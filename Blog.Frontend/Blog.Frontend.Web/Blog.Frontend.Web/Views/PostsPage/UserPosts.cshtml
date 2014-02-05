@@ -1,0 +1,8 @@
+﻿@model Blog.Backend.Services.BlogService.Contracts.ViewModels.UserPosts
+
+@if (Model.User != null)
+{
+    @Html.Partial("_User", Model.User)
+    @Html.Partial("_PostsList", Model.Posts)
+}
+

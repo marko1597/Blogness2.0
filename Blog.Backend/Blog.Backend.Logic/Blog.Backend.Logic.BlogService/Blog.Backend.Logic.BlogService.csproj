@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{388F088C-90F5-46E7-B7D1-422E0F577513}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blog.Backend.Logic.BlogService</RootNamespace>
+    <AssemblyName>Blog.Backend.Logic.BlogService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommentLikes.cs" />
+    <Compile Include="Comments.cs" />
+    <Compile Include="Education.cs" />
+    <Compile Include="Factory\CommentLikesFactory.cs" />
+    <Compile Include="Factory\CommentsFactory.cs" />
+    <Compile Include="Factory\EducationFactory.cs" />
+    <Compile Include="Factory\HobbyFactory.cs" />
+    <Compile Include="Factory\MediaFactory.cs" />
+    <Compile Include="Factory\MediaGroupFactory.cs" />
+    <Compile Include="Factory\PostContentsFactory.cs" />
+    <Compile Include="Factory\PostLikesFactory.cs" />
+    <Compile Include="Factory\PostsFactory.cs" />
+    <Compile Include="Factory\PostsPageFactory.cs" />
+    <Compile Include="Factory\SessionFactory.cs" />
+    <Compile Include="Factory\TagsFactory.cs" />
+    <Compile Include="Factory\UsersFactory.cs" />
+    <Compile Include="Hobby.cs" />
+    <Compile Include="Media.cs" />
+    <Compile Include="MediaGroup.cs" />
+    <Compile Include="PostContents.cs" />
+    <Compile Include="PostLikes.cs" />
+    <Compile Include="Posts.cs" />
+    <Compile Include="PostsPage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="Tags.cs" />
+    <Compile Include="Users.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common.BlogService\Blog.Backend.Common.BlogService.csproj">
+      <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
+      <Name>Blog.Backend.Common.BlogService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Backend.ResourceAccess\Blog.Backend.ResourceAccess.BlogService\Blog.Backend.ResourceAccess.BlogService.csproj">
+      <Project>{765c04c6-df62-41ba-922e-03b322e27b4f}</Project>
+      <Name>Blog.Backend.ResourceAccess.BlogService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Backend.Services\Blog.Backend.Services.BlogService.Contracts\Blog.Backend.Services.BlogService.Contracts.csproj">
+      <Project>{80e97384-c35d-4e94-a6b0-d73c98cf69de}</Project>
+      <Name>Blog.Backend.Services.BlogService.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

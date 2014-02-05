@@ -1,0 +1,85 @@
+﻿@model Blog.Frontend.Web.Models.PostView
+
+<div class="post-container">
+    <div class="post-header">
+        <h4>@Html.ActionLink(Model.Post.PostTitle, "ViewPost", "Posts", new { postId = Model.Post.PostId }, null)</h4>
+        <span>@Html.ActionLink("By " + Model.Post.User.FirstName + " " + Model.Post.User.LastName, "Index", "Users", new { userId = Model.Post.User.UserId }, null)</span>
+    </div>
+    
+    <div class="post-content-container">
+        <div class="post-content">
+            @if (Model.Post.PostContents.Count > 0)
+            {
+                foreach (var content in Model.Post.PostContents)
+                {
+                    @Html.Partial("_PostMedia", GetPostMediaView(content));
+                }
+            }
+            else
+            {
+                <div class="post-content-no-media">
+                    <span>There are no contents for this post.</span>
+                </div>
+            }
+
+            <div class="post-content-text">
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Post.PostMessage))
+                @*@MvcHtmlString.Create(HttpUtility.HtmlDecode(Model.Post.PostMessage))*@
+                @*@Html.Raw(Model.Post.PostMessage.Replace(Environment.NewLine, "<br/>"));*@
+            </div>
+        </div>
+        <div class="post-details-container">
+            @Html.Partial("_PostDetails", GetPostDetailsModel(Model.Post.PostId, Model.Post.CreatedDate, Model.Post.PostLikes.Count, Model.Post.UserId))
+            @if (Model.Post.User.UserId == Blog.Frontend.Web.CustomHelpers.Authentication.UserTemp.UserId && Model.IsAdd == false && Model.IsEdit == false)
+            {
+                @Html.Partial("_PostModificationArea", Model.Post)
+            }
+        </div>
+    </div>
+    @if (Model.DisplayComments)
+    {
+        @Html.Partial("_CommentSection", GetCommentViewModels(Model.Post.Comments, Model.Post.PostId))
+    }
+</div>
+
+<div id="deletePostModal_@Model.Post.PostId" title="Delete post" style="display: none;">
+    @using (Html.BeginForm())
+    {
+        <p>@Html.DisplayFor(model => model.Post.PostTitle)</p>
+        <span>@Html.DisplayFor(model => model.Post.PostMessage)</span>
+    }
+</div>
+
+<script>window.Blog.Events.initPost(@Model.Post.PostId)</script>
+
+@functions
+{
+    public Blog.Frontend.Web.Models.CommentView GetCommentViewModels(List<Blog.Backend.Services.BlogService.Contracts.BlogObjects.Comment> comments, int postId)
+    {
+        var commentView = new Blog.Frontend.Web.Models.CommentView
+        {
+            PostId = postId,
+            Comments = comments
+        };
+
+        return commentView;
+    }
+
+    public Blog.Frontend.Web.Models.PostDetails GetPostDetailsModel(int postId, DateTime createdDate, int likesCount, int? userId)
+    {
+        var postFooterDetails = new Blog.Frontend.Web.Models.PostDetails
+        {
+            PostId = postId,
+            CreatedDate = createdDate,
+            Likes = new Blog.Frontend.Web.Models.Likes { Id = postId, UserId = userId, Count = likesCount }
+        };
+
+        return postFooterDetails;
+    }
+
+    public Blog.Frontend.Web.Models.PostMediaView GetPostMediaView(Blog.Backend.Services.BlogService.Contracts.BlogObjects.PostContent postContent)
+    {
+        var postMediaView = new Blog.Frontend.Web.Models.PostMediaView { PostContent = postContent, AllowDelete = false };
+        return postMediaView;
+    }
+}

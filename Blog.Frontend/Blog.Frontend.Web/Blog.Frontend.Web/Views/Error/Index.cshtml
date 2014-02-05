@@ -1,0 +1,16 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+
+<section class="error">
+    <div class="error-img">
+        <img src="~/Content/images/errorpage/servererror_bg.png" />
+    </div>
+    <div class="reporterror">
+        <a>Click here to report the error</a>
+    </div>
+</section>
+@Html.Partial("_ReportError")
+
+<script>window.Blog.Events.initErrorPage();</script>

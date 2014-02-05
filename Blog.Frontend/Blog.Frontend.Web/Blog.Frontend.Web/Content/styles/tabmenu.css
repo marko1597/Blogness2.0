@@ -1,0 +1,94 @@
+﻿@media screen and (max-width : 1920px) {
+    #tab-menu-container {
+        float: left;
+    }
+
+        #tab-menu-container div.tabmenu {
+            margin: 12px auto;
+            text-align: center;
+        }
+
+            #tab-menu-container div.tabmenu select {
+                display: none;
+            }
+
+            #tab-menu-container div.tabmenu ul {
+                margin: 0px auto;
+                display: inline-block;
+                list-style-position: outside;
+                padding: 0px;
+            }
+
+                #tab-menu-container div.tabmenu ul li {
+                    list-style-type: none;
+                    display: inline;
+                    float: left;
+                    padding: 5px;
+                    overflow: hidden;
+                    cursor: pointer;
+                   
+                }
+
+                    #tab-menu-container div.tabmenu ul li a {
+                        color: #FFF;
+                        font-size: 20px;
+                        font-weight: bold;
+                        -moz-outline: 0;
+                        outline: 0;
+                        padding: 2px 4px;
+                        display: inline-block;
+                        text-decoration: none;
+                        -moz-transition-duration: 0.25s;
+                        -o-transition-duration: 0.25s;
+                        -webkit-transition-duration: 0.25s;
+                        transition-duration: 0.25s;
+                        -moz-transition-property: transform;
+                        -o-transition-property: transform;
+                        -webkit-transition-property: transform;
+                        transition-property: transform;
+                        -moz-transform: scale(1) rotate(0);
+                        -ms-transform: scale(1) rotate(0);
+                        -o-transform: scale(1) rotate(0);
+                        -webkit-transform: scale(1) rotate(0);
+                        transform: scale(1) rotate(0);
+                    }
+
+                        #tab-menu-container div.tabmenu ul li a:target {
+                            color: #5cbcd1;
+                            text-decoration: none;
+                            background: none;
+                        }
+
+                        #tab-menu-container div.tabmenu ul li a:hover {
+                            color: #5cbcd1;
+                            background: none;
+                            background: #FFF;
+                            text-decoration: none;
+                            -moz-border-radius: 4px;
+                            -webkit-border-radius: 4px;
+                            border-radius: 4px;
+                            -moz-transform: scale(1.05) rotate(-2deg) !important;
+                            -ms-transform: scale(1.05) rotate(-2deg) !important;
+                            -o-transform: scale(1.05) rotate(-2deg) !important;
+                            -webkit-transform: scale(1.05) rotate(-2deg) !important;
+                            transform: scale(1.05) rotate(-2deg) !important;
+                        }
+}
+
+@media screen and (max-width : 768px) {
+    #tab-menu-container div.tabmenu select {
+        display: inline-block;
+        font-size: 16px;
+        color: #FFF;
+        background: rgb(63, 77, 100);
+        padding: 5px 5px;
+        border: 1px solid;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    #tab-menu-container div.tabmenu ul {
+        display: none;
+    }
+}

@@ -1,0 +1,54 @@
+﻿div.post-details-social-container {
+    width: 100%;
+    float: left;
+    overflow: hidden;
+}
+
+    div.post-details-social-container div.post-details-social-facebook {
+        float: left;
+        padding: 5px;
+        background: #DB4747;
+        width: 93%;
+        margin: 10px;
+    }
+
+        div.post-details-social-container div.post-details-social-facebook span {
+            width: auto;
+        }
+
+        div.post-details-social-container div.post-details-social-facebook img {
+            width: auto;
+        }
+
+    div.post-details-social-container div.post-details-social-twitter {
+        float: left;
+        padding: 5px;
+        background: #DB4747;
+        width: 93%;
+        margin: 10px;
+    }
+
+        div.post-details-social-container div.post-details-social-twitter span {
+            width: auto;
+        }
+
+        div.post-details-social-container div.post-details-social-twitter img {
+            width: auto;
+        }
+    
+    div.post-details-social-container div.post-details-social-info {
+        float: left;
+        padding: 5px;
+        background: #DB4747;
+        width: 93%;
+        margin: 10px;
+    }
+
+        div.post-details-social-container div.post-details-social-info span {
+            font-size: 14px;
+            color: #FFF;
+        }
+
+        div.post-details-social-container div.post-details-social-info img {
+            width: auto;
+        }

@@ -1,0 +1,59 @@
+﻿@model Blog.Backend.Services.BlogService.Contracts.BlogObjects.Comment
+
+<div class="comment-item-container">
+    @Html.HiddenFor(model => model.CommentId)
+    @Html.HiddenFor(model => model.CreatedDate)
+    @Html.HiddenFor(model => model.PostId)
+
+    <div class="comment-item">
+        <div class="comment-top-row">
+            <div id="commentUsername_@Model.CommentId" class="comment-username">
+                @Html.DisplayFor(a => a.User.FirstName) @Html.DisplayFor(a => a.User.LastName)
+            </div>
+
+            <div id="commentLocation_@Model.CommentId" class="comment-location" >
+                @Html.DisplayFor(a => a.CommentLocation)
+            </div>
+        </div>
+
+        <div id="commentMessage_@Model.CommentId" class="comment-message">
+            @Html.DisplayFor(a => a.CommentMessage)
+        </div>
+
+        <div class="comment-bottom-row">
+            @if (Model.ParentCommentId == null)
+            {
+                <span id="commentRepliesHide_@Model.CommentId" class="comment-item-replies-hide">Show replies</span>
+                <span id="commentReply_@Model.CommentId" class="comment-item-reply">Reply</span>
+            }
+            <div id="commentlikes-container_@Model.CommentId" class="likes-container">
+                @Html.Partial("_Likes", new Blog.Frontend.Web.Models.Likes { Id = Model.CommentId, Count = Model.CommentLikes.Count })
+            </div>
+            <span id="commentTimespan_@Model.CommentId" class="comment-item-time" />
+        </div>
+    </div>
+
+    @if (Model.ParentCommentId == null)
+    {
+        @Html.Partial("_CommentNewItem", Model)
+        <div id="commentListContainer_@Model.CommentId" class="comment-replies-container">
+            @Html.Partial("_CommentList", new Blog.Frontend.Web.Models.CommentView { PostId = Model.PostId, IsCommentReply = true, Comments = Model.Comments ?? new List<Blog.Backend.Services.BlogService.Contracts.BlogObjects.Comment>() })
+        </div>
+    }
+</div>
+
+<script>
+    window.Blog.Events.initCommentItem(@Model.CommentId, @CheckPostId(), @Model.CreatedDate.Year, @Model.CreatedDate.Month, @Model.CreatedDate.Day, @Model.CreatedDate.Hour, @Model.CreatedDate.Minute, @Model.CreatedDate.Second, @Model.CreatedDate.Millisecond);
+</script>
+
+@functions
+{
+    public int? CheckPostId()
+    {
+        if (Model.PostId == null)
+        {
+            return 0;
+        } 
+        return Model.PostId;
+    }
+}

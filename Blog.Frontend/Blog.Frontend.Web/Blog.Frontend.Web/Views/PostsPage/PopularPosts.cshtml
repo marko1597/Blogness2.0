@@ -1,0 +1,7 @@
+﻿@model List<Blog.Backend.Services.BlogService.Contracts.BlogObjects.Post>
+
+@{
+    ViewBag.Title = "Popular Posts";
+}
+
+@Html.Partial("_PostsList", Model)

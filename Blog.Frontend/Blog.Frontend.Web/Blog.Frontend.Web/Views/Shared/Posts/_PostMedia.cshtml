@@ -1,0 +1,32 @@
+﻿@model Blog.Frontend.Web.Models.PostMediaView
+
+<div class="post-media-container">
+    @if (Model.PostContent.Media.MediaType.Substring(0, 5) == "image")
+    {
+        <img id="postContent_@Model.PostContent.PostContentId" src="@Url.Action("GetPostContent", "PostContent", new { postContentId = Model.PostContent.PostContentId })" />
+    }
+    else
+    {
+        <video id="postContentVideo_@Model.PostContent.PostContentId" class="video-js vjs-default-skin" controls preload="none" width="640" height="480" data-setup='{ }'>
+            <source src="@Url.Action("GetPostContent", "PostContent", new { postContentId = Model.PostContent.PostContentId })" type='video/mp4'>
+            <source src="@Url.Action("GetPostContent", "PostContent", new { postContentId = Model.PostContent.PostContentId })" type='video/webm'>
+        </video>
+    }
+
+    @if (Model.AllowDelete)
+    {
+        <div id="removeContent_@Model.PostContent.PostContentId" data-attr-postContentId="@Model.PostContent.PostContentId" class="post-media-remove">
+            <img src="~/Content/images/close.png" />
+            <span>Remove this content</span>
+        </div>
+        <br />
+
+        <div id="removeContentForm_@Model.PostContent.PostContentId" title="Delete content" style="display: none;">
+            <span>Do you want to delete this content? This can not be recovered.</span>
+        </div>
+
+        <script>
+            window.Blog.Events.initPostMedia(@Model.PostContent.PostContentId, @Model.PostContent.PostId);
+        </script>
+    }
+</div>

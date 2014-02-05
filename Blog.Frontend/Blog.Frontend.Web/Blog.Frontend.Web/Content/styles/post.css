@@ -1,0 +1,102 @@
+﻿div.post-container {
+    display: inline-block;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: auto;
+    padding-bottom: 15px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+    div.post-container div.post-header {
+        width: auto;
+        margin-bottom: 10px;
+        padding: 10px 0 10px 20px;
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+        background: black;
+        border-bottom: 3px solid #ccc;
+        -webkit-border-top-left-radius: 10px;
+        border-top-left-radius: 10px;
+        -webkit-border-top-right-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+        div.post-container div.post-header h4 {
+            font-size: 30px;
+            margin-top: 0;
+        }
+
+        div.post-container div.post-header span {
+            font-size: 19px;
+        }
+
+        div.post-container div.post-header a {
+            color: rgba(255,255,255,0.5);
+            color: #FFF;
+            text-decoration: none;
+            -moz-transition-duration: 0.25s;
+            -o-transition-duration: 0.25s;
+            -webkit-transition-duration: 0.25s;
+            transition-duration: 0.25s;
+            -moz-transition-property: transform;
+            -o-transition-property: transform;
+            -webkit-transition-property: transform;
+            transition-property: transform;
+        }
+
+            div.post-container div.post-header a:hover {
+                text-decoration: none;
+                -webkit-text-shadow: 0 0 10px #777;
+                text-shadow: 0 0 10px #777;
+                background: #FFF;
+                color: #000;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                border-radius: 4px;
+            }
+
+    div.post-container div.post-content-container {
+        display: inline-block;
+    }
+
+        div.post-container div.post-content-container div.post-content {
+            text-align: left;
+            width: 65%;
+            height: auto;
+            color: #FFF;
+            font-size: 15px;
+            padding: 5px 20px;
+            -webkit-text-stroke: 0px #7A99E1;
+            float: left;
+            border-right: 1px solid #666;
+            display: inline-block;
+        }
+            div.post-container div.post-content-container div.post-content div.post-content-no-media {
+                color: white;
+                font-size: 16px;
+                padding: 5px 0 5px 10px;
+                margin: 0 20px 10px 20px;
+                background: #DB4747;
+            }
+
+            div.post-container div.post-content-container div.post-content div.post-content-text {
+                display: inline-block;
+                color: #FFF;
+            }
+
+        div.post-container div.post-content-container div.post-details-container {
+            width: 30%;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        div.post-container div.post-content-container div.post-message div.post-edit-buttons-container {
+            display: inline-block;
+            width: 100%;
+            padding-top: 20px;
+        }

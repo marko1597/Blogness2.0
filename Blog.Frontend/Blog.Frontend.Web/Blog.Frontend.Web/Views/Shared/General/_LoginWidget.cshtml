@@ -1,0 +1,17 @@
+﻿@model Blog.Frontend.Web.Models.LoginModel
+
+<div class="loginWidget">
+    <h2>Member Login</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <label>Name:</label>
+        @Html.TextBoxFor(model => model.UserName)
+        <label>Password:</label>
+        @Html.PasswordFor(model => model.Password)
+        @Html.RouteLink("Sign up for an account", new { Controller = "Account", Action = "Register" })
+        <input id="btnLoginConfirm" type="submit" value="" class="go">
+    }
+</div>

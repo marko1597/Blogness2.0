@@ -1,0 +1,30 @@
+﻿div.likes-container {
+    border: 2px solid #3250c8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: #1289CE;
+    cursor: pointer;
+    width: 45px;
+    display: inline-block;
+}
+    div.likes-container img
+    {
+        width: 14px;
+        height: 14px;
+        position: relative;
+        top: 2px;
+    }
+
+    div.likes-container span
+    {
+        font-size: 12px;
+        padding: 0px;
+        color: #FFF;
+        text-decoration: none;
+    }

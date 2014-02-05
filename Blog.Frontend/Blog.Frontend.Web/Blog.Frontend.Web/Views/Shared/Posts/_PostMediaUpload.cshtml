@@ -1,0 +1,22 @@
+﻿@model Blog.Frontend.Web.Models.PostContentUpload
+
+<div class="content-upload-container">
+    @using (Html.BeginForm("AddPostContent", "PostContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="content-upload-header">
+            Upload images
+        </div>
+        <input type="file" name="PostContentUploadFile" id="PostContentUploadFile" class="customfile-input" style="left: -26px; top: 25px;">
+        <input type="submit" value="Save" id="uploadContentsButton" @*onclick="window.Radix.PostContent.postContentUploading()"*@>
+        @Html.HiddenFor(model => model.PostId)
+    }
+</div>
+
+<div id="blockMessage" class="noshow blockUi">
+    <span>We are processing your request.  Please be patient.</span>
+</div>
+
+@Scripts.Render("~/bundles/fileupload")
+@Styles.Render("~/Content/fileupload")
+
+<script>window.Blog.Events.initPostMediaUpload();</script>

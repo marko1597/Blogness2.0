@@ -1,0 +1,34 @@
+﻿div.contentUploadContainer
+{
+    text-align: left;
+    background: #29b512;
+    margin-right: 27px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+}
+
+    div.contentUploadContainer form
+    {
+        width: 100%;
+    }
+
+        div.contentUploadContainer form div.uploadHeader
+        {
+            width: auto;
+            margin-top: 0;
+            color: #FFF;
+            font-size: 20px;
+            font-weight: normal;
+            padding: 10px;
+            background: rgb(158, 29, 199);
+        }
+
+            div.contentUploadContainer form div.uploadHeader div.input-file-wrapper
+            {
+                cursor: pointer;
+                height: auto;
+                display: inline-block;
+                overflow: hidden;
+                position: relative;
+                padding: 0 25px;
+            }

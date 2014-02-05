@@ -1,0 +1,303 @@
+﻿/* Smart phones */
+@media screen and (max-width : 480px) {
+    #login-partial {
+        margin: 0 auto;
+        float: right;
+    }
+
+        #login-partial section.login-section {
+            margin: 13px 10px;
+            -moz-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4e8bb1), color-stop(1, #1f3c58));
+            background: -moz-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -webkit-linear-gradient(top, #4e8bb1 5%, #1f3c58);
+            background: -o-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -ms-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: linear-gradient(to bottom, #4e8bb1 5%, #1f3c58 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8bb1', endColorstr='#1f3c58',GradientType=0);
+            background-color: #1f3c58;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #3866a3;
+            display: inline-block;
+            text-decoration: none;
+            -webkit-text-shadow: 0px 1px 0px #7cacde;
+            text-shadow: 0px 1px 0px #7cacde;
+            padding: 4px;
+            height: 38px;
+        }
+
+            #login-partial section.login-section a {
+            }
+
+            #login-partial section.login-section ul.desktop {
+                display: none;
+            }
+
+            #login-partial section.login-section ul.mobile {
+                list-style-type: none;
+                display: inline-block;
+                padding: 0;
+                margin: 0;
+            }
+
+                #login-partial section.login-section ul.mobile li.help {
+                    display: none;
+                }
+
+                #login-partial section.login-section ul.mobile li.user {
+                    display: inline-block;
+                    list-style: none;
+                }
+
+                    #login-partial section.login-section ul.mobile li.user img {
+                        height: 20px;
+                        width: 20px;
+                    }
+}
+
+/* iPads */
+@media screen and (min-width : 481px) and (max-width : 1024px) {
+    #login-partial {
+        float: right;
+    }
+
+        #login-partial section.login-section {
+            margin: 23px 10px;
+            -moz-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4e8bb1), color-stop(1, #1f3c58));
+            background: -moz-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -webkit-linear-gradient(top, #4e8bb1 5%, #1f3c58);
+            background: -o-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -ms-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: linear-gradient(to bottom, #4e8bb1 5%, #1f3c58 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8bb1', endColorstr='#1f3c58',GradientType=0);
+            background-color: #1f3c58;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #3866a3;
+            display: inline-block;
+            text-decoration: none;
+            -webkit-text-shadow: 0px 1px 0px #7cacde;
+            text-shadow: 0px 1px 0px #7cacde;
+            padding: 4px;
+            height: 38px;
+        }
+
+            #login-partial section.login-section a {
+            }
+
+            #login-partial section.login-section ul.desktop {
+                display: none;
+            }
+
+            #login-partial section.login-section ul.mobile {
+                display: inline-block;
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+                #login-partial section.login-section ul.mobile li.help {
+                    display: inline-block;
+                    list-style-type: none;
+                }
+
+                #login-partial section.login-section ul.mobile li.help div {
+                    cursor: pointer;
+                    position: relative;
+                    top: -3px;
+                }
+
+                    #login-partial section.login-section ul.mobile li.help div img {
+                        width: 20px;
+                        height: 20px;
+                        position: relative;
+                        top: 5px;
+                    }
+
+                    #login-partial section.login-section ul.mobile li.help div a {
+                        display: inline-block;
+                        font-size: 14px;
+                        color: #FFF;
+                        text-decoration: none;
+                    }
+
+                        #login-partial section.login-section ul.mobile li.help div a:hover {
+                            color: #FFF;
+                            background: rgb(54, 96, 141);
+                        }
+
+                #login-partial section.login-section ul.mobile li.user {
+                    display: inline-block;
+                    list-style: none;
+                }
+
+                    #login-partial section.login-section ul.mobile li.user img {
+                        height: 20px;
+                        width: 20px;
+                        position: relative;
+                        top: 2px;
+                    }
+}
+
+/* Desktops and laptops */
+@media screen and (min-width : 1025px) {
+    #login-partial {
+        /*margin-left: 50px;*/
+        float: right;
+    }
+
+        #login-partial section.login-section {
+            margin: 10px 10px 10px 0px;
+            -moz-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            -webkit-box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            box-shadow: inset 0px 1px 0px 0px #bee2f9;
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4e8bb1), color-stop(1, #1f3c58));
+            background: -moz-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -webkit-linear-gradient(top, #4e8bb1 5%, #1f3c58);
+            background: -o-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: -ms-linear-gradient(top, #4e8bb1 5%, #1f3c58 100%);
+            background: linear-gradient(to bottom, #4e8bb1 5%, #1f3c58 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e8bb1', endColorstr='#1f3c58',GradientType=0);
+            background-color: #1f3c58;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            border-radius: 6px;
+            border: 1px solid #3866a3;
+            display: inline-block;
+            color: #FFF;
+            font-family: arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            -webkit-text-shadow: 0px 1px 0px #7cacde;
+            text-shadow: 0px 1px 0px #7cacde;
+            height: 38px;
+        }
+
+            #login-partial section.login-section a {
+            }
+
+            #login-partial section.login-section ul.desktop {
+                height: 30px;
+                margin: 0;
+                padding: 3px;
+                display: inline-block;
+            }
+
+            #login-partial section.login-section ul.mobile {
+                display: none;
+            }
+
+            #login-partial section.login-section ul.desktop li {
+                display: inline-block;
+                list-style: none;
+                height: 30px;
+            }
+
+                #login-partial section.login-section ul.desktop li span {
+                    color: #242f3a;
+                }
+
+                    #login-partial section.login-section ul.desktop li span a {
+                        color: #242f3a;
+                        text-decoration: none;
+                    }
+
+                        #login-partial section.login-section ul.desktop li span a:hover {
+                            color: #242f3a;
+                        }
+
+                #login-partial section.login-section ul.desktop li.help div {
+                    cursor: pointer;
+                    display: inline-block;
+                }
+
+                    #login-partial section.login-section ul.desktop li.help div img {
+                        width: 20px;
+                        height: 20px;
+                        position: relative;
+                        top: 5px;
+                    }
+
+                    #login-partial section.login-section ul.desktop li.help div a {
+                        display: inline-block;
+                        font-size: 14px;
+                        color: #FFF;
+                        text-decoration: none;
+                    }
+
+                        #login-partial section.login-section ul.desktop li.help div a:hover {
+                            color: #FFF;
+                            background: rgb(54, 96, 141);
+                        }
+
+                #login-partial section.login-section ul.desktop li.loginarea ul {
+                    padding: 0;
+                    margin: 0;
+                    border: none;
+                }
+
+                    #login-partial section.login-section ul.desktop li.loginarea ul li a,
+                    #login-partial section.login-section ul.desktop li form a {
+                        -moz-box-shadow: inset 0px 1px 0px 0px #54a3f7;
+                        -webkit-box-shadow: inset 0px 1px 0px 0px #54a3f7;
+                        box-shadow: inset 0px 1px 0px 0px #54a3f7;
+                        background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #007dc1), color-stop(1, #0061a7));
+                        background: -moz-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+                        background: -webkit-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+                        background: -o-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+                        background: -ms-linear-gradient(top, #007dc1 5%, #0061a7 100%);
+                        background: linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#007dc1', endColorstr='#0061a7',GradientType=0);
+                        background-color: #007dc1;
+                        -moz-border-radius: 3px;
+                        -webkit-border-radius: 3px;
+                        border-radius: 3px;
+                        border: 1px solid #124d77;
+                        display: inline-block;
+                        color: #ffffff;
+                        font-family: arial;
+                        font-size: 13px;
+                        font-weight: normal;
+                        padding: 6px 24px;
+                        text-decoration: none;
+                        -webkit-text-shadow: 0px 1px 0px #154682;
+                        text-shadow: 0px 1px 0px #154682;
+                    }
+
+
+                        #login-partial section.login-section ul.desktop li.loginarea ul li a:hover,
+                        #login-partial section.login-section ul.desktop li form a:hover {
+                            background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0061a7), color-stop(1, #007dc1));
+                            background: -moz-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+                            background: -webkit-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+                            background: -o-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+                            background: -ms-linear-gradient(top, #0061a7 5%, #007dc1 100%);
+                            background: linear-gradient(to bottom, #0061a7 5%, #007dc1 100%);
+                            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0061a7', endColorstr='#007dc1',GradientType=0);
+                            background-color: #0061a7;
+                        }
+
+                        #login-partial section.login-section ul.desktop li.loginarea ul li a:active,
+                        #login-partial section.login-section ul.desktop li form a:active {
+                            position: relative;
+                            top: 1px;
+                        }
+
+                        #login-partial section.login-section ul.desktop li.loginarea ul li a.username {
+                            background: none;
+                            margin: 0;
+                            padding: 0;
+                            text-decoration: underline;
+                            color: #FFF;
+                        }
+}

@@ -1,0 +1,73 @@
+﻿/* File Created: November 8, 2012 */
+
+.loginWidget
+{
+    display: inline-block;
+    width: 225px;
+}
+
+    .loginWidget h2
+    {
+        background-color: #E23838;
+        width: 205px;
+        height: 31px;
+        padding: 0 0 0 20px;
+        font: bold 16px/31px Arial, Helvetica, sans-serif;
+        color: white;
+    }
+
+    .loginWidget form
+    {
+        width: 191px !important;
+        background-color: #353535;
+        padding: 9px 17px 24px 17px;
+        color: white;
+        display: inline-block;
+    }
+
+    .loginWidget label
+    {
+        font: normal 11px/22px "Trebuchet MS", Arial, Helvetica, sans-serif;
+        float: left;
+        display: block;
+    }
+
+    .loginWidget form input
+    {
+        width: 185px;
+        height: 19px;
+        border-left: gray solid 1px;
+        border-top: gray solid 1px;
+        border-right: #D4D0C8 solid 1px;
+        border-bottom: #D4D0C8 solid 1px;
+        color: black;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+        float: left;
+        font-size: 12px;
+    }
+
+    .loginWidget form a
+    {
+        background: url(../images/register_member_icon.gif) 0 0 no-repeat;
+        padding: 0 0 0 20px;
+        font: bold 11px/14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+        color: #9CCC37;
+        background-color: #353535;
+        text-decoration: underline;
+        float: left;
+        margin: 15px 0 0 0;
+        width: 120px;
+    }
+
+    .loginWidget form input.go
+    {
+        background: url(../images/btn_go.gif) 0 0 no-repeat;
+        width: 36px;
+        height: 15px;
+        border: none;
+        cursor: pointer;
+        float: right;
+        margin: 15px 0 0 0;
+    }
