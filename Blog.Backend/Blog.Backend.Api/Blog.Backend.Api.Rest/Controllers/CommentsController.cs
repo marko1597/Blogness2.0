@@ -17,13 +17,31 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpGet]
         [Route("api/posts/{postId}/comments")]
-        public List<Comment> Get(int postId)
+        public List<Comment> GetByPost(int postId)
         {
             var comments = new List<Comment>();
 
             try
             {
                 comments = _service.GetByPostId(postId) ?? new List<Comment>();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return comments;
+        }
+
+        [HttpGet]
+        [Route("api/user/{userId}/comments")]
+        public List<Comment> GetByComments(int userId)
+        {
+            var comments = new List<Comment>();
+
+            try
+            {
+                comments = _service.GetByUser(userId) ?? new List<Comment>();
 
             }
             catch (Exception ex)

@@ -1,13 +1,24 @@
 ﻿using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.Services.BlogService.Contracts;
+using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
     public class Session : ISession
     {
-        public Contracts.BlogObjects.Session GetByUser(int userId)
+        public Contracts.BlogObjects.Session GetByUser(string username)
         {
-            return SessionFactory.GetInstance().CreateSession().GetByUser(userId);
+            return SessionFactory.GetInstance().CreateSession().GetByUser(username);
+        }
+
+        public LoggedUser Login(string userName, string passWord)
+        {
+            return SessionFactory.GetInstance().CreateSession().Login(userName, passWord);
+        }
+
+        public bool Logout(string userName)
+        {
+            return SessionFactory.GetInstance().CreateSession().Logout(userName);
         }
     }
 }

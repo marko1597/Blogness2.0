@@ -56,6 +56,43 @@ namespace Blog.Backend.Logic.BlogService
             return comments;
         }
 
+        public List<Comment> GetByUser(int userId)
+        {
+            var comments = new List<Comment>();
+            try
+            {
+                comments = _commentResource.Get(a => a.UserId == userId, true).OrderByDescending(a => a.CreatedDate).ToList();
+                comments.ForEach(a =>
+                {
+                    if (a.CommentLikes == null)
+                    {
+                        a.CommentLikes = new List<CommentLike>();
+                    }
+                    if (a.Comments == null)
+                    {
+                        a.Comments = new List<Comment>();
+                    }
+
+                    a.Comments.ForEach(b =>
+                    {
+                        if (b.CommentLikes == null)
+                        {
+                            b.CommentLikes = new List<CommentLike>();
+                        }
+                        if (b.Comments == null)
+                        {
+                            b.Comments = new List<Comment>();
+                        }
+                    });
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return comments;
+        }
+
         public List<Comment> GetReplies(int commentId)
         {
             var comments = new List<Comment>();

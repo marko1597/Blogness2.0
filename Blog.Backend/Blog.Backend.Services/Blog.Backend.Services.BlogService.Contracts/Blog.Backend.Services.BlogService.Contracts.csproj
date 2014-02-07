@@ -81,6 +81,7 @@
     <Compile Include="ISession.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="ViewModels\LoggedUser.cs" />
     <Compile Include="ViewModels\UserMediaGroup.cs" />
     <Compile Include="ViewModels\UserPost.cs" />
     <Compile Include="Helper\Attribute\Include.cs" />

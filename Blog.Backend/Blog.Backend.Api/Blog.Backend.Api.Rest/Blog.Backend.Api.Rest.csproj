@@ -164,6 +164,7 @@
     <Compile Include="Controllers\CommentLikesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Formatter\JsonMediaTypeFormatter.cs" />
     <Compile Include="Global.asax.cs">

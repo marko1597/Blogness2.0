@@ -57,12 +57,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\ApiFactory.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="HttpClientHelper.cs" />
-    <Compile Include="JsonHelper.cs" />
-    <Compile Include="ServiceProxy.cs" />
+    <Compile Include="Authentication\Api.cs" />
+    <Compile Include="Helper\HttpClientHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\ServiceProxyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.BlogService.Contracts\Blog.Backend.Services.BlogService.Contracts.csproj">
+      <Project>{80e97384-c35d-4e94-a6b0-d73c98cf69de}</Project>
+      <Name>Blog.Backend.Services.BlogService.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

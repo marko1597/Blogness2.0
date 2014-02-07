@@ -4,7 +4,7 @@ using System.Web.Http;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
-namespace BlogApi.Controllers
+namespace Blog.Backend.Api.Rest.Controllers
 {
     public class CommentLikesController : ApiController
     {
@@ -15,13 +15,15 @@ namespace BlogApi.Controllers
             _service = service;
         }
 
-        public List<CommentLike> Get(int id)
+        [HttpGet]
+        [Route("api/comments/{commentId}/likes")]
+        public List<CommentLike> Get(int commentId)
         {
             var commentLikes = new List<CommentLike>();
 
             try
             {
-                commentLikes = _service.Get(id) ?? new List<CommentLike>();
+                commentLikes = _service.Get(commentId) ?? new List<CommentLike>();
 
             }
             catch (Exception ex)

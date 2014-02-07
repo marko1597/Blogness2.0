@@ -2,9 +2,9 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace Blog.Frontend.Common
+namespace Blog.Frontend.Common.Helper
 {
-    public class ServiceProxy<TInterface> : ClientBase<TInterface>, IDisposable where TInterface : class
+    public class ServiceProxyHelper<TInterface> : ClientBase<TInterface>, IDisposable where TInterface : class
     {
         /// <summary>
         /// The service proxy delegate.
@@ -13,37 +13,37 @@ namespace Blog.Frontend.Common
         public delegate void ServiceProxyDelegate(TInterface proxy);
 
         /// <summary>
-        /// Create a new instance of <see cref="ServiceProxy{TInsterface}" />.
+        /// Create a new instance of <see cref="ServiceProxyHelper{TInsterface}" />.
         /// </summary>
-        public ServiceProxy()
+        public ServiceProxyHelper()
         {
         }
 
         /// <summary>
-        /// Create a new instance of <see cref="ServiceProxy{TInsterface}" />.
+        /// Create a new instance of <see cref="ServiceProxyHelper{TInsterface}" />.
         /// </summary>
         /// <param name="endpointConfigurationName">The end-point configuration name.</param>
-        public ServiceProxy(string endpointConfigurationName)
+        public ServiceProxyHelper(string endpointConfigurationName)
             : base(endpointConfigurationName)
         {
         }
 
         /// <summary>
-        /// Create a new instance of <see cref="ServiceProxy{TInsterface}" />.
+        /// Create a new instance of <see cref="ServiceProxyHelper{TInsterface}" />.
         /// </summary>
         /// <param name="endpointConfigurationName">The end-point configuration name.</param>
         /// <param name="remoteAddress">The remote address to use</param>
-        public ServiceProxy(string endpointConfigurationName, string remoteAddress)
+        public ServiceProxyHelper(string endpointConfigurationName, string remoteAddress)
             : base(endpointConfigurationName, remoteAddress)
         {
         }
 
         /// <summary>
-        /// Create a new instance of <see cref="ServiceProxy{TInsterface}" />.
+        /// Create a new instance of <see cref="ServiceProxyHelper{TInsterface}" />.
         /// </summary>
         /// <param name="binding">The binding method.</param>
         /// <param name="remoteAddress">The remote address.</param>
-        public ServiceProxy(Binding binding, EndpointAddress remoteAddress)
+        public ServiceProxyHelper(Binding binding, EndpointAddress remoteAddress)
             : base(binding, remoteAddress)
         {
         }

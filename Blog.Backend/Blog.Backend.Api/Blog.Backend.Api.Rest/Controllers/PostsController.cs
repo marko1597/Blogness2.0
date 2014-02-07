@@ -22,7 +22,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/posts/{postId}")]
+        [Route("api/posts/{postId:int}")]
         public Post Get(int postId)
         {
             var post = new Post();

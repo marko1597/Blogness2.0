@@ -23,7 +23,8 @@ namespace Blog.Backend.Logic.BlogService.Factory
         public Session CreateSession()
         {
             ISessionResource sessionResource = new SessionResource();
-            return new Session(sessionResource);
+            IUserResource userResource = new UserResource();
+            return new Session(sessionResource, userResource);
         }
     }
 }

@@ -1,12 +1,21 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-/* Set padding to keep content from hitting the edges */
+::selection {
+	color: #fff;
+	background: #f676b2;
+}
+::-moz-selection {
+	color: #fff;
+	background: #f676b2;
+}
+
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

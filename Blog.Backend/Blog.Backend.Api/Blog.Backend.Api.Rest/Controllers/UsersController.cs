@@ -4,7 +4,7 @@ using Blog.Backend.Api.Rest.Models;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
-namespace BlogApi.Controllers
+namespace Blog.Backend.Api.Rest.Controllers
 {
     public class UsersController : ApiController
     {
@@ -15,13 +15,15 @@ namespace BlogApi.Controllers
             _user = user;
         }
 
-        public User Get(int id)
+        [HttpGet]
+        [Route("api/user/{userId:int}")]
+        public User Get(int userId)
         {
             var user = new User();
 
             try
             {
-                user = _user.Get(id) ?? new User();
+                user = _user.Get(userId) ?? new User();
 
             }
             catch (Exception ex)
@@ -32,6 +34,8 @@ namespace BlogApi.Controllers
             return user;
         }
 
+        [HttpGet]
+        [Route("api/user/{name}")]
         public User Get(string name)
         {
             var user = new User();
@@ -70,34 +74,6 @@ namespace BlogApi.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-        }
-
-        [AcceptVerbs("POST")]
-        [ActionName("Login")]
-        public User Login([FromBody]Login credentials)
-        {
-            try
-            {
-                return _user.Login(credentials.Username, credentials.Password);
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        [AcceptVerbs("POST")]
-        [ActionName("Logout")]
-        public bool Logout([FromBody]string name)
-        {
-            try
-            {
-                return _user.Logout(name);
-            }
-            catch
-            {
-                return false;
             }
         }
     }

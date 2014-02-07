@@ -25,6 +25,8 @@ namespace Blog.Backend.Api.Rest
             container.Register<ICommentLikes, CommentLikes>(Lifestyle.Singleton);
             container.Register<IPosts, Posts>(Lifestyle.Singleton);
             container.Register<IPostsPage, PostsPage>(Lifestyle.Singleton);
+            container.Register<IUser, Users>(Lifestyle.Singleton);
+            container.Register<ISession, Session>(Lifestyle.Singleton);
 
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

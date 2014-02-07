@@ -12,6 +12,11 @@ namespace Blog.Backend.Services.BlogService.Implementation
             return CommentsFactory.GetInstance().CreateCommentLikes().GetByPostId(id);
         }
 
+        public List<Comment> GetByUser(int id)
+        {
+            return CommentsFactory.GetInstance().CreateCommentLikes().GetByUser(id);
+        }
+
         public List<Comment> GetReplies(int id)
         {
             return CommentsFactory.GetInstance().CreateCommentLikes().GetReplies(id);

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Blog.Frontend.Web
+namespace Blog.Frontend.Web.App_Start
 {
     public class RouteConfig
     {

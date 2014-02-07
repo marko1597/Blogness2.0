@@ -8,7 +8,5 @@ namespace Blog.Backend.Services.BlogService.Contracts
         User Get(int userId);
         User Add(User user);
         User Update(User user);
-        User Login(string userName, string passWord);
-        bool Logout(string userName);
     }
 }

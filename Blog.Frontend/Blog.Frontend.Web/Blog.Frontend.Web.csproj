@@ -180,8 +180,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorDependencyResolver.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
+    <Compile Include="Authentication\BlogIdentity.cs" />
+    <Compile Include="Authentication\BlogPrincipal.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -192,6 +195,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\modules\loginform\loginform.css" />
+    <Content Include="Content\plugins\angular-motion.min.css" />
+    <Content Include="Content\plugins\angular-snap.min.css" />
+    <Content Include="Content\plugins\bootstrap-additions.min.css" />
     <Content Include="Content\plugins\bootstrap-theme.min.css" />
     <Content Include="Content\plugins\bootstrap.min.css" />
     <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.svg" />
@@ -216,17 +223,30 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\modules\app.js" />
+    <Content Include="Scripts\modules\header\directives\headerMenu.js" />
+    <Content Include="Scripts\modules\header\headerMenu.js" />
+    <Content Include="Scripts\modules\login\directives\loginForm.js" />
+    <Content Include="Scripts\modules\login\loginForm.js" />
+    <Content Include="Scripts\plugins\angular-animate.min.js" />
+    <Content Include="Scripts\plugins\angular-deckgrid.min.js" />
+    <Content Include="Scripts\plugins\angular-dragdrop.min.js" />
+    <Content Include="Scripts\plugins\angular-loading-bar.min.js" />
+    <Content Include="Scripts\plugins\angular-route.min.js" />
+    <Content Include="Scripts\plugins\angular-scrollbar.min.js" />
+    <Content Include="Scripts\plugins\angular-snap.min.js" />
+    <Content Include="Scripts\plugins\angular-strap.min.js" />
+    <Content Include="Scripts\plugins\angular-strap.tpl.min.js" />
     <Content Include="Scripts\plugins\angular.min.js" />
     <Content Include="Scripts\plugins\bootstrap.min.js" />
     <Content Include="Scripts\plugins\jquery-1.11.0.min.js" />
     <Content Include="Scripts\plugins\jquery-ui-1.10.4.custom.min.js" />
-    <Content Include="Scripts\plugins\jquery.mCustomScrollbar.min.js" />
-    <Content Include="Scripts\plugins\jquery.mousewheel.min.js" />
     <Content Include="Scripts\plugins\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\plugins\modernizr-2.6.2.js" />
     <Content Include="Scripts\plugins\respond.js" />
     <Content Include="Scripts\plugins\respond.min.js" />
-    <Content Include="Scripts\plugins\ui-bootstrap-tpls-0.10.0.min.js" />
+    <Content Include="Scripts\plugins\angular-ui-bootstrap-tpls-0.10.0.min.js" />
+    <Content Include="Scripts\plugins\snap.min.js" />
     <Content Include="Scripts\plugins\underscore-min.js" />
     <Content Include="Scripts\plugins\video-js\demo.html" />
     <Content Include="Scripts\plugins\video-js\font\vjs.svg" />
@@ -264,6 +284,17 @@
     <Content Include="Scripts\plugins\video-js\font\vjs.eot" />
     <Content Include="Scripts\plugins\video-js\font\vjs.ttf" />
     <Content Include="Scripts\plugins\video-js\font\vjs.woff" />
+    <Content Include="Views\Profile\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.BlogService.Contracts\Blog.Backend.Services.BlogService.Contracts.csproj">
+      <Project>{80e97384-c35d-4e94-a6b0-d73c98cf69de}</Project>
+      <Name>Blog.Backend.Services.BlogService.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Frontend.Common\Blog.Frontend.Common\Blog.Frontend.Common.csproj">
+      <Project>{22f6f7f9-d2a4-4364-a3a6-c0d6eb598133}</Project>
+      <Name>Blog.Frontend.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,6 +6,7 @@ namespace Blog.Backend.Services.BlogService.Contracts
     public interface IComments
     {
         List<Comment> GetByPostId(int postId);
+        List<Comment> GetByUser(int userId);
         List<Comment> GetReplies(int commentId);
         Comment Add(Comment comment);
         void Delete(int commentId);

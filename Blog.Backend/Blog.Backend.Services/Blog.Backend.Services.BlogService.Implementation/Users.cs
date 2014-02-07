@@ -26,15 +26,5 @@ namespace Blog.Backend.Services.BlogService.Implementation
         {
             return UsersFactory.GetInstance().CreateUsers().Update(user);
         }
-
-        public User Login(string userName, string passWord)
-        {
-            return UsersFactory.GetInstance().CreateUsers().Login(userName, passWord);
-        }
-
-        public bool Logout(string userName)
-        {
-            return UsersFactory.GetInstance().CreateUsers().Logout(userName);
-        }
     }
 }
