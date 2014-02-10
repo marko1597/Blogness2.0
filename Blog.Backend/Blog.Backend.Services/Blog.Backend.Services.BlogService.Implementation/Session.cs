@@ -11,9 +11,14 @@ namespace Blog.Backend.Services.BlogService.Implementation
             return SessionFactory.GetInstance().CreateSession().GetByUser(username);
         }
 
-        public LoggedUser Login(string userName, string passWord)
+        public Contracts.BlogObjects.Session GetByIp(string ipAddress)
         {
-            return SessionFactory.GetInstance().CreateSession().Login(userName, passWord);
+            return SessionFactory.GetInstance().CreateSession().GetByIp(ipAddress);
+        }
+
+        public LoggedUser Login(string userName, string passWord, string ipAddress)
+        {
+            return SessionFactory.GetInstance().CreateSession().Login(userName, passWord, ipAddress);
         }
 
         public bool Logout(string userName)

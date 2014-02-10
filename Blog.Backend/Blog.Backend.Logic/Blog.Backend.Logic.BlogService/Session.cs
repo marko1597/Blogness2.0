@@ -33,14 +33,31 @@ namespace Blog.Backend.Logic.BlogService
             }
         }
 
-        public LoggedUser Login(string userName, string passWord)
+        public Services.BlogService.Contracts.BlogObjects.Session GetByIp(string ipAddress)
+        {
+            try
+            {
+                CleanupExpiredSessions();
+                var session = _sessionResource.Get(a => a.IpAddress == ipAddress).FirstOrDefault();
+
+                return session ?? new Services.BlogService.Contracts.BlogObjects.Session();
+            }
+            catch (Exception)
+            {
+                return new Services.BlogService.Contracts.BlogObjects.Session();
+            }
+        }
+
+        public LoggedUser Login(string userName, string passWord, string ipAddress)
         {
             try
             {
                 var user = _userResource.Get(a => a.UserName == userName && a.Password == passWord).FirstOrDefault();
                 if (user != null)
                 {
-                    var session = _sessionResource.Add(user.UserId);
+                    DeleteSessionFromSameIp(ipAddress);
+
+                    var session = _sessionResource.Add(user.UserId, ipAddress);
                     CleanupExpiredSessions();
 
                     if (session != null)
@@ -67,7 +84,9 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 var user = _userResource.Get(a => a.UserName == userName).FirstOrDefault();
-                if (user != null) loggedOut = _sessionResource.Delete(user.UserId);
+                var session = _sessionResource.Get(a => a.UserId == user.UserId).FirstOrDefault();
+
+                if (user != null) loggedOut = _sessionResource.Delete(session);
 
                 CleanupExpiredSessions();
             }
@@ -78,10 +97,23 @@ namespace Blog.Backend.Logic.BlogService
             return loggedOut;
         }
 
+        private void DeleteSessionFromSameIp(string ipAddress)
+        {
+            try
+            {
+                var sessions = _sessionResource.Get(a => a.IpAddress == ipAddress);
+                sessions.ForEach(a => _sessionResource.Delete(a));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         private void CleanupExpiredSessions()
         {
             var oldSessions = _sessionResource.Get(a => a.TimeValidity <= DateTime.UtcNow);
-            oldSessions.ForEach(a => _sessionResource.Delete(a.UserId));
+            oldSessions.ForEach(a => _sessionResource.Delete(a));
         }
     }
 }

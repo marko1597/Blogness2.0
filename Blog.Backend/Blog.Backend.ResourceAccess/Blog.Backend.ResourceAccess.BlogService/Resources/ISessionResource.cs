@@ -7,7 +7,7 @@ namespace Blog.Backend.ResourceAccess.BlogService.Resources
     public interface ISessionResource
     {
         List<Session> Get(Func<Session, bool> expression);
-        Session Add(int userId);
-        bool Delete(int userId);
+        Session Add(int userId, string ipAddress);
+        bool Delete(Session session);
     }
 }

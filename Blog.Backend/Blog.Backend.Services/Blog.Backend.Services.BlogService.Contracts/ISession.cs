@@ -6,7 +6,8 @@ namespace Blog.Backend.Services.BlogService.Contracts
     public interface ISession
     {
         Session GetByUser(string username);
-        LoggedUser Login(string userName, string passWord);
+        Session GetByIp(string ipAddress);
+        LoggedUser Login(string userName, string passWord, string ipAddress);
         bool Logout(string userName);
     }
 }

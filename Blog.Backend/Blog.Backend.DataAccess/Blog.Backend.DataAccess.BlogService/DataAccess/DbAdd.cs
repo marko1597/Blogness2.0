@@ -81,14 +81,15 @@ namespace Blog.Backend.DataAccess.BlogService.DataAccess
             return db.Add(user);
         }
 
-        public Session Session(int userId)
+        public Session Session(int userId, string ipAddress)
         {
             var db = new Repository<BlogDb>();
             return db.Add(new Session
                               {
                                   Token = Guid.NewGuid().ToString(),
                                   TimeValidity = DateTime.UtcNow.AddHours(Constants.SESSION_VALIDITY_LENGTH),
-                                  UserId = userId
+                                  UserId = userId,
+                                  IpAddress = ipAddress
                               });
         }
 

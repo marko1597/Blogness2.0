@@ -1,1 +1,0 @@
-﻿var loginForm = angular.module("loginForm", ["ngRoute"]);

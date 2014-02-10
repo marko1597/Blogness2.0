@@ -144,13 +144,10 @@ namespace Blog.Backend.DataAccess.BlogService.DataAccess
             return db.Delete(hobby);
         }
 
-        public bool Session(int userId)
+        public bool Session(Session session)
         {
             var db = new Repository<BlogDb>();
-            var tmp = db.Select<Session>()
-                .Where(a => a.UserId == userId)
-                .Select(a => a).FirstOrDefault();
-            return db.Delete(tmp);
+            return db.Delete(session);
         }
 
         private void PostTag(PostTag postTag)

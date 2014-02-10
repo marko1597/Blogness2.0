@@ -8,6 +8,7 @@ using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Api.Rest.Models;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
+using System.Web;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
@@ -36,13 +37,28 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/session/ip/{ipAddress}")]
+        public Session GetByIp(string ipAddress)
+        {
+            try
+            {
+                return _session.GetByIp(ipAddress);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         [HttpPost]
         [Route("api/session")]
         public LoggedUser Post([FromBody]Login credentials)
         {
             try
             {
-                return _session.Login(credentials.Username, credentials.Password);
+                var ip = ((HttpContextBase)Request.Properties["MS_HttpContext"]).Request.UserHostAddress;
+                return _session.Login(credentials.Username, credentials.Password, ip);
             }
             catch
             {

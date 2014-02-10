@@ -12,14 +12,14 @@ namespace Blog.Backend.ResourceAccess.BlogService.Resources
             return new DbGet().Sessions(expression);
         }
 
-        public Session Add(int userId)
+        public Session Add(int userId, string ipAddress)
         {
-            return new DbAdd().Session(userId);
+            return new DbAdd().Session(userId, ipAddress);
         }
 
-        public bool Delete(int userId)
+        public bool Delete(Session session)
         {
-            return new DbDelete().Session(userId);
+            return new DbDelete().Session(session);
         }
     }
 }

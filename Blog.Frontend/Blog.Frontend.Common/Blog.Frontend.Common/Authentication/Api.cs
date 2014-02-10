@@ -27,5 +27,21 @@ namespace Blog.Frontend.Common.Authentication
             }
             return session;
         }
+
+        public Session GetByIp(string ipAddress)
+        {
+            var session = new Session();
+            try
+            {
+                session = JsonHelper.DeserializeJson<Session>(
+                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
+                    .Get("session/ip/" + ipAddress));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return session;
+        }
     }
 }

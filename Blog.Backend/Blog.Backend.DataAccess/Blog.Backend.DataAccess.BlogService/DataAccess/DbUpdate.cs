@@ -65,5 +65,11 @@ namespace Blog.Backend.DataAccess.BlogService.DataAccess
             var db = new Repository<BlogDb>();
             return db.Update(user);
         }
+
+        public Session Session(Session session)
+        {
+            var db = new Repository<BlogDb>();
+            return db.Update(session);
+        }
     }
 }

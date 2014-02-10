@@ -42,6 +42,7 @@ namespace Blog.Frontend.Web.App_Start
                       "~/Scripts/plugins/angular-animate.min.js",
                       "~/Scripts/plugins/angular-deckgrid.min.js",
                       "~/Scripts/plugins/angular-dragdrop.min.js",
+                      "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-loading-bar.min.js",
                       "~/Scripts/plugins/angular-strap.min.js",
                       "~/Scripts/plugins/angular-snap.min.js",
@@ -51,8 +52,8 @@ namespace Blog.Frontend.Web.App_Start
             bundles.Add(new ScriptBundle("~/scripts/blog").Include(
                         "~/Scripts/modules/app.js"));
 
-            bundles.Add(new ScriptBundle("~/scripts/headermenu").Include(
-                      "~/Scripts/modules/header/headerMenu.js",
+            bundles.Add(new ScriptBundle("~/scripts/header").Include(
+                      "~/Scripts/modules/header/headerModule.js",
                       "~/Scripts/modules/header/directives/headerMenu.js"));
 
             #endregion

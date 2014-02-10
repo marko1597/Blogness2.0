@@ -1,8 +1,14 @@
-﻿loginForm.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope) {
+﻿loginModule.directive('loginForm', function () {
+    var ctrlFn = function ($scope, $rootScope, $location, loginService) {
+        $scope.username = "";
+        $scope.password = "";
 
+        $scope.login = function () {
+            loginService.loginUser($scope.username, $scope.password);
+            $location.path = "/";
+        }
     };
-    ctrlFn.$inject = ["$scope", "$rootScope"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "loginService"];
 
     return {
         restrict: 'EA',
@@ -20,15 +26,15 @@
 		                    '</div>' +
 	
 		                    '<div class="content">' +
-		                        '<input name="username" type="text" class="input username" placeholder="Username" />' +
+		                        '<input name="username" type="text" class="input username" placeholder="Username" ng-model="username" />' +
 		                        '<div class="user-icon"></div>' +
-		                        '<input name="password" type="password" class="input password" placeholder="Password" />' +
+		                        '<input name="password" type="password" class="input password" placeholder="Password" ng-model="password" />' +
 		                        '<div class="pass-icon"></div>' +
 		                    '</div>' +
 
 		                    '<div class="footer">' +
-		                        '<input type="submit" name="submit" value="Login" class="button" />' +
-		                        '<input type="submit" name="submit" value="Register" class="register" />' +
+		                        '<input type="button" name="login" value="Login" class="button" ng-click="login()" />' +
+		                        '<input type="button" name="register" value="Register" class="register" />' +
 		                    '</div>' +
 	                    '</form>' +
                     '</div>' +

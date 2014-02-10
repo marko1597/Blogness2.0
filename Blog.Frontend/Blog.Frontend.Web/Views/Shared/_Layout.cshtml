@@ -7,7 +7,9 @@
     @Styles.Render("~/content/css")
     @Styles.Render("~/content/cssplugins")
     @Scripts.Render("~/scripts/modernizr")
-
+    <script>
+        var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
+    </script>
 </head>
 <body>
     <header-menu></header-menu>
@@ -23,10 +25,22 @@
     @Scripts.Render("~/scripts/bootstrap")
     @Scripts.Render("~/scripts/angular")
     @Scripts.Render("~/scripts/blog")
-    @Scripts.Render("~/scripts/headermenu")
+    @Scripts.Render("~/scripts/header")
 
-    <script src="~/Scripts/modules/login/loginForm.js"></script>
+    <script>
+        $(function () {
+            var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
+            settings.setBlogApiEndpoint(blogApi);
+        });
+    </script>
+
+    <script src="~/Scripts/modules/config/configModule.js"></script>
+    <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
+
+    <script src="~/Scripts/modules/login/loginModule.js"></script>
     <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
+    <script src="~/Scripts/modules/login/services/loginService.js"></script>
+
     <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
 
     @RenderSection("scripts", required: false)

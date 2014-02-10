@@ -19,6 +19,14 @@ namespace Blog.Frontend.Web.Attributes
         {
             if (filterContext.HttpContext.Request.Cookies["username"] == null)
             {
+                var ip = filterContext.HttpContext.Request.UserHostAddress;
+                var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
+
+                if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
+                {
+                    return;
+                }
+
                 filterContext.Result = new HttpUnauthorizedResult();
                 return;
             }
@@ -40,6 +48,14 @@ namespace Blog.Frontend.Web.Attributes
         {
             if (filterContext.HttpContext.Request.Cookies["username"] == null)
             {
+                var ip = filterContext.HttpContext.Request.UserHostAddress;
+                var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
+
+                if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
+                {
+                    return;
+                }
+
                 filterContext.Result = new HttpUnauthorizedResult();
                 return;
             }

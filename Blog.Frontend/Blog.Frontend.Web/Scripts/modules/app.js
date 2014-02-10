@@ -1,1 +1,1 @@
-﻿var blog = angular.module("blog", ["ngRoute", "headerMenu", "loginForm"]);
+﻿var blog = angular.module("blog", ["ngRoute", "ngLocalStorage", "headerModule", "loginModule"]);

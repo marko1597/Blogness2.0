@@ -1,4 +1,4 @@
-﻿headerMenu.directive('headerMenu', function () {
+﻿headerModule.directive('headerMenu', function () {
     var ctrlFn = function ($scope, $rootScope) {
     };
     ctrlFn.$inject = ["$scope", "$rootScope"];

@@ -16,6 +16,9 @@ namespace Blog.Backend.Services.BlogService.Contracts.BlogObjects
         public int UserId { get; set; }
 
         [DataMember]
+        public string IpAddress { get; set; }
+
+        [DataMember]
         public DateTime TimeValidity { get; set; }
     }
 }
