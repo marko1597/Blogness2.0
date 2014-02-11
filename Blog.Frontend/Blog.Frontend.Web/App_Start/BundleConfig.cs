@@ -53,9 +53,25 @@ namespace Blog.Frontend.Web.App_Start
             bundles.Add(new ScriptBundle("~/scripts/blog").Include(
                         "~/Scripts/modules/app.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/shareddirectives").Include(
+                        "~/Scripts/modules/shared/directives/keypress.js"));
+
             bundles.Add(new ScriptBundle("~/scripts/header").Include(
                       "~/Scripts/modules/header/headerModule.js",
                       "~/Scripts/modules/header/directives/headerMenu.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/config").Include(
+                      "~/Scripts/modules/config/configModule.js",
+                      "~/Scripts/modules/config/provider/configProvider.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/config").Include(
+                      "~/Scripts/modules/config/configModule.js",
+                      "~/Scripts/modules/config/provider/configProvider.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/login").Include(
+                      "~/Scripts/modules/login/loginModule.js",
+                      "~/Scripts/modules/login/directives/loginForm.js",
+                      "~/Scripts/modules/login/services/loginService.js"));
 
             #endregion
 
@@ -70,6 +86,9 @@ namespace Blog.Frontend.Web.App_Start
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/content/login").Include(
+                      "~/Content/modules/loginform/loginform.css"));
 
             #endregion
 

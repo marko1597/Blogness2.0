@@ -231,6 +231,7 @@
     <Content Include="Scripts\modules\login\directives\loginForm.js" />
     <Content Include="Scripts\modules\login\loginModule.js" />
     <Content Include="Scripts\modules\login\services\loginService.js" />
+    <Content Include="Scripts\modules\shared\directives\keypress.js" />
     <Content Include="Scripts\plugins\angular-animate.min.js" />
     <Content Include="Scripts\plugins\angular-cookies.min.js" />
     <Content Include="Scripts\plugins\angular-deckgrid.min.js" />
@@ -273,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\modules\posts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

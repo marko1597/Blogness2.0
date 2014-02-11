@@ -122,26 +122,30 @@ CONTENT
 }
 
 .user-icon {
-    top: 158px;
+    top: 4px;
     background: rgba(65,72,72,0.75) url(http://www.demo.amitjakhu.com/login-form/images/user-icon.png) no-repeat center;
 }
 
 .pass-icon {
-    top: 214px;
+    top: 4px;
     background: rgba(65,72,72,0.75) url(http://www.demo.amitjakhu.com/login-form/images/pass-icon.png) no-repeat center;
 }
 
-.content input:focus + div {
-    left: -46px;
-}
+
 
 /* Animation */
-.input, .user-icon, .pass-icon, .button, .register {
-    transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -webkit-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    -ms-transition: all 0.5s ease;
+@media (min-width: 768px) {
+    .input, .user-icon, .pass-icon, .button, .register {
+        transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -webkit-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+    }
+
+    .content input:focus + div {
+        left: -55px;
+    }
 }
 
 /*******************

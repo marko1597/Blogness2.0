@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Bloggity</title>
     @Styles.Render("~/content/css")
+    @Styles.Render("~/content/login")
     @Styles.Render("~/content/cssplugins")
     @Scripts.Render("~/scripts/modernizr")
     <script>
@@ -25,7 +26,10 @@
     @Scripts.Render("~/scripts/bootstrap")
     @Scripts.Render("~/scripts/angular")
     @Scripts.Render("~/scripts/blog")
+    @Scripts.Render("~/scripts/shareddirectives")
     @Scripts.Render("~/scripts/header")
+    @Scripts.Render("~/scripts/config")
+    @Scripts.Render("~/scripts/login")
 
     <script>
         $(function () {
@@ -33,15 +37,6 @@
             settings.setBlogApiEndpoint(blogApi);
         });
     </script>
-
-    <script src="~/Scripts/modules/config/configModule.js"></script>
-    <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
-
-    <script src="~/Scripts/modules/login/loginModule.js"></script>
-    <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
-    <script src="~/Scripts/modules/login/services/loginService.js"></script>
-
-    <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
 
     @RenderSection("scripts", required: false)
 </body>

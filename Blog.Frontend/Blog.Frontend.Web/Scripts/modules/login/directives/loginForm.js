@@ -19,22 +19,36 @@
                 '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">' +
 			        '<div id="wrapper">' +
 	                    '<form name="login-form" class="login-form" action="" method="post">' +
-		                    '<div class="header">' +
-		                        '<h1>Login Form</h1>' +
-		                        '<span>Fill out the form below to login to Bloggity.</span>' +
-		                    '</div>' +
-	
+                            '<div class="row">' +
+                                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+                                    '<div class="header">' +
+		                                '<h1>Login Form</h1>' +
+		                                '<span>Fill out the form below to login to Bloggity.</span>' +
+		                            '</div>' +
+                                '</div>' +
+                            '</div>' +
+
 		                    '<div class="content">' +
-		                        '<input name="username" type="text" class="input username" placeholder="Username" ng-model="username" />' +
-		                        '<div class="user-icon"></div>' +
-		                        '<input name="password" type="password" class="input password" placeholder="Password" ng-model="password" />' +
-		                        '<div class="pass-icon"></div>' +
+	                            '<div class="row">' +
+                                    '<div class="col-xs-6 col-sm-6 col-md-12 col-lg-12">' +
+                                         '<input name="username" type="text" class="input username" placeholder="Username" ng-model="username" ng-enter="login()"/>' +
+		                                 '<div class="user-icon"></div>' +
+                                    '</div>' +
+                                    '<div class="col-xs-6 col-sm-6 col-md-12 col-lg-12">' +
+                                          '<input name="password" type="password" class="input password" placeholder="Password" ng-model="password" ng-enter="login()" />' +
+		                                  '<div class="pass-icon"></div>' +
+                                    '</div>' +
+                                '</div>' +
 		                    '</div>' +
 
-		                    '<div class="footer">' +
-		                        '<input type="button" name="login" value="Login" class="button" ng-click="login()" />' +
-		                        '<input type="button" name="register" value="Register" class="register" />' +
-		                    '</div>' +
+                            '<div class="row">' +
+                                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+		                            '<div class="footer">' +
+		                                '<input type="button" name="login" value="Login" class="button" ng-click="login()" />' +
+		                                '<input type="button" name="register" value="Register" class="register" />' +
+		                            '</div>' +
+                                '</div>' +
+                            '</div>' +
 	                    '</form>' +
                     '</div>' +
                 '</div>' +
