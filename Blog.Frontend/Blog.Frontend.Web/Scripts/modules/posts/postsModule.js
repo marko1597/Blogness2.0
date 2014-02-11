@@ -1,0 +1,1 @@
+﻿var postsModule = angular.module("postsModule", ["ngRoute", "configModule"]);

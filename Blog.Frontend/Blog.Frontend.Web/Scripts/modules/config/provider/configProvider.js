@@ -2,7 +2,8 @@
     var settings = {
         "BlogApi": "",
         "IsLoggedIn": false,
-        "SessionId": 0
+        "SessionId": 0,
+        "PostsThreshold": 20
     };
 
     this.$get = [function () {

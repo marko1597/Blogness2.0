@@ -57,7 +57,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/posts/popular/{postsCount}")]
+        [Route("api/posts/popular/{postsCount:int?}")]
         public List<Post> GetPopular(int postsCount = 20)
         {
             var posts = new List<Post>();
@@ -75,7 +75,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/posts/recent/{postsCount}")]
+        [Route("api/posts/recent/{postsCount:int?}")]
         public List<Post> GetRecent(int postsCount = 20)
         {
             var posts = new List<Post>();
