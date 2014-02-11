@@ -1,4 +1,4 @@
-﻿loginModule.factory('loginService', ["$http", "$q", "$timeout", "$cookies", "configProvider", function ($http, $q, $timeout, $cookies, configProvider) {
+﻿loginModule.factory('loginService', ["$http", "$q", "$timeout", "$cookies", "$window", "configProvider", function ($http, $q, $timeout, $cookies, $window, configProvider) {
     var sessionApi = "";
     $timeout(function () {
         sessionApi = configProvider.getSettings().BlogApi + "Session";
@@ -19,6 +19,7 @@
             }).success(function (response) {
                 $cookies.username = response.User.UserName;
                 $cookies.sessionId = response.Session.Token;
+                $window.location.href = "http://localhost:57540/";
                 deferred.resolve(response);
             }).error(function () {
                 deferred.reject("An error occurred!");

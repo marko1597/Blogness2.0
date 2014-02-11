@@ -38,7 +38,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity >= DateTime.Now)
+            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.Now)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
@@ -67,7 +67,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity >= DateTime.Now)
+            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.Now)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }

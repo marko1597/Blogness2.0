@@ -1,14 +1,13 @@
 ﻿loginModule.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $location, loginService) {
+    var ctrlFn = function ($scope, $rootScope, loginService) {
         $scope.username = "";
         $scope.password = "";
 
         $scope.login = function () {
             loginService.loginUser($scope.username, $scope.password);
-            $location.path = "/";
         }
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "loginService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "loginService"];
 
     return {
         restrict: 'EA',
