@@ -24,6 +24,20 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
+        [Route("api/session")]
+        public List<Session> Get()
+        {
+            try
+            {
+                return _session.GetAll();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
         [Route("api/session/{userName}")]
         public Session GetByUser(string username)
         {

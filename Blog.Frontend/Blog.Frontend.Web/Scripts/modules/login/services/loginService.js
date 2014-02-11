@@ -17,8 +17,8 @@
                 method: "POST",
                 data: credentials
             }).success(function (response) {
-                $cookies.username = response.User.Username;
-                $cookies.sessionId = response.Session.SessionId;
+                $cookies.username = response.User.UserName;
+                $cookies.sessionId = response.Session.Token;
                 deferred.resolve(response);
             }).error(function () {
                 deferred.reject("An error occurred!");

@@ -19,7 +19,7 @@ namespace Blog.Frontend.Web.Attributes
         {
             if (filterContext.HttpContext.Request.Cookies["username"] == null)
             {
-                var ip = filterContext.HttpContext.Request.UserHostAddress;
+                var ip = filterContext.HttpContext.Request.ServerVariables["REMOTE_ADDR"];
                 var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
 
                 if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
@@ -48,7 +48,7 @@ namespace Blog.Frontend.Web.Attributes
         {
             if (filterContext.HttpContext.Request.Cookies["username"] == null)
             {
-                var ip = filterContext.HttpContext.Request.UserHostAddress;
+                var ip = filterContext.HttpContext.Request.ServerVariables["REMOTE_ADDR"];
                 var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
 
                 if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))

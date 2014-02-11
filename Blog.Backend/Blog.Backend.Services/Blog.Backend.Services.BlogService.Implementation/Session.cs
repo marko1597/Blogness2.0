@@ -1,11 +1,17 @@
 ﻿using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
+using System.Collections.Generic;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
     public class Session : ISession
     {
+        public List<Contracts.BlogObjects.Session> GetAll()
+        {
+            return SessionFactory.GetInstance().CreateSession().GetAll();
+        }
+
         public Contracts.BlogObjects.Session GetByUser(string username)
         {
             return SessionFactory.GetInstance().CreateSession().GetByUser(username);

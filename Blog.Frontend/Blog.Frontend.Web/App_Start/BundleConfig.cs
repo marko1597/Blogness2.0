@@ -39,6 +39,7 @@ namespace Blog.Frontend.Web.App_Start
             bundles.Add(new ScriptBundle("~/scripts/angular").Include(
                       "~/Scripts/plugins/angular.min.js",
                       "~/Scripts/plugins/angular-route.min.js",
+                      "~/Scripts/plugins/angular-cookies.min.js",
                       "~/Scripts/plugins/angular-animate.min.js",
                       "~/Scripts/plugins/angular-deckgrid.min.js",
                       "~/Scripts/plugins/angular-dragdrop.min.js",

@@ -232,6 +232,7 @@
     <Content Include="Scripts\modules\login\loginModule.js" />
     <Content Include="Scripts\modules\login\services\loginService.js" />
     <Content Include="Scripts\plugins\angular-animate.min.js" />
+    <Content Include="Scripts\plugins\angular-cookies.min.js" />
     <Content Include="Scripts\plugins\angular-deckgrid.min.js" />
     <Content Include="Scripts\plugins\angular-dragdrop.min.js" />
     <Content Include="Scripts\plugins\angular-loading-bar.min.js" />

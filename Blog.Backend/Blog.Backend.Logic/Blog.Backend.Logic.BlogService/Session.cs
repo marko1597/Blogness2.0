@@ -3,6 +3,7 @@ using System.Linq;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
+using System.Collections.Generic;
 
 namespace Blog.Backend.Logic.BlogService
 {
@@ -15,6 +16,19 @@ namespace Blog.Backend.Logic.BlogService
         {
             _sessionResource = sessionResource;
             _userResource = userResource;
+        }
+
+        public List<Services.BlogService.Contracts.BlogObjects.Session> GetAll()
+        {
+            try
+            {
+                var sessions = _sessionResource.Get(a => a.SessionId > 0).ToList();
+                return sessions ?? new List<Services.BlogService.Contracts.BlogObjects.Session>();
+            }
+            catch (Exception)
+            {
+                return new List<Services.BlogService.Contracts.BlogObjects.Session>();
+            }
         }
 
         public Services.BlogService.Contracts.BlogObjects.Session GetByUser(string username)
