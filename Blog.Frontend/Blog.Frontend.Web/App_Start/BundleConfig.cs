@@ -26,11 +26,11 @@ namespace Blog.Frontend.Web.App_Start
             bundles.Add(new ScriptBundle("~/scripts/jqueryplugins").Include(
                         "~/Scripts/plugins/jquery.mCustomScrollbar.min.js",
                         "~/Scripts/plugins/jquery.mousewheel.min.js",
-                        "~/Scripts/plugins/jquery.ui.touch-punch.min.js"));
+                        "~/Scripts/plugins/jquery.ui.touch-punch.min.js",
+                        "~/Scripts/plugins/classie.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(
                         "~/Scripts/plugins/underscore-min.js",
-                        "~/Scripts/plugins/snap.min.js",
                         "~/Scripts/plugins/video-js/video.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
@@ -46,7 +46,6 @@ namespace Blog.Frontend.Web.App_Start
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-loading-bar.min.js",
                       "~/Scripts/plugins/angular-strap.min.js",
-                      "~/Scripts/plugins/angular-snap.min.js",
                       "~/Scripts/plugins/angular-strap.tpl.min.js",
                       "~/Scripts/plugins/angular-ui-bootstrap-tpls-0.10.0.min.js"));
 
@@ -73,6 +72,20 @@ namespace Blog.Frontend.Web.App_Start
                       "~/Scripts/modules/login/directives/loginForm.js",
                       "~/Scripts/modules/login/services/loginService.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/login").Include(
+                      "~/Scripts/modules/login/loginModule.js",
+                      "~/Scripts/modules/login/directives/loginForm.js",
+                      "~/Scripts/modules/login/services/loginService.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/navigation").Include(
+                      "~/Scripts/modules/navigation/navigationModule.js",
+                      "~/Scripts/modules/navigation/directives/navigationMenu.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/posts").Include(
+                      "~/Scripts/modules/posts/postsModule.js",
+                      "~/Scripts/modules/posts/directives/postsMain.js",
+                      "~/Scripts/modules/posts/services/postsService.js"));
+
             #endregion
 
             #region CSS Files
@@ -81,14 +94,19 @@ namespace Blog.Frontend.Web.App_Start
                       "~/Content/plugins/bootstrap.min.css",
                       "~/Content/plugins/bootstrap-theme.min.css",
                       "~/Content/plugins/bootstrap-additions.min.css",
-                      "~/Content/plugins/angular-motion.min.css",
-                      "~/Content/plugins/angular-snap.min.css"));
+                      "~/Content/plugins/angular-motion.min.css"));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/content/login").Include(
                       "~/Content/modules/loginform/loginform.css"));
+
+            bundles.Add(new StyleBundle("~/content/navigation").Include(
+                      "~/Content/modules/navigation/navigationmenu.css"));
+
+            bundles.Add(new StyleBundle("~/content/posts").Include(
+                      "~/Content/modules/posts/postsmain.css"));
 
             #endregion
 

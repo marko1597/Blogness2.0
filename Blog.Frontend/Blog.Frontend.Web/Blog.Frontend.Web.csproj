@@ -196,8 +196,9 @@
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\modules\loginform\loginform.css" />
+    <Content Include="Content\modules\navigation\navigationmenu.css" />
+    <Content Include="Content\modules\posts\postsmain.css" />
     <Content Include="Content\plugins\angular-motion.min.css" />
-    <Content Include="Content\plugins\angular-snap.min.css" />
     <Content Include="Content\plugins\bootstrap-additions.min.css" />
     <Content Include="Content\plugins\bootstrap-theme.min.css" />
     <Content Include="Content\plugins\bootstrap.min.css" />
@@ -231,6 +232,10 @@
     <Content Include="Scripts\modules\login\directives\loginForm.js" />
     <Content Include="Scripts\modules\login\loginModule.js" />
     <Content Include="Scripts\modules\login\services\loginService.js" />
+    <Content Include="Scripts\modules\messaging\messagingModule.js" />
+    <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
+    <Content Include="Scripts\modules\navigation\navigationModule.js" />
+    <Content Include="Scripts\modules\posts\directives\postsMain.js" />
     <Content Include="Scripts\modules\posts\postsModule.js" />
     <Content Include="Scripts\modules\posts\services\postsService.js" />
     <Content Include="Scripts\modules\shared\directives\keypress.js" />
@@ -242,11 +247,11 @@
     <Content Include="Scripts\plugins\angular-local-storage.js" />
     <Content Include="Scripts\plugins\angular-route.min.js" />
     <Content Include="Scripts\plugins\angular-scrollbar.min.js" />
-    <Content Include="Scripts\plugins\angular-snap.min.js" />
     <Content Include="Scripts\plugins\angular-strap.min.js" />
     <Content Include="Scripts\plugins\angular-strap.tpl.min.js" />
     <Content Include="Scripts\plugins\angular.min.js" />
     <Content Include="Scripts\plugins\bootstrap.min.js" />
+    <Content Include="Scripts\plugins\classie.js" />
     <Content Include="Scripts\plugins\jquery-1.11.0.min.js" />
     <Content Include="Scripts\plugins\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\plugins\jquery.ui.touch-punch.min.js" />
@@ -254,7 +259,6 @@
     <Content Include="Scripts\plugins\respond.js" />
     <Content Include="Scripts\plugins\respond.min.js" />
     <Content Include="Scripts\plugins\angular-ui-bootstrap-tpls-0.10.0.min.js" />
-    <Content Include="Scripts\plugins\snap.min.js" />
     <Content Include="Scripts\plugins\underscore-min.js" />
     <Content Include="Scripts\plugins\video-js\demo.html" />
     <Content Include="Scripts\plugins\video-js\font\vjs.svg" />
@@ -276,7 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\modules\posts\directives\" />
+    <Folder Include="Scripts\modules\messaging\directives\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

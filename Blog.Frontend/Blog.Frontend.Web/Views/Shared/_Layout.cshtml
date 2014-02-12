@@ -6,6 +6,8 @@
     <title>@ViewBag.Title - Bloggity</title>
     @Styles.Render("~/content/css")
     @Styles.Render("~/content/login")
+    @Styles.Render("~/content/navigation")
+    @Styles.Render("~/content/posts")
     @Styles.Render("~/content/cssplugins")
     @Scripts.Render("~/scripts/modernizr")
     <script>
@@ -13,11 +15,8 @@
     </script>
 </head>
 <body>
-    <header-menu></header-menu>
-
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+    
+    @RenderBody()
 
     @Scripts.Render("~/scripts/jquery")
     @Scripts.Render("~/scripts/jqueryui")
@@ -30,6 +29,8 @@
     @Scripts.Render("~/scripts/header")
     @Scripts.Render("~/scripts/config")
     @Scripts.Render("~/scripts/login")
+    @Scripts.Render("~/scripts/navigation")
+    @Scripts.Render("~/scripts/posts")
 
     <script>
         $(function () {
@@ -37,6 +38,8 @@
             settings.setBlogApiEndpoint(blogApi);
         });
     </script>
+
+    <script src="~/Scripts/modules/messaging/messagingModule.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>
