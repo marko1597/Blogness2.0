@@ -5,7 +5,7 @@
     }, 1000);
 
     return {
-        loginUser: function (username, password) {
+        loginUser: function(username, password) {
             var deferred = $q.defer();
             var credentials = {
                 Username: username,
@@ -16,19 +16,19 @@
                 url: sessionApi,
                 method: "POST",
                 data: credentials
-            }).success(function (response) {
+            }).success(function(response) {
                 $cookies.username = response.User.UserName;
                 $cookies.sessionId = response.Session.Token;
                 $window.location.href = "http://localhost/blog/";
                 deferred.resolve(response);
-            }).error(function () {
+            }).error(function() {
                 deferred.reject("An error occurred!");
             });
 
             return deferred.promise;
         },
 
-        logoutUser: function (username) {
+        logoutUser: function(username) {
             var deferred = $q.defer();
             var credentials = {
                 Username: username
@@ -38,13 +38,13 @@
                 url: sessionApi,
                 method: "DELETE",
                 data: credentials
-            }).success(function (response) {
+            }).success(function(response) {
                 deferred.resolve(response);
-            }).error(function () {
+            }).error(function() {
                 deferred.reject("An error occurred!");
             });
 
             return deferred.promise;
         }
-    }
+    };
 }]);

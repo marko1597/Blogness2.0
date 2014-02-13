@@ -1,9 +1,5 @@
 ﻿using Blog.Backend.Services.BlogService.Contracts.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Web;
 
 namespace Blog.Frontend.Web.Authentication
 {

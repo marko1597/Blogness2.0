@@ -15,6 +15,8 @@ div.main-container {
         z-index: 99;
         height: 100%;
         -webkit-transition: -webkit-transform 0.5s;
+        -moz-transition: transform 0.5s;
+        -o-transition: transform 0.5s;
         transition: transform 0.5s;
     }
 
@@ -28,6 +30,8 @@ div.main-container {
             content: '';
             opacity: 0;
             -webkit-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+            -moz-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
+            -o-transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
             transition: opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s;
         }
 
@@ -38,6 +42,7 @@ div.main-container {
             div.main-container div.main-pusher div.main-content,
             div.main-container div.main-pusher div.main-content div.main-content-inner {
                 position: relative;
+                background: #FFF;
             }
 
 div.navigation-menu-open div.main-pusher::after {
@@ -45,6 +50,8 @@ div.navigation-menu-open div.main-pusher::after {
     height: 100%;
     opacity: 1;
     -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
 

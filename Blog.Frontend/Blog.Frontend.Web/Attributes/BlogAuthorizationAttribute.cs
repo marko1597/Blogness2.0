@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Security.Principal;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
-using Blog.Frontend.Common.Helper;
 using Blog.Frontend.Common.Authentication;
-using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 using System.Web.Mvc.Filters;
 
 namespace Blog.Frontend.Web.Attributes
@@ -31,7 +24,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value.ToString());
+            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value);
             if (session == null)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
@@ -60,7 +53,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value.ToString());
+            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value);
             if (session == null)
             {
                 filterContext.Result = new HttpUnauthorizedResult();

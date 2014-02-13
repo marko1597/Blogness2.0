@@ -3,7 +3,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-namespace Blog.Frontend.Web.App_Start
+namespace Blog.Frontend.Web
 {
     public partial class Startup
     {

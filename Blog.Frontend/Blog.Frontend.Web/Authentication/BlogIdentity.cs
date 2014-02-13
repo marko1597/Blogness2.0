@@ -1,10 +1,7 @@
-﻿using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
-using Blog.Backend.Services.BlogService.Contracts.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Security.Principal;
-using System.Web;
+using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
+using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Frontend.Web.Authentication
 {
@@ -20,7 +17,7 @@ namespace Blog.Frontend.Web.Authentication
             User = loggedUser.User;
             Session = loggedUser.Session;
             Name = loggedUser.User.UserName;
-            IsAuthenticated = loggedUser.Session != null && loggedUser.Session.SessionId != null && loggedUser.Session.TimeValidity <= DateTime.Now;
+            IsAuthenticated = loggedUser.Session != null && string.IsNullOrEmpty(loggedUser.Session.Token) && loggedUser.Session.TimeValidity <= DateTime.Now;
         }
 
         public string AuthenticationType

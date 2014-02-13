@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Web;
 using System.Web.Optimization;
 
-namespace Blog.Frontend.Web.App_Start
+namespace Blog.Frontend.Web
 {
     public class BundleConfig
     {

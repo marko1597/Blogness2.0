@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http.Dependencies;
 using SimpleInjector;
 
-namespace Blog.Frontend.Web.App_Start
+namespace Blog.Frontend.Web
 {
     public class SimpleInjectorDependencyResolver : IDependencyResolver
     {

@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\images\lw-1.jpg" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
