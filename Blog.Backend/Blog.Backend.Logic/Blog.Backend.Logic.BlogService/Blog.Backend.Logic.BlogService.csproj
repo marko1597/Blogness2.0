@@ -44,9 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommentLikes.cs" />
-    <Compile Include="Comments.cs" />
-    <Compile Include="Education.cs" />
+    <Compile Include="CommentLikesLogic.cs" />
+    <Compile Include="CommentsLogic.cs" />
+    <Compile Include="EducationLogic.cs" />
     <Compile Include="Factory\CommentLikesFactory.cs" />
     <Compile Include="Factory\CommentsFactory.cs" />
     <Compile Include="Factory\EducationFactory.cs" />
@@ -60,17 +60,17 @@
     <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Factory\TagsFactory.cs" />
     <Compile Include="Factory\UsersFactory.cs" />
-    <Compile Include="Hobby.cs" />
-    <Compile Include="Media.cs" />
-    <Compile Include="MediaGroup.cs" />
-    <Compile Include="PostContents.cs" />
-    <Compile Include="PostLikes.cs" />
-    <Compile Include="Posts.cs" />
-    <Compile Include="PostsPage.cs" />
+    <Compile Include="HobbyLogic.cs" />
+    <Compile Include="MediaLogic.cs" />
+    <Compile Include="MediaGroupLogic.cs" />
+    <Compile Include="PostContentsLogic.cs" />
+    <Compile Include="PostLikesLogic.cs" />
+    <Compile Include="PostsLogic.cs" />
+    <Compile Include="PostsPageLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
-    <Compile Include="Tags.cs" />
-    <Compile Include="Users.cs" />
+    <Compile Include="SessionLogic.cs" />
+    <Compile Include="TagsLogic.cs" />
+    <Compile Include="UsersLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common.BlogService\Blog.Backend.Common.BlogService.csproj">

@@ -237,6 +237,7 @@
     <Content Include="Scripts\modules\messaging\messagingModule.js" />
     <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
     <Content Include="Scripts\modules\navigation\navigationModule.js" />
+    <Content Include="Scripts\modules\posts\directives\postContent.js" />
     <Content Include="Scripts\modules\posts\directives\postsMain.js" />
     <Content Include="Scripts\modules\posts\postsModule.js" />
     <Content Include="Scripts\modules\posts\services\postsService.js" />

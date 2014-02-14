@@ -4,7 +4,7 @@ using Blog.Backend.Services.BlogService.Contracts;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Hobby : IHobby
+    public class HobbyService : IHobby
     {
         public List<Contracts.BlogObjects.Hobby> GetByUser(int userId)
         {

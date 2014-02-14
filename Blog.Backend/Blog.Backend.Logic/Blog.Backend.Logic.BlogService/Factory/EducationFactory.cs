@@ -20,10 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Education CreateEducation()
+        public EducationLogic CreateEducation()
         {
             IEducationResource educationResource = new EducationResource();
-            return new Education(educationResource);
+            return new EducationLogic(educationResource);
         }
     }
 }

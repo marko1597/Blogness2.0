@@ -7,7 +7,7 @@ namespace Blog.Backend.Services.BlogService.Contracts
     {
         List<PostContent> GetByPostId(int postId);
         PostContent Get(int postContentId);
-        void Add(PostContent postImage);
+        void Add(PostContent postContent);
         void Delete(int postContentId);
     }
 }

@@ -4,7 +4,7 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Users : IUser
+    public class UsersService : IUser
     {
         public User GetByUserName(int? userId, string userName)
         {

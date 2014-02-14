@@ -4,7 +4,7 @@ using Blog.Backend.Services.BlogService.Contracts;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Media : IMedia
+    public class MediaService : IMedia
     {
         public List<Contracts.BlogObjects.Media> GetByUser(int userId)
         {

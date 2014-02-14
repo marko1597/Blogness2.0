@@ -5,7 +5,7 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Comments : IComments
+    public class CommentsService : IComments
     {
         public List<Comment> GetByPostId(int id)
         {

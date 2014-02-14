@@ -5,7 +5,7 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class PostLikes : IPostLikes
+    public class PostLikesService : IPostLikes
     {
         public List<PostLike> Get(int postId)
         {

@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.BlogService;
+using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class PostContents
+    public class PostContentsLogic
     {
         private readonly IPostContentResource _postContentResource;
-        private readonly IMediaResource _mediaResource;
 
-        public PostContents(IPostContentResource postContentResource, IMediaResource mediaResource)
+        public PostContentsLogic(IPostContentResource postContentResource)
         {
             _postContentResource = postContentResource;
-            _mediaResource = mediaResource;
         }
 
         public List<PostContent> GetByPostId(int postId)
@@ -24,6 +23,15 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 postContents = _postContentResource.Get(a => a.PostId == postId);
+                postContents.ForEach(a =>
+                {
+                    a.Media = MediaFactory.GetInstance().CreateMedia().Get(a.MediaId);
+                    if (a.Media != null)
+                    {
+                        a.Media.MediaContent = null;
+                        a.Media.ThumbnailContent = null;
+                    }
+                });
             }
             catch (Exception ex)
             {
@@ -38,6 +46,11 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 postContent = _postContentResource.Get(a => a.PostContentId == postContentId).FirstOrDefault();
+                if (postContent != null)
+                {
+                    postContent.Media = MediaFactory.GetInstance().CreateMedia().Get(postContent.MediaId);
+                    if (postContent.Media != null) postContent.Media.MediaContent = null;
+                }
             }
             catch (Exception ex)
             {
@@ -55,7 +68,7 @@ namespace Blog.Backend.Logic.BlogService
                     Utils.CreateDirectory(postContent.Media.MediaPath);
                     Utils.CreateThumbnailPath(postContent.Media.ThumbnailPath);
 
-                    var media = _mediaResource.Add(postContent.Media);
+                    var media = MediaFactory.GetInstance().CreateMedia().Add(postContent.Media);
                     postContent.MediaId = media.MediaId;
                 }
                 _postContentResource.Add(postContent);

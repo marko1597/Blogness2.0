@@ -4,24 +4,24 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using Blog.Backend.Common.BlogService;
+using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
+using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class Media
+    public class MediaLogic
     {
         private readonly IMediaResource _mediaResource;
-        private readonly IMediaGroupResource _mediaGroupResource;
 
-        public Media(IMediaResource mediaResource, IMediaGroupResource mediaGroupResource)
+        public MediaLogic(IMediaResource mediaResource)
         {
             _mediaResource = mediaResource;
-            _mediaGroupResource = mediaGroupResource;
         }
 
-        public List<Services.BlogService.Contracts.BlogObjects.Media> GetByUser(int userId)
+        public List<Media> GetByUser(int userId)
         {
-            var media = new List<Services.BlogService.Contracts.BlogObjects.Media>();
+            var media = new List<Media>();
             try
             {
                 media = _mediaResource.Get(a => a.UserId == userId);
@@ -33,9 +33,23 @@ namespace Blog.Backend.Logic.BlogService
             return media;
         }
 
-        public Services.BlogService.Contracts.BlogObjects.Media Get(int mediaId)
+        public List<Media> GetByGroup(int mediaGroupId)
         {
-            var media = new Services.BlogService.Contracts.BlogObjects.Media();
+            var media = new List<Media>();
+            try
+            {
+                media = _mediaResource.Get(a => a.MediaGroupId == mediaGroupId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return media;
+        }
+
+        public Media Get(int mediaId)
+        {
+            var media = new Media();
             try
             {
                 media = _mediaResource.Get(a => a.MediaId == mediaId).FirstOrDefault();
@@ -47,9 +61,9 @@ namespace Blog.Backend.Logic.BlogService
             return media;
         }
 
-        public Services.BlogService.Contracts.BlogObjects.Media Add(Services.BlogService.Contracts.BlogObjects.Media media)
+        public Media Add(Media media)
         {
-            var newMedia = new Services.BlogService.Contracts.BlogObjects.Media();
+            var newMedia = new Media();
 
             try
             {
@@ -65,7 +79,11 @@ namespace Blog.Backend.Logic.BlogService
 
                 if (media.MediaGroupId == 0)
                 {
-                    media.MediaGroupId = _mediaGroupResource.Get(a => a.IsUserDefault && a.UserId == media.UserId).First().MediaGroupId;
+                    media.MediaGroupId =
+                        MediaGroupFactory.GetInstance()
+                            .CreateMediaGroup()
+                            .GetUserDefaultGroup(media.UserId)
+                            .MediaGroupId;
                 }
 
                 newMedia = _mediaResource.Add(media);

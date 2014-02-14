@@ -20,10 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Hobby CreateHobby()
+        public HobbyLogic CreateHobby()
         {
             IHobbyResource hobbyResource = new HobbyResource();
-            return new Hobby(hobbyResource);
+            return new HobbyLogic(hobbyResource);
         }
     }
 }

@@ -11,12 +11,7 @@ namespace Blog.Backend.ResourceAccess.BlogService.Resources
         {
             return new DbGet().Comments(expression);
         }
-
-        public List<Comment> Get(Func<Comment, bool> expression, bool isComplete)
-        {
-            return new DbGet().Comments(expression, isComplete);
-        }
-
+        
         public Comment Add(Comment comment)
         {
             return new DbAdd().Comment(comment);

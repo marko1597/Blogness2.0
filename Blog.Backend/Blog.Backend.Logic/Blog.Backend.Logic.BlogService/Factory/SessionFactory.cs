@@ -20,11 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Session CreateSession()
+        public SessionLogic CreateSession()
         {
             ISessionResource sessionResource = new SessionResource();
-            IUserResource userResource = new UserResource();
-            return new Session(sessionResource, userResource);
+            return new SessionLogic(sessionResource);
         }
     }
 }

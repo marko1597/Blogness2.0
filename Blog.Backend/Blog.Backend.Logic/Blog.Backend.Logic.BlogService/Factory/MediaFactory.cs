@@ -20,11 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Media CreateMedia()
+        public MediaLogic CreateMedia()
         {
             IMediaResource mediaResource = new MediaResource();
-            IMediaGroupResource mediaGroupResource = new MediaGroupResource();
-            return new Media(mediaResource, mediaGroupResource);
+            return new MediaLogic(mediaResource);
         }
     }
 }

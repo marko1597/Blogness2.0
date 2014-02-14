@@ -5,7 +5,7 @@ using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class MediaGroup : IMediaGroup
+    public class MediaGroupService : IMediaGroup
     {
         public List<UserMediaGroup> GetByUser(int userId)
         {

@@ -5,7 +5,7 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Posts : IPosts
+    public class PostsService : IPosts
     {
         public Post GetPost(int postId)
         {

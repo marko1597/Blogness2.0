@@ -5,7 +5,7 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Tags : ITag
+    public class TagsService : ITag
     {
         public List<Tag> Get(int postId)
         {

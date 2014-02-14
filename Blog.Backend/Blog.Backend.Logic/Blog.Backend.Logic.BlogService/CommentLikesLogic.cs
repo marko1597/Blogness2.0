@@ -6,11 +6,11 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class CommentLikes
+    public class CommentLikesLogic
     {
         private readonly ICommentLikeResource _commentLikeResource;
 
-        public CommentLikes(ICommentLikeResource commentLikeResource)
+        public CommentLikesLogic(ICommentLikeResource commentLikeResource)
         {
             _commentLikeResource = commentLikeResource;
         }

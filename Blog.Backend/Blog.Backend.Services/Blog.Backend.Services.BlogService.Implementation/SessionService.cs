@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class Session : ISession
+    public class SessionService : ISession
     {
         public List<Contracts.BlogObjects.Session> GetAll()
         {

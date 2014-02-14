@@ -5,11 +5,11 @@ using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class Users
+    public class UsersLogic
     {
         private readonly IUserResource _userResource;
 
-        public Users(IUserResource userResource)
+        public UsersLogic(IUserResource userResource)
         {
             _userResource = userResource;
         }
@@ -28,12 +28,26 @@ namespace Blog.Backend.Logic.BlogService
             return user;
         }
 
+        public User GetByCredentials(string username, string password)
+        {
+            var user = new User();
+            try
+            {
+                user = _userResource.Get(a => a.UserName == username && a.Password == password).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return user;
+        }
+
         public User Get(int userId)
         {
             var user = new User();
             try
             {
-                user = _userResource.Get(a => a.UserId == userId, true).FirstOrDefault();
+                user = _userResource.Get(a => a.UserId == userId).FirstOrDefault();
             }
             catch (Exception ex)
             {

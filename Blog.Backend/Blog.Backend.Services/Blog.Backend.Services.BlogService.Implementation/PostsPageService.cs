@@ -6,7 +6,7 @@ using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Backend.Services.BlogService.Implementation
 {
-    public class PostsPage : IPostsPage
+    public class PostsPageService : IPostsPage
     {
         public UserPosts GetUserPosts(int userId)
         {

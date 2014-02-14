@@ -20,12 +20,14 @@ namespace Blog.Backend.Api.Rest
 
             // Simple Injection Setup
             var container = new Container();
-            container.Register<IComments, Comments>(Lifestyle.Singleton);
-            container.Register<ICommentLikes, CommentLikes>(Lifestyle.Singleton);
-            container.Register<IPosts, Posts>(Lifestyle.Singleton);
-            container.Register<IPostsPage, PostsPage>(Lifestyle.Singleton);
-            container.Register<IUser, Users>(Lifestyle.Singleton);
-            container.Register<ISession, Session>(Lifestyle.Singleton);
+            container.Register<IComments, CommentsService>(Lifestyle.Singleton);
+            container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
+            container.Register<IPosts, PostsService>(Lifestyle.Singleton);
+            container.Register<IPostsPage, PostsPageService>(Lifestyle.Singleton);
+            container.Register<IUser, UsersService>(Lifestyle.Singleton);
+            container.Register<ISession, SessionService>(Lifestyle.Singleton);
+            container.Register<IPostContents, PostContentsService>(Lifestyle.Singleton);
+            container.Register<IMedia, MediaService>(Lifestyle.Singleton);
 
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

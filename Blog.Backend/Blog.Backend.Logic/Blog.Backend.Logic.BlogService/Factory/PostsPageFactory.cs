@@ -20,12 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public PostsPage CreatePostsPage()
+        public PostsPageLogic CreatePostsPage()
         {
             IPostResource postResource = new PostResource();
-            IUserResource userResource = new UserResource();
-            IPostContentResource postContentResource = new PostContentResource();
-            return new PostsPage(userResource, postResource, postContentResource);
+            return new PostsPageLogic(postResource);
         }
     }
 }

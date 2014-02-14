@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class PostsPage
+    public class PostsPageLogic
     {
-        private readonly IUserResource _userResource;
         private readonly IPostResource _postResource;
-        private readonly IPostContentResource _postContentResource;
 
-        public PostsPage(IUserResource userResource, IPostResource postResource, IPostContentResource postContentResource)
+        public PostsPageLogic(IPostResource postResource)
         {
-            _userResource = userResource;
             _postResource = postResource;
-            _postContentResource = postContentResource;
         }
 
         public UserPosts GetUserPosts(int userId)
@@ -25,12 +22,11 @@ namespace Blog.Backend.Logic.BlogService
             var userPosts = new UserPosts();
             try
             {
-                userPosts.User = _userResource.Get(a => a.UserId == userId).First();
+                userPosts.User = UsersFactory.GetInstance().CreateUsers().Get(userId);
                 userPosts.Posts = _postResource.Get(a => a.UserId == userId).ToList();
                 userPosts.Posts.ForEach(a =>
                 {
-                    a.PostContents = _postContentResource.Get(b => b.PostId == a.PostId);
-                    a.PostContents.ForEach(b => { b.Media = null; });
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
                 });
             }
             catch (Exception ex)
@@ -45,7 +41,11 @@ namespace Blog.Backend.Logic.BlogService
             var posts = new List<Post>();
             try
             {
-                posts = _postResource.Get(a => a.PostId > 0, postsCount).OrderByDescending(a => a.PostLikes.Count).ToList();
+                posts = _postResource.Get(a => a.PostId > 0, postsCount).ToList();
+                posts.ForEach(a =>
+                {
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                });
             }
             catch (Exception ex)
             {
@@ -60,6 +60,10 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 posts = _postResource.Get(a => a.PostId > 0).Take(postsCount).OrderByDescending(a => a.CreatedDate).ToList();
+                posts.ForEach(a =>
+                {
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                });
             }
             catch (Exception ex)
             {

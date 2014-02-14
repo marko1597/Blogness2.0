@@ -20,10 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Users CreateUsers()
+        public UsersLogic CreateUsers()
         {
             IUserResource userResource = new UserResource();
-            return new Users(userResource);
+            return new UsersLogic(userResource);
         }
     }
 }

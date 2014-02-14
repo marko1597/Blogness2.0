@@ -20,10 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public PostLikes CreatePostLikes()
+        public PostLikesLogic CreatePostLikes()
         {
             IPostLikeResource postLikeResource = new PostLikeResource();
-            return new PostLikes(postLikeResource);
+            return new PostLikesLogic(postLikeResource);
         }
     }
 }

@@ -11,12 +11,7 @@ namespace Blog.Backend.ResourceAccess.BlogService.Resources
         {
             return new DbGet().Users(expression);
         }
-
-        public List<User> Get(Func<User, bool> expression, bool isComplete)
-        {
-            return new DbGet().Users(expression, isComplete);
-        }
-
+        
         public User Add(User user)
         {
             return new DbAdd().User(user);

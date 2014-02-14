@@ -20,10 +20,10 @@ namespace Blog.Backend.Logic.BlogService.Factory
             return _instance;
         }
 
-        public Tags CreateTags()
+        public TagsLogic CreateTags()
         {
             ITagResource tagResource = new TagResource();
-            return new Tags(tagResource);
+            return new TagsLogic(tagResource);
         }
     }
 }

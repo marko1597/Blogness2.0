@@ -157,6 +157,8 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CommentLikesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MediaController.cs" />
+    <Compile Include="Controllers\PostContentController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsersController.cs" />

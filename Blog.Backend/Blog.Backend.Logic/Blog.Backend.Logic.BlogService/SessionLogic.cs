@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Linq;
+using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
+using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 using System.Collections.Generic;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class Session
+    public class SessionLogic
     {
         private readonly ISessionResource _sessionResource;
-        private readonly IUserResource _userResource;
 
-        public Session(ISessionResource sessionResource, IUserResource userResource)
+        public SessionLogic(ISessionResource sessionResource)
         {
             _sessionResource = sessionResource;
-            _userResource = userResource;
         }
 
-        public List<Services.BlogService.Contracts.BlogObjects.Session> GetAll()
+        public List<Session> GetAll()
         {
             try
             {
@@ -26,38 +26,38 @@ namespace Blog.Backend.Logic.BlogService
             }
             catch (Exception)
             {
-                return new List<Services.BlogService.Contracts.BlogObjects.Session>();
+                return new List<Session>();
             }
         }
 
-        public Services.BlogService.Contracts.BlogObjects.Session GetByUser(string username)
+        public Session GetByUser(string username)
         {
             try
             {
                 CleanupExpiredSessions();
-                var user = _userResource.Get(a => a.UserName == username).FirstOrDefault();
+                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(null, username);
                 var session = _sessionResource.Get(a => user != null && a.UserId == user.UserId).FirstOrDefault();
 
-                return session ?? new Services.BlogService.Contracts.BlogObjects.Session();
+                return session ?? new Session();
             }
             catch (Exception)
             {
-                return new Services.BlogService.Contracts.BlogObjects.Session();
+                return new Session();
             }
         }
 
-        public Services.BlogService.Contracts.BlogObjects.Session GetByIp(string ipAddress)
+        public Session GetByIp(string ipAddress)
         {
             try
             {
                 CleanupExpiredSessions();
                 var session = _sessionResource.Get(a => a.IpAddress == ipAddress).FirstOrDefault();
 
-                return session ?? new Services.BlogService.Contracts.BlogObjects.Session();
+                return session ?? new Session();
             }
             catch (Exception)
             {
-                return new Services.BlogService.Contracts.BlogObjects.Session();
+                return new Session();
             }
         }
 
@@ -65,7 +65,7 @@ namespace Blog.Backend.Logic.BlogService
         {
             try
             {
-                var user = _userResource.Get(a => a.UserName == userName && a.Password == passWord).FirstOrDefault();
+                var user = UsersFactory.GetInstance().CreateUsers().GetByCredentials(userName, passWord);
                 if (user != null)
                 {
                     DeleteSessionFromSameIp(ipAddress);
@@ -96,7 +96,7 @@ namespace Blog.Backend.Logic.BlogService
             var loggedOut = false;
             try
             {
-                var user = _userResource.Get(a => a.UserName == userName).FirstOrDefault();
+                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(null, userName);
                 var session = _sessionResource.Get(a => user != null && a.UserId == user.UserId).FirstOrDefault();
 
                 if (user != null) loggedOut = _sessionResource.Delete(session);

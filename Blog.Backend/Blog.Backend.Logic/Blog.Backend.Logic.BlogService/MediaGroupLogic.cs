@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
+using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Backend.Logic.BlogService
 {
-    public class MediaGroup
+    public class MediaGroupLogic
     {
-        private readonly IMediaResource _mediaResource;
         private readonly IMediaGroupResource _mediaGroupResource;
 
-        public MediaGroup(IMediaResource mediaResource, IMediaGroupResource mediaGroupResource)
+        public MediaGroupLogic(IMediaGroupResource mediaGroupResource)
         {
-            _mediaResource = mediaResource;
             _mediaGroupResource = mediaGroupResource;
         }
 
@@ -26,7 +27,7 @@ namespace Blog.Backend.Logic.BlogService
                 {
                     MediaGroupId = g.MediaGroupId,
                     MediaGroupName = g.MediaGroupName,
-                    Media = _mediaResource.Get(m => m.MediaGroupId == g.MediaGroupId && m.UserId == g.UserId)
+                    Media = MediaFactory.GetInstance().CreateMedia().GetByGroup(g.MediaGroupId)
                 }));
             }
             catch (Exception ex)
@@ -36,7 +37,22 @@ namespace Blog.Backend.Logic.BlogService
             return userMediaGroup;
         }
 
-        public void Delete(Services.BlogService.Contracts.BlogObjects.MediaGroup mediaGroup)
+        public MediaGroup GetUserDefaultGroup(int userId)
+        {
+            var mediaGroup = new MediaGroup();
+            try
+            {
+                mediaGroup = _mediaGroupResource.Get(a => a.IsUserDefault && a.UserId == userId).First();
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return mediaGroup;
+        }
+
+        public void Delete(MediaGroup mediaGroup)
         {
             try
             {
@@ -48,7 +64,7 @@ namespace Blog.Backend.Logic.BlogService
             }
         }
 
-        public Services.BlogService.Contracts.BlogObjects.MediaGroup Add(Services.BlogService.Contracts.BlogObjects.MediaGroup mediaGroup)
+        public MediaGroup Add(MediaGroup mediaGroup)
         {
             try
             {
@@ -56,11 +72,11 @@ namespace Blog.Backend.Logic.BlogService
             }
             catch
             {
-                return new Services.BlogService.Contracts.BlogObjects.MediaGroup();
+                return new MediaGroup();
             }
         }
 
-        public Services.BlogService.Contracts.BlogObjects.MediaGroup Update(Services.BlogService.Contracts.BlogObjects.MediaGroup mediaGroup)
+        public MediaGroup Update(MediaGroup mediaGroup)
         {
             try
             {
@@ -68,7 +84,7 @@ namespace Blog.Backend.Logic.BlogService
             }
             catch
             {
-                return new Services.BlogService.Contracts.BlogObjects.MediaGroup();
+                return new MediaGroup();
             }
         }
     }
