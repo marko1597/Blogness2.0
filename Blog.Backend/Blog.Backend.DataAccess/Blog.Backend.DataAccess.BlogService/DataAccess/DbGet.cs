@@ -56,6 +56,15 @@ namespace Blog.Backend.DataAccess.BlogService.DataAccess
             return posts;
         }
 
+        public List<Post> Posts(Func<Post, bool> expression, int threshold)
+        {
+            var db = new Repository<BlogDb>();
+            var posts = db.Find(expression, threshold)
+                .Select(a => a).ToList();
+
+            return posts;
+        }
+
         public List<Post> PopularPosts(Func<Post, bool> expression, int threshold)
         {
             var db = new Repository<BlogDb>();
