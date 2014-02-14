@@ -27,7 +27,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
 
         private static void LoadUsers()
         {
-            SeedEntities.USERS.Add(new User
+            SeedEntities.Users.Add(new User
             {
                 FirstName = "Jason",
                 LastName = "Magpantay",
@@ -37,7 +37,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 EmailAddress = "jason.magpantay@gmail.com",
                 BirthDate = DateTime.UtcNow.AddYears(-25)
             });
-            SeedEntities.USERS.Add(new User
+            SeedEntities.Users.Add(new User
             {
                 FirstName = "Jason",
                 LastName = "Avel",
@@ -47,7 +47,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 EmailAddress = "jason.avel@gmail.com",
                 BirthDate = DateTime.UtcNow.AddYears(-25)
             });
-            SeedEntities.USERS.Add(new User
+            SeedEntities.Users.Add(new User
             {
                 FirstName = "Avel",
                 LastName = "Magpantay",
@@ -63,10 +63,10 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var addId = 0;
 
-            foreach (var u in SeedEntities.USERS)
+            foreach (var u in SeedEntities.Users)
             {
                 addId++;
-                SeedEntities.ADDRESS.Add(new Address
+                SeedEntities.Address.Add(new Address
                 {
                     AddressId = addId,
                     UserId = u.UserId,
@@ -81,25 +81,25 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
 
         private static void LoadEducationType()
         {
-            SeedEntities.EDUCATIONTYPE.Add(new EducationType
+            SeedEntities.Educationtype.Add(new EducationType
             {
                 EducationTypeId = 1,
                 EducationTypeName = "Grade School"
             });
 
-            SeedEntities.EDUCATIONTYPE.Add(new EducationType
+            SeedEntities.Educationtype.Add(new EducationType
             {
                 EducationTypeId = 2,
                 EducationTypeName = "High School"
             });
 
-            SeedEntities.EDUCATIONTYPE.Add(new EducationType
+            SeedEntities.Educationtype.Add(new EducationType
             {
                 EducationTypeId = 3,
                 EducationTypeName = "College Education"
             });
 
-            SeedEntities.EDUCATIONTYPE.Add(new EducationType
+            SeedEntities.Educationtype.Add(new EducationType
             {
                 EducationTypeId = 3,
                 EducationTypeName = "Post Graduate"
@@ -110,14 +110,14 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var educId = 0;
 
-            foreach (var u in SeedEntities.USERS)
+            foreach (var u in SeedEntities.Users)
             {
                 educId++;
                 var ed1 = new Education
                 {
                     EducationId = educId,
                     EducationTypeId = 1,
-                    EducationType = SeedEntities.EDUCATIONTYPE.FirstOrDefault(t => t.EducationTypeId == 1),
+                    EducationType = SeedEntities.Educationtype.FirstOrDefault(t => t.EducationTypeId == 1),
                     UserId = u.UserId,
                     SchoolName = "Grade School",
                     City = "City",
@@ -137,7 +137,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 {
                     EducationId = educId,
                     EducationTypeId = 2,
-                    EducationType = SeedEntities.EDUCATIONTYPE.FirstOrDefault(t => t.EducationTypeId == 1),
+                    EducationType = SeedEntities.Educationtype.FirstOrDefault(t => t.EducationTypeId == 1),
                     UserId = u.UserId,
                     SchoolName = "High School",
                     City = "City",
@@ -157,7 +157,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 {
                     EducationId = educId,
                     EducationTypeId = 3,
-                    EducationType = SeedEntities.EDUCATIONTYPE.FirstOrDefault(t => t.EducationTypeId == 1),
+                    EducationType = SeedEntities.Educationtype.FirstOrDefault(t => t.EducationTypeId == 1),
                     UserId = u.UserId,
                     SchoolName = "College Education",
                     City = "City",
@@ -172,9 +172,9 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                     ModifiedDate = DateTime.UtcNow
                 };
 
-                SeedEntities.EDUCATION.Add(ed1);
-                SeedEntities.EDUCATION.Add(ed2);
-                SeedEntities.EDUCATION.Add(ed3);
+                SeedEntities.Education.Add(ed1);
+                SeedEntities.Education.Add(ed2);
+                SeedEntities.Education.Add(ed3);
             }
         }
 
@@ -182,7 +182,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var hobId = 0;
 
-            foreach (var u in SeedEntities.USERS)
+            foreach (var u in SeedEntities.Users)
             {
                 hobId++;
                 var hob1 = new Hobby
@@ -220,15 +220,15 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                     ModifiedDate = DateTime.UtcNow
                 };
 
-                SeedEntities.HOBBIES.Add(hob1);
-                SeedEntities.HOBBIES.Add(hob2);
-                SeedEntities.HOBBIES.Add(hob3);
+                SeedEntities.Hobbies.Add(hob1);
+                SeedEntities.Hobbies.Add(hob2);
+                SeedEntities.Hobbies.Add(hob3);
             }
         }
 
         private static void LoadTags()
         {
-            SeedEntities.TAGS.Add(new Tag
+            SeedEntities.Tags.Add(new Tag
             {
                 CreatedBy = 1,
                 CreatedDate = DateTime.UtcNow,
@@ -237,7 +237,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 TagId = 1,
                 TagName = "lorem"
             });
-            SeedEntities.TAGS.Add(new Tag
+            SeedEntities.Tags.Add(new Tag
             {
                 CreatedBy = 2,
                 CreatedDate = DateTime.UtcNow,
@@ -246,7 +246,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 TagId = 2,
                 TagName = "ipsum"
             });
-            SeedEntities.TAGS.Add(new Tag
+            SeedEntities.Tags.Add(new Tag
             {
                 CreatedBy = 3,
                 CreatedDate = DateTime.UtcNow,
@@ -264,7 +264,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
             {
                 for (var j = 1; j < 6; j++)
                 {
-                    var tuser = SeedEntities.USERS.FirstOrDefault(a => a.UserId == i);
+                    var tuser = SeedEntities.Users.FirstOrDefault(a => a.UserId == i);
                     if (tuser != null)
                     {
                         var user = new User
@@ -277,7 +277,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                                            EmailAddress = tuser.EmailAddress
                                        };
 
-                        SeedEntities.POSTS.Add(new Post
+                        SeedEntities.Posts.Add(new Post
                                                    {
                                                        CreatedBy = i,
                                                        CreatedDate = DateTime.UtcNow.AddHours(-i),
@@ -298,11 +298,11 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         private static void LoadPostTags()
         {
             var ctrPostTag = 1;
-            foreach (var p in SeedEntities.POSTS)
+            foreach (var p in SeedEntities.Posts)
             {
-                foreach (var t in SeedEntities.TAGS)
+                foreach (var t in SeedEntities.Tags)
                 {
-                    SeedEntities.POSTTAGS.Add(new PostTag
+                    SeedEntities.PostTags.Add(new PostTag
                     {
                         PostTagId = ctrPostTag,
                         PostId = p.PostId,
@@ -320,13 +320,13 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         private static void LoadPostLikes()
         {
             var ctrPostLike = 1;
-            var posts = SeedEntities.POSTS;
+            var posts = SeedEntities.Posts;
 
             foreach (var p in posts)
             {
                 for (var i = 1; i < 4; i++)
                 {
-                    SeedEntities.POSTLIKES.Add(new PostLike
+                    SeedEntities.PostLikes.Add(new PostLike
                     {
                         CreatedBy = i,
                         CreatedDate = DateTime.UtcNow.AddHours(-i),
@@ -339,14 +339,14 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                     ctrPostLike++;
                 }
 
-                p.PostLikes = SeedEntities.POSTLIKES.Where(a => a.PostId == p.PostId).ToList();
+                p.PostLikes = SeedEntities.PostLikes.Where(a => a.PostId == p.PostId).ToList();
             }
         }
 
         private static void LoadComments()
         {
             int ctr = 1;
-            foreach (var post in SeedEntities.POSTS)
+            foreach (var post in SeedEntities.Posts)
             {
                 for (int i = 1; i < 4; i++)
                 {
@@ -363,7 +363,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                         UserId = i,
                         CommentLocation = "Makati City, Philippines"
                     };
-                    SeedEntities.COMMENTS.Add(comment);
+                    SeedEntities.Comments.Add(comment);
                     ctr++;
                 }
             }
@@ -372,13 +372,13 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         private static void LoadCommentLikes()
         {
             var ctrCommentLike = 1;
-            var comments = SeedEntities.COMMENTS;
+            var comments = SeedEntities.Comments;
 
             foreach (var c in comments)
             {
                 for (var i = 1; i < 4; i++)
                 {
-                    SeedEntities.COMMENTLIKES.Add(new CommentLike
+                    SeedEntities.CommentLikes.Add(new CommentLike
                     {
                         CreatedBy = i,
                         CreatedDate = DateTime.UtcNow.AddHours(i),
@@ -397,9 +397,9 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var mediaGroupId = 1;
 
-            foreach (var u in SeedEntities.USERS)
+            foreach (var u in SeedEntities.Users)
             {
-                SeedEntities.MEDIAGROUP.Add(new MediaGroup
+                SeedEntities.MediaGroups.Add(new MediaGroup
                 {
                     MediaGroupId = mediaGroupId,
                     MediaGroupName = "Stuff",
@@ -412,7 +412,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                 });
                 mediaGroupId++;
 
-                SeedEntities.MEDIAGROUP.Add(new MediaGroup
+                SeedEntities.MediaGroups.Add(new MediaGroup
                 {
                     MediaGroupId = mediaGroupId,
                     MediaGroupName = "Miscellaneous",
@@ -431,7 +431,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var mediaId = 1;
 
-            foreach (var u in SeedEntities.USERS)
+            foreach (var u in SeedEntities.Users)
             {
                 for (int i = 1; i < 6; i++)
                 {
@@ -441,7 +441,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
 
                     if (i < 4)
                     {
-                        SeedEntities.MEDIA.Add(new Media
+                        SeedEntities.Media.Add(new Media
                         {
                             CreatedBy = u.UserId,
                             CreatedDate = DateTime.UtcNow,
@@ -461,7 +461,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                     }
                     else
                     {
-                        SeedEntities.MEDIA.Add(new Media
+                        SeedEntities.Media.Add(new Media
                         {
                             CreatedBy = u.UserId,
                             CreatedDate = DateTime.UtcNow,
@@ -489,9 +489,9 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
         {
             var ctrPostContent = 1;
 
-            foreach (var p in SeedEntities.POSTS)
+            foreach (var p in SeedEntities.Posts)
             {
-                SeedEntities.POSTCONTENT.Add(new PostContent
+                SeedEntities.PostContents.Add(new PostContent
                 {
                     CreatedBy = p.User.UserId,
                     CreatedDate = p.CreatedDate,
@@ -499,7 +499,7 @@ namespace Blog.Backend.DataAccess.BlogService.Entities
                     ModifiedDate = p.ModifiedDate,
                     PostContentId = ctrPostContent,
                     PostId = p.PostId,
-                    Media = SeedEntities.MEDIA.FirstOrDefault(m => m.MediaId == ctrPostContent),
+                    Media = SeedEntities.Media.FirstOrDefault(m => m.MediaId == ctrPostContent),
                     MediaId = ctrPostContent
                 });
 

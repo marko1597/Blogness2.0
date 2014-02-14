@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.Services.BlogService.Contracts;
 

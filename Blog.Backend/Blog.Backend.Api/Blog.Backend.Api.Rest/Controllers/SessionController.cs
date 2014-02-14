@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
@@ -15,12 +11,9 @@ namespace Blog.Backend.Api.Rest.Controllers
     public class SessionController : ApiController
     {
         private readonly ISession _session;
-        private readonly IUser _user;
-
-        public SessionController(ISession session, IUser user)
+        public SessionController(ISession session)
         {
             _session = session;
-            _user = user;
         }
 
         [HttpGet]

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using Blog.Frontend.Common.Helper;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
-using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 
 namespace Blog.Frontend.Common.Authentication
 {

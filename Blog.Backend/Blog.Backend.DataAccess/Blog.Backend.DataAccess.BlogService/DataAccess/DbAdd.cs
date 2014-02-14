@@ -87,7 +87,7 @@ namespace Blog.Backend.DataAccess.BlogService.DataAccess
             return db.Add(new Session
                               {
                                   Token = Guid.NewGuid().ToString(),
-                                  TimeValidity = DateTime.UtcNow.AddHours(Constants.SESSION_VALIDITY_LENGTH),
+                                  TimeValidity = DateTime.UtcNow.AddHours(Constants.SessionValidityLength),
                                   UserId = userId,
                                   IpAddress = ipAddress
                               });

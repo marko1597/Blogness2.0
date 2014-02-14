@@ -9,7 +9,7 @@ namespace Blog.Backend.DataAccess.BlogService.Repository
         TE Add<TE>(TE entity) where TE : class;
         TE Update<TE>(TE entity) where TE : class;
         bool Delete<TE>(TE entity) where TE : class;
-        IQueryable<E> Select<E>() where E : class;
+        IQueryable<TE> Select<TE>() where TE : class;
         TE Select<TE>(object key) where TE : class;
         IList<TE> Find<TE>(Func<TE, bool> expressions) where TE : class, new();
         int SaveChanges();

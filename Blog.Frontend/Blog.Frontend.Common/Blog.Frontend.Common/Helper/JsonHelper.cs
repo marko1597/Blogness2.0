@@ -9,7 +9,7 @@ namespace Blog.Frontend.Common.Helper
     {
         public static string SerializeJson<T>(T obj)
         {
-            if (obj == null)
+            if (Equals(obj, null))
                 return "";
 
             string r = "";

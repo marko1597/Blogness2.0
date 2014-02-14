@@ -24,7 +24,7 @@ namespace Blog.Backend.Api.Rest.Formatter
         ///  Name of the query string parameter to look for
         ///  the jsonp function name
         /// </summary>
-        private string _jsonpParameterName;
+        private readonly string _jsonpParameterName;
 
         /// <summary>
         /// Captured name of the Jsonp function that the JSON call

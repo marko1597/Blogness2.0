@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ServiceModel;
-using System.ServiceModel.Web;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Backend.Services.BlogService.Contracts

@@ -19,13 +19,13 @@ namespace Blog.Frontend.Common
             return new string(chars);
         }
 
-        private static Regex isGuid = new Regex(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", RegexOptions.Compiled);
+        private static readonly Regex GuidConstraint = new Regex(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", RegexOptions.Compiled);
 
         public static bool IsGuid(string candidate)
         {
             if(candidate != null)
             {
-                return isGuid.IsMatch(candidate);
+                return GuidConstraint.IsMatch(candidate);
             }
             return false;
         }

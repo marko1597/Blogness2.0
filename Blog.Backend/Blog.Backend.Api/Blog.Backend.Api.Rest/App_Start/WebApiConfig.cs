@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Blog.Backend.Api.Rest.App_Start
+namespace Blog.Backend.Api.Rest
 {
     public static class WebApiConfig
     {

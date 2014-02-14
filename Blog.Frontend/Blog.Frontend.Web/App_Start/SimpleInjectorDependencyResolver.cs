@@ -16,7 +16,7 @@ namespace Blog.Frontend.Web
                 throw new ArgumentNullException("container");
             }
 
-            this.Container = container;
+            Container = container;
         }
 
         public void Dispose()
@@ -25,12 +25,12 @@ namespace Blog.Frontend.Web
 
         public object GetService(Type serviceType)
         {
-            return ((IServiceProvider)this.Container).GetService(serviceType);
+            return ((IServiceProvider)Container).GetService(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
         {
-            return this.Container.GetAllInstances(serviceType);
+            return Container.GetAllInstances(serviceType);
         }
 
         public IDependencyScope BeginScope()

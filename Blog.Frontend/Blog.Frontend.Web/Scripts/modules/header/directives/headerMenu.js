@@ -1,9 +1,10 @@
 ﻿headerModule.directive('headerMenu', function () {
-    var ctrlFn = function ($scope, $rootScope) {
+    var ctrlFn = function ($scope) {
+        $scope.userLoggedIn = false;
     };
-    ctrlFn.$inject = ["$scope", "$rootScope"];
+    ctrlFn.$inject = ["$scope"];
 
-    var linkFn = function (scope, element, attrs) {
+    var linkFn = function (scope, element) {
         var container = document.getElementById('main-container');
         var resetMenu = function () {
             classie.remove(container, 'navigation-menu-open');
@@ -16,7 +17,7 @@
             return e.parentNode && hasParentClass(e.parentNode, classname);
         };
 
-        $(element).find(".navbar-brand").click(function(el, i) {
+        $(element).find(".navbar-brand").click(function() {
             container.className = 'main-container';
             classie.add(container, "navigation-effect");
             setTimeout(function () {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Blog.Backend.ResourceAccess.BlogService.Resources;
-using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 using Blog.Backend.Services.BlogService.Contracts.ViewModels;
 using System.Collections.Generic;
 
@@ -23,7 +22,7 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 var sessions = _sessionResource.Get(a => a.SessionId > 0).ToList();
-                return sessions ?? new List<Services.BlogService.Contracts.BlogObjects.Session>();
+                return sessions;
             }
             catch (Exception)
             {
@@ -37,7 +36,7 @@ namespace Blog.Backend.Logic.BlogService
             {
                 CleanupExpiredSessions();
                 var user = _userResource.Get(a => a.UserName == username).FirstOrDefault();
-                var session = _sessionResource.Get(a => a.UserId == user.UserId).FirstOrDefault();
+                var session = _sessionResource.Get(a => user != null && a.UserId == user.UserId).FirstOrDefault();
 
                 return session ?? new Services.BlogService.Contracts.BlogObjects.Session();
             }
@@ -98,7 +97,7 @@ namespace Blog.Backend.Logic.BlogService
             try
             {
                 var user = _userResource.Get(a => a.UserName == userName).FirstOrDefault();
-                var session = _sessionResource.Get(a => a.UserId == user.UserId).FirstOrDefault();
+                var session = _sessionResource.Get(a => user != null && a.UserId == user.UserId).FirstOrDefault();
 
                 if (user != null) loggedOut = _sessionResource.Delete(session);
 

@@ -1,5 +1,4 @@
-﻿using System;
-using Blog.Backend.Logic.BlogService.Factory;
+﻿using Blog.Backend.Logic.BlogService.Factory;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 

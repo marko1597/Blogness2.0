@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Blog.Backend.Api.Rest.App_Start
+namespace Blog.Backend.Api.Rest
 {
     public class RouteConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Formatting;
 using Blog.Backend.Api.Rest.Formatter;
 
-namespace Blog.Backend.Api.Rest.App_Start
+namespace Blog.Backend.Api.Rest
 {
     public static class FormatConfig
     {

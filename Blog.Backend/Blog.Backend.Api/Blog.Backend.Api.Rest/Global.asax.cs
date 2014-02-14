@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Implementation;
-using Blog.Backend.Api.Rest.App_Start;
 using SimpleInjector;
 
 namespace Blog.Backend.Api.Rest

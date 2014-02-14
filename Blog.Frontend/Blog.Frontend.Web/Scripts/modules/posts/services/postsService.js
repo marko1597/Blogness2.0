@@ -5,34 +5,34 @@
     }, 1000);
 
     return {
-        getPopularPosts: function () {
+        getPopularPosts: function() {
             var deferred = $q.defer();
 
             $http({
                 url: postsApi + "/popular/" + configProvider.getSettings().PostsThreshold,
                 method: "GET"
-            }).success(function (response) {
+            }).success(function(response) {
                 deferred.resolve(response);
-            }).error(function () {
+            }).error(function() {
                 deferred.reject("An error occurred!");
             });
 
             return deferred.promise;
         },
 
-        getRecentPosts: function () {
+        getRecentPosts: function() {
             var deferred = $q.defer();
 
             $http({
                 url: postsApi + "/recent/" + configProvider.getSettings().PostsThreshold,
                 method: "GET"
-            }).success(function (response) {
+            }).success(function(response) {
                 deferred.resolve(response);
-            }).error(function () {
+            }).error(function() {
                 deferred.reject("An error occurred!");
             });
 
             return deferred.promise;
         }
-    }
+    };
 }]);

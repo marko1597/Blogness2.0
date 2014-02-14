@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using Blog.Backend.Api.Rest.Models;
 using Blog.Backend.Services.BlogService.Contracts;
 using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
