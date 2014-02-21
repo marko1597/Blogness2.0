@@ -1,9 +1,9 @@
-﻿using Blog.Backend.Services.BlogService.Contracts;
-using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
-using Blog.Backend.Services.BlogService.Contracts.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.ViewModels;
+using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {

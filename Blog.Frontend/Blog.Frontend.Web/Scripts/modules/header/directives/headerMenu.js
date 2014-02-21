@@ -17,6 +17,7 @@
             return e.parentNode && hasParentClass(e.parentNode, classname);
         };
 
+        //Opening side menu
         $(element).find(".navbar-brand").click(function() {
             container.className = 'main-container';
             classie.add(container, "navigation-effect");

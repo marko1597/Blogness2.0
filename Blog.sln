@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
+# Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend", "Blog.Backend", "{526898AC-3A0B-4A29-AEDA-CFBDD1F89873}"
@@ -13,21 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Common", "Blog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Api", "Blog.Backend.Api", "{7E179C90-40E2-4C2B-BF8A-0AF95FB69631}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.ResourceAccess", "Blog.Backend.ResourceAccess", "{8BDC19F4-BB1A-482B-9D6E-AA28DB216765}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Services", "Blog.Backend.Services", "{1B741FFC-1D1F-4C08-846E-0F69FFBEF492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.BlogService", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.BlogService\Blog.Backend.Common.BlogService.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common\Blog.Backend.Common.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess.BlogService", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess.BlogService\Blog.Backend.DataAccess.BlogService.csproj", "{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess\Blog.Backend.DataAccess.csproj", "{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Logic.BlogService", "Blog.Backend\Blog.Backend.Logic\Blog.Backend.Logic.BlogService\Blog.Backend.Logic.BlogService.csproj", "{388F088C-90F5-46E7-B7D1-422E0F577513}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Logic", "Blog.Backend\Blog.Backend.Logic\Blog.Backend.Logic\Blog.Backend.Logic.csproj", "{388F088C-90F5-46E7-B7D1-422E0F577513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.ResourceAccess.BlogService", "Blog.Backend\Blog.Backend.ResourceAccess\Blog.Backend.ResourceAccess.BlogService\Blog.Backend.ResourceAccess.BlogService.csproj", "{765C04C6-DF62-41BA-922E-03B322E27B4F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Services.BlogService.Contracts", "Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.BlogService.Contracts\Blog.Backend.Services.BlogService.Contracts.csproj", "{80E97384-C35D-4E94-A6B0-D73C98CF69DE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Services.BlogService.Implementation", "Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.BlogService.Implementation\Blog.Backend.Services.BlogService.Implementation.csproj", "{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Services.Implementation", "Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.Implementation\Blog.Backend.Services.Implementation.csproj", "{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Frontend", "Blog.Frontend", "{D2E814AD-9733-41B0-B392-DF8559627441}"
 EndProject
@@ -48,6 +42,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Api.Rest", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Frontend.Web", "Blog.Frontend\Blog.Frontend.Web\Blog.Frontend.Web.csproj", "{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.Contracts", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj", "{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess.Seed", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess.Seed\Blog.Backend.DataAccess.Seed.csproj", "{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,14 +64,6 @@ Global
 		{388F088C-90F5-46E7-B7D1-422E0F577513}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{388F088C-90F5-46E7-B7D1-422E0F577513}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{388F088C-90F5-46E7-B7D1-422E0F577513}.Release|Any CPU.Build.0 = Release|Any CPU
-		{765C04C6-DF62-41BA-922E-03B322E27B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{765C04C6-DF62-41BA-922E-03B322E27B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{765C04C6-DF62-41BA-922E-03B322E27B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{765C04C6-DF62-41BA-922E-03B322E27B4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80E97384-C35D-4E94-A6B0-D73C98CF69DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80E97384-C35D-4E94-A6B0-D73C98CF69DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80E97384-C35D-4E94-A6B0-D73C98CF69DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80E97384-C35D-4E94-A6B0-D73C98CF69DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -90,6 +80,14 @@ Global
 		{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,14 +97,13 @@ Global
 		{15E7A4F1-3700-4903-BB7D-CD65608956E0} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
 		{C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
 		{7E179C90-40E2-4C2B-BF8A-0AF95FB69631} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
-		{8BDC19F4-BB1A-482B-9D6E-AA28DB216765} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
 		{1B741FFC-1D1F-4C08-846E-0F69FFBEF492} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
 		{388F088C-90F5-46E7-B7D1-422E0F577513} = {A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}
 		{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073} = {15E7A4F1-3700-4903-BB7D-CD65608956E0}
+		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2} = {15E7A4F1-3700-4903-BB7D-CD65608956E0}
 		{3446AC30-FE40-4630-858E-03F3D08356D3} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
+		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
 		{E332015C-24B5-48FA-9ED4-12F5310FCE7C} = {7E179C90-40E2-4C2B-BF8A-0AF95FB69631}
-		{765C04C6-DF62-41BA-922E-03B322E27B4F} = {8BDC19F4-BB1A-482B-9D6E-AA28DB216765}
-		{80E97384-C35D-4E94-A6B0-D73C98CF69DE} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 		{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 		{EB64D71D-6ED3-4BC2-8A9D-E630CD84C804} = {D2E814AD-9733-41B0-B392-DF8559627441}
 		{774E1E6D-8FA4-4D34-BED3-5B42AFE64391} = {D2E814AD-9733-41B0-B392-DF8559627441}

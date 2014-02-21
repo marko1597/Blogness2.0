@@ -1,13 +1,14 @@
-﻿using System.Web.Http;
+﻿using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Blog.Backend.Services.BlogService.Contracts;
-using Blog.Backend.Services.BlogService.Implementation;
+using Blog.Backend.Services.Implementation;
+using Newtonsoft.Json;
 using SimpleInjector;
 
 namespace Blog.Backend.Api.Rest
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {
@@ -17,7 +18,7 @@ namespace Blog.Backend.Api.Rest
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatConfig.RegisterFormats(GlobalConfiguration.Configuration.Formatters);
-
+            
             // Simple Injection Setup
             var container = new Container();
             container.Register<IComments, CommentsService>(Lifestyle.Singleton);

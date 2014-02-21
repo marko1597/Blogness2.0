@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using Blog.Backend.Common.Contracts;
 using Blog.Frontend.Common.Helper;
-using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
 
 namespace Blog.Frontend.Common.Authentication
 {

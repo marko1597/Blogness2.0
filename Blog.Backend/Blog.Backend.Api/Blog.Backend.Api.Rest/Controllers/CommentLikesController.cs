@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using Blog.Backend.Services.BlogService.Contracts;
-using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
+using Blog.Backend.Common.Contracts;
+using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http;
-using Blog.Backend.Services.BlogService.Contracts;
-using Blog.Backend.Services.BlogService.Contracts.BlogObjects;
+using Blog.Backend.Common.Contracts;
+using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
@@ -52,6 +52,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             return user;
         }
 
+        [HttpPost]
+        [Route("api/user")]
         public void Post([FromBody] User user)
         {
             try
@@ -64,6 +66,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/user")]
         public void Put([FromBody] User user)
         {
             try

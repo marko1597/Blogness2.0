@@ -1,4 +1,4 @@
-﻿using Blog.Backend.Services.BlogService.Contracts.ViewModels;
+﻿using Blog.Backend.Common.Contracts.ViewModels;
 using System.Security.Principal;
 
 namespace Blog.Frontend.Web.Authentication

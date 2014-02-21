@@ -154,14 +154,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorWebApiDependencyResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
-    <Compile Include="Controllers\CommentLikesController.cs" />
+    <Compile Include="Controllers\CommentLikesController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\CommentsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MediaController.cs" />
-    <Compile Include="Controllers\PostContentController.cs" />
-    <Compile Include="Controllers\PostsController.cs" />
-    <Compile Include="Controllers\SessionController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\MediaController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PostContentController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PostsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\SessionController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\UsersController.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Formatter\JsonMediaTypeFormatter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,12 +198,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
@@ -207,13 +215,13 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Blog.Backend.Services\Blog.Backend.Services.BlogService.Contracts\Blog.Backend.Services.BlogService.Contracts.csproj">
-      <Project>{80e97384-c35d-4e94-a6b0-d73c98cf69de}</Project>
-      <Name>Blog.Backend.Services.BlogService.Contracts</Name>
+    <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj">
+      <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
+      <Name>Blog.Backend.Common.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Blog.Backend.Services\Blog.Backend.Services.BlogService.Implementation\Blog.Backend.Services.BlogService.Implementation.csproj">
+    <ProjectReference Include="..\..\Blog.Backend.Services\Blog.Backend.Services.Implementation\Blog.Backend.Services.Implementation.csproj">
       <Project>{e8d4c1b0-f3bf-4497-9ce7-922e90b1cf5b}</Project>
-      <Name>Blog.Backend.Services.BlogService.Implementation</Name>
+      <Name>Blog.Backend.Services.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
