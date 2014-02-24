@@ -19,7 +19,7 @@
             }).success(function(response) {
                 $cookies.username = response.User.UserName;
                 $cookies.sessionId = response.Session.Token;
-                $window.location.href = "http://localhost/blog/";
+                $window.location.href = "http://localhost/blog/profile/";
                 deferred.resolve(response);
             }).error(function() {
                 deferred.reject("An error occurred!");

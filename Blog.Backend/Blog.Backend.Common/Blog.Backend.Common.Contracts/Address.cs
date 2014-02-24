@@ -9,7 +9,7 @@ namespace Blog.Backend.Common.Contracts
         public int AddressId { get; set; }
 
         [DataMember]
-        public User User { get; set; }
+        public int UserId { get; set; }
 
         [DataMember]
         public string StreetAddress { get; set; }

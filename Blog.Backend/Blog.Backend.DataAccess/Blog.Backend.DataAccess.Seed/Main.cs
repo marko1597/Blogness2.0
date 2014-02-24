@@ -20,19 +20,56 @@ namespace Blog.Backend.DataAccess.Seed
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            LoadUsers();
-            LoadAddress();
-            LoadEducationType();
-            LoadEducation();
-            LoadHobbies();
-            LoadMediaGroup();
-            LoadMedia();
-            LoadTags();
-            LoadPosts();
-            LoadPostContents();
-            LoadPostLikes();
-            LoadComments();
-            LoadCommentLikes();
+            try
+            {
+                lbConsole.Items.Add("<================ START ================>");
+
+                LoadUsers();
+                lbConsole.Items.Add("Successfully added users...");
+
+                LoadAddress();
+                lbConsole.Items.Add("Successfully added addresses...");
+
+                LoadEducationType();
+                lbConsole.Items.Add("Successfully added education types...");
+
+                LoadEducation();
+                lbConsole.Items.Add("Successfully added educations...");
+
+                LoadHobbies();
+                lbConsole.Items.Add("Successfully added hobbies...");
+
+                LoadMediaGroup();
+                lbConsole.Items.Add("Successfully added media groups...");
+
+                LoadMedia();
+                lbConsole.Items.Add("Successfully added media...");
+
+                LoadTags();
+                lbConsole.Items.Add("Successfully added tags...");
+
+                LoadPosts();
+                lbConsole.Items.Add("Successfully added posts...");
+
+                LoadPostContents();
+                lbConsole.Items.Add("Successfully added post contents...");
+
+                LoadPostLikes();
+                lbConsole.Items.Add("Successfully added post likes...");
+
+                LoadComments();
+                lbConsole.Items.Add("Successfully added comments and comment replies...");
+
+                LoadCommentLikes();
+                lbConsole.Items.Add("Successfully added comment likes...");
+
+                lbConsole.Items.Add("<================ END ================>");
+
+            }
+            catch (Exception ex)
+            {
+                lbConsole.Items.Add(ex.Message);
+            }
         }
 
         private void LoadUsers()

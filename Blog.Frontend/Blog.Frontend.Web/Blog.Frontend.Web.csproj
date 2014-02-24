@@ -181,8 +181,6 @@
     <Compile Include="App_Start\SimpleInjectorDependencyResolver.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
-    <Compile Include="Authentication\BlogIdentity.cs" />
-    <Compile Include="Authentication\BlogPrincipal.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">

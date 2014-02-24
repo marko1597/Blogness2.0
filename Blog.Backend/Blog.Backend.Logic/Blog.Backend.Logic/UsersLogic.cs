@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.DataAccess.Repository;
@@ -9,10 +10,14 @@ namespace Blog.Backend.Logic
     public class UsersLogic
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAddressRepository _addressRepository;
+        private readonly IEducationRepository _educationRepository;
 
-        public UsersLogic(IUserRepository userRepository)
+        public UsersLogic(IUserRepository userRepository, IAddressRepository addressRepository, IEducationRepository educationRepository)
         {
             _userRepository = userRepository;
+            _addressRepository = addressRepository;
+            _educationRepository = educationRepository;
         }
 
         public User GetByUserName(int? userId, string userName)
@@ -21,8 +26,10 @@ namespace Blog.Backend.Logic
             try
             {
                 user = string.IsNullOrEmpty(userName) ? 
-                    UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, true).FirstOrDefault()) : 
-                    UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, true).FirstOrDefault());
+                    UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault()) :
+                    UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault());
+                user.Address = GetAddress(user);
+                user.Education = GetEducations(user);
             }
             catch (Exception ex)
             {
@@ -36,7 +43,9 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == username && a.Password == password, true).FirstOrDefault());
+                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == username && a.Password == password, null, "Address,Hobbies").FirstOrDefault());
+                user.Address = GetAddress(user);
+                user.Education = GetEducations(user);
             }
             catch (Exception ex)
             {
@@ -50,7 +59,9 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, true).FirstOrDefault());
+                user = UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault());
+                user.Address = GetAddress(user);
+                user.Education = GetEducations(user);
             }
             catch (Exception ex)
             {
@@ -83,6 +94,26 @@ namespace Blog.Backend.Logic
             {
                 return false;
             }
+        }
+
+        private Address GetAddress(User user)
+        {
+            var address = new Address();
+            if (user.UserId <= 0) return address;
+
+            address = AddressMapper.ToDto(_addressRepository.Find(a => a.UserId == user.UserId, false).FirstOrDefault());
+            return address;
+        }
+
+        private List<Education> GetEducations(User user)
+        {
+            var educations = new List<Education>();
+            if (user.UserId <= 0) return educations;
+
+            var db = _educationRepository.Find(a => a.UserId == user.UserId, true).ToList();
+            db.ForEach(a => educations.Add(EducationMapper.ToDto(a)));
+
+            return educations;
         }
     }
 }

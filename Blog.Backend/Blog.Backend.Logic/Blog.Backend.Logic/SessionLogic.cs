@@ -39,8 +39,13 @@ namespace Blog.Backend.Logic
             {
                 CleanupExpiredSessions();
                 var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(null, username);
-                var session = _sessionRepository.Find(a => user != null && a.UserId == user.UserId, true).FirstOrDefault();
+                var session = new DataAccess.Entities.Objects.Session();
 
+                if (user != null)
+                {
+                    session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
+                }
+                
                 return SessionMapper.ToDto(session) ?? new Session();
             }
             catch (Exception)
@@ -77,7 +82,7 @@ namespace Blog.Backend.Logic
                 {
                     IpAddress = ipAddress,
                     SessionId = 0,
-                    TimeValidity = DateTime.UtcNow,
+                    TimeValidity = DateTime.UtcNow.AddMinutes(20),
                     Token = Guid.NewGuid().ToString(),
                     UserId = user.UserId
                 };

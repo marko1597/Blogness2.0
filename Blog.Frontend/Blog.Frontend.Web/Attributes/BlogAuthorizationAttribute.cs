@@ -17,6 +17,7 @@ namespace Blog.Frontend.Web.Attributes
 
                 if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
                 {
+                    filterContext.Result = new HttpUnauthorizedResult();
                     return;
                 }
 
@@ -31,7 +32,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.Now)
+            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.UtcNow)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
@@ -60,7 +61,7 @@ namespace Blog.Frontend.Web.Attributes
                 return;
             }
 
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.Now)
+            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.UtcNow)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }

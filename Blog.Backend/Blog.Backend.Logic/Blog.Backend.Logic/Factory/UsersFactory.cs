@@ -23,7 +23,9 @@ namespace Blog.Backend.Logic.Factory
         public UsersLogic CreateUsers()
         {
             IUserRepository userRepository = new UserRepository();
-            return new UsersLogic(userRepository);
+            IAddressRepository addressRepository = new AddressRepository();
+            IEducationRepository educationRepository = new EducationRepository();
+            return new UsersLogic(userRepository, addressRepository, educationRepository);
         }
     }
 }

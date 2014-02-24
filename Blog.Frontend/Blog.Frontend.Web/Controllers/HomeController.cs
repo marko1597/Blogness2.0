@@ -5,7 +5,6 @@ namespace Blog.Frontend.Web.Controllers
 {
     public class HomeController : Controller
     {
-        [BlogAuth]
         public ActionResult Index()
         {
             return View();

@@ -16,7 +16,7 @@ namespace Blog.Backend.Logic.Mapper
                     State = address.State,
                     StreetAddress = address.StreetAddress,
                     Zip = address.Zip,
-                    User = address.User != null ? UserMapper.ToDto(address.User) : null
+                    UserId = address.UserId
                 };
         }
 
@@ -32,8 +32,7 @@ namespace Blog.Backend.Logic.Mapper
                     State = address.State,
                     StreetAddress = address.StreetAddress,
                     Zip = address.Zip,
-                    User = address.User != null ? UserMapper.ToEntity(address.User) : null,
-                    UserId = address.User != null ? address.User.UserId : 0
+                    UserId = address.UserId
                 };
         }
     }

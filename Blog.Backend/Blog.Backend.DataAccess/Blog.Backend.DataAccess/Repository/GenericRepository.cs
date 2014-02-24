@@ -22,8 +22,10 @@ namespace Blog.Backend.DataAccess.Repository
             return query.ToList();
         }
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        public IList<T> Find(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
         {
+            _context.Configuration.ProxyCreationEnabled = false;
+
             IQueryable<T> query = _context.Set<T>();
 
             if (filter != null)

@@ -122,9 +122,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj">
       <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
