@@ -1,7 +1,7 @@
 ﻿loginModule.factory('loginService', ["$http", "$q", "$timeout", "$cookies", "$window", "configProvider", function ($http, $q, $timeout, $cookies, $window, configProvider) {
     var sessionApi = "";
     $timeout(function () {
-        sessionApi = configProvider.getSettings().BlogApi + "Session";
+        sessionApi = configProvider.getSettings().BlogRoot + "Profile/Authenticate";
     }, 1000);
 
     return {
@@ -9,7 +9,8 @@
             var deferred = $q.defer();
             var credentials = {
                 Username: username,
-                Password: password
+                Password: password,
+                RememberMe: null
             };
 
             $http({
@@ -17,9 +18,9 @@
                 method: "POST",
                 data: credentials
             }).success(function(response) {
-                $cookies.username = response.User.UserName;
-                $cookies.sessionId = response.Session.Token;
-                $window.location.href = "http://localhost/blog/profile/";
+                //$cookies.username = response.User.UserName;
+                //$cookies.sessionId = response.Session.Token;
+                $window.location.href = configProvider.getSettings().BlogRoot;
                 deferred.resolve(response);
             }).error(function() {
                 deferred.reject("An error occurred!");

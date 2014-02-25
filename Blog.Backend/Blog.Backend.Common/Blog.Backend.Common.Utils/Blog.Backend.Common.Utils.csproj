@@ -8,8 +8,8 @@
     <ProjectGuid>{3446AC30-FE40-4630-858E-03F3D08356D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blog.Backend.Common</RootNamespace>
-    <AssemblyName>Blog.Backend.Common</AssemblyName>
+    <RootNamespace>Blog.Backend.Common.Utils</RootNamespace>
+    <AssemblyName>Blog.Backend.Common.Utils</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="IImageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="ImageHelper.cs" />
+    <Compile Include="SslValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

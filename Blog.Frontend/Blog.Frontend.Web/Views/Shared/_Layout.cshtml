@@ -12,6 +12,7 @@
     @Scripts.Render("~/scripts/modernizr")
     <script>
         var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
+        var blogRoot = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogRoot"))";
     </script>
 </head>
 <body ng-app="blog">
@@ -35,6 +36,7 @@
         $(function () {
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
             settings.setBlogApiEndpoint(blogApi);
+            settings.setBlogRoot(blogRoot);
         });
     </script>
 

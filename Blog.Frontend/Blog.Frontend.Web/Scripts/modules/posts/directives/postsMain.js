@@ -14,7 +14,7 @@
                     '<div id="posts-main">' +
                         '<div class="jumbotron">' +
                             '<h2>Jason Magpantay</h2>' +
-                            '<p>Kris Arianne</p>' +
+                            '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
                             '<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>' +
                         '</div>' +
                     '</div>' +

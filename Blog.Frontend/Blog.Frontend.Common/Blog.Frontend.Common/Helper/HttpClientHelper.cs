@@ -26,7 +26,15 @@ namespace Blog.Frontend.Common.Helper
         {
             HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var result = _httpClient.PostAsJsonAsync(url, obj).Result.ToString();
+            var result = _httpClient.PostAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
+            return result;
+        }
+
+        public string Put<T>(string url, T obj) where T : class
+        {
+            HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var result = _httpClient.PutAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
             return result;
         }
     }

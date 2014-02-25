@@ -1,4 +1,5 @@
-﻿using Blog.Backend.DataAccess.Repository;
+﻿using Blog.Backend.Common.Utils;
+using Blog.Backend.DataAccess.Repository;
 
 namespace Blog.Backend.DataAccess.Seed
 {
@@ -83,6 +84,7 @@ namespace Blog.Backend.DataAccess.Seed
         private readonly IPostRepository _postRepository = new PostRepository();
         private readonly ITagRepository _tagRepository = new TagRepository();
         private readonly IUserRepository _userRepository = new UserRepository();
+        private readonly IImageHelper _imageHelper = new ImageHelper();
         private System.Windows.Forms.ListBox lbConsole;
     }
 }

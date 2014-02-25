@@ -50,6 +50,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
+                ipAddress = ipAddress.Replace('x', ':');
                 return _session.GetByIp(ipAddress);
             }
             catch
@@ -73,9 +74,9 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPut]
         [Route("api/session")]
-        public bool Delete([FromBody]Login credentials)
+        public bool Put([FromBody]Login credentials)
         {
             try
             {

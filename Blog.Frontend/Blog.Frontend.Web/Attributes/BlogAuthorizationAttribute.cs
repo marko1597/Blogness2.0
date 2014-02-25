@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
-using Blog.Frontend.Common.Authentication;
 using System.Web.Mvc.Filters;
+using Blog.Frontend.Common.Authentication;
 
 namespace Blog.Frontend.Web.Attributes
 {
@@ -10,61 +10,23 @@ namespace Blog.Frontend.Web.Attributes
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            if (filterContext.HttpContext.Request.Cookies["username"] == null)
-            {
-                var ip = filterContext.HttpContext.Request.ServerVariables["REMOTE_ADDR"];
-                var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
-
-                if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
-                {
-                    filterContext.Result = new HttpUnauthorizedResult();
-                    return;
-                }
-
-                filterContext.Result = new HttpUnauthorizedResult();
-                return;
-            }
-
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value);
-            if (session == null)
-            {
-                filterContext.Result = new HttpUnauthorizedResult();
-                return;
-            }
-
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.UtcNow)
-            {
-                filterContext.Result = new HttpUnauthorizedResult();
-            }
+            filterContext.Result = GetCodeResult(filterContext);
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-            if (filterContext.HttpContext.Request.Cookies["username"] == null)
+
+        }
+
+        private HttpStatusCodeResult GetCodeResult(AuthenticationContext filterContext)
+        {
+            if (!filterContext.HttpContext.Request.IsAuthenticated)
             {
-                var ip = filterContext.HttpContext.Request.ServerVariables["REMOTE_ADDR"];
-                var sessionByIp = ApiFactory.GetInstance().CreateApi().GetByIp(ip);
-
-                if (sessionByIp != null && string.IsNullOrEmpty(sessionByIp.Token))
-                {
-                    return;
-                }
-
-                filterContext.Result = new HttpUnauthorizedResult();
-                return;
+                return new HttpUnauthorizedResult();
             }
 
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.HttpContext.Request.Cookies["username"].Value);
-            if (session == null)
-            {
-                filterContext.Result = new HttpUnauthorizedResult();
-                return;
-            }
-
-            if (string.IsNullOrEmpty(session.Token) || session.TimeValidity <= DateTime.UtcNow)
-            {
-                filterContext.Result = new HttpUnauthorizedResult();
-            }
+            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.Principal.Identity.Name);
+            return session != null ? null : new HttpUnauthorizedResult() ;
         }
     }
 }

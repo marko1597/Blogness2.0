@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
@@ -25,8 +26,7 @@ namespace Blog.Frontend.Common.Helper
             }
             catch (Exception ex)
             {
-
-                System.Diagnostics.Debug.WriteLine("#ERR SerializeJson:\t" + ex.Message);
+                Debug.WriteLine("#ERR SerializeJson:\t" + ex.Message);
             }
             return r;
         }
@@ -40,7 +40,7 @@ namespace Blog.Frontend.Common.Helper
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("#ERR DeserializeJson:\t" + ex.Message);
+               Debug.WriteLine("#ERR DeserializeJson:\t" + ex.Message);
             }
             return obj;
         }

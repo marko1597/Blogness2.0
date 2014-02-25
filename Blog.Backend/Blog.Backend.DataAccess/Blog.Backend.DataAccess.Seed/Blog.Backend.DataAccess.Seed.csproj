@@ -119,9 +119,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common\Blog.Backend.Common.csproj">
+    <ProjectReference Include="..\..\Blog.Backend.Common\Blog.Backend.Common.Utils\Blog.Backend.Common.Utils.csproj">
       <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
-      <Name>Blog.Backend.Common</Name>
+      <Name>Blog.Backend.Common.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Blog.Backend.DataAccess\Blog.Backend.DataAccess.csproj">
       <Project>{9caf7700-6fba-41d0-9c55-efdacfa2e073}</Project>

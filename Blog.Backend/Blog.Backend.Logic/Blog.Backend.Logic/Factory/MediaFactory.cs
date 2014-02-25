@@ -1,4 +1,5 @@
-﻿using Blog.Backend.DataAccess.Repository;
+﻿using Blog.Backend.Common.Utils;
+using Blog.Backend.DataAccess.Repository;
 
 namespace Blog.Backend.Logic.Factory
 {
@@ -23,7 +24,8 @@ namespace Blog.Backend.Logic.Factory
         public MediaLogic CreateMedia()
         {
             IMediaRepository mediaRepository = new MediaRepository();
-            return new MediaLogic(mediaRepository);
+            IImageHelper imageHelper = new ImageHelper();
+            return new MediaLogic(mediaRepository, imageHelper);
         }
     }
 }

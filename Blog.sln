@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Api", "Blog.Ba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Services", "Blog.Backend.Services", "{1B741FFC-1D1F-4C08-846E-0F69FFBEF492}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common\Blog.Backend.Common.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.Utils", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Utils\Blog.Backend.Common.Utils.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess\Blog.Backend.DataAccess.csproj", "{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073}"
 EndProject

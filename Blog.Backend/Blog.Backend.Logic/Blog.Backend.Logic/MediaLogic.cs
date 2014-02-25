@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Blog.Backend.Common;
+using Blog.Backend.Common.Utils;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Factory;
@@ -13,10 +13,12 @@ namespace Blog.Backend.Logic
     public class MediaLogic
     {
         private readonly IMediaRepository _mediaRepository;
+        private readonly IImageHelper _imageHelper;
 
-        public MediaLogic(IMediaRepository mediaRepository)
+        public MediaLogic(IMediaRepository mediaRepository, IImageHelper imageHelper)
         {
             _mediaRepository = mediaRepository;
+            _imageHelper = imageHelper;
         }
 
         public List<Media> GetByUser(int userId)
@@ -81,17 +83,17 @@ namespace Blog.Backend.Logic
         {
             try
             {
-                media.MediaPath = Utils.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
-                media.ThumbnailPath = Utils.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
-                
-                Utils.CreateDirectory(media.MediaPath);
+                media.MediaPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
+                media.ThumbnailPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
+
+                _imageHelper.CreateDirectory(media.MediaPath);
                 var fs = new FileStream(media.MediaPath, FileMode.Create);
                 fs.Write(media.MediaContent, 0, media.MediaContent.Length);
 
                 if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
                 {
-                    Utils.CreateThumbnailPath(media.ThumbnailPath);
-                    media.ThumbnailContent = Utils.CreateThumbnail(media.MediaPath);
+                    _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
+                    media.ThumbnailContent = _imageHelper.CreateThumbnail(media.MediaPath);
                 }
 
                 if (media.MediaGroupId == 0)
@@ -126,8 +128,8 @@ namespace Blog.Backend.Logic
                 _mediaRepository.Delete(db);
                 File.Delete(db.ThumbnailPath);
                 File.Delete(db.MediaPath);
-                Utils.DeleteThumbnailPath(db.ThumbnailPath);
-                Utils.DeleteDirectory(db.MediaPath);
+                _imageHelper.DeleteThumbnailPath(db.ThumbnailPath);
+                _imageHelper.DeleteDirectory(db.MediaPath);
 
                 return true;
             }

@@ -1,6 +1,7 @@
 ﻿configModule.provider('configProvider', function () {
     var settings = {
         "BlogApi": "",
+        "BlogRoot": "",
         "IsLoggedIn": false,
         "SessionId": 0,
         "PostsThreshold": 20
@@ -24,6 +25,10 @@
             /* Setters */
             setBlogApiEndpoint: function (val) {
                 settings.BlogApi = val;
+            },
+
+            setBlogRoot: function (val) {
+                settings.BlogRoot = val;
             },
 
             setSessionId: function (sessionId) {

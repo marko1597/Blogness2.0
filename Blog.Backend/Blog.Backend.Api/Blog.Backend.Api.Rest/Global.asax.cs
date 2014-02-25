@@ -2,8 +2,8 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Blog.Backend.Common.Utils;
 using Blog.Backend.Services.Implementation;
-using Newtonsoft.Json;
 using SimpleInjector;
 
 namespace Blog.Backend.Api.Rest
@@ -18,6 +18,7 @@ namespace Blog.Backend.Api.Rest
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatConfig.RegisterFormats(GlobalConfiguration.Configuration.Formatters);
+            SslValidator.OverrideValidation();
             
             // Simple Injection Setup
             var container = new Container();

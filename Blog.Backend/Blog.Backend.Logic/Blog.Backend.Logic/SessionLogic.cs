@@ -99,7 +99,11 @@ namespace Blog.Backend.Logic
             }
             catch (Exception)
             {
-                return new LoggedUser();
+                return new LoggedUser
+                {
+                    User = null,
+                    Session = null
+                };
             }
         }
 

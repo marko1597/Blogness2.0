@@ -110,7 +110,7 @@ namespace Blog.Frontend.Web
 
             #endregion
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
 
         public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)

@@ -186,8 +186,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Authentication.cs" />
+    <Compile Include="Helpers\IAuthentication.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -298,11 +299,16 @@
     <Content Include="Scripts\plugins\video-js\font\vjs.ttf" />
     <Content Include="Scripts\plugins\video-js\font\vjs.woff" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj">
       <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
       <Name>Blog.Backend.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Utils\Blog.Backend.Common.Utils.csproj">
+      <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
+      <Name>Blog.Backend.Common.Utils</Name>
     </ProjectReference>
     <ProjectReference Include="..\Blog.Frontend.Common\Blog.Frontend.Common\Blog.Frontend.Common.csproj">
       <Project>{22f6f7f9-d2a4-4364-a3a6-c0d6eb598133}</Project>

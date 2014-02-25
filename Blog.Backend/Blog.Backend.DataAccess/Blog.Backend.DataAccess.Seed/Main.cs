@@ -272,9 +272,9 @@ namespace Blog.Backend.DataAccess.Seed
                             MediaType = "image/jpeg",
                             UserId = u.UserId,
                             MediaPath = mediaPath,
-                            MediaContent = Common.Utils.ImageToByteArray(image),
+                            MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailPath = tnPath,
-                            ThumbnailContent = Common.Utils.CreateThumbnail(mediaPath)
+                            ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });
                     }
                     else
@@ -291,9 +291,9 @@ namespace Blog.Backend.DataAccess.Seed
                             MediaType = "image/jpeg",
                             UserId = u.UserId,
                             MediaPath = mediaPath,
-                            MediaContent = Common.Utils.ImageToByteArray(image),
+                            MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailPath = tnPath,
-                            ThumbnailContent = Common.Utils.CreateThumbnail(mediaPath)
+                            ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });
                     }
                     mediaId++;
