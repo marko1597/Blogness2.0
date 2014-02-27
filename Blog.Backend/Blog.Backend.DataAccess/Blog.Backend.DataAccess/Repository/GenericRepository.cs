@@ -40,10 +40,7 @@ namespace Blog.Backend.DataAccess.Repository
             {
                 return orderBy(query).ToList();
             }
-            else
-            {
-                return query.ToList();
-            }
+            return query.ToList();
         }
 
         public IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren)

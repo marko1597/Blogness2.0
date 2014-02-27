@@ -57,11 +57,11 @@ namespace Blog.Backend.Logic
             }
         }
 
-        public bool Delete(Hobby hobby)
+        public bool Delete(int hobbyId)
         {
             try
             {
-                _hobbyRepository.Delete(HobbyMapper.ToEntity(hobby));
+                _hobbyRepository.Delete(_hobbyRepository.Find(a => a.HobbyId == hobbyId, false).FirstOrDefault());
                 return true;
             }
             catch (Exception)

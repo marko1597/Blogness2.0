@@ -15,7 +15,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/user/{userId:int}")]
+        [Route("api/users/{userId:int}")]
         public User Get(int userId)
         {
             var user = new User();
@@ -34,7 +34,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/user/{name}")]
+        [Route("api/users/{name}")]
         public User Get(string name)
         {
             var user = new User();
@@ -53,7 +53,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpPost]
-        [Route("api/user")]
+        [Route("api/users")]
         public void Post([FromBody] User user)
         {
             try
@@ -67,7 +67,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpPut]
-        [Route("api/user")]
+        [Route("api/users")]
         public void Put([FromBody] User user)
         {
             try

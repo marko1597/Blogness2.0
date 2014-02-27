@@ -46,11 +46,11 @@ namespace Blog.Backend.Logic
             return mediaGroup;
         }
 
-        public bool Delete(MediaGroup mediaGroup)
+        public bool Delete(int mediaGroupId)
         {
             try
             {
-                _mediaGroupRepository.Delete(MediaGroupMapper.ToEntity(mediaGroup));
+                _mediaGroupRepository.Delete(_mediaGroupRepository.Find(a => a.MediaGroupId == mediaGroupId, false).FirstOrDefault());
                 return true;
             }
             catch (Exception ex)

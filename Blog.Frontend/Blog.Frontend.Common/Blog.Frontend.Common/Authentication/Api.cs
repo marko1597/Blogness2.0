@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using System.Web;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Contracts.ViewModels;
 using Blog.Frontend.Common.Helper;

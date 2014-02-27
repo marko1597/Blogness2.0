@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Blog.Backend.Common.Contracts;
 
 namespace Blog.Backend.Logic.Mapper
@@ -9,8 +10,12 @@ namespace Blog.Backend.Logic.Mapper
         {
             if (mediaGroup != null)
             {
-                var media = mediaGroup.Media.Select(MediaMapper.ToDto).ToList();
-
+                var media = new List<Media>();
+                if (mediaGroup.Media != null)
+                {
+                    media = mediaGroup.Media.Select(a => MediaMapper.ToDto(a, false)).ToList();
+                }
+                
                 return new MediaGroup
                 {
                     MediaGroupId = mediaGroup.MediaGroupId,
@@ -31,7 +36,11 @@ namespace Blog.Backend.Logic.Mapper
         {
             if (mediaGroup != null)
             {
-                var media = mediaGroup.Media.Select(MediaMapper.ToEntity).ToList();
+                var media = new List<DataAccess.Entities.Objects.Media>();
+                if (mediaGroup.Media != null)
+                {
+                    media = mediaGroup.Media.Select(MediaMapper.ToEntity).ToList();
+                }
 
                 return new DataAccess.Entities.Objects.MediaGroup
                 {

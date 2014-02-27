@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Blog.Backend.Common.Contracts;
-using Blog.Backend.Common.Contracts.ViewModels;
 
 namespace Blog.Backend.Services.Implementation
 {
@@ -10,6 +9,6 @@ namespace Blog.Backend.Services.Implementation
         MediaGroup GetUserDefaultGroup(int userId);
         bool Add(MediaGroup mediaGroup);
         bool Update(MediaGroup mediaGroup);
-        bool Delete(MediaGroup mediaGroup);
+        bool Delete(int mediaGroupId);
     }
 }

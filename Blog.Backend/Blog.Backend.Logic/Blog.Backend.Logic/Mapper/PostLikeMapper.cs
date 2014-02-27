@@ -1,5 +1,4 @@
-﻿using System.Data.Common;
-using Blog.Backend.Common.Contracts;
+﻿using Blog.Backend.Common.Contracts;
 
 namespace Blog.Backend.Logic.Mapper
 {

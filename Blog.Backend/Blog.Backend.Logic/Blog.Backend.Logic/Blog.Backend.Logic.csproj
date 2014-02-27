@@ -54,9 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressLogic.cs" />
     <Compile Include="CommentLikesLogic.cs" />
     <Compile Include="CommentsLogic.cs" />
     <Compile Include="EducationLogic.cs" />
+    <Compile Include="Factory\AddressFactory.cs" />
     <Compile Include="Factory\CommentLikesFactory.cs" />
     <Compile Include="Factory\CommentsFactory.cs" />
     <Compile Include="Factory\EducationFactory.cs" />

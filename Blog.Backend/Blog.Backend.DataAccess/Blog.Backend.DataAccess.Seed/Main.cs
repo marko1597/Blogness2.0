@@ -248,31 +248,35 @@ namespace Blog.Backend.DataAccess.Seed
 
         private void LoadMedia()
         {
-            var mediaId = 1;
-
             foreach (var u in _users)
             {
+                var u1 = u;
+                var mediaGroups = _mediaGroupRepository.Find(a => a.UserId == u1.UserId).ToList();
+
                 for (var i = 1; i < 6; i++)
                 {
                     var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + i + ".jpg";
                     var tnPath = "C:\\SampleImages\\" + u.UserId + "\\tn\\" + i + ".jpg";
                     var image = Image.FromFile(mediaPath);
+                    var customName = Guid.NewGuid().ToString();
 
                     if (i < 4)
                     {
                         _mediaRepository.Add(new Media
                         {
+                            CustomName = customName,
                             CreatedBy = u.UserId,
                             CreatedDate = DateTime.UtcNow,
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
-                            MediaGroupId = 1,
+                            MediaGroupId = mediaGroups[0].MediaGroupId,
                             FileName = i + ".jpg",
-                            ExternalUrl = "http://localhost/blogapi/api/media/getmediaitem?mediaId=" + mediaId,
+                            MediaUrl = "https://localhost/blogapi/api/media/" + customName,
                             MediaType = "image/jpeg",
                             UserId = u.UserId,
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
+                            ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,
                             ThumbnailPath = tnPath,
                             ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });
@@ -281,22 +285,23 @@ namespace Blog.Backend.DataAccess.Seed
                     {
                         _mediaRepository.Add(new Media
                         {
+                            CustomName = customName,
                             CreatedBy = u.UserId,
                             CreatedDate = DateTime.UtcNow,
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
-                            MediaGroupId = 2,
+                            MediaGroupId = mediaGroups[1].MediaGroupId,
                             FileName = i + ".jpg",
-                            ExternalUrl = "http://localhost/blogapi/api/media/getmediaitem?mediaId=" + mediaId,
+                            MediaUrl = "https://localhost/blogapi/api/media/" + customName,
                             MediaType = "image/jpeg",
                             UserId = u.UserId,
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
+                            ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,
                             ThumbnailPath = tnPath,
                             ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });
                     }
-                    mediaId++;
                 }
             }
         }

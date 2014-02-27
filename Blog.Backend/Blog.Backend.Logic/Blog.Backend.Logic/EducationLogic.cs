@@ -57,11 +57,11 @@ namespace Blog.Backend.Logic
             }
         }
 
-        public bool Delete(Education education)
+        public bool Delete(int educationId)
         {
             try
             {
-                _educationRepository.Delete(EducationMapper.ToEntity(education));
+                _educationRepository.Delete(_educationRepository.Find(a => a.EducationId == educationId, false).FirstOrDefault());
                 return true;
             }
             catch (Exception)

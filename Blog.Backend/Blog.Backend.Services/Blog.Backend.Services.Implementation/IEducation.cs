@@ -8,6 +8,6 @@ namespace Blog.Backend.Services.Implementation
         List<Education> GetByUser(int userId);
         bool Add(Education education);
         bool Update(Education education);
-        bool Delete(Education education);
+        bool Delete(int educationId);
     }
 }

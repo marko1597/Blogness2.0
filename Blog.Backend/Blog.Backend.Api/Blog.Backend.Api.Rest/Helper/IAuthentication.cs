@@ -1,6 +1,6 @@
 ﻿using Blog.Backend.Common.Contracts;
 
-namespace Blog.Frontend.Web.Helpers
+namespace Blog.Backend.Api.Rest.Helper
 {
     public interface IAuthentication
     {

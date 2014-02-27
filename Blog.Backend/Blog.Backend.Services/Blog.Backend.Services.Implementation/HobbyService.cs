@@ -21,9 +21,9 @@ namespace Blog.Backend.Services.Implementation
             return HobbyFactory.GetInstance().CreateHobby().Update(hobby);
         }
 
-        public bool Delete(Hobby hobby)
+        public bool Delete(int hobbyId)
         {
-            return HobbyFactory.GetInstance().CreateHobby().Delete(hobby);
+            return HobbyFactory.GetInstance().CreateHobby().Delete(hobbyId);
         }
     }
 }

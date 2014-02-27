@@ -43,10 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressService.cs" />
     <Compile Include="CommentLikesService.cs" />
     <Compile Include="CommentsService.cs" />
     <Compile Include="EducationService.cs" />
     <Compile Include="HobbyService.cs" />
+    <Compile Include="IAddress.cs" />
     <Compile Include="ICommentLikes.cs" />
     <Compile Include="IComments.cs" />
     <Compile Include="IEducation.cs" />

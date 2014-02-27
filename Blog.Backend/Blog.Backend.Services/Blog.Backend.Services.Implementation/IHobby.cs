@@ -8,6 +8,6 @@ namespace Blog.Backend.Services.Implementation
         List<Hobby> GetByUser(int userId);
         bool Add(Hobby hobby);
         bool Update(Hobby hobby);
-        bool Delete(Hobby hobby);
+        bool Delete(int hobbyId);
     }
 }

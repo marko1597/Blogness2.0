@@ -27,7 +27,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var db = _mediaRepository.Find(a => a.UserId == userId, true).ToList();
-                db.ForEach(a => media.Add(MediaMapper.ToDto(a)));
+                db.ForEach(a => media.Add(MediaMapper.ToDto(a, false)));
             }
             catch (Exception ex)
             {
@@ -42,7 +42,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var db = _mediaRepository.Find(a => a.MediaGroupId == mediaGroupId, true).ToList();
-                db.ForEach(a => media.Add(MediaMapper.ToDto(a)));
+                db.ForEach(a => media.Add(MediaMapper.ToDto(a, false)));
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace Blog.Backend.Logic
             var media = new Media();
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId, true).FirstOrDefault());
+                return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId, true).FirstOrDefault(), true);
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace Blog.Backend.Logic
             var media = new Media();
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault());
+                return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault(), true);
             }
             catch (Exception ex)
             {
@@ -85,6 +85,8 @@ namespace Blog.Backend.Logic
             {
                 media.MediaPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
                 media.ThumbnailPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
+                media.CustomName = Guid.NewGuid().ToString();
+                media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
 
                 _imageHelper.CreateDirectory(media.MediaPath);
                 var fs = new FileStream(media.MediaPath, FileMode.Create);
@@ -94,6 +96,7 @@ namespace Blog.Backend.Logic
                 {
                     _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
                     media.ThumbnailContent = _imageHelper.CreateThumbnail(media.MediaPath);
+                    media.ThumbnailUrl = Constants.FileMediaThumbnailUrl + media.CustomName;
                 }
 
                 if (media.MediaGroupId == 0)
@@ -105,8 +108,6 @@ namespace Blog.Backend.Logic
                             .MediaGroupId;
                 }
 
-                media.CustomName = Guid.NewGuid().ToString();
-                media.ExternalUrl = Constants.FileMediaExternalUrl + media.CustomName;
                 _mediaRepository.Add(MediaMapper.ToEntity(media));
             }
             catch (Exception ex)

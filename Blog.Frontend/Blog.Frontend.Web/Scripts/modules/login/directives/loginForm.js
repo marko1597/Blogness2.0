@@ -2,9 +2,10 @@
 	var ctrlFn = function ($scope, $rootScope, loginService) {
 		$scope.username = "";
 		$scope.password = "";
+	    $scope.rememberMe = false;
 
 		$scope.login = function() {
-			loginService.loginUser($scope.username, $scope.password);
+			loginService.loginUser($scope.username, $scope.password, $scope.rememberMe);
 		};
 	};
 	ctrlFn.$inject = ["$scope", "$rootScope", "loginService"];
@@ -36,6 +37,9 @@
 									'<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
 										  '<input name="password" type="password" class="input password" placeholder="Password" ng-model="password" ng-enter="login()" />' +
 										  '<div class="pass-icon"></div>' +
+									'</div>' +
+                                    '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+										 '<input name="username" type="checkbox" ng-model="rememberMe" name="rememberMe">Remember me</input>' +
 									'</div>' +
 								'</div>' +
 							'</div>' +

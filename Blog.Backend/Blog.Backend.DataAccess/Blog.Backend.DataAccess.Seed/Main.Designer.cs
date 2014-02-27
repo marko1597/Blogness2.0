@@ -31,6 +31,7 @@ namespace Blog.Backend.DataAccess.Seed
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.btnGenerate = new System.Windows.Forms.Button();
             this.lbConsole = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
@@ -60,7 +61,8 @@ namespace Blog.Backend.DataAccess.Seed
             this.ClientSize = new System.Drawing.Size(318, 303);
             this.Controls.Add(this.lbConsole);
             this.Controls.Add(this.btnGenerate);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "I Can Haz Seeds!";

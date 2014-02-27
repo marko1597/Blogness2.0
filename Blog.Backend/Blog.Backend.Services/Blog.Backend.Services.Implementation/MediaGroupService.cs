@@ -26,9 +26,9 @@ namespace Blog.Backend.Services.Implementation
             return MediaGroupFactory.GetInstance().CreateMediaGroup().Update(mediaGroup);
         }
 
-        public bool Delete(MediaGroup mediaGroup)
+        public bool Delete(int mediaGroupId)
         {
-            return MediaGroupFactory.GetInstance().CreateMediaGroup().Delete(mediaGroup);
+            return MediaGroupFactory.GetInstance().CreateMediaGroup().Delete(mediaGroupId);
         }
     }
 }

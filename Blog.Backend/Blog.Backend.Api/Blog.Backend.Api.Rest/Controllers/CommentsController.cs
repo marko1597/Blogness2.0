@@ -34,7 +34,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/user/{userId}/comments")]
+        [Route("api/users/{userId}/comments")]
         public List<Comment> GetByComments(int userId)
         {
             var comments = new List<Comment>();
@@ -52,7 +52,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/comment/{commentId}/replies")]
+        [Route("api/comments/{commentId}/replies")]
         public List<Comment> Replies(int commentId)
         {
             var comments = new List<Comment>();
@@ -68,6 +68,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             return comments;
         }
 
+        [HttpPost]
+        [Route("api/comments")]
         public void Post([FromBody]Comment comment)
         {
             try
@@ -80,6 +82,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/comments")]
         public void Delete([FromBody]int id)
         {
             try

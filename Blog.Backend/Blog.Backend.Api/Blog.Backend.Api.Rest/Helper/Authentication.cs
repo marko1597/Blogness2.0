@@ -5,7 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Blog.Backend.Common.Contracts;
 
-namespace Blog.Frontend.Web.Helpers
+namespace Blog.Backend.Api.Rest.Helper
 {
     public class Authentication : IAuthentication
     {

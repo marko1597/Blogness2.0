@@ -4,6 +4,7 @@
     {
         public static double SessionValidityLength = 15.0;
         public static string FileMediaLocation = @"C:\SampleImages\";
-        public static string FileMediaExternalUrl = "http://localhost/blogapi/api/media/getmediaitem/";
+        public static string FileMediaUrl = "http://localhost/blogapi/api/media/";
+        public static string FileMediaThumbnailUrl = "http://localhost/blogapi/api/media/thumb/";
     }
 }

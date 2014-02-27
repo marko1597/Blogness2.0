@@ -6,40 +6,40 @@ using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
-    public class CommentLikesController : ApiController
+    public class PostLikesController : ApiController
     {
-        private readonly ICommentLikes _service;
+        private readonly IPostLikes _service;
 
-        public CommentLikesController(ICommentLikes service)
+        public PostLikesController(IPostLikes service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Route("api/comments/{commentId}/likes")]
-        public List<CommentLike> Get(int commentId)
+        [Route("api/posts/{postId}/likes")]
+        public List<PostLike> Get(int postId)
         {
-            var commentLikes = new List<CommentLike>();
+            var postLikes = new List<PostLike>();
 
             try
             {
-                commentLikes = _service.Get(commentId) ?? new List<CommentLike>();
+                postLikes = _service.Get(postId) ?? new List<PostLike>();
 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            return commentLikes;
+            return postLikes;
         }
 
         [HttpPost]
-        [Route("api/comments/likes")]
-        public void Post([FromBody]CommentLike commentLike)
+        [Route("api/posts/likes")]
+        public void Post([FromBody]PostLike postLike)
         {
             try
             {
-                _service.Add(commentLike);
+                _service.Add(postLike);
             }
             catch (Exception ex)
             {

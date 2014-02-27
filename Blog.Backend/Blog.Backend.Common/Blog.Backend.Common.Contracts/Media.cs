@@ -25,13 +25,16 @@ namespace Blog.Backend.Common.Contracts
         public string CustomName { get; set; }
 
         [DataMember]
-        public string ExternalUrl { get; set; }
+        public string MediaUrl { get; set; }
 
         [DataMember]
         public string MediaPath { get; set; }
 
         [DataMember]
         public byte[] MediaContent { get; set; }
+
+        [DataMember]
+        public string ThumbnailUrl { get; set; }
 
         [DataMember]
         public string ThumbnailPath { get; set; }

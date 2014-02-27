@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Blog.Backend.Common.Contracts;
+﻿using Blog.Backend.Common.Contracts;
 
 namespace Blog.Backend.Logic.Mapper
 {
@@ -17,7 +12,7 @@ namespace Blog.Backend.Logic.Mapper
                 {
                     PostContentId = postContent.PostContentId,
                     PostId = postContent.PostId,
-                    Media = postContent.Media != null ? MediaMapper.ToDto(postContent.Media) : new Media(),
+                    Media = postContent.Media != null ? MediaMapper.ToDto(postContent.Media, false) : new Media(),
                     CreatedBy = postContent.CreatedBy,
                     CreatedDate = postContent.CreatedDate,
                     ModifiedBy = postContent.ModifiedBy,

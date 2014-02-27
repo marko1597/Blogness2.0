@@ -107,6 +107,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             return posts;
         }
 
+        [HttpPost]
+        [Route("api/posts")]
         public void Post([FromBody]Post post)
         {
             try
@@ -119,6 +121,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("api/posts")]
         public void Put([FromBody]Post post)
         {
             try
@@ -131,6 +135,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/posts")]
         public void Delete([FromBody]int id)
         {
             try

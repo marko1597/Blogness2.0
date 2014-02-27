@@ -21,9 +21,9 @@ namespace Blog.Backend.Services.Implementation
             return EducationFactory.GetInstance().CreateEducation().Update(education);
         }
 
-        public bool Delete(Education education)
+        public bool Delete(int educationId)
         {
-            return EducationFactory.GetInstance().CreateEducation().Delete(education);
+            return EducationFactory.GetInstance().CreateEducation().Delete(educationId);
         }
     }
 }

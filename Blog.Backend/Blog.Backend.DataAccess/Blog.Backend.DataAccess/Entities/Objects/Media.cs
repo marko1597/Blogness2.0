@@ -14,9 +14,10 @@ namespace Blog.Backend.DataAccess.Entities.Objects
         public int MediaGroupId { get; set; }
         public string FileName { get; set; }
         public string CustomName { get; set; }
-        public string ExternalUrl { get; set; }
+        public string MediaUrl { get; set; }
         public string MediaPath { get; set; }
         public byte[] MediaContent { get; set; }
+        public string ThumbnailUrl { get; set; }
         public string ThumbnailPath { get; set; }
         public byte[] ThumbnailContent { get; set; }
         public DateTime CreatedDate { get; set; }

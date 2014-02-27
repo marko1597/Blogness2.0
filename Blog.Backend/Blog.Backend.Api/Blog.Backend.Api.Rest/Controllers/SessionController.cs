@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Blog.Backend.Api.Rest.Models;
 using System.Web;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Contracts.ViewModels;

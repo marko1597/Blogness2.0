@@ -46,6 +46,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             return null;
         }
 
+        [HttpPost]
+        [Route("api/postcontent")]
         public bool Post([FromBody]PostContent postContent)
         {
             try
@@ -59,6 +61,8 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("api/postcontent")]
         public bool Delete([FromBody]int postContentId)
         {
             try

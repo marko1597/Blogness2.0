@@ -23,7 +23,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var db = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
-                db.ForEach(a => PostContentMapper.ToDto(a));
+                db.ForEach(a => postContents.Add(PostContentMapper.ToDto(a)));
             }
             catch (Exception ex)
             {
