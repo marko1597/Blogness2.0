@@ -194,7 +194,7 @@
     <Compile Include="Controllers\MediaController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\MediaGroupController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\PostContentController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -231,7 +231,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />

@@ -19,13 +19,13 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/mediagroup/{mediaGroupId:int}/media")]
-        public List<Media> GetByGroup(int mediaGroupId)
+        [Route("api/album/{albumId:int}/media")]
+        public List<Media> GetByGroup(int albumId)
         {
             var media = new List<Media>();
             try
             {
-                media = _service.GetByGroup(mediaGroupId) ?? new List<Media>();
+                media = _service.GetByGroup(albumId) ?? new List<Media>();
             }
             catch (Exception ex)
             {
@@ -69,6 +69,22 @@ namespace Blog.Backend.Api.Rest.Controllers
         [HttpGet]
         [Route("api/media/{name}")]
         public HttpResponseMessage GetByName(string name)
+        {
+            try
+            {
+                var media = _service.GetByName(name) ?? new Media();
+                return CreateResponseMediaMessage(media);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
+
+        [HttpGet]
+        [Route("api/media/{name}")]
+        public HttpResponseMessage GetThumbnailByName(string name)
         {
             try
             {

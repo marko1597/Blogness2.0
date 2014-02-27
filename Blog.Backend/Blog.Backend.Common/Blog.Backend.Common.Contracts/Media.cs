@@ -10,13 +10,10 @@ namespace Blog.Backend.Common.Contracts
         public int MediaId { get; set; }
 
         [DataMember]
-        public int UserId { get; set; }
-
-        [DataMember]
         public string MediaType { get; set; }
 
         [DataMember]
-        public int MediaGroupId { get; set; }
+        public int AlbumId { get; set; }
 
         [DataMember]
         public string FileName { get; set; }

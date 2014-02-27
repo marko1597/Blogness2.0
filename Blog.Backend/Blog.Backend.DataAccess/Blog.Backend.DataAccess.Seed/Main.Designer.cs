@@ -79,7 +79,7 @@ namespace Blog.Backend.DataAccess.Seed
         private readonly IEducationRepository _educationRepository = new EducationRepository();
         private readonly IEducationTypeRepository _educationTypeRepository = new EducationTypeRepository();
         private readonly IHobbyRepository _hobbyRepository = new HobbyRepository();
-        private readonly IMediaGroupRepository _mediaGroupRepository = new MediaGroupRepository();
+        private readonly IAlbumRepository _albumRepository = new AlbumRepository();
         private readonly IMediaRepository _mediaRepository = new MediaRepository();
         private readonly IPostContentRepository _postContentRepository = new PostContentRepository();
         private readonly IPostLikeRepository _postLikeRepository = new PostLikeRepository();

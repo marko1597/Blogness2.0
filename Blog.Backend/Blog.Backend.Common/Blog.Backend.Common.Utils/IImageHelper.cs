@@ -6,7 +6,7 @@ namespace Blog.Backend.Common.Utils
     {
         byte[] ImageToByteArray(Image image);
         Image ByteArrayToImage(byte[] byteArray);
-        string GenerateImagePath(int id, string storageRoot);
+        string GenerateImagePath(int id, string name, string storageRoot);
         bool CreateDirectory(string path);
         bool DeleteDirectory(string path);
         byte[] CreateThumbnail(string filename);

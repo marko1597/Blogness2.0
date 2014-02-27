@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Blog.Backend.DataAccess.Entities.Objects
 {
-    public class MediaGroup
+    public class Album
     {
         [Key]
-        public int MediaGroupId { get; set; }
+        public int AlbumId { get; set; }
         public virtual User User { get; set; }
         public int UserId { get; set; }
-        public string MediaGroupName { get; set; }
+        public string AlbumName { get; set; }
         public bool IsUserDefault { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }

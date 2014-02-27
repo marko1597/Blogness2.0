@@ -1,13 +1,8 @@
-﻿loginModule.factory('loginService', ["$http", "$q", "$timeout", "$cookies", "$window", "configProvider", function ($http, $q, $timeout, $cookies, $window, configProvider) {
-    var sessionApi = "";
-    var authApi = "";
+﻿loginModule.factory('loginService', ["$http", "$q", "$window", "configProvider", function ($http, $q, $window, configProvider) {
+    var sessionApi = configProvider.getSettings().BlogRoot == "" ? window.blogRoot + "Profile/Authenticate" : configProvider.getSettings().BlogRoot + "Profile/Authenticate";
+    var authApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Authenticate" : configProvider.getSettings().BlogApi + "Authenticate";
 
-    $timeout(function () {
-        sessionApi = configProvider.getSettings().BlogRoot + "Profile/Authenticate";
-        authApi = configProvider.getSettings().BlogApi + "Authenticate";
-    }, 1000);
-
-    var apiAuthenticate = function(username, password) {
+    var apiAuthenticate = function (username, password) {
         var deferred = $q.defer();
         var credentials = {
             Username: username,
@@ -18,18 +13,18 @@
             url: authApi,
             method: "POST",
             data: credentials
-        }).success(function(response) {
+        }).success(function (response) {
             deferred.resolve(response);
             $window.location.href = configProvider.getSettings().BlogRoot;
-        }).error(function() {
-            deferred.reject("An error occurred!");
+        }).error(function () {
+            deferred.reject("Error authenticating in the API!");
         });
 
         return deferred.promise;
     };
 
     return {
-        loginUser: function(username, password, rememberMe) {
+        loginUser: function (username, password, rememberMe) {
             var deferred = $q.defer();
             var credentials = {
                 Username: username,
@@ -42,16 +37,23 @@
                 method: "POST",
                 data: credentials
             }).success(function (response) {
-                deferred.resolve(response);
-                apiAuthenticate(username, password);
+                if (response.Session != null && response.User != null) {
+                    apiAuthenticate(username, password).then(function (resp) {
+                        deferred.resolve(response);
+                    }, function (err) {
+                        deferred.reject(err);
+                    });
+                } else {
+                    deferred.reject("Username or password is invalid.");
+                }
             }).error(function () {
-                deferred.reject("An error occurred!");
+                deferred.reject("Error communicating with login server!");
             });
 
             return deferred.promise;
         },
 
-        logoutUser: function(username) {
+        logoutUser: function (username) {
             var deferred = $q.defer();
             var credentials = {
                 Username: username
@@ -61,9 +63,9 @@
                 url: sessionApi,
                 method: "DELETE",
                 data: credentials
-            }).success(function(response) {
+            }).success(function (response) {
                 deferred.resolve(response);
-            }).error(function() {
+            }).error(function () {
                 deferred.reject("An error occurred!");
             });
 

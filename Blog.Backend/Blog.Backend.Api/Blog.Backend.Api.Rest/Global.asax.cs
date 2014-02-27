@@ -31,7 +31,7 @@ namespace Blog.Backend.Api.Rest
             container.Register<ISession, SessionService>(Lifestyle.Singleton);
             container.Register<IPostContents, PostContentsService>(Lifestyle.Singleton);
             container.Register<IMedia, MediaService>(Lifestyle.Singleton);
-            container.Register<IMediaGroup, MediaGroupService>(Lifestyle.Singleton);
+            container.Register<IAlbum, AlbumService>(Lifestyle.Singleton);
             container.Register<IEducation, EducationService>(Lifestyle.Singleton);
             container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
             container.Register<IAddress, AddressService>(Lifestyle.Singleton);

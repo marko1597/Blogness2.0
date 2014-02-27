@@ -2,7 +2,7 @@
 
 namespace Blog.Backend.DataAccess.Repository
 {
-    public interface IMediaGroupRepository : IGenericRepository<MediaGroup>
+    public interface IAlbumRepository : IGenericRepository<Album>
     {
     }
 }

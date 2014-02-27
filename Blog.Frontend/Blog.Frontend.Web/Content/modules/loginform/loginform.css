@@ -15,6 +15,16 @@
     }
 }
 
+div.login-alert {
+    position: absolute;
+    width: 100%;
+    margin: 15px;
+}
+
+    div.login-alert > strong {
+        padding-right: 5px;
+    }
+
 .download {
     display: block;
     position: absolute;

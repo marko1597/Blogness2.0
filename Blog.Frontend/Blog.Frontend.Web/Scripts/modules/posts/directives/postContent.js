@@ -1,8 +1,19 @@
 ﻿postsModule.directive('postContent', function () {
-    var ctrlFn = function ($scope) {
+    var ctrlFn = function ($scope, $postsService) {
+        $scope.posts = [];
+        $scope.errorContent = { Show: false, Type: "" };
 
+        $scope.getPopularPosts = function () {
+            $postsService.getPopularPosts().then(function (resp) {
+                $scope.posts = resp;
+            }, function (errorMsg) {
+                alert(errorMsg);
+            });
+        };
+
+        $scope.getPopularPosts();
     };
-    ctrlFn.$inject = ["$scope"];
+    ctrlFn.$inject = ["$scope", "postsService"];
 
     return {
         restrict: 'EA',

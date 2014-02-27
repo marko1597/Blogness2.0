@@ -54,7 +54,7 @@
     <Compile Include="IEducation.cs" />
     <Compile Include="IHobby.cs" />
     <Compile Include="IMedia.cs" />
-    <Compile Include="IMediaGroup.cs" />
+    <Compile Include="IAlbum.cs" />
     <Compile Include="IPostContents.cs" />
     <Compile Include="IPostLikes.cs" />
     <Compile Include="IPosts.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="ITag.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="MediaService.cs" />
-    <Compile Include="MediaGroupService.cs" />
+    <Compile Include="AlbumService.cs" />
     <Compile Include="PostContentsService.cs" />
     <Compile Include="PostLikesService.cs" />
     <Compile Include="PostsService.cs" />

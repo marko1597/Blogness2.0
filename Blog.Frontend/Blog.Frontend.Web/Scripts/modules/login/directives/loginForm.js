@@ -1,21 +1,73 @@
 ﻿loginModule.directive('loginForm', function () {
-	var ctrlFn = function ($scope, $rootScope, loginService) {
-		$scope.username = "";
-		$scope.password = "";
-	    $scope.rememberMe = false;
+    var ctrlFn = function ($scope, $rootScope, $timeout, configProvider, loginService) {
+        $scope.username = "";
+        $scope.password = "";
+        $scope.rememberMe = false;
+        $scope.alert = { Title: "Oops!", Message: "", Show: false };
 
-		$scope.login = function() {
-			loginService.loginUser($scope.username, $scope.password, $scope.rememberMe);
-		};
-	};
-	ctrlFn.$inject = ["$scope", "$rootScope", "loginService"];
+        $scope.login = function () {
+            $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
+                console.log(resp);
+                $.unblockUI();
+            }, function (errorMsg) {
+                $scope.alert.Message = errorMsg;
+                $scope.alert.Show = true;
+                $.unblockUI();
 
-	return {
-		restrict: 'EA',
-		scope: { data: '=' },
-		replace: true,
-		template:
+                $timeout(function() {
+                    $scope.alert.Show = false;
+                }, configProvider.getSettings().AlertTimer);
+            });
+        };
+
+        $scope.closeAlert = function() {
+            $scope.alert.Show = false;
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "configProvider", "loginService"];
+
+    var filterFn;
+    filterFn = function (scope, element) {
+        $("input[name=login]").on("click", function () {
+            doBlock();
+        });
+
+        $("form.login-form div.content :input:not(:checkbox)").on("keydown", function (e) {
+            var code = e.which; 
+            if (code == 13) e.preventDefault();
+            if (code == 32 || code == 13 || code == 188 || code == 186) {
+                doBlock();
+            }
+        });
+
+        var doBlock = function() {
+            $.blockUI({
+                message: '<h4><img src="../content/images/loader-girl.gif" height="128" /></h4>',
+                css: {
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: '#000',
+                    opacity: .5,
+                    color: '#fff'
+                }
+            });
+        };
+    };
+
+    return {
+        restrict: 'EA',
+        scope: { data: '=' },
+        replace: true,
+        link: filterFn,
+        template:
 			'<div class="row">' +
+                '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="alert.Show">' +
+                    '<div class="login-alert alert alert-danger alert-dismissable">' +
+			            '<strong>{{alert.Title}}</strong>' +
+                        '<span>{{alert.Message}}</span>' +
+			        '</div>' +
+			    '</div>' +
+
 				'<div class="col-xs-12 col-sm-6 col-sm-push-3 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">' +
 					'<div id="wrapper">' +
 						'<form name="login-form" class="login-form" action="" method="post">' +
@@ -56,6 +108,6 @@
 					'</div>' +
 				'</div>' +
 			'</div>',
-		controller: ctrlFn
-	};
+        controller: ctrlFn
+    };
 });

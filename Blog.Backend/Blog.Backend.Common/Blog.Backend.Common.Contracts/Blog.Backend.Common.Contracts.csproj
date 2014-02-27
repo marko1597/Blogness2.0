@@ -48,7 +48,7 @@
     <Compile Include="EducationType.cs" />
     <Compile Include="Hobby.cs" />
     <Compile Include="Media.cs" />
-    <Compile Include="MediaGroup.cs" />
+    <Compile Include="Album.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostContent.cs" />
     <Compile Include="PostLike.cs" />
@@ -59,7 +59,6 @@
     <Compile Include="User.cs" />
     <Compile Include="ViewModels\LoggedUser.cs" />
     <Compile Include="ViewModels\Login.cs" />
-    <Compile Include="ViewModels\UserMediaGroup.cs" />
     <Compile Include="ViewModels\UserPost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

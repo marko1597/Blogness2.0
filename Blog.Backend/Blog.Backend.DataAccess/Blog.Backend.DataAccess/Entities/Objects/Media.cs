@@ -7,11 +7,9 @@ namespace Blog.Backend.DataAccess.Entities.Objects
     {
         [Key]
         public int MediaId { get; set; }
-        public virtual User User { get; set; }
-        public int UserId { get; set; }
         public string MediaType { get; set; }
-        public virtual MediaGroup MediaGroup { get; set; }
-        public int MediaGroupId { get; set; }
+        public virtual Album Album { get; set; }
+        public int AlbumId { get; set; }
         public string FileName { get; set; }
         public string CustomName { get; set; }
         public string MediaUrl { get; set; }

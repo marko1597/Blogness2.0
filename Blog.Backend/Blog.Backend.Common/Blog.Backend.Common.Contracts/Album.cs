@@ -5,13 +5,13 @@ using System.Runtime.Serialization;
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class MediaGroup
+    public class Album
     {
         [DataMember]
-        public int MediaGroupId { get; set; }
+        public int AlbumId { get; set; }
 
         [DataMember]
-        public string MediaGroupName { get; set; }
+        public string AlbumName { get; set; }
 
         [DataMember]
         public List<Media> Media { get; set; }

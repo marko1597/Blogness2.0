@@ -1,8 +1,5 @@
-﻿postsModule.factory('postsService', ["$http", "$q", "$timeout", "configProvider", function ($http, $q, $timeout, configProvider) {
-    var postsApi = "";
-    $timeout(function () {
-        postsApi = configProvider.getSettings().BlogApi + "Posts";
-    }, 1000);
+﻿postsModule.factory('postsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
+    var postsApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Posts" : configProvider.getSettings().BlogApi + "Posts";
 
     return {
         getPopularPosts: function() {

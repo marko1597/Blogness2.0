@@ -64,7 +64,7 @@
     <Compile Include="Factory\EducationFactory.cs" />
     <Compile Include="Factory\HobbyFactory.cs" />
     <Compile Include="Factory\MediaFactory.cs" />
-    <Compile Include="Factory\MediaGroupFactory.cs" />
+    <Compile Include="Factory\AlbumFactory.cs" />
     <Compile Include="Factory\PostContentsFactory.cs" />
     <Compile Include="Factory\PostLikesFactory.cs" />
     <Compile Include="Factory\PostsFactory.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Mapper\EducationMapper.cs" />
     <Compile Include="Mapper\EducationTypeMapper.cs" />
     <Compile Include="Mapper\HobbyMapper.cs" />
-    <Compile Include="Mapper\MediaGroupMapper.cs" />
+    <Compile Include="Mapper\AlbumMapper.cs" />
     <Compile Include="Mapper\MediaMapper.cs" />
     <Compile Include="Mapper\PostContentMapper.cs" />
     <Compile Include="Mapper\PostLikeMapper.cs" />
@@ -88,7 +88,7 @@
     <Compile Include="Mapper\TagMapper.cs" />
     <Compile Include="Mapper\UserMapper.cs" />
     <Compile Include="MediaLogic.cs" />
-    <Compile Include="MediaGroupLogic.cs" />
+    <Compile Include="AlbumLogic.cs" />
     <Compile Include="PostContentsLogic.cs" />
     <Compile Include="PostLikesLogic.cs" />
     <Compile Include="PostsLogic.cs" />

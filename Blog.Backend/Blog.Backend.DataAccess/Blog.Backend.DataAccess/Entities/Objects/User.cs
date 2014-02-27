@@ -19,8 +19,7 @@ namespace Blog.Backend.DataAccess.Entities.Objects
         public virtual ICollection<Hobby> Hobbies { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Media> Media { get; set; }
-        public virtual ICollection<MediaGroup> MediaGroups { get; set; }
+        public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<CommentLike> CommentLikes { get; set; }
         public virtual ICollection<PostLike> PostLikes { get; set; }
     }

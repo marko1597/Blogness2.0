@@ -47,12 +47,7 @@ namespace Blog.Backend.DataAccess.Entities
                 .HasForeignKey(a => a.UserId)
                 .WillCascadeOnDelete(false);
             mb.Entity<User>()
-                .HasMany<MediaGroup>(a => a.MediaGroups)
-                .WithRequired(a => a.User)
-                .HasForeignKey(a => a.UserId)
-                .WillCascadeOnDelete(false);
-            mb.Entity<User>()
-                .HasMany<Media>(a => a.Media)
+                .HasMany<Album>(a => a.Albums)
                 .WithRequired(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .WillCascadeOnDelete(false);
@@ -63,11 +58,11 @@ namespace Blog.Backend.DataAccess.Entities
                 .WithMany(a => a.Education)
                 .HasForeignKey(a => a.EducationTypeId);
 
-            //MediaGroup
-            mb.Entity<MediaGroup>()
+            //Album
+            mb.Entity<Album>()
                 .HasMany<Media>(a => a.Media)
-                .WithRequired(a => a.MediaGroup)
-                .HasForeignKey(a => a.MediaGroupId);
+                .WithRequired(a => a.Album)
+                .HasForeignKey(a => a.AlbumId);
             mb.Entity<PostContent>()
                 .HasRequired(a => a.Media);
 
@@ -122,7 +117,7 @@ namespace Blog.Backend.DataAccess.Entities
         public DbSet<Session> Sessions { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
-        public DbSet<MediaGroup> MediaGroup { get; set; }
+        public DbSet<Album> Albums { get; set; }
         public DbSet<Media> Media { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
         

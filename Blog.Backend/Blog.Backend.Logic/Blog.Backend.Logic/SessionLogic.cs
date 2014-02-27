@@ -45,7 +45,7 @@ namespace Blog.Backend.Logic
                 {
                     session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
                 }
-                
+
                 return SessionMapper.ToDto(session) ?? new Session();
             }
             catch (Exception)
@@ -76,7 +76,7 @@ namespace Blog.Backend.Logic
                 DeleteSessionFromSameIp(ipAddress);
 
                 var user = UsersFactory.GetInstance().CreateUsers().GetByCredentials(userName, passWord);
-                if (user == null) return new LoggedUser();
+                if (user == null || user.UserId == 0) return new LoggedUser { Session = null, User = null };
 
                 var session = new Session
                 {

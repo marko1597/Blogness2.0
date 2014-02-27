@@ -23,9 +23,10 @@ namespace Blog.Backend.Logic.Factory
 
         public MediaLogic CreateMedia()
         {
+            IAlbumRepository albumRepository = new AlbumRepository();
             IMediaRepository mediaRepository = new MediaRepository();
             IImageHelper imageHelper = new ImageHelper();
-            return new MediaLogic(mediaRepository, imageHelper);
+            return new MediaLogic(mediaRepository, albumRepository, imageHelper);
         }
     }
 }

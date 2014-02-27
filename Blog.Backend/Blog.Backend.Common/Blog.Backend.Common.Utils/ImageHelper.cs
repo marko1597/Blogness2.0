@@ -20,9 +20,9 @@ namespace Blog.Backend.Common.Utils
             return Image.FromStream(ms);
         }
 
-        public string GenerateImagePath(int id, string storageRoot)
+        public string GenerateImagePath(int id, string name, string storageRoot)
         {
-            return storageRoot + id + "\\" + Guid.NewGuid() + "\\";
+            return storageRoot + id + "\\" + name + "\\" + Guid.NewGuid() + "\\";
         }
 
         public bool CreateDirectory(string path)
@@ -32,6 +32,7 @@ namespace Blog.Backend.Common.Utils
                 var folders = path.Split('\\');
                 Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2]);
                 Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3]);
+                Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4]);
 
                 return true;
             }
@@ -46,6 +47,7 @@ namespace Blog.Backend.Common.Utils
             try
             {
                 var folders = path.Split('\\');
+                Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4], true);
                 Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3], true);
                 Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2], true);
 

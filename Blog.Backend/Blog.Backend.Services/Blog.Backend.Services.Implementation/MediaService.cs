@@ -16,9 +16,9 @@ namespace Blog.Backend.Services.Implementation
             return MediaFactory.GetInstance().CreateMedia().Get(mediaId);
         }
 
-        public List<Media> GetByGroup(int mediaGroupId)
+        public List<Media> GetByGroup(int albumId)
         {
-            return MediaFactory.GetInstance().CreateMedia().GetByGroup(mediaGroupId);
+            return MediaFactory.GetInstance().CreateMedia().GetByGroup(albumId);
         }
 
         public Media GetByName(string customName)

@@ -72,7 +72,7 @@
     <Compile Include="Entities\Objects\EducationType.cs" />
     <Compile Include="Entities\Objects\Hobby.cs" />
     <Compile Include="Entities\Objects\Media.cs" />
-    <Compile Include="Entities\Objects\MediaGroup.cs" />
+    <Compile Include="Entities\Objects\Album.cs" />
     <Compile Include="Entities\Objects\Post.cs" />
     <Compile Include="Entities\Objects\PostContent.cs" />
     <Compile Include="Entities\Objects\PostLike.cs" />
@@ -94,7 +94,7 @@
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IHobbyRepository.cs" />
-    <Compile Include="Repository\IMediaGroupRepository.cs" />
+    <Compile Include="Repository\IAlbumRepository.cs" />
     <Compile Include="Repository\IMediaRepository.cs" />
     <Compile Include="Repository\IPostContentRepository.cs" />
     <Compile Include="Repository\IPostLikeRepository.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Repository\ISessionRepository.cs" />
     <Compile Include="Repository\ITagRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
-    <Compile Include="Repository\MediaGroupRepository.cs" />
+    <Compile Include="Repository\AlbumRepository.cs" />
     <Compile Include="Repository\MediaRepository.cs" />
     <Compile Include="Repository\PostContentRepository.cs" />
     <Compile Include="Repository\PostLikeRepository.cs" />

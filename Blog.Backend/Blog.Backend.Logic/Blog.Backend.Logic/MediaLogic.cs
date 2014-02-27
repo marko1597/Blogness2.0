@@ -13,11 +13,13 @@ namespace Blog.Backend.Logic
     public class MediaLogic
     {
         private readonly IMediaRepository _mediaRepository;
+        private readonly IAlbumRepository _albumRepository;
         private readonly IImageHelper _imageHelper;
 
-        public MediaLogic(IMediaRepository mediaRepository, IImageHelper imageHelper)
+        public MediaLogic(IMediaRepository mediaRepository, IAlbumRepository albumRepository, IImageHelper imageHelper)
         {
             _mediaRepository = mediaRepository;
+            _albumRepository = albumRepository;
             _imageHelper = imageHelper;
         }
 
@@ -26,8 +28,8 @@ namespace Blog.Backend.Logic
             var media = new List<Media>();
             try
             {
-                var db = _mediaRepository.Find(a => a.UserId == userId, true).ToList();
-                db.ForEach(a => media.Add(MediaMapper.ToDto(a, false)));
+                var album = _albumRepository.Find(a => a.UserId == userId, null, "User,Media").ToList();
+                album.ForEach(a => media.AddRange(a.Media.Select(m => MediaMapper.ToDto(m, false))));
             }
             catch (Exception ex)
             {
@@ -36,12 +38,12 @@ namespace Blog.Backend.Logic
             return media;
         }
 
-        public List<Media> GetByGroup(int mediaGroupId)
+        public List<Media> GetByGroup(int albumId)
         {
             var media = new List<Media>();
             try
             {
-                var db = _mediaRepository.Find(a => a.MediaGroupId == mediaGroupId, true).ToList();
+                var db = _mediaRepository.Find(a => a.AlbumId == albumId, true).ToList();
                 db.ForEach(a => media.Add(MediaMapper.ToDto(a, false)));
             }
             catch (Exception ex)
@@ -83,8 +85,11 @@ namespace Blog.Backend.Logic
         {
             try
             {
-                media.MediaPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
-                media.ThumbnailPath = _imageHelper.GenerateImagePath(media.UserId, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
+                var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, null, "User").FirstOrDefault();
+                if (album == null) return null;
+
+                media.MediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
+                media.ThumbnailPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
                 media.CustomName = Guid.NewGuid().ToString();
                 media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
 
@@ -99,13 +104,13 @@ namespace Blog.Backend.Logic
                     media.ThumbnailUrl = Constants.FileMediaThumbnailUrl + media.CustomName;
                 }
 
-                if (media.MediaGroupId == 0)
+                if (media.AlbumId == 0)
                 {
-                    media.MediaGroupId =
-                        MediaGroupFactory.GetInstance()
-                            .CreateMediaGroup()
-                            .GetUserDefaultGroup(media.UserId)
-                            .MediaGroupId;
+                    media.AlbumId =
+                        AlbumFactory.GetInstance()
+                            .CreateAlbumLogic()
+                            .GetUserDefaultGroup(album.UserId)
+                            .AlbumId;
                 }
 
                 _mediaRepository.Add(MediaMapper.ToEntity(media));

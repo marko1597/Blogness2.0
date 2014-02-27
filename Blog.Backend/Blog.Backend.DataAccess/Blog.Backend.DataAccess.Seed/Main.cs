@@ -39,8 +39,8 @@ namespace Blog.Backend.DataAccess.Seed
                 LoadHobbies();
                 lbConsole.Items.Add("Successfully added hobbies...");
 
-                LoadMediaGroup();
-                lbConsole.Items.Add("Successfully added media groups...");
+                LoadAlbums();
+                lbConsole.Items.Add("Successfully added albums...");
 
                 LoadMedia();
                 lbConsole.Items.Add("Successfully added media...");
@@ -218,13 +218,13 @@ namespace Blog.Backend.DataAccess.Seed
             }
         }
 
-        private void LoadMediaGroup()
+        private void LoadAlbums()
         {
             foreach (var u in _users)
             {
-                _mediaGroupRepository.Add(new MediaGroup
+                _albumRepository.Add(new Album
                 {
-                    MediaGroupName = "Stuff",
+                    AlbumName = "Stuff",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
                     CreatedDate = DateTime.UtcNow,
@@ -233,9 +233,9 @@ namespace Blog.Backend.DataAccess.Seed
                     IsUserDefault = false
                 });
 
-                _mediaGroupRepository.Add(new MediaGroup
+                _albumRepository.Add(new Album
                 {
-                    MediaGroupName = "Miscellaneous",
+                    AlbumName = "Miscellaneous",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
                     CreatedDate = DateTime.UtcNow,
@@ -251,12 +251,13 @@ namespace Blog.Backend.DataAccess.Seed
             foreach (var u in _users)
             {
                 var u1 = u;
-                var mediaGroups = _mediaGroupRepository.Find(a => a.UserId == u1.UserId).ToList();
+                var albums = _albumRepository.Find(a => a.UserId == u1.UserId).ToList();
 
                 for (var i = 1; i < 6; i++)
                 {
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + i + ".jpg";
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\tn\\" + i + ".jpg";
+                    var albumName = i < 4 ? "Stuff" : "Miscellaneous";
+                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + ".jpg";
+                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + ".jpg";
                     var image = Image.FromFile(mediaPath);
                     var customName = Guid.NewGuid().ToString();
 
@@ -269,11 +270,10 @@ namespace Blog.Backend.DataAccess.Seed
                             CreatedDate = DateTime.UtcNow,
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
-                            MediaGroupId = mediaGroups[0].MediaGroupId,
+                            AlbumId = albums[0].AlbumId,
                             FileName = i + ".jpg",
                             MediaUrl = "https://localhost/blogapi/api/media/" + customName,
                             MediaType = "image/jpeg",
-                            UserId = u.UserId,
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,
@@ -290,11 +290,10 @@ namespace Blog.Backend.DataAccess.Seed
                             CreatedDate = DateTime.UtcNow,
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
-                            MediaGroupId = mediaGroups[1].MediaGroupId,
+                            AlbumId = albums[1].AlbumId,
                             FileName = i + ".jpg",
                             MediaUrl = "https://localhost/blogapi/api/media/" + customName,
                             MediaType = "image/jpeg",
-                            UserId = u.UserId,
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,

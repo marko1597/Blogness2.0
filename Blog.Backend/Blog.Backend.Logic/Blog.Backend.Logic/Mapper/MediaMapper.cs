@@ -12,10 +12,9 @@ namespace Blog.Backend.Logic.Mapper
                 {
                     MediaId = media.MediaId,
                     MediaType = media.MediaType,
-                    MediaGroupId = media.MediaGroupId,
+                    AlbumId = media.AlbumId,
                     MediaContent = includeContent ? media.MediaContent : null,
                     MediaPath = media.MediaPath,
-                    UserId = media.UserId,
                     MediaUrl = media.MediaUrl,
                     ThumbnailUrl = media.ThumbnailUrl,
                     ThumbnailContent = includeContent ? media.ThumbnailContent : null,
@@ -37,10 +36,9 @@ namespace Blog.Backend.Logic.Mapper
                 {
                     MediaId = media.MediaId,
                     MediaType = media.MediaType,
-                    MediaGroupId = media.MediaGroupId,
+                    AlbumId = media.AlbumId,
                     MediaContent = media.MediaContent,
                     MediaPath = media.MediaPath,
-                    UserId = media.UserId,
                     MediaUrl = media.MediaUrl,
                     ThumbnailContent = media.ThumbnailContent,
                     ThumbnailPath = media.ThumbnailPath,

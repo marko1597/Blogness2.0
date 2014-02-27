@@ -24,6 +24,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/jqueryplugins").Include(
                         "~/Scripts/plugins/jquery.ui.touch-punch.js",
+                        "~/Scripts/plugins/jquery.blockui.js",
                         "~/Scripts/plugins/classie.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(

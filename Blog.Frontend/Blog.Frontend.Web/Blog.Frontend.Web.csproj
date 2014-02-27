@@ -194,6 +194,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
+    <Content Include="Content\images\error-pages\servererror_bg.png" />
+    <Content Include="Content\images\error-pages\serviceunavailable_bg.png" />
+    <Content Include="Content\images\loader-cat.gif" />
+    <Content Include="Content\images\loader-potato.gif" />
+    <Content Include="Content\images\loader-girl.gif" />
+    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\lw-1.jpg" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
@@ -257,6 +264,7 @@
     <Content Include="Scripts\plugins\classie.js" />
     <Content Include="Scripts\plugins\jquery-1.11.0.js" />
     <Content Include="Scripts\plugins\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\plugins\jquery.blockui.js" />
     <Content Include="Scripts\plugins\jquery.ui.touch-punch.js" />
     <Content Include="Scripts\plugins\modernizr-2.6.2.js" />
     <Content Include="Scripts\plugins\respond.js" />
