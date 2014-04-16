@@ -45,7 +45,7 @@ namespace Blog.Frontend.Web.Controllers
                 _authentication.SignIn(result.User);
             }
 
-            return Json(result);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
