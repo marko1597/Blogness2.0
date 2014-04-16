@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Blog.Backend.Api.Rest.Areas.HelpPage.ModelDescriptions
