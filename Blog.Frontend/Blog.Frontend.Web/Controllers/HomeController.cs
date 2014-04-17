@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Blog.Frontend.Web.Attributes;
+using Blog.Backend.Common.Web.Attributes;
 
 namespace Blog.Frontend.Web.Controllers
 {

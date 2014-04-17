@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Formatting;
-using Blog.Backend.Api.Rest.Formatter;
+using Blog.Backend.Common.Web.Formatter;
 
 namespace Blog.Backend.Api.Rest
 {

@@ -2,8 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Blog.Frontend.Web.Helpers;
 using Blog.Backend.Common.Utils;
+using Blog.Backend.Common.Web.Authentication;
 using SimpleInjector;
 
 namespace Blog.Frontend.Web
@@ -24,7 +24,7 @@ namespace Blog.Frontend.Web
 
             // Create the container as usual.
             var container = new Container();
-            container.Register<IAuthentication, Authentication>(Lifestyle.Singleton);
+            container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());

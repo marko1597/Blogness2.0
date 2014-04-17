@@ -5,15 +5,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Blog.Backend.Common.Contracts;
 
-namespace Blog.Backend.Api.Rest.Helper
+namespace Blog.Backend.Common.Web.Authentication
 {
-    public class Authentication : IAuthentication
+    public class AuthenticationHelper : IAuthenticationHelper
     {
         public bool SignIn(User user)
         {
             try
             {
-                var identity = new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, user.UserName)},
+                var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, user.UserName) },
                     DefaultAuthenticationTypes.ApplicationCookie,
                     ClaimTypes.Name, ClaimTypes.Role);
 

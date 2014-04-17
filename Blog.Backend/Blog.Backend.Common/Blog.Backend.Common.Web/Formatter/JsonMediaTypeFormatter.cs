@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json.Converters;
 
-namespace Blog.Backend.Api.Rest.Formatter
+namespace Blog.Backend.Common.Web.Formatter
 {
     public class JsonpMediaTypeFormatter : JsonMediaTypeFormatter
     {

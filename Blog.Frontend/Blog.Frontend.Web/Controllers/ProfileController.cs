@@ -1,16 +1,15 @@
 ﻿using System.Web.Mvc;
-using Blog.Frontend.Common.Authentication;
-using Blog.Frontend.Web.Attributes;
-using Blog.Frontend.Web.Helpers;
+using Blog.Backend.Common.Web.Attributes;
+using Blog.Backend.Common.Web.Authentication;
 using Blog.Frontend.Web.Models;
 
 namespace Blog.Frontend.Web.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly IAuthentication _authentication;
+        private readonly IAuthenticationHelper _authentication;
 
-        public ProfileController(IAuthentication authentication)
+        public ProfileController(IAuthenticationHelper authentication)
         {
             _authentication = authentication;
         }

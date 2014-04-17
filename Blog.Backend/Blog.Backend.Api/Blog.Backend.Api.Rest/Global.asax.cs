@@ -2,8 +2,9 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Blog.Backend.Api.Rest.Helper;
 using Blog.Backend.Common.Utils;
+using Blog.Backend.Common.Web.Authentication;
+using Blog.Backend.Common.Web.Helper;
 using Blog.Backend.Services.Implementation;
 using SimpleInjector;
 
@@ -35,7 +36,7 @@ namespace Blog.Backend.Api.Rest
             container.Register<IEducation, EducationService>(Lifestyle.Singleton);
             container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
             container.Register<IAddress, AddressService>(Lifestyle.Singleton);
-            container.Register<IAuthentication, Authentication>(Lifestyle.Singleton);
+            container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

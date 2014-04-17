@@ -4,7 +4,7 @@ using System.Web.Http.Dependencies;
 using SimpleInjector;
 using SimpleInjector.Extensions.LifetimeScoping;
 
-namespace Blog.Backend.Api.Rest
+namespace Blog.Backend.Common.Web.Helper
 {
     public class SimpleInjectorWebApiDependencyResolver : IDependencyResolver
     {

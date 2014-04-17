@@ -1,17 +1,17 @@
 ﻿using System.Web.Http;
-using Blog.Backend.Api.Rest.Helper;
 using Blog.Backend.Common.Contracts.ViewModels;
+using Blog.Backend.Common.Web.Authentication;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
     public class AuthenticationController : ApiController
     {
-        private readonly IAuthentication _authentication;
+        private readonly IAuthenticationHelper _authentication;
         private readonly ISession _session;
         private readonly IUser _user;
 
-        public AuthenticationController(IAuthentication authentication, ISession session, IUser user)
+        public AuthenticationController(IAuthenticationHelper authentication, ISession session, IUser user)
         {
             _authentication = authentication;
             _session = session;

@@ -23,7 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Home|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Remote|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
@@ -200,14 +200,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorDependencyResolver.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Authentication.cs" />
-    <Compile Include="Helpers\IAuthentication.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -319,18 +316,18 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <None Include="Web.Home.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Remote.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -360,9 +357,9 @@
       <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
       <Name>Blog.Backend.Common.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Blog.Frontend.Common\Blog.Frontend.Common\Blog.Frontend.Common.csproj">
-      <Project>{22f6f7f9-d2a4-4364-a3a6-c0d6eb598133}</Project>
-      <Name>Blog.Frontend.Common</Name>
+    <ProjectReference Include="..\..\Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Web\Blog.Backend.Common.Web.csproj">
+      <Project>{a591cf4a-f004-4d92-ade8-8937ff290b63}</Project>
+      <Name>Blog.Backend.Common.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

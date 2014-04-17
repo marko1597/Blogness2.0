@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
-using Blog.Frontend.Common.Authentication;
+using Blog.Backend.Common.Web.Authentication;
 
-namespace Blog.Frontend.Web.Attributes
+namespace Blog.Backend.Common.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class BlogAuthAttribute : ActionFilterAttribute, IAuthenticationFilter

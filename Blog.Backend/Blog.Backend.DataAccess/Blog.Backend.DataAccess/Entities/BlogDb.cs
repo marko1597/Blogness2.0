@@ -121,7 +121,7 @@ namespace Blog.Backend.DataAccess.Entities
         public DbSet<Media> Media { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
         
-        public class BlogDbInitializer : CreateDatabaseIfNotExists<BlogDb>
+        public class BlogDbInitializer : DropCreateDatabaseIfModelChanges<BlogDb>
         {
         }
     }
