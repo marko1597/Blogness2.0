@@ -120,8 +120,8 @@ namespace Blog.Backend.DataAccess.Entities
         public DbSet<Album> Albums { get; set; }
         public DbSet<Media> Media { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
-        
-        public class BlogDbInitializer : DropCreateDatabaseIfModelChanges<BlogDb>
+
+        public class BlogDbInitializer : CreateDatabaseIfNotExists<BlogDb>
         {
         }
     }
