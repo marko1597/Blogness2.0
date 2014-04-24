@@ -14,20 +14,24 @@ namespace Blog.Frontend.Web
             #region JS Files
 
             bundles.Add(new ScriptBundle("~/scripts/jquery").Include(
-                        "~/Scripts/plugins/jquery-1.11.0.js"));
+                        "~/Scripts/plugins/jquery-*"));
 
             bundles.Add(new ScriptBundle("~/scripts/jqueryui").Include(
-                        "~/Scripts/plugins/jquery-ui-1.10.4.custom.js"));
+                        "~/Scripts/plugins/jquery-ui-*"));
 
             bundles.Add(new ScriptBundle("~/scripts/modernizr").Include(
                         "~/Scripts/plugins/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/scripts/jqueryplugins").Include(
+                        "~/Scripts/plugins/jquery.validate.js",
+                        "~/Scripts/plugins/jquery.validate.unobtrusive.js",
                         "~/Scripts/plugins/jquery.ui.touch-punch.js",
                         "~/Scripts/plugins/jquery.blockui.js",
+                        "~/Scripts/plugins/jquery.newsticker.js",
                         "~/Scripts/plugins/classie.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(
+                        "~/Scripts/plugins/respond.js",
                         "~/Scripts/plugins/underscore.js",
                         "~/Scripts/plugins/video-js/video.js"));
 
@@ -93,9 +97,10 @@ namespace Blog.Frontend.Web
                       "~/Content/plugins/angular-motion.css",
                       "~/Content/plugins/angular-scrollbar.css",
                       "~/Content/plugins/bootstrap.css",
+                      "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap-theme.css",
                       "~/Content/plugins/bootstrap-additions.css",
-                      "~/Content/plugins/jquery-ui-1.10.4.custom.css"));
+                      "~/Content/plugins/jquery-ui-*"));
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/Content/site.css"));
