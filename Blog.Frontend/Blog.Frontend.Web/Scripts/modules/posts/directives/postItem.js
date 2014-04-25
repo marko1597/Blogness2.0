@@ -10,8 +10,19 @@
         replace: true,
         template:
             '<div id="post-item-{{data.PostId}}">' +
-                '<h4>{{data.PostTitle}}</h4>' +
-                '<p>{{data.PostMessage}}</p>' +
+                '<div class="post-item-header">' +
+                    '<h4>{{data.PostTitle}}</h4>' +
+                '</div>' +
+                '<div class="post-item-body">' +
+                    '<p>{{data.PostMessage}}</p>' +
+                    '<div class="post-item-contents">' +
+                        '<div ng-repeat="content in data.PostContents">' +
+                            '<div class="post-item-content">' +
+                                '<img ng-src="{{content.Media.MediaUrl}}" />' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
             '</div>',
         controller: ctrlFn
     };

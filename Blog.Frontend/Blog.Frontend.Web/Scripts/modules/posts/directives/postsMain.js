@@ -1,5 +1,5 @@
 ﻿postsModule.directive('postsMain', function () {
-    var ctrlFn = function ($scope, postsService) {
+    var ctrlFn = function ($scope, $timeout, postsService) {
         $scope.posts = [];
         $scope.errorContent = { Show: false, Type: "" };
 
@@ -15,9 +15,13 @@
             return $scope.errorContent.Type;
         };
 
+        $timeout(function () {
+            $scope.$emit('iso-option', { layoutMode: 'masonry' });
+        }, 2000);
+
         $scope.getPopularPosts();
     };
-    ctrlFn.$inject = ["$scope", "postsService"];
+    ctrlFn.$inject = ["$scope", "$timeout", "postsService"];
 
     return {
         restrict: 'EA',

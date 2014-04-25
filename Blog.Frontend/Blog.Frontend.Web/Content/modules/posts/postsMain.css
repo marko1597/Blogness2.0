@@ -71,3 +71,24 @@ div.navigation-menu-open div.main-pusher::after {
         text-decoration: none;
         vertical-align: top;
     }
+
+        #posts-main > div.post-item > div.post-item-header {
+            background: #666;
+            color: #fff;
+            padding: 10px 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+            #posts-main > div.post-item > div.post-item-header h4 {
+                margin: 0;
+            }
+
+        #posts-main > div.post-item > div.post-item-body {
+            padding: 10px 10px;
+        }
+
+            #posts-main > div.post-item > div.post-item-body > .post-item-contents .post-item-content > img {
+                width: 100%;
+                height: 100%;
+            }

@@ -83,7 +83,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/media/{name}")]
+        [Route("api/media/{name}/thumb")]
         public HttpResponseMessage GetThumbnailByName(string name)
         {
             try
