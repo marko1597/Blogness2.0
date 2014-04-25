@@ -58,3 +58,16 @@ div.navigation-menu-open div.main-pusher::after {
 #posts-main {
     margin: 60px 0;
 }
+
+    #posts-main > div.post-item {
+        margin: 5px;
+        width: 100%;
+        min-height: 400px;
+        max-width: 340px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background: #fff;
+        position: relative;
+        text-decoration: none;
+        vertical-align: top;
+    }

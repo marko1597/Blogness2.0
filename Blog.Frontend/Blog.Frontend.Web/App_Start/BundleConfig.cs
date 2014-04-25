@@ -27,6 +27,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.validate.unobtrusive.js",
                         "~/Scripts/plugins/jquery.ui.touch-punch.js",
                         "~/Scripts/plugins/jquery.blockui.js",
+                        "~/Scripts/plugins/jquery.isotope.js",
                         "~/Scripts/plugins/jquery.newsticker.js",
                         "~/Scripts/plugins/classie.js"));
 
@@ -43,8 +44,9 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-route.js",
                       "~/Scripts/plugins/angular-cookies.js",
                       "~/Scripts/plugins/angular-animate.js",
-                      "~/Scripts/plugins/angular-deckgrid.js",
+                      "~/Scripts/plugins/angular-isotope.js",
                       "~/Scripts/plugins/angular-dragdrop.js",
+                      "~/Scripts/plugins/angular-infinite-scroll.js",
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-loading-bar.js",
                       "~/Scripts/plugins/angular-strap.js",
@@ -86,6 +88,7 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/posts").Include(
                       "~/Scripts/modules/posts/postsModule.js",
                       "~/Scripts/modules/posts/directives/postsMain.js",
+                      "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/services/postsService.js"));
 
             #endregion
@@ -100,6 +103,7 @@ namespace Blog.Frontend.Web
                       "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap-theme.css",
                       "~/Content/plugins/bootstrap-additions.css",
+                      "~/Content/plugins/isotope.css",
                       "~/Content/plugins/jquery-ui-*"));
 
             bundles.Add(new StyleBundle("~/content/css").Include(

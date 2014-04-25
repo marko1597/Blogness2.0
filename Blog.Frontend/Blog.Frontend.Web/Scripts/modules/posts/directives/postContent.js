@@ -11,6 +11,10 @@
             });
         };
 
+        $scope.loadMorePosts = function () {
+            
+        };
+
         $scope.getPopularPosts();
     };
     ctrlFn.$inject = ["$scope", "postsService"];
@@ -20,14 +24,8 @@
         scope: { data: '=' },
         replace: true,
         template:
-            '<div id="postContent">' +
-                '<div id="posts-main">' +
-                    '<div class="jumbotron">' +
-                        '<h2>Jason Magpantay</h2>' +
-                        '<p>Kris Arianne</p>' +
-                        '<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>' +
-                    '</div>' +
-                '</div>' +
+            '<div id="posts-main" isotope-container infinite-scroll="loadMorePosts()" infinite-scroll-distance="0">' +
+                '<div ng-repeat="post in posts" isotope-item post-item></div>' +
             '</div>',
         controller: ctrlFn
     };

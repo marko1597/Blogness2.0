@@ -27,11 +27,9 @@
             '<div>' +
                 '<div class="row">' +
                     '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
-                        '<div id="posts-main">' +
-                            '<div class="jumbotron">' +
-                                '<h2>Jason Magpantay</h2>' +
-                                '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
-                                '<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>' +
+                        '<div>' +
+                            '<div id="posts-main" isotope-container infinite-scroll="loadMorePosts()" infinite-scroll-distance="0">' +
+                                '<div class="post-item" ng-repeat="post in posts" isotope-item post-item data="post"></div>' +
                             '</div>' +
                             '<div id="error-main" ng-show="errorContent.Show">' +
                                 '<a href="#">' +
