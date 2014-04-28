@@ -89,6 +89,8 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/postsModule.js",
                       "~/Scripts/modules/posts/directives/postsMain.js",
                       "~/Scripts/modules/posts/directives/postItem.js",
+                      "~/Scripts/modules/posts/directives/postLikes.js",
+                      "~/Scripts/modules/posts/directives/postTags.js",
                       "~/Scripts/modules/posts/services/postsService.js"));
 
             #endregion

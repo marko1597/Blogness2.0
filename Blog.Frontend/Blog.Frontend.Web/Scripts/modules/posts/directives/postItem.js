@@ -1,6 +1,5 @@
 ﻿postsModule.directive('postItem', function () {
     var ctrlFn = function ($scope, $postsService) {
-        //$scope.post = data;
     };
     ctrlFn.$inject = ["$scope", "postsService"];
 
@@ -22,6 +21,10 @@
                             '</div>' +
                         '</div>' +
                     '</div>' +
+                '</div>' +
+                '<div class="post-item-details">' +
+                    '<div post-likes data="{ PostLikes: data.PostLikes, PostId: data.PostId }"></div>' +
+                    '<div post-tags data="{ Tags: data.Tags, PostId: data.PostId }"></div>' +
                 '</div>' +
             '</div>',
         controller: ctrlFn

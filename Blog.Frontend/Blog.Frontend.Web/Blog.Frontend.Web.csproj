@@ -218,6 +218,10 @@
     <Content Include="Content\images\loader-potato.gif" />
     <Content Include="Content\images\loader-girl.gif" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\login-main.jpg" />
+    <Content Include="Content\images\login-pass-icon.png" />
+    <Content Include="Content\images\login-pattern.png" />
+    <Content Include="Content\images\login-user-icon.png" />
     <Content Include="Content\images\lw-1.jpg" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
@@ -253,6 +257,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\modules\posts\directives\postItem.js" />
+    <Content Include="Scripts\modules\posts\directives\postTags.js" />
     <Content Include="Scripts\plugins\angular-infinite-scroll.js" />
     <Content Include="Scripts\plugins\angular-isotope.js" />
     <Content Include="Scripts\plugins\jquery-2.1.0.js" />
@@ -269,7 +274,7 @@
     <Content Include="Scripts\modules\messaging\messagingModule.js" />
     <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
     <Content Include="Scripts\modules\navigation\navigationModule.js" />
-    <Content Include="Scripts\modules\posts\directives\postContent.js" />
+    <Content Include="Scripts\modules\posts\directives\postLikes.js" />
     <Content Include="Scripts\modules\posts\directives\postsMain.js" />
     <Content Include="Scripts\modules\posts\postsModule.js" />
     <Content Include="Scripts\modules\posts\services\postsService.js" />
