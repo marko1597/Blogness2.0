@@ -32,19 +32,19 @@ namespace Blog.Backend.DataAccess.Seed
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.btnGenerate = new System.Windows.Forms.Button();
+            this.BtnGenerate = new System.Windows.Forms.Button();
             this.lbConsole = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // btnGenerate
+            // BtnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(12, 12);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(294, 23);
-            this.btnGenerate.TabIndex = 5;
-            this.btnGenerate.Text = "Generate Data";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            this.BtnGenerate.Location = new System.Drawing.Point(12, 12);
+            this.BtnGenerate.Name = "BtnGenerate";
+            this.BtnGenerate.Size = new System.Drawing.Size(294, 23);
+            this.BtnGenerate.TabIndex = 5;
+            this.BtnGenerate.Text = "Generate Data";
+            this.BtnGenerate.UseVisualStyleBackColor = true;
+            this.BtnGenerate.Click += new System.EventHandler(this.BtnGenerateClick);
             // 
             // lbConsole
             // 
@@ -60,7 +60,7 @@ namespace Blog.Backend.DataAccess.Seed
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(318, 303);
             this.Controls.Add(this.lbConsole);
-            this.Controls.Add(this.btnGenerate);
+            this.Controls.Add(this.BtnGenerate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
@@ -72,7 +72,7 @@ namespace Blog.Backend.DataAccess.Seed
 
         #endregion
 
-        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.Button BtnGenerate;
         private readonly IAddressRepository _addressRepository = new AddressRepository();
         private readonly ICommentLikeRepository _commentLikeRepository = new CommentLikeRepository();
         private readonly ICommentRepository _commentRepository = new CommentRepository();

@@ -259,6 +259,7 @@
     <Content Include="Scripts\modules\posts\directives\postItem.js" />
     <Content Include="Scripts\modules\posts\directives\postItemComment.js" />
     <Content Include="Scripts\modules\posts\directives\postTags.js" />
+    <Content Include="Scripts\modules\posts\controllers\postsController.js" />
     <Content Include="Scripts\modules\shared\directives\ticker.js" />
     <Content Include="Scripts\plugins\angular-infinite-scroll.js" />
     <Content Include="Scripts\plugins\angular-isotope.js" />

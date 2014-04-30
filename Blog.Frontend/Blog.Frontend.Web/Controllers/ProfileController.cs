@@ -29,6 +29,7 @@ namespace Blog.Frontend.Web.Controllers
             return View();
         }
 
+        [AllowCrossSite]
         public JsonResult Authenticate(LoginViewModel model, string returnUrl)
         {
             var login = new Backend.Common.Contracts.ViewModels.Login

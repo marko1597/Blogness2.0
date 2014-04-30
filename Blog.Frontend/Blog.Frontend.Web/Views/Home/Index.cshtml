@@ -8,8 +8,8 @@
         <div class="main-content">
             <div class="main-content-inner">
                 <header-menu></header-menu>
-                <div class="container">
-                    <posts-main></posts-main>
+                <div class="container" ng-controller="postsController">
+                    <posts-main posts="posts" size="size" get-error-type="getErrorType()" load-more-posts="loadMorePosts()"></posts-main>
                 </div>
             </div>
         </div>

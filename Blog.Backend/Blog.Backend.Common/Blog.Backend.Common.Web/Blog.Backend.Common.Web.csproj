@@ -136,6 +136,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AllowCrossSiteApiAttribute.cs" />
+    <Compile Include="Attributes\AllowCrossSiteAttribute.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
     <Compile Include="Authentication\ApiFactory.cs" />
     <Compile Include="Authentication\AuthenticationHelper.cs" />

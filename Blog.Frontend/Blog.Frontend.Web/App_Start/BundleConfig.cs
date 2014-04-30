@@ -88,6 +88,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/posts").Include(
                       "~/Scripts/modules/posts/postsModule.js",
+                      "~/Scripts/modules/posts/controllers/postsController.js",
                       "~/Scripts/modules/posts/directives/postsMain.js",
                       "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",

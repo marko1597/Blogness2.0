@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Net.Sockets
+@using System.Text
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -11,37 +13,80 @@
     @Styles.Render("~/content/cssplugins")
     @Scripts.Render("~/scripts/modernizr")
     <script>
-        var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
-        var blogRoot = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogRoot"))";
+        @*var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
+        var blogRoot = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogRoot"))";*@
+        var blogApi = "@GetBlogApi()";
+        var blogRoot = "@GetBlogRoot()";
     </script>
 </head>
-<body ng-app="blog">
-    @RenderBody()
+    <body ng-app="blog">
+        @*<h4 id="pageWidth" style="margin-top: 60px; "></h4>*@
+        @RenderBody()
 
-    @Scripts.Render("~/scripts/jquery")
-    @Scripts.Render("~/scripts/jqueryui")
-    @Scripts.Render("~/scripts/jqueryplugins")
-    @Scripts.Render("~/scripts/jsplugins")
-    @Scripts.Render("~/scripts/bootstrap")
-    @Scripts.Render("~/scripts/angular")
-    @Scripts.Render("~/scripts/blog")
-    @Scripts.Render("~/scripts/shareddirectives")
-    @Scripts.Render("~/scripts/header")
-    @Scripts.Render("~/scripts/config")
-    @Scripts.Render("~/scripts/login")
-    @Scripts.Render("~/scripts/navigation")
-    @Scripts.Render("~/scripts/posts")
+        @Scripts.Render("~/scripts/jquery")
+        @Scripts.Render("~/scripts/jqueryui")
+        @Scripts.Render("~/scripts/jqueryplugins")
+        @Scripts.Render("~/scripts/jsplugins")
+        @Scripts.Render("~/scripts/bootstrap")
+        @Scripts.Render("~/scripts/angular")
+        @Scripts.Render("~/scripts/blog")
+        @Scripts.Render("~/scripts/shareddirectives")
+        @Scripts.Render("~/scripts/header")
+        @Scripts.Render("~/scripts/config")
+        @Scripts.Render("~/scripts/login")
+        @Scripts.Render("~/scripts/navigation")
+        @Scripts.Render("~/scripts/posts")
 
-    <script>
-        $(function () {
-            var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
-            settings.setBlogApiEndpoint(blogApi);
-            settings.setBlogRoot(blogRoot);
-        });
-    </script>
+        <script>
+            $(function () {
+                var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
+                settings.setBlogApiEndpoint(blogApi);
+                settings.setBlogRoot(blogRoot);
 
-    <script src="~/Scripts/modules/messaging/messagingModule.js"></script>
+                // Enable this for debugging purposes along with h4 element above (just below body)
+                //$("#pageWidth").text($(document).outerWidth());
+                //$(window).on("resize", function() {
+                //    $("#pageWidth").html($(document).outerWidth());
+                //}); 
+            });
+        </script>
 
-    @RenderSection("scripts", required: false)
-</body>
+        <script src="~/Scripts/modules/messaging/messagingModule.js"></script>
+
+        @RenderSection("scripts", required: false)
+    </body>
 </html>
+@functions
+{
+    private string GetLocalIpAddress()
+    {
+        var localIp = "";
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
+        {
+            localIp = ip.ToString();
+            break;
+        }
+        return localIp;
+    }
+
+    public string GetBlogApi()
+    {
+        var sb = new StringBuilder();
+        sb.Append("https://");
+        sb.Append(GetLocalIpAddress());
+        sb.Append("/blogapi/api/");
+
+        return sb.ToString();
+    }
+
+    public string GetBlogRoot()
+    {
+        var sb = new StringBuilder();
+        sb.Append("https://");
+        sb.Append(GetLocalIpAddress());
+        sb.Append("/blog/");
+
+        return sb.ToString();
+    }
+}

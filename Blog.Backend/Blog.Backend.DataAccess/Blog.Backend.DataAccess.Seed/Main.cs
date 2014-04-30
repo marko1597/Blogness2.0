@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Blog.Backend.DataAccess.Entities.Objects;
 
@@ -18,51 +19,30 @@ namespace Blog.Backend.DataAccess.Seed
             InitializeComponent();
         }
 
-        private void btnGenerate_Click(object sender, EventArgs e)
+        private void BtnGenerateClick(object sender, EventArgs e)
         {
             try
             {
                 lbConsole.Items.Add("<================ START ================>");
 
-                LoadUsers();
-                lbConsole.Items.Add("Successfully added users...");
+                var task = Task.Run(() =>
+                    {
+                        LoadUsers();
+                        LoadAddress();
+                        LoadEducationType();
+                        LoadEducation();
+                        LoadHobbies();
+                        LoadAlbums();
+                        LoadMedia();
+                        LoadTags();
+                        LoadPosts();
+                        LoadPostContents();
+                        LoadPostLikes();
+                        LoadComments();
+                        LoadCommentLikes();
+                    });
 
-                LoadAddress();
-                lbConsole.Items.Add("Successfully added addresses...");
-
-                LoadEducationType();
-                lbConsole.Items.Add("Successfully added education types...");
-
-                LoadEducation();
-                lbConsole.Items.Add("Successfully added educations...");
-
-                LoadHobbies();
-                lbConsole.Items.Add("Successfully added hobbies...");
-
-                LoadAlbums();
-                lbConsole.Items.Add("Successfully added albums...");
-
-                LoadMedia();
-                lbConsole.Items.Add("Successfully added media...");
-
-                LoadTags();
-                lbConsole.Items.Add("Successfully added tags...");
-
-                LoadPosts();
-                lbConsole.Items.Add("Successfully added posts...");
-
-                LoadPostContents();
-                lbConsole.Items.Add("Successfully added post contents...");
-
-                LoadPostLikes();
-                lbConsole.Items.Add("Successfully added post likes...");
-
-                LoadComments();
-                lbConsole.Items.Add("Successfully added comments and comment replies...");
-
-                LoadCommentLikes();
-                lbConsole.Items.Add("Successfully added comment likes...");
-
+                Task.WaitAll(new[] {task});
                 lbConsole.Items.Add("<================ END ================>");
 
             }
@@ -107,6 +87,8 @@ namespace Blog.Backend.DataAccess.Seed
                     a => a.UserId > 0,
                     b => b.OrderBy(c => c.UserId),
                     "Address,Education,Hobbies").ToList();
+
+            lbConsole.Items.Add("Successfully added users...");
         }
 
         private void LoadAddress()
@@ -120,6 +102,8 @@ namespace Blog.Backend.DataAccess.Seed
                 Country = "Country",
                 Zip = 1234
             }));
+
+            lbConsole.Items.Add("Successfully added addresses...");
         }
 
         private void LoadEducationType()
@@ -143,6 +127,8 @@ namespace Blog.Backend.DataAccess.Seed
             {
                 EducationTypeName = "Post Graduate"
             });
+
+            lbConsole.Items.Add("Successfully added education types...");
         }
 
         private void LoadEducation()
@@ -200,6 +186,8 @@ namespace Blog.Backend.DataAccess.Seed
                     ModifiedDate = DateTime.UtcNow
                 });
             }
+
+            lbConsole.Items.Add("Successfully added educations...");
         }
 
         private void LoadHobbies()
@@ -216,6 +204,8 @@ namespace Blog.Backend.DataAccess.Seed
                     ModifiedDate = DateTime.UtcNow
                 });
             }
+
+            lbConsole.Items.Add("Successfully added hobbies...");
         }
 
         private void LoadAlbums()
@@ -244,6 +234,8 @@ namespace Blog.Backend.DataAccess.Seed
                     IsUserDefault = true
                 });
             }
+
+            lbConsole.Items.Add("Successfully added albums...");
         }
 
         private void LoadMedia()
@@ -303,6 +295,8 @@ namespace Blog.Backend.DataAccess.Seed
                     }
                 }
             }
+
+            lbConsole.Items.Add("Successfully added media...");
         }
 
         private void LoadTags()
@@ -336,6 +330,8 @@ namespace Blog.Backend.DataAccess.Seed
             });
 
             _tags = _tagRepository.Find(a => a.TagId > 0, false).ToList();
+
+            lbConsole.Items.Add("Successfully added tags...");
         }
 
         private void LoadPosts()
@@ -360,6 +356,8 @@ namespace Blog.Backend.DataAccess.Seed
 
             _posts = _postRepository.Find(a => a.PostId > 0, q => q.OrderByDescending(p => p.CreatedDate),
                 "Comments,User,PostLikes,Tags,PostContents").ToList();
+
+            lbConsole.Items.Add("Successfully added posts...");
         }
 
         private void LoadPostContents()
@@ -379,6 +377,8 @@ namespace Blog.Backend.DataAccess.Seed
                     MediaId = m.MediaId
                 });
             }
+
+            lbConsole.Items.Add("Successfully added post contents...");
         }
 
         private void LoadPostLikes()
@@ -398,6 +398,8 @@ namespace Blog.Backend.DataAccess.Seed
                     });
                 }
             }
+
+            lbConsole.Items.Add("Successfully added post likes...");
         }
 
         private void LoadComments()
@@ -443,6 +445,8 @@ namespace Blog.Backend.DataAccess.Seed
 
             _comments = _commentRepository.Find(a => a.CommentId > 0 && a.ParentCommentId == null, q => q.OrderByDescending(p => p.CreatedDate),
                 "Comments,User,CommentLikes,ParentComment").ToList();
+
+            lbConsole.Items.Add("Successfully added comments and comment replies...");
         }
 
         private void LoadCommentLikes()
@@ -462,6 +466,8 @@ namespace Blog.Backend.DataAccess.Seed
                     });
                 }
             }
+
+            lbConsole.Items.Add("Successfully added comment likes...");
         }
     }
 }
