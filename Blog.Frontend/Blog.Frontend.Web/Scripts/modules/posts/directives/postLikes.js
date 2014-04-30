@@ -5,7 +5,7 @@
         };
     };
     ctrlFn.$inject = ["$scope", "postsService"];
-
+    
     return {
         restrict: 'EA',
         scope: { data: '=' },

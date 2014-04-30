@@ -61,9 +61,9 @@ div.navigation-menu-open div.main-pusher::after {
 
     #posts-main > div.post-item {
         margin: 5px;
-        width: 100%;
+        width: 350px;
         min-height: 400px;
-        max-width: 340px;
+        min-width: 350px;
         border: 1px solid #ddd;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         background: #fff;
@@ -86,6 +86,7 @@ div.navigation-menu-open div.main-pusher::after {
 
         #posts-main > div.post-item > div.post-item-body {
             padding: 10px 10px;
+            border-bottom: 1px solid #ddd;
         }
 
             #posts-main > div.post-item > div.post-item-body > .post-item-contents .post-item-content > img {
@@ -95,6 +96,7 @@ div.navigation-menu-open div.main-pusher::after {
 
         #posts-main > div.post-item > div.post-item-details {
             padding: 10px 10px;
+            border-bottom: 1px solid #ddd;
         }
 
             #posts-main > div.post-item > div.post-item-details > div.post-likes {
@@ -110,6 +112,7 @@ div.navigation-menu-open div.main-pusher::after {
                 line-height: 28px;
                 width: 20%;
                 display: inline-block;
+                margin-right: 10px;
             }
 
                 #posts-main > div.post-item > div.post-item-details > div.post-likes > div.wrapper {
@@ -127,13 +130,39 @@ div.navigation-menu-open div.main-pusher::after {
 
             #posts-main > div.post-item > div.post-item-details > div.post-tags {
                 display: inline-block;
-                width: 80%;
+                width: 75%;
             }
 
                 #posts-main > div.post-item > div.post-item-details > div.post-tags > button {
                     height: 28px;
-                    margin: 0 10px;
                     line-height: 10px;
                     position: relative;
                     top: -2px;
+                    width: 160px;
                 }
+
+        #posts-main > div.post-item > div.post-item-comments ul {
+            height: 55px !important;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            list-style-type: none;
+            padding: 10px;
+        }
+
+            #posts-main > div.post-item > div.post-item-comments ul > li p {
+                margin: 0;
+            }
+
+                #posts-main > div.post-item > div.post-item-comments ul > li p > a {
+                    cursor: pointer;
+                }
+
+            #posts-main > div.post-item > div.post-item-comments ul > li p:last-child {
+                -ms-text-overflow: ellipsis;
+                -o-text-overflow: ellipsis;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                width: auto;
+            }

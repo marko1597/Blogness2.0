@@ -257,7 +257,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\modules\posts\directives\postItem.js" />
+    <Content Include="Scripts\modules\posts\directives\postItemComment.js" />
     <Content Include="Scripts\modules\posts\directives\postTags.js" />
+    <Content Include="Scripts\modules\shared\directives\ticker.js" />
     <Content Include="Scripts\plugins\angular-infinite-scroll.js" />
     <Content Include="Scripts\plugins\angular-isotope.js" />
     <Content Include="Scripts\plugins\jquery-2.1.0.js" />
