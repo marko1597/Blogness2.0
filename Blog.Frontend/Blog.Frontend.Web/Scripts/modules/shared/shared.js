@@ -1,0 +1,1 @@
+﻿var ngShared = angular.module("ngShared", ["ngRoute"]);

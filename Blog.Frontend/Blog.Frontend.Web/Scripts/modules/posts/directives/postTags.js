@@ -1,4 +1,4 @@
-﻿postsModule.directive('postTags', function () {
+﻿ngPosts.directive('postTags', function () {
     var ctrlFn = function ($scope) {
         $scope.dropdown = [];
 

@@ -2,17 +2,18 @@
     ViewBag.Title = "Bloggity Blog";
 }
 
-<div id="main-container">
-    <navigation-menu></navigation-menu>
-    <div class="main-pusher">
-        <div class="main-content">
-            <div class="main-content-inner">
-                <header-menu></header-menu>
-                <div class="container" ng-controller="postsController">
-                    <posts-main posts="posts" size="size" get-error-type="getErrorType()" load-more-posts="loadMorePosts()"></posts-main>
-                </div>
-            </div>
-        </div>
+<snap-drawers>
+    <div snap-drawer>
+        <navigation-menu></navigation-menu>
     </div>
-</div>
+    <div snap-drawer="right">
+        <h4>Right Drawer</h4>
+    </div>
+</snap-drawers>
 
+<snap-content>
+    <header-menu></header-menu>
+    <div class="container" ng-controller="postsController">
+        <posts-main posts="posts" size="size" get-error-type="getErrorType()" load-more-posts="loadMorePosts()"></posts-main>
+    </div>
+</snap-content>

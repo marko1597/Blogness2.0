@@ -1,0 +1,1 @@
+﻿var ngPosts = angular.module("ngPosts", ["ngRoute", "iso.directives", "infinite-scroll", "ngConfig"]);

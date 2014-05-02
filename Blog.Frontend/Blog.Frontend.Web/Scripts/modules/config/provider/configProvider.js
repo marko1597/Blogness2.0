@@ -1,4 +1,4 @@
-﻿configModule.provider('configProvider', function () {
+﻿ngConfig.provider('configProvider', function () {
     var settings = {
         "BlogApi": "",
         "BlogRoot": "",

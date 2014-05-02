@@ -1,4 +1,4 @@
-﻿postsModule.directive('postLikes', function () {
+﻿ngPosts.directive('postLikes', function () {
     var ctrlFn = function ($scope) {
         $scope.tooltip = {
             "title": "Click to favorite this post.",

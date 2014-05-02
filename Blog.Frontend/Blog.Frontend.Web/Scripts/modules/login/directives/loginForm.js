@@ -1,4 +1,4 @@
-﻿loginModule.directive('loginForm', function () {
+﻿ngLogin.directive('loginForm', function () {
     var ctrlFn = function ($scope, $rootScope, $timeout, configProvider, loginService) {
         $scope.username = "";
         $scope.password = "";

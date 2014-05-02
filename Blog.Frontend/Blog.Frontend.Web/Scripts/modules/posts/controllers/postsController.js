@@ -1,5 +1,5 @@
-﻿postsModule.controller('postsController', ["$scope", "$interval", "postsService",
-    function ($scope, $interval, postsService) {
+﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "postsService",
+    function ($scope, $interval, snapRemote, postsService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.errorContent = { Show: false, Type: "" };
@@ -19,6 +19,16 @@
 
         $scope.$on("updatePostsSize", function (ev, size) {
             $scope.size = size;
+        });
+
+        snapRemote.getSnapper().then(function (snapper) {
+            snapper.on('open', function () {
+                console.log("open");
+            });
+
+            snapper.on('close', function () {
+                console.log('closed!');
+            });
         });
 
         var stopApplyLayoutFlag;

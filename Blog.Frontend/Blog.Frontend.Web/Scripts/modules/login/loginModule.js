@@ -1,1 +1,0 @@
-﻿var loginModule = angular.module("loginModule", ["ngRoute", "configModule", "mgcrea.ngStrap"]);

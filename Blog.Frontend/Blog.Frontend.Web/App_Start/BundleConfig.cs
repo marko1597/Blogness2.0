@@ -5,7 +5,6 @@ namespace Blog.Frontend.Web
 {
     public class BundleConfig
     {
-
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.IgnoreList.Clear();
@@ -29,7 +28,8 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.blockui.js",
                         "~/Scripts/plugins/jquery.isotope.js",
                         "~/Scripts/plugins/jquery.newsticker.js",
-                        "~/Scripts/plugins/classie.js"));
+                        "~/Scripts/plugins/classie.js",
+                        "~/Scripts/plugins/snap.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(
                         "~/Scripts/plugins/respond.js",
@@ -46,6 +46,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-animate.js",
                       "~/Scripts/plugins/angular-isotope.js",
                       "~/Scripts/plugins/angular-dragdrop.js",
+                      "~/Scripts/plugins/angular-snap.js",
                       "~/Scripts/plugins/angular-infinite-scroll.js",
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-loading-bar.js",
@@ -56,38 +57,30 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/blog").Include(
                         "~/Scripts/modules/app.js"));
 
-            bundles.Add(new ScriptBundle("~/scripts/shareddirectives").Include(
+            bundles.Add(new ScriptBundle("~/scripts/shared").Include(
+                        "~/Scripts/modules/shared/shared.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/header").Include(
-                      "~/Scripts/modules/header/headerModule.js",
+                      "~/Scripts/modules/header/header.js",
                       "~/Scripts/modules/header/directives/headerMenu.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/config").Include(
-                      "~/Scripts/modules/config/configModule.js",
-                      "~/Scripts/modules/config/provider/configProvider.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/config").Include(
-                      "~/Scripts/modules/config/configModule.js",
+                      "~/Scripts/modules/config/config.js",
                       "~/Scripts/modules/config/provider/configProvider.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/login").Include(
-                      "~/Scripts/modules/login/loginModule.js",
-                      "~/Scripts/modules/login/directives/loginForm.js",
-                      "~/Scripts/modules/login/services/loginService.js"));
-
-            bundles.Add(new ScriptBundle("~/scripts/login").Include(
-                      "~/Scripts/modules/login/loginModule.js",
+                      "~/Scripts/modules/login/login.js",
                       "~/Scripts/modules/login/directives/loginForm.js",
                       "~/Scripts/modules/login/services/loginService.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/navigation").Include(
-                      "~/Scripts/modules/navigation/navigationModule.js",
+                      "~/Scripts/modules/navigation/navigation.js",
                       "~/Scripts/modules/navigation/directives/navigationMenu.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/posts").Include(
-                      "~/Scripts/modules/posts/postsModule.js",
+                      "~/Scripts/modules/posts/posts.js",
                       "~/Scripts/modules/posts/controllers/postsController.js",
                       "~/Scripts/modules/posts/directives/postsMain.js",
                       "~/Scripts/modules/posts/directives/postItem.js",
@@ -103,6 +96,7 @@ namespace Blog.Frontend.Web
             bundles.Add(new StyleBundle("~/content/cssplugins").Include(
                       "~/Content/plugins/angular-loading-bar.css",
                       "~/Content/plugins/angular-motion.css",
+                      "~/Content/plugins/angular-snap.css",
                       "~/Content/plugins/angular-scrollbar.css",
                       "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap.css",

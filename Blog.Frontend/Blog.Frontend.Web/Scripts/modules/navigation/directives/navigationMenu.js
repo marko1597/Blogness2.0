@@ -1,4 +1,4 @@
-﻿navigationModule.directive('navigationMenu', function () {
+﻿ngNavigation.directive('navigationMenu', function () {
     var ctrlFn = function ($scope, $rootScope, configProvider) {
         $scope.navigationItems = configProvider.navigationItems;
 

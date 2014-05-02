@@ -1,4 +1,4 @@
-﻿loginModule.factory('loginService', ["$http", "$q", "$window", "configProvider", function ($http, $q, $window, configProvider) {
+﻿ngLogin.factory('loginService', ["$http", "$q", "$window", "configProvider", function ($http, $q, $window, configProvider) {
     var sessionApi = configProvider.getSettings().BlogRoot == "" ? window.blogRoot + "Profile/Authenticate" : configProvider.getSettings().BlogRoot + "Profile/Authenticate";
     var authApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Authenticate" : configProvider.getSettings().BlogApi + "Authenticate";
 

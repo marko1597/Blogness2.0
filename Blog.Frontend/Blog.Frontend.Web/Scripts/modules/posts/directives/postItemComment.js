@@ -1,4 +1,4 @@
-﻿postsModule.directive('postItemComment', ["$popover", function ($popover) {
+﻿ngPosts.directive('postItemComment', ["$popover", function ($popover) {
     var ctrlFn = function ($scope) {
         $scope.user = {
             "name": $scope.comment.User.FirstName + " " + $scope.comment.User.LastName,

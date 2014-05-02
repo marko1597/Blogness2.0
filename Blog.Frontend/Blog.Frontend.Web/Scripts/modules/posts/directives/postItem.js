@@ -1,4 +1,4 @@
-﻿postsModule.directive('postItem', [function () {
+﻿ngPosts.directive('postItem', [function () {
     var ctrlFn = function ($scope, $postsService) {
         $scope.post = $scope.data.Post;
         

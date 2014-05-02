@@ -1,1 +1,0 @@
-﻿var navigationModule = angular.module("navigationModule", ["ngRoute", "configModule"]);

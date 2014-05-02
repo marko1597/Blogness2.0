@@ -1,4 +1,4 @@
-﻿postsModule.directive('postsMain', ["$window", "$timeout", function ($window, $timeout) {
+﻿ngPosts.directive('postsMain', ["$window", "$timeout", function ($window, $timeout) {
     var ctrlFn = function () {
         
     };

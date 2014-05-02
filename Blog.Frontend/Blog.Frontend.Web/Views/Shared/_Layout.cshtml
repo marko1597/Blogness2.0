@@ -32,7 +32,7 @@
         @Scripts.Render("~/scripts/bootstrap")
         @Scripts.Render("~/scripts/angular")
         @Scripts.Render("~/scripts/blog")
-        @Scripts.Render("~/scripts/shareddirectives")
+        @Scripts.Render("~/scripts/shared")
         @Scripts.Render("~/scripts/header")
         @Scripts.Render("~/scripts/config")
         @Scripts.Render("~/scripts/login")
@@ -53,8 +53,6 @@
             });
         </script>
 
-        <script src="~/Scripts/modules/messaging/messagingModule.js"></script>
-
         @RenderSection("scripts", required: false)
     </body>
 </html>
@@ -62,13 +60,13 @@
 {
     private string GetLocalIpAddress()
     {
-        var localIp = "";
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
-        {
-            localIp = ip.ToString();
-            break;
-        }
+        var localIp = "localhost";
+        //var host = Dns.GetHostEntry(Dns.GetHostName());
+        //foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
+        //{
+        //    localIp = ip.ToString();
+        //    break;
+        //}
         return localIp;
     }
 

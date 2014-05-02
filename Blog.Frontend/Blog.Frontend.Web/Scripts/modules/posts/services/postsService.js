@@ -1,4 +1,4 @@
-﻿postsModule.factory('postsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
+﻿ngPosts.factory('postsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
     var postsApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Posts" : configProvider.getSettings().BlogApi + "Posts";
 
     return {

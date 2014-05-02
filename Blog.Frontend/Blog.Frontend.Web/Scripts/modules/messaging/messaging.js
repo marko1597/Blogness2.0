@@ -1,0 +1,1 @@
+﻿var ngMessaging = angular.module("ngMessaging", ["ngRoute", "configModule"]);
