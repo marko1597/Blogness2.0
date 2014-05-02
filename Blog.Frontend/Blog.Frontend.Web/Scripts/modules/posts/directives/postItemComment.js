@@ -12,24 +12,12 @@
     };
     ctrlFn.$inject = ["$scope"];
 
-    var linkFn = function(scope, elem) {
-        $(elem).find("p:last-child").on("click", function () {
-            var pop = $(elem).find("div.popover");
-            if (pop.length > 0) {
-                $(elem).closest("div.post-item-comments ul").newsTicker('unpause');
-            } else {
-                $(elem).closest("div.post-item-comments ul").newsTicker('pause');
-            }
-        });
-    };
-
     return {
         restrict: 'EA',
         scope: { comment: '=' },
         replace: true,
-        link: linkFn,
         template:
-            '<div>' +
+            '<div data-comment-id="{{comment.CommentId}}">' +
                 '<p><a href="{{user.url}}">{{user.name}}</a></p>' +
                 '<p data-pause-trigger data-placement="top-right" data-animation="am-flip-x" bs-popover="popover">{{comment.CommentMessage}}</p>' +
             '</div>',

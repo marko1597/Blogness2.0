@@ -114,6 +114,9 @@ namespace Blog.Frontend.Web
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/content/header").Include(
+                      "~/Content/modules/header/header.css"));
+
             bundles.Add(new StyleBundle("~/content/login").Include(
                       "~/Content/modules/loginform/loginform.css"));
 

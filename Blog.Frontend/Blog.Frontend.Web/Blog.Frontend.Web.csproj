@@ -223,6 +223,7 @@
     <Content Include="Content\images\login-pattern.png" />
     <Content Include="Content\images\login-user-icon.png" />
     <Content Include="Content\images\lw-1.jpg" />
+    <Content Include="Content\modules\header\header.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
