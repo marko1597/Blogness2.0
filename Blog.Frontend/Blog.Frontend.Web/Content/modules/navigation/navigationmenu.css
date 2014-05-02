@@ -109,6 +109,8 @@ div.navigation-menu-open div.navigation-menu::after {
     -ms-transform: translate3d(0, 0, 0);
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
+    position: fixed;
+    top: 0;
 }
 
 .navigation-effect.navigation-menu::after {

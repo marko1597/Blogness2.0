@@ -77,7 +77,7 @@
 							    '<div class="row">' +
 								    '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
 									    '<div class="header">' +
-										    '<h1>Login Form</h1>' +
+										    '<h1>Bloggity Blog</h1>' +
 										    '<span>Fill out the form below to login to Bloggity.</span>' +
 									    '</div>' +
 								    '</div>' +
@@ -94,7 +94,8 @@
 										      '<div class="pass-icon"></div>' +
 									    '</div>' +
                                         '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
-										     '<input name="username" type="checkbox" ng-model="rememberMe" name="rememberMe">Remember me</input>' +
+										     '<input name="username" type="checkbox" ng-model="rememberMe" name="rememberMe">' +
+                                             '<span>Remember me</span>' +
 									    '</div>' +
 								    '</div>' +
 							    '</div>' +

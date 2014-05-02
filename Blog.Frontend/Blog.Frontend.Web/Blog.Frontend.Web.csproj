@@ -316,6 +316,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Content\fonts\CanterBold3D.otf" />
+    <Content Include="Content\fonts\CanterBoldShadow.otf" />
+    <Content Include="Content\fonts\CanterBoldStrips.otf" />
+    <Content Include="Content\fonts\CanterBold.otf" />
+    <Content Include="Content\fonts\CanterLight.otf" />
+    <Content Include="Content\fonts\CanterOutline.otf" />
+    <Content Include="Content\fonts\Bazar.ttf" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
