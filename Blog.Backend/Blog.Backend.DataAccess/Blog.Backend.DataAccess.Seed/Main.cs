@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Blog.Backend.DataAccess.Entities.Objects;
@@ -13,10 +15,18 @@ namespace Blog.Backend.DataAccess.Seed
         private List<User> _users = new List<User>();
         private List<Post> _posts = new List<Post>();
         private List<Comment> _comments = new List<Comment>();
-        private List<Tag> _tags = new List<Tag>(); 
+        private List<Tag> _tags = new List<Tag>();
+        private string _localIpAddress = string.Empty;
         public Main()
         {
             InitializeComponent();
+
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
+            {
+                _localIpAddress = ip.ToString();
+                break;
+            }
         }
 
         private void BtnGenerateClick(object sender, EventArgs e)
@@ -264,11 +274,11 @@ namespace Blog.Backend.DataAccess.Seed
                             ModifiedDate = DateTime.UtcNow,
                             AlbumId = albums[0].AlbumId,
                             FileName = i + ".jpg",
-                            MediaUrl = "https://localhost/blogapi/api/media/" + customName,
+                            MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
                             MediaType = "image/jpeg",
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
-                            ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,
+                            ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
                             ThumbnailPath = tnPath,
                             ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });

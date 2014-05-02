@@ -1,12 +1,21 @@
-﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "postsService",
-    function ($scope, $interval, snapRemote, postsService) {
+﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "localStorageService", "postsService", "blockUiService",
+    function ($scope, $interval, snapRemote, localStorageService, postsService, blockUiService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.errorContent = { Show: false, Type: "" };
-
+        
         $scope.getPopularPosts = function () {
+            blockUiService.blockIt(
+                '<h4>Loading...</h4>', {
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: '#000',
+                    opacity: .5,
+                    color: '#fff'
+                });
             postsService.getPopularPosts().then(function (resp) {
                 $scope.posts = resp;
+                blockUiService.unblockIt();
                 console.log(resp);
             }, function (errorMsg) {
                 alert(errorMsg);
@@ -23,10 +32,19 @@
 
         snapRemote.getSnapper().then(function (snapper) {
             snapper.on('open', function () {
+                blockUiService.blockIt(
+                '<h4>Loading...</h4>', {
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: '#000',
+                    opacity: .5,
+                    color: '#fff'
+                }, $(".snap-content"));
                 console.log("open");
             });
 
             snapper.on('close', function () {
+                blockUiService.unblockIt($(".snap-content"));
                 console.log('closed!');
             });
         });

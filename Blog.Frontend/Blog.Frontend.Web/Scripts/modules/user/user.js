@@ -1,0 +1,1 @@
+﻿var ngUser = angular.module("ngUser", ["ngRoute", "localStorageModule"]);

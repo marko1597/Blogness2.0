@@ -1,1 +1,1 @@
-﻿var ngPosts = angular.module("ngPosts", ["ngRoute", "iso.directives", "infinite-scroll", "ngConfig"]);
+﻿var ngPosts = angular.module("ngPosts", ["ngRoute", "ngShared", "iso.directives", "infinite-scroll", "ngConfig"]);

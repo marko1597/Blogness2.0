@@ -1,2 +1,2 @@
-﻿var blog = angular.module("blog", ["ngRoute", "ngLocalStorage", "mgcrea.ngStrap", "snap",
-    "ngShared", "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation"]);
+﻿var blog = angular.module("blog", ["ngRoute", "localStorageModule", "mgcrea.ngStrap", "snap",
+    "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation", "ngUser"]);

@@ -223,10 +223,17 @@
     <Content Include="Content\images\login-pattern.png" />
     <Content Include="Content\images\login-user-icon.png" />
     <Content Include="Content\images\lw-1.jpg" />
+    <Content Include="Content\images\nav-groups.png" />
+    <Content Include="Content\images\nav-events.png" />
+    <Content Include="Content\images\nav-friends.png" />
+    <Content Include="Content\images\nav-home.png" />
+    <Content Include="Content\images\nav-profile.png" />
     <Content Include="Content\modules\header\header.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
+    <Content Include="Scripts\modules\user\services\userService.js" />
+    <Content Include="Scripts\modules\user\user.js" />
     <Content Include="Content\plugins\angular-loading-bar.css" />
     <Content Include="Content\plugins\angular-motion.css" />
     <Content Include="Content\plugins\angular-scrollbar.css" />
@@ -309,6 +316,7 @@
     <Content Include="Scripts\plugins\respond.js" />
     <Content Include="Scripts\plugins\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\plugins\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\plugins\snap.js" />
     <Content Include="Scripts\plugins\underscore.js" />
     <Content Include="Scripts\plugins\video-js\demo.html" />
     <Content Include="Scripts\plugins\video-js\font\vjs.svg" />

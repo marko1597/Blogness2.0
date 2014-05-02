@@ -36,6 +36,7 @@
         @Scripts.Render("~/scripts/header")
         @Scripts.Render("~/scripts/config")
         @Scripts.Render("~/scripts/login")
+        @Scripts.Render("~/scripts/user")
         @Scripts.Render("~/scripts/navigation")
         @Scripts.Render("~/scripts/posts")
 
@@ -61,12 +62,12 @@
     private string GetLocalIpAddress()
     {
         var localIp = "localhost";
-        //var host = Dns.GetHostEntry(Dns.GetHostName());
-        //foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
-        //{
-        //    localIp = ip.ToString();
-        //    break;
-        //}
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
+        {
+            localIp = ip.ToString();
+            break;
+        }
         return localIp;
     }
 

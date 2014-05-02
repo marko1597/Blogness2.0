@@ -45,20 +45,18 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-cookies.js",
                       "~/Scripts/plugins/angular-animate.js",
                       "~/Scripts/plugins/angular-isotope.js",
-                      "~/Scripts/plugins/angular-dragdrop.js",
+                      "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-snap.js",
                       "~/Scripts/plugins/angular-infinite-scroll.js",
-                      "~/Scripts/plugins/angular-local-storage.js",
-                      "~/Scripts/plugins/angular-loading-bar.js",
                       "~/Scripts/plugins/angular-strap.js",
-                      "~/Scripts/plugins/angular-strap.tpl.js",
-                      "~/Scripts/plugins/angular-ui-bootstrap-tpls-0.10.0.js"));
+                      "~/Scripts/plugins/angular-strap.tpl.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/blog").Include(
                         "~/Scripts/modules/app.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/shared").Include(
                         "~/Scripts/modules/shared/shared.js",
+                        "~/Scripts/modules/shared/services/blockUi.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
 
@@ -69,6 +67,10 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/config").Include(
                       "~/Scripts/modules/config/config.js",
                       "~/Scripts/modules/config/provider/configProvider.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/user").Include(
+                      "~/Scripts/modules/user/user.js",
+                      "~/Scripts/modules/user/services/userService.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/login").Include(
                       "~/Scripts/modules/login/login.js",

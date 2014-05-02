@@ -1,64 +1,47 @@
 ﻿ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, configProvider, loginService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, localStorageService, configProvider, loginService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
         $scope.alert = { Title: "Oops!", Message: "", Show: false };
 
         $scope.login = function () {
-            $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
-                console.log(resp);
-                $.unblockUI();
-            }, function (errorMsg) {
-                $scope.alert.Message = errorMsg;
-                $scope.alert.Show = true;
-                $.unblockUI();
-
-                $timeout(function() {
-                    $scope.alert.Show = false;
-                }, configProvider.getSettings().AlertTimer);
-            });
-        };
-
-        $scope.closeAlert = function() {
-            $scope.alert.Show = false;
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "configProvider", "loginService"];
-
-    var filterFn;
-    filterFn = function (scope, element) {
-        $("input[name=login]").on("click", function () {
-            doBlock();
-        });
-
-        $("form.login-form div.content :input:not(:checkbox)").on("keydown", function (e) {
-            var code = e.which; 
-            if (code == 13) e.preventDefault();
-            if (code == 32 || code == 13 || code == 188 || code == 186) {
-                doBlock();
-            }
-        });
-
-        var doBlock = function() {
-            $.blockUI({
-                message: '<h4><img src="../content/images/loader-girl.gif" height="128" /></h4>',
-                css: {
+            blockUiService.blockIt(
+                '<h4>' +
+                    '<img src="../content/images/loader-girl.gif" height="128" />' +
+                '</h4>', {
                     border: 'none',
                     padding: '5px',
                     backgroundColor: '#000',
                     opacity: .5,
                     color: '#fff'
-                }
+                });
+
+            $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
+                localStorageService.add("username", resp.User.UserName);
+                console.log(resp);
+                blockUiService.unblockIt();
+            }, function (errorMsg) {
+                $scope.alert.Message = errorMsg;
+                $scope.alert.Show = true;
+                blockUiService.unblockIt();
+
+                $timeout(function () {
+                    $scope.alert.Show = false;
+                }, configProvider.getSettings().AlertTimer);
             });
         };
+
+        $scope.closeAlert = function () {
+            $scope.alert.Show = false;
+        };
     };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "localStorageService", "configProvider", "loginService", "blockUiService"];
 
     return {
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        link: filterFn,
         template:
             '<div class="main-wrapper">' +
                 '<div class="background" />' +
