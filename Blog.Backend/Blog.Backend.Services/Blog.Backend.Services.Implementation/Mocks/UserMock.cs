@@ -8,43 +8,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class UserMock : IUser
     {
-        public UserMock()
-        {
-            if (DataStorage.Users.Count == 0)
-            {
-                DataStorage.Users.Add(new User
-                {
-                    UserId = 1,
-                    FirstName = "Jason",
-                    LastName = "Magpantay",
-                    UserName = "jama",
-                    Password = "testtest1",
-                    EmailAddress = "jason.magpantay@gmail.com",
-                    BirthDate = DateTime.UtcNow.AddYears(-25)
-                });
-                DataStorage.Users.Add(new User
-                {
-                    UserId = 2,
-                    FirstName = "Jason",
-                    LastName = "Avel",
-                    UserName = "jaav",
-                    Password = "testtest1",
-                    EmailAddress = "jason.avel@gmail.com",
-                    BirthDate = DateTime.UtcNow.AddYears(-25)
-                });
-                DataStorage.Users.Add(new User
-                {
-                    UserId = 3,
-                    FirstName = "Avel",
-                    LastName = "Magpantay",
-                    UserName = "avma",
-                    Password = "testtest1",
-                    EmailAddress = "avel.magpantay@gmail.com",
-                    BirthDate = DateTime.UtcNow.AddYears(-25)
-                });
-            }
-        }
-
         public User GetByCredentials(string username, string password)
         {
             var user = DataStorage.Users.FirstOrDefault(a => a.UserName == username && a.Password == password);

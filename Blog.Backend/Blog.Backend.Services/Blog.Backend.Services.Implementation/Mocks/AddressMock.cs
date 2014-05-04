@@ -8,29 +8,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class AddressMock : IAddress
     {
-        public AddressMock()
-        {
-            if (DataStorage.Addresses.Count == 0)
-            {
-                var addressId = 1;
-
-                DataStorage.Users.ForEach(a =>
-                                        {
-                                            DataStorage.Addresses.Add(new Address
-                                            {
-                                                AddressId = addressId,
-                                                UserId = a.UserId,
-                                                StreetAddress = "Street Address",
-                                                City = "City",
-                                                State = "State",
-                                                Country = "Country",
-                                                Zip = 1234
-                                            });
-                                            addressId++;
-                                        });
-            }
-        }
-
         public Address GetByUser(int userId)
         {
             var address = DataStorage.Addresses.FirstOrDefault(a => a.UserId == userId);

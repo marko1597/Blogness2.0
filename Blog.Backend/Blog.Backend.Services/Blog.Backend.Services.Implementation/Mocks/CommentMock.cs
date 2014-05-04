@@ -7,35 +7,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class CommentMock : IComments
     {
-        public CommentMock()
-        {
-            if (DataStorage.Comments.Count == 0)
-            {
-                var commentId = 1;
-
-                foreach (var p in DataStorage.Posts)
-                {
-                    for (var i = 1; i < 4; i++)
-                    {
-                        DataStorage.Comments.Add(new Comment
-                        {
-                            CommentId = commentId,
-                            CommentMessage = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.",
-                            PostId = p.PostId,
-                            ParentCommentId = null,
-                            CreatedBy = i,
-                            CreatedDate = DateTime.UtcNow.AddHours(-i),
-                            ModifiedBy = p.User.UserId,
-                            ModifiedDate = DateTime.UtcNow.AddHours(-i),
-                            User = DataStorage.Users.FirstOrDefault(a => a.UserId == i),
-                            CommentLocation = "Makati City, Philippines"
-                        });
-                        commentId++;
-                    }
-                }
-            }
-        }
-
         public List<Comment> GetByPostId(int postId)
         {
             var comments = DataStorage.Comments.FindAll(a => a.PostId == postId);

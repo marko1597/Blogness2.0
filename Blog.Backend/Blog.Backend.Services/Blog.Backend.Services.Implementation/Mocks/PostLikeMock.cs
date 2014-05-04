@@ -7,32 +7,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class PostLikeMock : IPostLikes
     {
-        public PostLikeMock()
-        {
-            if (DataStorage.PostLikes.Count == 0)
-            {
-                var postLikeId = 1;
-
-                foreach (var p in DataStorage.PostLikes)
-                {
-                    for (var i = 1; i < 4; i++)
-                    {
-                        DataStorage.PostLikes.Add(new PostLike
-                                                {
-                                                    CreatedBy = i,
-                                                    CreatedDate = DateTime.UtcNow.AddHours(-i),
-                                                    ModifiedBy = i,
-                                                    ModifiedDate = DateTime.UtcNow.AddHours(-i),
-                                                    PostId = p.PostId,
-                                                    UserId = i,
-                                                    PostLikeId = postLikeId
-                                                });
-                        postLikeId++;
-                    }
-                }
-            }
-        }
-
         public List<PostLike> Get(int postId)
         {
             var postLikes = DataStorage.PostLikes.FindAll(a => a.PostId == postId);

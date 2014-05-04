@@ -7,52 +7,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class TagMock : ITag
     {
-        public TagMock()
-        {
-            if (DataStorage.Tags.Count == 0)
-            {
-                DataStorage.Tags.Add(new Tag
-                {
-                    CreatedBy = 1,
-                    CreatedDate = DateTime.UtcNow,
-                    ModifiedBy = 1,
-                    ModifiedDate = DateTime.UtcNow,
-                    TagId = 1,
-                    TagName = "lorem"
-                });
-                DataStorage.Tags.Add(new Tag
-                {
-                    CreatedBy = 2,
-                    CreatedDate = DateTime.UtcNow,
-                    ModifiedBy = 2,
-                    ModifiedDate = DateTime.UtcNow,
-                    TagId = 2,
-                    TagName = "ipsum"
-                });
-                DataStorage.Tags.Add(new Tag
-                {
-                    CreatedBy = 3,
-                    CreatedDate = DateTime.UtcNow,
-                    ModifiedBy = 3,
-                    ModifiedDate = DateTime.UtcNow,
-                    TagId = 3,
-                    TagName = "dolor"
-                });
-            }
-
-            if (DataStorage.PostTags.Count == 0)
-            {
-                foreach (var p in DataStorage.Posts)
-                {
-                    DataStorage.Tags.ForEach(t => DataStorage.PostTags.Add(new PostTag
-                                                                           {
-                                                                               PostId = p.PostId, 
-                                                                               TagId = t.TagId
-                                                                           }));
-                }
-            }
-        }
-
         public List<Tag> GetByPostId(int postId)
         {
             var tags = new List<Tag>();

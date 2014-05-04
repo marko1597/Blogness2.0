@@ -7,32 +7,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class PostContentMock : IPostContents
     {
-        public PostContentMock()
-        {
-            if (DataStorage.PostContents.Count == 0)
-            {
-                var postContentId = 1;
-                
-                foreach (var p in DataStorage.Posts)
-                {
-                    var p1 = p;
-                    var m = DataStorage.Media.FirstOrDefault(a => a.MediaId == p1.PostId);
-
-                    DataStorage.PostContents.Add(new PostContent
-                    {
-                        CreatedBy = p.User.UserId,
-                        CreatedDate = p.CreatedDate,
-                        ModifiedBy = p.User.UserId,
-                        ModifiedDate = p.ModifiedDate,
-                        PostId = p.PostId,
-                        Media = m,
-                        PostContentId = postContentId
-                    });
-                    postContentId++;
-                }
-            }
-        }
-
         public List<PostContent> GetByPostId(int postId)
         {
             var postContent = DataStorage.PostContents.FindAll(a => a.PostId == postId);

@@ -7,42 +7,6 @@ namespace Blog.Backend.Services.Implementation.Mocks
 {
     public class AlbumMock : IAlbum
     {
-        public AlbumMock()
-        {
-            if (DataStorage.Albums.Count == 0)
-            {
-                var albumId = 1;
-
-                foreach (var u in DataStorage.Users)
-                {
-                    DataStorage.Albums.Add(new Album
-                    {
-                        AlbumId = albumId,
-                        AlbumName = "Stuff",
-                        User = u,
-                        CreatedBy = u.UserId,
-                        CreatedDate = DateTime.UtcNow,
-                        ModifiedBy = u.UserId,
-                        ModifiedDate = DateTime.UtcNow,
-                        IsUserDefault = false
-                    });
-                    albumId++;
-
-                    DataStorage.Albums.Add(new Album
-                    {
-                        AlbumId = albumId,
-                        AlbumName = "Miscellaneous",
-                        User = u,
-                        CreatedBy = u.UserId,
-                        CreatedDate = DateTime.UtcNow,
-                        ModifiedBy = u.UserId,
-                        ModifiedDate = DateTime.UtcNow,
-                        IsUserDefault = true
-                    });
-                    albumId++;
-                }
-            }
-        }
         public List<Album> GetByUser(int userId)
         {
             var albums = DataStorage.Albums.FindAll(a => a.User.UserId == userId);
