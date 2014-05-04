@@ -41,7 +41,7 @@ namespace Blog.Backend.Api.Rest.Controllers
 
             try
             {
-                user = _user.GetByUserName(null, name) ?? new User();
+                user = _user.GetByUserName(name) ?? new User();
 
             }
             catch (Exception ex)

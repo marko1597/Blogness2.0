@@ -38,7 +38,7 @@ namespace Blog.Backend.Logic
             try
             {
                 CleanupExpiredSessions();
-                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(null, username);
+                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(username);
                 var session = new DataAccess.Entities.Objects.Session();
 
                 if (user != null)
@@ -112,7 +112,7 @@ namespace Blog.Backend.Logic
             var loggedOut = false;
             try
             {
-                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(null, userName);
+                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(userName);
                 var session = _sessionRepository.Find(a => user != null && a.UserId == user.UserId, true).FirstOrDefault();
 
                 if (user != null)

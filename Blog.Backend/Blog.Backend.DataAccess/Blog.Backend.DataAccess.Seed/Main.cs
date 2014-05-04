@@ -16,7 +16,7 @@ namespace Blog.Backend.DataAccess.Seed
         private List<Post> _posts = new List<Post>();
         private List<Comment> _comments = new List<Comment>();
         private List<Tag> _tags = new List<Tag>();
-        private string _localIpAddress = string.Empty;
+        private readonly string _localIpAddress = string.Empty;
         public Main()
         {
             InitializeComponent();
@@ -294,11 +294,11 @@ namespace Blog.Backend.DataAccess.Seed
                             ModifiedDate = DateTime.UtcNow,
                             AlbumId = albums[1].AlbumId,
                             FileName = i + ".jpg",
-                            MediaUrl = "https://localhost/blogapi/api/media/" + customName,
+                            MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
                             MediaType = "image/jpeg",
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
-                            ThumbnailUrl = "https://localhost/blogapi/api/media/thumbnail/" + customName,
+                            ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
                             ThumbnailPath = tnPath,
                             ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });

@@ -20,14 +20,12 @@ namespace Blog.Backend.Logic
             _educationRepository = educationRepository;
         }
 
-        public User GetByUserName(int? userId, string userName)
+        public User GetByUserName(string userName)
         {
             var user = new User();
             try
             {
-                user = string.IsNullOrEmpty(userName) ? 
-                    UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault()) :
-                    UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault());
+                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault());
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
             }

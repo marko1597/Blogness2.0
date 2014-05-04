@@ -10,9 +10,9 @@ namespace Blog.Backend.Services.Implementation
             return UsersFactory.GetInstance().CreateUsers().GetByCredentials(username, password);
         }
 
-        public User GetByUserName(int? userId, string username)
+        public User GetByUserName(string username)
         {
-            return UsersFactory.GetInstance().CreateUsers().GetByUserName(userId, username);
+            return UsersFactory.GetInstance().CreateUsers().GetByUserName(username);
         }
 
         public User Get(int userId)

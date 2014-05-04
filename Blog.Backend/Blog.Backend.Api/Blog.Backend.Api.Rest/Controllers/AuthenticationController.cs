@@ -25,7 +25,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             var result = _session.GetByUser(login.Username);
             if (result != null)
             {
-                _authentication.SignIn(_user.GetByUserName(null, login.Username));
+                _authentication.SignIn(_user.GetByUserName(login.Username));
                 return true;
             }
             return false;

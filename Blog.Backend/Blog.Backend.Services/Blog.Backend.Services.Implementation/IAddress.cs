@@ -5,8 +5,8 @@ namespace Blog.Backend.Services.Implementation
     public interface IAddress
     {
         Address GetByUser(int userId);
-        bool Add(Address education);
-        bool Update(Address education);
+        bool Add(Address address);
+        bool Update(Address address);
         bool Delete(int addressId);
     }
 }
