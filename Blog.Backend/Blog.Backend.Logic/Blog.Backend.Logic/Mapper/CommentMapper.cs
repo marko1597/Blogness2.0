@@ -25,7 +25,7 @@ namespace Blog.Backend.Logic.Mapper
                     ParentCommentId = comment.ParentCommentId,
                     PostId = comment.PostId,
                     Comments = comments,
-                    User = comment.User != null ? UserMapper.ToDto(comment.User) : null,
+                    User = comment.User != null ? UserMapper.ToDto(comment.User, false) : null,
                     CreatedBy = comment.CreatedBy,
                     CreatedDate = comment.CreatedDate,
                     ModifiedBy = comment.ModifiedBy,

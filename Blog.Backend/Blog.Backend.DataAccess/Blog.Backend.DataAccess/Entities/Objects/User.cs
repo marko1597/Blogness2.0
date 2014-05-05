@@ -15,6 +15,8 @@ namespace Blog.Backend.DataAccess.Entities.Objects
         public string EmailAddress { get; set; }
         public DateTime BirthDate { get; set; }
         public virtual Address Address { get; set; }
+        public int? UserPictureId { get; set; }
+        public int? UserBackgroundId { get; set; }
         public virtual ICollection<Education> Education { get; set; }
         public virtual ICollection<Hobby> Hobbies { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

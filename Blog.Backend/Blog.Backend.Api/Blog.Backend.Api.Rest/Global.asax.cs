@@ -25,37 +25,37 @@ namespace Blog.Backend.Api.Rest
             
             // Simple Injection Setup
             var container = new Container();
-            //container.Register<IComments, CommentsService>(Lifestyle.Singleton);
-            //container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
-            //container.Register<IPosts, PostsService>(Lifestyle.Singleton);
-            //container.Register<IPostsPage, PostsPageService>(Lifestyle.Singleton);
-            //container.Register<IUser, UsersService>(Lifestyle.Singleton);
-            //container.Register<ISession, SessionService>(Lifestyle.Singleton);
-            //container.Register<IPostContents, PostContentsService>(Lifestyle.Singleton);
-            //container.Register<IMedia, MediaService>(Lifestyle.Singleton);
-            //container.Register<IAlbum, AlbumService>(Lifestyle.Singleton);
-            //container.Register<IEducation, EducationService>(Lifestyle.Singleton);
-            //container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
-            //container.Register<IAddress, AddressService>(Lifestyle.Singleton);
-            //container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
+            container.Register<IComments, CommentsService>(Lifestyle.Singleton);
+            container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
+            container.Register<IPosts, PostsService>(Lifestyle.Singleton);
+            container.Register<IPostsPage, PostsPageService>(Lifestyle.Singleton);
+            container.Register<IUser, UsersService>(Lifestyle.Singleton);
+            container.Register<ISession, SessionService>(Lifestyle.Singleton);
+            container.Register<IPostContents, PostContentsService>(Lifestyle.Singleton);
+            container.Register<IMedia, MediaService>(Lifestyle.Singleton);
+            container.Register<IAlbum, AlbumService>(Lifestyle.Singleton);
+            container.Register<IEducation, EducationService>(Lifestyle.Singleton);
+            container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
+            container.Register<IAddress, AddressService>(Lifestyle.Singleton);
+            container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             /*
              * Uncomment these lines to switch between mocks or real db calls
              * -------------------------------------------------------------- */
-            DataStorage.LoadMockData();
-            container.Register<IComments, CommentMock>(Lifestyle.Singleton);
-            container.Register<ICommentLikes, CommentLikeMock>(Lifestyle.Singleton);
-            container.Register<IPosts, PostMock>(Lifestyle.Singleton);
-            container.Register<IPostsPage, PostPageMock>(Lifestyle.Singleton);
-            container.Register<IUser, UserMock>(Lifestyle.Singleton);
-            container.Register<ISession, SessionMock>(Lifestyle.Singleton);
-            container.Register<IPostContents, PostContentMock>(Lifestyle.Singleton);
-            container.Register<IMedia, MediaMock>(Lifestyle.Singleton);
-            container.Register<IAlbum, AlbumMock>(Lifestyle.Singleton);
-            container.Register<IEducation, EducationMock>(Lifestyle.Singleton);
-            container.Register<IHobby, HobbyMock>(Lifestyle.Singleton);
-            container.Register<IAddress, AddressMock>(Lifestyle.Singleton);
-            container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
+            //DataStorage.LoadMockData();
+            //container.Register<IComments, CommentMock>(Lifestyle.Singleton);
+            //container.Register<ICommentLikes, CommentLikeMock>(Lifestyle.Singleton);
+            //container.Register<IPosts, PostMock>(Lifestyle.Singleton);
+            //container.Register<IPostsPage, PostPageMock>(Lifestyle.Singleton);
+            //container.Register<IUser, UserMock>(Lifestyle.Singleton);
+            //container.Register<ISession, SessionMock>(Lifestyle.Singleton);
+            //container.Register<IPostContents, PostContentMock>(Lifestyle.Singleton);
+            //container.Register<IMedia, MediaMock>(Lifestyle.Singleton);
+            //container.Register<IAlbum, AlbumMock>(Lifestyle.Singleton);
+            //container.Register<IEducation, EducationMock>(Lifestyle.Singleton);
+            //container.Register<IHobby, HobbyMock>(Lifestyle.Singleton);
+            //container.Register<IAddress, AddressMock>(Lifestyle.Singleton);
+            //container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

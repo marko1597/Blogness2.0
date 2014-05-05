@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.DataAccess.Repository;
+using Blog.Backend.Logic.Factory;
 using Blog.Backend.Logic.Mapper;
 
 namespace Blog.Backend.Logic
@@ -12,12 +13,16 @@ namespace Blog.Backend.Logic
         private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly IEducationRepository _educationRepository;
+        private readonly IMediaRepository _mediaRepository;
+        private readonly IAlbumRepository _albumRepository;
 
-        public UsersLogic(IUserRepository userRepository, IAddressRepository addressRepository, IEducationRepository educationRepository)
+        public UsersLogic(IUserRepository userRepository, IAddressRepository addressRepository, IEducationRepository educationRepository, IMediaRepository mediaRepository, IAlbumRepository albumRepository)
         {
             _userRepository = userRepository;
             _addressRepository = addressRepository;
             _educationRepository = educationRepository;
+            _mediaRepository = mediaRepository;
+            _albumRepository = albumRepository;
         }
 
         public User GetByUserName(string userName)
@@ -25,9 +30,12 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault());
+                var tUser = _userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault();
+                user = UserMapper.ToDto(tUser, true);
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
+                //user.UserPicture = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserPictureId).FirstOrDefault(), false);
+                //user.UserBackground = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserBackgroundId).FirstOrDefault(), false);
             }
             catch (Exception ex)
             {
@@ -41,9 +49,12 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == username && a.Password == password, null, "Address,Hobbies").FirstOrDefault());
+                var tUser = _userRepository.Find(a => a.UserName == username && a.Password == password, null, "Address,Hobbies").FirstOrDefault();
+                user = UserMapper.ToDto(tUser, false);
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
+                //user.UserPicture = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserPictureId).FirstOrDefault(), false);
+                //user.UserBackground = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserBackgroundId).FirstOrDefault(), false);
             }
             catch (Exception ex)
             {
@@ -57,9 +68,12 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault());
+                var tUser = _userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault();
+                user = UserMapper.ToDto(tUser, true);
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
+                //user.UserPicture = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserPictureId).FirstOrDefault(), false);
+                //user.UserBackground = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.UserBackgroundId).FirstOrDefault(), false);
             }
             catch (Exception ex)
             {
@@ -72,6 +86,30 @@ namespace Blog.Backend.Logic
         {
             try
             {
+                var tUser = _userRepository.Find(a => a.UserId == user.UserId).FirstOrDefault();
+
+                if (user.UserPicture != null)
+                {
+                    var album = _albumRepository.Find(a => a.AlbumName == "Profile" && a.UserId == user.UserId).FirstOrDefault();
+                    if (album != null)
+                    {
+                        user.UserPicture.AlbumId = album.AlbumId;
+                        var media = MediaFactory.GetInstance().CreateMedia().Add(user.UserPicture);
+                        if (tUser != null) tUser.UserPictureId = media.MediaId;
+                    }
+                }
+
+                if (user.UserBackground != null)
+                {
+                    var album = _albumRepository.Find(a => a.AlbumName == "Background" && a.UserId == user.UserId).FirstOrDefault();
+                    if (album != null)
+                    {
+                        user.UserBackground.AlbumId = album.AlbumId;
+                        var media = MediaFactory.GetInstance().CreateMedia().Add(user.UserBackground);
+                        if (tUser != null) tUser.UserBackgroundId = media.MediaId;
+                    }
+                }
+
                 _userRepository.Add(UserMapper.ToEntity(user));
                 return true;
             }

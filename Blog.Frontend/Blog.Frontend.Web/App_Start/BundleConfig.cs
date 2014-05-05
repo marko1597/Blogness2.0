@@ -56,6 +56,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/shared").Include(
                         "~/Scripts/modules/shared/shared.js",
+                        "~/Scripts/modules/shared/services/dateHelper.js",
                         "~/Scripts/modules/shared/services/blockUi.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));

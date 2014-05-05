@@ -31,6 +31,12 @@ namespace Blog.Backend.Common.Contracts
         public Address Address { get; set; }
 
         [DataMember]
+        public Media UserPicture { get; set; }
+
+        [DataMember]
+        public Media UserBackground { get; set; }
+
+        [DataMember]
         public List<Education> Education { get; set; }
 
         [DataMember]

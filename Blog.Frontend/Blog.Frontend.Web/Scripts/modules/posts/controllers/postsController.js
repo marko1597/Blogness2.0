@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "localStorageService", "postsService", "blockUiService",
-    function ($scope, $interval, snapRemote, localStorageService, postsService, blockUiService) {
+﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "localStorageService", "postsService", "blockUiService", "dateHelper",
+    function ($scope, $interval, snapRemote, localStorageService, postsService, blockUiService, dateHelper) {
         $scope.posts = [];
         $scope.size = "";
         $scope.errorContent = { Show: false, Type: "" };
@@ -15,6 +15,11 @@
                 });
             postsService.getPopularPosts().then(function (resp) {
                 $scope.posts = resp;
+
+                _.each(resp, function(p) {
+                    p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                });
+
                 blockUiService.unblockIt();
                 console.log(resp);
             }, function (errorMsg) {

@@ -21,7 +21,7 @@ namespace Blog.Backend.Logic.Mapper
                     AlbumId = album.AlbumId,
                     AlbumName = album.AlbumName,
                     Media = media,
-                    User = UserMapper.ToDto(album.User),
+                    User = UserMapper.ToDto(album.User, true),
                     IsUserDefault = album.IsUserDefault,
                     CreatedBy = album.CreatedBy,
                     CreatedDate = album.CreatedDate,

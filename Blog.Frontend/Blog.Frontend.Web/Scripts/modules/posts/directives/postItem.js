@@ -1,6 +1,7 @@
 ﻿ngPosts.directive('postItem', [function () {
-    var ctrlFn = function ($scope, $postsService) {
+    var ctrlFn = function ($scope, postsService) {
         $scope.post = $scope.data.Post;
+        $scope.user = $scope.data.Post.User;
         
         $scope.getCommentPopover = function(commentId) {
             var comment = _.where($scope.comments, { CommentId: commentId });
@@ -21,6 +22,12 @@
         template:
             '<div id="post-item-{{post.PostId}}" ng-class="getPostSize()">' +
                 '<div class="post-item-header">' +
+                    '<div class="post-item-user" data-user-id="{{post.CreatedBy"}}">' +
+                        '<img src="{{user.Media.MediaUrl}}" />' +
+                        '<p><a>{{post.User.UserName}}</a>' +
+                            '<span>{{post.CreatedDate}}</span>' +
+                        '</p>' +
+                    '</div>' +
                     '<h4>{{post.PostTitle}}</h4>' +
                 '</div>' +
                 '<div class="post-item-body">' +

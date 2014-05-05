@@ -113,15 +113,14 @@ namespace Blog.Backend.Logic
                             .AlbumId;
                 }
 
-                _mediaRepository.Add(MediaMapper.ToEntity(media));
+                var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
+                return MediaMapper.ToDto(result, false);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 return null;
             }
-
-            return media;
         }
 
         public bool Delete(int mediaId)
