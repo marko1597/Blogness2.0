@@ -26,6 +26,10 @@ namespace Blog.Backend.Logic
                 userPosts.User = UsersFactory.GetInstance().CreateUsers().Get(userId);
                 var dbPosts = _postRepository.Find(a => a.UserId == userId, null, "PostContents,Tags,User,Comments,PostLikes").ToList();
                 dbPosts.ForEach(a => userPosts.Posts.Add(PostMapper.ToDto(a)));
+                userPosts.Posts.ForEach(a =>
+                {
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                });
             }
             catch (Exception ex)
             {
@@ -41,6 +45,10 @@ namespace Blog.Backend.Logic
             {
                 var db = _postRepository.GetPopular(a => a.PostId > 0, postsCount).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a =>
+                {
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                });
             }
             catch (Exception ex)
             {
@@ -56,6 +64,10 @@ namespace Blog.Backend.Logic
             {
                 var db = _postRepository.GetRecent(a => a.PostId > 0, postsCount).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a =>
+                {
+                    a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                });
             }
             catch (Exception ex)
             {
