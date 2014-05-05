@@ -300,8 +300,8 @@ namespace Blog.Backend.DataAccess.Seed
                         _userRepository.Edit(u1);
                     }
 
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + ".jpg";
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + ".jpg";
+                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
+                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
                     var image = Image.FromFile(mediaPath);
                     var customName = Guid.NewGuid().ToString();
 
@@ -313,9 +313,9 @@ namespace Blog.Backend.DataAccess.Seed
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
                             AlbumId = albumId,
-                            FileName = i + ".jpg",
+                            FileName = i + (i == 4 || i == 5 ? ".gif" : ".jpg"),
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                            MediaType = "image/jpeg",
+                            MediaType = (i == 4 || i == 5 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
