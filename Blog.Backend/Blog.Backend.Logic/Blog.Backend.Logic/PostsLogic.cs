@@ -22,7 +22,7 @@ namespace Blog.Backend.Logic
             var post = new Post();
             try
             {
-                var db = _postRepository.Find(a => a.PostId == postId, true).FirstOrDefault();
+                var db = _postRepository.Find(a => a.PostId == postId, null, "PostContents,Tags,User,Comments,PostLikes").FirstOrDefault();
                 post = PostMapper.ToDto(db);
             }
             catch (Exception ex)
@@ -38,9 +38,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var tag = TagsFactory.GetInstance().CreateTags().GetTagsByName(tagName).FirstOrDefault();
-                var db = _postRepository.Find(a =>
-                    a.Tags.Contains(TagMapper.ToEntity(tag)), null,
-                    "Comments,PostLikes,Tags,User").ToList();
+                var db = _postRepository.Find(a => a.Tags.Contains(TagMapper.ToEntity(tag)), null, "PostContents,Tags,User,Comments,PostLikes").ToList();
  
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
             }
@@ -56,7 +54,7 @@ namespace Blog.Backend.Logic
             var posts = new List<Post>();
             try
             {
-                var db = _postRepository.Find(a => a.UserId == userId, true).ToList();
+                var db = _postRepository.Find(a => a.UserId == userId, null, "PostContents,Tags,User,Comments,PostLikes").ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
             }
             catch (Exception ex)

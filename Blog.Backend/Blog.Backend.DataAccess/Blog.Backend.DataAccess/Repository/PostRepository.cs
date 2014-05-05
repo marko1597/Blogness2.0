@@ -9,15 +9,15 @@ namespace Blog.Backend.DataAccess.Repository
 {
     public class PostRepository : GenericRepository<BlogDb, Post>, IPostRepository
     {
-        public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, bool loadChildren, int threshold = 20)
+        public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 20)
         {
-            var query = Find(predicate, loadChildren).OrderBy(a => a.PostLikes.Count).Take(threshold).ToList();
+            var query = Find(predicate, null, "PostContents,Tags,User,Comments,PostLikes").OrderBy(a => a.PostLikes.Count).Take(threshold).ToList();
             return query;
         }
 
-        public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, bool loadChildren, int threshold = 20)
+        public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 20)
         {
-            var query = Find(predicate, loadChildren).OrderBy(a => a.CreatedDate).Take(threshold).ToList();
+            var query = Find(predicate, null, "PostContents,Tags,User,Comments,PostLikes").OrderBy(a => a.CreatedDate).Take(threshold).ToList();
             return query;
         }
     }

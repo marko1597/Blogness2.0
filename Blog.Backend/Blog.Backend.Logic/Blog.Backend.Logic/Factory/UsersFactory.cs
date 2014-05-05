@@ -25,7 +25,9 @@ namespace Blog.Backend.Logic.Factory
             IUserRepository userRepository = new UserRepository();
             IAddressRepository addressRepository = new AddressRepository();
             IEducationRepository educationRepository = new EducationRepository();
-            return new UsersLogic(userRepository, addressRepository, educationRepository);
+            IAlbumRepository albumRepository = new AlbumRepository();
+            IMediaRepository mediaRepository = new MediaRepository();
+            return new UsersLogic(userRepository, addressRepository, educationRepository, albumRepository, mediaRepository);
         }
     }
 }

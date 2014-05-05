@@ -21,7 +21,7 @@ namespace Blog.Backend.Logic
             var comments = new List<Comment>();
             try
             {
-                var db = _commentRepository.Find(a => a.PostId == postId, true).OrderByDescending(a => a.CreatedDate).ToList();
+                var db = _commentRepository.Find(a => a.PostId == postId, null, "ParentComment,Comments,CommentLikes").OrderByDescending(a => a.CreatedDate).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace Blog.Backend.Logic
             var comments = new List<Comment>();
             try
             {
-                var db = _commentRepository.Find(a => a.UserId == userId, true).OrderByDescending(a => a.CreatedDate).ToList();
+                var db = _commentRepository.Find(a => a.UserId == userId, null, "ParentComment,Comments,CommentLikes").OrderByDescending(a => a.CreatedDate).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace Blog.Backend.Logic
             var comments = new List<Comment>();
             try
             {
-                var db = _commentRepository.Find(a => a.ParentCommentId == commentId, true).OrderByDescending(a => a.CreatedDate).ToList();
+                var db = _commentRepository.Find(a => a.ParentCommentId == commentId, null, "ParentComment,CommentLikes").OrderByDescending(a => a.CreatedDate).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
             }
             catch (Exception ex)

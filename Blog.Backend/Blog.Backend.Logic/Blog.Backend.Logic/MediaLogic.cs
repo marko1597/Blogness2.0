@@ -29,7 +29,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var album = _albumRepository.Find(a => a.UserId == userId, null, "User,Media").ToList();
-                album.ForEach(a => media.AddRange(a.Media.Select(m => MediaMapper.ToDto(m, false))));
+                album.ForEach(a => media.AddRange(a.Media.Select(m => MediaMapper.ToDto(m))));
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var db = _mediaRepository.Find(a => a.AlbumId == albumId, true).ToList();
-                db.ForEach(a => media.Add(MediaMapper.ToDto(a, false)));
+                db.ForEach(a => media.Add(MediaMapper.ToDto(a)));
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Blog.Backend.Logic
             var media = new Media();
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId, true).FirstOrDefault(), true);
+                return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId).FirstOrDefault());
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace Blog.Backend.Logic
             var media = new Media();
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault(), true);
+                return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault());
             }
             catch (Exception ex)
             {

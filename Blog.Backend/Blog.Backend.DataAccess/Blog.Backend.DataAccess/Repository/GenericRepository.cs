@@ -55,11 +55,13 @@ namespace Blog.Backend.DataAccess.Repository
             return _context.Set<T>().Where(predicate).Take(threshold).ToList();
         }
 
-        public virtual void Add(T entity)
+        public virtual T Add(T entity)
         {
             _context.Set<T>().Add(entity);
             _context.Entry(entity).State = EntityState.Added;
             _context.SaveChanges();
+
+            return entity;
         }
 
         public virtual void Delete(T entity)
@@ -69,11 +71,13 @@ namespace Blog.Backend.DataAccess.Repository
             _context.SaveChanges();
         }
 
-        public virtual void Edit(T entity)
+        public virtual T Edit(T entity)
         {
             _context.Set<T>().Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
+
+            return entity;
         }
 
         public virtual void Save()

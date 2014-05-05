@@ -12,12 +12,16 @@ namespace Blog.Backend.Logic
         private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly IEducationRepository _educationRepository;
+        private readonly IAlbumRepository _albumRepository;
+        private readonly IMediaRepository _mediaRepository;
 
-        public UsersLogic(IUserRepository userRepository, IAddressRepository addressRepository, IEducationRepository educationRepository)
+        public UsersLogic(IUserRepository userRepository, IAddressRepository addressRepository, IEducationRepository educationRepository, IAlbumRepository albumRepository, IMediaRepository mediaRepository)
         {
             _userRepository = userRepository;
             _addressRepository = addressRepository;
             _educationRepository = educationRepository;
+            _albumRepository = albumRepository;
+            _mediaRepository = mediaRepository;
         }
 
         public User GetByUserName(string userName)
@@ -25,9 +29,12 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault());
+                var tUser = _userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault();
+                user = UserMapper.ToDto(tUser);
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
+                user.Picture = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.PictureId).FirstOrDefault());
+                user.Background = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.BackgroundId).FirstOrDefault());
             }
             catch (Exception ex)
             {
@@ -41,9 +48,8 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserName == username && a.Password == password, null, "Address,Hobbies").FirstOrDefault());
-                user.Address = GetAddress(user);
-                user.Education = GetEducations(user);
+                var tUser = _userRepository.Find(a => a.UserName == username && a.Password == password, false).FirstOrDefault();
+                user = UserMapper.ToDto(tUser);
             }
             catch (Exception ex)
             {
@@ -57,9 +63,12 @@ namespace Blog.Backend.Logic
             var user = new User();
             try
             {
-                user = UserMapper.ToDto(_userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault());
+                var tUser = _userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault();
+                user = UserMapper.ToDto(tUser);
                 user.Address = GetAddress(user);
                 user.Education = GetEducations(user);
+                user.Picture = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.PictureId).FirstOrDefault());
+                user.Background = MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == tUser.BackgroundId).FirstOrDefault());
             }
             catch (Exception ex)
             {
@@ -72,6 +81,28 @@ namespace Blog.Backend.Logic
         {
             try
             {
+                if (user.Picture != null)
+                {
+                    var album = _albumRepository.Find(a => a.AlbumName == "Profile" && a.UserId == user.UserId, false).FirstOrDefault();
+                    if (album != null)
+                    {
+                        user.Picture.AlbumId = album.AlbumId;
+                        var picture = _mediaRepository.Add(MediaMapper.ToEntity(user.Picture));
+                        user.Picture.MediaId = picture.MediaId;
+                    }
+                }
+
+                if (user.Background != null)
+                {
+                    var album = _albumRepository.Find(a => a.AlbumName == "Background" && a.UserId == user.UserId, false).FirstOrDefault();
+                    if (album != null)
+                    {
+                        user.Background.AlbumId = album.AlbumId;
+                        var background = _mediaRepository.Add(MediaMapper.ToEntity(user.Background));
+                        user.Background.MediaId = background.MediaId;
+                    }
+                }
+
                 _userRepository.Add(UserMapper.ToEntity(user));
                 return true;
             }
