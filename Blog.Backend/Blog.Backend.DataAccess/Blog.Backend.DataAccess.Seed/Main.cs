@@ -393,20 +393,34 @@ namespace Blog.Backend.DataAccess.Seed
 
         private void LoadPostContents()
         {
-            foreach (var p in _posts)
+            foreach (var u in _users)
             {
-                var p1 = p;
-                var m = _mediaRepository.Find(a => a.MediaId == p1.PostId, false).First();
+                var u1 = u;
+                var userposts = _posts.Where(a => a.UserId == u1.UserId).ToList();
+                var album = _albumRepository
+                    .Find(a => a.UserId == u1.UserId && a.AlbumName != "Background" && a.AlbumName != "Profile")
+                    .ToList();
 
-                _postContentRepository.Add(new PostContent
+                var alb1 = album[0].AlbumId;
+                var alb2 = album[1].AlbumId;
+                var media = new List<Media>();
+                media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb1, false));
+                media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb2, false));
+
+                for (var i = 0; i < 5; i++)
                 {
-                    CreatedBy = p.User.UserId,
-                    CreatedDate = p.CreatedDate,
-                    ModifiedBy = p.User.UserId,
-                    ModifiedDate = p.ModifiedDate,
-                    PostId = p.PostId,
-                    MediaId = m.MediaId
-                });
+                    _postContentRepository.Add(new PostContent
+                    {
+                        CreatedBy = u1.UserId,
+                        CreatedDate = DateTime.UtcNow,
+                        ModifiedBy = u1.UserId,
+                        ModifiedDate = DateTime.UtcNow,
+                        PostId = userposts[i].PostId,
+                        MediaId = media[i].MediaId
+                    }); 
+                }
+
+                
             }
 
             lbConsole.Items.Add("Successfully added post contents...");

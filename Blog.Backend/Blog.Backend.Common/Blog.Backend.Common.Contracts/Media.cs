@@ -23,8 +23,6 @@ namespace Blog.Backend.Common.Contracts
 
         [DataMember]
         public string MediaUrl { get; set; }
-
-        [DataMember]
         public string MediaPath { get; set; }
 
         [DataMember]
@@ -32,8 +30,6 @@ namespace Blog.Backend.Common.Contracts
 
         [DataMember]
         public string ThumbnailUrl { get; set; }
-
-        [DataMember]
         public string ThumbnailPath { get; set; }
 
         [DataMember]
