@@ -64,6 +64,13 @@ namespace Blog.Backend.DataAccess.Repository
             return entity;
         }
 
+        public virtual void Delete(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            _context.Entry(entity).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
         public virtual T Edit(T entity)
         {
             _context.Set<T>().Attach(entity);
@@ -73,13 +80,6 @@ namespace Blog.Backend.DataAccess.Repository
             return entity;
         }
 
-        public virtual void Delete(T entity)
-        {
-            _context.Set<T>().Remove(entity);
-            _context.Entry(entity).State = EntityState.Deleted;
-            _context.SaveChanges();
-        }
-        
         public virtual void Save()
         {
             _context.SaveChanges();

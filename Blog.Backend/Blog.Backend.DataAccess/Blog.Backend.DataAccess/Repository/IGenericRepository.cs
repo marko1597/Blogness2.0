@@ -14,8 +14,8 @@ namespace Blog.Backend.DataAccess.Repository
         IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren, int threshold);
         IList<T> Find(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
         T Add(T entity);
-        T Edit(T entity);
         void Delete(T entity);
+        T Edit(T entity);
         void Save();
 
         #pragma warning restore 693

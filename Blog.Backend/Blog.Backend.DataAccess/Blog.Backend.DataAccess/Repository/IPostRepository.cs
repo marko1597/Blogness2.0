@@ -7,7 +7,7 @@ namespace Blog.Backend.DataAccess.Repository
 {
     public interface IPostRepository : IGenericRepository<Post>
     {
-        IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, bool loadChildren, int threshold = 20);
-        IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, bool loadChildren, int threshold = 20);
+        IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 20);
+        IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 20);
     }
 }

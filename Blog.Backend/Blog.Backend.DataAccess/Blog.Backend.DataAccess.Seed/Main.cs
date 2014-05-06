@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Blog.Backend.DataAccess.Entities.Objects;
 
@@ -48,7 +47,6 @@ namespace Blog.Backend.DataAccess.Seed
                 LoadComments();
                 LoadCommentLikes();
                 lbConsole.Items.Add("<================ END ================>");
-
             }
             catch (Exception ex)
             {
@@ -246,7 +244,7 @@ namespace Blog.Backend.DataAccess.Seed
                     CreatedDate = DateTime.UtcNow,
                     ModifiedBy = u.UserId,
                     ModifiedDate = DateTime.UtcNow,
-                    IsUserDefault = false
+                    IsUserDefault = true
                 });
 
                 _albumRepository.Add(new Album
@@ -257,7 +255,7 @@ namespace Blog.Backend.DataAccess.Seed
                     CreatedDate = DateTime.UtcNow,
                     ModifiedBy = u.UserId,
                     ModifiedDate = DateTime.UtcNow,
-                    IsUserDefault = false
+                    IsUserDefault = true
                 });
             }
 
@@ -267,6 +265,7 @@ namespace Blog.Backend.DataAccess.Seed
         private void LoadMedia()
         {
             var mediaId = 1;
+
             foreach (var u in _users)
             {
                 var u1 = u;
@@ -274,127 +273,55 @@ namespace Blog.Backend.DataAccess.Seed
 
                 for (var i = 1; i < 8; i++)
                 {
+                    var albumId = 0;
                     var albumName = string.Empty;
-
                     if (i < 4)
                     {
                         albumName = "Stuff";
+                        albumId = albums[0].AlbumId;
                     }
-                    else if (i > 3 && i < 6)
+                    else if (i < 6)
                     {
                         albumName = "Miscellaneous";
+                        albumId = albums[1].AlbumId;
                     }
                     else if (i == 6)
                     {
                         albumName = "Profile";
+                        albumId = albums[2].AlbumId;
+                        u1.PictureId = mediaId;
+                        _userRepository.Edit(u1);
                     }
                     else if (i == 7)
                     {
                         albumName = "Background";
+                        albumId = albums[3].AlbumId;
+                        u1.BackgroundId = mediaId;
+                        _userRepository.Edit(u1);
                     }
 
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + ".jpg";
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + ".jpg";
+                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
+                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
                     var image = Image.FromFile(mediaPath);
                     var customName = Guid.NewGuid().ToString();
 
-                    if (i < 4)
-                    {
-                        _mediaRepository.Add(new Media
+                    _mediaRepository.Add(new Media
                         {
                             CustomName = customName,
                             CreatedBy = u.UserId,
                             CreatedDate = DateTime.UtcNow,
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
-                            AlbumId = albums[0].AlbumId,
-                            FileName = i + ".jpg",
+                            AlbumId = albumId,
+                            FileName = i + (i == 4 || i == 5 ? ".gif" : ".jpg"),
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                            MediaType = "image/jpeg",
+                            MediaType = (i == 4 || i == 5 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
                             MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
                             ThumbnailPath = tnPath,
                             ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
                         });
-                    }
-                    else
-                    {
-                        if (i == 6)
-                        {
-                            _mediaRepository.Add(new Media
-                            {
-                                CustomName = customName,
-                                CreatedBy = u.UserId,
-                                CreatedDate = DateTime.UtcNow,
-                                ModifiedBy = u.UserId,
-                                ModifiedDate = DateTime.UtcNow,
-                                AlbumId = albums[2].AlbumId,
-                                FileName = i + ".jpg",
-                                MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                                MediaType = "image/jpeg",
-                                MediaPath = mediaPath,
-                                MediaContent = _imageHelper.ImageToByteArray(image),
-                                ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
-                                ThumbnailPath = tnPath,
-                                ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
-                            });
-
-                            var tUser = _userRepository.Find(a => a.UserId == u1.UserId).FirstOrDefault();
-                            if (tUser != null)
-                            {
-                                tUser.UserPictureId = mediaId;
-                                _userRepository.Edit(tUser);
-                            }
-                        }
-                        else if (i == 7)
-                        {
-                            _mediaRepository.Add(new Media
-                            {
-                                CustomName = customName,
-                                CreatedBy = u.UserId,
-                                CreatedDate = DateTime.UtcNow,
-                                ModifiedBy = u.UserId,
-                                ModifiedDate = DateTime.UtcNow,
-                                AlbumId = albums[3].AlbumId,
-                                FileName = i + ".jpg",
-                                MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                                MediaType = "image/jpeg",
-                                MediaPath = mediaPath,
-                                MediaContent = _imageHelper.ImageToByteArray(image),
-                                ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
-                                ThumbnailPath = tnPath,
-                                ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
-                            });
-
-                            var tUser = _userRepository.Find(a => a.UserId == u1.UserId).FirstOrDefault();
-                            if (tUser != null)
-                            {
-                                tUser.UserBackgroundId = mediaId;
-                                _userRepository.Edit(tUser);
-                            }
-                        }
-                        else
-                        {
-                            _mediaRepository.Add(new Media
-                            {
-                                CustomName = customName,
-                                CreatedBy = u.UserId,
-                                CreatedDate = DateTime.UtcNow,
-                                ModifiedBy = u.UserId,
-                                ModifiedDate = DateTime.UtcNow,
-                                AlbumId = albums[1].AlbumId,
-                                FileName = i + ".jpg",
-                                MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                                MediaType = "image/jpeg",
-                                MediaPath = mediaPath,
-                                MediaContent = _imageHelper.ImageToByteArray(image),
-                                ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
-                                ThumbnailPath = tnPath,
-                                ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
-                            });
-                        }
-                    }
 
                     mediaId++;
                 }
@@ -466,20 +393,34 @@ namespace Blog.Backend.DataAccess.Seed
 
         private void LoadPostContents()
         {
-            foreach (var p in _posts)
+            foreach (var u in _users)
             {
-                var p1 = p;
-                var m = _mediaRepository.Find(a => a.MediaId == p1.PostId, false).First();
+                var u1 = u;
+                var userposts = _posts.Where(a => a.UserId == u1.UserId).ToList();
+                var album = _albumRepository
+                    .Find(a => a.UserId == u1.UserId && a.AlbumName != "Background" && a.AlbumName != "Profile")
+                    .ToList();
 
-                _postContentRepository.Add(new PostContent
+                var alb1 = album[0].AlbumId;
+                var alb2 = album[1].AlbumId;
+                var media = new List<Media>();
+                media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb1, false));
+                media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb2, false));
+
+                for (var i = 0; i < 5; i++)
                 {
-                    CreatedBy = p.User.UserId,
-                    CreatedDate = p.CreatedDate,
-                    ModifiedBy = p.User.UserId,
-                    ModifiedDate = p.ModifiedDate,
-                    PostId = p.PostId,
-                    MediaId = m.MediaId
-                });
+                    _postContentRepository.Add(new PostContent
+                    {
+                        CreatedBy = u1.UserId,
+                        CreatedDate = DateTime.UtcNow,
+                        ModifiedBy = u1.UserId,
+                        ModifiedDate = DateTime.UtcNow,
+                        PostId = userposts[i].PostId,
+                        MediaId = media[i].MediaId
+                    }); 
+                }
+
+                
             }
 
             lbConsole.Items.Add("Successfully added post contents...");

@@ -12,7 +12,7 @@ namespace Blog.Backend.Logic.Mapper
                 {
                     PostContentId = postContent.PostContentId,
                     PostId = postContent.PostId,
-                    Media = postContent.Media != null ? MediaMapper.ToDto(postContent.Media, false) : new Media(),
+                    Media = postContent.Media != null ? MediaMapper.ToDto(postContent.Media) : new Media(),
                     CreatedBy = postContent.CreatedBy,
                     CreatedDate = postContent.CreatedDate,
                     ModifiedBy = postContent.ModifiedBy,

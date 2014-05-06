@@ -13,7 +13,7 @@ namespace Blog.Backend.Logic.Mapper
                 var media = new List<Media>();
                 if (album.Media != null)
                 {
-                    media = album.Media.Select(a => MediaMapper.ToDto(a, false)).ToList();
+                    media = album.Media.Select(MediaMapper.ToDto).ToList();
                 }
                 
                 return new Album

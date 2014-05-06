@@ -4,7 +4,7 @@ namespace Blog.Backend.Logic.Mapper
 {
     public static class MediaMapper
     {
-        public static Media ToDto(DataAccess.Entities.Objects.Media media, bool includeContent)
+        public static Media ToDto(DataAccess.Entities.Objects.Media media)
         {
             return media == null ?
                 new Media() : 
@@ -13,11 +13,11 @@ namespace Blog.Backend.Logic.Mapper
                     MediaId = media.MediaId,
                     MediaType = media.MediaType,
                     AlbumId = media.AlbumId,
-                    MediaContent = includeContent ? media.MediaContent : null,
+                    MediaContent = null,
                     MediaPath = media.MediaPath,
                     MediaUrl = media.MediaUrl,
                     ThumbnailUrl = media.ThumbnailUrl,
-                    ThumbnailContent = includeContent ? media.ThumbnailContent : null,
+                    ThumbnailContent = null,
                     ThumbnailPath = media.ThumbnailPath,
                     FileName = media.FileName,
                     CustomName = media.CustomName,
