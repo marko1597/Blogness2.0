@@ -1,27 +1,20 @@
 ﻿ngPosts.directive('postTags', function () {
     var ctrlFn = function ($scope) {
-        $scope.dropdown = [];
-
-        _.each($scope.data.Tags, function (a) {
-            var obj = {
-                "text": "#" + a.TagName,
-                "href": "#"
-            };
-            $scope.dropdown.push(obj);
-        });
+        
     };
 
-    ctrlFn.$inject = ["$scope", "postsService"];
+    ctrlFn.$inject = ["$scope"];
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: { tags: '=' },
         replace: true,
         template:
-            '<div class="post-tags" data-post-id={{data.PostId}}>' +
-                '<button class="btn btn-primary" data-animation="am-flip-x" bs-dropdown="dropdown" data-placement="top">' +
-                    '<span>Click to view tags</span>' +
-                '</button>' +
+            '<div class="post-tags">' +
+                '<span data-tag-id="{{tag.TagId}}" ng-repeat="tag in tags">' +
+                    '<i class="fa fa-tags"></i>' +
+                    '{{tag.TagName}}' +
+                '</span>' +
             '</div>',
         controller: ctrlFn
     };

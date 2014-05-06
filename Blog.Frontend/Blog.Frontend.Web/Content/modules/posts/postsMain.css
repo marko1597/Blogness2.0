@@ -94,7 +94,7 @@
             }
 
         #posts-main > div.post-item > div.post-item-details {
-            padding: 10px 10px;
+            padding: 10px;
             border-bottom: 1px solid #ddd;
         }
 
@@ -138,50 +138,67 @@
                     border-color: #bfbfbf;
                 }
 
-            #posts-main > div.post-item > div.post-item-details > div.post-tags {
-                display: inline-block;
-                width: 75%;
+        #posts-main > div.post-item > div.post-item-comments {
+            border-bottom: 1px solid #ddd;
+        }
+
+            #posts-main > div.post-item > div.post-item-comments ul {
+                height: 53px !important;
+                width: 100%;
+                overflow: hidden;
+                margin: 0;
+                list-style-type: none;
+                padding: 10px;
             }
 
-                #posts-main > div.post-item > div.post-item-details > div.post-tags > button {
-                    height: 28px;
-                    line-height: 10px;
-                    position: relative;
-                    top: -2px;
-                    width: 160px;
+                #posts-main > div.post-item > div.post-item-comments ul > li p {
+                    margin: 0;
                 }
 
-        #posts-main > div.post-item > div.post-item-comments ul {
-            height: 55px !important;
-            width: 100%;
-            overflow: hidden;
-            margin: 0;
-            list-style-type: none;
+                    #posts-main > div.post-item > div.post-item-comments ul > li p > a {
+                        cursor: pointer;
+                    }
+
+                    #posts-main > div.post-item > div.post-item-comments ul > li p:last-child {
+                        -ms-text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                        -moz-text-overflow: ellipsis;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        width: auto;
+                        cursor: pointer;
+                    }
+
+                        #posts-main > div.post-item > div.post-item-comments ul > li p:last-child:hover {
+                            color: #888;
+                        }
+
+        #posts-main > div.post-item > div.post-item-tags > div.post-tags {
             padding: 10px;
         }
 
-            #posts-main > div.post-item > div.post-item-comments ul > li p {
-                margin: 0;
+            #posts-main > div.post-item > div.post-item-tags > div.post-tags > span {
+                color: #eee;
+                background: #56c2e1;
+                border: 1px solid #46b3d3;
+                padding: 5px;
+                margin-right: 5px;
+                cursor: pointer;
+                box-shadow: inset 0 0 1px hsla(0, 0%, 100%, 0.1);
+                -webkit-text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+                text-shadow: 0 1px 0 rgba(0,0,0,0.25);
             }
 
-                #posts-main > div.post-item > div.post-item-comments ul > li p > a {
-                    cursor: pointer;
+                #posts-main > div.post-item > div.post-item-tags > div.post-tags > span:hover {
+                    background: #3f9db8;
+                    border: 1px solid hsla(0, 0%, 100%, 0.75);
+                    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
                 }
 
-                #posts-main > div.post-item > div.post-item-comments ul > li p:last-child {
-                    -ms-text-overflow: ellipsis;
-                    -o-text-overflow: ellipsis;
-                    -moz-text-overflow: ellipsis;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    width: auto;
-                    cursor: pointer;
+                #posts-main > div.post-item > div.post-item-tags > div.post-tags > span > i {
+                    margin-right: 5px;
                 }
-
-                    #posts-main > div.post-item > div.post-item-comments ul > li p:last-child:hover {
-                        color: #888;
-                    }
 
 @media (max-width: 360px) {
     #posts-main > div.post-item {

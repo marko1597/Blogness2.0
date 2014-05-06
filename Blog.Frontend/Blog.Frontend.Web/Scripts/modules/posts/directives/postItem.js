@@ -42,7 +42,6 @@
                 '</div>' +
                 '<div class="post-item-details">' +
                     '<div post-likes data="{ PostLikes: post.PostLikes, PostId: post.PostId }"></div>' +
-                    '<div post-tags data="{ Tags: post.Tags, PostId: post.PostId }"></div>' +
                 '</div>' +
                 '<div class="post-item-comments">' +
                     '<ul ticker data-enable-pause="true" data-pause-element="popover">' +
@@ -50,6 +49,9 @@
                             '<div post-item-comment comment="comment">' +
                         '</li>' +
                     '</ul>' +
+                '</div>' +
+                '<div class="post-item-tags">' +
+                    '<div post-tags tags="post.Tags"></div>' +
                 '</div>' +
             '</div>',
         controller: ctrlFn
