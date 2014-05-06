@@ -32,11 +32,11 @@
                 '</div>' +
                 '<div class="post-item-body">' +
                     '<p>{{post.PostMessage}}</p>' +
-                    '<div class="post-item-contents">' +
-                        '<div ng-repeat="content in post.PostContents">' +
-                            '<div class="post-item-content">' +
-                                '<img ng-src="{{content.Media.MediaUrl}}" />' +
-                            '</div>' +
+                '</div>' +
+                '<div class="post-item-contents">' +
+                    '<div ng-repeat="content in post.PostContents">' +
+                        '<div class="post-item-content">' +
+                            '<img ng-src="{{content.Media.MediaUrl}}" />' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -51,7 +51,7 @@
                     '</ul>' +
                 '</div>' +
                 '<div class="post-item-tags">' +
-                    '<div post-tags tags="post.Tags"></div>' +
+                    '<div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>' +
                 '</div>' +
             '</div>',
         controller: ctrlFn

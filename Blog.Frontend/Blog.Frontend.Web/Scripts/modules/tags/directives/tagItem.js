@@ -9,8 +9,9 @@
         scope: { tag: '=' },
         replace: true,
         template:
-            '<div data-tag-id="{{tag.TagId}}">' +
-                '<span>{{tag.TaName}}</span>' +
+            '<div class="tag-item" data-tag-id="{{tag.TagId}}">' +
+                '<i class="fa fa-tags"></i>' +
+                '{{tag.TagName}}' +
             '</div>',
         controller: ctrlFn
     };
