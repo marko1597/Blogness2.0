@@ -30,7 +30,7 @@ namespace Blog.Backend.Logic.Mapper
                     PostLikes = postLikes,
                     PostContents = contents,
                     Comments = comments,
-                    User = post.User != null ? UserMapper.ToDto(post.User, true) : null,
+                    User = post.User != null ? UserMapper.ToDto(post.User) : null,
                     Tags = tags,
                     CreatedBy = post.CreatedBy,
                     CreatedDate = post.CreatedDate,

@@ -114,7 +114,7 @@ namespace Blog.Backend.Logic
                 }
 
                 var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
-                return MediaMapper.ToDto(result, false);
+                return MediaMapper.ToDto(result);
             }
             catch (Exception ex)
             {
