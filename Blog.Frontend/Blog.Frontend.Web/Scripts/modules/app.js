@@ -1,7 +1,7 @@
 ﻿var blog = angular.module("blog", ["ngRoute", "mgcrea.ngStrap", "snap",
     "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation", "ngUser", "ngTags"]);
 
-blog.config(function ($routeProvider) {
+blog.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: '/blog/scripts/templates/posts.html',
@@ -23,4 +23,4 @@ blog.config(function ($routeProvider) {
             templateUrl: '/blog/scripts/templates/events.html',
             controller: ''
         });
-});
+}]);

@@ -6,6 +6,14 @@
     border-right: 1px solid #333;
 }
 
+    nav.navigation-menu:after {
+        width: 100%;
+        height: auto;
+        background: #4c4c4c;
+        color: #999;
+        border-right: 1px solid #333;
+    }
+
     nav.navigation-menu h4 {
         margin: 0;
         padding: 3.5em 1em 1em 1em;

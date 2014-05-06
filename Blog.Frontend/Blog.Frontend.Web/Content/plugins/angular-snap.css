@@ -30,7 +30,7 @@ snap-drawers,
     width: auto;
     left: 0;
     right: 0;
-    background: url(../images/bg.jpg) center top repeat;
+    background: url(/blog/content/images/bg.jpg) center top repeat;
     -moz-background-size: 100% auto;
     -o-background-size: 100% auto;
     -webkit-background-size: 100% auto;
@@ -76,6 +76,15 @@ snap-drawer,
     -moz-overflow-scrolling: touch;
     -o-overflow-scrolling: touch;
     overflow-scrolling: touch;
+}
+
+/* This is added for the navigation only */
+.snap-drawer.snap-drawer-left {
+    width: 100%;
+    height: auto;
+    background: #4c4c4c;
+    color: #999;
+    border-right: 1px solid #333;
 }
 
 .snap-drawer-left {

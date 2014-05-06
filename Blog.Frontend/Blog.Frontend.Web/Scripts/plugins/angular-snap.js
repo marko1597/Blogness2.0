@@ -139,7 +139,6 @@ angular.module('snap')
       var ctrlFn = function ($scope) {
           $scope.$on('toggleNavigation', function () {
               snapRemote.toggle('left', undefined);
-              $rootScope.$digest();
           });
       };
       ctrlFn.$inject = ["$scope"];
