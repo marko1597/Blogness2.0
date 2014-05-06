@@ -23,7 +23,7 @@
             '<div id="post-item-{{post.PostId}}" ng-class="getPostSize()">' +
                 '<div class="post-item-header">' +
                     '<div class="post-item-user" data-user-id="{{post.CreatedBy"}}">' +
-                        '<img src="{{user.Media.MediaUrl}}" />' +
+                        '<img ng-src="{{user.Media.MediaUrl}}" />' +
                         '<p><a>{{post.User.UserName}}</a>' +
                             '<span>{{post.CreatedDate}}</span>' +
                         '</p>' +

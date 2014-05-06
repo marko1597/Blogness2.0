@@ -25,7 +25,7 @@
 				'<ul>' +
 					'<li ng-repeat="navigationItem in navigationItems">' +
                         '<a class="icon icon-data" href="#">' +
-                            '<img src="{{navigationItem.icon}}" />' +
+                            '<img ng-src="{{navigationItem.icon}}" />' +
                             '{{navigationItem.text}}' +
                         '</a>' +
                     '</li>' +

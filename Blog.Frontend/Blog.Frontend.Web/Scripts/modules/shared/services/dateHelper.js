@@ -32,7 +32,7 @@
             var diff = (parseInt(currDate - itemDate) / 1000 / 60 / 60).toFixed(2);
 
             if (diff < 24) {
-                return diff + " hours ago " + this.getJsTime(jsonDate);
+                return diff + " hours ago " + this.getJsTime(jsonDate).toFixed(0);
             } else if (diff < 48) {
                 return "A day ago " + this.getJsTime(jsonDate);
             } else if (diff < 48) {
