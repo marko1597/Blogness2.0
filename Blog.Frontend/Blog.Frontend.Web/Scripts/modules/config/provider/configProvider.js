@@ -15,11 +15,11 @@
     };
 
     var navigationItems = [
-        { text: "Home", icon: "/blog/content/images/nav-home.png" },
-        { text: "Profile", icon: "/blog/content/images/nav-profile.png" },
-        { text: "Friends", icon: "/blog/content/images/nav-friends.png" },
-        { text: "Groups", icon: "/blog/content/images/nav-groups.png" },
-        { text: "Events", icon: "/blog/content/images/nav-events.png" }
+        { text: "Home", icon: "/blog/content/images/nav-home.png", href: "./" },
+        { text: "Profile", icon: "/blog/content/images/nav-profile.png", href: "./#/profile" },
+        { text: "Friends", icon: "/blog/content/images/nav-friends.png", href: "./#/friends" },
+        { text: "Groups", icon: "/blog/content/images/nav-groups.png", href: "./#/groups" },
+        { text: "Events", icon: "/blog/content/images/nav-events.png", href: "./#/events" }
     ];
 
     this.$get = [function () {

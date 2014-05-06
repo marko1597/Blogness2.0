@@ -24,7 +24,7 @@
 				'<h4 class="icon icon-lab">{{userFullName}}</h4>' +
 				'<ul>' +
 					'<li ng-repeat="navigationItem in navigationItems">' +
-                        '<a class="icon icon-data" href="#">' +
+                        '<a class="icon icon-data" href="{{navigationItem.href}}">' +
                             '<img ng-src="{{navigationItem.icon}}" />' +
                             '{{navigationItem.text}}' +
                         '</a>' +

@@ -1,5 +1,4 @@
 ﻿#posts-main {
-    margin: 60px 0;
     width: 100%;
 }
 
@@ -11,14 +10,7 @@
         -ms-min-width: 350px;
         -o-min-width: 350px;
         -webkit-min-width: 350px;
-        /*min-width: 350px;*/
-        border: 1px solid #ddd;
-        -webkit-box-shadow: 0 2px 4px #000000;
-        -webkit-box-shadow: 0 2px 4px #000000;
-        -ms-box-shadow: 0 2px 4px #000000;
-        -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        box-shadow: 0 2px 4px #000000;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        min-width: 350px;
         background: #fff;
         position: relative;
         text-decoration: none;
@@ -58,11 +50,38 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
             border-bottom: 1px solid #000000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            margin: 0;
+            overflow: hidden;
         }
 
-            #posts-main > div.post-item > div.post-item-header h4 {
-                margin: 0;
+            #posts-main > div.post-item > div.post-item-header > img {
+                float: left;
+                width: 80px;
+                height: 80px;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -webkit-background-size: cover;
+                background-size: cover;
+                border-radius: 40px;
+                -webkit-border-radius: 40px;
+                -moz-border-radius: 40px;
+                border: 3px solid #fff;
+                margin: 0 10px 0 0;
             }
+
+            #posts-main > div.post-item > div.post-item-header > div {
+                float: left;
+            }
+
+                #posts-main > div.post-item > div.post-item-header > div > h4 {
+                    margin: 0 0 5px;
+                    font-weight: bold;
+                }
+
+                #posts-main > div.post-item > div.post-item-header > div > p > a {
+                    margin: 0 5px 0 0;
+                    color: #fff;
+                }
 
         #posts-main > div.post-item > div.post-item-body {
             padding: 10px 10px;

@@ -20,15 +20,15 @@
         scope: { data: '=' },
         replace: true,
         template:
-            '<div id="post-item-{{post.PostId}}" ng-class="getPostSize()">' +
-                '<div class="post-item-header">' +
-                    '<div class="post-item-user" data-user-id="{{post.CreatedBy"}}">' +
-                        '<img ng-src="{{user.Media.MediaUrl}}" />' +
+            '<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="content-item">' +
+                '<div class="post-item-header" data-user-id="{{post.CreatedBy"}}">' +
+                    '<img ng-src="{{user.Picture.MediaUrl}}" />' +
+                    '<div>' +
+                        '<h4>{{post.PostTitle}}</h4>' +
                         '<p><a>{{post.User.UserName}}</a>' +
                             '<span>{{post.CreatedDate}}</span>' +
                         '</p>' +
                     '</div>' +
-                    '<h4>{{post.PostTitle}}</h4>' +
                 '</div>' +
                 '<div class="post-item-body">' +
                     '<p>{{post.PostMessage}}</p>' +

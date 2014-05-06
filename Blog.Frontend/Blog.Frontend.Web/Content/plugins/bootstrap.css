@@ -332,7 +332,7 @@ html {
 }
 
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
@@ -352,11 +352,12 @@ textarea {
 a {
     color: #428bca;
     text-decoration: none;
+    cursor: pointer;
 }
 
     a:hover,
     a:focus {
-        color: #2a6496;
+        /*color: #2a6496;*/
         text-decoration: underline;
     }
 
@@ -5350,7 +5351,7 @@ a.list-group-item.active > .badge,
     padding: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #eee;
+    background-color: #fff;
 }
 
     .jumbotron h1,

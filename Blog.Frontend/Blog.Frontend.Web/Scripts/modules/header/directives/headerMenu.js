@@ -23,7 +23,7 @@
 			                '<span class="icon-bar"></span>' +
 			                '<span class="icon-bar"></span>' +
                         '</div>' +
-			            '<a class="navbar-brand" href="#" snap-toggle>' +
+			            '<a class="navbar-brand" snap-toggle>' +
                             'Bloggity Blog' +
 	                    '</a>' +
 			        '</div>' +
