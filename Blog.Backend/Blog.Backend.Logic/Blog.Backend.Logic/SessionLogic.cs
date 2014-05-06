@@ -129,7 +129,7 @@ namespace Blog.Backend.Logic
             return loggedOut;
         }
 
-        private void DeleteSessionFromSameIp(string ipAddress)
+        public void DeleteSessionFromSameIp(string ipAddress)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace Blog.Backend.Logic
             }
         }
 
-        private void CleanupExpiredSessions()
+        public void CleanupExpiredSessions()
         {
             var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.UtcNow, true).ToList();
             oldSessions.ForEach(a => _sessionRepository.Delete(a));
