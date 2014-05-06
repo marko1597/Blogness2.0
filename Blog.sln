@@ -107,12 +107,12 @@ Global
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Remote|Any CPU.Build.0 = Remote|Any CPU
-		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Home|Any CPU.ActiveCfg = Home|Any CPU
-		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Home|Any CPU.Build.0 = Home|Any CPU
+		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Home|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Home|Any CPU.Build.0 = Release|Any CPU
 		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
-		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Remote|Any CPU.Build.0 = Remote|Any CPU
+		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Remote|Any CPU.ActiveCfg = Release|Any CPU
+		{2C0674C4-1249-462A-8CD6-09C100B2DBA0}.Remote|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
