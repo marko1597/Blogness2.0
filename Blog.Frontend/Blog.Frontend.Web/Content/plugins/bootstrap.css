@@ -337,7 +337,7 @@ body {
     line-height: 1.42857143;
     color: #333;
     background-color: #eee;
-    height: auto;
+    height: 100%;
 }
 
 input,
@@ -4935,8 +4935,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     }
 
 .navbar-inverse {
-    background-color: #222;
-    border-color: #080808;
+    background-color: #4c4c4c;
+    border-color: #333;
 }
 
     .navbar-inverse .navbar-brand {

@@ -28,21 +28,12 @@
                     scope.$emit("updatePostsSize", "xlarge");
                     scope.$emit('iso-option', { layoutMode: 'masonry' });
                 }, 500);
-
             } else if (postsMain == 720) {
                 $timeout(function () {
                     _.each($("div.post-item"), function (a) {
                         $(a).width("338px");
                     });
                     scope.$emit("updatePostsSize", "medium");
-                    scope.$emit('iso-option', { layoutMode: 'masonry' });
-                }, 500);
-            } else if (postsMain > 550 && postsMain < 720) {
-                $timeout(function () {
-                    _.each($("div.post-item"), function (a) {
-                        $(a).width("46%");
-                    });
-                    scope.$emit("updatePostsSize", "small");
                     scope.$emit('iso-option', { layoutMode: 'masonry' });
                 }, 500);
             } else {

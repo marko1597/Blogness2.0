@@ -11,6 +11,10 @@
             });
         };
 
+        $scope.toggleNavigation = function() {
+            $rootScope.$broadcast("toggleNavigation", {});
+        };
+
         $scope.getUserInfo();
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "userService", "configProvider"];
@@ -24,7 +28,7 @@
 				'<h4 class="icon icon-lab">{{userFullName}}</h4>' +
 				'<ul>' +
 					'<li ng-repeat="navigationItem in navigationItems">' +
-                        '<a class="icon icon-data" href="{{navigationItem.href}}">' +
+                        '<a class="icon icon-data" href="{{navigationItem.href}}" ng-click="toggleNavigation()">' +
                             '<img ng-src="{{navigationItem.icon}}" />' +
                             '{{navigationItem.text}}' +
                         '</a>' +

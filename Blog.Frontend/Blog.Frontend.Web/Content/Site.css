@@ -96,7 +96,7 @@
 }
 
 .content-item {
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
     -ms-box-shadow: 0 2px 4px #000000;
@@ -106,7 +106,9 @@
 }
 
 .body-content {
-    margin: 60px 0;
+    margin: 51px 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .max-height {
@@ -178,11 +180,6 @@ body {
 ::-moz-selection {
     color: #fff;
     background: #f676b2;
-}
-
-.body-content {
-    padding-top: 15px;
-    padding-bottom: 15px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

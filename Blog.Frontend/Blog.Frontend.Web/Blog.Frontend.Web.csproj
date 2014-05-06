@@ -211,13 +211,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\bg-noise.png" />
+    <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
     <Content Include="Content\images\error-pages\servererror_bg.png" />
     <Content Include="Content\images\error-pages\serviceunavailable_bg.png" />
-    <Content Include="Content\images\loader-cat.gif" />
     <Content Include="Content\images\loader-potato.gif" />
     <Content Include="Content\images\loader-girl.gif" />
-    <Content Include="Content\images\loading.gif" />
     <Content Include="Content\images\login-main.jpg" />
     <Content Include="Content\images\login-pass-icon.png" />
     <Content Include="Content\images\login-pattern.png" />
@@ -234,6 +235,7 @@
     <Content Include="Content\modules\posts\postsmain.css" />
     <Content Include="Content\modules\tags\tags.css" />
     <Content Include="Content\plugins\angular-tags-input.css" />
+    <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
     <Content Include="Scripts\modules\tags\tags.js" />
@@ -347,6 +349,10 @@
     <Content Include="Content\fonts\CanterLight.otf" />
     <Content Include="Content\fonts\CanterOutline.otf" />
     <Content Include="Content\fonts\Bazar.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

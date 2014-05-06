@@ -115,6 +115,7 @@ namespace Blog.Frontend.Web
                       "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap-theme.css",
                       "~/Content/plugins/bootstrap-additions.css",
+                      "~/Content/plugins/font-awesome.css",
                       "~/Content/plugins/isotope.css",
                       "~/Content/plugins/jquery-ui-*"));
 

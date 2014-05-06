@@ -11,7 +11,7 @@
         replace: true,
         template:
             '<div id="blog-header">' +
-        	    '<div class="navbar navbar-default navbar-fixed-top" role="navigation">' +
+        	    '<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">' +
 			        '<div class="navbar-header">' +
 			            '<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar">' +
 			                '<span class="icon-bar"></span>' +

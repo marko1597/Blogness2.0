@@ -37,19 +37,10 @@
 
         snapRemote.getSnapper().then(function (snapper) {
             snapper.on('open', function () {
-                //blockUiService.blockIt(
-                //'<h4>Loading...</h4>', {
-                //    border: 'none',
-                //    padding: '5px',
-                //    backgroundColor: '#000',
-                //    opacity: .5,
-                //    color: '#fff'
-                //}, $(".snap-content"));
                 console.log("open");
             });
 
             snapper.on('close', function () {
-                //blockUiService.unblockIt($(".snap-content"));
                 console.log('closed!');
             });
         });

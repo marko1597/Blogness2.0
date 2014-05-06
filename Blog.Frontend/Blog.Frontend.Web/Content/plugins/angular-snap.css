@@ -24,13 +24,17 @@ snap-drawers,
 .snap-drawers,
 .snap-content {
     position: absolute;
-    height: auto;
+    height: 100%;
     top: 0;
     bottom: 0;
     width: auto;
     left: 0;
     right: 0;
-    background: #eee;
+    background: url(../images/bg.jpg) center top repeat;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
 }
 
 snap-drawer,
