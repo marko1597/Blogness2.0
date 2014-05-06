@@ -1,0 +1,1 @@
+﻿var ngTags = angular.module("ngTags", ["ngRoute"]);

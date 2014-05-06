@@ -46,6 +46,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-animate.js",
                       "~/Scripts/plugins/angular-isotope.js",
                       "~/Scripts/plugins/angular-local-storage.js",
+                      "~/Scripts/plugins/angular-tags-input.js",
                       "~/Scripts/plugins/angular-snap.js",
                       "~/Scripts/plugins/angular-infinite-scroll.js",
                       "~/Scripts/plugins/angular-strap.js",
@@ -60,6 +61,14 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/services/blockUi.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/header").Include(
+                      "~/Scripts/modules/header/header.js",
+                      "~/Scripts/modules/header/directives/headerMenu.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/tags").Include(
+                      "~/Scripts/modules/tags/tags.js",
+                      "~/Scripts/modules/tags/directives/tagItem.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/header").Include(
                       "~/Scripts/modules/header/header.js",
@@ -101,6 +110,7 @@ namespace Blog.Frontend.Web
                       "~/Content/plugins/angular-motion.css",
                       "~/Content/plugins/angular-snap.css",
                       "~/Content/plugins/angular-scrollbar.css",
+                      "~/Content/plugins/angular-tags-input.css",
                       "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap.css",
                       "~/Content/plugins/bootstrap-theme.css",
@@ -113,6 +123,9 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new StyleBundle("~/content/header").Include(
                       "~/Content/modules/header/header.css"));
+
+            bundles.Add(new StyleBundle("~/content/tags").Include(
+                      "~/Content/modules/tags/tags.css"));
 
             bundles.Add(new StyleBundle("~/content/login").Include(
                       "~/Content/modules/loginform/loginform.css"));

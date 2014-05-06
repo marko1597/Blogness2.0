@@ -232,7 +232,11 @@
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
+    <Content Include="Content\modules\tags\tags.css" />
+    <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
+    <Content Include="Scripts\modules\tags\directives\tagItem.js" />
+    <Content Include="Scripts\modules\tags\tags.js" />
     <Content Include="Scripts\modules\user\directives\userProfile.js" />
     <Content Include="Scripts\modules\user\services\userService.js" />
     <Content Include="Scripts\modules\user\user.js" />
@@ -277,6 +281,7 @@
     <Content Include="Scripts\plugins\angular-infinite-scroll.js" />
     <Content Include="Scripts\plugins\angular-isotope.js" />
     <Content Include="Scripts\plugins\angular-snap.js" />
+    <Content Include="Scripts\plugins\angular-tags-input.js" />
     <Content Include="Scripts\plugins\jquery-2.1.0.js" />
     <Content Include="Scripts\plugins\jquery.isotope.js" />
     <Content Include="Scripts\plugins\jquery.newsTicker.js" />
@@ -305,7 +310,6 @@
     <Content Include="Scripts\plugins\angular-scrollbar.js" />
     <Content Include="Scripts\plugins\angular-strap.js" />
     <Content Include="Scripts\plugins\angular-strap.tpl.js" />
-    <Content Include="Scripts\plugins\angular-ui-bootstrap-tpls-0.10.0.js" />
     <Content Include="Scripts\plugins\angular.js" />
     <Content Include="Scripts\plugins\bootstrap.js" />
     <Content Include="Scripts\plugins\classie.js" />
