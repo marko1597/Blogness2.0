@@ -1,6 +1,6 @@
 ﻿ngLogin.factory('loginService', ["$http", "$q", "$window", "configProvider", function ($http, $q, $window, configProvider) {
-    var sessionApi = configProvider.getSettings().BlogRoot == "" ? window.blogRoot + "Profile/Authenticate" : configProvider.getSettings().BlogRoot + "Profile/Authenticate";
-    var authApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Authenticate" : configProvider.getSettings().BlogApi + "Authenticate";
+    var sessionApi = configProvider.getSettings().BlogRoot == "" ? window.blogConfiguration.blogRoot + "Profile/Authenticate" : configProvider.getSettings().BlogRoot + "Profile/Authenticate";
+    var authApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Authenticate" : configProvider.getSettings().BlogApi + "Authenticate";
 
     var apiAuthenticate = function (username, password) {
         var deferred = $q.defer();

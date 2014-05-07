@@ -34,7 +34,8 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(
                         "~/Scripts/plugins/respond.js",
                         "~/Scripts/plugins/underscore.js",
-                        "~/Scripts/plugins/video-js/video.js"));
+                        "~/Scripts/plugins/video-js/video.js",
+                        "~/Scripts/plugins/ckeditor/ckeditor.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/bootstrap").Include(
                       "~/Scripts/plugins/bootstrap.js"));
@@ -45,6 +46,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-cookies.js",
                       "~/Scripts/plugins/angular-animate.js",
                       "~/Scripts/plugins/angular-isotope.js",
+                      "~/Scripts/plugins/angular-ckeditor.js",
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-tags-input.js",
                       "~/Scripts/plugins/angular-snap.js",
@@ -93,12 +95,14 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/posts").Include(
                       "~/Scripts/modules/posts/posts.js",
+                      "~/Scripts/modules/posts/controllers/postsModifyController.js",
                       "~/Scripts/modules/posts/controllers/postsController.js",
                       "~/Scripts/modules/posts/directives/postsMain.js",
                       "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postItemComment.js",
-                      "~/Scripts/modules/posts/services/postsService.js"));
+                      "~/Scripts/modules/posts/services/postsService.js",
+                      "~/Scripts/modules/posts/services/postsStateService.js"));
 
             #endregion
 
@@ -108,6 +112,7 @@ namespace Blog.Frontend.Web
                       "~/Content/plugins/angular-loading-bar.css",
                       "~/Content/plugins/angular-motion.css",
                       "~/Content/plugins/angular-snap.css",
+                      "~/Content/plugins/angular-ckeditor.css",
                       "~/Content/plugins/angular-scrollbar.css",
                       "~/Content/plugins/angular-tags-input.css",
                       "~/Content/plugins/bootstrap.css",
@@ -134,7 +139,8 @@ namespace Blog.Frontend.Web
                       "~/Content/modules/navigation/navigationmenu.css"));
 
             bundles.Add(new StyleBundle("~/content/posts").Include(
-                      "~/Content/modules/posts/postsmain.css"));
+                      "~/Content/modules/posts/postsmain.css",
+                      "~/Content/modules/posts/postsmodify.css"));
 
             #endregion
 

@@ -1,5 +1,5 @@
 ﻿ngUser.factory('userService', ["$http", "$q", "configProvider", "localStorageService", function ($http, $q, configProvider, localStorageService) {
-    var userApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Users" : configProvider.getSettings().BlogApi + "Users";
+    var userApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Users" : configProvider.getSettings().BlogApi + "Users";
 
     return {
         getUserInfo: function () {

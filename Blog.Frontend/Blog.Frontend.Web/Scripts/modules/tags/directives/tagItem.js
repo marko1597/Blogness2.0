@@ -8,11 +8,7 @@
         restrict: 'EA',
         scope: { tag: '=' },
         replace: true,
-        template:
-            '<div class="tag-item" data-tag-id="{{tag.TagId}}">' +
-                '<i class="fa fa-tags"></i>' +
-                '{{tag.TagName}}' +
-            '</div>',
+        templateUrl: window.blogConfiguration.templatesUrl + "tags/tagItem.html",
         controller: ctrlFn
     };
 }]);

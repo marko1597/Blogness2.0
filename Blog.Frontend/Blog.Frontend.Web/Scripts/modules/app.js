@@ -19,6 +19,10 @@ blog.config(["$routeProvider", function ($routeProvider) {
             templateUrl: '/blog/scripts/templates/profile.html',
             controller: ''
         })
+        .when('/post/new', {
+            templateUrl: '/blog/scripts/templates/modifyPost.html',
+            controller: 'postsModifyController'
+        })
         .when('/events', {
             templateUrl: '/blog/scripts/templates/events.html',
             controller: ''

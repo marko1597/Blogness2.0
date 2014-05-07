@@ -19,41 +19,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        template:
-            '<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="content-item">' +
-                '<div class="post-item-header" data-user-id="{{post.CreatedBy"}}">' +
-                    '<img ng-src="{{user.Picture.MediaUrl}}" />' +
-                    '<div>' +
-                        '<h4>{{post.PostTitle}}</h4>' +
-                        '<p><a>{{post.User.UserName}}</a>' +
-                            '<span>{{post.CreatedDate}}</span>' +
-                        '</p>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="post-item-body">' +
-                    '<p>{{post.PostMessage}}</p>' +
-                '</div>' +
-                '<div class="post-item-contents">' +
-                    '<div ng-repeat="content in post.PostContents">' +
-                        '<div class="post-item-content">' +
-                            '<img ng-src="{{content.Media.MediaUrl}}" />' +
-                        '</div>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="post-item-details">' +
-                    '<div post-likes data="{ PostLikes: post.PostLikes, PostId: post.PostId }"></div>' +
-                '</div>' +
-                '<div class="post-item-comments">' +
-                    '<ul ticker data-enable-pause="true" data-pause-element="popover">' +
-                        '<li ng-repeat="comment in post.Comments">' +
-                            '<div post-item-comment comment="comment">' +
-                        '</li>' +
-                    '</ul>' +
-                '</div>' +
-                '<div class="post-item-tags">' +
-                    '<div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>' +
-                '</div>' +
-            '</div>',
+        templateUrl: window.blogConfiguration.templatesUrl + "posts/postItem.html",
         controller: ctrlFn
     };
 }]);

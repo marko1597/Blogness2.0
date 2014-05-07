@@ -10,13 +10,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        template:
-            '<div class="post-likes" data-post-id={{data.PostId}}>' +
-                '<div class="wrapper" data-placement="right" data-type="info" data-animation="am-flip-x" bs-tooltip="tooltip">' +
-                '<span><i class="fa fa-star-o"></i></span>' +
-                '<span>{{data.PostLikes.length}}</span>' +
-                '</div>' +
-            '</div>',
+        templateUrl: window.blogConfiguration.templatesUrl + "posts/postlikes.html",
         controller: ctrlFn
     };
 });

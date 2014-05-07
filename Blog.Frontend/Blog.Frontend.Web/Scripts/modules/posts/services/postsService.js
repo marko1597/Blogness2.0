@@ -1,5 +1,5 @@
 ﻿ngPosts.factory('postsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
-    var postsApi = configProvider.getSettings().BlogApi == "" ? window.blogApi + "Posts" : configProvider.getSettings().BlogApi + "Posts";
+    var postsApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Posts" : configProvider.getSettings().BlogApi + "Posts";
 
     return {
         getPopularPosts: function() {

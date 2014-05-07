@@ -18,8 +18,12 @@
     <script>
         @*var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
         var blogRoot = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogRoot"))";*@
-        var blogApi = "@GetBlogApi()";
-        var blogRoot = "@GetBlogRoot()";
+        var blogConfiguration =
+        {
+            blogApi: "@GetBlogApi()",
+            blogRoot: "@GetBlogRoot()",
+            templatesUrl: "/blog/scripts/templates/modules/"
+        };
     </script>
 </head>
 <body ng-app="blog">
@@ -45,8 +49,8 @@
     <script>
         $(function () {
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
-            settings.setBlogApiEndpoint(blogApi);
-            settings.setBlogRoot(blogRoot);
+            settings.setBlogApiEndpoint(blogConfiguration.blogApi);
+            settings.setBlogRoot(blogConfiguration.blogRoot);
 
             // Enable this for debugging purposes along with h4 element above (just below body)
             //$("#pageWidth").text($(document).outerWidth());

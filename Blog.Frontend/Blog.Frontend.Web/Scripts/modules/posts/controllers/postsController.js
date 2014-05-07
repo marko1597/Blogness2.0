@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$interval", "snapRemote", "localStorageService", "postsService", "blockUiService", "dateHelper",
-    function ($scope, $interval, snapRemote, localStorageService, postsService, blockUiService, dateHelper) {
+﻿ngPosts.controller('postsController', ["$scope", "$interval", "localStorageService", "postsService", "postsStateService", "blockUiService", "dateHelper",
+    function ($scope, $interval, localStorageService, postsService, postsStateService, blockUiService, dateHelper) {
         $scope.posts = [];
         $scope.size = "";
         $scope.errorContent = { Show: false, Type: "" };
@@ -35,16 +35,19 @@
             $scope.size = size;
         });
 
-        snapRemote.getSnapper().then(function (snapper) {
-            snapper.on('open', function () {
-                console.log("open");
-            });
+        $scope.addPost = function() {
+            postsStateService.setPostItem(null);
+        };
 
-            snapper.on('close', function () {
-                console.log('closed!');
-            });
-        });
+        $scope.editPost = function(postId) {
+            var post = _.findWhere($scope.posts, { PostId: postId });
+            postsStateService.setPostItem(post);
+        };
 
+        /*
+         * Layout Fix for Isotope
+         * ----------------------
+         */
         var stopApplyLayoutFlag;
         $scope.applyLayout = function () {
             if (angular.isDefined(stopApplyLayoutFlag)) return;
@@ -53,7 +56,6 @@
                 $scope.$broadcast('iso-method', { name: null, params: null });
             }, 2000, 5);
         };
-
         $scope.stopApplyLayout = function () {
             if (angular.isDefined(stopApplyLayoutFlag)) {
                 $interval.cancel(stopApplyLayoutFlag);
@@ -61,6 +63,10 @@
             }
         };
 
+        /*
+         * Initial calls
+         * -----------------------
+         */
         $scope.getPopularPosts();
         $scope.applyLayout();
     }
