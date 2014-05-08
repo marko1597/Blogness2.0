@@ -690,8 +690,7 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Scripts\plugins\ckeditor\styles.js" />
-    <Content Include="Scripts\templates\modules\login\loginForm.html" />
-    <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
+    <Content Include="Scripts\templates\modifyPost.html" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
     <Content Include="Scripts\modules\tags\tags.js" />
@@ -788,7 +787,9 @@
     <Content Include="Scripts\plugins\video-js\video.js" />
     <Content Include="Scripts\templates\events.html" />
     <Content Include="Scripts\templates\groups.html" />
-    <Content Include="Scripts\templates\modifyPost.html" />
+    <Content Include="Scripts\templates\modules\header\headerMenu.html" />
+    <Content Include="Scripts\templates\modules\login\loginForm.html" />
+    <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\templates\modules\posts\postItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItemComment.html" />
     <Content Include="Scripts\templates\modules\posts\postLikes.html" />
@@ -797,7 +798,6 @@
     <Content Include="Scripts\templates\profile.html" />
     <Content Include="Scripts\templates\friends.html" />
     <Content Include="Scripts\templates\posts.html" />
-    <Content Include="Scripts\templates\modules\header\headerMenu.html" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
