@@ -149,12 +149,14 @@
     <Compile Include="Attributes\AllowCrossSiteApiAttribute.cs" />
     <Compile Include="Attributes\AllowCrossSiteAttribute.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
+    <Compile Include="Attributes\ValidateMimetypeMultipartContentAttribute.cs" />
     <Compile Include="Authentication\ApiFactory.cs" />
     <Compile Include="Authentication\AuthenticationHelper.cs" />
     <Compile Include="Authentication\IAuthenticationHelper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Authentication\Api.cs" />
     <Compile Include="Formatter\JsonMediaTypeFormatter.cs" />
+    <Compile Include="Helper\InMemoryMultipartFormDataStreamProvider.cs" />
     <Compile Include="Helper\HttpClientHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\ServiceProxyHelper.cs" />
