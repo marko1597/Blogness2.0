@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Blog.Backend.Common.Utils;
-using Blog.Backend.Common.Contracts;
+using Blog.Backend.DataAccess.Entities.Objects;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Factory;
 using Blog.Backend.Logic.Mapper;
+using Media = Blog.Backend.Common.Contracts.Media;
 
 namespace Blog.Backend.Logic
 {
@@ -29,7 +30,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var album = _albumRepository.Find(a => a.UserId == userId, null, "User,Media").ToList();
-                album.ForEach(a => media.AddRange(a.Media.Select(m => MediaMapper.ToDto(m))));
+                album.ForEach(a => media.AddRange(a.Media.Select(MediaMapper.ToDto)));
             }
             catch (Exception ex)
             {
@@ -85,22 +86,22 @@ namespace Blog.Backend.Logic
         {
             try
             {
+                var guid = Guid.NewGuid().ToString();
                 var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, null, "User").FirstOrDefault();
                 if (album == null) return null;
 
-                media.MediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, Constants.FileMediaLocation) + Path.GetFileName(media.FileName);
-                media.ThumbnailPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, Constants.FileMediaLocation) + "tn\\" + Path.GetFileName(media.FileName);
+                media.MediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                media.ThumbnailPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation) + "tn\\";
                 media.CustomName = Guid.NewGuid().ToString();
                 media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
 
                 _imageHelper.CreateDirectory(media.MediaPath);
-                var fs = new FileStream(media.MediaPath, FileMode.Create);
+                var fs = new FileStream(media.MediaPath + media.FileName, FileMode.Create);
                 fs.Write(media.MediaContent, 0, media.MediaContent.Length);
 
                 if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
                 {
                     _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
-                    media.ThumbnailContent = _imageHelper.CreateThumbnail(media.MediaPath);
                     media.ThumbnailUrl = Constants.FileMediaThumbnailUrl + media.CustomName;
                 }
 
@@ -114,6 +115,56 @@ namespace Blog.Backend.Logic
                 }
 
                 var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
+                return MediaMapper.ToDto(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public Media Add(Common.Contracts.User user, string albumName, string filename, string path, string contentType)
+        {
+            try
+            {
+                var album = GetAlbumByName(albumName, user.UserId);
+                var guid = Guid.NewGuid().ToString();
+                var mediaPath = _imageHelper.GenerateImagePath(user.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                _imageHelper.CreateDirectory(mediaPath);
+
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    filename = filename.Substring(1, filename.Length - 2);
+                    if (path != null)
+                    {
+                        File.Move(path, mediaPath + "\\" + filename);
+                    }
+                }
+
+                var tMedia = new Media
+                             {
+                                 FileName = filename,
+                                 AlbumId = album.AlbumId,
+                                 MediaPath = mediaPath,
+                                 ThumbnailPath = mediaPath + "tn\\",
+                                 CustomName = Guid.NewGuid().ToString(),
+                                 CreatedBy = user.UserId,
+                                 CreatedDate = DateTime.UtcNow,
+                                 ModifiedBy = user.UserId,
+                                 ModifiedDate = DateTime.UtcNow
+                             };
+                tMedia.ThumbnailUrl = Constants.FileMediaThumbnailUrl + tMedia.CustomName;
+                tMedia.MediaUrl = Constants.FileMediaUrl + tMedia.CustomName;
+                tMedia.MediaType = contentType;
+
+                if (tMedia.MediaType != "image/gif" && tMedia.MediaType.Substring(0, 5) != "video")
+                {
+                    _imageHelper.CreateThumbnailPath(tMedia.ThumbnailPath);
+                    tMedia.ThumbnailUrl = Constants.FileMediaThumbnailUrl + tMedia.CustomName;
+                }
+
+                var result = _mediaRepository.Add(MediaMapper.ToEntity(tMedia));
                 return MediaMapper.ToDto(result);
             }
             catch (Exception ex)
@@ -143,6 +194,37 @@ namespace Blog.Backend.Logic
                 Console.WriteLine(ex.Message);
                 return false;
             }
+        }
+
+        private void SetDirectory()
+        {
+        }
+
+        private Album GetAlbumByName(string albumName, int userId)
+        {
+            var album = albumName.ToLower() != "default"
+                ? _albumRepository.Find(a => a.AlbumName.ToLower() == albumName.ToLower()
+                                            && a.UserId == userId).FirstOrDefault()
+                : _albumRepository.Find(a => a.IsUserDefault
+                                            && a.UserId == userId).FirstOrDefault();
+
+            if (album == null)
+            {
+                var tAlbum = _albumRepository.Add(new Album
+                {
+                    AlbumName = albumName,
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.UtcNow,
+                    ModifiedBy = userId,
+                    ModifiedDate = DateTime.UtcNow,
+                    UserId = userId,
+                    IsUserDefault = false
+                });
+
+                return tAlbum;
+            }
+
+            return album;
         }
     }
 }

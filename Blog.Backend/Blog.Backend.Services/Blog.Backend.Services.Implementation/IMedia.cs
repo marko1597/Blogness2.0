@@ -10,6 +10,7 @@ namespace Blog.Backend.Services.Implementation
         Media GetByName(string customName);
         Media Get(int mediaId);
         Media Add(Media media);
+        Media Add(User user, string albumName, string filename, string path, string contentType);
         bool Delete(int mediaId);
     }
 }

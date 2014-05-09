@@ -1,0 +1,44 @@
+﻿    div.file-upload div.dropzone {
+        border: dotted 3px #666;
+    }
+
+        div.file-upload input[type=file] {
+            margin-bottom: 5px;
+        }
+
+        div.file-upload div.dropzone ul.upload-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            div.file-upload div.dropzone ul.upload-items > li {
+                margin: 0 0 10px 0;
+                border: 1px solid #999;
+                background: #fff;
+                padding: 10px;
+            }
+
+                div.file-upload div.dropzone ul.upload-items > li p {
+                    margin: 0;
+                }
+
+                    div.file-upload div.dropzone ul.upload-items > li p.filename {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        -ms-text-overflow: ellipsis;
+                        -o-text-overflow: ellipsis;
+                        -moz-text-overflow: ellipsis;
+                        text-overflow: ellipsis;
+                        width: 280px;
+                        font-weight: bold;
+                    }
+
+.ng-file-over {
+    border: dotted 3px red;
+}
+
+@media (max-width: 767px) {
+    ul.upload-items > li > div > div.progress {
+        margin-bottom: 5px !important;
+    }
+}

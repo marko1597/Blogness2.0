@@ -1,21 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Utils;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class MediaController : ApiController
     {
-        private readonly IMedia _service;
+        private readonly IMedia _media;
+        private readonly IUser _user;
+        private readonly IImageHelper _imageHelper;
+        private readonly string _mediaPath = ConfigurationManager.AppSettings.Get("MediaLocation");
 
-        public MediaController(IMedia service)
+        public MediaController(IMedia media, IUser user, IImageHelper imageHelper)
         {
-            _service = service;
+            _media = media;
+            _user = user;
+            _imageHelper = imageHelper;
         }
 
         [HttpGet]
@@ -25,7 +36,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             var media = new List<Media>();
             try
             {
-                media = _service.GetByGroup(albumId) ?? new List<Media>();
+                media = _media.GetByGroup(albumId) ?? new List<Media>();
             }
             catch (Exception ex)
             {
@@ -41,7 +52,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             var media = new List<Media>();
             try
             {
-                media = _service.GetByUser(userId) ?? new List<Media>();
+                media = _media.GetByUser(userId) ?? new List<Media>();
             }
             catch (Exception ex)
             {
@@ -56,7 +67,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                var media = _service.Get(mediaId) ?? new Media();
+                var media = _media.Get(mediaId) ?? new Media();
                 return CreateResponseMediaMessage(media);
             }
             catch (Exception ex)
@@ -72,7 +83,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                var media = _service.GetByName(name) ?? new Media();
+                var media = _media.GetByName(name) ?? new Media();
                 return CreateResponseMediaMessage(media);
             }
             catch (Exception ex)
@@ -88,7 +99,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                var media = _service.GetByName(name) ?? new Media();
+                var media = _media.GetByName(name) ?? new Media();
                 return CreateResponseMediaMessage(media);
             }
             catch (Exception ex)
@@ -97,19 +108,33 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             return null;
         }
-        
+
         [HttpPost]
         [Route("api/media")]
-        public bool Post([FromBody]Media media)
+        public async Task<Media> Post([FromUri]string username, string album)
         {
             try
             {
-                _service.Add(media);
-                return true;
+                var user = _user.GetByUserName(username);
+                var filename = string.Empty;
+                var chunkName = string.Empty;
+
+                var streamProvider = new MultipartFormDataStreamProvider(_mediaPath);
+                await Request.Content.ReadAsMultipartAsync(streamProvider).ContinueWith(
+                    t =>
+                    {
+                        chunkName = streamProvider.FileData.Select(entry => entry.LocalFileName).FirstOrDefault();
+                        filename = streamProvider.FileData.Select(entry => entry.Headers.ContentDisposition.FileName).FirstOrDefault();
+                    });
+
+                var resultMedia = _media.Add(user, album, filename, chunkName,
+                    streamProvider.FileData[0].Headers.ContentType.ToString());
+
+                return resultMedia;
             }
             catch
             {
-                return false;
+                return new Media();
             }
         }
 
@@ -119,7 +144,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                _service.Delete(mediaId);
+                _media.Delete(mediaId);
                 return true;
             }
             catch
@@ -134,7 +159,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             {
                 var response = new HttpResponseMessage
                 {
-                    Content = new StreamContent(new FileStream(media.MediaPath, FileMode.Open, FileAccess.Read))
+                    Content = new StreamContent(new FileStream(media.MediaPath + media.FileName, FileMode.Open, FileAccess.Read))
                 };
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue(media.MediaType);
 

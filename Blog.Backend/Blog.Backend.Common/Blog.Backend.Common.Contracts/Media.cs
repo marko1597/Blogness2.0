@@ -33,9 +33,6 @@ namespace Blog.Backend.Common.Contracts
         public string ThumbnailPath { get; set; }
 
         [DataMember]
-        public byte[] ThumbnailContent { get; set; }
-
-        [DataMember]
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
         public DateTime ModifiedDate { get; set; }

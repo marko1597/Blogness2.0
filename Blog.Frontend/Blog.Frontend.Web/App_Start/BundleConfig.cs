@@ -63,6 +63,8 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/shared.js",
                         "~/Scripts/modules/shared/services/dateHelper.js",
                         "~/Scripts/modules/shared/services/blockUi.js",
+                        "~/Scripts/modules/shared/directives/fileUpload.js",
+                        "~/Scripts/modules/shared/directives/fileUploadItem.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
 
@@ -103,7 +105,6 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postItemComment.js",
-                      "~/Scripts/modules/posts/directives/postContentUploadItem.js",
                       "~/Scripts/modules/posts/services/postsService.js",
                       "~/Scripts/modules/posts/services/postsStateService.js"));
 
@@ -140,6 +141,9 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new StyleBundle("~/content/navigation").Include(
                       "~/Content/modules/navigation/navigationmenu.css"));
+
+            bundles.Add(new StyleBundle("~/content/shared").Include(
+                      "~/Content/modules/shared/fileupload.css"));
 
             bundles.Add(new StyleBundle("~/content/posts").Include(
                       "~/Content/modules/posts/postcontentupload.css",

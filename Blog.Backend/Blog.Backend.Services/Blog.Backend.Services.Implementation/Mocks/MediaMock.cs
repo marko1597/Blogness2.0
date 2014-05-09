@@ -50,6 +50,15 @@ namespace Blog.Backend.Services.Implementation.Mocks
             return media;
         }
 
+        public Media Add(User user, string albumName, string filename, string path, string contentType)
+        {
+            var id = DataStorage.Media.Select(a => a.MediaId).Max();
+            var media = new Media { MediaId = id + 1 };
+            DataStorage.Media.Add(media);
+
+            return media;
+        }
+
         public bool Delete(int mediaId)
         {
             var tMedia = DataStorage.Media.FirstOrDefault(a => a.MediaId == mediaId);

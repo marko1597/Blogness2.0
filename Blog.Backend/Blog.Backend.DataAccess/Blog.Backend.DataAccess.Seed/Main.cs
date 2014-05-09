@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -244,7 +243,7 @@ namespace Blog.Backend.DataAccess.Seed
                     CreatedDate = DateTime.UtcNow,
                     ModifiedBy = u.UserId,
                     ModifiedDate = DateTime.UtcNow,
-                    IsUserDefault = true
+                    IsUserDefault = false
                 });
 
                 _albumRepository.Add(new Album
@@ -255,7 +254,7 @@ namespace Blog.Backend.DataAccess.Seed
                     CreatedDate = DateTime.UtcNow,
                     ModifiedBy = u.UserId,
                     ModifiedDate = DateTime.UtcNow,
-                    IsUserDefault = true
+                    IsUserDefault = false
                 });
             }
 
@@ -300,9 +299,8 @@ namespace Blog.Backend.DataAccess.Seed
                         _userRepository.Edit(u1);
                     }
 
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + (i == 4 || i == 5 ? ".gif" : ".jpg");
-                    var image = Image.FromFile(mediaPath);
+                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\";
+                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\";
                     var customName = Guid.NewGuid().ToString();
 
                     _mediaRepository.Add(new Media
@@ -317,10 +315,8 @@ namespace Blog.Backend.DataAccess.Seed
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
                             MediaType = (i == 4 || i == 5 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
-                            MediaContent = _imageHelper.ImageToByteArray(image),
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
-                            ThumbnailPath = tnPath,
-                            ThumbnailContent = _imageHelper.CreateThumbnail(mediaPath)
+                            ThumbnailPath = tnPath
                         });
 
                     mediaId++;

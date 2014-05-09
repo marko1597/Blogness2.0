@@ -20,9 +20,9 @@ namespace Blog.Backend.Common.Utils
             return Image.FromStream(ms);
         }
 
-        public string GenerateImagePath(int id, string name, string storageRoot)
+        public string GenerateImagePath(int id, string name, string guid, string storageRoot)
         {
-            return storageRoot + id + "\\" + name + "\\" + Guid.NewGuid() + "\\";
+            return storageRoot + id + "\\" + name + "\\" + guid + "\\";
         }
 
         public bool CreateDirectory(string path)

@@ -286,8 +286,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                             MediaPath = mediaPath,
                             MediaContent = new ImageHelper().ImageToByteArray(image),
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", localIpAddress, customName),
-                            ThumbnailPath = tnPath,
-                            ThumbnailContent = new ImageHelper().CreateThumbnail(mediaPath)
+                            ThumbnailPath = tnPath
                         });
                     }
                     else
@@ -307,8 +306,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                             MediaPath = mediaPath,
                             MediaContent = new ImageHelper().ImageToByteArray(image),
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", localIpAddress, customName),
-                            ThumbnailPath = tnPath,
-                            ThumbnailContent = new ImageHelper().CreateThumbnail(mediaPath)
+                            ThumbnailPath = tnPath
                         });
                     }
 

@@ -31,6 +31,12 @@ namespace Blog.Backend.Services.Implementation
             return MediaFactory.GetInstance().CreateMedia().Add(media);
         }
 
+
+        public Media Add(User user, string albumName, string filename, string path, string contentType)
+        {
+            return MediaFactory.GetInstance().CreateMedia().Add(user, albumName, filename, path, contentType);
+        }
+
         public bool Delete(int mediaId)
         {
             return MediaFactory.GetInstance().CreateMedia().Delete(mediaId);
