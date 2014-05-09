@@ -6,13 +6,26 @@
     <div class="modify-post-message">
         <h5>Message</h5>
         <textarea id="post-message-editor" ckeditor="editorOptions" ck-editor-helper ng-model="post.PostMessage"
-                  data-browse-url="http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1" data-upload-url="http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1" 
+                  data-browse-url="http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1" data-upload-url="http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1"
                   data-image-window-width="640" data-image-window-height="480"></textarea>
     </div>
     <div class="modify-post-contents">
+        <div ng-file-drop>
+            <input ng-file-select type="file" multiple />
+            <div class="well dropzone" ng-file-over>
+                <h3>Drag files here...</h3>
+                <p>Queue length: {{ uploader.queue.length }}</p>
+                <div>
+                    <ul class="upload-items">
+                        <li ng-repeat="item in uploader.queue" class="row">
+                            <div post-content-upload-item item="item"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modify-post-buttons">
 
-    </div>
-    <div class="modify-post-buttons">
-
+        </div>
     </div>
 </div>

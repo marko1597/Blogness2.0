@@ -28,6 +28,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.blockui.js",
                         "~/Scripts/plugins/jquery.isotope.js",
                         "~/Scripts/plugins/jquery.newsticker.js",
+                        "~/Scripts/plugins/es5-shim.js",
                         "~/Scripts/plugins/classie.js",
                         "~/Scripts/plugins/snap.js"));
 
@@ -45,6 +46,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-route.js",
                       "~/Scripts/plugins/angular-cookies.js",
                       "~/Scripts/plugins/angular-animate.js",
+                      "~/Scripts/plugins/angular-file-upload.js",
                       "~/Scripts/plugins/angular-isotope.js",
                       "~/Scripts/plugins/angular-ckeditor.js",
                       "~/Scripts/plugins/angular-local-storage.js",
@@ -101,6 +103,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postItemComment.js",
+                      "~/Scripts/modules/posts/directives/postContentUploadItem.js",
                       "~/Scripts/modules/posts/services/postsService.js",
                       "~/Scripts/modules/posts/services/postsStateService.js"));
 
@@ -139,6 +142,7 @@ namespace Blog.Frontend.Web
                       "~/Content/modules/navigation/navigationmenu.css"));
 
             bundles.Add(new StyleBundle("~/content/posts").Include(
+                      "~/Content/modules/posts/postcontentupload.css",
                       "~/Content/modules/posts/postsmain.css",
                       "~/Content/modules/posts/postsmodify.css"));
 

@@ -222,6 +222,7 @@
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg-noise.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
@@ -242,6 +243,7 @@
     <Content Include="Content\modules\header\header.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
+    <Content Include="Content\modules\posts\postcontentupload.css" />
     <Content Include="Content\modules\posts\postsmodify.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
     <Content Include="Content\modules\tags\tags.css" />
@@ -251,6 +253,7 @@
     <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
     <Content Include="Scripts\modules\posts\services\postsStateService.js" />
     <Content Include="Scripts\plugins\angular-ckeditor.js" />
+    <Content Include="Scripts\plugins\angular-file-upload.js" />
     <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />
@@ -690,6 +693,7 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Scripts\plugins\ckeditor\styles.js" />
+    <Content Include="Scripts\plugins\es5-shim.js" />
     <Content Include="Scripts\templates\modifyPost.html" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
@@ -722,12 +726,8 @@
     <Content Include="Content\plugins\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\plugins\jquery-ui-1.10.4.custom.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\modules\posts\directives\postItem.js" />
     <Content Include="Scripts\modules\posts\directives\postItemComment.js" />
     <Content Include="Scripts\modules\posts\controllers\postsController.js" />
@@ -790,6 +790,8 @@
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
+    <Content Include="Scripts\modules\posts\directives\postContentUploadItem.js" />
+    <Content Include="Scripts\templates\modules\posts\postContentUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItemComment.html" />
     <Content Include="Scripts\templates\modules\posts\postLikes.html" />
@@ -828,6 +830,9 @@
     <Content Include="Scripts\plugins\ckeditor\plugins\slideshow\dialogs\slideshow.js.bak" />
     <Content Include="Scripts\plugins\ckeditor\plugins\wsc\LICENSE.md" />
     <Content Include="Scripts\plugins\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
