@@ -12,7 +12,7 @@
         };
 
         $scope.toggleNavigation = function() {
-            $rootScope.$broadcast("toggleNavigation", {});
+            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
         $scope.getUserInfo();
