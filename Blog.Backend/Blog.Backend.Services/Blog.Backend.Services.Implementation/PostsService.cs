@@ -21,12 +21,12 @@ namespace Blog.Backend.Services.Implementation
             return PostsFactory.GetInstance().CreatePosts().GetPostsByUser(userId);
         }
 
-        public bool UpdatePost(Post post)
+        public Post UpdatePost(Post post)
         {
             return PostsFactory.GetInstance().CreatePosts().UpdatePost(post);
         }
 
-        public bool AddPost(Post post)
+        public Post AddPost(Post post)
         {
             return PostsFactory.GetInstance().CreatePosts().AddPost(post);
         }

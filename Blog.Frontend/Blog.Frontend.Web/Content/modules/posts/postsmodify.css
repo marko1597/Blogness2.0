@@ -5,9 +5,12 @@
     margin-bottom: 20px;
 }
 
-    #modify-post-main > div.modify-post-title {
+    #modify-post-main > div {
         padding: 10px;
         border-bottom: 1px solid #ddd;
+    }
+
+    #modify-post-main > div.modify-post-title {
     }
 
         #modify-post-main > div.modify-post-title > span {
@@ -22,7 +25,6 @@
 
     #modify-post-main > div.modify-post-message {
         padding: 10px 20px 10px 10px;
-        border-bottom: 1px solid #ddd;
     }
 
         #modify-post-main > div.modify-post-message > h5 {
@@ -37,3 +39,9 @@
         #modify-post-main > div.modify-post-message .cke_contents {
             height: 200px !important;
         }
+
+    #modify-post-main > div.modify-post-contents {
+    }
+
+    #modify-post-main > div.modify-post-buttons {
+    }

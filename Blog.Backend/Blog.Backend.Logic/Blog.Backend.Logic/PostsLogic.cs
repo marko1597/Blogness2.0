@@ -72,31 +72,52 @@ namespace Blog.Backend.Logic
             return posts;
         }
 
-        public bool UpdatePost(Post post)
+        public Post UpdatePost(Post post)
         {
             try
             {
-                _postRepository.Edit(PostMapper.ToEntity(post));
-                return true;
+                var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
+                return PostMapper.ToDto(tPost);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return null;
             }
         }
 
-        public bool AddPost(Post post)
+        public Post AddPost(Post post)
         {
             try
             {
-                _postRepository.Add(PostMapper.ToEntity(post));
-                return true;
+                foreach (var tag in post.Tags)
+                {
+                    tag.CreatedBy = post.User.UserId;
+                    tag.CreatedDate = DateTime.UtcNow;
+                    tag.ModifiedBy = post.User.UserId;
+                    tag.ModifiedDate = DateTime.UtcNow;
+                }
+
+                foreach (var postContent in post.PostContents)
+                {
+                    postContent.CreatedBy = post.User.UserId;
+                    postContent.CreatedDate = DateTime.UtcNow;
+                    postContent.ModifiedBy = post.User.UserId;
+                    postContent.ModifiedDate = DateTime.UtcNow;
+                }
+
+                post.CreatedBy = post.User.UserId;
+                post.CreatedDate = DateTime.UtcNow;
+                post.ModifiedBy = post.User.UserId;
+                post.ModifiedDate = DateTime.UtcNow;
+
+                var tPost = _postRepository.Add(PostMapper.ToEntity(post));
+                return GetPost(tPost.PostId);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return false;
+                return null;
             }
         }
 

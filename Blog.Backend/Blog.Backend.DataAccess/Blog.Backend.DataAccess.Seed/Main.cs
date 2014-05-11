@@ -415,8 +415,6 @@ namespace Blog.Backend.DataAccess.Seed
                         MediaId = media[i].MediaId
                     }); 
                 }
-
-                
             }
 
             lbConsole.Items.Add("Successfully added post contents...");

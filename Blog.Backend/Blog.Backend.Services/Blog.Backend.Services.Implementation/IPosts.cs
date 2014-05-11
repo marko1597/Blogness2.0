@@ -8,8 +8,8 @@ namespace Blog.Backend.Services.Implementation
         Post GetPost(int postId);
         List<Post> GetPostsByTag(string tagName);
         List<Post> GetPostsByUser(int userId);
-        bool UpdatePost(Post post);
-        bool AddPost(Post post);
+        Post UpdatePost(Post post);
+        Post AddPost(Post post);
         bool DeletePost(int postId);
     }
 }

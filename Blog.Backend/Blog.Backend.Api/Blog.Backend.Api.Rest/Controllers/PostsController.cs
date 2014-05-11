@@ -30,7 +30,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return post;
         }
@@ -47,7 +47,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
 
             return posts;
@@ -65,7 +65,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
 
             return posts;
@@ -83,7 +83,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
 
             return posts;
@@ -101,7 +101,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
 
             return posts;
@@ -109,15 +109,16 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpPost]
         [Route("api/posts")]
-        public void Post([FromBody]Post post)
+        public Post Post([FromBody]Post post)
         {
             try
             {
-                _postsSvc.AddPost(post);
+               return _postsSvc.AddPost(post);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return null;
             }
         }
 
@@ -131,7 +132,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
         }
 
@@ -145,7 +146,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
         }
     }

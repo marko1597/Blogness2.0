@@ -89,7 +89,7 @@ namespace Blog.Backend.Common.Web.Formatter
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine(ex.Message);
+                    Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
                 }
 
                 var tcs = new TaskCompletionSource<object>();

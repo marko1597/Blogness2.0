@@ -8,8 +8,8 @@ namespace Blog.Backend.Common.Utils
     {
         public static double SessionValidityLength = 15.0;
         public static string FileMediaLocation = @"C:\SampleImages\";
-        public static string FileMediaUrl = string.Format("http://{0}/blogapi/api/media/", GetLocalIpAddress());
-        public static string FileMediaThumbnailUrl = string.Format("http://{0}/blogapi/api/media/thumb/", GetLocalIpAddress());
+        public static string FileMediaUrl = string.Format("https://{0}/blogapi/api/media/", GetLocalIpAddress());
+        public static string FileMediaThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumb/", GetLocalIpAddress());
 
         private static string GetLocalIpAddress()
         {

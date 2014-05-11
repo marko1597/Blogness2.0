@@ -30,6 +30,22 @@
             });
 
             return deferred.promise;
+        },
+
+        savePost: function(post) {
+            var deferred = $q.defer();
+
+            $http({
+                url: postsApi,
+                method: "POST",
+                data: post
+            }).success(function (response) {
+                deferred.resolve(response);
+            }).error(function () {
+                deferred.reject("An error occurred!");
+            });
+
+            return deferred.promise;
         }
     };
 }]);

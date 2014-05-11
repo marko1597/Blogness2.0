@@ -1,4 +1,4 @@
-﻿div.tag-item {
+﻿.tag-item {
     display: inline-block;
     color: #eee;
     background: #56c2e1;
@@ -11,12 +11,12 @@
     text-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
 
-    div.tag-item:hover {
+    .tag-item:hover {
         background: #3f9db8;
         border: 1px solid hsla(0, 0%, 100%, 0.75);
         box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
     }
 
-    div.tag-item > i {
+    .tag-item > i {
         margin-right: 5px;
     }

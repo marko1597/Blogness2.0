@@ -37,8 +37,8 @@
     border: dotted 3px red;
 }
 
-@media (max-width: 767px) {
-    ul.upload-items > li > div > div.progress {
+@media (max-width: 992px) {
+    ul.upload-items > li div.progress {
         margin-bottom: 5px !important;
     }
 }

@@ -26,7 +26,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return hobbies;
         }

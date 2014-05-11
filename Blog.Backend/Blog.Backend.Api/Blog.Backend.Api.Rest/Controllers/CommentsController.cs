@@ -28,7 +28,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return comments;
         }
@@ -46,7 +46,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return comments;
         }
@@ -63,7 +63,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return comments;
         }
@@ -78,7 +78,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
         }
 
@@ -92,7 +92,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
         }
     }

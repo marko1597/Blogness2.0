@@ -29,22 +29,22 @@ namespace Blog.Backend.Services.Implementation.Mocks
             return posts;
         }
 
-        public bool UpdatePost(Post post)
+        public Post UpdatePost(Post post)
         {
             var tPost = DataStorage.Posts.FirstOrDefault(a => a.PostId == post.PostId);
             DataStorage.Posts.Remove(tPost);
             DataStorage.Posts.Add(post);
 
-            return true;
+            return tPost;
         }
 
-        public bool AddPost(Post post)
+        public Post AddPost(Post post)
         {
             var id = DataStorage.Posts.Select(a => a.PostId).Max();
             post.PostId = id + 1;
             DataStorage.Posts.Add(post);
 
-            return true;
+            return post;
         }
 
         public bool DeletePost(int postId)

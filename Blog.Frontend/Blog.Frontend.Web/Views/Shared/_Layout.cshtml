@@ -28,7 +28,6 @@
     </script>
 </head>
 <body ng-app="blog">
-    @*<h4 id="pageWidth" style="margin-top: 60px; "></h4>*@
     @RenderBody()
 
     @Scripts.Render("~/scripts/jquery")
@@ -52,12 +51,15 @@
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
             settings.setBlogApiEndpoint(blogConfiguration.blogApi);
             settings.setBlogRoot(blogConfiguration.blogRoot);
-
-            // Enable this for debugging purposes along with h4 element above (just below body)
-            //$("#pageWidth").text($(document).outerWidth());
-            //$(window).on("resize", function() {
-            //    $("#pageWidth").html($(document).outerWidth());
-            //});
+            
+            window.onerror = function (msg, url, line) {
+                var err = {
+                    message: msg,
+                    url: url,
+                    line: line
+                };
+                console.log(err);
+            };
         });
     </script>
 

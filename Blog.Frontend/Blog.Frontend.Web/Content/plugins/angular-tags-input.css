@@ -37,16 +37,8 @@ tags-input .tags .tag-list {
 }
 tags-input .tags .tag-item {
   margin: 2px;
-  padding: 0 5px;
   display: inline-block;
   float: left;
-  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  height: 26px;
-  line-height: 25px;
-  border: 1px solid #acacac;
-  border-radius: 3px;
-  background: -webkit-linear-gradient(top, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
-  background: linear-gradient(to bottom, #f0f9ff 0%, #cbebff 47%, #a1dbff 100%);
 }
 tags-input .tags .tag-item.selected {
   background: -webkit-linear-gradient(top, #febbbb 0%, #fe9090 45%, #ff5c5c 100%);
@@ -68,7 +60,7 @@ tags-input .tags .tag-item .remove-button:active {
 tags-input .tags .input {
   border: 0;
   outline: none;
-  margin: 2px;
+  margin: 5px 2px 2px 2px;
   padding: 0;
   padding-left: 5px;
   float: left;

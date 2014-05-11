@@ -5,7 +5,7 @@
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
-                if ($scope.toggleClass == "open") {
+                if ($scope.toggleClass == "nav-open") {
                     $scope.toggleClass = "nav-close";
                 } else {
                     $scope.toggleClass = "nav-open";

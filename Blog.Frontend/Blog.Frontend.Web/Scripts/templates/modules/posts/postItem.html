@@ -10,14 +10,10 @@
         </div>
     </div>
     <div class="post-item-body">
-        <p>{{post.PostMessage}}</p>
+        <div ng-bind-html="post.PostMessage"></div>
     </div>
     <div class="post-item-contents">
-        <div ng-repeat="content in post.PostContents">
-            <div class="post-item-content">
-                <img ng-src="{{content.Media.MediaUrl}}" />
-            </div>
-        </div>
+        <div post-contents contents="post.PostContents"></div>
     </div>
     <div class="post-item-details">
         <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.PostId }"></div>

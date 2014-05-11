@@ -248,14 +248,19 @@
     <Content Include="Content\modules\posts\postsmain.css" />
     <Content Include="Content\modules\shared\fileupload.css" />
     <Content Include="Content\modules\tags\tags.css" />
+    <Content Include="Content\plugins\angular-carousel.css" />
     <Content Include="Content\plugins\angular-ckeditor.css" />
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
+    <Content Include="Scripts\modules\posts\directives\postContents.js" />
     <Content Include="Scripts\modules\posts\services\postsStateService.js" />
     <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
+    <Content Include="Scripts\plugins\angular-carousel.js" />
     <Content Include="Scripts\plugins\angular-ckeditor.js" />
     <Content Include="Scripts\plugins\angular-file-upload.js" />
+    <Content Include="Scripts\plugins\angular-sanitize.js" />
+    <Content Include="Scripts\plugins\angular-touch.js" />
     <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />
@@ -793,6 +798,7 @@
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
+    <Content Include="Scripts\templates\modules\posts\postContents.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItemComment.html" />

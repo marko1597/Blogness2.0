@@ -28,7 +28,7 @@ namespace Blog.Backend.Logic.Mapper
                 {
                     PostContentId = postContent.PostContentId,
                     PostId = postContent.PostId,
-                    Media = postContent.Media != null ? MediaMapper.ToEntity(postContent.Media) : new DataAccess.Entities.Objects.Media(),
+                    Media = null,
                     MediaId = postContent.Media != null ? postContent.Media.MediaId : 0,
                     CreatedBy = postContent.CreatedBy,
                     CreatedDate = postContent.CreatedDate,

@@ -19,7 +19,7 @@ namespace Blog.Backend.Common.Web.Authentication
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return session;
         }
@@ -36,7 +36,7 @@ namespace Blog.Backend.Common.Web.Authentication
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return session;
         }
@@ -52,7 +52,7 @@ namespace Blog.Backend.Common.Web.Authentication
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return loggedUser;
         }
@@ -68,7 +68,7 @@ namespace Blog.Backend.Common.Web.Authentication
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
             }
             return isLoggedOut;
         }

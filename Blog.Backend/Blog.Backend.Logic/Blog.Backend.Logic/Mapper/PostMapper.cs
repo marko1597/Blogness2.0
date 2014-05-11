@@ -66,7 +66,7 @@ namespace Blog.Backend.Logic.Mapper
                     PostLikes = postLikes,
                     PostContents = contents,
                     Comments = comments,
-                    User = post.User != null ? UserMapper.ToEntity(post.User) : null,
+                    User = null,
                     UserId = post.User != null ? post.User.UserId : 0,
                     Tags = tags,
                     CreatedBy = post.CreatedBy,
