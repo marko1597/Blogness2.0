@@ -1,7 +1,9 @@
 ﻿<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="content-item">
-    <div class="post-item-header" data-user-id="{{post.CreatedBy}}">
-        <img ng-src="{{user.Picture.MediaUrl}}" />
-        <div>
+    <div class="post-item-header row" data-user-id="{{post.CreatedBy}}">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 no-pad">
+            <img ng-src="{{user.Picture.MediaUrl}}" />
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 no-pad">
             <h4>{{post.PostTitle}}</h4>
             <p>
                 <a>{{post.User.UserName}}</a>

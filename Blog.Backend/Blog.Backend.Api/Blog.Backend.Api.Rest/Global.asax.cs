@@ -38,6 +38,7 @@ namespace Blog.Backend.Api.Rest
             container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
             container.Register<IAddress, AddressService>(Lifestyle.Singleton);
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
+            container.Register<ITag, TagsService>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             /*

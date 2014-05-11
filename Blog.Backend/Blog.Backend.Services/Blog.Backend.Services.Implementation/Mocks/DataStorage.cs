@@ -264,8 +264,8 @@ namespace Blog.Backend.Services.Implementation.Mocks
                 for (var i = 1; i < 6; i++)
                 {
                     var albumName = i < 4 ? "Stuff" : "Miscellaneous";
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + ".jpg";
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + ".jpg";
+                    var mediaPath = "C:\\Temp\\SampleImages\\" + u.UserId + "\\" + albumName + "\\" + i + ".jpg";
+                    var tnPath = "C:\\Temp\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\" + i + ".jpg";
                     var image = Image.FromFile(mediaPath);
                     var customName = Guid.NewGuid().ToString();
 

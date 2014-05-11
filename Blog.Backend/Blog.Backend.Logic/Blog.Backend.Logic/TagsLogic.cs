@@ -38,7 +38,7 @@ namespace Blog.Backend.Logic
             var tags = new List<Tag>();
             try
             {
-                var db = _tagRepository.Find(a => a.TagName == tagName, true).ToList();
+                var db = _tagRepository.Find(a => a.TagName.Contains(tagName), true).ToList();
                 db.ForEach(a => tags.Add(TagMapper.ToDto(a)));
             }
             catch (Exception ex)

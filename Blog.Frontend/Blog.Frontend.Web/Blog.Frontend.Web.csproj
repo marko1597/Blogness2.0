@@ -256,6 +256,7 @@
     <Content Include="Scripts\modules\posts\directives\postContents.js" />
     <Content Include="Scripts\modules\posts\services\postsStateService.js" />
     <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
+    <Content Include="Scripts\modules\tags\services\tagsService.js" />
     <Content Include="Scripts\plugins\angular-carousel.js" />
     <Content Include="Scripts\plugins\angular-ckeditor.js" />
     <Content Include="Scripts\plugins\angular-file-upload.js" />

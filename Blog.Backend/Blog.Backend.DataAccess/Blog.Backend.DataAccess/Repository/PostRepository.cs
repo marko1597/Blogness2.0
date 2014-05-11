@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.Backend.DataAccess.Entities;
@@ -19,6 +20,52 @@ namespace Blog.Backend.DataAccess.Repository
         {
             var query = Find(predicate, null, "PostContents,Tags,User,Comments,PostLikes").OrderBy(a => a.CreatedDate).Take(threshold).ToList();
             return query;
+        }
+
+        public override Post Add(Post post)
+        {
+            //Context.Posts.Attach(post);
+
+            if (post.Tags != null)
+            {
+                var tags = post.Tags;
+                post.Tags = new List<Tag>();
+
+                foreach (var t in tags)
+                {
+                    var t1 = t;
+                    var q = Context.Tags.Where(a => a.TagName.ToLower() == t1.TagName.ToLower()).ToList();
+
+                    if (q.Count == 0)
+                    {
+                        Context.Tags.Attach(t);
+                        Context.Entry(t).State = EntityState.Added;
+                        post.Tags.Add(t);
+                    }
+                    else
+                    {
+                        Context.Tags.Attach(q.FirstOrDefault());
+                        Context.Entry(q.FirstOrDefault()).State = EntityState.Unchanged;
+                        post.Tags.Add(q.FirstOrDefault());
+                    }
+                }
+            }
+
+            if (post.PostContents != null)
+            {
+                var contents = post.PostContents;
+                post.PostContents = new List<PostContent>();
+
+                foreach (var postContent in contents)
+                {
+                    post.PostContents.Add(postContent);
+                }
+            }
+
+            Context.Entry(post).State = EntityState.Added;
+            Context.SaveChanges();
+
+            return post;
         }
     }
 }

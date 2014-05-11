@@ -33,40 +33,55 @@ namespace Blog.Backend.DataAccess.Seed
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.BtnGenerate = new System.Windows.Forms.Button();
-            this.lbConsole = new System.Windows.Forms.ListBox();
+            this.TxtConsole = new System.Windows.Forms.TextBox();
+            this.BtnDropDatabase = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnGenerate
             // 
-            this.BtnGenerate.Location = new System.Drawing.Point(12, 12);
+            this.BtnGenerate.Location = new System.Drawing.Point(0, 0);
             this.BtnGenerate.Name = "BtnGenerate";
-            this.BtnGenerate.Size = new System.Drawing.Size(294, 23);
+            this.BtnGenerate.Size = new System.Drawing.Size(268, 23);
             this.BtnGenerate.TabIndex = 5;
             this.BtnGenerate.Text = "Generate Data";
             this.BtnGenerate.UseVisualStyleBackColor = true;
             this.BtnGenerate.Click += new System.EventHandler(this.BtnGenerateClick);
             // 
-            // lbConsole
+            // TxtConsole
             // 
-            this.lbConsole.FormattingEnabled = true;
-            this.lbConsole.Location = new System.Drawing.Point(13, 42);
-            this.lbConsole.Name = "lbConsole";
-            this.lbConsole.Size = new System.Drawing.Size(293, 251);
-            this.lbConsole.TabIndex = 6;
+            this.TxtConsole.Location = new System.Drawing.Point(0, 29);
+            this.TxtConsole.Multiline = true;
+            this.TxtConsole.Name = "TxtConsole";
+            this.TxtConsole.ReadOnly = true;
+            this.TxtConsole.Size = new System.Drawing.Size(547, 302);
+            this.TxtConsole.TabIndex = 6;
+            // 
+            // BtnDropDatabase
+            // 
+            this.BtnDropDatabase.Location = new System.Drawing.Point(279, 0);
+            this.BtnDropDatabase.Name = "BtnDropDatabase";
+            this.BtnDropDatabase.Size = new System.Drawing.Size(268, 23);
+            this.BtnDropDatabase.TabIndex = 7;
+            this.BtnDropDatabase.Text = "Drop Database";
+            this.BtnDropDatabase.UseVisualStyleBackColor = true;
+            this.BtnDropDatabase.Click += new System.EventHandler(this.BtnDropDatabaseClick);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 303);
-            this.Controls.Add(this.lbConsole);
+            this.ClientSize = new System.Drawing.Size(547, 330);
+            this.Controls.Add(this.BtnDropDatabase);
+            this.Controls.Add(this.TxtConsole);
             this.Controls.Add(this.BtnGenerate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "I Can Haz Seeds!";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -87,7 +102,8 @@ namespace Blog.Backend.DataAccess.Seed
         private readonly ITagRepository _tagRepository = new TagRepository();
         private readonly IUserRepository _userRepository = new UserRepository();
         private readonly IImageHelper _imageHelper = new ImageHelper();
-        private System.Windows.Forms.ListBox lbConsole;
+        private System.Windows.Forms.TextBox TxtConsole;
+        private System.Windows.Forms.Button BtnDropDatabase;
     }
 }
 

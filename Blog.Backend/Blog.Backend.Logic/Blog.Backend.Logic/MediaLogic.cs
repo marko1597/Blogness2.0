@@ -131,7 +131,9 @@ namespace Blog.Backend.Logic
                 var album = GetAlbumByName(albumName, user.UserId);
                 var guid = Guid.NewGuid().ToString();
                 var mediaPath = _imageHelper.GenerateImagePath(user.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
-                _imageHelper.CreateDirectory(mediaPath);
+                var hasCreatedDir = _imageHelper.CreateDirectory(mediaPath);
+
+                if (!hasCreatedDir) return null;
 
                 if (!string.IsNullOrEmpty(filename))
                 {

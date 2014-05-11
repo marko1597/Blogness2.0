@@ -102,8 +102,6 @@ namespace Blog.Backend.DataAccess.Entities
                     x.MapLeftKey("PostId");
                     x.MapRightKey("TagId");
                 });
-
-
         }
 
         public DbSet<Comment> Comments { get; set; }

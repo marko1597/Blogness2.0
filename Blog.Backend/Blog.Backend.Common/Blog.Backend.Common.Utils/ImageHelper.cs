@@ -29,11 +29,7 @@ namespace Blog.Backend.Common.Utils
         {
             try
             {
-                var folders = path.Split('\\');
-                Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2]);
-                Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3]);
-                Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4]);
-
+                Directory.CreateDirectory(path);
                 return true;
             }
             catch

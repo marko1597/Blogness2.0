@@ -13,8 +13,10 @@
         <div file-upload uploader="uploader"></div>
     </div>
     <div class="modify-post-tags">
-        <tags-input ng-model="Tags" add-on-enter="true" add-on-space="true"
-                    add-on-comma="true" on-tag-added="onTagAdded($tag)"></tags-input>
+        <tags-input ng-model="Tags" add-on-enter="true" add-on-comma="true" 
+                    on-tag-added="onTagAdded($tag)" on-tag-removed="onTagRemoved($tag)">
+            <auto-complete source="getTagsSource($query)" highlight-matched-text="true" debounce-delay="1500"></auto-complete>
+        </tags-input>
     </div>
     <div class="modify-post-buttons">
         <button class="btn btn-primary" ng-click="savePost()">Save</button>

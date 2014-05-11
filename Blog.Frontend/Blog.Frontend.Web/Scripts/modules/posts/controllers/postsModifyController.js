@@ -1,7 +1,8 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$fileUploader", "localStorageService",
-    "postsService", "userService", "postsStateService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $fileUploader, localStorageService, postsService, userService,
-        postsStateService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$location", "$fileUploader", "localStorageService",
+    "postsService", "userService", "postsStateService", "tagsService", "blockUiService",
+    "dateHelper", "configProvider",
+    function ($scope, $location, $fileUploader, localStorageService, postsService, userService,
+        postsStateService, tagsService, blockUiService, dateHelper, configProvider) {
 
         $scope.post = { PostTitle : "", PostMessage : "", PostContents: [], Tags: []};
         $scope.username = localStorageService.get("username");
@@ -13,14 +14,30 @@
         $scope.onTagAdded = function (t) {
             var tag = { TagName: t.text };
             $scope.post.Tags.push(tag);
-            console.log($scope.post);
+        };
+
+        $scope.onTagRemoved = function (t) {
+            var tag = { TagName: t.text };
+            var index = $scope.post.Tags.indexOf(tag);
+            $scope.post.Tags.splice(index);
+        };
+
+        $scope.getTagsSource = function(t) {
+            return tagsService.getTagsByName(t);
         };
 
         $scope.savePost = function () {
+            blockUiService.blockIt();
             userService.getUserInfo().then(function(userinfo) {
                 $scope.post.User = userinfo;
 
                 postsService.savePost($scope.post).then(function (resp) {
+                    blockUiService.unblockIt();
+                    
+                    if (resp != null) {
+                        $location.path("/");
+                    }
+
                     console.log(resp);
                 }, function (e) {
                     alert(e);

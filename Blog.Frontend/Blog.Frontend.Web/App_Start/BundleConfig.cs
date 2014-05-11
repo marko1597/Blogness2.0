@@ -77,6 +77,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/tags").Include(
                       "~/Scripts/modules/tags/tags.js",
+                      "~/Scripts/modules/tags/services/tagsService.js",
                       "~/Scripts/modules/tags/directives/tagItem.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/header").Include(

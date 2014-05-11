@@ -11,10 +11,12 @@ namespace Blog.Backend.Logic
     public class PostsLogic
     {
         private readonly IPostRepository _postRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public PostsLogic(IPostRepository postRepository)
+        public PostsLogic(IPostRepository postRepository, ITagRepository tagRepository)
         {
             _postRepository = postRepository;
+            _tagRepository = tagRepository;
         }
 
         public Post GetPost(int postId)
@@ -96,6 +98,7 @@ namespace Blog.Backend.Logic
                     tag.CreatedDate = DateTime.UtcNow;
                     tag.ModifiedBy = post.User.UserId;
                     tag.ModifiedDate = DateTime.UtcNow;
+                    tag.TagName = tag.TagName.ToLower();
                 }
 
                 foreach (var postContent in post.PostContents)

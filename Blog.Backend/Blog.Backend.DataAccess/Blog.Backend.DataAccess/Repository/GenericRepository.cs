@@ -6,7 +6,9 @@ using System.Linq.Expressions;
 
 namespace Blog.Backend.DataAccess.Repository
 {
-    public abstract class GenericRepository<TC, T> : IGenericRepository<T> where T : class where TC : DbContext, new()
+    public abstract class GenericRepository<TC, T> : IGenericRepository<T>
+        where T : class
+        where TC : DbContext, new()
     {
         private TC _context = new TC();
 
@@ -33,7 +35,7 @@ namespace Blog.Backend.DataAccess.Repository
                 query = query.Where(filter);
             }
 
-            query = includeProperties.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+            query = includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                 .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             if (orderBy != null)
@@ -63,7 +65,7 @@ namespace Blog.Backend.DataAccess.Repository
 
             return entity;
         }
-
+        
         public virtual void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);

@@ -5,14 +5,7 @@
         $scope.errorContent = { Show: false, Type: "" };
         
         $scope.getPopularPosts = function () {
-            blockUiService.blockIt(
-                '<h4>Loading...</h4>', {
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: '#000',
-                    opacity: .5,
-                    color: '#fff'
-                });
+            blockUiService.blockIt();
             postsService.getPopularPosts().then(function (resp) {
                 $scope.posts = resp;
 

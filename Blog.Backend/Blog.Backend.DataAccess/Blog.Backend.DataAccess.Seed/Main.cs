@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Windows.Forms;
 using Blog.Backend.DataAccess.Entities.Objects;
 
@@ -15,6 +19,7 @@ namespace Blog.Backend.DataAccess.Seed
         private List<Comment> _comments = new List<Comment>();
         private List<Tag> _tags = new List<Tag>();
         private readonly string _localIpAddress = string.Empty;
+
         public Main()
         {
             InitializeComponent();
@@ -27,11 +32,23 @@ namespace Blog.Backend.DataAccess.Seed
             }
         }
 
+        private void AddConsoleMessage(string message)
+        {
+            TxtConsole.AppendText(message + Environment.NewLine);
+        }
+
+        private void BtnDropDatabaseClick(object sender, EventArgs e)
+        {
+            DropDatabaseOnFail();
+            AddConsoleMessage("Dropped it like its hot!");
+        }
+
         private void BtnGenerateClick(object sender, EventArgs e)
         {
             try
             {
-                lbConsole.Items.Add("<================ START ================>");
+                AddConsoleMessage("<================ START ================>");
+                CopyImages();
                 LoadUsers();
                 LoadAddress();
                 LoadEducationType();
@@ -45,13 +62,18 @@ namespace Blog.Backend.DataAccess.Seed
                 LoadPostLikes();
                 LoadComments();
                 LoadCommentLikes();
-                lbConsole.Items.Add("<================ END ================>");
+
+                AddConsoleMessage("<================ END ================>");
             }
             catch (Exception ex)
             {
-                lbConsole.Items.Add(ex.Message);
+                DropDatabaseOnFail();
+                AddConsoleMessage(ex.Message);
+                AddConsoleMessage("Dropped database due to error...");
             }
         }
+
+        #region Load Data Stuff
 
         private void LoadUsers()
         {
@@ -89,7 +111,7 @@ namespace Blog.Backend.DataAccess.Seed
                     b => b.OrderBy(c => c.UserId),
                     "Address,Education,Hobbies").ToList();
 
-            lbConsole.Items.Add("Successfully added users...");
+            AddConsoleMessage("Successfully added users...");
         }
 
         private void LoadAddress()
@@ -104,7 +126,7 @@ namespace Blog.Backend.DataAccess.Seed
                 Zip = 1234
             }));
 
-            lbConsole.Items.Add("Successfully added addresses...");
+            AddConsoleMessage("Successfully added addresses...");
         }
 
         private void LoadEducationType()
@@ -129,7 +151,7 @@ namespace Blog.Backend.DataAccess.Seed
                 EducationTypeName = "Post Graduate"
             });
 
-            lbConsole.Items.Add("Successfully added education types...");
+            AddConsoleMessage("Successfully added education types...");
         }
 
         private void LoadEducation()
@@ -188,7 +210,7 @@ namespace Blog.Backend.DataAccess.Seed
                 });
             }
 
-            lbConsole.Items.Add("Successfully added educations...");
+            AddConsoleMessage("Successfully added educations...");
         }
 
         private void LoadHobbies()
@@ -206,7 +228,7 @@ namespace Blog.Backend.DataAccess.Seed
                 });
             }
 
-            lbConsole.Items.Add("Successfully added hobbies...");
+            AddConsoleMessage("Successfully added hobbies...");
         }
 
         private void LoadAlbums()
@@ -258,7 +280,7 @@ namespace Blog.Backend.DataAccess.Seed
                 });
             }
 
-            lbConsole.Items.Add("Successfully added albums...");
+            AddConsoleMessage("Successfully added albums...");
         }
 
         private void LoadMedia()
@@ -299,8 +321,8 @@ namespace Blog.Backend.DataAccess.Seed
                         _userRepository.Edit(u1);
                     }
 
-                    var mediaPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\";
-                    var tnPath = "C:\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\";
+                    var mediaPath = "C:\\Temp\\SampleImages\\" + u.UserId + "\\" + albumName + "\\";
+                    var tnPath = "C:\\Temp\\SampleImages\\" + u.UserId + "\\" + albumName + "\\tn\\";
                     var customName = Guid.NewGuid().ToString();
 
                     _mediaRepository.Add(new Media
@@ -323,7 +345,7 @@ namespace Blog.Backend.DataAccess.Seed
                 }
             }
 
-            lbConsole.Items.Add("Successfully added media...");
+            AddConsoleMessage("Successfully added media...");
         }
 
         private void LoadTags()
@@ -358,7 +380,7 @@ namespace Blog.Backend.DataAccess.Seed
 
             _tags = _tagRepository.Find(a => a.TagId > 0, false).ToList();
 
-            lbConsole.Items.Add("Successfully added tags...");
+            AddConsoleMessage("Successfully added tags...");
         }
 
         private void LoadPosts()
@@ -380,11 +402,11 @@ namespace Blog.Backend.DataAccess.Seed
                     });
                 }
             }
-
+            
             _posts = _postRepository.Find(a => a.PostId > 0, q => q.OrderByDescending(p => p.CreatedDate),
                 "Comments,User,PostLikes,Tags,PostContents").ToList();
 
-            lbConsole.Items.Add("Successfully added posts...");
+            AddConsoleMessage("Successfully added posts...");
         }
 
         private void LoadPostContents()
@@ -417,7 +439,7 @@ namespace Blog.Backend.DataAccess.Seed
                 }
             }
 
-            lbConsole.Items.Add("Successfully added post contents...");
+            AddConsoleMessage("Successfully added post contents...");
         }
 
         private void LoadPostLikes()
@@ -438,7 +460,7 @@ namespace Blog.Backend.DataAccess.Seed
                 }
             }
 
-            lbConsole.Items.Add("Successfully added post likes...");
+            AddConsoleMessage("Successfully added post likes...");
         }
 
         private void LoadComments()
@@ -485,7 +507,7 @@ namespace Blog.Backend.DataAccess.Seed
             _comments = _commentRepository.Find(a => a.CommentId > 0 && a.ParentCommentId == null, q => q.OrderByDescending(p => p.CreatedDate),
                 "Comments,User,CommentLikes,ParentComment").ToList();
 
-            lbConsole.Items.Add("Successfully added comments and comment replies...");
+            AddConsoleMessage("Successfully added comments and comment replies...");
         }
 
         private void LoadCommentLikes()
@@ -506,7 +528,51 @@ namespace Blog.Backend.DataAccess.Seed
                 }
             }
 
-            lbConsole.Items.Add("Successfully added comment likes...");
+            AddConsoleMessage("Successfully added comment likes...");
+        }
+
+        #endregion
+
+        private void DropDatabaseOnFail()
+        {
+            try
+            {
+                var connectionstring = ConfigurationManager.AppSettings.Get("MasterDb");
+                var dbName = ConfigurationManager.AppSettings.Get("BlogDbName");
+
+                using (var con = new SqlConnection(connectionstring))
+                {
+                    con.Open();
+                    var sqlCommandText = @"
+                    ALTER DATABASE " + dbName + @" SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                    DROP DATABASE [" + dbName + "]";
+                    var sqlCommand = new SqlCommand(sqlCommandText, con);
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                AddConsoleMessage(ex.Message);
+            }
+            
+        }
+
+        private void CopyImages()
+        {
+            var imagesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\SampleImages";
+            const string destinationPath = @"C:\Temp\SampleImages\";
+            
+            foreach (var dest in Directory.GetDirectories(imagesPath, "*", SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dest.Replace(imagesPath, destinationPath));
+            }
+            
+            foreach (var newPath in Directory.GetFiles(imagesPath, "*.*", SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(imagesPath, destinationPath), true);
+            }
+            
+            AddConsoleMessage("Successfully moved sample images...");
         }
     }
 }
