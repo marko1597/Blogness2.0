@@ -3,7 +3,7 @@
         $scope.posts = [];
         $scope.size = "";
         $scope.errorContent = { Show: false, Type: "" };
-        
+
         $scope.getPopularPosts = function () {
             blockUiService.blockIt();
             postsService.getPopularPosts().then(function (resp) {

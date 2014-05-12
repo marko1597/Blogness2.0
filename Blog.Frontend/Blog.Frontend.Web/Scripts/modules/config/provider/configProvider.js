@@ -1,4 +1,10 @@
 ﻿ngConfig.provider('configProvider', function () {
+    var windowDimensions = {
+        width: 0,
+        height: 0,
+        mode: ""
+    };
+
     var settings = {
         "BlogApi": "",
         "BlogRoot": "",
@@ -29,6 +35,19 @@
                 return settings;
             },
 
+            setDimensions: function (w, h) {
+                windowDimensions.width = w;
+                windowDimensions.height = h;
+
+                if (w >= 320 && w <= 767) {
+                    windowDimensions.mode = "mobile";
+                } else if (w >= 768 && w <= 1024) {
+                    windowDimensions.mode = "tablet";
+                } else if (w > 1024) {
+                    windowDimensions.mode = "desktop";
+                }
+            },
+
             /* Setters */
             setBlogApiEndpoint: function (val) {
                 settings.BlogApi = val;
@@ -45,7 +64,8 @@
 
             /* Constants */
             pageState: pageState,
-            navigationItems: navigationItems
+            navigationItems: navigationItems,
+            windowDimensions: windowDimensions
         };
     }];
 });

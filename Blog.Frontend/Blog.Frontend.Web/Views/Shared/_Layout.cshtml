@@ -23,11 +23,12 @@
         {
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
-            templatesUrl: "/blog/scripts/templates/modules/"
+            templatesUrl: "/blog/scripts/templates/modules/",
+            displayMode: "desktop"
         };
     </script>
 </head>
-<body ng-app="blog">
+<body ng-app="blog" window-resize>
     @RenderBody()
 
     @Scripts.Render("~/scripts/jquery")
@@ -52,16 +53,20 @@
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
             settings.setBlogApiEndpoint(blogConfiguration.blogApi);
             settings.setBlogRoot(blogConfiguration.blogRoot);
-            
-            window.onerror = function (msg, url, line) {
-                var err = {
-                    message: msg,
-                    url: url,
-                    line: line
-                };
-                console.log(err);
-            };
+            settings.setDimensions(window.innerWidth, window.innerHeight);
         });
+
+        var getDimensionMode = function() {
+            var w = window.innerWidth;
+
+            if (w >= 320 && w <= 767) {
+                windowDimensions.mode = "mobile";
+            } else if (w >= 768 && w <= 1024) {
+                windowDimensions.mode = "tablet";
+            } else if (w > 1024) {
+                windowDimensions.mode = "desktop";
+            }
+        };
     </script>
 
     @RenderSection("scripts", false)

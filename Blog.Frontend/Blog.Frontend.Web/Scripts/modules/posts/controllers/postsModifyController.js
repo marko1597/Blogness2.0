@@ -4,7 +4,11 @@
     function ($scope, $location, $fileUploader, localStorageService, postsService, userService,
         postsStateService, tagsService, blockUiService, dateHelper, configProvider) {
 
-        $scope.post = { PostTitle : "", PostMessage : "", PostContents: [], Tags: []};
+        $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
+            window.getDimensionMode() : configProvider.windowDimensions.mode;
+
+        $scope.post = { PostTitle: "", PostMessage: "", PostContents: [], Tags: [] };
+
         $scope.username = localStorageService.get("username");
 
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
@@ -46,6 +50,12 @@
                 alert(e);
             });
         };
+
+        $scope.$on("windowSizeChanged", function (e, d) {
+            configProvider.setDimensions(d.width, d.height);
+            $scope.dimensionMode = configProvider.windowDimensions.mode;
+            console.log($scope.dimensionMode);
+        });
 
         var uploader = $scope.uploader = $fileUploader.create({
             scope: $scope,

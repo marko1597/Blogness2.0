@@ -1,6 +1,31 @@
 ﻿var blog = angular.module("blog", ["ngRoute", "mgcrea.ngStrap", "snap", "ngLogger",
     "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation", "ngUser", "ngTags"]);
 
+blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
+    return {
+        restrict: 'EA',
+        link: function postLink(scope) {
+            scope.onResizeFunction = function() {
+                scope.windowHeight = $window.innerHeight;
+                scope.windowWidth = $window.innerWidth;
+                $rootScope.$broadcast("windowSizeChanged", {
+                    height: scope.windowHeight,
+                    width: scope.windowWidth
+                });
+            };
+
+            scope.onResizeFunction();
+
+            angular.element($window).bind('resize', function () {
+                $timeout(function() {
+                    scope.onResizeFunction();
+                    scope.$apply();
+                }, 1000);
+            });
+        }
+    };
+}]);
+
 blog.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
         .when('/', {

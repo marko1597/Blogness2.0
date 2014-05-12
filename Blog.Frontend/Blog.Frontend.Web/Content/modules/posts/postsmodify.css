@@ -10,38 +10,46 @@
         border-bottom: 1px solid #ddd;
     }
 
-    #modify-post-main > div.modify-post-title {
-    }
-
-        #modify-post-main > div.modify-post-title > span {
-            width: 5%;
-            margin-right: 10px;
+        #modify-post-main > div.modify-post-title {
         }
 
-        #modify-post-main > div.modify-post-title > input {
-            width: 90%;
-            max-width: 90%;
+            #modify-post-main > div.modify-post-title > span {
+                width: 5%;
+                margin-right: 10px;
+            }
+
+            #modify-post-main > div.modify-post-title > input {
+                width: 90%;
+                max-width: 90%;
+            }
+
+        #modify-post-main > div.modify-post-message {
+            padding: 10px 20px 10px 10px;
         }
 
+            #modify-post-main > div.modify-post-message > h5 {
+                margin: 0 0 10px 0;
+            }
+
+            #modify-post-main > div.modify-post-message textarea {
+                min-height: 150px;
+                resize: none;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            #modify-post-main > div.modify-post-message .cke_contents {
+                height: 200px !important;
+            }
+
+        #modify-post-main > div.modify-post-contents {
+        }
+
+        #modify-post-main > div.modify-post-buttons {
+        }
+
+@media (max-width: 767px) {
     #modify-post-main > div.modify-post-message {
-        padding: 10px 20px 10px 10px;
+        padding: 10px;
     }
-
-        #modify-post-main > div.modify-post-message > h5 {
-            margin: 0 0 10px 0;
-        }
-
-        #modify-post-main > div.modify-post-message > textarea {
-            min-height: 300px;
-            resize: none;
-        }
-
-        #modify-post-main > div.modify-post-message .cke_contents {
-            height: 200px !important;
-        }
-
-    #modify-post-main > div.modify-post-contents {
-    }
-
-    #modify-post-main > div.modify-post-buttons {
-    }
+}
