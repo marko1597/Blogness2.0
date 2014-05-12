@@ -35,6 +35,7 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/jsplugins").Include(
                         "~/Scripts/plugins/respond.js",
                         "~/Scripts/plugins/underscore.js",
+                        "~/Scripts/plugins/stacktrace.js",
                         "~/Scripts/plugins/video-js/video.js",
                         "~/Scripts/plugins/ckeditor/ckeditor.js"));
 
@@ -70,6 +71,11 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/directives/fileUploadItem.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/logger").Include(
+                        "~/Scripts/modules/logger/logger.js",
+                        "~/Scripts/modules/logger/services/stacktraceService.js",
+                        "~/Scripts/modules/logger/services/errorLogService.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/header").Include(
                       "~/Scripts/modules/header/header.js",

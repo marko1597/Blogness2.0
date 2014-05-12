@@ -3,10 +3,12 @@ using System.Web.Http;
 using System.Web;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Contracts.ViewModels;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class SessionController : ApiController
     {
         private readonly ISession _session;

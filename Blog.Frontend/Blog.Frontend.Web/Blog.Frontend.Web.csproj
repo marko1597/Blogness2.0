@@ -252,6 +252,9 @@
     <Content Include="Content\plugins\angular-ckeditor.css" />
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
+    <Content Include="Scripts\modules\logger\logger.js" />
+    <Content Include="Scripts\modules\logger\services\errorLogService.js" />
+    <Content Include="Scripts\modules\logger\services\stacktraceService.js" />
     <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
     <Content Include="Scripts\modules\posts\directives\postContents.js" />
     <Content Include="Scripts\modules\posts\services\postsStateService.js" />
@@ -702,6 +705,7 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Scripts\plugins\ckeditor\styles.js" />
     <Content Include="Scripts\plugins\es5-shim.js" />
+    <Content Include="Scripts\plugins\stacktrace.js" />
     <Content Include="Scripts\templates\modifyPost.html" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />

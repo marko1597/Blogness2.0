@@ -1,4 +1,4 @@
-﻿var blog = angular.module("blog", ["ngRoute", "mgcrea.ngStrap", "snap",
+﻿var blog = angular.module("blog", ["ngRoute", "mgcrea.ngStrap", "snap", "ngLogger",
     "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation", "ngUser", "ngTags"]);
 
 blog.config(["$routeProvider", function ($routeProvider) {

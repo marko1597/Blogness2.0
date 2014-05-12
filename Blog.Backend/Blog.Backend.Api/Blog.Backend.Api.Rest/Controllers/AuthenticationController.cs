@@ -1,10 +1,12 @@
 ﻿using System.Web.Http;
 using Blog.Backend.Common.Contracts.ViewModels;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Common.Web.Authentication;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class AuthenticationController : ApiController
     {
         private readonly IAuthenticationHelper _authentication;

@@ -220,12 +220,12 @@
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MediaController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\PostContentController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -236,13 +236,13 @@
     <Compile Include="Controllers\SessionController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\UploadTempController.cs" />
     <Compile Include="Controllers\UsersController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ErrorLogModel.cs" />
     <Compile Include="Models\FileUploadViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

@@ -40,7 +40,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return media;
         }
@@ -56,7 +56,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return media;
         }
@@ -72,7 +72,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return null;
         }
@@ -88,7 +88,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return null;
         }
@@ -104,7 +104,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return null;
         }
@@ -167,7 +167,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return null;
         }

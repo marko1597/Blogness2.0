@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 using Blog.Backend.Common.Contracts;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class HobbiesController : ApiController
     {
         private readonly IHobby _service;
@@ -26,7 +28,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return hobbies;
         }

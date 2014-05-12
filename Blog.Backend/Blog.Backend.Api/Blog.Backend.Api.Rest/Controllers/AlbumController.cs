@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class AlbumController : ApiController
     {
         private readonly IAlbum _service;
@@ -26,7 +28,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return albums;
         }
@@ -42,7 +44,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return album;
         }

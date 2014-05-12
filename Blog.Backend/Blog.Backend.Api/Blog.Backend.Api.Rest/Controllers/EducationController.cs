@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 using System;
 using System.Web.Http;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
+    [AllowCrossSiteApi]
     public class EducationController : ApiController
     {
         private readonly IEducation _service;
@@ -26,7 +28,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
             }
             return education;
         }
