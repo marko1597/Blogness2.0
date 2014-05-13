@@ -7,7 +7,7 @@ namespace Blog.Backend.Common.Contracts
     [DataContract]
     [KnownType(typeof(PostLike))]
     [KnownType(typeof(PostContent))]
-    public class Post
+    public class Post : BaseContract
     {
         [DataMember]
         public int PostId { get; set; }

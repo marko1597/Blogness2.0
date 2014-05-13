@@ -3,7 +3,7 @@
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class EducationType
+    public class EducationType : BaseContract
     {
         [DataMember]
         public int EducationTypeId { get; set; }

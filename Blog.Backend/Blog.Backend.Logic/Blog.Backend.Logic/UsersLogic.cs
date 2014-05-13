@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Mapper;
 
@@ -26,7 +27,7 @@ namespace Blog.Backend.Logic
 
         public User GetByUserName(string userName)
         {
-            var user = new User();
+            User user;
             try
             {
                 var tUser = _userRepository.Find(a => a.UserName == userName, null, "Address,Hobbies").FirstOrDefault();
@@ -38,14 +39,14 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return user;
         }
 
         public User GetByCredentials(string username, string password)
         {
-            var user = new User();
+            User user;
             try
             {
                 var tUser = _userRepository.Find(a => a.UserName == username && a.Password == password, false).FirstOrDefault();
@@ -53,14 +54,14 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return user;
         }
 
         public User Get(int userId)
         {
-            var user = new User();
+            User user;
             try
             {
                 var tUser = _userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault();
@@ -72,7 +73,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return user;
         }

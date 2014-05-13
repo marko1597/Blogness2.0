@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class Album
+    public class Album : BaseContract
     {
         [DataMember]
         public int AlbumId { get; set; }

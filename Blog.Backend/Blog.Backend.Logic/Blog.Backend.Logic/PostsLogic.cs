@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Factory;
 using Blog.Backend.Logic.Mapper;
@@ -11,17 +12,15 @@ namespace Blog.Backend.Logic
     public class PostsLogic
     {
         private readonly IPostRepository _postRepository;
-        private readonly ITagRepository _tagRepository;
 
-        public PostsLogic(IPostRepository postRepository, ITagRepository tagRepository)
+        public PostsLogic(IPostRepository postRepository)
         {
             _postRepository = postRepository;
-            _tagRepository = tagRepository;
         }
 
         public Post GetPost(int postId)
         {
-            var post = new Post();
+            Post post;
             try
             {
                 var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,Comments,PostLikes").FirstOrDefault();
@@ -30,7 +29,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return post;
         }
@@ -50,7 +49,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return posts;
         }
@@ -69,7 +68,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return posts;
         }
@@ -83,8 +82,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -119,8 +117,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -134,8 +131,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }

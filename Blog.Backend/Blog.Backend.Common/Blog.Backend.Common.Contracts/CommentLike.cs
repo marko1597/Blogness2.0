@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class CommentLike
+    public class CommentLike : BaseContract
     {
         [DataMember]
         public int CommentLikeId { get; set; }

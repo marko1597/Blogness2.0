@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.Common.Contracts.ViewModels;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Factory;
@@ -109,7 +110,6 @@ namespace Blog.Backend.Logic
 
         public bool Logout(string userName)
         {
-            var loggedOut = false;
             try
             {
                 var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(userName);
@@ -119,14 +119,15 @@ namespace Blog.Backend.Logic
                 {
                     _sessionRepository.Delete(session);
                 }
+
                 CleanupExpiredSessions();
-                loggedOut = true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
-            return loggedOut;
+
+            return true;
         }
 
         public void DeleteSessionFromSameIp(string ipAddress)
@@ -138,7 +139,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 

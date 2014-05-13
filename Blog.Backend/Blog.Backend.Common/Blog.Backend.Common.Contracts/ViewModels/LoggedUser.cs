@@ -3,7 +3,7 @@
 namespace Blog.Backend.Common.Contracts.ViewModels
 {
     [DataContract]
-    public class LoggedUser
+    public class LoggedUser : BaseContract
     {
         [DataMember]
         public User User { get; set; }

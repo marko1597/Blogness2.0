@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.Common.Utils;
 using Blog.Backend.DataAccess.Entities.Objects;
 using Blog.Backend.DataAccess.Repository;
@@ -35,7 +36,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return media;
         }
@@ -50,37 +51,33 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return media;
         }
 
         public Media Get(int mediaId)
         {
-            var media = new Media();
             try
             {
                 return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId).FirstOrDefault());
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
-            return media;
         }
 
         public Media GetByName(string customName)
         {
-            var media = new Media();
             try
             {
                 return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault());
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
-            return media;
         }
 
         public Media Add(Media media)
@@ -120,8 +117,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -186,8 +182,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -208,8 +203,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 

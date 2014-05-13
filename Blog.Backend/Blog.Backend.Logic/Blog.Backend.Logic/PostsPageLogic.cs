@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.Common.Contracts.ViewModels;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Factory;
@@ -33,7 +34,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return userPosts;
         }
@@ -53,7 +54,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return posts;
         }
@@ -73,7 +74,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return posts;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Mapper;
 
@@ -17,7 +18,7 @@ namespace Blog.Backend.Logic
 
         public Address GetByUser(int userId)
         {
-            var address = new Address();
+            Address address;
             try
             {
                 var db = _addressRepository.Find(a => a.UserId == userId, true).FirstOrDefault();
@@ -25,7 +26,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return address;
         }

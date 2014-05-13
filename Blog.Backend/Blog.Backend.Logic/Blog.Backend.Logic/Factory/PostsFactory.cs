@@ -22,9 +22,8 @@ namespace Blog.Backend.Logic.Factory
 
         public PostsLogic CreatePosts()
         {
-            ITagRepository tagsRepository = new TagRepository();
             IPostRepository postRepository = new PostRepository();
-            return new PostsLogic(postRepository, tagsRepository);
+            return new PostsLogic(postRepository);
         }
     }
 }

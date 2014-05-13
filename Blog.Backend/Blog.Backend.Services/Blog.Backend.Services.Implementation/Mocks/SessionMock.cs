@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.Common.Contracts.ViewModels;
 
 namespace Blog.Backend.Services.Implementation.Mocks
@@ -76,7 +77,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 

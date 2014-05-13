@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class Session
+    public class Session : BaseContract
     {
         [DataMember]
         public int SessionId { get; set; }

@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Backend.Common.Contracts
 {
     [DataContract]
-    public class Media
+    public class Media : BaseContract
     {
         [DataMember]
         public int MediaId { get; set; }

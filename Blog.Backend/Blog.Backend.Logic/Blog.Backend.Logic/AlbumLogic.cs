@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Backend.Common.Contracts;
+using Blog.Backend.Common.Contracts.Utils;
 using Blog.Backend.DataAccess.Repository;
 using Blog.Backend.Logic.Mapper;
 
@@ -26,14 +27,14 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return albums;
         }
 
         public Album GetUserDefaultGroup(int userId)
         {
-            var album = new Album();
+            Album album;
             try
             {
                 var db = _albumRepository.Find(a => a.IsUserDefault && a.UserId == userId, false).First();
@@ -41,7 +42,7 @@ namespace Blog.Backend.Logic
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return album;
         }
