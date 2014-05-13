@@ -9,7 +9,8 @@ namespace Blog.Backend.Common.Utils
         string GenerateImagePath(int id, string name, string guid, string storageRoot);
         bool CreateDirectory(string path);
         bool DeleteDirectory(string path);
-        byte[] CreateThumbnail(string filename);
+        bool CreateThumbnail(string filename, string destinationPath);
+        bool CreateVideoThumbnail(string filename, string destinationPath);
         bool CreateThumbnailPath(string path);
         bool DeleteThumbnailPath(string path);
     }

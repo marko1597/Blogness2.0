@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using NReco.VideoConverter;
 
 namespace Blog.Backend.Common.Utils
 {
@@ -42,11 +45,7 @@ namespace Blog.Backend.Common.Utils
         {
             try
             {
-                var folders = path.Split('\\');
-                Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4], true);
-                Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3], true);
-                Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2], true);
-
+                Directory.Delete(path, true);
                 return true;
             }
             catch
@@ -55,21 +54,46 @@ namespace Blog.Backend.Common.Utils
             }
         }
 
-        public byte[] CreateThumbnail(string filename)
+        public bool CreateThumbnail(string filename, string destinationPath)
         {
-            var image = Image.FromFile(filename);
-            var thumb = image.GetThumbnailImage(256, 256, () => false, IntPtr.Zero);
+            try
+            {
+                var image = Image.FromFile(filename);
+                var jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                var encoder = Encoder.Quality;
+                var encoderParams = new EncoderParameters(1);
 
-            return ImageToByteArray(thumb);
+                var thumb = ResizeImage(image, new Size(256, 256));
+                encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
+                thumb.Save(destinationPath + Path.GetFileName(filename), jgpEncoder, encoderParams);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+
+        public bool CreateVideoThumbnail(string filename, string destinationPath)
+        {
+            try
+            {
+                new FFMpegConverter().GetVideoThumbnail(filename, destinationPath + Path.GetFileNameWithoutExtension(filename) + ".jpg");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool CreateThumbnailPath(string path)
         {
             try
             {
-                var folders = path.Split('\\');
-                Directory.CreateDirectory(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4]);
-
+                Directory.CreateDirectory(path);
                 return true;
             }
             catch
@@ -82,15 +106,36 @@ namespace Blog.Backend.Common.Utils
         {
             try
             {
-                var folders = path.Split('\\');
-                Directory.Delete(folders[0] + "\\" + folders[1] + "\\" + folders[2] + "\\" + folders[3] + "\\" + folders[4], true);
-
+                Directory.Delete(path, true);
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            var codecs = ImageCodecInfo.GetImageDecoders();
+            return codecs.FirstOrDefault(codec => codec.FormatID == format.Guid);
+        }
+
+        private Image ResizeImage(Image mg, Size newSize)
+        {
+            var thumbSize = new Size(newSize.Width, newSize.Height);
+            var image = new Bitmap(newSize.Width, newSize.Height);
+            var x = (newSize.Width - thumbSize.Width) / 2;
+            var y = (newSize.Height - thumbSize.Height);
+
+            var g = Graphics.FromImage(image);
+            g.SmoothingMode = SmoothingMode.HighSpeed;
+            g.InterpolationMode = InterpolationMode.Low;
+            g.PixelOffsetMode = PixelOffsetMode.HighSpeed;
+
+            var rect = new Rectangle(x, y, thumbSize.Width, thumbSize.Height);
+            g.DrawImage(mg, rect, 0, 0, mg.Width, mg.Height, GraphicsUnit.Pixel);
+
+            return image;
         }
     }
 }

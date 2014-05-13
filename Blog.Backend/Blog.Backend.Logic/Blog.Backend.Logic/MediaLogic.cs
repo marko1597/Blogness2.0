@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Blog.Backend.Common.Utils;
 using Blog.Backend.DataAccess.Entities.Objects;
 using Blog.Backend.DataAccess.Repository;
@@ -160,9 +161,19 @@ namespace Blog.Backend.Logic
                 tMedia.MediaUrl = Constants.FileMediaUrl + tMedia.CustomName;
                 tMedia.MediaType = contentType;
 
-                if (tMedia.MediaType != "image/gif" && tMedia.MediaType.Substring(0, 5) != "video")
+                if (IsMediaSupported(tMedia.MediaType))
                 {
                     _imageHelper.CreateThumbnailPath(tMedia.ThumbnailPath);
+
+                    if (IsVideo(tMedia.MediaType))
+                    {
+                        Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
+                    }
+                    else
+                    {
+                        Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
+                    }
+                    
                     tMedia.ThumbnailUrl = Constants.FileMediaThumbnailUrl + tMedia.CustomName;
                 }
 
@@ -198,10 +209,6 @@ namespace Blog.Backend.Logic
             }
         }
 
-        private void SetDirectory()
-        {
-        }
-
         private Album GetAlbumByName(string albumName, int userId)
         {
             var album = albumName.ToLower() != "default"
@@ -227,6 +234,40 @@ namespace Blog.Backend.Logic
             }
 
             return album;
+        }
+
+        private bool IsMediaSupported(string mimeType)
+        {
+            var supportedMedia = new List<string>
+            {
+                "image/bmp",
+                "image/x-windows-bmp",
+                "image/jpeg",
+                "image/png",
+                "image/tiff",
+                "image/x-tiff",
+                "video/avi",
+                "video/quicktime",
+                "video/mpeg",
+                "video/mp4",
+                "video/x-flv"
+            };
+
+            return supportedMedia.Contains(mimeType);
+        }
+
+        private bool IsVideo(string mimeType)
+        {
+            var supportedMedia = new List<string>
+            {
+                "video/avi",
+                "video/quicktime",
+                "video/mpeg",
+                "video/mp4",
+                "video/x-flv"
+            };
+
+            return supportedMedia.Contains(mimeType);
         }
     }
 }
