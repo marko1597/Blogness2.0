@@ -11,6 +11,7 @@ namespace Blog.Backend.Common.Utils
         bool DeleteDirectory(string path);
         bool CreateThumbnail(string filename, string destinationPath);
         bool CreateVideoThumbnail(string filename, string destinationPath);
+        bool CreateGifThumbnail(string filename, string destinationPath);
         bool CreateThumbnailPath(string path);
         bool DeleteThumbnailPath(string path);
     }

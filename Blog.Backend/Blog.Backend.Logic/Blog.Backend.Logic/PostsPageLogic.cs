@@ -48,6 +48,7 @@ namespace Blog.Backend.Logic
                 posts.ForEach(a =>
                 {
                     a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                    a.Comments = CommentsFactory.GetInstance().CreateCommentLikes().GetTopComments(5);
                 });
             }
             catch (Exception ex)
@@ -67,6 +68,7 @@ namespace Blog.Backend.Logic
                 posts.ForEach(a =>
                 {
                     a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
+                    a.Comments = CommentsFactory.GetInstance().CreateCommentLikes().GetTopComments(5);
                 });
             }
             catch (Exception ex)

@@ -169,6 +169,10 @@ namespace Blog.Backend.Logic
                     {
                         Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
                     }
+                    else if (tMedia.MediaType == "image/gif")
+                    {
+                        Task.Run(() => _imageHelper.CreateGifThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
+                    }
                     else
                     {
                         Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));

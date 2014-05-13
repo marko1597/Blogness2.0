@@ -12,20 +12,25 @@ namespace Blog.Backend.DataAccess.Repository
     {
         public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 20)
         {
-            var query = Find(predicate, null, "PostContents,Tags,User,Comments,PostLikes").OrderBy(a => a.PostLikes.Count).Take(threshold).ToList();
+            var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.PostLikes.Count)
+                .ThenByDescending(b => b.CreatedDate)
+                .Take(threshold)
+                .ToList();
             return query;
         }
 
         public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 20)
         {
-            var query = Find(predicate, null, "PostContents,Tags,User,Comments,PostLikes").OrderBy(a => a.CreatedDate).Take(threshold).ToList();
+            var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.CreatedDate)
+                .Take(threshold)
+                .ToList();
             return query;
         }
 
         public override Post Add(Post post)
         {
-            //Context.Posts.Attach(post);
-
             if (post.Tags != null)
             {
                 var tags = post.Tags;

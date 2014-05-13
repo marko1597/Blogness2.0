@@ -46,6 +46,21 @@ namespace Blog.Backend.Logic
             return comments;
         }
 
+        public List<Comment> GetTopComments(int commentsCount)
+        {
+            var comments = new List<Comment>();
+            try
+            {
+                var db = _commentRepository.GetTop(a => a.CommentId > 0, commentsCount).ToList();
+                db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return comments;
+        }
+
         public List<Comment> GetReplies(int commentId)
         {
             var comments = new List<Comment>();

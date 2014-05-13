@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -63,9 +64,12 @@ namespace Blog.Backend.Common.Utils
                 var encoder = Encoder.Quality;
                 var encoderParams = new EncoderParameters(1);
 
-                var thumb = ResizeImage(image, new Size(256, 256));
+                var thumb = ResizeImage(image, new Size(image.Width / 5, image.Height / 5));
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
                 thumb.Save(destinationPath + Path.GetFileName(filename), jgpEncoder, encoderParams);
+                
+                thumb.Dispose();
+                image.Dispose();
 
                 return true;
             }
@@ -81,6 +85,27 @@ namespace Blog.Backend.Common.Utils
             try
             {
                 new FFMpegConverter().GetVideoThumbnail(filename, destinationPath + Path.GetFileNameWithoutExtension(filename) + ".jpg");
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool CreateGifThumbnail(string filename, string destinationPath)
+        {
+            try
+            {
+                var img = Image.FromFile(filename);
+                var frames = img.GetFrameCount(FrameDimension.Time);
+                if (frames <= 1) throw new ArgumentException("Image not animated");
+
+                var frame = Convert.ToInt32(Math.Round(Convert.ToDouble(frames / 2), MidpointRounding.AwayFromZero));
+                img.SelectActiveFrame(FrameDimension.Time, frame);
+                img.Save(destinationPath + Path.GetFileName(filename));
+                img.Dispose();
+
                 return true;
             }
             catch (Exception)
