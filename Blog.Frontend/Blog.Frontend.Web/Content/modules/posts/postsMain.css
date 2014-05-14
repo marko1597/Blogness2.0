@@ -78,6 +78,10 @@
                     padding-left: 90px;
                 }
 
+                    #posts-main > div.post-item > div.post-item-header > div > h4 > a {
+                        color: #fff;
+                    }
+
                 #posts-main > div.post-item > div.post-item-header > div > p {
                     padding-left: 90px;
                 }

@@ -110,8 +110,9 @@ namespace Blog.Frontend.Web
             bundles.Add(new ScriptBundle("~/scripts/posts").Include(
                       "~/Scripts/modules/posts/posts.js",
                       "~/Scripts/modules/posts/controllers/postsModifyController.js",
+                      "~/Scripts/modules/posts/controllers/postsViewController.js",
                       "~/Scripts/modules/posts/controllers/postsController.js",
-                      "~/Scripts/modules/posts/directives/postsMain.js",
+                      "~/Scripts/modules/posts/directives/postItemResize.js",
                       "~/Scripts/modules/posts/directives/postItem.js",
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",

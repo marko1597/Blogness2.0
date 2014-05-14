@@ -45,11 +45,22 @@ blog.config(["$routeProvider", function ($routeProvider) {
             controller: ''
         })
         .when('/post/new', {
-            templateUrl: '/blog/scripts/templates/modifyPost.html',
+            templateUrl: '/blog/scripts/templates/modifypost.html',
             controller: 'postsModifyController'
         })
         .when('/events', {
             templateUrl: '/blog/scripts/templates/events.html',
             controller: ''
+        })
+        .when('/404', {
+            templateUrl: '/blog/scripts/templates/pagenotfound.html',
+            controller: ''
+        })
+        .when('/post/:postId', {
+            templateUrl: '/blog/scripts/templates/viewpost.html',
+            controller: 'postsViewController'
+        })
+        .otherwise({
+            redirectTo: '/404'
         });
 }]);

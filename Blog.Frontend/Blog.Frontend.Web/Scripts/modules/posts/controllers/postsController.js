@@ -25,6 +25,7 @@
         };
 
         $scope.$on("updatePostsSize", function (ev, size) {
+            console.log(size);
             $scope.size = size;
         });
 

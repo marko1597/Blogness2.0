@@ -1,1 +1,24 @@
-﻿<posts-main posts="posts" size="size" get-error-type="getErrorType()" load-more-posts="loadMorePosts()"></posts-main>
+﻿<div class="row" post-item-resize ng-if="!errorContent.Show">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="posts-main" isotope-container infinite-scroll="loadMorePosts()" infinite-scroll-distance="0">
+            <div class="post-item" ng-repeat="post in posts" isotope-item post-item data="{ Post: post, Width: size }"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-if="errorContent.Show">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div id="error-main" ng-show="errorContent.Show">
+            <a href="#">
+                <div ng-switch="getErrorType()">
+                    <div ng-switch-when="404">
+                        <img src="../blog/content/images/error-pages/pagenotfound_bg.png" />
+                    </div>
+                    <div ng-switch-when="500">
+                        <img src="../blog/content/images/error-pages/servererror_bg.png" />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

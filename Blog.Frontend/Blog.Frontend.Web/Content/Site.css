@@ -73,9 +73,12 @@
     }
 }
 
-/* CK Editor Image Browser override 
+/* Error page
  ============================================= */
-
+#page-not-found > img {
+    width: 100%;
+    height: auto;
+}
 
 /* Block UI message base css 
  ============================================= */

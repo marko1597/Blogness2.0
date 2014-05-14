@@ -4,7 +4,9 @@
             <img ng-src="{{user.Picture.MediaUrl}}" />
         </div>
         <div>
-            <h4>{{post.PostTitle}}</h4>
+            <h4>
+                <a href="./#/post/{{post.PostId}}">{{post.PostTitle}}</a>
+            </h4>
             <p>
                 <a>{{post.User.UserName}}</a>
                 <span>{{post.CreatedDate}}</span>

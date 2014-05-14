@@ -1,9 +1,4 @@
-﻿ngPosts.directive('postsMain', ["$window", "$timeout", function ($window, $timeout) {
-    var ctrlFn = function () {
-        
-    };
-    ctrlFn.$inject = ["$scope", "postsService"];
-
+﻿ngPosts.directive('postItemResize', ["$window", "$timeout", function ($window, $timeout) {
     var linkFn = function (scope) {
         var window = angular.element($window);
         window.bind("resize", function () {
@@ -52,15 +47,6 @@
 
     return {
         restrict: 'EA',
-        scope: {
-            posts: '=',
-            size: '=',
-            getErrorType: '&',
-            loadMorePosts: '&'
-        },
-        replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postsMain.html",
-        controller: ctrlFn,
         link: linkFn
     };
 }]);

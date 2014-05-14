@@ -234,7 +234,6 @@
     <Content Include="Content\images\login-pass-icon.png" />
     <Content Include="Content\images\login-pattern.png" />
     <Content Include="Content\images\login-user-icon.png" />
-    <Content Include="Content\images\lw-1.jpg" />
     <Content Include="Content\images\nav-groups.png" />
     <Content Include="Content\images\nav-events.png" />
     <Content Include="Content\images\nav-friends.png" />
@@ -257,6 +256,7 @@
     <Content Include="Scripts\modules\logger\services\errorLogService.js" />
     <Content Include="Scripts\modules\logger\services\stacktraceService.js" />
     <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
+    <Content Include="Scripts\modules\posts\controllers\postsViewController.js" />
     <Content Include="Scripts\modules\posts\directives\postContents.js" />
     <Content Include="Scripts\modules\posts\services\postsStateService.js" />
     <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
@@ -415,7 +415,7 @@
     <Content Include="Scripts\plugins\ckeditor\styles.js" />
     <Content Include="Scripts\plugins\es5-shim.js" />
     <Content Include="Scripts\plugins\stacktrace.js" />
-    <Content Include="Scripts\templates\modifyPost.html" />
+    <Content Include="Scripts\templates\modifypost.html" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
     <Content Include="Scripts\modules\tags\tags.js" />
@@ -474,7 +474,7 @@
     <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
     <Content Include="Scripts\modules\navigation\navigation.js" />
     <Content Include="Scripts\modules\posts\directives\postLikes.js" />
-    <Content Include="Scripts\modules\posts\directives\postsMain.js" />
+    <Content Include="Scripts\modules\posts\directives\postItemResize.js" />
     <Content Include="Scripts\modules\posts\posts.js" />
     <Content Include="Scripts\modules\posts\services\postsService.js" />
     <Content Include="Scripts\modules\shared\directives\keypress.js" />
@@ -517,12 +517,13 @@
     <Content Include="Scripts\templates\modules\posts\postItem.html" />
     <Content Include="Scripts\templates\modules\posts\postItemComment.html" />
     <Content Include="Scripts\templates\modules\posts\postLikes.html" />
-    <Content Include="Scripts\templates\modules\posts\postsMain.html" />
     <Content Include="Scripts\templates\modules\shared\fileUpload.html" />
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
+    <Content Include="Scripts\templates\pagenotfound.html" />
     <Content Include="Scripts\templates\profile.html" />
     <Content Include="Scripts\templates\friends.html" />
     <Content Include="Scripts\templates\posts.html" />
+    <Content Include="Scripts\templates\viewpost.html" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
