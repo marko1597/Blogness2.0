@@ -50,7 +50,9 @@
         }
 
             #posts-main > div.post-item > div.post-item-header > div:first-child {
-                text-align: center;
+                width: 80px;
+                float: left;
+                margin: 0 10px 0 0;
             }
 
             #posts-main > div.post-item > div.post-item-header img {
@@ -64,18 +66,26 @@
                 -webkit-border-radius: 40px;
                 -moz-border-radius: 40px;
                 border: 3px solid #fff;
-                /*margin: 0 10px 0 0;*/
             }
-            
+
+            #posts-main > div.post-item > div.post-item-header > div {
+                width: 100%;
+            }
+
                 #posts-main > div.post-item > div.post-item-header > div > h4 {
                     margin: 0 0 5px;
                     font-weight: bold;
+                    padding-left: 90px;
                 }
 
-                #posts-main > div.post-item > div.post-item-header > div > p > a {
-                    margin: 0 5px 0 0;
-                    color: #fff;
+                #posts-main > div.post-item > div.post-item-header > div > p {
+                    padding-left: 90px;
                 }
+
+                    #posts-main > div.post-item > div.post-item-header > div > p > a {
+                        margin: 0 5px 0 0;
+                        color: #fff;
+                    }
 
         #posts-main > div.post-item > div.post-item-body {
             padding: 10px 10px;

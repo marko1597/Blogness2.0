@@ -252,6 +252,7 @@
     <Content Include="Content\plugins\angular-ckeditor.css" />
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
+    <Content Include="Content\plugins\isotope.css" />
     <Content Include="Scripts\modules\logger\logger.js" />
     <Content Include="Scripts\modules\logger\services\errorLogService.js" />
     <Content Include="Scripts\modules\logger\services\stacktraceService.js" />
