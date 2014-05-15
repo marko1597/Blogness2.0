@@ -6,7 +6,7 @@
     <div class="modify-post-message">
         <h5>Message</h5>
         <div ng-switch on="dimensionMode">
-            <textarea ng-switch-when="mobile" id="post-message-editor"></textarea>
+            <textarea ng-switch-when="mobile" ng-model="post.PostMessage" id="post-message-editor"></textarea>
             <textarea ng-switch-default id="post-message-editor" ckeditor="editorOptions" ck-editor-helper ng-model="post.PostMessage"
                       data-browse-url="http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1" data-upload-url="{{uploadUrl}}"
                       data-image-window-width="640" data-image-window-height="480"></textarea>

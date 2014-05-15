@@ -68,6 +68,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/services/dateHelper.js",
                         "~/Scripts/modules/shared/services/blockUi.js",
                         "~/Scripts/modules/shared/directives/scrollTrigger.js",
+                        "~/Scripts/modules/shared/directives/ellipsis.js",
                         "~/Scripts/modules/shared/directives/fileUpload.js",
                         "~/Scripts/modules/shared/directives/fileUploadItem.js",
                         "~/Scripts/modules/shared/directives/ticker.js",

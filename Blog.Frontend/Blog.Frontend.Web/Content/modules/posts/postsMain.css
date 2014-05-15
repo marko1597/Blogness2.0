@@ -103,7 +103,7 @@
 
             #posts-main > div.post-item > div.post-item-contents .post-item-content > img {
                 max-width: 100%;
-                width: auto;
+                width: 100%;
                 height: auto;
                 border-bottom: 1px solid #ddd;
             }

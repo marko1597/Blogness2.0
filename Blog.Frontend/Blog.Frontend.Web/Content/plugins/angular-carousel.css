@@ -31,7 +31,7 @@
 
 .rn-carousel-slide {
     white-space: normal;
-    vertical-align: top;
+    /*vertical-align: top;*/
     display: inline-block;
     width: 100%;
     height: 100%;

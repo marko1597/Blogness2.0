@@ -253,6 +253,7 @@
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\modules\shared\directives\ellipsis.js" />
     <Content Include="Scripts\modules\shared\directives\scrollTrigger.js" />
     <Content Include="Scripts\plugins\angular-inview.js" />
     <Content Include="Scripts\plugins\jquery-2.1.1.js" />

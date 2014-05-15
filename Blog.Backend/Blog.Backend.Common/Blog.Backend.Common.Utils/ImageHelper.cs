@@ -162,23 +162,20 @@ namespace Blog.Backend.Common.Utils
 
         private Size GetComputedImageSize(int width, int height)
         {
-            var size = new Size();
-            if (height > width)
+            if (width > 400)
             {
-                var divisor = height/256;
-                var tWidth = Math.Round(Convert.ToDouble(width/divisor), 0, MidpointRounding.AwayFromZero);
-                size.Height = 256;
-                size.Width = Convert.ToInt32(tWidth);
-            }
-            else
-            {
-                var divisor = width / 256;
-                var tHeight = Math.Round(Convert.ToDouble(height / divisor), 0, MidpointRounding.AwayFromZero);
-                size.Height = Convert.ToInt32(tHeight);
-                size.Width = 256;
+                var divisor = width/400;
+                var tHeight = Math.Round(Convert.ToDouble(height/divisor), 0, MidpointRounding.AwayFromZero);
+                var size = new Size
+                           {
+                               Height = Convert.ToInt32(tHeight),
+                               Width = 400
+                           };
+
+                return size;
             }
 
-            return size;
+            return new Size(width, height);
         }
 
         private Image ResizeImage(Image mg, Size newSize)
