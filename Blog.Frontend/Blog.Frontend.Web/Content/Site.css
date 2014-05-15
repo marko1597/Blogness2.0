@@ -38,6 +38,54 @@
 }
 
 /*
+ * Animations on ng-views   
+ * --------------------------------------------------
+ */
+@-moz-keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+}
+
+@-webkit-keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -ms-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        transform: scale(0.8);
+    }
+}
+
+.ng-enter {
+    z-index: 8888;
+}
+
+.ng-enter {
+    -moz-animation: scaleUp 0.5s both ease-in;
+    -o-animation: scaleUp 0.5s both ease-in;
+    -webkit-animation: scaleUp 0.5s both ease-in;
+    animation: scaleUp 0.5s both ease-in;
+}
+
+/*
  * Off Canvas
  * --------------------------------------------------
  */
