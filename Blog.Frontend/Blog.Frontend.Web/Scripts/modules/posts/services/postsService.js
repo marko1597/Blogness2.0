@@ -6,7 +6,7 @@
             var deferred = $q.defer();
 
             $http({
-                url: postsApi + "/popular/" + configProvider.getSettings().PostsThreshold,
+                url: postsApi + "/popular",
                 method: "GET"
             }).success(function(response) {
                 deferred.resolve(response);
@@ -21,11 +21,26 @@
             var deferred = $q.defer();
 
             $http({
-                url: postsApi + "/recent/" + configProvider.getSettings().PostsThreshold,
+                url: postsApi + "/recent",
                 method: "GET"
             }).success(function(response) {
                 deferred.resolve(response);
             }).error(function() {
+                deferred.reject("An error occurred!");
+            });
+
+            return deferred.promise;
+        },
+
+        getMorePosts: function (c) {
+            var deferred = $q.defer();
+
+            $http({
+                url: postsApi + "/more/" + c,
+                method: "GET"
+            }).success(function (response) {
+                deferred.resolve(response);
+            }).error(function () {
                 deferred.reject("An error occurred!");
             });
 

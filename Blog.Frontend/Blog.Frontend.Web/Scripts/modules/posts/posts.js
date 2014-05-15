@@ -1,3 +1,3 @@
 ﻿var ngPosts = angular.module("ngPosts", ["ngSanitize", "ngShared", "ngTags", "ngCkeditor",
-    "ngTagsInput", "iso.directives", "infinite-scroll", "ngConfig", "localStorageModule",
+    "ngTagsInput", "iso.directives", "ngConfig", "localStorageModule",
     "ngFileUpload", "ngCarousel"]);

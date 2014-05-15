@@ -31,5 +31,16 @@ namespace Blog.Backend.Services.Implementation.Mocks
                 .ToList();
             return posts;
         }
+
+
+        public List<Post> GetMorePosts(int postsCount, int skip)
+        {
+            var posts = DataStorage.Posts
+                .OrderByDescending(a => a.CreatedDate)
+                .Skip(skip)
+                .Take(postsCount)
+                .ToList();
+            return posts;
+        }
     }
 }

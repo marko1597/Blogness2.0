@@ -9,5 +9,6 @@ namespace Blog.Backend.Services.Implementation
         UserPosts GetUserPosts(int userId);
         List<Post> GetPopularPosts(int postsCount);
         List<Post> GetRecentPosts(int postsCount);
+        List<Post> GetMorePosts(int postsCount, int skip);
     }
 }

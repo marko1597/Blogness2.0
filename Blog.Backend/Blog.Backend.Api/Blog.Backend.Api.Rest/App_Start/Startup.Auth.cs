@@ -15,7 +15,7 @@ namespace Blog.Backend.Api.Rest
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Home"),
-                ExpireTimeSpan = new TimeSpan(0, 20, 0),
+                ExpireTimeSpan = new TimeSpan(0, 0, 5),
                 CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName")
             });
         }

@@ -3,6 +3,7 @@ using System.Web.Http;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
+using WebApi.OutputCache.V2;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
@@ -17,6 +18,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/users/{userId:int}")]
         public User Get(int userId)
         {
@@ -36,6 +38,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/users/{name}")]
         public User Get(string name)
         {

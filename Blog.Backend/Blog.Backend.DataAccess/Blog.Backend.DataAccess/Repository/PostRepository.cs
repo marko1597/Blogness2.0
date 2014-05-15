@@ -10,7 +10,7 @@ namespace Blog.Backend.DataAccess.Repository
 {
     public class PostRepository : GenericRepository<BlogDb, Post>, IPostRepository
     {
-        public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 20)
+        public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
                 .OrderByDescending(a => a.PostLikes.Count)
@@ -20,10 +20,21 @@ namespace Blog.Backend.DataAccess.Repository
             return query;
         }
 
-        public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 20)
+        public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
                 .OrderByDescending(a => a.CreatedDate)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Post> GetMorePosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10)
+        {
+            var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.PostLikes.Count)
+                .ThenByDescending(b => b.CreatedDate)
+                .Skip(skip)
                 .Take(threshold)
                 .ToList();
             return query;

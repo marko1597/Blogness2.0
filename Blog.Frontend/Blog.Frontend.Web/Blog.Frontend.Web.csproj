@@ -68,15 +68,15 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.0.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.0.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -117,7 +117,7 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector, Version=2.5.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -252,6 +252,11 @@
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
+    <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\modules\shared\directives\scrollTrigger.js" />
+    <Content Include="Scripts\plugins\angular-inview.js" />
+    <Content Include="Scripts\plugins\jquery-2.1.1.js" />
+    <Content Include="Scripts\plugins\jquery-2.1.1.min.js" />
     <Content Include="Scripts\modules\logger\logger.js" />
     <Content Include="Scripts\modules\logger\services\errorLogService.js" />
     <Content Include="Scripts\modules\logger\services\stacktraceService.js" />
@@ -459,7 +464,6 @@
     <Content Include="Scripts\plugins\angular-isotope.js" />
     <Content Include="Scripts\plugins\angular-snap.js" />
     <Content Include="Scripts\plugins\angular-tags-input.js" />
-    <Content Include="Scripts\plugins\jquery-2.1.0.js" />
     <Content Include="Scripts\plugins\jquery.isotope.js" />
     <Content Include="Scripts\plugins\jquery.newsTicker.js" />
     <Content Include="Scripts\modules\app.js" />
@@ -576,6 +580,7 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Scripts\plugins\jquery-2.1.1.min.map" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

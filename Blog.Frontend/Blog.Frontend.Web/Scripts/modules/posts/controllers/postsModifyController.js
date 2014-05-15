@@ -41,20 +41,17 @@
                     if (resp != null) {
                         $location.path("/");
                     }
-
-                    console.log(resp);
                 }, function (e) {
-                    alert(e);
+                    console.log(e);
                 });
             }, function(e) {
-                alert(e);
+                console.log(e);
             });
         };
 
         $scope.$on("windowSizeChanged", function (e, d) {
             configProvider.setDimensions(d.width, d.height);
             $scope.dimensionMode = configProvider.windowDimensions.mode;
-            console.log($scope.dimensionMode);
         });
 
         var uploader = $scope.uploader = $fileUploader.create({

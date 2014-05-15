@@ -14,12 +14,10 @@
 
             snapper.on('open', function () {
                 checkNav();
-                console.log("nav opened");
             });
 
             snapper.on('close', function () {
                 checkNav();
-                console.log("nav closed ");
             });
         });
     };

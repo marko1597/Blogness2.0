@@ -1,5 +1,6 @@
 ﻿@using System.Net.Sockets
 @using System.Text
+@using Blog.Backend.Common.Utils
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,14 +77,7 @@
 {
     private string GetLocalIpAddress()
     {
-        var localIp = "localhost";
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
-        {
-            localIp = ip.ToString();
-            break;
-        }
-        return localIp;
+        return new UserHelper().GetLocalIpAddress();
     }
 
     public string GetBlogApi()

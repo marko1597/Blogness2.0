@@ -19,7 +19,6 @@
 
             $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
                 localStorageService.add("username", resp.User.UserName);
-                console.log(resp);
                 blockUiService.unblockIt();
             }, function (errorMsg) {
                 $scope.alert.Message = errorMsg;

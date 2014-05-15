@@ -10,8 +10,7 @@
         "BlogRoot": "",
         "IsLoggedIn": false,
         "SessionId": 0,
-        "AlertTimer": 5000,
-        "PostsThreshold": 20
+        "AlertTimer": 5000
     };
 
     var pageState = {

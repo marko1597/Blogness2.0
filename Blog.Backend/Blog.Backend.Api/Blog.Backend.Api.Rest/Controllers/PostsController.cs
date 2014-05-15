@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Contracts.ViewModels;
 using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
+using WebApi.OutputCache.V2;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
@@ -38,6 +40,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/posts/{tagName}")]
         public List<Post> Get(string tagName)
         {
@@ -56,14 +59,16 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/posts/popular/{postsCount:int?}")]
-        public List<Post> GetPopular(int postsCount = 20)
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [Route("api/posts/popular")]
+        public List<Post> GetPopular()
         {
             var posts = new List<Post>();
 
             try
             {
-                posts = _postsPageSvc.GetPopularPosts(postsCount) ?? new List<Post>();
+                posts = _postsPageSvc.GetPopularPosts(
+                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -74,14 +79,16 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [Route("api/posts/recent/{postsCount:int?}")]
-        public List<Post> GetRecent(int postsCount = 20)
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [Route("api/posts/recent")]
+        public List<Post> GetRecent()
         {
             var posts = new List<Post>();
 
             try
             {
-                posts = _postsPageSvc.GetRecentPosts(postsCount) ?? new List<Post>();
+                posts = _postsPageSvc.GetRecentPosts(
+                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -92,6 +99,27 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [Route("api/posts/more/{skip:int?}")]
+        public List<Post> GetMore(int skip = 10)
+        {
+            var posts = new List<Post>();
+
+            try
+            {
+                posts = _postsPageSvc.GetMorePosts(
+                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("MorePostsTakeValue")), skip) ?? new List<Post>();
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+
+            return posts;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/user/{userId}/posts")]
         public UserPosts GetUserPosts(int userId)
         {

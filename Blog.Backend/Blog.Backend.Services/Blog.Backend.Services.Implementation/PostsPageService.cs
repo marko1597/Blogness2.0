@@ -21,5 +21,10 @@ namespace Blog.Backend.Services.Implementation
         {
             return PostsPageFactory.GetInstance().CreatePostsPage().GetRecentPosts(postsCount);
         }
+
+        public List<Post> GetMorePosts(int postsCount, int skip)
+        {
+            return PostsPageFactory.GetInstance().CreatePostsPage().GetMorePosts(postsCount, skip);
+        }
     }
 }

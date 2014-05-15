@@ -73,6 +73,24 @@
     }
 }
 
+/* Snap Content overrides
+ ============================================= */
+/*.snap-content .container {
+    height: 100%;
+}
+
+    .snap-content .container > div[ng-view] {
+        height: 100%;
+    }
+
+        .snap-content .container > div[ng-view] > div.row {
+            height: 100%;
+        }
+
+            .snap-content .container > div[ng-view] > div.row > div {
+                height: 100%;
+            }*/
+
 /* Error page
  ============================================= */
 #page-not-found > img {

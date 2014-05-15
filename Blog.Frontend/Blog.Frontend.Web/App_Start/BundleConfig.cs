@@ -56,7 +56,6 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-tags-input.js",
                       "~/Scripts/plugins/angular-snap.js",
-                      "~/Scripts/plugins/angular-infinite-scroll.js",
                       "~/Scripts/plugins/angular-strap.js",
                       "~/Scripts/plugins/angular-strap.tpl.js"));
 
@@ -67,6 +66,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/shared.js",
                         "~/Scripts/modules/shared/services/dateHelper.js",
                         "~/Scripts/modules/shared/services/blockUi.js",
+                        "~/Scripts/modules/shared/directives/scrollTrigger.js",
                         "~/Scripts/modules/shared/directives/fileUpload.js",
                         "~/Scripts/modules/shared/directives/fileUploadItem.js",
                         "~/Scripts/modules/shared/directives/ticker.js",

@@ -2,19 +2,48 @@
     function ($scope, $interval, localStorageService, postsService, postsStateService, blockUiService, dateHelper) {
         $scope.posts = [];
         $scope.size = "";
+        $scope.isBusy = false;
         $scope.errorContent = { Show: false, Type: "" };
 
         $scope.getPopularPosts = function () {
             blockUiService.blockIt();
+
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
             postsService.getPopularPosts().then(function (resp) {
-                $scope.posts = resp;
+                $scope.posts = [];
 
                 _.each(resp, function(p) {
                     p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                    $scope.posts.push(p);
                 });
 
+                $scope.isBusy = false;
                 blockUiService.unblockIt();
-                console.log(resp);
+            }, function (errorMsg) {
+                alert(errorMsg);
+            });
+        };
+
+        $scope.getMorePosts = function () {
+            blockUiService.blockIt();
+
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+            
+            postsService.getMorePosts($scope.posts.length).then(function (resp) {
+                _.each(resp, function (p) {
+                    p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                    $scope.posts.push(p);
+                });
+
+                $scope.isBusy = false;
+                blockUiService.unblockIt();
             }, function (errorMsg) {
                 alert(errorMsg);
             });
@@ -25,10 +54,13 @@
         };
 
         $scope.$on("updatePostsSize", function (ev, size) {
-            console.log(size);
             $scope.size = size;
         });
 
+        $scope.$on("scrollBottom", function () {
+            $scope.getMorePosts();
+        });
+        
         $scope.addPost = function() {
             postsStateService.setPostItem(null);
         };
