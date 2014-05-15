@@ -100,7 +100,7 @@ namespace Blog.Backend.Logic
                 if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
                 {
                     _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
-                    media.ThumbnailUrl = Constants.FileMediaThumbnailUrl + media.CustomName;
+                    media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
                 }
 
                 if (media.AlbumId == 0)
@@ -153,7 +153,7 @@ namespace Blog.Backend.Logic
                                  ModifiedBy = user.UserId,
                                  ModifiedDate = DateTime.UtcNow
                              };
-                tMedia.ThumbnailUrl = Constants.FileMediaThumbnailUrl + tMedia.CustomName;
+                tMedia.ThumbnailUrl = Constants.FileMediaUrl + tMedia.CustomName + @"/thumb";
                 tMedia.MediaUrl = Constants.FileMediaUrl + tMedia.CustomName;
                 tMedia.MediaType = contentType;
 
@@ -173,8 +173,6 @@ namespace Blog.Backend.Logic
                     {
                         Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
                     }
-                    
-                    tMedia.ThumbnailUrl = Constants.FileMediaThumbnailUrl + tMedia.CustomName;
                 }
 
                 var result = _mediaRepository.Add(MediaMapper.ToEntity(tMedia));
