@@ -1,5 +1,5 @@
 ﻿ngPosts.directive('postItem', [function () {
-    var ctrlFn = function ($scope, postsService) {
+    var ctrlFn = function ($scope) {
         $scope.post = $scope.data.Post;
         $scope.user = $scope.data.Post.User;
         
@@ -13,13 +13,13 @@
             return $scope.data.Width;
         };
     };
-    ctrlFn.$inject = ["$scope", "postsService"];
+    ctrlFn.$inject = ["$scope"];
     
     return {
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postItem.html",
+        templateUrl: window.blogConfiguration.templatesUrl + "posts/postListItem.html",
         controller: ctrlFn
     };
 }]);

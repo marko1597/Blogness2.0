@@ -8,27 +8,27 @@ namespace Blog.Backend.Services.Implementation
     {
         public List<Comment> GetByPostId(int id)
         {
-            return CommentsFactory.GetInstance().CreateCommentLikes().GetByPostId(id);
+            return CommentsFactory.GetInstance().CreateComments().GetByPostId(id);
         }
 
         public List<Comment> GetByUser(int id)
         {
-            return CommentsFactory.GetInstance().CreateCommentLikes().GetByUser(id);
+            return CommentsFactory.GetInstance().CreateComments().GetByUser(id);
         }
 
         public List<Comment> GetReplies(int id)
         {
-            return CommentsFactory.GetInstance().CreateCommentLikes().GetReplies(id);
+            return CommentsFactory.GetInstance().CreateComments().GetReplies(id);
         }
 
         public bool Add(Comment comment)
         {
-            return CommentsFactory.GetInstance().CreateCommentLikes().Add(comment);
+            return CommentsFactory.GetInstance().CreateComments().Add(comment);
         }
 
         public bool Delete(int id)
         {
-            return CommentsFactory.GetInstance().CreateCommentLikes().Delete(id);
+            return CommentsFactory.GetInstance().CreateComments().Delete(id);
         }
     }
 }

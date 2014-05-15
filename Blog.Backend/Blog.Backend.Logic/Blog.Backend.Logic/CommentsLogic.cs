@@ -47,12 +47,12 @@ namespace Blog.Backend.Logic
             return comments;
         }
 
-        public List<Comment> GetTopComments(int commentsCount)
+        public List<Comment> GetTopComments(int postId, int commentsCount)
         {
             var comments = new List<Comment>();
             try
             {
-                var db = _commentRepository.GetTop(a => a.CommentId > 0, commentsCount).ToList();
+                var db = _commentRepository.GetTop(a => a.PostId == postId, commentsCount).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
             }
             catch (Exception ex)

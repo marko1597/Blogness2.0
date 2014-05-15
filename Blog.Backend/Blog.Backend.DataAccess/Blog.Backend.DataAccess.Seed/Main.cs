@@ -337,7 +337,7 @@ namespace Blog.Backend.DataAccess.Seed
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
                             MediaType = (i == 4 || i == 5 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
-                            ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/thumbnail/{1}", _localIpAddress, customName),
+                            ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/{1}/thumb", _localIpAddress, customName),
                             ThumbnailPath = tnPath
                         });
 

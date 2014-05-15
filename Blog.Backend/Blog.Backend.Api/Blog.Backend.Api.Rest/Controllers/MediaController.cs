@@ -8,7 +8,6 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
-using Blog.Backend.Common.Utils;
 using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
 
@@ -19,14 +18,12 @@ namespace Blog.Backend.Api.Rest.Controllers
     {
         private readonly IMedia _media;
         private readonly IUser _user;
-        private readonly IImageHelper _imageHelper;
         private readonly string _mediaPath = ConfigurationManager.AppSettings.Get("MediaLocation");
 
-        public MediaController(IMedia media, IUser user, IImageHelper imageHelper)
+        public MediaController(IMedia media, IUser user)
         {
             _media = media;
             _user = user;
-            _imageHelper = imageHelper;
         }
 
         [HttpGet]
@@ -68,7 +65,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             try
             {
                 var media = _media.Get(mediaId) ?? new Media();
-                return CreateResponseMediaMessage(media);
+                return CreateResponseMediaMessage(media, false);
             }
             catch (Exception ex)
             {
@@ -84,7 +81,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             try
             {
                 var media = _media.GetByName(name) ?? new Media();
-                return CreateResponseMediaMessage(media);
+                return CreateResponseMediaMessage(media, false);
             }
             catch (Exception ex)
             {
@@ -100,7 +97,7 @@ namespace Blog.Backend.Api.Rest.Controllers
             try
             {
                 var media = _media.GetByName(name) ?? new Media();
-                return CreateResponseMediaMessage(media);
+                return CreateResponseMediaMessage(media, true);
             }
             catch (Exception ex)
             {
@@ -153,13 +150,19 @@ namespace Blog.Backend.Api.Rest.Controllers
             }
         }
 
-        private HttpResponseMessage CreateResponseMediaMessage(Media media)
+        private HttpResponseMessage CreateResponseMediaMessage(Media media, bool isThumb)
         {
             try
             {
                 var response = new HttpResponseMessage
                 {
-                    Content = new StreamContent(new FileStream(media.MediaPath + media.FileName, FileMode.Open, FileAccess.Read))
+                    Content = isThumb ?
+                        new StreamContent(new FileStream(media.ThumbnailPath + 
+                            ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
+                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg", 
+                            FileMode.Open, FileAccess.Read)) :
+                        new StreamContent(new FileStream(media.MediaPath + 
+                            media.FileName, FileMode.Open, FileAccess.Read))
                 };
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue(media.MediaType);
 

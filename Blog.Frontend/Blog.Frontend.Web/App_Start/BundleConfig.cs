@@ -27,6 +27,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.ui.touch-punch.js",
                         "~/Scripts/plugins/jquery.blockui.js",
                         "~/Scripts/plugins/jquery.isotope.js",
+                        "~/Scripts/plugins/jquery.dotdotdot.js",
                         "~/Scripts/plugins/jquery.newsticker.js",
                         "~/Scripts/plugins/es5-shim.js",
                         "~/Scripts/plugins/classie.js",
@@ -112,11 +113,11 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/controllers/postsModifyController.js",
                       "~/Scripts/modules/posts/controllers/postsViewController.js",
                       "~/Scripts/modules/posts/controllers/postsController.js",
-                      "~/Scripts/modules/posts/directives/postItemResize.js",
-                      "~/Scripts/modules/posts/directives/postItem.js",
+                      "~/Scripts/modules/posts/directives/postListItemResize.js",
+                      "~/Scripts/modules/posts/directives/postListItem.js",
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
-                      "~/Scripts/modules/posts/directives/postItemComment.js",
+                      "~/Scripts/modules/posts/directives/postListItemComment.js",
                       "~/Scripts/modules/posts/services/postsService.js",
                       "~/Scripts/modules/posts/services/postsStateService.js"));
 

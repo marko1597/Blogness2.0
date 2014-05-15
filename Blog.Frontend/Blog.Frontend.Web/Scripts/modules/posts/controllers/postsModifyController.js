@@ -43,9 +43,11 @@
                     }
                 }, function (e) {
                     console.log(e);
+                    $location.path("/404");
                 });
             }, function(e) {
                 console.log(e);
+                $location.path("/404");
             });
         };
 

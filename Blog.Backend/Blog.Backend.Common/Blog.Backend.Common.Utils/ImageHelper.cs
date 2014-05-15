@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -63,9 +64,11 @@ namespace Blog.Backend.Common.Utils
                 var encoder = Encoder.Quality;
                 var encoderParams = new EncoderParameters(1);
 
-                var thumb = ResizeImage(image, new Size(image.Width / 5, image.Height / 5));
+                var thumb = ResizeImage(image, GetComputedImageSize(image.Width, image.Height));
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                thumb.Save(destinationPath + Path.GetFileName(filename), jgpEncoder, encoderParams);
+                thumb.Save(destinationPath + 
+                    ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
+                    Path.GetFileName(filename), jgpEncoder, encoderParams);
                 
                 thumb.Dispose();
                 image.Dispose();
@@ -83,7 +86,9 @@ namespace Blog.Backend.Common.Utils
         {
             try
             {
-                new FFMpegConverter().GetVideoThumbnail(filename, destinationPath + Path.GetFileNameWithoutExtension(filename) + ".jpg");
+                new FFMpegConverter().GetVideoThumbnail(filename,
+                    destinationPath + ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
+                    Path.GetFileNameWithoutExtension(filename) + ".jpg");
                 return true;
             }
             catch (Exception)
@@ -102,7 +107,18 @@ namespace Blog.Backend.Common.Utils
 
                 var frame = Convert.ToInt32(Math.Round(Convert.ToDouble(frames / 2), MidpointRounding.AwayFromZero));
                 img.SelectActiveFrame(FrameDimension.Time, frame);
-                img.Save(destinationPath + Path.GetFileName(filename));
+
+                var compressedImage = ResizeImage(img, GetComputedImageSize(img.Width, img.Height));
+                var jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                var encoder = Encoder.Quality;
+                var encoderParams = new EncoderParameters(1);
+
+                encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
+                compressedImage.Save(destinationPath + 
+                    ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
+                    Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
+
+                compressedImage.Dispose();
                 img.Dispose();
 
                 return true;
@@ -142,6 +158,27 @@ namespace Blog.Backend.Common.Utils
         {
             var codecs = ImageCodecInfo.GetImageDecoders();
             return codecs.FirstOrDefault(codec => codec.FormatID == format.Guid);
+        }
+
+        private Size GetComputedImageSize(int width, int height)
+        {
+            var size = new Size();
+            if (height > width)
+            {
+                var divisor = height/256;
+                var tWidth = Math.Round(Convert.ToDouble(width/divisor), 0, MidpointRounding.AwayFromZero);
+                size.Height = 256;
+                size.Width = Convert.ToInt32(tWidth);
+            }
+            else
+            {
+                var divisor = width / 256;
+                var tHeight = Math.Round(Convert.ToDouble(height / divisor), 0, MidpointRounding.AwayFromZero);
+                size.Height = Convert.ToInt32(tHeight);
+                size.Width = 256;
+            }
+
+            return size;
         }
 
         private Image ResizeImage(Image mg, Size newSize)

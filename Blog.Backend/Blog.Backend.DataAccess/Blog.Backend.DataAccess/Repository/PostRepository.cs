@@ -32,8 +32,7 @@ namespace Blog.Backend.DataAccess.Repository
         public IList<Post> GetMorePosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
-                .OrderByDescending(a => a.PostLikes.Count)
-                .ThenByDescending(b => b.CreatedDate)
+                .OrderByDescending(b => b.CreatedDate)
                 .Skip(skip)
                 .Take(threshold)
                 .ToList();

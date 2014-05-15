@@ -1,11 +1,11 @@
-﻿ngPosts.controller('postsController', ["$scope", "$interval", "localStorageService", "postsService", "postsStateService", "blockUiService", "dateHelper",
-    function ($scope, $interval, localStorageService, postsService, postsStateService, blockUiService, dateHelper) {
+﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "postsStateService", "blockUiService", "dateHelper",
+    function ($scope, $location, $interval, localStorageService, postsService, postsStateService, blockUiService, dateHelper) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
         $scope.errorContent = { Show: false, Type: "" };
 
-        $scope.getPopularPosts = function () {
+        $scope.getRecentPosts = function () {
             blockUiService.blockIt();
 
             if ($scope.isBusy) {
@@ -13,18 +13,13 @@
             }
             $scope.isBusy = true;
 
-            postsService.getPopularPosts().then(function (resp) {
-                $scope.posts = [];
-
-                _.each(resp, function(p) {
-                    p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
-                    $scope.posts.push(p);
-                });
-
+            postsService.getRecentPosts().then(function (resp) {
+                $scope.posts = resp;
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
-            }, function (errorMsg) {
-                alert(errorMsg);
+            }, function (e) {
+                console.log(e);
+                $location.path("/404");
             });
         };
 
@@ -38,14 +33,13 @@
             
             postsService.getMorePosts($scope.posts.length).then(function (resp) {
                 _.each(resp, function (p) {
-                    p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
                     $scope.posts.push(p);
                 });
-
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
-            }, function (errorMsg) {
-                alert(errorMsg);
+            }, function (e) {
+                console.log(e);
+                $location.path("/404");
             });
         };
 
@@ -61,7 +55,7 @@
             $scope.getMorePosts();
         });
         
-        $scope.addPost = function() {
+        $scope.addPost = function () {
             postsStateService.setPostItem(null);
         };
 
@@ -93,7 +87,7 @@
          * Initial calls
          * -----------------------
          */
-        $scope.getPopularPosts();
+        $scope.getRecentPosts();
         $scope.applyLayout();
     }
 ]);

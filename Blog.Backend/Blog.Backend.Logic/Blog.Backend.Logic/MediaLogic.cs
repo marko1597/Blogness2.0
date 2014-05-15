@@ -244,6 +244,7 @@ namespace Blog.Backend.Logic
                 "image/png",
                 "image/tiff",
                 "image/x-tiff",
+                "image/gif",
                 "video/avi",
                 "video/quicktime",
                 "video/mpeg",

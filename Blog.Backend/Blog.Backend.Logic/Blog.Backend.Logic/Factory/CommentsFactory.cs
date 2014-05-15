@@ -20,7 +20,7 @@ namespace Blog.Backend.Logic.Factory
             return _instance;
         }
 
-        public CommentsLogic CreateCommentLikes()
+        public CommentsLogic CreateComments()
         {
             ICommentRepository commentRepository = new CommentRepository();
             return new CommentsLogic(commentRepository);
