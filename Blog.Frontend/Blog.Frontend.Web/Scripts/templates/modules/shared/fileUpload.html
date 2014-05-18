@@ -3,11 +3,11 @@
         <input ng-file-select type="file" multiple />
         <div class="well dropzone" ng-file-over>
             <h3>Drag files here...</h3>
-            <p>Queue length: {{ uploader.queue.length }}</p>
+            <!--<p>Queue length: {{ uploader.queue.length }}</p>-->
             <div>
                 <ul class="upload-items">
                     <li ng-repeat="item in uploader.queue" class="row">
-                        <div data-media-id="{{item.mediaId}}" file-upload-item item="item"></div>
+                        <div data-media-id="{{item.mediaId}}" file-upload-item item="item" uploader="uploader"></div>
                     </li>
                 </ul>
             </div>
