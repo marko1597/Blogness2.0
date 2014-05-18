@@ -146,7 +146,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                return _postsSvc.SavePost(post, true);
+                return _postsSvc.AddPost(post);
             }
             catch (Exception ex)
             {
@@ -185,7 +185,7 @@ namespace Blog.Backend.Api.Rest.Controllers
                     };
                 }
 
-                return _postsSvc.SavePost(post, false);
+                return _postsSvc.UpdatePost(post);
             }
             catch (Exception ex)
             {

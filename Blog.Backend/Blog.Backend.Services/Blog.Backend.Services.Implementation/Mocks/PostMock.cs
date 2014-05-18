@@ -28,8 +28,8 @@ namespace Blog.Backend.Services.Implementation.Mocks
             var posts = DataStorage.Posts.FindAll(a => a.User.UserId == userId);
             return posts;
         }
-        
-        public Post SavePost(Post post, bool isAdding)
+
+        public Post AddPost(Post post)
         {
             var id = DataStorage.Posts.Select(a => a.PostId).Max();
             post.PostId = id + 1;
@@ -38,6 +38,15 @@ namespace Blog.Backend.Services.Implementation.Mocks
             return post;
         }
 
+        public Post UpdatePost(Post post)
+        {
+            var id = DataStorage.Posts.Select(a => a.PostId).Max();
+            post.PostId = id + 1;
+            DataStorage.Posts.Add(post);
+
+            return post;
+        }
+        
         public bool DeletePost(int postId)
         {
             var tPost = DataStorage.Posts.FirstOrDefault(a => a.PostId == postId);

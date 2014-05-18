@@ -39,26 +39,16 @@ namespace Blog.Backend.DataAccess.Repository
             return query;
         }
 
-        public Post Save(Post post, bool isAdding)
+        public override Post Add(Post post)
         {
-            if (!isAdding)
-            {
-                Context.Posts.Attach(post);
-            }
-
-            #region Tags
-
             if (post.Tags != null)
             {
                 var tags = post.Tags;
-                var tagIds = new List<int>();
                 post.Tags = new List<Tag>();
 
                 foreach (var t in tags)
                 {
-                    tagIds.Add(t.TagId);
-                    var t1 = t;
-                    var q = Context.Tags.Where(a => a.TagName.ToLower() == t1.TagName.ToLower()).ToList();
+                    var q = Context.Tags.Where(a => a.TagName.ToLower() == t.TagName.ToLower()).ToList();
 
                     if (q.Count == 0)
                     {
@@ -73,202 +63,109 @@ namespace Blog.Backend.DataAccess.Repository
                         post.Tags.Add(q.FirstOrDefault());
                     }
                 }
-
-                if (!isAdding)
-                {
-                    var tPost = Context.Posts.Include("Tags")
-                        .FirstOrDefault(p => p.PostId == post.PostId);
-
-                    if (tPost != null)
-                    {
-                        var deletedTags = (from t in tPost.Tags
-                            where tagIds.All(a => a != t.TagId)
-                            select t).ToList();
-
-                        deletedTags.ForEach(a =>
-                                            {
-                                                Context.Tags.Attach(a);
-                                                Context.Entry(a).State = EntityState.Deleted;
-                                                post.Tags.Add(a);
-                                                post.Tags.Remove(a);
-                                            });
-                    }
-                }
             }
-
-            #endregion
-
-            #region Contents
 
             if (post.PostContents != null)
             {
-                if (isAdding)
-                {
-                    var contents = post.PostContents;
-                    post.PostContents = new List<PostContent>();
+                var contents = post.PostContents;
+                post.PostContents = new List<PostContent>();
 
-                    foreach (var postContent in contents)
-                    {
-                        post.PostContents.Add(postContent);
-                    }
-                }
-                else
+                foreach (var postContent in contents)
                 {
-                    foreach (var c in post.PostContents)
-                    {
-                        var c1 = c;
-                        var q = Context.PostContents
-                            .Where(a => a.PostId == c1.PostId && a.MediaId == c1.MediaId).ToList();
-
-                        Context.Entry(c).State = q.Count == 0 ? EntityState.Added : EntityState.Unchanged;
-                    }
+                    post.PostContents.Add(postContent);
                 }
             }
 
-            #endregion
-
-            if (!isAdding)
-            {
-                post.Comments = new List<Comment>();
-                var comments = Context.Comments.Where(a => a.PostId == post.PostId).ToList();
-                comments.ForEach(a =>
-                                 {
-                                     Context.Comments.Attach(a);
-                                     Context.Entry(a).State = EntityState.Unchanged;
-                                     post.Comments.Add(a);
-                                 });
-
-                post.PostLikes = new List<PostLike>();
-                var likes = Context.PostLikes.Where(a => a.PostId == post.PostId).ToList();
-                likes.ForEach(a =>
-                {
-                    Context.PostLikes.Attach(a);
-                    Context.Entry(a).State = EntityState.Unchanged;
-                    post.PostLikes.Add(a);
-                });
-            }
-
-            Context.Entry(post).State = isAdding ? EntityState.Added : EntityState.Modified;
+            Context.Entry(post).State = EntityState.Added;
             Context.SaveChanges();
 
             return post;
         }
 
-        //public override Post Edit(Post post)
-        //{
-        //    Context.Posts.Attach(post);
-            
-        //    #region Tags
+        public override Post Edit(Post post)
+        {
+            var db = Context.Posts
+                .Include(a => a.PostContents)
+                .Include(a => a.PostLikes)
+                .Include(a => a.Tags)
+                .Include(a => a.Comments)
+                .FirstOrDefault(a => a.PostId == post.PostId);
 
-        //    if (post.Tags != null)
-        //    {
-        //        var tags = post.Tags;
-        //        var tagIds = new List<int>();
-        //        post.Tags = new List<Tag>();
+            if (db != null)
+            {
+                db.PostTitle = post.PostTitle;
+                db.PostMessage = post.PostMessage;
 
-                
+                var tempTags = db.Tags.ToList();
+                foreach (var t in tempTags)
+                {
+                    Context.Entry(t).State = GetTagState(t, post.Tags);
+                }
 
-        //        if (!isAdding)
-        //        {
-        //            var tPost = Context.Posts.Include("Tags")
-        //                .FirstOrDefault(p => p.PostId == post.PostId);
+                var newtags = GetNewTags(db.Tags, post.Tags);
+                newtags.ForEach(a =>
+                                {
+                                    Context.Tags.Attach(a);
+                                    Context.Entry(a).State = EntityState.Added;
+                                    db.Tags.Add(a);
+                                });
 
-        //            if (tPost != null)
-        //            {
-        //                var deletedTags = (from t in tPost.Tags
-        //                                   where tagIds.All(a => a != t.TagId)
-        //                                   select t).ToList();
+                var tempContents = db.PostContents.ToList();
+                foreach (var c in tempContents)
+                {
+                    Context.Entry(c).State = GetContentState(c, post.PostContents);
+                }
 
-        //                deletedTags.ForEach(a =>
-        //                {
-        //                    Context.Tags.Attach(a);
-        //                    Context.Entry(a).State = EntityState.Deleted;
-        //                    post.Tags.Add(a);
-        //                    post.Tags.Remove(a);
-        //                });
-        //            }
-        //        }
-        //    }
+                var newcontents = GetNewContents(db.PostContents, post.PostContents);
+                newcontents.ForEach(a =>
+                {
+                    Context.PostContents.Attach(a);
+                    Context.Entry(a).State = EntityState.Added;
+                    db.PostContents.Add(a);
+                });
+            }
 
-        //    #endregion
+            Context.Entry(db).State = EntityState.Modified;
+            Context.SaveChanges();
 
-        //    #region Contents
+            return post;
+        }
 
-        //    if (post.PostContents != null)
-        //    {
-        //        if (isAdding)
-        //        {
-        //            var contents = post.PostContents;
-        //            post.PostContents = new List<PostContent>();
+        #region Private methods
 
-        //            foreach (var postContent in contents)
-        //            {
-        //                post.PostContents.Add(postContent);
-        //            }
-        //        }
-        //        else
-        //        {
-        //            foreach (var c in post.PostContents)
-        //            {
-        //                var c1 = c;
-        //                var q = Context.PostContents
-        //                    .Where(a => a.PostId == c1.PostId && a.MediaId == c1.MediaId).ToList();
+        private EntityState GetTagState(Tag tag, IEnumerable<Tag> tags)
+        {
+            var tagNames = tags.Select(a => a.TagName.ToLower()).ToList();
 
-        //                Context.Entry(c).State = q.Count == 0 ? EntityState.Added : EntityState.Unchanged;
-        //            }
-        //        }
-        //    }
+            return tagNames.Contains(tag.TagName.ToLower()) ?
+                EntityState.Unchanged : EntityState.Deleted;
+        }
 
-        //    #endregion
+        private List<Tag> GetNewTags(IEnumerable<Tag> dbTags, IEnumerable<Tag> clientTags)
+        {
+            var dbTagNames = dbTags.Select(a => a.TagName.ToLower()).ToList();
+            var newTags = (from t in clientTags
+                           where dbTagNames.All(a => a != t.TagName)
+                           select t).ToList();
 
-        //    if (!isAdding)
-        //    {
-        //        post.Comments = new List<Comment>();
-        //        var comments = Context.Comments.Where(a => a.PostId == post.PostId).ToList();
-        //        comments.ForEach(a =>
-        //        {
-        //            Context.Comments.Attach(a);
-        //            Context.Entry(a).State = EntityState.Unchanged;
-        //            post.Comments.Add(a);
-        //        });
+            return newTags;
+        }
 
-        //        post.PostLikes = new List<PostLike>();
-        //        var likes = Context.PostLikes.Where(a => a.PostId == post.PostId).ToList();
-        //        likes.ForEach(a =>
-        //        {
-        //            Context.PostLikes.Attach(a);
-        //            Context.Entry(a).State = EntityState.Unchanged;
-        //            post.PostLikes.Add(a);
-        //        });
-        //    }
+        private EntityState GetContentState(PostContent content, IEnumerable<PostContent> contents)
+        {
+            var tContent = contents.Where(a => a.PostId == content.PostId && a.MediaId == content.MediaId).ToList();
+            return tContent.Count > 0 ? EntityState.Unchanged : EntityState.Deleted;
+        }
 
-        //    Context.Entry(post).State = isAdding ? EntityState.Added : EntityState.Modified;
-        //    Context.SaveChanges();
+        private List<PostContent> GetNewContents(IEnumerable<PostContent> dbContents, IEnumerable<PostContent> clientContents)
+        {
+            var newContents = (from c in clientContents
+                               where dbContents.All(a => a.MediaId != c.MediaId)
+                               select c).ToList();
 
-        //    return post;
-        //}
+            return newContents;
+        }
 
-        //private List<Tag> UpdateTagsContext(ref Post post, IList<Tag> tags)
-        //{
-        //    foreach (var t in tags)
-        //    {
-        //        tagIds.Add(t.TagId);
-        //        var t1 = t;
-        //        var q = Context.Tags.Where(a => a.TagName.ToLower() == t1.TagName.ToLower()).ToList();
-
-        //        if (q.Count == 0)
-        //        {
-        //            Context.Tags.Attach(t);
-        //            Context.Entry(t).State = EntityState.Added;
-        //            post.Tags.Add(t);
-        //        }
-        //        else
-        //        {
-        //            Context.Tags.Attach(q.FirstOrDefault());
-        //            Context.Entry(q.FirstOrDefault()).State = EntityState.Unchanged;
-        //            post.Tags.Add(q.FirstOrDefault());
-        //        }
-        //    }
-        //}
+        #endregion
     }
 }

@@ -72,42 +72,36 @@ namespace Blog.Backend.Logic
             }
             return posts;
         }
-        
-        public Post SavePost(Post post, bool isAdding)
+
+        public Post AddPost(Post post)
         {
             try
             {
-                foreach (var tag in post.Tags)
-                {
-                    tag.CreatedBy = post.User.UserId;
-                    tag.CreatedDate = DateTime.UtcNow;
-                    tag.ModifiedBy = post.User.UserId;
-                    tag.ModifiedDate = DateTime.UtcNow;
-                    tag.TagName = tag.TagName.ToLower();
-                }
+                post.Tags = PrepareTags(post.Tags, post.User.UserId);
+                post.PostContents = PreparePostContents(post.PostContents, post.User.UserId, post.PostId);
+                post.CreatedBy = post.User.UserId;
+                post.CreatedDate = DateTime.UtcNow;
+                post.ModifiedBy = post.User.UserId;
+                post.ModifiedDate = DateTime.UtcNow;
 
-                foreach (var postContent in post.PostContents)
-                {
-                    postContent.CreatedBy = post.User.UserId;
-                    postContent.CreatedDate = DateTime.UtcNow;
-                    postContent.ModifiedBy = post.User.UserId;
-                    postContent.ModifiedDate = DateTime.UtcNow;
-                    postContent.PostId = isAdding ? 0 : post.PostId;
-                }
+                var tPost = _postRepository.Add(PostMapper.ToEntity(post));
+                return GetPost(tPost.PostId);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+        
+        public Post UpdatePost(Post post)
+        {
+            try
+            {
+                post.Tags = PrepareTags(post.Tags, post.User.UserId);
+                post.PostContents = PreparePostContents(post.PostContents, post.User.UserId, post.PostId);
+                post.ModifiedDate = DateTime.UtcNow;
 
-                if (isAdding)
-                {
-                    post.CreatedBy = post.User.UserId;
-                    post.CreatedDate = DateTime.UtcNow;
-                    post.ModifiedBy = post.User.UserId;
-                    post.ModifiedDate = DateTime.UtcNow;
-                }
-                else
-                {
-                    post.ModifiedDate = DateTime.UtcNow;
-                }
-
-                var tPost = _postRepository.Save(PostMapper.ToEntity(post), isAdding);
+                var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
             }
             catch (Exception ex)
@@ -128,6 +122,36 @@ namespace Blog.Backend.Logic
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
+        }
+
+        private List<Tag> PrepareTags(IEnumerable<Tag> tags, int userId)
+        {
+            var enumerable = tags as Tag[] ?? tags.ToArray();
+            foreach (var tag in enumerable)
+            {
+                tag.CreatedBy = userId;
+                tag.CreatedDate = DateTime.UtcNow;
+                tag.ModifiedBy = userId;
+                tag.ModifiedDate = DateTime.UtcNow;
+                tag.TagName = tag.TagName.ToLower();
+            }
+
+            return enumerable.ToList();
+        }
+
+        private List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int userId, int postId)
+        {
+            var postContents = contents as PostContent[] ?? contents.ToArray();
+            foreach (var postContent in postContents)
+            {
+                postContent.CreatedBy = userId;
+                postContent.CreatedDate = DateTime.UtcNow;
+                postContent.ModifiedBy = userId;
+                postContent.ModifiedDate = DateTime.UtcNow;
+                postContent.PostId = postId;
+            }
+
+            return postContents.ToList();
         }
     }
 }
