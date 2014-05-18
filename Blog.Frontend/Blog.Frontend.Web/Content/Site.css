@@ -74,11 +74,11 @@
     }
 }
 
-.ng-enter {
+.page-content.ng-enter {
     z-index: 8888;
 }
 
-.ng-enter {
+.page-content.ng-enter {
     -moz-animation: scaleUp 0.5s both ease-in;
     -o-animation: scaleUp 0.5s both ease-in;
     -webkit-animation: scaleUp 0.5s both ease-in;
