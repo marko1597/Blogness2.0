@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$location", "$routeParams", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $location, $routeParams, $fileUploader, localStorageService, postsService, userService, tagsService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$routeParams", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "blockUiService", "dateHelper", "configProvider",
+    function ($scope, $rootScope, $location, $routeParams, $fileUploader, localStorageService, postsService, userService, tagsService, blockUiService, dateHelper, configProvider) {
         $scope.isAdding = true;
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
@@ -66,11 +66,16 @@
             if (!isNaN($routeParams.postId)) {
                 blockUiService.blockIt();
                 postsService.getPost($routeParams.postId).then(function (post) {
-                    $scope.isAdding = false;
-                    $scope.post = post;
-                    _.each(post.Tags, function(t) {
-                        $scope.Tags.push({ text: t.TagName });
-                    });
+                    if ($scope.username === post.User.UserName) {
+                        $scope.isAdding = false;
+                        $scope.post = post;
+                        _.each(post.Tags, function(t) {
+                            $scope.Tags.push({ text: t.TagName });
+                        });
+                    } else {
+                        $rootScope.$broadcast("displayError", { Message: "Oh you sneaky bastard! This post is not yours to edit." });
+                        $location.path("/404");
+                    }
                     blockUiService.unblockIt();
                 }, function (e) {
                     console.log(e);

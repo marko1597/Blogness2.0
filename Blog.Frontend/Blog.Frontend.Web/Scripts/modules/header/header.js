@@ -1,1 +1,1 @@
-﻿var ngHeader = angular.module("ngHeader", ["ngRoute"]);
+﻿var ngHeader = angular.module("ngHeader", []);

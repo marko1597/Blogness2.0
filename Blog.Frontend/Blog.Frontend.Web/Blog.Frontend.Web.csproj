@@ -256,6 +256,8 @@
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\modules\error\directives\errorDisplay.js" />
+    <Content Include="Scripts\modules\error\error.js" />
     <Content Include="Scripts\modules\shared\directives\ellipsis.js" />
     <Content Include="Scripts\modules\shared\directives\scrollTrigger.js" />
     <Content Include="Scripts\plugins\angular-inview.js" />
@@ -516,6 +518,7 @@
     <Content Include="Scripts\plugins\video-js\video.js" />
     <Content Include="Scripts\templates\events.html" />
     <Content Include="Scripts\templates\groups.html" />
+    <Content Include="Scripts\templates\modules\error\errorDisplay.html" />
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />

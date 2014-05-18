@@ -1,0 +1,1 @@
+﻿var ngError = angular.module("ngError", []);

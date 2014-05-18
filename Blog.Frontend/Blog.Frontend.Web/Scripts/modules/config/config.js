@@ -1,1 +1,1 @@
-﻿var ngConfig = angular.module("ngConfig", ["ngRoute"]);
+﻿var ngConfig = angular.module("ngConfig", []);

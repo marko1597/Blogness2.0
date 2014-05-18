@@ -1,5 +1,6 @@
 ﻿var blog = angular.module("blog", ["ngRoute","ngAnimate", "mgcrea.ngStrap", "snap", "ngLogger",
-    "ngHeader", "ngLogin", "ngPosts", "ngNavigation", "ngNavigation", "ngUser", "ngTags"]);
+    "ngHeader", "ngLogin", "ngPosts", "ngError", "ngNavigation", "ngNavigation", "ngUser",
+    "ngTags"]);
 
 blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
     return {

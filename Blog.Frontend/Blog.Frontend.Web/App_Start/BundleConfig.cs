@@ -79,6 +79,10 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/logger/services/stacktraceService.js",
                         "~/Scripts/modules/logger/services/errorLogService.js"));
 
+            bundles.Add(new ScriptBundle("~/scripts/error").Include(
+                      "~/Scripts/modules/error/error.js",
+                      "~/Scripts/modules/error/directives/errorDisplay.js"));
+
             bundles.Add(new ScriptBundle("~/scripts/header").Include(
                       "~/Scripts/modules/header/header.js",
                       "~/Scripts/modules/header/directives/headerMenu.js"));
