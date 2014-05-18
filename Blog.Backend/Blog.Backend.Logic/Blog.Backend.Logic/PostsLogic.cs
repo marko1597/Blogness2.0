@@ -92,6 +92,7 @@ namespace Blog.Backend.Logic
                     postContent.CreatedDate = DateTime.UtcNow;
                     postContent.ModifiedBy = post.User.UserId;
                     postContent.ModifiedDate = DateTime.UtcNow;
+                    postContent.PostId = isAdding ? 0 : post.PostId;
                 }
 
                 if (isAdding)

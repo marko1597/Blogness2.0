@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Contracts.ViewModels;
@@ -147,22 +146,6 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                var isAllowed = ApiFactory.GetInstance()
-                    .CreateApi()
-                    .IsUserAllowedAccess(User.Identity.GetUserName(), post.PostId);
-
-                if (!isAllowed)
-                {
-                    return new Post
-                           {
-                               Error = new Error
-                                       {
-                                           Id = (int) Common.Utils.Constants.Error.RequestNotAllowed,
-                                           Message = "Request not allowed. You cannot edit someone else's post."
-                                       }
-                           };
-                }
-
                 return _postsSvc.SavePost(post, true);
             }
             catch (Exception ex)

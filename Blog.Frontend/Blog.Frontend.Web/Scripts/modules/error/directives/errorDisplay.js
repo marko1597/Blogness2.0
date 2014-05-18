@@ -12,7 +12,7 @@
                 $(element).removeClass("hidden");
                 $timeout(function() {
                     $(element).addClass("hidden");
-                }, 4000);
+                }, 10000);
             });
         };
 

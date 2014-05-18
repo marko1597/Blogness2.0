@@ -228,6 +228,7 @@
     <Content Include="Content\images\edit-post.png" />
     <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
     <Content Include="Content\images\error-pages\servererror_bg.png" />
+    <Content Include="Content\images\error-pages\servererror_bg2.png" />
     <Content Include="Content\images\error-pages\serviceunavailable_bg.png" />
     <Content Include="Content\images\img-next.png" />
     <Content Include="Content\images\img-prev.png" />
