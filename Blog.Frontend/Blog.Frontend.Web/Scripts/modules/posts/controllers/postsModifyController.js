@@ -70,7 +70,7 @@
             if (!isNaN($routeParams.postId)) {
                 blockUiService.blockIt();
                 postsService.getPost($routeParams.postId).then(function (resp) {
-                    if ($scope.username === post.User.UserName) {
+                    if ($scope.username === resp.User.UserName) {
                         if (resp.Error == undefined) {
                             $scope.isAdding = false;
                             $scope.post = resp;
