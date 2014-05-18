@@ -119,8 +119,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postListItemComment.js",
-                      "~/Scripts/modules/posts/services/postsService.js",
-                      "~/Scripts/modules/posts/services/postsStateService.js"));
+                      "~/Scripts/modules/posts/services/postsService.js"));
 
             #endregion
 

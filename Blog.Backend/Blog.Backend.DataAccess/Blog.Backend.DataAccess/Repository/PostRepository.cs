@@ -39,8 +39,10 @@ namespace Blog.Backend.DataAccess.Repository
             return query;
         }
 
-        public override Post Add(Post post)
+        public Post Save(Post post, bool isAdding)
         {
+            #region Tags
+
             if (post.Tags != null)
             {
                 var tags = post.Tags;
@@ -66,18 +68,74 @@ namespace Blog.Backend.DataAccess.Repository
                 }
             }
 
+            #endregion
+
+            #region Contents
+
             if (post.PostContents != null)
             {
-                var contents = post.PostContents;
-                post.PostContents = new List<PostContent>();
-
-                foreach (var postContent in contents)
+                if (isAdding)
                 {
-                    post.PostContents.Add(postContent);
+                    var contents = post.PostContents;
+                    post.PostContents = new List<PostContent>();
+
+                    foreach (var postContent in contents)
+                    {
+                        post.PostContents.Add(postContent);
+                    }
+                }
+                else
+                {
+                    var contents = post.PostContents;
+                    post.PostContents = new List<PostContent>();
+
+                    foreach (var c in contents)
+                    {
+                        var c1 = c;
+                        var q = Context.PostContents
+                            .Where(a => a.PostId == c1.PostId && a.MediaId == c1.MediaId).ToList();
+
+                        if (q.Count == 0)
+                        {
+                            c.PostId = post.PostId;
+                            Context.PostContents.Attach(c);
+                            Context.Entry(c).State = EntityState.Added;
+                            post.PostContents.Add(c);
+                        }
+                        else
+                        {
+                            Context.PostContents.Attach(q.FirstOrDefault());
+                            Context.Entry(q.FirstOrDefault()).State = EntityState.Unchanged;
+                            post.PostContents.Add(q.FirstOrDefault());
+                        }
+                    }
                 }
             }
 
-            Context.Entry(post).State = EntityState.Added;
+            #endregion
+
+            if (!isAdding)
+            {
+                post.Comments = new List<Comment>();
+                var comments = Context.Comments.Where(a => a.PostId == post.PostId).ToList();
+                comments.ForEach(a =>
+                                 {
+                                     Context.Comments.Attach(a);
+                                     Context.Entry(a).State = EntityState.Unchanged;
+                                     post.Comments.Add(a);
+                                 });
+
+                post.PostLikes = new List<PostLike>();
+                var likes = Context.PostLikes.Where(a => a.PostId == post.PostId).ToList();
+                likes.ForEach(a =>
+                {
+                    Context.PostLikes.Attach(a);
+                    Context.Entry(a).State = EntityState.Unchanged;
+                    post.PostLikes.Add(a);
+                });
+            }
+            
+            Context.Entry(post).State = isAdding ? EntityState.Added : EntityState.Modified;
             Context.SaveChanges();
 
             return post;

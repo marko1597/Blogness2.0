@@ -3,7 +3,7 @@
         var postsApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi + "Posts/" :
             configProvider.getSettings().BlogApi + "Posts/";
-        
+
         return {
             getPost: function (id) {
                 var deferred = $q.defer();
@@ -12,7 +12,7 @@
                     url: postsApi + id,
                     method: "GET"
                 }).success(function (response) {
-                    response.CreatedDate = dateHelper.getDateDisplay(response.CreatedDate);
+                    response.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
                     deferred.resolve(response);
                 }).error(function () {
                     deferred.reject("An error occurred!");
@@ -29,7 +29,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
                 }).error(function () {
@@ -47,7 +47,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
                 }).error(function () {
@@ -65,7 +65,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.CreatedDate = dateHelper.getDateDisplay(p.CreatedDate);
+                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
                 }).error(function () {
@@ -75,12 +75,28 @@
                 return deferred.promise;
             },
 
-            savePost: function (post) {
+            addPost: function (post) {
                 var deferred = $q.defer();
 
                 $http({
                     url: postsApi,
                     method: "POST",
+                    data: post
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function () {
+                    deferred.reject("An error occurred!");
+                });
+
+                return deferred.promise;
+            },
+
+            updatePost: function (post) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi,
+                    method: "PUT",
                     data: post
                 }).success(function (response) {
                     deferred.resolve(response);

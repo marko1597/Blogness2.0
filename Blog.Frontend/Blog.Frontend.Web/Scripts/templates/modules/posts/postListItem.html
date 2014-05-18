@@ -9,8 +9,9 @@
             </h4>
             <p>
                 <a>{{post.User.UserName}}</a>
-                <span>{{post.CreatedDate}}</span>
+                <span>{{post.DateDisplay}}</span>
             </p>
+            <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
         </div>
     </div>
     <div class="post-item-body">

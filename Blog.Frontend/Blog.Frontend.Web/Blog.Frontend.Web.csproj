@@ -225,9 +225,12 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg-noise.png" />
     <Content Include="Content\images\bg.jpg" />
+    <Content Include="Content\images\edit-post.png" />
     <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
     <Content Include="Content\images\error-pages\servererror_bg.png" />
     <Content Include="Content\images\error-pages\serviceunavailable_bg.png" />
+    <Content Include="Content\images\img-next.png" />
+    <Content Include="Content\images\img-prev.png" />
     <Content Include="Content\images\loader-potato.gif" />
     <Content Include="Content\images\loader-girl.gif" />
     <Content Include="Content\images\login-main.jpg" />
@@ -264,7 +267,6 @@
     <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
     <Content Include="Scripts\modules\posts\controllers\postsViewController.js" />
     <Content Include="Scripts\modules\posts\directives\postContents.js" />
-    <Content Include="Scripts\modules\posts\services\postsStateService.js" />
     <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
     <Content Include="Scripts\modules\tags\services\tagsService.js" />
     <Content Include="Scripts\plugins\angular-carousel.js" />

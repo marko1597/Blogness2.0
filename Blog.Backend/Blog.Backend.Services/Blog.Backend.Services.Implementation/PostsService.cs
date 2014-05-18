@@ -21,14 +21,9 @@ namespace Blog.Backend.Services.Implementation
             return PostsFactory.GetInstance().CreatePosts().GetPostsByUser(userId);
         }
 
-        public Post UpdatePost(Post post)
+        public Post SavePost(Post post, bool isAdding)
         {
-            return PostsFactory.GetInstance().CreatePosts().UpdatePost(post);
-        }
-
-        public Post AddPost(Post post)
-        {
-            return PostsFactory.GetInstance().CreatePosts().AddPost(post);
+            return PostsFactory.GetInstance().CreatePosts().SavePost(post, isAdding);
         }
 
         public bool DeletePost(int postId)

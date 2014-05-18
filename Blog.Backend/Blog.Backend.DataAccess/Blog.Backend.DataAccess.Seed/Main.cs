@@ -40,6 +40,7 @@ namespace Blog.Backend.DataAccess.Seed
         private void BtnDropDatabaseClick(object sender, EventArgs e)
         {
             DropDatabaseOnFail();
+            Directory.Delete(@"C:\Temp\SampleImages\", true);
             AddConsoleMessage("Dropped it like its hot!");
         }
 

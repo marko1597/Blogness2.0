@@ -69,6 +69,30 @@
                 border: 3px solid #fff;
             }
 
+            #posts-main > div.post-item > div.post-item-header div.edit-post {
+                display: inline-block;
+                background: url(../../images/edit-post.png) no-repeat;
+                position: absolute;
+                top: 8px;
+                right: 10px;
+                width: 20px;
+                height: 20px;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -webkit-background-size: cover;
+                background-size: cover;
+                cursor: pointer;
+                opacity: 1;
+                -moz-transition: opacity .25s ease-in-out;
+                -webkit-transition: opacity .25s ease-in-out;
+                -o-transition: opacity .25s ease-in-out;
+                transition: opacity .25s ease-in-out;
+            }
+
+                #posts-main > div.post-item > div.post-item-header div.edit-post:hover {
+                    opacity: 0.5;
+                }
+
             #posts-main > div.post-item > div.post-item-header > div {
                 width: 100%;
             }
@@ -96,6 +120,10 @@
             padding: 10px 10px;
             border-bottom: 1px solid #ddd;
         }
+
+            #posts-main > div.post-item > div.post-item-body > p blockquote {
+                font-size: 1em;
+            }
 
         #posts-main > div.post-item > div.post-item-contents .post-item-content {
             text-align: center;

@@ -149,7 +149,6 @@ angular.module('ngCarousel')
                         scope.$watch('indicatorIndex', function(newValue) {
                             goToSlide(newValue, true);
                         });
-
                     }
 
                     // enable carousel indicator

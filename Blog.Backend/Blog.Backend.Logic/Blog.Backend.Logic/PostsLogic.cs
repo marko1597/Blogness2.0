@@ -23,7 +23,7 @@ namespace Blog.Backend.Logic
             Post post;
             try
             {
-                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,Comments,PostLikes").FirstOrDefault();
+                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,PostLikes").FirstOrDefault();
                 post = PostMapper.ToDto(db);
                 post.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(postId);
             }
@@ -72,21 +72,8 @@ namespace Blog.Backend.Logic
             }
             return posts;
         }
-
-        public Post UpdatePost(Post post)
-        {
-            try
-            {
-                var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
-                return PostMapper.ToDto(tPost);
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public Post AddPost(Post post)
+        
+        public Post SavePost(Post post, bool isAdding)
         {
             try
             {
@@ -107,12 +94,19 @@ namespace Blog.Backend.Logic
                     postContent.ModifiedDate = DateTime.UtcNow;
                 }
 
-                post.CreatedBy = post.User.UserId;
-                post.CreatedDate = DateTime.UtcNow;
-                post.ModifiedBy = post.User.UserId;
-                post.ModifiedDate = DateTime.UtcNow;
+                if (isAdding)
+                {
+                    post.CreatedBy = post.User.UserId;
+                    post.CreatedDate = DateTime.UtcNow;
+                    post.ModifiedBy = post.User.UserId;
+                    post.ModifiedDate = DateTime.UtcNow;
+                }
+                else
+                {
+                    post.ModifiedDate = DateTime.UtcNow;
+                }
 
-                var tPost = _postRepository.Add(PostMapper.ToEntity(post));
+                var tPost = _postRepository.Save(PostMapper.ToEntity(post), isAdding);
                 return GetPost(tPost.PostId);
             }
             catch (Exception ex)

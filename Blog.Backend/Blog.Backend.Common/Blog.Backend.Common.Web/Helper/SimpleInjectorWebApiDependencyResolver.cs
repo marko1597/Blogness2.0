@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
+using Blog.Backend.Common.Contracts.Utils;
 using SimpleInjector;
 using SimpleInjector.Extensions.LifetimeScoping;
 
@@ -46,7 +47,11 @@ namespace Blog.Backend.Common.Web.Helper
         {
             if (_lifetimeScope != null)
             {
-                _lifetimeScope.Dispose();
+                /* Code here should be removed because disposing of scope within a different
+                 * thread that called it is not advisable due to the asynchronous nature 
+                 * of Web Apis.
+                 * ========================================================================= */
+                //_lifetimeScope.Dispose();
             }
         }
     }

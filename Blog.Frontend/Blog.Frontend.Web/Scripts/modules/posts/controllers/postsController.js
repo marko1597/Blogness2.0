@@ -4,7 +4,7 @@
         $scope.size = "";
         $scope.isBusy = false;
         $scope.errorContent = { Show: false, Type: "" };
-
+        
         $scope.getRecentPosts = function () {
             blockUiService.blockIt();
 

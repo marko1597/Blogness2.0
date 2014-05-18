@@ -48,6 +48,10 @@ blog.config(["$routeProvider", function ($routeProvider) {
             templateUrl: '/blog/scripts/templates/modifypost.html',
             controller: 'postsModifyController'
         })
+        .when('/post/new/:postId', {
+            templateUrl: '/blog/scripts/templates/modifypost.html',
+            controller: 'postsModifyController'
+        })
         .when('/events', {
             templateUrl: '/blog/scripts/templates/events.html',
             controller: ''

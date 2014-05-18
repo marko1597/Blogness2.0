@@ -1,8 +1,6 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$location", "$fileUploader", "localStorageService",
-    "postsService", "userService", "postsStateService", "tagsService", "blockUiService",
-    "dateHelper", "configProvider",
-    function ($scope, $location, $fileUploader, localStorageService, postsService, userService,
-        postsStateService, tagsService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$location", "$routeParams", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "blockUiService", "dateHelper", "configProvider",
+    function ($scope, $location, $routeParams, $fileUploader, localStorageService, postsService, userService, tagsService, blockUiService, dateHelper, configProvider) {
+        $scope.isAdding = true;
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
             window.getDimensionMode() : configProvider.windowDimensions.mode;
@@ -35,26 +33,58 @@
             userService.getUserInfo().then(function(userinfo) {
                 $scope.post.User = userinfo;
 
-                postsService.savePost($scope.post).then(function (resp) {
-                    blockUiService.unblockIt();
-                    
-                    if (resp != null) {
-                        $location.path("/");
-                    }
-                }, function (e) {
-                    console.log(e);
-                    $location.path("/404");
-                });
+                if ($scope.isAdding) {
+                    postsService.addPost($scope.post).then(function(resp) {
+                        blockUiService.unblockIt();
+
+                        if (resp != null) {
+                            $location.path("/");
+                        }
+                    }, function(e) {
+                        console.log(e);
+                        $location.path("/404");
+                    });
+                } else {
+                    postsService.updatePost($scope.post).then(function (resp) {
+                        blockUiService.unblockIt();
+
+                        if (resp != null) {
+                            $location.path("/");
+                        }
+                    }, function (e) {
+                        console.log(e);
+                        $location.path("/404");
+                    });
+                }
             }, function(e) {
                 console.log(e);
                 $location.path("/404");
             });
         };
 
+        $scope.init = function() {
+            if (!isNaN($routeParams.postId)) {
+                blockUiService.blockIt();
+                postsService.getPost($routeParams.postId).then(function (post) {
+                    $scope.isAdding = false;
+                    $scope.post = post;
+                    _.each(post.Tags, function(t) {
+                        $scope.Tags.push({ text: t.TagName });
+                    });
+                    blockUiService.unblockIt();
+                }, function (e) {
+                    console.log(e);
+                    $location.path("/404");
+                });
+            }
+        };
+
         $scope.$on("windowSizeChanged", function (e, d) {
             configProvider.setDimensions(d.width, d.height);
             $scope.dimensionMode = configProvider.windowDimensions.mode;
         });
+
+        $scope.init();
 
         var uploader = $scope.uploader = $fileUploader.create({
             scope: $scope,

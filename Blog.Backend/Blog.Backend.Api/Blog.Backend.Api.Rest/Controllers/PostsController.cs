@@ -40,7 +40,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/{tagName}")]
         public List<Post> Get(string tagName)
         {
@@ -59,7 +59,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/popular")]
         public List<Post> GetPopular()
         {
@@ -79,7 +79,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/recent")]
         public List<Post> GetRecent()
         {
@@ -99,7 +99,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/more/{skip:int?}")]
         public List<Post> GetMore(int skip = 10)
         {
@@ -119,7 +119,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/user/{userId}/posts")]
         public UserPosts GetUserPosts(int userId)
         {
@@ -143,7 +143,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-               return _postsSvc.AddPost(post);
+               return _postsSvc.SavePost(post, true);
             }
             catch (Exception ex)
             {
@@ -158,7 +158,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                _postsSvc.UpdatePost(post);
+                _postsSvc.SavePost(post, false);
             }
             catch (Exception ex)
             {
