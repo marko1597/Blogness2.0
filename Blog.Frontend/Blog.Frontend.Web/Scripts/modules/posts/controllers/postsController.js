@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "postsStateService", "blockUiService", "dateHelper",
-    function ($scope, $location, $interval, localStorageService, postsService, postsStateService, blockUiService, dateHelper) {
+﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "blockUiService",
+    function ($scope, $location, $interval, localStorageService, postsService, blockUiService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;

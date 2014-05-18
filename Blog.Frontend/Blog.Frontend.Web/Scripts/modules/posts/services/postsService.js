@@ -1,5 +1,5 @@
-﻿ngPosts.factory('postsService', ["$http", "$q", "configProvider", "postsStateService", "dateHelper",
-    function ($http, $q, configProvider, postsStateService, dateHelper) {
+﻿ngPosts.factory('postsService', ["$http", "$q", "configProvider", "dateHelper",
+    function ($http, $q, configProvider, dateHelper) {
         var postsApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi + "Posts/" :
             configProvider.getSettings().BlogApi + "Posts/";
