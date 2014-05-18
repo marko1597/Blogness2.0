@@ -15,7 +15,6 @@
             data: credentials
         }).success(function (response) {
             deferred.resolve(response);
-            $window.location.href = configProvider.getSettings().BlogRoot;
         }).error(function () {
             deferred.reject("Error authenticating in the API!");
         });

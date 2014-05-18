@@ -6,7 +6,7 @@ using Blog.Backend.Common.Web.Authentication;
 namespace Blog.Backend.Common.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
-    public class BlogAuthAttribute : ActionFilterAttribute, IAuthenticationFilter
+    public class BlogAuthorizationAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {

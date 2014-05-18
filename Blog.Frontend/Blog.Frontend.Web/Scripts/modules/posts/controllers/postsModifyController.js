@@ -34,11 +34,13 @@
                 $scope.post.User = userinfo;
 
                 if ($scope.isAdding) {
-                    postsService.addPost($scope.post).then(function(resp) {
-                        blockUiService.unblockIt();
-
-                        if (resp != null) {
+                    postsService.addPost($scope.post).then(function (resp) {
+                        if (resp.Error == undefined) {
+                            blockUiService.unblockIt();
                             $location.path("/");
+                        } else {
+                            blockUiService.unblockIt();
+                            $rootScope.$broadcast("displayError", { Message: resp.Error.Message });
                         }
                     }, function(e) {
                         console.log(e);
@@ -46,10 +48,12 @@
                     });
                 } else {
                     postsService.updatePost($scope.post).then(function (resp) {
-                        blockUiService.unblockIt();
-
-                        if (resp != null) {
+                        if (resp.Error == undefined) {
+                            blockUiService.unblockIt();
                             $location.path("/");
+                        } else {
+                            blockUiService.unblockIt();
+                            $rootScope.$broadcast("displayError", { Message: resp.Error.Message });
                         }
                     }, function (e) {
                         console.log(e);
@@ -65,13 +69,15 @@
         $scope.init = function() {
             if (!isNaN($routeParams.postId)) {
                 blockUiService.blockIt();
-                postsService.getPost($routeParams.postId).then(function (post) {
+                postsService.getPost($routeParams.postId).then(function (resp) {
                     if ($scope.username === post.User.UserName) {
-                        $scope.isAdding = false;
-                        $scope.post = post;
-                        _.each(post.Tags, function(t) {
-                            $scope.Tags.push({ text: t.TagName });
-                        });
+                        if (resp.Error == undefined) {
+                            $scope.isAdding = false;
+                            $scope.post = resp;
+                            _.each(resp.Tags, function (t) {
+                                $scope.Tags.push({ text: t.TagName });
+                            });
+                        }
                     } else {
                         $rootScope.$broadcast("displayError", { Message: "Oh you sneaky bastard! This post is not yours to edit." });
                         $location.path("/404");

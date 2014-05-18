@@ -8,6 +8,24 @@ namespace Blog.Backend.Common.Web.Authentication
 {
     public class Api
     {
+        public bool IsUserAllowedAccess(string username, int postId)
+        {
+            var isAllowed = false;
+            try
+            {
+                var post = JsonHelper.DeserializeJson<Post>(
+                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
+                    .Get("posts/" + postId));
+
+                isAllowed = username == post.User.UserName;
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+            return isAllowed;
+        }
+
         public Session IsLoggedIn(string username)
         {
             var session = new Session();

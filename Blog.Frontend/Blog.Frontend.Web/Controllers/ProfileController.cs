@@ -14,7 +14,7 @@ namespace Blog.Frontend.Web.Controllers
             _authentication = authentication;
         }
 
-        [BlogAuth]
+        [BlogAuthorization]
         public ActionResult Index()
         {
             return View();

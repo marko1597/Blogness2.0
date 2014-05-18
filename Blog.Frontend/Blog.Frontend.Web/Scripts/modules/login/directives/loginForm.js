@@ -1,5 +1,5 @@
 ﻿ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, localStorageService, configProvider, loginService, blockUiService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $window, localStorageService, configProvider, loginService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
@@ -20,6 +20,7 @@
             $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
                 localStorageService.add("username", resp.User.UserName);
                 blockUiService.unblockIt();
+                $window.location.href = configProvider.getSettings().BlogRoot;
             }, function (errorMsg) {
                 $scope.alert.Message = errorMsg;
                 $scope.alert.Show = true;
@@ -35,7 +36,7 @@
             $scope.alert.Show = false;
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "localStorageService", "configProvider", "loginService", "blockUiService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "localStorageService", "configProvider", "loginService", "blockUiService"];
 
     return {
         restrict: 'EA',

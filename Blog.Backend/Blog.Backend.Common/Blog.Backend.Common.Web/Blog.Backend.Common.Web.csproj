@@ -155,6 +155,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AllowCrossSiteApiAttribute.cs" />
     <Compile Include="Attributes\AllowCrossSiteAttribute.cs" />
+    <Compile Include="Attributes\BlogApiAuthorizationAttribute.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
     <Compile Include="Attributes\ValidateMimetypeMultipartContentAttribute.cs" />
     <Compile Include="Authentication\ApiFactory.cs" />
