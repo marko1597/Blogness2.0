@@ -121,23 +121,35 @@
     }
 }
 
-/* Snap Content overrides
+/* CK Editor overrides
  ============================================= */
-/*.snap-content .container {
-    height: 100%;
+#cke_post-message-editor {
+    background: none !important;
+    padding: 3px 5px 5px 5px !important;
+    border-radius: 0 !important;
+    border: 1px solid #acacac !important;
 }
 
-    .snap-content .container > div[ng-view] {
-        height: 100%;
+    #cke_post-message-editor div {
+        border-radius: 0 !important;
     }
 
-        .snap-content .container > div[ng-view] > div.row {
-            height: 100%;
-        }
+    #cke_post-message-editor span {
+        border-radius: 0 !important;
+    }
 
-            .snap-content .container > div[ng-view] > div.row > div {
-                height: 100%;
-            }*/
+.cke_toolgroup {
+    border: 1px solid #acacac !important;
+}
+
+.cke_contents {
+    margin-top: 5px !important;
+    border: 1px solid #acacac !important;
+}
+
+.cke_inner .cke_top {
+    background: none !important;
+}
 
 /* Error page
  ============================================= */
