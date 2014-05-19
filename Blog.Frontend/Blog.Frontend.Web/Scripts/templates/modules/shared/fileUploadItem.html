@@ -1,39 +1,31 @@
 ﻿<div>
-    <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4">
+    <div class="upload-details">
         <p class="filename">{{ item.file.name }}</p>
-        <div ng-show="uploader.isHTML5" file-upload-thumbnail="{ file: item.file, height: 100 }"></div>
-    </div>
-
-    <div class="col-xs-1 col-sm-1 visible-xs visible-sm">
-        <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
-        <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
-        <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
         <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>
-    </div>
+        <div class="status">
+            <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
+            <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
+            <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
+        </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-        <div class="progress" style="margin-bottom: 0;">
-            <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+        <div class="buttons" nowrap>
+            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                <span class="fa fa-upload"></span> Upload
+            </button>
+            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                <span class="fa fa-ban"></span> Cancel
+            </button>
+            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                <span class="fa fa-trash-o"></span> Remove
+            </button>
         </div>
     </div>
 
-    <div class="col-md-1 col-lg-1 hidden-xs hidden-sm">
-        <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
-        <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
-        <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
+    <div class="thumbnail">
+        <div ng-show="uploader.isHTML5" file-upload-thumbnail="{ file: item.file, height: 100 }"></div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" nowrap>
-        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-            <span class="fa fa-upload"></span> Upload
-        </button>
-        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-            <span class="fa fa-ban"></span> Cancel
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-            <span class="fa fa-trash-o"></span> Remove
-        </button>
+    
+    <div class="progress" style="margin-bottom: 0;">
+        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
     </div>
 </div>

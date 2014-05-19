@@ -1,44 +1,60 @@
-﻿    div.file-upload div.dropzone {
-        border: dotted 3px #666;
+﻿div.file-upload div.dropzone {
+    border: dotted 3px #666;
+}
+
+div.file-upload input[type=file] {
+    margin-bottom: 5px;
+}
+
+div.file-upload div.dropzone ul.upload-items {
+    list-style-type: none;
+    padding: 0;
+    /*height: 100% !important;*/
+}
+
+    div.file-upload div.dropzone ul.upload-items:after {
+        clear: both;
+        content: "";
+        display: block;
     }
 
-        div.file-upload input[type=file] {
-            margin-bottom: 5px;
+    div.file-upload div.dropzone ul.upload-items > li {
+        background: #fff;
+        margin: 5px;
+        width: 48%;
+    }
+
+    div.file-upload div.dropzone ul.upload-items div.upload-details {
+        background: #4c4c4c;
+        color: #f2f2f2;
+        padding: 10px;
+    }
+
+        div.file-upload div.dropzone ul.upload-items div.upload-details > p {
+            margin: 0 0 5px 0;
         }
 
-        div.file-upload div.dropzone ul.upload-items {
-            list-style-type: none;
-            padding: 0;
-        }
-
-            div.file-upload div.dropzone ul.upload-items > li {
-                margin: 0 0 10px 0;
-                border: 1px solid #999;
-                background: #fff;
-                padding: 10px;
+            div.file-upload div.dropzone ul.upload-items div.upload-details > p:first-child {
+                font-weight: bold;
             }
 
-                div.file-upload div.dropzone ul.upload-items > li p {
-                    margin: 0;
-                }
+    div.file-upload div.dropzone ul.upload-items div.thumbnail {
+        border: 0;
+        padding: 0;
+        border-radius: 0;
+        margin: 0;
+    }
 
-                    div.file-upload div.dropzone ul.upload-items > li p.filename {
-                        white-space: nowrap;
-                        overflow: hidden;
-                        -ms-text-overflow: ellipsis;
-                        -o-text-overflow: ellipsis;
-                        -moz-text-overflow: ellipsis;
-                        text-overflow: ellipsis;
-                        width: 280px;
-                        font-weight: bold;
-                    }
+        div.file-upload div.dropzone ul.upload-items div.thumbnail canvas {
+            width: 100%;
+            height: auto;
+        }
+
+    div.file-upload div.dropzone ul.upload-items div.progress {
+        border-radius: 0;
+        height: 10px;
+    }
 
 .ng-file-over {
     border: dotted 3px red;
-}
-
-@media (max-width: 992px) {
-    ul.upload-items > li div.progress {
-        margin-bottom: 5px !important;
-    }
 }
