@@ -154,6 +154,9 @@ namespace Blog.Frontend.Web
             bundles.Add(new StyleBundle("~/content/header").Include(
                       "~/Content/modules/header/header.css"));
 
+            bundles.Add(new StyleBundle("~/content/error").Include(
+                      "~/Content/modules/error/globalerrormessage.css"));
+
             bundles.Add(new StyleBundle("~/content/tags").Include(
                       "~/Content/modules/tags/tags.css"));
 

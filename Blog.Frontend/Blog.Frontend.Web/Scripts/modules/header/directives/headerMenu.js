@@ -1,7 +1,17 @@
 ﻿ngHeader.directive('headerMenu', function () {
-    var ctrlFn = function ($scope, snapRemote) {
+    var ctrlFn = function ($scope, $location, $rootScope, snapRemote) {
         $scope.userLoggedIn = false;
         $scope.toggleClass = "nav-close";
+
+        $scope.goAddNewPost = function () {
+            $('#blog-header-collapsible').collapse("hide");
+            $location.path("/post/new");
+        };
+
+        $scope.testDisplayError = function () {
+            $('#blog-header-collapsible').collapse("hide");
+            $rootScope.$broadcast("displayError", { Message: "This is a test error message." });
+        };
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
@@ -9,6 +19,7 @@
                     $scope.toggleClass = "nav-close";
                 } else {
                     $scope.toggleClass = "nav-open";
+                    $('#blog-header-collapsible').collapse("hide");
                 }
             };
 
@@ -21,8 +32,7 @@
             });
         });
     };
-    ctrlFn.$inject = ["$scope", "snapRemote"];
-
+    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote"];
 
     return {
         restrict: 'EA',

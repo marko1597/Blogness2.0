@@ -1,18 +1,19 @@
-﻿ngError.directive('errorDisplay', ["$timeout",
-    function ($timeout) {
+﻿ngError.directive('errorDisplay', [
+    function () {
         var ctrlFn = function ($scope) {
             $scope.errorMessage = "";
         };
         ctrlFn.$inject = ["$scope"];
 
-        var linkFn = function (scope, element, attr) {
+        var linkFn = function (scope, element) {
             scope.$on("displayError", function (e, d) {
                 scope.errorMessage = d.Message;
-
                 $(element).removeClass("hidden");
-                $timeout(function() {
-                    $(element).addClass("hidden");
-                }, 10000);
+            });
+
+            $("#blog-error-global span.close-error").on("click", function (ev) {
+                ev.preventDefault();
+                $(element).addClass('hidden');
             });
         };
 

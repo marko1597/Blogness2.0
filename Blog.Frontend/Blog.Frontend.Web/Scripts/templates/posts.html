@@ -1,7 +1,7 @@
 ﻿<div class="row" post-item-resize ng-if="!errorContent.Show">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div id="posts-main" isotope-container>
-            <div class="post-item" ng-repeat="post in posts" isotope-item post-item data="{ Post: post, Width: size }"></div>
+            <div class="post-item" ng-repeat="post in posts track by $index" isotope-item post-item data="{ Post: post, Width: size }"></div>
         </div>
     </div>
 </div>

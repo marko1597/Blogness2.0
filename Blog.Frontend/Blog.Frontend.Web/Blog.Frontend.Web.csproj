@@ -243,6 +243,7 @@
     <Content Include="Content\images\nav-friends.png" />
     <Content Include="Content\images\nav-home.png" />
     <Content Include="Content\images\nav-profile.png" />
+    <Content Include="Content\modules\error\globalerrormessage.css" />
     <Content Include="Content\modules\header\header.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
