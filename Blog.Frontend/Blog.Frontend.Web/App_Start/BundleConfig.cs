@@ -83,6 +83,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/error").Include(
                       "~/Scripts/modules/error/error.js",
+                      "~/Scripts/modules/error/controllers/errorPageController.js",
                       "~/Scripts/modules/error/services/errorService.js",
                       "~/Scripts/modules/error/directives/errorDisplay.js"));
 
@@ -155,7 +156,8 @@ namespace Blog.Frontend.Web
                       "~/Content/modules/header/header.css"));
 
             bundles.Add(new StyleBundle("~/content/error").Include(
-                      "~/Content/modules/error/globalerrormessage.css"));
+                      "~/Content/modules/error/globalerrormessage.css",
+                      "~/Content/modules/error/errorpage.css"));
 
             bundles.Add(new StyleBundle("~/content/tags").Include(
                       "~/Content/modules/tags/tags.css"));

@@ -57,15 +57,15 @@ blog.config(["$routeProvider", function ($routeProvider) {
             templateUrl: '/blog/scripts/templates/events.html',
             controller: ''
         })
-        .when('/404', {
-            templateUrl: '/blog/scripts/templates/pagenotfound.html',
-            controller: ''
+        .when('/error', {
+            templateUrl: '/blog/scripts/templates/errorpage.html',
+            controller: 'errorPageController'
         })
         .when('/post/:postId', {
             templateUrl: '/blog/scripts/templates/viewpost.html',
             controller: 'postsViewController'
         })
         .otherwise({
-            redirectTo: '/404'
+            redirectTo: '/error'
         });
 }]);

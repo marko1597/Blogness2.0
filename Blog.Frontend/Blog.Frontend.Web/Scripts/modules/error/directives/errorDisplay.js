@@ -1,9 +1,13 @@
 ﻿ngError.directive('errorDisplay', [
     function () {
-        var ctrlFn = function ($scope) {
+        var ctrlFn = function ($scope, errorService) {
             $scope.errorMessage = "";
+
+            $scope.$on("displayError", function (e, d) {
+                errorService.setError(d);
+            });
         };
-        ctrlFn.$inject = ["$scope"];
+        ctrlFn.$inject = ["$scope", "errorService"];
 
         var linkFn = function (scope, element) {
             scope.$on("displayError", function (e, d) {

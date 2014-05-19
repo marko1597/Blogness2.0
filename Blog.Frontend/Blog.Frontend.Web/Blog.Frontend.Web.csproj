@@ -243,6 +243,7 @@
     <Content Include="Content\images\nav-friends.png" />
     <Content Include="Content\images\nav-home.png" />
     <Content Include="Content\images\nav-profile.png" />
+    <Content Include="Content\modules\error\errorpage.css" />
     <Content Include="Content\modules\error\globalerrormessage.css" />
     <Content Include="Content\modules\header\header.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
@@ -258,6 +259,7 @@
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\modules\error\controllers\errorPageController.js" />
     <Content Include="Scripts\modules\error\directives\errorDisplay.js" />
     <Content Include="Scripts\modules\error\error.js" />
     <Content Include="Scripts\modules\error\services\errorService.js" />
@@ -535,7 +537,7 @@
     <Content Include="Scripts\templates\modules\posts\postLikes.html" />
     <Content Include="Scripts\templates\modules\shared\fileUpload.html" />
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
-    <Content Include="Scripts\templates\pagenotfound.html" />
+    <Content Include="Scripts\templates\errorpage.html" />
     <Content Include="Scripts\templates\profile.html" />
     <Content Include="Scripts\templates\friends.html" />
     <Content Include="Scripts\templates\posts.html" />

@@ -13,6 +13,11 @@
             $rootScope.$broadcast("displayError", { Message: "This is a test error message." });
         };
 
+        $scope.yetAnotherTestDisplayError = function () {
+            $('#blog-header-collapsible').collapse("hide");
+            $rootScope.$broadcast("displayError", { Message: "This is a different test error message." });
+        };
+
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
                 if ($scope.toggleClass == "nav-open") {
