@@ -5,7 +5,7 @@
             <h3>Drag files here...</h3>
             <!--<p>Queue length: {{ uploader.queue.length }}</p>-->
             <div>
-                <ul class="upload-items" isotope-container>
+                <ul class="upload-items" isotope-container file-upload-item-resize>
                     <li ng-repeat="item in uploader.queue" isotope-item class="content-item">
                         <div data-media-id="{{item.mediaId}}" file-upload-item item="item" uploader="uploader"></div>
                     </li>

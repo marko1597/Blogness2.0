@@ -259,7 +259,9 @@
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\modules\error\directives\errorDisplay.js" />
     <Content Include="Scripts\modules\error\error.js" />
+    <Content Include="Scripts\modules\error\services\errorService.js" />
     <Content Include="Scripts\modules\shared\directives\ellipsis.js" />
+    <Content Include="Scripts\modules\shared\directives\fileUploadItemResize.js" />
     <Content Include="Scripts\modules\shared\directives\fileUploadThumbnail.js" />
     <Content Include="Scripts\modules\shared\directives\scrollTrigger.js" />
     <Content Include="Scripts\plugins\angular-inview.js" />

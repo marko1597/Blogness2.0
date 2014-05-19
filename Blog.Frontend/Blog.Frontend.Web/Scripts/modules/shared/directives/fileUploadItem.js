@@ -1,5 +1,5 @@
 ﻿ngShared.directive("fileUploadItem", [
-    function() {
+    function () {
         return {
             restrict: 'EA',
             scope: { item: '=', uploader: '=' },

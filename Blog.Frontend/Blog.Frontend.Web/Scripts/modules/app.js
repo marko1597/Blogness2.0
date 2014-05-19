@@ -21,7 +21,7 @@ blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($
                 $timeout(function() {
                     scope.onResizeFunction();
                     scope.$apply();
-                }, 1000);
+                }, 500);
             });
         }
     };

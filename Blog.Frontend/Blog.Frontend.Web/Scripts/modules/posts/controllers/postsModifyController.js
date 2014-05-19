@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$routeParams", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $rootScope, $location, $routeParams, $fileUploader, localStorageService, postsService, userService, tagsService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$routeParams", "$timeout", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
+    function ($scope, $rootScope, $location, $routeParams, $timeout, $fileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
         $scope.isAdding = true;
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
@@ -39,12 +39,10 @@
                             blockUiService.unblockIt();
                             $location.path("/");
                         } else {
-                            blockUiService.unblockIt();
-                            $rootScope.$broadcast("displayError", { Message: resp.Error.Message });
+                            errorService.displayErrorUnblock(resp.Error);
                         }
                     }, function(e) {
-                        console.log(e);
-                        $location.path("/404");
+                        errorService.displayErrorRedirect({ Message: e });
                     });
                 } else {
                     postsService.updatePost($scope.post).then(function (resp) {
@@ -52,17 +50,14 @@
                             blockUiService.unblockIt();
                             $location.path("/");
                         } else {
-                            blockUiService.unblockIt();
-                            $rootScope.$broadcast("displayError", { Message: resp.Error.Message });
+                            errorService.displayErrorUnblock(resp.Error);
                         }
                     }, function (e) {
-                        console.log(e);
-                        $location.path("/404");
+                        errorService.displayErrorRedirect({ Message: e });
                     });
                 }
             }, function(e) {
-                console.log(e);
-                $location.path("/404");
+                errorService.displayErrorRedirect({ Message: e });
             });
         };
 
@@ -74,18 +69,18 @@
                         if (resp.Error == undefined) {
                             $scope.isAdding = false;
                             $scope.post = resp;
-                            _.each(resp.Tags, function (t) {
+                            _.each(resp.Tags, function(t) {
                                 $scope.Tags.push({ text: t.TagName });
                             });
+                            blockUiService.unblockIt();
+                        } else {
+                            errorService.displayErrorUnblock(resp.Error);
                         }
                     } else {
-                        $rootScope.$broadcast("displayError", { Message: "Oh you sneaky bastard! This post is not yours to edit." });
-                        $location.path("/404");
+                        errorService.displayErrorUnblock({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
                     }
-                    blockUiService.unblockIt();
                 }, function (e) {
-                    console.log(e);
-                    $location.path("/404");
+                    errorService.displayErrorRedirect({ Message: e });
                 });
             }
         };
@@ -93,6 +88,14 @@
         $scope.$on("windowSizeChanged", function (e, d) {
             configProvider.setDimensions(d.width, d.height);
             $scope.dimensionMode = configProvider.windowDimensions.mode;
+
+        });
+
+        $scope.$on("resizeUploadThumbnails", function () {
+            $timeout(function () {
+                $scope.$broadcast('iso-method', { name: null, params: null });
+                blockUiService.unblockIt();
+            }, 500);
         });
 
         $scope.init();
@@ -115,8 +118,14 @@
                 Media: response,
             };
             $scope.post.PostContents.push(media);
+        });
 
-            console.info('Success', xhr, item, response);
+        uploader.bind('afteraddingfile', function () {
+            blockUiService.blockIt();
+        });
+
+        uploader.bind('afteraddingall', function () {
+            blockUiService.blockIt();
         });
     }
 ]);

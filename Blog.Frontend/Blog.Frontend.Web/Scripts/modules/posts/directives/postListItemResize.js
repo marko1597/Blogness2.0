@@ -1,52 +1,41 @@
-﻿ngPosts.directive('postItemResize', ["$window", "$timeout", function ($window, $timeout) {
-    var linkFn = function (scope) {
-        var window = angular.element($window);
-        window.bind("resize", function () {
-            resizePosts();
-        });
+﻿ngPosts.directive('postItemResize', [
+    function () {
+        var linkFn = function (scope) {
+            scope.$on("windowSizeChanged", function (e, d) {
+                resizePosts();
+            });
 
-        var resizePosts = function () {
-            var postsMain = $("#posts-main").outerWidth();
-            if (postsMain == 940) {
-                $timeout(function () {
+            var resizePosts = function () {
+                var postsMain = $("#posts-main").outerWidth();
+                if (postsMain == 940) {
                     _.each($("div.post-item"), function (a) {
                         $(a).width("448px");
                     });
                     scope.$emit("updatePostsSize", "large");
-                    scope.$emit('iso-option', { layoutMode: 'masonry' });
-                }, 500);
-            } else if (postsMain == 1140) {
-                $timeout(function () {
+                } else if (postsMain == 1140) {
                     _.each($("div.post-item"), function (a) {
                         $(a).width("368px");
                     });
                     scope.$emit("updatePostsSize", "xlarge");
-                    scope.$emit('iso-option', { layoutMode: 'masonry' });
-                }, 500);
-            } else if (postsMain == 720) {
-                $timeout(function () {
+                } else if (postsMain == 720) {
                     _.each($("div.post-item"), function (a) {
                         $(a).width("338px");
                     });
                     scope.$emit("updatePostsSize", "medium");
-                    scope.$emit('iso-option', { layoutMode: 'masonry' });
-                }, 500);
-            } else {
-                $timeout(function () {
+                } else {
                     _.each($("div.post-item"), function (a) {
                         $(a).width("98%");
                     });
                     scope.$emit("updatePostsSize", "xsmall");
-                    scope.$emit('iso-option', { layoutMode: 'masonry' });
-                }, 500);
-            }
+                }
+                scope.$emit('iso-option', { layoutMode: 'masonry' });
+            };
+            resizePosts();
         };
 
-        resizePosts();
-    };
-
-    return {
-        restrict: 'EA',
-        link: linkFn
-    };
-}]);
+        return {
+            restrict: 'EA',
+            link: linkFn
+        };
+    }
+]);

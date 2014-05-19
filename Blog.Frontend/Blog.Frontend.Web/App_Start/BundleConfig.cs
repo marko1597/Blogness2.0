@@ -71,6 +71,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/modules/shared/directives/ellipsis.js",
                         "~/Scripts/modules/shared/directives/fileUpload.js",
                         "~/Scripts/modules/shared/directives/fileUploadItem.js",
+                        "~/Scripts/modules/shared/directives/fileUploadItemResize.js",
                         "~/Scripts/modules/shared/directives/fileUploadThumbnail.js",
                         "~/Scripts/modules/shared/directives/ticker.js",
                         "~/Scripts/modules/shared/directives/keypress.js"));
@@ -82,6 +83,7 @@ namespace Blog.Frontend.Web
 
             bundles.Add(new ScriptBundle("~/scripts/error").Include(
                       "~/Scripts/modules/error/error.js",
+                      "~/Scripts/modules/error/services/errorService.js",
                       "~/Scripts/modules/error/directives/errorDisplay.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/header").Include(

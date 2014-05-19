@@ -55,15 +55,6 @@
             $scope.getMorePosts();
         });
         
-        $scope.addPost = function () {
-            postsStateService.setPostItem(null);
-        };
-
-        $scope.editPost = function(postId) {
-            var post = _.findWhere($scope.posts, { PostId: postId });
-            postsStateService.setPostItem(post);
-        };
-
         /*
          * Layout Fix for Isotope
          * ----------------------

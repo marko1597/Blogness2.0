@@ -1,23 +1,27 @@
 ﻿<div>
     <div class="upload-details">
-        <p class="filename">{{ item.file.name }}</p>
+        <p class="filename" bs-popover data-placement="bottom" data-animation="am-flip-x"
+           title="File Name" data-content="{{item.file.name}}">
+            {{ item.file.name }}
+        </p>
         <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>
+        
+        <div class="buttons" nowrap>
+            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                <span class="fa fa-upload"></span>
+            </button>
+            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                <span class="fa fa-ban"></span>
+            </button>
+            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                <span class="fa fa-trash-o"></span>
+            </button>
+        </div>
+
         <div class="status">
             <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
             <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
             <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
-        </div>
-
-        <div class="buttons" nowrap>
-            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                <span class="fa fa-upload"></span> Upload
-            </button>
-            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
-                <span class="fa fa-ban"></span> Cancel
-            </button>
-            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                <span class="fa fa-trash-o"></span> Remove
-            </button>
         </div>
     </div>
 
