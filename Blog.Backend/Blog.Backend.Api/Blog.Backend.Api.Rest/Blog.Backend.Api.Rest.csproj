@@ -210,8 +210,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helper\" />
+    <Folder Include="Views\Unauthorized\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\FormatConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -244,6 +246,7 @@
     <Compile Include="Controllers\SessionController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\UnauthorizedController.cs" />
     <Compile Include="Controllers\UsersController.cs">
       <SubType>Code</SubType>
     </Compile>

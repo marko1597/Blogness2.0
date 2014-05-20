@@ -108,6 +108,7 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpPost]
         [Route("api/media")]
+        [BlogApiAuthorization]
         public async Task<Media> Post([FromUri]string username, string album)
         {
             try

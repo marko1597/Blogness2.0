@@ -7,7 +7,7 @@ namespace Blog.Backend.Api.Rest.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-
+            Response.StatusCode = 403;
             return View();
         }
     }

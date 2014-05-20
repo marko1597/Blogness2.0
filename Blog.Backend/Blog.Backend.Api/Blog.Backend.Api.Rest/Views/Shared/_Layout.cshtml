@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     @RenderBody()
@@ -12,7 +15,8 @@
     <footer>
         <p>&copy; @DateTime.Now.Year - Jason Magpantay</p>
     </footer>
-
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

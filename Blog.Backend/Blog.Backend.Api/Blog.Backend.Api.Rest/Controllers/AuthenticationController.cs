@@ -22,12 +22,25 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpPost]
         [Route("api/authenticate")]
-        public bool Authenticate([FromBody] Login login)
+        public bool Post([FromBody] Login login)
         {
             var result = _session.GetByUser(login.Username);
             if (result != null)
             {
                 _authentication.SignIn(_user.GetByUserName(login.Username));
+                return true;
+            }
+            return false;
+        }
+
+        [HttpPut]
+        [Route("api/authenticate")]
+        public bool Put([FromBody] Login login)
+        {
+            var result = _session.GetByUser(login.Username);
+            if (result != null)
+            {
+                _authentication.SignOut(_user.GetByUserName(login.Username));
                 return true;
             }
             return false;

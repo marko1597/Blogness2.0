@@ -49,7 +49,7 @@
                             errorService.displayErrorUnblock(resp.Error);
                         }
                     }, function (e) {
-                        errorService.displayErrorRedirect({ Message: e });
+                        errorService.displayErrorRedirect(e);
                     });
                 } else {
                     postsService.updatePost($scope.post).then(function (resp) {
@@ -60,11 +60,11 @@
                             errorService.displayErrorUnblock(resp.Error);
                         }
                     }, function (e) {
-                        errorService.displayErrorRedirect({ Message: e });
+                        errorService.displayErrorRedirect(e);
                     });
                 }
             }, function (e) {
-                errorService.displayErrorRedirect({ Message: e });
+                errorService.displayErrorRedirect(e);
             });
         };
 
@@ -121,7 +121,7 @@
                         errorService.displayErrorUnblock({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
                     }
                 }, function (e) {
-                    errorService.displayErrorRedirect({ Message: e });
+                    errorService.displayErrorRedirect(e);
                 });
             }
         };

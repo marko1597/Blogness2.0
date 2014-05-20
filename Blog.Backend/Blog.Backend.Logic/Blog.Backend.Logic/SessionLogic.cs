@@ -83,7 +83,7 @@ namespace Blog.Backend.Logic
                 {
                     IpAddress = ipAddress,
                     SessionId = 0,
-                    TimeValidity = DateTime.UtcNow.AddMinutes(5),
+                    TimeValidity = DateTime.UtcNow.AddMinutes(20),
                     Token = Guid.NewGuid().ToString(),
                     UserId = user.UserId
                 };
@@ -113,7 +113,7 @@ namespace Blog.Backend.Logic
             try
             {
                 var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(userName);
-                var session = _sessionRepository.Find(a => user != null && a.UserId == user.UserId, true).FirstOrDefault();
+                var session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
 
                 if (user != null)
                 {

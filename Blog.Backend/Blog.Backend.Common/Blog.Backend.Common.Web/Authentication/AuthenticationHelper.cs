@@ -34,5 +34,21 @@ namespace Blog.Backend.Common.Web.Authentication
                 return false;
             }
         }
+
+        public bool SignOut(User user)
+        {
+            try
+            {
+                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
+                authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Backend.Common.Utils;
 using Blog.Backend.Common.Web.Authentication;
 using Blog.Backend.Common.Web.Helper;
 using Blog.Backend.Services.Implementation;
-using Blog.Backend.Services.Implementation.Mocks;
 using SimpleInjector;
 
 namespace Blog.Backend.Api.Rest
@@ -21,6 +21,7 @@ namespace Blog.Backend.Api.Rest
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatConfig.RegisterFormats(GlobalConfiguration.Configuration.Formatters);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             SslValidator.OverrideValidation();
             
             // Simple Injection Setup

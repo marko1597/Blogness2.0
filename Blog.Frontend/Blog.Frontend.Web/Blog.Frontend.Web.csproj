@@ -211,7 +211,7 @@
     <Compile Include="App_Start\SimpleInjectorDependencyResolver.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -661,8 +661,7 @@
     <Content Include="Scripts\plugins\video-js\font\vjs.eot" />
     <Content Include="Scripts\plugins\video-js\font\vjs.ttf" />
     <Content Include="Scripts\plugins\video-js\font\vjs.woff" />
-    <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\Login.cshtml" />
+    <Content Include="Views\Authentication\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj">

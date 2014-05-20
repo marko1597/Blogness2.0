@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "blockUiService",
-    function ($scope, $location, $interval, localStorageService, postsService, blockUiService) {
+﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
+    function ($scope, $location, $interval, localStorageService, postsService, blockUiService, errorService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
@@ -18,8 +18,7 @@
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
             }, function (e) {
-                console.log(e);
-                $location.path("/404");
+                errorService.displayErrorRedirect(e);
             });
         };
 
@@ -38,8 +37,7 @@
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
             }, function (e) {
-                console.log(e);
-                $location.path("/404");
+                errorService.displayErrorRedirect(e);
             });
         };
 

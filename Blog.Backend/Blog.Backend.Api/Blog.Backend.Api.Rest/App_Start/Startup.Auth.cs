@@ -14,7 +14,7 @@ namespace Blog.Backend.Api.Rest
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Home"),
+                LoginPath = new PathString("/Unauthorized"),
                 ExpireTimeSpan = new TimeSpan(0, 20, 0),
                 CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName")
             });

@@ -14,8 +14,8 @@
                 }).success(function (response) {
                     response.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
@@ -32,8 +32,8 @@
                         p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
@@ -50,8 +50,8 @@
                         p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
@@ -68,8 +68,8 @@
                         p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
                     });
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
@@ -84,8 +84,8 @@
                     data: post
                 }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
@@ -100,11 +100,12 @@
                     data: post
                 }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (e) {
+                    deferred.reject(e);
                 });
 
                 return deferred.promise;
             }
         };
-    }]);
+    }
+]);

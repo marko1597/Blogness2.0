@@ -1,1 +1,1 @@
-﻿var ngError = angular.module("ngError", []);
+﻿var ngError = angular.module("ngError", ["ngConfig", "ngLogin"]);
