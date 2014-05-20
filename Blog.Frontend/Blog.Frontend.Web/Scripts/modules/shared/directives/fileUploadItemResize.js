@@ -10,7 +10,6 @@
             });
 
             var resizeUploadItems = function (w) {
-                console.log(w);
                 if (w >= 992) {
                     _.each($("ul.upload-items > li.isotope-item"), function (a) {
                         $(a).width("32%");

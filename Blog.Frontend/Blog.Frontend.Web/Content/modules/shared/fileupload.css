@@ -77,6 +77,11 @@ div.file-upload div.dropzone ul.upload-items {
         margin: 0;
     }
 
+        div.file-upload div.dropzone ul.upload-items div.thumbnail img {
+            height: auto;
+            width: 100%;
+        }
+
         div.file-upload div.dropzone ul.upload-items div.thumbnail canvas {
             width: 100%;
             height: auto;

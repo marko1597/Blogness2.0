@@ -5,7 +5,14 @@
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
             window.getDimensionMode() : configProvider.windowDimensions.mode;
 
-        $scope.post = { PostTitle: "", PostMessage: "", PostContents: [], Tags: [] };
+        $scope.post = {
+            PostTitle: "",
+            PostMessage: "",
+            PostContents: [],
+            Tags: []
+        };
+
+        $scope.existingContents = [];
 
         $scope.username = localStorageService.get("username");
 
@@ -24,13 +31,13 @@
             $scope.post.Tags.splice(index);
         };
 
-        $scope.getTagsSource = function(t) {
+        $scope.getTagsSource = function (t) {
             return tagsService.getTagsByName(t);
         };
 
         $scope.savePost = function () {
             blockUiService.blockIt();
-            userService.getUserInfo().then(function(userinfo) {
+            userService.getUserInfo().then(function (userinfo) {
                 $scope.post.User = userinfo;
 
                 if ($scope.isAdding) {
@@ -41,7 +48,7 @@
                         } else {
                             errorService.displayErrorUnblock(resp.Error);
                         }
-                    }, function(e) {
+                    }, function (e) {
                         errorService.displayErrorRedirect({ Message: e });
                     });
                 } else {
@@ -56,12 +63,12 @@
                         errorService.displayErrorRedirect({ Message: e });
                     });
                 }
-            }, function(e) {
+            }, function (e) {
                 errorService.displayErrorRedirect({ Message: e });
             });
         };
 
-        $scope.init = function() {
+        $scope.init = function () {
             if (!isNaN($routeParams.postId)) {
                 blockUiService.blockIt();
                 postsService.getPost($routeParams.postId).then(function (resp) {
@@ -69,9 +76,43 @@
                         if (resp.Error == undefined) {
                             $scope.isAdding = false;
                             $scope.post = resp;
-                            _.each(resp.Tags, function(t) {
+
+                            _.each(resp.Tags, function (t) {
                                 $scope.Tags.push({ text: t.TagName });
                             });
+
+                            _.each(resp.PostContents, function (t) {
+                                var item = {
+                                    file: {
+                                        name: t.Media.FileName,
+                                        size: 1e6
+                                    },
+                                    mediaId: t.Media.MediaId,
+                                    progress: 100,
+                                    isUploaded: true,
+                                    isSuccess: true,
+                                    isExisting: true,
+                                    url: t.Media.ThumbnailUrl,
+                                    base: t,
+                                    remove: function () {
+                                        var index = $scope.post.PostContents.indexOf(this.base);
+                                        $scope.post.PostContents.splice(index);
+                                        uploader.removeFromQueue(this);
+                                        console.log($scope.post);
+                                    }
+                                };
+                                $scope.existingContents.push(item);
+                            });
+
+                            $timeout(function () {
+                                _.each($scope.existingContents, function (c) {
+                                    uploader.queue.push(c);
+                                });
+                                $timeout(function() {
+                                    $rootScope.$broadcast("resizeUploadThumbnails", {});
+                                }, 500);
+                            }, 500);
+
                             blockUiService.unblockIt();
                         } else {
                             errorService.displayErrorUnblock(resp.Error);
@@ -98,10 +139,8 @@
             }, 500);
         });
 
-        $scope.init();
-
         var uploader = $scope.uploader = $fileUploader.create({
-            scope: $scope,
+            scope: $rootScope,
             url: $scope.uploadUrl
         });
 
@@ -127,5 +166,7 @@
         uploader.bind('afteraddingall', function () {
             blockUiService.blockIt();
         });
+
+        $scope.init();
     }
 ]);
