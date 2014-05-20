@@ -30,7 +30,7 @@ namespace Blog.Frontend.Web.Controllers
                 RememberMe = model.RememberMe
             };
 
-            var result = ApiFactory.GetInstance().CreateApi().Login(login);
+            var result = AuthenticationApiFactory.GetInstance().Create().Login(login);
             if (result.User != null && result.Session != null)
             {
                 _authentication.SignIn(result.User);
@@ -47,7 +47,7 @@ namespace Blog.Frontend.Web.Controllers
                 Username = model.UserName
             };
 
-            var result = ApiFactory.GetInstance().CreateApi().Logout(login);
+            var result = AuthenticationApiFactory.GetInstance().Create().Logout(login);
 
             if (result)
             {

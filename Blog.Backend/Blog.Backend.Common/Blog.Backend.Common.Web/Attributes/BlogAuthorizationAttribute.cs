@@ -25,7 +25,7 @@ namespace Blog.Backend.Common.Web.Attributes
                 return new HttpUnauthorizedResult();
             }
 
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(filterContext.Principal.Identity.Name);
+            var session = AuthenticationApiFactory.GetInstance().Create().IsLoggedIn(filterContext.Principal.Identity.Name);
             return session != null ? null : new HttpUnauthorizedResult() ;
         }
     }

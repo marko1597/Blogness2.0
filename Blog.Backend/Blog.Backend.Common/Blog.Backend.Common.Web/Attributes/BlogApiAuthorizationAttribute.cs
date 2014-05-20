@@ -11,7 +11,7 @@ namespace Blog.Backend.Common.Web.Attributes
         protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
             if (!HttpContext.Current.User.Identity.IsAuthenticated) return base.IsAuthorized(actionContext);
-            var session = ApiFactory.GetInstance().CreateApi().IsLoggedIn(HttpContext.Current.User.Identity.Name);
+            var session = AuthenticationApiFactory.GetInstance().Create().IsLoggedIn(HttpContext.Current.User.Identity.Name);
             return session != null;
         }
     }

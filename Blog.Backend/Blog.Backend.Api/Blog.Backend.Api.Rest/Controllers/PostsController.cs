@@ -169,8 +169,8 @@ namespace Blog.Backend.Api.Rest.Controllers
         {
             try
             {
-                var isAllowed = ApiFactory.GetInstance()
-                    .CreateApi()
+                var isAllowed = AuthenticationApiFactory.GetInstance()
+                    .Create()
                     .IsUserAllowedAccess(User.Identity.GetUserName(), post.PostId);
 
                 if (!isAllowed)

@@ -6,7 +6,7 @@ using Blog.Frontend.Common.Helper;
 
 namespace Blog.Backend.Common.Web.Authentication
 {
-    public class Api
+    public class AuthenticationApi
     {
         public bool IsUserAllowedAccess(string username, int postId)
         {
