@@ -191,10 +191,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="db_add.ico" />
-    <Content Include="SampleImages\1\Background\7.jpg">
+    <Content Include="SampleImages\1\Background\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Background\tn\tn_7.jpg">
+    <Content Include="SampleImages\1\Background\tn\tn_1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Miscellaneous\3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\1\Miscellaneous\4.gif">
@@ -203,40 +206,100 @@
     <Content Include="SampleImages\1\Miscellaneous\5.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleImages\1\Miscellaneous\6.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Miscellaneous\7.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Miscellaneous\tn\tn_3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SampleImages\1\Miscellaneous\tn\tn_4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\1\Miscellaneous\tn\tn_5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Profile\6.jpg">
+    <Content Include="SampleImages\1\Miscellaneous\tn\tn_6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Profile\tn\tn_6.jpg">
+    <Content Include="SampleImages\1\Miscellaneous\tn\tn_7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\1.jpg">
+    <Content Include="SampleImages\1\Profile\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\2.jpg">
+    <Content Include="SampleImages\1\Profile\tn\tn_2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\3.jpg">
+    <Content Include="SampleImages\1\Stuff\10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\tn\tn_1.jpg">
+    <Content Include="SampleImages\1\Stuff\11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\tn\tn_2.jpg">
+    <Content Include="SampleImages\1\Stuff\12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\1\Stuff\tn\tn_3.jpg">
+    <Content Include="SampleImages\1\Stuff\13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Background\7.jpg">
+    <Content Include="SampleImages\1\Stuff\14.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Background\tn\tn_7.jpg">
+    <Content Include="SampleImages\1\Stuff\15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_11.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_12.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_14.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\1\Stuff\tn\tn_9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Background\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Background\tn\tn_1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Miscellaneous\3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\2\Miscellaneous\4.gif">
@@ -245,40 +308,100 @@
     <Content Include="SampleImages\2\Miscellaneous\5.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleImages\2\Miscellaneous\6.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Miscellaneous\7.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Miscellaneous\tn\tn_3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SampleImages\2\Miscellaneous\tn\tn_4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\2\Miscellaneous\tn\tn_5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Profile\6.jpg">
+    <Content Include="SampleImages\2\Miscellaneous\tn\tn_6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Profile\tn\tn_6.jpg">
+    <Content Include="SampleImages\2\Miscellaneous\tn\tn_7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\1.jpg">
+    <Content Include="SampleImages\2\Profile\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\2.jpg">
+    <Content Include="SampleImages\2\Profile\tn\tn_2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\3.jpg">
+    <Content Include="SampleImages\2\Stuff\10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\tn\tn_1.jpg">
+    <Content Include="SampleImages\2\Stuff\11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\tn\tn_2.jpg">
+    <Content Include="SampleImages\2\Stuff\12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\2\Stuff\tn\tn_3.jpg">
+    <Content Include="SampleImages\2\Stuff\13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Background\7.jpg">
+    <Content Include="SampleImages\2\Stuff\14.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Background\tn\tn_7.jpg">
+    <Content Include="SampleImages\2\Stuff\15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_11.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_12.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_14.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\2\Stuff\tn\tn_9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Background\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Background\tn\tn_1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Miscellaneous\3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\3\Miscellaneous\4.gif">
@@ -287,34 +410,91 @@
     <Content Include="SampleImages\3\Miscellaneous\5.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleImages\3\Miscellaneous\6.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Miscellaneous\7.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Miscellaneous\tn\tn_3.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SampleImages\3\Miscellaneous\tn\tn_4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleImages\3\Miscellaneous\tn\tn_5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Profile\6.jpg">
+    <Content Include="SampleImages\3\Miscellaneous\tn\tn_6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Profile\tn\tn_6.jpg">
+    <Content Include="SampleImages\3\Miscellaneous\tn\tn_7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\1.jpg">
+    <Content Include="SampleImages\3\Profile\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\2.jpg">
+    <Content Include="SampleImages\3\Profile\tn\tn_2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\3.jpg">
+    <Content Include="SampleImages\3\Stuff\10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\tn\tn_1.jpg">
+    <Content Include="SampleImages\3\Stuff\11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\tn\tn_2.jpg">
+    <Content Include="SampleImages\3\Stuff\12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SampleImages\3\Stuff\tn\tn_3.jpg">
+    <Content Include="SampleImages\3\Stuff\13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\14.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\9.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_10.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_11.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_12.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_13.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_14.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_15.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_16.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_17.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_8.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SampleImages\3\Stuff\tn\tn_9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

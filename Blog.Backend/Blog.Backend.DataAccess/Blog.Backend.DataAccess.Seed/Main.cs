@@ -39,15 +39,28 @@ namespace Blog.Backend.DataAccess.Seed
 
         private void BtnDropDatabaseClick(object sender, EventArgs e)
         {
-            DropDatabaseOnFail();
-            Directory.Delete(@"C:\Temp\SampleImages\", true);
-            AddConsoleMessage("Dropped it like its hot!");
+            Rollback();
+        }
+
+        private void Rollback()
+        {
+            try
+            {
+                DropDatabaseOnFail();
+                Directory.Delete(@"C:\Temp\SampleImages\", true);
+                AddConsoleMessage("Dropped it like its hot!");
+            }
+            catch (Exception exception)
+            {
+                AddConsoleMessage(exception.Message);
+            }
         }
 
         private void BtnGenerateClick(object sender, EventArgs e)
         {
             try
             {
+                TxtConsole.Text = string.Empty;
                 AddConsoleMessage("<================ START ================>");
                 CopyImages();
                 LoadUsers();
@@ -68,9 +81,9 @@ namespace Blog.Backend.DataAccess.Seed
             }
             catch (Exception ex)
             {
-                DropDatabaseOnFail();
+                Rollback();
                 AddConsoleMessage(ex.Message);
-                AddConsoleMessage("Dropped database due to error...");
+                AddConsoleMessage("Rolled back the entire thing.");
             }
         }
 
@@ -238,7 +251,7 @@ namespace Blog.Backend.DataAccess.Seed
             {
                 _albumRepository.Add(new Album
                 {
-                    AlbumName = "Stuff",
+                    AlbumName = "Miscellaneous",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
                     CreatedDate = DateTime.UtcNow,
@@ -249,7 +262,7 @@ namespace Blog.Backend.DataAccess.Seed
 
                 _albumRepository.Add(new Album
                 {
-                    AlbumName = "Miscellaneous",
+                    AlbumName = "Stuff",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
                     CreatedDate = DateTime.UtcNow,
@@ -293,28 +306,28 @@ namespace Blog.Backend.DataAccess.Seed
                 var u1 = u;
                 var albums = _albumRepository.Find(a => a.UserId == u1.UserId).ToList();
 
-                for (var i = 1; i < 8; i++)
+                for (var i = 1; i < 18; i++)
                 {
                     var albumId = 0;
                     var albumName = string.Empty;
-                    if (i < 4)
-                    {
-                        albumName = "Stuff";
-                        albumId = albums[0].AlbumId;
-                    }
-                    else if (i < 6)
+                    if (i > 2 && i < 8)
                     {
                         albumName = "Miscellaneous";
+                        albumId = albums[0].AlbumId;
+                    }
+                    else if (i >= 8)
+                    {
+                        albumName = "Stuff";
                         albumId = albums[1].AlbumId;
                     }
-                    else if (i == 6)
+                    else if (i == 2)
                     {
                         albumName = "Profile";
                         albumId = albums[2].AlbumId;
                         u1.PictureId = mediaId;
                         _userRepository.Edit(u1);
                     }
-                    else if (i == 7)
+                    else if (i == 1)
                     {
                         albumName = "Background";
                         albumId = albums[3].AlbumId;
@@ -334,9 +347,9 @@ namespace Blog.Backend.DataAccess.Seed
                             ModifiedBy = u.UserId,
                             ModifiedDate = DateTime.UtcNow,
                             AlbumId = albumId,
-                            FileName = i + (i == 4 || i == 5 ? ".gif" : ".jpg"),
+                            FileName = i + (i > 2 && i < 8 ? ".gif" : ".jpg"),
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
-                            MediaType = (i == 4 || i == 5 ? "image/gif" : "image/jpeg"),
+                            MediaType = (i > 2 && i < 8 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
                             ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/{1}/thumb", _localIpAddress, customName),
                             ThumbnailPath = tnPath
@@ -388,7 +401,7 @@ namespace Blog.Backend.DataAccess.Seed
         {
             foreach (var u in _users)
             {
-                for (var j = 1; j < 6; j++)
+                for (var j = 1; j < 16; j++)
                 {
                     _postRepository.Add(new Post
                     {
@@ -426,7 +439,7 @@ namespace Blog.Backend.DataAccess.Seed
                 media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb1, false));
                 media.AddRange(_mediaRepository.Find(a => a.AlbumId == alb2, false));
 
-                for (var i = 0; i < 5; i++)
+                for (var i = 0; i < 15; i++)
                 {
                     _postContentRepository.Add(new PostContent
                     {
