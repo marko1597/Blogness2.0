@@ -1,35 +1,57 @@
-﻿ngPosts.directive('postLikes', function () {
-    var ctrlFn = function ($scope, $rootScope, postsHubService, postsService, localStorageService) {
-        $scope.postId = $scope.data.PostId;
-        $scope.postLikes = $scope.data.PostLikes.length;
-        $scope.username = localStorageService.get("username");
+﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService",
+    function ($rootScope, postsHubService, postsService, userService) {
+        var linkFn = function (scope, elem) {
+            scope.postId = scope.data.PostId;
+            scope.postLikes = scope.data.PostLikes;
+            scope.user = {};
 
-        $scope.tooltip = {
-            "title": "Click to favorite this post.",
-        };
+            scope.tooltip = {
+                "title": "Click to favorite this post.",
+            };
 
-        $scope.$on("postsLikeUpdate", function(e, d) {
-            if (d.PostId == $scope.data.PostId) {
-                $scope.postLikes = d.PostLikes.length;
-                $scope.$apply();
-            }
-        });
+            scope.init = function() {
+                userService.getUserInfo().then(function(resp) {
+                    scope.user = resp;
+                });
+            };
 
-        $scope.likePost = function() {
-            postsService.likePost($scope.data.PostId, $scope.username).then(function(resp) {
-                console.log(resp);
-            }, function(e) {
-                console.log(e);
+            scope.$on("postsLikeUpdate", function (e, d) {
+                if (d.PostId == scope.data.PostId) {
+                    scope.postLikes = d.PostLikes;
+                    scope.$apply();
+                    $(elem).effect("highlight", { color: "#B3C833" }, 1500);
+                    scope.isUserLiked();
+                }
             });
+
+            scope.likePost = function () {
+                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function (resp) {
+                    console.log(resp);
+                }, function (e) {
+                    console.log(e);
+                });
+            };
+
+            scope.isUserLiked = function() {
+                var isLiked = false;
+                _.each(scope.postLikes, function(p) {
+                    if (p.UserId == scope.user.UserId) {
+                        isLiked = true;
+                    }
+                });
+
+                return isLiked ? "fa-star" : "fa-star-o";
+            };
+
+            scope.init();
         };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsHubService", "postsService", "localStorageService"];
-    
-    return {
-        restrict: 'EA',
-        scope: { data: '=' },
-        replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postlikes.html",
-        controller: ctrlFn
-    };
-});
+
+        return {
+            restrict: 'EA',
+            scope: { data: '=' },
+            replace: true,
+            templateUrl: window.blogConfiguration.templatesUrl + "posts/postlikes.html",
+            link: linkFn
+        };
+    }
+]);
