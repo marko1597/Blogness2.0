@@ -7,6 +7,8 @@ namespace Blog.Backend.DataAccess.Entities.Objects
         public int PostContentId { get; set; }
         public virtual Post Post { get; set; }
         public int PostId { get; set; }
+        public string PostContentTitle { get; set; }
+        public string PostContentText { get; set; }
         public virtual Media Media { get; set; }
         public int MediaId { get; set; }
         public DateTime CreatedDate { get; set; }

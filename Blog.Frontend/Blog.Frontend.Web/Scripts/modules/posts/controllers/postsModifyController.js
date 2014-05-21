@@ -155,11 +155,16 @@
             var media = {
                 PostId: null,
                 Media: response,
+                PostContentTitle: item.postContentTitle,
+                PostContentText: item.postContentText
             };
             $scope.post.PostContents.push(media);
         });
 
-        uploader.bind('afteraddingfile', function () {
+        uploader.bind('afteraddingfile', function (e, a) {
+            a.allowCaptions = true;
+            a.postContentTitle = "";
+            a.postContentText = "";
             blockUiService.blockIt();
         });
 

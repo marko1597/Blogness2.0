@@ -31,6 +31,17 @@
             <img ng-src="{{item.url}}" />
         </div>
     </div>
+    
+    <div class="captions" ng-switch on="item.allowCaptions">
+        <div ng-switch-when="true">
+            <h5>Content Title</h5>
+            <input ng-model="item.postContentTitle" placeholder="Enter content title here..." maxlength="50" />
+            <h5>Content Description</h5>
+            <textarea ng-model="item.postContentText" placeholder="Enter a brief description of this content here..." 
+                      maxlength="140"></textarea>
+        </div>
+        <div ng-switch-default></div>
+    </div>
 
     <div class="progress" style="margin-bottom: 0;">
         <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>

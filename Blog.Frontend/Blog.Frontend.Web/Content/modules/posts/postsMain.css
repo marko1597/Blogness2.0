@@ -230,11 +230,24 @@ div.post-likes {
 
 /* Post Content 
  * ====================================== */
-div.post-item-content {
+.post-item-content > div.content-image {
     text-align: center;
 }
 
-    div.post-item-content > img {
+    .post-item-content > p {
+        text-align: left;
+        font-size: 1em;
+        padding: 0 10px;
+        margin: 10px 0;
+    }
+
+        .post-item-content > p:first-child {
+            font-weight: bold;
+            height: 20px;
+        }
+
+
+    .post-item-content > div.content-image > img {
         max-width: 100%;
         width: 100%;
         height: auto;

@@ -87,6 +87,26 @@ div.file-upload div.dropzone ul.upload-items {
             height: auto;
         }
 
+    div.file-upload div.dropzone ul.upload-items div.captions {
+        padding: 0 10px 10px 10px;
+        color: #999;
+    }
+
+        div.file-upload div.dropzone ul.upload-items div.captions h5 {
+            color: #666;
+        }
+
+        div.file-upload div.dropzone ul.upload-items div.captions input {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        div.file-upload div.dropzone ul.upload-items div.captions textarea {
+            width: 100%;
+            max-width: 100%;
+            resize: none;
+        }
+
     div.file-upload div.dropzone ul.upload-items div.progress {
         border-radius: 0;
         height: 10px;

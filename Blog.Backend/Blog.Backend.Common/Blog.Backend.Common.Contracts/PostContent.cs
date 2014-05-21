@@ -14,6 +14,12 @@ namespace Blog.Backend.Common.Contracts
         public int PostId { get; set; }
 
         [DataMember]
+        public string PostContentTitle { get; set; }
+
+        [DataMember]
+        public string PostContentText { get; set; }
+
+        [DataMember]
         public Media Media { get; set; }
 
         [DataMember]

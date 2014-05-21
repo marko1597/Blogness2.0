@@ -23,7 +23,7 @@ namespace Blog.Backend.DataAccess.Repository
         public IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
-                .OrderByDescending(a => a.CreatedDate)
+                .OrderByDescending(a => a.ModifiedDate)
                 .Take(threshold)
                 .ToList();
             return query;

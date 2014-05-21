@@ -165,7 +165,7 @@ namespace Blog.Backend.Api.Rest.Controllers
                         new StreamContent(new FileStream(media.MediaPath + 
                             media.FileName, FileMode.Open, FileAccess.Read))
                 };
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue(media.MediaType);
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue(isThumb ? "image/jpeg" : media.MediaType);
 
                 return response;
             }
