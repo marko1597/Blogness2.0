@@ -12,7 +12,7 @@ namespace Blog.Frontend.Web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            app.MapSignalR();
+            //app.MapSignalR();
             app.UseCors(CorsOptions.AllowAll);
             app.Map("/signalr", map =>
             {

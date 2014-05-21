@@ -272,6 +272,8 @@
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
+    <Content Include="Scripts\plugins\json2.js" />
+    <Content Include="Scripts\plugins\json2.min.js" />
     <Content Include="Scripts\modules\posts\services\postsHubService.js" />
     <Content Include="Scripts\plugins\angular-signalr-hubs.js" />
     <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />

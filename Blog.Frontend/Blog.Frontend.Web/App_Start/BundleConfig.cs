@@ -30,6 +30,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.dotdotdot.js",
                         "~/Scripts/plugins/jquery.signalR-*",
                         "~/Scripts/plugins/jquery.newsticker.js",
+                        "~/Scripts/plugins/json2.js",
                         "~/Scripts/plugins/es5-shim.js",
                         "~/Scripts/plugins/classie.js",
                         "~/Scripts/plugins/snap.js"));

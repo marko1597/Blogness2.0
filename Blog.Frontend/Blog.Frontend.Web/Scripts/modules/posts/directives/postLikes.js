@@ -1,5 +1,7 @@
 ﻿ngPosts.directive('postLikes', function () {
     var ctrlFn = function ($scope, $rootScope, postsHubService, postsService, localStorageService) {
+        $scope.postId = $scope.data.PostId;
+        $scope.postLikes = $scope.data.PostLikes.length;
         $scope.username = localStorageService.get("username");
 
         $scope.tooltip = {
@@ -8,8 +10,8 @@
 
         $scope.$on("postsLikeUpdate", function(e, d) {
             if (d.PostId == $scope.data.PostId) {
-                $scope.data.PostLikes = d.PostLikes;
-                $rootScope.$apply();
+                $scope.postLikes = d.PostLikes.length;
+                $scope.$apply();
             }
         });
 

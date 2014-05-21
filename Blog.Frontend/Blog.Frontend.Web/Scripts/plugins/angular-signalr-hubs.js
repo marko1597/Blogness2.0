@@ -1,11 +1,10 @@
 ﻿angular.module('ngSignalr', [])
 .constant('$', $)
 .factory('signalrHub', ['$', function ($) {
-    return function (hubName, listeners, methods) {
+    return function (connectionName, hubName, listeners, methods) {
         var hub = this;
-        hub.connection = $.hubConnection();
+        hub.connection = $.hubConnection(connectionName, { useDefaultPath: false });
         hub.proxy = hub.connection.createHubProxy(hubName);
-        hub.connection.start();
         hub.on = function (event, fn) {
             hub.proxy.on(event, fn);
         };
@@ -27,6 +26,7 @@
                 };
             });
         }
+        hub.connection.start();
         return hub;
     };
 }]);
