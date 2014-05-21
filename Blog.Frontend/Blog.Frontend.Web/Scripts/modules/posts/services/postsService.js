@@ -105,6 +105,21 @@
                 });
 
                 return deferred.promise;
+            },
+
+            likePost: function (postId, username) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + "likes?username=" + username + "&postId=" + postId,
+                    method: "POST"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
             }
         };
     }

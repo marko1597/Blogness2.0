@@ -166,6 +166,8 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Authentication\AuthenticationApi.cs" />
     <Compile Include="Formatter\JsonMediaTypeFormatter.cs" />
+    <Compile Include="Helper\Hub\Factory\PostsHubFactory.cs" />
+    <Compile Include="Helper\Hub\PostsHub.cs" />
     <Compile Include="Helper\InMemoryMultipartFormDataStreamProvider.cs" />
     <Compile Include="Helper\HttpClientHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />

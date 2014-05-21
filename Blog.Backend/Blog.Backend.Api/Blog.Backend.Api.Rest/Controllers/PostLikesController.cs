@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Web.Attributes;
+using Blog.Backend.Common.Web.Helper.Hub.Factory;
 using Blog.Backend.Services.Implementation;
 
 namespace Blog.Backend.Api.Rest.Controllers
@@ -11,10 +12,12 @@ namespace Blog.Backend.Api.Rest.Controllers
     public class PostLikesController : ApiController
     {
         private readonly IPostLikes _service;
+        private readonly IUser _user;
 
-        public PostLikesController(IPostLikes service)
+        public PostLikesController(IPostLikes service, IUser user)
         {
             _service = service;
+            _user = user;
         }
 
         [HttpGet]
@@ -37,11 +40,18 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpPost]
         [Route("api/posts/likes")]
-        public void Post([FromBody]PostLike postLike)
+        public void Post([FromUri]int postId, string username)
         {
             try
             {
+                var user = _user.GetByUserName(username);
+                var postLike = new PostLike
+                               {
+                                   PostId = postId,
+                                   UserId = user.UserId
+                               };
                 _service.Add(postLike);
+                PostsHubFactory.GetInstance().Create().PushPostLikes(_service.Get(postId));
             }
             catch (Exception ex)
             {

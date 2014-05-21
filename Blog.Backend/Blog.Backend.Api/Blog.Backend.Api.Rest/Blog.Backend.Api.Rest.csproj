@@ -235,6 +235,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\SocketsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\PostContentController.cs">
       <SubType>Code</SubType>

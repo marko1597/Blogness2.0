@@ -43,7 +43,7 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
-        [Route("api/posts/{tagName}")]
+        [Route("api/posts/tag/{tagName}")]
         public List<Post> Get(string tagName)
         {
             var posts = new List<Post>();

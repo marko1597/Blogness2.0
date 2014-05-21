@@ -28,6 +28,7 @@ namespace Blog.Frontend.Web
                         "~/Scripts/plugins/jquery.blockui.js",
                         "~/Scripts/plugins/jquery.isotope.js",
                         "~/Scripts/plugins/jquery.dotdotdot.js",
+                        "~/Scripts/plugins/jquery.signalR-*",
                         "~/Scripts/plugins/jquery.newsticker.js",
                         "~/Scripts/plugins/es5-shim.js",
                         "~/Scripts/plugins/classie.js",
@@ -56,6 +57,7 @@ namespace Blog.Frontend.Web
                       "~/Scripts/plugins/angular-ckeditor.js",
                       "~/Scripts/plugins/angular-local-storage.js",
                       "~/Scripts/plugins/angular-tags-input.js",
+                      "~/Scripts/plugins/angular-signalr-hubs.js",
                       "~/Scripts/plugins/angular-snap.js",
                       "~/Scripts/plugins/angular-strap.js",
                       "~/Scripts/plugins/angular-strap.tpl.js"));
@@ -127,7 +129,8 @@ namespace Blog.Frontend.Web
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postListItemComment.js",
-                      "~/Scripts/modules/posts/services/postsService.js"));
+                      "~/Scripts/modules/posts/services/postsService.js",
+                      "~/Scripts/modules/posts/services/postsHubService.js"));
 
             #endregion
 
