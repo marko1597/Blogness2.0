@@ -1,10 +1,11 @@
-﻿ngPosts.controller('postsViewController', ["$scope", "$location", "$routeParams", "postsService", "blockUiService",
-    function ($scope, $location, $routeParams, postsService, blockUiService) {
+﻿ngPosts.controller('postsViewController', ["$scope", "$location", "$routeParams", "postsService", "userService", "errorService", "blockUiService",
+    function ($scope, $location, $routeParams, postsService, userService, errorService, blockUiService) {
         $scope.postId = $routeParams.postId;
-        $scope.posts = {};
+        $scope.post = {};
+        $scope.user = {};
         $scope.postsList = [];
         $scope.isBusy = false;
-        
+
         $scope.init = function () {
             blockUiService.blockIt();
 
@@ -13,19 +14,25 @@
             }
             $scope.isBusy = true;
 
-            postsService.getPost($scope.postId).then(function (post) {
-                $scope.post = post;
-                blockUiService.unblockIt();
+            userService.getUserInfo().then(function (user) {
+                $scope.user = user;
 
-                postsService.getPopularPosts().then(function (resp) {
-                    $scope.postsList = resp;
-                    $scope.isBusy = false;
+                postsService.getPost($scope.postId).then(function (post) {
+                    $scope.post = post;
+                    blockUiService.unblockIt();
+
+                    postsService.getPopularPosts().then(function (list) {
+                        $scope.postsList = list;
+                        $scope.isBusy = false;
+                        $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.PostId, PostLikes: $scope.post.PostLikes });
+                    }, function (e) {
+                        errorService.displayErrorUnblock({ Message: e });
+                    });
                 }, function (e) {
-                    console.log(e);
+                    errorService.displayErrorUnblock({ Message: e });
                 });
             }, function (e) {
-                console.log(e);
-                $location.path("/404");
+                errorService.displayErrorUnblock({ Message: e });
             });
         };
 

@@ -34,149 +34,6 @@
             width: 98%;
         }
 
-        #posts-main > div.post-item > div.post-item-header {
-            background: #4c4c4c;
-            color: #fff;
-            padding: 10px 10px;
-            -webkit-box-shadow: 0 6px 12px #000000;
-            -webkit-box-shadow: 0 6px 12px #000000;
-            -ms-box-shadow: 0 6px 12px #000000;
-            -ms-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-            box-shadow: 0 6px 12px #000000;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-            border-bottom: 1px solid #000000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-            margin: 0;
-            overflow: hidden;
-        }
-
-            #posts-main > div.post-item > div.post-item-header > div:first-child {
-                width: 80px;
-                float: left;
-                margin: 0 10px 0 0;
-            }
-
-            #posts-main > div.post-item > div.post-item-header img {
-                width: 80px;
-                height: 80px;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                -webkit-background-size: cover;
-                background-size: cover;
-                border-radius: 40px;
-                -webkit-border-radius: 40px;
-                -moz-border-radius: 40px;
-                border: 3px solid #fff;
-            }
-
-            #posts-main > div.post-item > div.post-item-header div.edit-post {
-                display: inline-block;
-                background: url(../../images/edit-post.png) no-repeat;
-                position: absolute;
-                top: 8px;
-                right: 10px;
-                width: 20px;
-                height: 20px;
-                -moz-background-size: cover;
-                -o-background-size: cover;
-                -webkit-background-size: cover;
-                background-size: cover;
-                cursor: pointer;
-                opacity: 1;
-                -moz-transition: opacity .25s ease-in-out;
-                -webkit-transition: opacity .25s ease-in-out;
-                -o-transition: opacity .25s ease-in-out;
-                transition: opacity .25s ease-in-out;
-            }
-
-                #posts-main > div.post-item > div.post-item-header div.edit-post:hover {
-                    opacity: 0.5;
-                }
-
-            #posts-main > div.post-item > div.post-item-header > div {
-                width: 100%;
-            }
-
-                #posts-main > div.post-item > div.post-item-header > div > h4 {
-                    margin: 0 0 5px;
-                    font-weight: bold;
-                    padding-left: 90px;
-                    padding-right: 25px;
-                }
-
-                    #posts-main > div.post-item > div.post-item-header > div > h4 > a {
-                        color: #fff;
-                    }
-
-                #posts-main > div.post-item > div.post-item-header > div > p {
-                    padding-left: 90px;
-                }
-
-                    #posts-main > div.post-item > div.post-item-header > div > p > a {
-                        margin: 0 5px 0 0;
-                        color: #fff;
-                    }
-
-        #posts-main > div.post-item > div.post-item-body {
-            padding: 10px 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-            #posts-main > div.post-item > div.post-item-body > p blockquote {
-                font-size: 1em;
-            }
-
-        #posts-main > div.post-item > div.post-item-contents .post-item-content {
-            text-align: center;
-        }
-
-            #posts-main > div.post-item > div.post-item-contents .post-item-content > img {
-                max-width: 100%;
-                width: 100%;
-                height: auto;
-                border-bottom: 1px solid #ddd;
-            }
-
-        #posts-main > div.post-item > div.post-item-details {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-            #posts-main > div.post-item > div.post-item-details > div.post-likes {
-                -ms-border-radius: 3px;
-                border-radius: 3px;
-                -webkit-box-shadow: 0 1px 0 #000000;
-                -ms-box-shadow: 0 1px 0 #000000;
-                -ms-box-shadow: 0 1px 0 rgba(0,0,0,.05);
-                box-shadow: 0 1px 0 #000000;
-                box-shadow: 0 1px 0 rgba(0,0,0,.05);
-                border: 1px solid #d9d9d9;
-                cursor: pointer;
-                height: 28px;
-                line-height: 28px;
-                width: 20%;
-                display: inline-block;
-                margin-right: 10px;
-            }
-
-                #posts-main > div.post-item > div.post-item-details > div.post-likes > div.wrapper {
-                    padding: 0 10px;
-                }
-
-                    #posts-main > div.post-item > div.post-item-details > div.post-likes > div.wrapper > span {
-                        padding: 3px;
-                    }
-
-                #posts-main > div.post-item > div.post-item-details > div.post-likes:hover {
-                    -webkit-box-shadow: 0 1px 0 #000000;
-                    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1);
-                    -ms-box-shadow: 0 1px 0 #000000;
-                    -ms-box-shadow: 0 1px 0 rgba(0,0,0,.1);
-                    box-shadow: 0 1px 0 #000000;
-                    box-shadow: 0 1px 0 rgba(0,0,0,.1);
-                    border-color: #bfbfbf;
-                }
-
         #posts-main > div.post-item > div.post-item-comments {
             border-bottom: 1px solid #ddd;
         }
@@ -223,3 +80,163 @@
         margin: 0 0 10px 0;
     }
 }
+
+/* Post Header
+ * ====================================== */
+div.post-item-header {
+    background: #4c4c4c;
+    color: #fff;
+    padding: 10px 10px;
+    -webkit-box-shadow: 0 6px 12px #000000;
+    -webkit-box-shadow: 0 6px 12px #000000;
+    -ms-box-shadow: 0 6px 12px #000000;
+    -ms-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px #000000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    margin: 0;
+    overflow: hidden;
+}
+
+    div.post-item-header > div:first-child {
+        width: 80px;
+        float: left;
+        margin: 0 10px 0 0;
+    }
+
+    div.post-item-header img {
+        width: 80px;
+        height: 80px;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+        border-radius: 40px;
+        -webkit-border-radius: 40px;
+        -moz-border-radius: 40px;
+        border: 3px solid #fff;
+    }
+
+    div.post-item-header div.edit-post {
+        display: inline-block;
+        background: url(../../images/edit-post.png) no-repeat;
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+        cursor: pointer;
+        opacity: 1;
+        -moz-transition: opacity .25s ease-in-out;
+        -webkit-transition: opacity .25s ease-in-out;
+        -o-transition: opacity .25s ease-in-out;
+        transition: opacity .25s ease-in-out;
+    }
+
+        div.post-item-header div.edit-post:hover {
+            opacity: 0.5;
+        }
+
+    div.post-item-header > div {
+        width: 100%;
+    }
+
+        div.post-item-header > div > h4 {
+            margin: 0 0 5px;
+            font-weight: bold;
+            padding-left: 90px;
+            padding-right: 25px;
+        }
+
+            div.post-item-header > div > h4 > a {
+                color: #fff;
+            }
+
+        div.post-item-header > div > p {
+            padding-left: 90px;
+        }
+
+            div.post-item-header > div > p > a {
+                margin: 0 5px 0 0;
+                color: #fff;
+            }
+
+/* Post Body
+ * ====================================== */
+div.post-item-body {
+    padding: 10px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+    div.post-item-body > p blockquote {
+        font-size: 1em;
+    }
+
+/* Post View 
+ * ====================================== */
+div.post-view {
+    background: #fff;
+    vertical-align: top;
+    font-size: 1em;
+    color: #333;
+}
+
+/* Post Likes 
+ * ====================================== */
+div.post-item-details {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+div.post-likes {
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 0 #000000;
+    -ms-box-shadow: 0 1px 0 #000000;
+    -ms-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    box-shadow: 0 1px 0 #000000;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+    height: 28px;
+    line-height: 28px;
+    width: 20%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+    div.post-likes > div.wrapper {
+        padding: 0 10px;
+    }
+
+        div.post-likes > div.wrapper > span {
+            padding: 3px;
+        }
+
+    div.post-likes:hover {
+        -webkit-box-shadow: 0 1px 0 #000000;
+        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+        -ms-box-shadow: 0 1px 0 #000000;
+        -ms-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+        box-shadow: 0 1px 0 #000000;
+        box-shadow: 0 1px 0 rgba(0,0,0,.1);
+        border-color: #bfbfbf;
+    }
+
+/* Post Content 
+ * ====================================== */
+div.post-item-content {
+    text-align: center;
+}
+
+    div.post-item-content > img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+    }

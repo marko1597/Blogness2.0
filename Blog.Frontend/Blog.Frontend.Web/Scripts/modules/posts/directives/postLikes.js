@@ -24,12 +24,14 @@
                 }
             });
 
+            scope.$on("viewedPostLoaded", function(e, d) {
+                scope.postId = d.PostId;
+                scope.postLikes = d.PostLikes;
+                scope.isUserLiked();
+            });
+
             scope.likePost = function () {
-                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function (resp) {
-                    console.log(resp);
-                }, function (e) {
-                    console.log(e);
-                });
+                postsService.likePost(scope.data.PostId, scope.user.UserName);
             };
 
             scope.isUserLiked = function() {
