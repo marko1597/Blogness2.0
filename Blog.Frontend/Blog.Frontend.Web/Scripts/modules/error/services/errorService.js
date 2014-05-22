@@ -1,33 +1,40 @@
-﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "loginService", "localStorageService", "blockUiService",
-    function ($location, $rootScope, $window, configProvider, loginService, localStorageService, blockUiService) {
+﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "loginService", "localStorageService",
+    function ($location, $rootScope, $window, configProvider, loginService, localStorageService) {
         var error = {};
+
+        var isAuthorized = function (d) {
+            if (d.Status == 401 || d.Status == 403) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        var logoutUser = function() {
+            var username = localStorageService.get("username");
+            loginService.logout(username).then(function (resp) {
+                if (resp === "true") {
+                    $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
+                } else {
+                    $location.path("/error");
+                }
+            }, function () {
+                $location.path("/error");
+            });
+        };
         
         return {
-            displayErrorUnblock: function (d) {
-                blockUiService.unblockIt();
+            displayError: function (d) {
                 $rootScope.$broadcast("displayError", { Message: d.Message });
-                if (isUnauthorized()) {
-                    $location.path('/blog/profile/login');
-                }
             },
 
             displayErrorRedirect: function (d) {
-                blockUiService.unblockIt();
                 $rootScope.$broadcast("displayError", { Message: d.Message });
 
-                if (d.Status == 401) {
-                    var  username = localStorageService.get("username");
-                    loginService.logoutUser(username).then(function(resp) {
-                        if (resp === "true") {
-                            $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
-                        } else {
-                            $location.path("/error");
-                        }
-                    }, function(e) {
-                        console.log(e);
-                    });
-                } else {
+                if (isAuthorized(d)) {
                     $location.path("/error");
+                } else {
+                    logoutUser();
                 }
             },
 

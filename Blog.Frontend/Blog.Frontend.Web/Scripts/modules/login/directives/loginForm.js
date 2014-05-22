@@ -1,9 +1,8 @@
 ﻿ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, $window, localStorageService, configProvider, loginService, blockUiService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, loginService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
-        $scope.alert = { Title: "Oops!", Message: "", Show: false };
 
         $scope.login = function () {
             blockUiService.blockIt(
@@ -17,26 +16,24 @@
                     color: '#fff'
                 });
 
-            $scope.response = loginService.loginUser($scope.username, $scope.password, $scope.rememberMe).then(function (resp) {
-                localStorageService.add("username", resp.User.UserName);
-                blockUiService.unblockIt();
-                $window.location.href = configProvider.getSettings().BlogRoot;
-            }, function (errorMsg) {
-                $scope.alert.Message = errorMsg;
-                $scope.alert.Show = true;
-                blockUiService.unblockIt();
-
-                $timeout(function () {
-                    $scope.alert.Show = false;
-                }, configProvider.getSettings().AlertTimer);
+            loginService.login($scope.username, $scope.password, $scope.rememberMe).then(function (siteResponse) {
+                loginService.loginApi($scope.username, $scope.password, $scope.rememberMe).then(function(apiResponse) {
+                    if (apiResponse === "true") {
+                        localStorageService.add("username", siteResponse.User.UserName);
+                        blockUiService.unblockIt();
+                        $window.location.href = configProvider.getSettings().BlogRoot;
+                    } else {
+                        errorService.displayErrorUnblock({ Message: "Error communicating with the login server." });
+                    }
+                }, function(error) {
+                    errorService.displayErrorUnblock({ Message: error });
+                });
+            }, function (error) {
+                errorService.displayErrorUnblock({ Message: error });
             });
         };
-
-        $scope.closeAlert = function () {
-            $scope.alert.Show = false;
-        };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "localStorageService", "configProvider", "loginService", "blockUiService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "loginService", "blockUiService"];
 
     return {
         restrict: 'EA',

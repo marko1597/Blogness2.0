@@ -46,9 +46,11 @@
                             blockUiService.unblockIt();
                             $location.path("/");
                         } else {
-                            errorService.displayErrorUnblock(resp.Error);
+                            blockUiService.unblockIt();
+                            errorService.displayError(resp.Error);
                         }
                     }, function (e) {
+                        blockUiService.unblockIt();
                         errorService.displayErrorRedirect(e);
                     });
                 } else {
@@ -57,13 +59,16 @@
                             blockUiService.unblockIt();
                             $location.path("/");
                         } else {
-                            errorService.displayErrorUnblock(resp.Error);
+                            blockUiService.unblockIt();
+                            errorService.displayError(resp.Error);
                         }
                     }, function (e) {
+                        blockUiService.unblockIt();
                         errorService.displayErrorRedirect(e);
                     });
                 }
             }, function (e) {
+                blockUiService.unblockIt();
                 errorService.displayErrorRedirect(e);
             });
         };
@@ -115,12 +120,15 @@
 
                             blockUiService.unblockIt();
                         } else {
-                            errorService.displayErrorUnblock(resp.Error);
+                            blockUiService.unblockIt();
+                            errorService.displayError(resp.Error);
                         }
                     } else {
-                        errorService.displayErrorUnblock({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
+                        blockUiService.unblockIt();
+                        errorService.displayError({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
                     }
                 }, function (e) {
+                    blockUiService.unblockIt();
                     errorService.displayErrorRedirect(e);
                 });
             }
