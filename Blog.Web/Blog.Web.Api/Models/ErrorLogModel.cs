@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Blog.Web.Api.Models
+﻿namespace Blog.Web.Api.Models
 {
     public class ErrorLogModel
     {

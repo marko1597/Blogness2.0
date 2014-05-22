@@ -6,8 +6,7 @@ namespace Blog.Common.Contracts.Utils
     [Serializable]
     public class BlogException : Exception
     {
-        public BlogException()
-            : base() { }
+        public BlogException() { }
 
         public BlogException(string message)
             : base(message) { }

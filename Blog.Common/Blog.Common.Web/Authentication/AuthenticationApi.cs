@@ -2,7 +2,7 @@
 using System.Configuration;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
-using Blog.Frontend.Common.Helper;
+using Blog.Common.Web.Helper;
 
 namespace Blog.Common.Web.Authentication
 {

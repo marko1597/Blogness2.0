@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using Blog.Common.Contracts;
-using Blog.Frontend.Common.Helper;
 
 namespace Blog.Common.Web.Helper.Hub
 {

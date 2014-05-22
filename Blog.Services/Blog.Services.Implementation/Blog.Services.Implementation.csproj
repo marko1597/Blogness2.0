@@ -47,11 +47,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressService.cs" />
@@ -108,7 +103,7 @@
       <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
       <Name>Blog.Common.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Blog.Logic\Blog.Logic\Blog.Logic.Core.csproj">
+    <ProjectReference Include="..\..\Blog.Logic\Blog.Logic.Core\Blog.Logic.Core.csproj">
       <Project>{388f088c-90f5-46e7-b7d1-422e0f577513}</Project>
       <Name>Blog.Logic.Core</Name>
     </ProjectReference>

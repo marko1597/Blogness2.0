@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http.Dependencies;
-using Blog.Common.Contracts.Utils;
 using SimpleInjector;
 using SimpleInjector.Extensions.LifetimeScoping;
 

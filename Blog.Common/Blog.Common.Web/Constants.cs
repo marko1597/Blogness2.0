@@ -1,4 +1,4 @@
-﻿namespace Blog.Frontend.Common
+﻿namespace Blog.Common.Web
 {
     public static class Constants
     {

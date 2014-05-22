@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Blog.Frontend.Common
+namespace Blog.Common.Web
 {
     public static class Utils
     {
