@@ -1,0 +1,88 @@
+﻿using System;
+using System.Web.Http;
+using Blog.Common.Contracts;
+using Blog.Common.Web.Attributes;
+using Blog.Services.Implementation;
+using WebApi.OutputCache.V2;
+
+namespace Blog.Web.Api.Controllers
+{
+    [AllowCrossSiteApi]
+    public class UsersController : ApiController
+    {
+        private readonly IUser _user;
+
+        public UsersController(IUser user)
+        {
+            _user = user;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [Route("api/users/{userId:int}")]
+        public User Get(int userId)
+        {
+            var user = new User();
+
+            try
+            {
+                user = _user.Get(userId) ?? new User();
+
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+
+            return user;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [Route("api/users/{name}")]
+        public User Get(string name)
+        {
+            var user = new User();
+
+            try
+            {
+                user = _user.GetByUserName(name) ?? new User();
+
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+
+            return user;
+        }
+
+        [HttpPost]
+        [Route("api/users")]
+        public void Post([FromBody] User user)
+        {
+            try
+            {
+                _user.Add(user);
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+        }
+
+        [HttpPut]
+        [Route("api/users")]
+        public void Put([FromBody] User user)
+        {
+            try
+            {
+                _user.Update(user);
+            }
+            catch (Exception ex)
+            {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+            }
+        }
+    }
+}

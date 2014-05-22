@@ -3,29 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend", "Blog.Backend", "{526898AC-3A0B-4A29-AEDA-CFBDD1F89873}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Logic", "Blog.Logic", "{A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Logic", "Blog.Backend.Logic", "{A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.DataAccess", "Blog.DataAccess", "{15E7A4F1-3700-4903-BB7D-CD65608956E0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.DataAccess", "Blog.Backend.DataAccess", "{15E7A4F1-3700-4903-BB7D-CD65608956E0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Common", "Blog.Common", "{C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Common", "Blog.Backend.Common", "{C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Web.Api", "Blog.Web.Api", "{7E179C90-40E2-4C2B-BF8A-0AF95FB69631}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Api", "Blog.Backend.Api", "{7E179C90-40E2-4C2B-BF8A-0AF95FB69631}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Services", "Blog.Services", "{1B741FFC-1D1F-4C08-846E-0F69FFBEF492}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Backend.Services", "Blog.Backend.Services", "{1B741FFC-1D1F-4C08-846E-0F69FFBEF492}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Utils", "Blog.Common\Blog.Common.Utils\Blog.Common.Utils.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.Utils", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Utils\Blog.Backend.Common.Utils.csproj", "{3446AC30-FE40-4630-858E-03F3D08356D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DataAccess.Database", "Blog.DataAccess\Blog.DataAccess.Database\Blog.DataAccess.Database.csproj", "{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess\Blog.Backend.DataAccess.csproj", "{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Logic.Core", "Blog.Logic\Blog.Logic.Core\Blog.Logic.Core.csproj", "{388F088C-90F5-46E7-B7D1-422E0F577513}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Logic", "Blog.Backend\Blog.Backend.Logic\Blog.Backend.Logic\Blog.Backend.Logic.csproj", "{388F088C-90F5-46E7-B7D1-422E0F577513}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.Implementation", "Blog.Services\Blog.Services.Implementation\Blog.Services.Implementation.csproj", "{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Services.Implementation", "Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.Implementation\Blog.Backend.Services.Implementation.csproj", "{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Web", "Blog.Web", "{D2E814AD-9733-41B0-B392-DF8559627441}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Frontend", "Blog.Frontend", "{D2E814AD-9733-41B0-B392-DF8559627441}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Frontend.Web", "Blog.Frontend.Web", "{EB64D71D-6ED3-4BC2-8A9D-E630CD84C804}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Web.Site", "Blog.Web.Site", "{EB64D71D-6ED3-4BC2-8A9D-E630CD84C804}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3C5C2E3-6DAE-4DBD-AB7A-55483B16ACF6}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,17 +32,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D3C5C2
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Api.Rest", "Blog.Backend\Blog.Backend.Api\Blog.Backend.Api.Rest\Blog.Backend.Api.Rest.csproj", "{E332015C-24B5-48FA-9ED4-12F5310FCE7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Web.Api", "Blog.Web\Blog.Web.Api\Blog.Web.Api.csproj", "{E332015C-24B5-48FA-9ED4-12F5310FCE7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Frontend.Web", "Blog.Frontend\Blog.Frontend.Web\Blog.Frontend.Web.csproj", "{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Web.Site", "Blog.Web\Blog.Web.Site\Blog.Web.Site.csproj", "{E7D70C50-D915-476F-9B4B-147EF0E7F5C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.Contracts", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Contracts\Blog.Backend.Common.Contracts.csproj", "{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Contracts", "Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj", "{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.DataAccess.Seed", "Blog.Backend\Blog.Backend.DataAccess\Blog.Backend.DataAccess.Seed\Blog.Backend.DataAccess.Seed.csproj", "{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DataAccess.Seed", "Blog.DataAccess\Blog.DataAccess.Seed\Blog.DataAccess.Seed.csproj", "{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Common.Web", "Blog.Backend\Blog.Backend.Common\Blog.Backend.Common.Web\Blog.Backend.Common.Web.csproj", "{A591CF4A-F004-4D92-ADE8-8937FF290B63}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Web", "Blog.Common\Blog.Common.Web\Blog.Common.Web.csproj", "{A591CF4A-F004-4D92-ADE8-8937FF290B63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Backend.Services.SessionCleaner", "Blog.Backend\Blog.Backend.Services\Blog.Backend.Services.SessionCleaner\Blog.Backend.Services.SessionCleaner.csproj", "{2C0674C4-1249-462A-8CD6-09C100B2DBA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.SessionCleaner", "Blog.Services\Blog.Services.SessionCleaner\Blog.Services.SessionCleaner.csproj", "{2C0674C4-1249-462A-8CD6-09C100B2DBA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,21 +136,17 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A29F66C0-7E32-4317-B7F4-488BEC3BCDBC} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
-		{15E7A4F1-3700-4903-BB7D-CD65608956E0} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
-		{C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
-		{7E179C90-40E2-4C2B-BF8A-0AF95FB69631} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
-		{1B741FFC-1D1F-4C08-846E-0F69FFBEF492} = {526898AC-3A0B-4A29-AEDA-CFBDD1F89873}
 		{388F088C-90F5-46E7-B7D1-422E0F577513} = {A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}
 		{9CAF7700-6FBA-41D0-9C55-EFDACFA2E073} = {15E7A4F1-3700-4903-BB7D-CD65608956E0}
 		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2} = {15E7A4F1-3700-4903-BB7D-CD65608956E0}
 		{3446AC30-FE40-4630-858E-03F3D08356D3} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
 		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
-		{E332015C-24B5-48FA-9ED4-12F5310FCE7C} = {7E179C90-40E2-4C2B-BF8A-0AF95FB69631}
+		{7E179C90-40E2-4C2B-BF8A-0AF95FB69631} = {D2E814AD-9733-41B0-B392-DF8559627441}
+		{EB64D71D-6ED3-4BC2-8A9D-E630CD84C804} = {D2E814AD-9733-41B0-B392-DF8559627441}
 		{E8D4C1B0-F3BF-4497-9CE7-922E90B1CF5B} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 		{2C0674C4-1249-462A-8CD6-09C100B2DBA0} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
-		{EB64D71D-6ED3-4BC2-8A9D-E630CD84C804} = {D2E814AD-9733-41B0-B392-DF8559627441}
+		{E332015C-24B5-48FA-9ED4-12F5310FCE7C} = {7E179C90-40E2-4C2B-BF8A-0AF95FB69631}
 		{E7D70C50-D915-476F-9B4B-147EF0E7F5C2} = {EB64D71D-6ED3-4BC2-8A9D-E630CD84C804}
 	EndGlobalSection
 EndGlobal
