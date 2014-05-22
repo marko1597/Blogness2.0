@@ -3,9 +3,9 @@
         <input ng-file-select type="file" multiple />
         <div class="well dropzone" ng-file-over>
             <h4>Drag files here...</h4>
-            <!--<p>Queue length: {{ uploader.queue.length }}</p>-->
+            <p>You have {{ uploader.queue.length }} items</p>
             <div>
-                <ul class="upload-items" isotope-container file-upload-item-resize>
+                <ul class="upload-items" isotope-container isotope-item-resize>
                     <li ng-repeat="item in uploader.queue" isotope-item class="content-item">
                         <div data-media-id="{{item.mediaId}}" file-upload-item item="item" uploader="uploader"></div>
                     </li>

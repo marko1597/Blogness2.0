@@ -19,15 +19,22 @@
 
                 postsService.getPost($scope.postId).then(function (post) {
                     $scope.post = post;
+                    $scope.isBusy = false;
+                    $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.PostId, PostLikes: $scope.post.PostLikes });
+                    $scope.$broadcast("resizeIsotopeItems");
                     blockUiService.unblockIt();
 
                     postsService.getPopularPosts().then(function (list) {
                         $scope.postsList = list;
-                        $scope.isBusy = false;
-                        $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.PostId, PostLikes: $scope.post.PostLikes });
                     }, function (e) {
                         errorService.displayErrorUnblock({ Message: e });
                     });
+
+                    //postsService.getPopularPosts().then(function (list) {
+                    //    $scope.postsList = list;
+                    //}, function (e) {
+                    //    errorService.displayErrorUnblock({ Message: e });
+                    //});
                 }, function (e) {
                     errorService.displayErrorUnblock({ Message: e });
                 });

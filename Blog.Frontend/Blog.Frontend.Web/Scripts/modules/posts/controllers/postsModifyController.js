@@ -109,7 +109,7 @@
                                     uploader.queue.push(c);
                                 });
                                 $timeout(function() {
-                                    $rootScope.$broadcast("resizeUploadThumbnails", {});
+                                    $rootScope.$broadcast("resizeIsotopeItems", {});
                                 }, 500);
                             }, 500);
 
@@ -132,7 +132,7 @@
 
         });
 
-        $scope.$on("resizeUploadThumbnails", function () {
+        $scope.$on("resizeIsotopeItems", function () {
             $timeout(function () {
                 $scope.$broadcast('iso-method', { name: null, params: null });
                 blockUiService.unblockIt();

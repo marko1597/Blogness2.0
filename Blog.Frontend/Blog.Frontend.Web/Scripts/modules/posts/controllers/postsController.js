@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$location", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
-    function ($scope, $location, $interval, localStorageService, postsService, blockUiService, errorService) {
+﻿ngPosts.controller('postsController', ["$scope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
+    function ($scope, $location, $timeout, $interval, localStorageService, postsService, blockUiService, errorService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
@@ -17,14 +17,13 @@
                 $scope.posts = resp;
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
+                $scope.applyLayout();
             }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
         };
 
         $scope.getMorePosts = function () {
-            blockUiService.blockIt();
-
             if ($scope.isBusy) {
                 return;
             }
@@ -35,7 +34,7 @@
                     $scope.posts.push(p);
                 });
                 $scope.isBusy = false;
-                blockUiService.unblockIt();
+                $scope.applyLayout();
             }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
@@ -52,7 +51,7 @@
         $scope.$on("scrollBottom", function () {
             $scope.getMorePosts();
         });
-        
+
         /*
          * Layout Fix for Isotope
          * ----------------------
@@ -77,6 +76,5 @@
          * -----------------------
          */
         $scope.getRecentPosts();
-        $scope.applyLayout();
     }
 ]);

@@ -83,7 +83,7 @@ namespace Blog.Backend.Logic
                 {
                     IpAddress = ipAddress,
                     SessionId = 0,
-                    TimeValidity = DateTime.Now.AddMinutes(20),
+                    TimeValidity = DateTime.Now.AddHours(12),
                     Token = Guid.NewGuid().ToString(),
                     UserId = user.UserId
                 };

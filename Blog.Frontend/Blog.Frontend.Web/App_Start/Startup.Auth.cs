@@ -16,7 +16,7 @@ namespace Blog.Frontend.Web
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Authentication"),
-                ExpireTimeSpan = new TimeSpan(0, 20, 0),
+                ExpireTimeSpan = new TimeSpan(0, 12, 0, 0),
                 CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName")
             });
 
