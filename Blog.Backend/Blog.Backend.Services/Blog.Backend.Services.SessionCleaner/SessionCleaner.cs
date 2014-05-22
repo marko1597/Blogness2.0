@@ -40,7 +40,7 @@ namespace Blog.Backend.Services.SessionCleaner
 
         protected override void OnStart(string[] args)
         {
-            EventLogger.WriteEntry(string.Format("Blog Session Cleaner Started at {0}", DateTime.UtcNow));
+            EventLogger.WriteEntry(string.Format("Blog Session Cleaner Started at {0}", DateTime.Now));
             _timer.Interval = 20000;
             _timer.Elapsed += OnTimedEvent;
             _timer.Start();
@@ -48,13 +48,13 @@ namespace Blog.Backend.Services.SessionCleaner
 
         protected override void OnContinue()
         {
-            EventLogger.WriteEntry(string.Format("Blog Session Cleaner has resumed at {0}", DateTime.UtcNow));
+            EventLogger.WriteEntry(string.Format("Blog Session Cleaner has resumed at {0}", DateTime.Now));
             _timer.Start();
         }
 
         protected override void OnStop()
         {
-            EventLogger.WriteEntry(string.Format("Blog Session Cleaner Stopped at {0}", DateTime.UtcNow));
+            EventLogger.WriteEntry(string.Format("Blog Session Cleaner Stopped at {0}", DateTime.Now));
             _timer.Stop();
         }
     }

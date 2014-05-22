@@ -43,9 +43,9 @@ namespace Blog.Backend.Logic
                 }
                 else
                 {
-                    postLike.CreatedDate = DateTime.UtcNow;
+                    postLike.CreatedDate = DateTime.Now;
                     postLike.CreatedBy = postLike.UserId;
-                    postLike.ModifiedDate = DateTime.UtcNow;
+                    postLike.ModifiedDate = DateTime.Now;
                     postLike.ModifiedBy = postLike.UserId;
                     _postLikeRepository.Add(PostLikeMapper.ToEntity(postLike));
                 }

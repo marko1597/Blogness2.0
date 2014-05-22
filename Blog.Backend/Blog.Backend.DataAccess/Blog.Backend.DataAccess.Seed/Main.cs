@@ -98,7 +98,7 @@ namespace Blog.Backend.DataAccess.Seed
                 UserName = "jama",
                 Password = "testtest1",
                 EmailAddress = "jason.magpantay@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
             _userRepository.Add(new User
             {
@@ -107,7 +107,7 @@ namespace Blog.Backend.DataAccess.Seed
                 UserName = "jaav",
                 Password = "testtest1",
                 EmailAddress = "jason.avel@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
             _userRepository.Add(new User
             {
@@ -116,7 +116,7 @@ namespace Blog.Backend.DataAccess.Seed
                 UserName = "avma",
                 Password = "testtest1",
                 EmailAddress = "avel.magpantay@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
 
             _users =
@@ -180,13 +180,13 @@ namespace Blog.Backend.DataAccess.Seed
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-20),
-                    YearGraduated = DateTime.UtcNow.AddYears(-14),
+                    YearAttended = DateTime.Now.AddYears(-20),
+                    YearGraduated = DateTime.Now.AddYears(-14),
                     Course = string.Empty,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
 
                 _educationRepository.Add(new Education
@@ -197,13 +197,13 @@ namespace Blog.Backend.DataAccess.Seed
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-14),
-                    YearGraduated = DateTime.UtcNow.AddYears(-8),
+                    YearAttended = DateTime.Now.AddYears(-14),
+                    YearGraduated = DateTime.Now.AddYears(-8),
                     Course = string.Empty,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
 
                 _educationRepository.Add(new Education
@@ -214,13 +214,13 @@ namespace Blog.Backend.DataAccess.Seed
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-8),
-                    YearGraduated = DateTime.UtcNow.AddYears(-4),
+                    YearAttended = DateTime.Now.AddYears(-8),
+                    YearGraduated = DateTime.Now.AddYears(-4),
                     Course = "BS Computer Science",
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
             }
 
@@ -236,9 +236,9 @@ namespace Blog.Backend.DataAccess.Seed
                     HobbyName = "Reading",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
             }
 
@@ -254,9 +254,9 @@ namespace Blog.Backend.DataAccess.Seed
                     AlbumName = "Miscellaneous",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = false
                 });
 
@@ -265,9 +265,9 @@ namespace Blog.Backend.DataAccess.Seed
                     AlbumName = "Stuff",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = true
                 });
 
@@ -276,9 +276,9 @@ namespace Blog.Backend.DataAccess.Seed
                     AlbumName = "Profile",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = false
                 });
 
@@ -287,9 +287,9 @@ namespace Blog.Backend.DataAccess.Seed
                     AlbumName = "Background",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = false
                 });
             }
@@ -343,9 +343,9 @@ namespace Blog.Backend.DataAccess.Seed
                         {
                             CustomName = customName,
                             CreatedBy = u.UserId,
-                            CreatedDate = DateTime.UtcNow,
+                            CreatedDate = DateTime.Now,
                             ModifiedBy = u.UserId,
-                            ModifiedDate = DateTime.UtcNow,
+                            ModifiedDate = DateTime.Now,
                             AlbumId = albumId,
                             FileName = i + (i > 2 && i < 8 ? ".gif" : ".jpg"),
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
@@ -367,27 +367,27 @@ namespace Blog.Backend.DataAccess.Seed
             _tagRepository.Add(new Tag
             {
                 CreatedBy = 1,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 1,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 1,
                 TagName = "lorem"
             });
             _tagRepository.Add(new Tag
             {
                 CreatedBy = 2,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 2,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 2,
                 TagName = "ipsum"
             });
             _tagRepository.Add(new Tag
             {
                 CreatedBy = 3,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 3,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 3,
                 TagName = "dolor"
             });
@@ -406,9 +406,9 @@ namespace Blog.Backend.DataAccess.Seed
                     _postRepository.Add(new Post
                     {
                         CreatedBy = u.UserId,
-                        CreatedDate = DateTime.UtcNow.AddHours(-j),
+                        CreatedDate = DateTime.Now.AddHours(-j),
                         ModifiedBy = u.UserId,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-j),
+                        ModifiedDate = DateTime.Now.AddHours(-j),
                         PostMessage = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         PostTitle = "Lorem ipsum dolor",
                         UserId = u.UserId,
@@ -446,9 +446,9 @@ namespace Blog.Backend.DataAccess.Seed
                         PostContentText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                         PostContentTitle = "Lorem ipsum dolor",
                         CreatedBy = u1.UserId,
-                        CreatedDate = DateTime.UtcNow,
+                        CreatedDate = DateTime.Now,
                         ModifiedBy = u1.UserId,
-                        ModifiedDate = DateTime.UtcNow,
+                        ModifiedDate = DateTime.Now,
                         PostId = userposts[i].PostId,
                         MediaId = media[i].MediaId
                     }); 
@@ -467,9 +467,9 @@ namespace Blog.Backend.DataAccess.Seed
                     _postLikeRepository.Add(new PostLike
                     {
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = i,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         PostId = p.PostId,
                         UserId = i,
                     });
@@ -491,9 +491,9 @@ namespace Blog.Backend.DataAccess.Seed
                         PostId = p.PostId,
                         ParentCommentId = null,
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = p.User.UserId,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         UserId = i,
                         CommentLocation = "Makati City, Philippines"
                     });
@@ -511,9 +511,9 @@ namespace Blog.Backend.DataAccess.Seed
                         PostId = null,
                         ParentCommentId = c.CommentId,
                         CreatedBy = u.UserId,
-                        CreatedDate = DateTime.UtcNow.AddHours(-1),
+                        CreatedDate = DateTime.Now.AddHours(-1),
                         ModifiedBy = u.UserId,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-1),
+                        ModifiedDate = DateTime.Now.AddHours(-1),
                         UserId = u.UserId,
                         CommentLocation = "Makati City, Philippines"
                     });
@@ -535,9 +535,9 @@ namespace Blog.Backend.DataAccess.Seed
                     _commentLikeRepository.Add(new CommentLike
                     {
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = i,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         CommentId = c.CommentId,
                         UserId = i,
                     });

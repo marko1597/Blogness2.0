@@ -80,9 +80,9 @@ namespace Blog.Backend.Logic
                 post.Tags = PrepareTags(post.Tags, post.User.UserId);
                 post.PostContents = PreparePostContents(post.PostContents, post.User.UserId, post.PostId);
                 post.CreatedBy = post.User.UserId;
-                post.CreatedDate = DateTime.UtcNow;
+                post.CreatedDate = DateTime.Now;
                 post.ModifiedBy = post.User.UserId;
-                post.ModifiedDate = DateTime.UtcNow;
+                post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -99,7 +99,7 @@ namespace Blog.Backend.Logic
             {
                 post.Tags = PrepareTags(post.Tags, post.User.UserId);
                 post.PostContents = PreparePostContents(post.PostContents, post.User.UserId, post.PostId);
-                post.ModifiedDate = DateTime.UtcNow;
+                post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -130,9 +130,9 @@ namespace Blog.Backend.Logic
             foreach (var tag in enumerable)
             {
                 tag.CreatedBy = userId;
-                tag.CreatedDate = DateTime.UtcNow;
+                tag.CreatedDate = DateTime.Now;
                 tag.ModifiedBy = userId;
-                tag.ModifiedDate = DateTime.UtcNow;
+                tag.ModifiedDate = DateTime.Now;
                 tag.TagName = tag.TagName.ToLower();
             }
 
@@ -145,9 +145,9 @@ namespace Blog.Backend.Logic
             foreach (var postContent in postContents)
             {
                 postContent.CreatedBy = userId;
-                postContent.CreatedDate = DateTime.UtcNow;
+                postContent.CreatedDate = DateTime.Now;
                 postContent.ModifiedBy = userId;
-                postContent.ModifiedDate = DateTime.UtcNow;
+                postContent.ModifiedDate = DateTime.Now;
                 postContent.PostId = postId;
             }
 

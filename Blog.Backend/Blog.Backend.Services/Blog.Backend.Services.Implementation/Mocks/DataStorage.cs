@@ -54,7 +54,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                 UserName = "jama",
                 Password = "testtest1",
                 EmailAddress = "jason.magpantay@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
             Users.Add(new User
             {
@@ -64,7 +64,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                 UserName = "jaav",
                 Password = "testtest1",
                 EmailAddress = "jason.avel@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
             Users.Add(new User
             {
@@ -74,7 +74,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                 UserName = "avma",
                 Password = "testtest1",
                 EmailAddress = "avel.magpantay@gmail.com",
-                BirthDate = DateTime.UtcNow.AddYears(-25)
+                BirthDate = DateTime.Now.AddYears(-25)
             });
         }
 
@@ -140,13 +140,13 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-20),
-                    YearGraduated = DateTime.UtcNow.AddYears(-14),
+                    YearAttended = DateTime.Now.AddYears(-20),
+                    YearGraduated = DateTime.Now.AddYears(-14),
                     Course = string.Empty,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
                 educationId++;
 
@@ -159,13 +159,13 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-14),
-                    YearGraduated = DateTime.UtcNow.AddYears(-8),
+                    YearAttended = DateTime.Now.AddYears(-14),
+                    YearGraduated = DateTime.Now.AddYears(-8),
                     Course = string.Empty,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
                 educationId++;
 
@@ -178,13 +178,13 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     City = "City",
                     State = "State",
                     Country = "Country",
-                    YearAttended = DateTime.UtcNow.AddYears(-8),
-                    YearGraduated = DateTime.UtcNow.AddYears(-4),
+                    YearAttended = DateTime.Now.AddYears(-8),
+                    YearGraduated = DateTime.Now.AddYears(-4),
                     Course = "BS Computer Science",
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
                 educationId++;
             }
@@ -202,9 +202,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     HobbyName = "Reading",
                     UserId = u.UserId,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow
+                    ModifiedDate = DateTime.Now
                 });
                 hobbyId++;
             }
@@ -222,9 +222,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     AlbumName = "Stuff",
                     User = u,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = false
                 });
                 albumId++;
@@ -235,9 +235,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     AlbumName = "Miscellaneous",
                     User = u,
                     CreatedBy = u.UserId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = u.UserId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     IsUserDefault = true
                 });
                 albumId++;
@@ -276,9 +276,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                             MediaId = mediaId,
                             CustomName = customName,
                             CreatedBy = u.UserId,
-                            CreatedDate = DateTime.UtcNow,
+                            CreatedDate = DateTime.Now,
                             ModifiedBy = u.UserId,
-                            ModifiedDate = DateTime.UtcNow,
+                            ModifiedDate = DateTime.Now,
                             AlbumId = albums[0].AlbumId,
                             FileName = i + ".jpg",
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", localIpAddress, customName),
@@ -296,9 +296,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                             MediaId = mediaId,
                             CustomName = customName,
                             CreatedBy = u.UserId,
-                            CreatedDate = DateTime.UtcNow,
+                            CreatedDate = DateTime.Now,
                             ModifiedBy = u.UserId,
-                            ModifiedDate = DateTime.UtcNow,
+                            ModifiedDate = DateTime.Now,
                             AlbumId = albums[1].AlbumId,
                             FileName = i + ".jpg",
                             MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", localIpAddress, customName),
@@ -320,27 +320,27 @@ namespace Blog.Backend.Services.Implementation.Mocks
             Tags.Add(new Tag
             {
                 CreatedBy = 1,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 1,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 1,
                 TagName = "lorem"
             });
             Tags.Add(new Tag
             {
                 CreatedBy = 2,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 2,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 2,
                 TagName = "ipsum"
             });
             Tags.Add(new Tag
             {
                 CreatedBy = 3,
-                CreatedDate = DateTime.UtcNow,
+                CreatedDate = DateTime.Now,
                 ModifiedBy = 3,
-                ModifiedDate = DateTime.UtcNow,
+                ModifiedDate = DateTime.Now,
                 TagId = 3,
                 TagName = "dolor"
             });
@@ -366,9 +366,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     Posts.Add(new Post
                     {
                         CreatedBy = u.UserId,
-                        CreatedDate = DateTime.UtcNow.AddHours(-j),
+                        CreatedDate = DateTime.Now.AddHours(-j),
                         ModifiedBy = u.UserId,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-j),
+                        ModifiedDate = DateTime.Now.AddHours(-j),
                         PostMessage = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                         PostTitle = "Post Title",
                         User = u,
@@ -414,9 +414,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     PostLikes.Add(new PostLike
                     {
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = i,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         PostId = p.PostId,
                         UserId = i,
                         PostLikeId = postLikeId
@@ -441,9 +441,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                         PostId = p.PostId,
                         ParentCommentId = null,
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = p.User.UserId,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         User = Users.FirstOrDefault(a => a.UserId == i),
                         CommentLocation = "Makati City, Philippines"
                     });
@@ -463,9 +463,9 @@ namespace Blog.Backend.Services.Implementation.Mocks
                     CommentLikes.Add(new CommentLike
                     {
                         CreatedBy = i,
-                        CreatedDate = DateTime.UtcNow.AddHours(-i),
+                        CreatedDate = DateTime.Now.AddHours(-i),
                         ModifiedBy = i,
-                        ModifiedDate = DateTime.UtcNow.AddHours(-i),
+                        ModifiedDate = DateTime.Now.AddHours(-i),
                         CommentId = p.CommentId,
                         UserId = i,
                         CommentLikeId = commentLikeId

@@ -149,9 +149,9 @@ namespace Blog.Backend.Logic
                                  ThumbnailPath = mediaPath + "tn\\",
                                  CustomName = Guid.NewGuid().ToString(),
                                  CreatedBy = user.UserId,
-                                 CreatedDate = DateTime.UtcNow,
+                                 CreatedDate = DateTime.Now,
                                  ModifiedBy = user.UserId,
-                                 ModifiedDate = DateTime.UtcNow
+                                 ModifiedDate = DateTime.Now
                              };
                 tMedia.ThumbnailUrl = Constants.FileMediaUrl + tMedia.CustomName + @"/thumb";
                 tMedia.MediaUrl = Constants.FileMediaUrl + tMedia.CustomName;
@@ -219,9 +219,9 @@ namespace Blog.Backend.Logic
                 {
                     AlbumName = albumName,
                     CreatedBy = userId,
-                    CreatedDate = DateTime.UtcNow,
+                    CreatedDate = DateTime.Now,
                     ModifiedBy = userId,
-                    ModifiedDate = DateTime.UtcNow,
+                    ModifiedDate = DateTime.Now,
                     UserId = userId,
                     IsUserDefault = false
                 });

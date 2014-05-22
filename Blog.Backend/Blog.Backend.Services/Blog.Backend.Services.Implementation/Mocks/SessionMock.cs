@@ -41,7 +41,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
                                   IpAddress = ipAddress,
                                   UserId = user.First().UserId,
                                   SessionId = id + 1,
-                                  TimeValidity = DateTime.UtcNow.AddMinutes(20),
+                                  TimeValidity = DateTime.Now.AddMinutes(20),
                                   Token = Guid.NewGuid().ToString()
                               };
 
@@ -83,7 +83,7 @@ namespace Blog.Backend.Services.Implementation.Mocks
 
         private void CleanupExpiredSessions()
         {
-            var oldSessions = DataStorage.Sessions.FindAll(a => a.TimeValidity <= DateTime.UtcNow);
+            var oldSessions = DataStorage.Sessions.FindAll(a => a.TimeValidity <= DateTime.Now);
             oldSessions.ForEach(a => DataStorage.Sessions.Remove(a));
         }
     }

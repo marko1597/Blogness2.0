@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Blog.Backend.Common.Contracts;
 using Blog.Backend.Common.Web.Attributes;
 using Blog.Backend.Services.Implementation;
+using WebApi.OutputCache.V2;
 
 namespace Blog.Backend.Api.Rest.Controllers
 {
@@ -76,6 +78,7 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpGet]
         [Route("api/media/{name}")]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         public HttpResponseMessage GetByName(string name)
         {
             try
@@ -92,6 +95,7 @@ namespace Blog.Backend.Api.Rest.Controllers
 
         [HttpGet]
         [Route("api/media/{name}/thumb")]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         public HttpResponseMessage GetThumbnailByName(string name)
         {
             try
@@ -158,11 +162,11 @@ namespace Blog.Backend.Api.Rest.Controllers
                 var response = new HttpResponseMessage
                 {
                     Content = isThumb ?
-                        new StreamContent(new FileStream(media.ThumbnailPath + 
-                            ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
-                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg", 
+                        new StreamContent(new FileStream(media.ThumbnailPath +
+                            ConfigurationManager.AppSettings.Get("ThumbnailPrefix") +
+                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg",
                             FileMode.Open, FileAccess.Read)) :
-                        new StreamContent(new FileStream(media.MediaPath + 
+                        new StreamContent(new FileStream(media.MediaPath +
                             media.FileName, FileMode.Open, FileAccess.Read))
                 };
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue(isThumb ? "image/jpeg" : media.MediaType);

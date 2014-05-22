@@ -83,7 +83,7 @@ namespace Blog.Backend.Logic
                 {
                     IpAddress = ipAddress,
                     SessionId = 0,
-                    TimeValidity = DateTime.UtcNow.AddMinutes(20),
+                    TimeValidity = DateTime.Now.AddMinutes(20),
                     Token = Guid.NewGuid().ToString(),
                     UserId = user.UserId
                 };
@@ -145,7 +145,7 @@ namespace Blog.Backend.Logic
 
         public void CleanupExpiredSessions()
         {
-            var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.UtcNow, true).ToList();
+            var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.Now, true).ToList();
             oldSessions.ForEach(a => _sessionRepository.Delete(a));
         }
     }
