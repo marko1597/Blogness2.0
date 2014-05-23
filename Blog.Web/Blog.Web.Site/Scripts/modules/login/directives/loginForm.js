@@ -23,13 +23,13 @@
                         blockUiService.unblockIt();
                         $window.location.href = configProvider.getSettings().BlogRoot;
                     } else {
-                        errorService.displayErrorUnblock({ Message: "Error communicating with the login server." });
+                        errorService.displayError({ Message: "Error communicating with the login server." });
                     }
                 }, function(error) {
-                    errorService.displayErrorUnblock({ Message: error });
+                    errorService.displayError({ Message: error });
                 });
             }, function (error) {
-                errorService.displayErrorUnblock({ Message: error });
+                errorService.displayError({ Message: error });
             });
         };
     };
