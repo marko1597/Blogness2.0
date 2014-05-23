@@ -8,17 +8,34 @@ namespace Blog.DataAccess.Database.Entities.Objects
     {
         [Key]
         public int UserId { get; set; }
+
+        [Required]
         public string UserName { get; set; }
+
+        [Required, MinLength(8)]
         public string Password { get; set; }
+
+        [Required]
         public string FirstName { get; set; }
+
+        [Required]
         public string LastName { get; set; }
+
+        [Required]
         public string EmailAddress { get; set; }
+
         public DateTime BirthDate { get; set; }
+
         public int? PictureId { get; set; }
+
         public int? BackgroundId { get; set; }
+
         public virtual Address Address { get; set; }
+
         public int? UserPictureId { get; set; }
+
         public int? UserBackgroundId { get; set; }
+
         public virtual ICollection<Education> Education { get; set; }
         public virtual ICollection<Hobby> Hobbies { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
