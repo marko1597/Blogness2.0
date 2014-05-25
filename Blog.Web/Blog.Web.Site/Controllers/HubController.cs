@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Microsoft.AspNet.SignalR;
 using PostsHub = Blog.Web.Site.Hubs.PostsHub;
 
@@ -10,16 +10,11 @@ namespace Blog.Web.Site.Controllers
     public class HubController : Controller
     {
         [ActionName("PostLikesUpdate")]
-        public void PostLikesUpdate(List<PostLike> postLikes)
+        public void PostLikesUpdate(PostLikesUpdate postLikesUpdate)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<PostsHub>();
-
-            var firstOrDefault = postLikes.FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                var postId = firstOrDefault.PostId;
-                context.Clients.All.postsLikeUpdate(postId, postLikes);
-            }
+            postLikesUpdate.PostLikes = postLikesUpdate.PostLikes ?? new List<PostLike>();
+            context.Clients.All.postsLikeUpdate(postLikesUpdate.PostId, postLikesUpdate.PostLikes);
         }
 	}
 }

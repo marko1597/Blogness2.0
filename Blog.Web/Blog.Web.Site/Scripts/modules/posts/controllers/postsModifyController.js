@@ -113,9 +113,7 @@
                                 _.each($scope.existingContents, function (c) {
                                     uploader.queue.push(c);
                                 });
-                                $timeout(function() {
-                                    $rootScope.$broadcast("resizeIsotopeItems", {});
-                                }, 500);
+                                $scope.$broadcast("resizeIsotopeItems");
                             }, 500);
 
                             blockUiService.unblockIt();
@@ -138,13 +136,6 @@
             configProvider.setDimensions(d.width, d.height);
             $scope.dimensionMode = configProvider.windowDimensions.mode;
 
-        });
-
-        $scope.$on("resizeIsotopeItems", function () {
-            $timeout(function () {
-                $scope.$broadcast('iso-method', { name: null, params: null });
-                blockUiService.unblockIt();
-            }, 500);
         });
 
         var uploader = $scope.uploader = $fileUploader.create({
@@ -173,11 +164,9 @@
             a.allowCaptions = true;
             a.postContentTitle = "";
             a.postContentText = "";
-            blockUiService.blockIt();
         });
 
         uploader.bind('afteraddingall', function () {
-            blockUiService.blockIt();
         });
 
         $scope.init();

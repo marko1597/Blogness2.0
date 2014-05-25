@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Configuration;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 
 namespace Blog.Common.Web.Helper.Hub
 {
     public class PostsHub
     {
-        public void PushPostLikes(List<PostLike> postLikes)
+        public void PushPostLikes(PostLikesUpdate postLikesUpdate)
         {
             try
             {
                 new HttpClientHelper(ConfigurationManager.AppSettings["Blog"])
-                    .Post("hub/postlikesupdate?format=json", postLikes);
+                    .Post("hub/postlikesupdate?format=json", postLikesUpdate);
             }
             catch (Exception ex)
             {

@@ -71,6 +71,7 @@
     <Compile Include="Utils\BlogException.cs" />
     <Compile Include="ViewModels\LoggedUser.cs" />
     <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\PostLikesUpdate.cs" />
     <Compile Include="ViewModels\UserPost.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

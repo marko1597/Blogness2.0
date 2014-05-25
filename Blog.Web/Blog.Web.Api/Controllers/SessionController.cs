@@ -4,7 +4,7 @@ using System.Web;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
-using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {

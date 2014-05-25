@@ -32,9 +32,11 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         public Media Picture { get; set; }
+        public int? PictureId { get; set; }
 
         [DataMember]
         public Media Background { get; set; }
+        public int? BackgroundId { get; set; }
 
         [DataMember]
         public List<Education> Education { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Blog.Common.Utils;
 using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 
 namespace Blog.DataAccess.Seed
 {

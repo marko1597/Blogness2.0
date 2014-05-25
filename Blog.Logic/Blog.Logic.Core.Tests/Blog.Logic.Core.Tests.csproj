@@ -58,7 +58,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ObjectMocks.cs" />
     <Compile Include="UsersLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +80,10 @@
     <ProjectReference Include="..\Blog.Logic.Core\Blog.Logic.Core.csproj">
       <Project>{388f088c-90f5-46e7-b7d1-422e0f577513}</Project>
       <Name>Blog.Logic.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Logic.ObjectMapper\Blog.Logic.ObjectMapper.csproj">
+      <Project>{b7b41254-99cc-439c-b40b-6c0cd4978adf}</Project>
+      <Name>Blog.Logic.ObjectMapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

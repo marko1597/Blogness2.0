@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
-using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {

@@ -7,6 +7,7 @@ using Blog.Common.Utils;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Helper;
 using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -42,24 +43,6 @@ namespace Blog.Web.Api
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<ITag, TagsService>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
-
-            /*
-             * Uncomment these lines to switch between mocks or real db calls
-             * -------------------------------------------------------------- */
-            //DataStorage.LoadMockData();
-            //container.Register<IComments, CommentMock>(Lifestyle.Singleton);
-            //container.Register<ICommentLikes, CommentLikeMock>(Lifestyle.Singleton);
-            //container.Register<IPosts, PostMock>(Lifestyle.Singleton);
-            //container.Register<IPostsPage, PostPageMock>(Lifestyle.Singleton);
-            //container.Register<IUser, UserMock>(Lifestyle.Singleton);
-            //container.Register<ISession, SessionMock>(Lifestyle.Singleton);
-            //container.Register<IPostContents, PostContentMock>(Lifestyle.Singleton);
-            //container.Register<IMedia, MediaMock>(Lifestyle.Singleton);
-            //container.Register<IAlbum, AlbumMock>(Lifestyle.Singleton);
-            //container.Register<IEducation, EducationMock>(Lifestyle.Singleton);
-            //container.Register<IHobby, HobbyMock>(Lifestyle.Singleton);
-            //container.Register<IAddress, AddressMock>(Lifestyle.Singleton);
-            //container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

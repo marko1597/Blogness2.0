@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Blog.Logic.Core.Factory;
 using Blog.Common.Contracts;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {

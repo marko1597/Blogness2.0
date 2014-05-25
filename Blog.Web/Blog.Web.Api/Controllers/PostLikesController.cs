@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Helper.Hub.Factory;
-using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -51,7 +52,11 @@ namespace Blog.Web.Api.Controllers
                                    UserId = user.UserId
                                };
                 _service.Add(postLike);
-                PostsHubFactory.GetInstance().Create().PushPostLikes(_service.Get(postId));
+                PostsHubFactory.GetInstance().Create().PushPostLikes(new PostLikesUpdate
+                                                                     {
+                                                                         PostId = postId,
+                                                                         PostLikes = _service.Get(postId)
+                                                                     });
             }
             catch (Exception ex)
             {

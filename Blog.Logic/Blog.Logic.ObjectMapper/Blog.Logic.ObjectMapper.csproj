@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B7B41254-99CC-439C-B40B-6C0CD4978ADF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blog.Logic.ObjectMapper</RootNamespace>
+    <AssemblyName>Blog.Logic.ObjectMapper</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressMapper.cs" />
+    <Compile Include="AlbumMapper.cs" />
+    <Compile Include="CommentLikeMapper.cs" />
+    <Compile Include="CommentMapper.cs" />
+    <Compile Include="EducationMapper.cs" />
+    <Compile Include="EducationTypeMapper.cs" />
+    <Compile Include="HobbyMapper.cs" />
+    <Compile Include="IMapper.cs" />
+    <Compile Include="MediaMapper.cs" />
+    <Compile Include="PostContentMapper.cs" />
+    <Compile Include="PostLikeMapper.cs" />
+    <Compile Include="PostMapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SessionMapper.cs" />
+    <Compile Include="TagMapper.cs" />
+    <Compile Include="UserMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">
+      <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
+      <Name>Blog.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.DataAccess\Blog.DataAccess.Database\Blog.DataAccess.Database.csproj">
+      <Project>{9caf7700-6fba-41d0-9c55-efdacfa2e073}</Project>
+      <Name>Blog.DataAccess.Database</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

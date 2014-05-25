@@ -17,7 +17,7 @@
                 $scope.posts = resp;
                 $scope.isBusy = false;
                 blockUiService.unblockIt();
-                $scope.applyLayout();
+                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
@@ -34,7 +34,7 @@
                     $scope.posts.push(p);
                 });
                 $scope.isBusy = false;
-                $scope.applyLayout();
+                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
@@ -52,29 +52,6 @@
             $scope.getMorePosts();
         });
 
-        /*
-         * Layout Fix for Isotope
-         * ----------------------
-         */
-        var stopApplyLayoutFlag;
-        $scope.applyLayout = function () {
-            if (angular.isDefined(stopApplyLayoutFlag)) return;
-
-            stopApplyLayoutFlag = $interval(function () {
-                $scope.$broadcast('iso-method', { name: null, params: null });
-            }, 2000, 5);
-        };
-        $scope.stopApplyLayout = function () {
-            if (angular.isDefined(stopApplyLayoutFlag)) {
-                $interval.cancel(stopApplyLayoutFlag);
-                stopApplyLayoutFlag = undefined;
-            }
-        };
-
-        /*
-         * Initial calls
-         * -----------------------
-         */
         $scope.getRecentPosts();
     }
 ]);

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
-using Blog.Services.Implementation;
 using System;
 using System.Web.Http;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {

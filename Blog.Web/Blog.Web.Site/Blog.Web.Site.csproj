@@ -583,7 +583,6 @@
     <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
     <Content Include="Scripts\modules\navigation\navigation.js" />
     <Content Include="Scripts\modules\posts\directives\postLikes.js" />
-    <Content Include="Scripts\modules\posts\directives\postListItemResize.js" />
     <Content Include="Scripts\modules\posts\posts.js" />
     <Content Include="Scripts\modules\posts\services\postsService.js" />
     <Content Include="Scripts\modules\shared\directives\keypress.js" />

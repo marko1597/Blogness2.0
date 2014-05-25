@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
-using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Factory;
-using Blog.Logic.Core.Mapper;
+using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {

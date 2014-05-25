@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Utils;
 using Blog.DataAccess.Database.Entities.Objects;
-using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Factory;
-using Blog.Logic.Core.Mapper;
+using Blog.Logic.ObjectMapper;
 using Media = Blog.Common.Contracts.Media;
 
 namespace Blog.Logic.Core
@@ -125,57 +125,25 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var album = GetAlbumByName(albumName, user.UserId);
+                filename = filename.Substring(1, filename.Length - 2);
                 var guid = Guid.NewGuid().ToString();
+
+                var album = GetAlbumByName(albumName, user.UserId);
+                if (album == null) throw new Exception("Error creating or finding album");
+
                 var mediaPath = _imageHelper.GenerateImagePath(user.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
+
                 var hasCreatedDir = _imageHelper.CreateDirectory(mediaPath);
+                if (!hasCreatedDir) throw new Exception("Error creating media directory");
 
-                if (!hasCreatedDir) return null;
+                var hasSuccessfullyMovedMedia = MoveMediaFileToCorrectPath(filename, path, mediaPath);
+                if (!hasSuccessfullyMovedMedia) throw new Exception("Error moving media to correct directory");
 
-                if (!string.IsNullOrEmpty(filename))
-                {
-                    filename = filename.Substring(1, filename.Length - 2);
-                    if (path != null)
-                    {
-                        File.Move(path, mediaPath + "\\" + filename);
-                    }
-                }
+                var media = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, user.UserId, contentType, guid);
+                CreateThumbnail(media, mediaPath, filename);
 
-                var tMedia = new Media
-                             {
-                                 FileName = filename,
-                                 AlbumId = album.AlbumId,
-                                 MediaPath = mediaPath,
-                                 ThumbnailPath = mediaPath + "tn\\",
-                                 CustomName = Guid.NewGuid().ToString(),
-                                 CreatedBy = user.UserId,
-                                 CreatedDate = DateTime.Now,
-                                 ModifiedBy = user.UserId,
-                                 ModifiedDate = DateTime.Now
-                             };
-                tMedia.ThumbnailUrl = Constants.FileMediaUrl + tMedia.CustomName + @"/thumb";
-                tMedia.MediaUrl = Constants.FileMediaUrl + tMedia.CustomName;
-                tMedia.MediaType = contentType;
-
-                if (IsMediaSupported(tMedia.MediaType))
-                {
-                    _imageHelper.CreateThumbnailPath(tMedia.ThumbnailPath);
-
-                    if (IsVideo(tMedia.MediaType))
-                    {
-                        Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
-                    }
-                    else if (tMedia.MediaType == "image/gif")
-                    {
-                        Task.Run(() => _imageHelper.CreateGifThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
-                    }
-                    else
-                    {
-                        Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + "\\" + filename, tMedia.ThumbnailPath));
-                    }
-                }
-
-                var result = _mediaRepository.Add(MediaMapper.ToEntity(tMedia));
+                var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
                 return MediaMapper.ToDto(result);
             }
             catch (Exception ex)
@@ -205,6 +173,48 @@ namespace Blog.Logic.Core
             }
         }
 
+        private static bool MoveMediaFileToCorrectPath(string filename, string path, string mediaPath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    if (path != null)
+                    {
+                        File.Move(path, mediaPath + "\\" + filename);
+                        return true;
+                    }
+                    throw new Exception("Path name is empty");
+                }
+                throw new Exception("File name is empty");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex.InnerException);
+            }
+        }
+
+        private static Media PrepareMediaForAdding(string filename, int albumId, string mediaPath, int userId, string contentType, string customName)
+        {
+            var media = new Media
+            {
+                FileName = filename,
+                AlbumId = albumId,
+                MediaPath = mediaPath,
+                ThumbnailPath = mediaPath + "tn\\",
+                CustomName = customName,
+                CreatedBy = userId,
+                CreatedDate = DateTime.Now,
+                ModifiedBy = userId,
+                ModifiedDate = DateTime.Now
+            };
+            media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
+            media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
+            media.MediaType = contentType;
+
+            return media;
+        }
+
         private Album GetAlbumByName(string albumName, int userId)
         {
             var album = albumName.ToLower() != "default"
@@ -232,7 +242,28 @@ namespace Blog.Logic.Core
             return album;
         }
 
-        private bool IsMediaSupported(string mimeType)
+        private void CreateThumbnail(Media media, string mediaPath, string filename)
+        {
+            if (IsMediaSupported(media.MediaType))
+            {
+                _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
+
+                if (IsVideo(media.MediaType))
+                {
+                    Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + filename, media.ThumbnailPath));
+                }
+                else if (media.MediaType == "image/gif")
+                {
+                    Task.Run(() => _imageHelper.CreateGifThumbnail(mediaPath + filename, media.ThumbnailPath));
+                }
+                else
+                {
+                    Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + filename, media.ThumbnailPath));
+                }
+            }
+        }
+
+        private static bool IsMediaSupported(string mimeType)
         {
             var supportedMedia = new List<string>
             {
@@ -253,7 +284,7 @@ namespace Blog.Logic.Core
             return supportedMedia.Contains(mimeType);
         }
 
-        private bool IsVideo(string mimeType)
+        private static bool IsVideo(string mimeType)
         {
             var supportedMedia = new List<string>
             {

@@ -125,7 +125,6 @@ namespace Blog.Web.Site
                       "~/Scripts/modules/posts/controllers/postsModifyController.js",
                       "~/Scripts/modules/posts/controllers/postsViewController.js",
                       "~/Scripts/modules/posts/controllers/postsController.js",
-                      "~/Scripts/modules/posts/directives/postListItemResize.js",
                       "~/Scripts/modules/posts/directives/postListItem.js",
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",

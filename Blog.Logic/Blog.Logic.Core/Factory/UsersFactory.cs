@@ -1,4 +1,6 @@
 ﻿using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
+using Db = Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.Logic.Core.Factory
 {
@@ -20,14 +22,18 @@ namespace Blog.Logic.Core.Factory
             return _instance;
         }
 
-        public UsersLogic CreateUsers()
+        public UsersLogic CreateLogic()
         {
             IUserRepository userRepository = new UserRepository();
             IAddressRepository addressRepository = new AddressRepository();
             IEducationRepository educationRepository = new EducationRepository();
-            IAlbumRepository albumRepository = new AlbumRepository();
             IMediaRepository mediaRepository = new MediaRepository();
-            return new UsersLogic(userRepository, addressRepository, educationRepository, albumRepository, mediaRepository);
+
+            return new UsersLogic(
+                userRepository, 
+                addressRepository, 
+                educationRepository, 
+                mediaRepository);
         }
     }
 }

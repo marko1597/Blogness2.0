@@ -2,7 +2,7 @@
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
-using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {

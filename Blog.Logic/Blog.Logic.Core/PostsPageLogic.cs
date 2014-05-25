@@ -4,9 +4,9 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Contracts.ViewModels;
-using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Factory;
-using Blog.Logic.Core.Mapper;
+using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
@@ -24,7 +24,7 @@ namespace Blog.Logic.Core
             var userPosts = new UserPosts();
             try
             {
-                userPosts.User = UsersFactory.GetInstance().CreateUsers().Get(userId);
+                userPosts.User = UsersFactory.GetInstance().CreateLogic().Get(userId);
                 var dbPosts = _postRepository.Find(a => a.UserId == userId, null, "PostContents,Tags,User,Comments,PostLikes").ToList();
                 dbPosts.ForEach(a => userPosts.Posts.Add(PostMapper.ToDto(a)));
                 userPosts.Posts.ForEach(a =>
@@ -50,6 +50,10 @@ namespace Blog.Logic.Core
                 {
                     a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
                     a.Comments = CommentsFactory.GetInstance().CreateComments().GetTopComments(a.PostId, 5);
+                    if (a.User.PictureId != null)
+                        a.User.Picture = MediaFactory.GetInstance().CreateMedia().Get((int) a.User.PictureId);
+                    if (a.User.BackgroundId != null)
+                        a.User.Background = MediaFactory.GetInstance().CreateMedia().Get((int)a.User.BackgroundId);
                 });
             }
             catch (Exception ex)
@@ -70,6 +74,10 @@ namespace Blog.Logic.Core
                 {
                     a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
                     a.Comments = CommentsFactory.GetInstance().CreateComments().GetTopComments(a.PostId, 5);
+                    if (a.User.PictureId != null)
+                        a.User.Picture = MediaFactory.GetInstance().CreateMedia().Get((int)a.User.PictureId);
+                    if (a.User.BackgroundId != null)
+                        a.User.Background = MediaFactory.GetInstance().CreateMedia().Get((int)a.User.BackgroundId);
                 });
             }
             catch (Exception ex)
@@ -90,6 +98,10 @@ namespace Blog.Logic.Core
                 {
                     a.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(a.PostId);
                     a.Comments = CommentsFactory.GetInstance().CreateComments().GetTopComments(a.PostId, 5);
+                    if (a.User.PictureId != null)
+                        a.User.Picture = MediaFactory.GetInstance().CreateMedia().Get((int)a.User.PictureId);
+                    if (a.User.BackgroundId != null)
+                        a.User.Background = MediaFactory.GetInstance().CreateMedia().Get((int)a.User.BackgroundId);
                 });
             }
             catch (Exception ex)

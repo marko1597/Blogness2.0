@@ -4,9 +4,9 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Contracts.ViewModels;
-using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Factory;
-using Blog.Logic.Core.Mapper;
+using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
@@ -39,7 +39,7 @@ namespace Blog.Logic.Core
             try
             {
                 CleanupExpiredSessions();
-                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(username);
+                var user = UsersFactory.GetInstance().CreateLogic().GetByUserName(username);
                 var session = new DataAccess.Database.Entities.Objects.Session();
 
                 if (user != null)
@@ -76,7 +76,7 @@ namespace Blog.Logic.Core
             {
                 DeleteSessionFromSameIp(ipAddress);
 
-                var user = UsersFactory.GetInstance().CreateUsers().GetByCredentials(userName, passWord);
+                var user = UsersFactory.GetInstance().CreateLogic().GetByCredentials(userName, passWord);
                 if (user == null || user.UserId == 0) return new LoggedUser { Session = null, User = null };
 
                 var session = new Session
@@ -112,7 +112,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var user = UsersFactory.GetInstance().CreateUsers().GetByUserName(userName);
+                var user = UsersFactory.GetInstance().CreateLogic().GetByUserName(userName);
                 var session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
 
                 if (user != null)
