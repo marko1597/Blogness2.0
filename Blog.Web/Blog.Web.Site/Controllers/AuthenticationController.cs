@@ -49,7 +49,7 @@ namespace Blog.Web.Site.Controllers
 
             var result = AuthenticationApiFactory.GetInstance().Create().Logout(login);
 
-            if (result)
+            if (result == null)
             {
                 _authentication.SignOut(new User { UserName = login.Username });
             }

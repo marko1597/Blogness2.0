@@ -12,10 +12,14 @@ namespace Blog.Logic.Core
     public class PostsLogic
     {
         private readonly IPostRepository _postRepository;
+        private readonly IPostContentRepository _postContentRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public PostsLogic(IPostRepository postRepository)
+        public PostsLogic(IPostRepository postRepository, IPostContentRepository postContentRepository, ITagRepository tagRepository)
         {
             _postRepository = postRepository;
+            _postContentRepository = postContentRepository;
+            _tagRepository = tagRepository;
         }
 
         public Post GetPost(int postId)
@@ -25,7 +29,12 @@ namespace Blog.Logic.Core
             {
                 var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,PostLikes").FirstOrDefault();
                 post = PostMapper.ToDto(db);
-                post.PostContents = PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(postId);
+
+                var dbContents = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
+                var postContents = new List<PostContent>();
+                dbContents.ForEach(a => postContents.Add(PostContentMapper.ToDto(a)));
+
+                post.PostContents = postContents;
             }
             catch (Exception ex)
             {
@@ -39,8 +48,8 @@ namespace Blog.Logic.Core
             var posts = new List<Post>();
             try
             {
-                var tag = TagsFactory.GetInstance().CreateTags().GetTagsByName(tagName).FirstOrDefault();
-                var db = _postRepository.Find(a => a.Tags.Contains(TagMapper.ToEntity(tag)), null, "Tags,User,Comments,PostLikes").ToList();
+                var tag = _tagRepository.Find(a => a.TagName == tagName, true).FirstOrDefault();
+                var db = _postRepository.Find(a => a.Tags.Contains(tag), null, "Tags,User,Comments,PostLikes").ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
                 posts.ForEach(a =>
                               {

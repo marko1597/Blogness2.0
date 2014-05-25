@@ -24,8 +24,8 @@
                     $scope.toggleClass = "nav-close";
                 } else {
                     $scope.toggleClass = "nav-open";
-                    $('#blog-header-collapsible').collapse("hide");
                 }
+                $('#blog-header-collapsible').collapse("hide");
             };
 
             snapper.on('open', function () {

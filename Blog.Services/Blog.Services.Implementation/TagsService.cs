@@ -9,17 +9,17 @@ namespace Blog.Services.Implementation
     {
         public List<Tag> GetByPostId(int postId)
         {
-            return TagsFactory.GetInstance().CreateTags().GetByPostId(postId);
+            return TagsFactory.GetInstance().CreateLogic().GetByPostId(postId);
         }
 
         public List<Tag> GetByName(string tagName)
         {
-            return TagsFactory.GetInstance().CreateTags().GetTagsByName(tagName);
+            return TagsFactory.GetInstance().CreateLogic().GetTagsByName(tagName);
         }
 
-        public bool Add(Tag tag)
+        public Tag Add(Tag tag)
         {
-            return TagsFactory.GetInstance().CreateTags().Add(tag);
+            return TagsFactory.GetInstance().CreateLogic().Add(tag);
         }
     }
 }

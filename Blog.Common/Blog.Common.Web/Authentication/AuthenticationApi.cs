@@ -75,20 +75,25 @@ namespace Blog.Common.Web.Authentication
             return loggedUser;
         }
 
-        public bool Logout(Login credentials)
+        public Error Logout(Login credentials)
         {
-            var isLoggedOut = false;
             try
             {
-                isLoggedOut = JsonHelper.DeserializeJson<bool>(
-                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
-                        .Put("session", credentials));
+                var result = JsonHelper.DeserializeJson<Error>(
+                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"]).Put("session", credentials));
+
+                return result;
             }
             catch (Exception ex)
             {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return new Error
+                {
+                    Id = (int)Common.Utils.Constants.Error.InternalError,
+                    Message = ex.Message,
+                    Exception = ex
+                };
             }
-            return isLoggedOut;
         }
     }
 }

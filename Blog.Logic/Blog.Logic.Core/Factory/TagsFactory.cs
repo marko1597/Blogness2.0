@@ -22,10 +22,11 @@ namespace Blog.Logic.Core.Factory
             return _instance;
         }
 
-        public TagsLogic CreateTags()
+        public TagsLogic CreateLogic()
         {
             ITagRepository tagRepository = new TagRepository();
-            return new TagsLogic(tagRepository);
+            IPostRepository postRepository = new PostRepository();
+            return new TagsLogic(tagRepository, postRepository);
         }
     }
 }

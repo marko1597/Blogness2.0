@@ -13,19 +13,21 @@
         var logoutUser = function() {
             var username = localStorageService.get("username");
             loginService.logout(username).then(function (resp) {
-                if (resp === "true") {
+                if (resp == null || resp == "") {
                     $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
                 } else {
+                    $rootScope.$broadcast("displayError", d);
                     $location.path("/error");
                 }
-            }, function () {
+            }, function (e) {
+                $rootScope.$broadcast("displayError", e);
                 $location.path("/error");
             });
         };
         
         return {
             displayError: function (d) {
-                $rootScope.$broadcast("displayError", { Message: d.Message });
+                $rootScope.$broadcast("displayError", d);
             },
 
             displayErrorRedirect: function (d) {

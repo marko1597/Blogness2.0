@@ -10,6 +10,6 @@ namespace Blog.Services.Implementation.Interfaces
         Session GetByUser(string username);
         Session GetByIp(string ipAddress);
         LoggedUser Login(string userName, string passWord, string ipAddress);
-        bool Logout(string userName);
+        Error Logout(string userName);
     }
 }

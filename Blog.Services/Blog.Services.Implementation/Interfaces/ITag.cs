@@ -7,6 +7,6 @@ namespace Blog.Services.Implementation.Interfaces
     {
         List<Tag> GetByPostId(int postId);
         List<Tag> GetByName(string tagName);
-        bool Add(Tag tag);
+        Tag Add(Tag tag);
     }
 }

@@ -1,7 +1,7 @@
 ﻿ngLogin.factory('loginService', ["$http", "$q", "$window", "configProvider", function ($http, $q, $window, configProvider) {
     var sessionApi = configProvider.getSettings().BlogRoot == "" ? window.blogConfiguration.blogRoot + "Authentication" : configProvider.getSettings().BlogRoot + "Authentication";
     var authApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Authenticate" : configProvider.getSettings().BlogApi + "Authenticate";
-    
+
     return {
         login: function (username, password, rememberMe) {
             var deferred = $q.defer();
@@ -19,10 +19,10 @@
                 if (response.Session != null && response.User != null) {
                     deferred.resolve(response);
                 } else {
-                    deferred.reject("Username or password is invalid.");
+                    deferred.reject(response);
                 }
             }).error(function () {
-                deferred.reject("Error communicating with login server!");
+                deferred.reject({ Message: "Error communicating with login server!" });
             });
 
             return deferred.promise;
@@ -39,13 +39,13 @@
                 method: "POST",
                 data: credentials
             }).success(function (response) {
-                if (response === "true") {
+                if (response == null || response == "") {
                     deferred.resolve(response);
                 } else {
-                    deferred.reject("User has no valid session.");
+                    deferred.reject(response);
                 }
             }).error(function () {
-                deferred.reject("Error communicating with login server!");
+                deferred.reject({ Message: "Error communicating with login server!" });
             });
 
             return deferred.promise;
@@ -66,7 +66,7 @@
             }).success(function (response) {
                 deferred.resolve(response);
             }).error(function () {
-                deferred.reject("Error authenticating in the API!");
+                deferred.reject({ Message: "Error authenticating in the API!" });
             });
 
             return deferred.promise;
@@ -85,7 +85,7 @@
             }).success(function (response) {
                 deferred.resolve(response);
             }).error(function () {
-                deferred.reject("Error logging out in the API!");
+                deferred.reject({ Message: "Error logging out in the API!" });
             });
 
             return deferred.promise;

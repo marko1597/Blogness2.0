@@ -25,7 +25,8 @@ namespace Blog.Logic.Core.Factory
         public SessionLogic CreateSession()
         {
             ISessionRepository sessionRepository = new SessionRepository();
-            return new SessionLogic(sessionRepository);
+            IUserRepository userRepository = new UserRepository();
+            return new SessionLogic(sessionRepository, userRepository);
         }
     }
 }

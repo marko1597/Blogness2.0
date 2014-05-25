@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils;
 using Blog.DataAccess.Database.Repository.Interfaces;
-using Blog.Logic.Core.Factory;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
@@ -12,10 +12,12 @@ namespace Blog.Logic.Core
     public class TagsLogic
     {
         private readonly ITagRepository _tagRepository;
+        private readonly IPostRepository _postRepository;
 
-        public TagsLogic(ITagRepository tagRepository)
+        public TagsLogic(ITagRepository tagRepository, IPostRepository postRepository)
         {
             _tagRepository = tagRepository;
+            _postRepository = postRepository;
         }
 
         public List<Tag> GetByPostId(int postId)
@@ -23,9 +25,13 @@ namespace Blog.Logic.Core
             var tags = new List<Tag>();
             try
             {
-                var post = PostsFactory.GetInstance().CreatePosts().GetPost(postId);
-                var db = _tagRepository.Find(a => a.Posts.Contains(PostMapper.ToEntity(post))).ToList();
-                db.ForEach(a => tags.Add(TagMapper.ToDto(a)));
+                var post = _postRepository.Find(a => a.PostId == postId, null, "Tags").FirstOrDefault();
+
+                if (post != null)
+                {
+                    var db = _tagRepository.Find(a => a.Posts.Contains(post), null, string.Empty).ToList();
+                    db.ForEach(a => tags.Add(TagMapper.ToDto(a)));
+                }
             }
             catch (Exception ex)
             {
@@ -49,16 +55,30 @@ namespace Blog.Logic.Core
             return tags;
         }
 
-        public bool Add(Tag tag)
+        public Tag Add(Tag tag)
         {
             try
             {
-                _tagRepository.Add(TagMapper.ToEntity(tag));
-                return true;
+                var dbTags = _tagRepository.Find(a => a.TagName.ToLower() == tag.TagName, null, string.Empty).ToList();
+
+                if (dbTags.Count == 0)
+                {
+                    var tTag = _tagRepository.Add(TagMapper.ToEntity(tag));
+                    return TagMapper.ToDto(tTag);
+                }
+
+                return new Tag
+                {
+                    Error = new Error
+                    {
+                        Id = (int) Constants.Error.ValidationError,
+                        Message = "Record already exists"
+                    }
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }

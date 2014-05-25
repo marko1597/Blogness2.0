@@ -1,4 +1,5 @@
-﻿using Blog.DataAccess.Database.Repository;
+﻿using Blog.Common.Contracts;
+using Blog.DataAccess.Database.Repository;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Db = Blog.DataAccess.Database.Entities.Objects;
 
@@ -22,10 +23,12 @@ namespace Blog.Logic.Core.Factory
             return _instance;
         }
 
-        public PostsLogic CreatePosts()
+        public PostsLogic CreateLogic()
         {
             IPostRepository postRepository = new PostRepository();
-            return new PostsLogic(postRepository);
+            IPostContentRepository postContentRepository = new PostContentRepository();
+            ITagRepository tagRepository = new TagRepository();
+            return new PostsLogic(postRepository, postContentRepository, tagRepository);
         }
     }
 }

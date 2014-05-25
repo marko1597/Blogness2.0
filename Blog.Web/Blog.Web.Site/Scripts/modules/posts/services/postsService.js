@@ -15,7 +15,7 @@
                     response.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -33,7 +33,7 @@
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -51,7 +51,7 @@
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -69,7 +69,7 @@
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -85,7 +85,7 @@
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -101,7 +101,7 @@
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;
@@ -116,7 +116,7 @@
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (e) {
-                    deferred.reject(e);
+                    deferred.reject({ Message: e });
                 });
 
                 return deferred.promise;

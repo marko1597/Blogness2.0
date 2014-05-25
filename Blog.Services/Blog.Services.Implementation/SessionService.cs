@@ -28,7 +28,7 @@ namespace Blog.Services.Implementation
             return SessionFactory.GetInstance().CreateSession().Login(userName, passWord, ipAddress);
         }
 
-        public bool Logout(string userName)
+        public Error Logout(string userName)
         {
             return SessionFactory.GetInstance().CreateSession().Logout(userName);
         }

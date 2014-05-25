@@ -17,19 +17,27 @@
                 });
 
             loginService.login($scope.username, $scope.password, $scope.rememberMe).then(function (siteResponse) {
-                loginService.loginApi($scope.username, $scope.password, $scope.rememberMe).then(function(apiResponse) {
-                    if (apiResponse === "true") {
-                        localStorageService.add("username", siteResponse.User.UserName);
+                if (siteResponse.Error == undefined || siteResponse.Error == null) {
+                    loginService.loginApi($scope.username, $scope.password, $scope.rememberMe).then(function (apiResponse) {
+                        if (apiResponse === "true") {
+                            localStorageService.add("username", siteResponse.User.UserName);
+                            blockUiService.unblockIt();
+                            $window.location.href = configProvider.getSettings().BlogRoot;
+                        } else {
+                            blockUiService.unblockIt();
+                            errorService.displayError({ Message: "Error authenticating with Api" });
+                        }
+                    }, function (error) {
                         blockUiService.unblockIt();
-                        $window.location.href = configProvider.getSettings().BlogRoot;
-                    } else {
-                        errorService.displayError({ Message: "Error communicating with the login server." });
-                    }
-                }, function(error) {
-                    errorService.displayError({ Message: error });
-                });
+                        errorService.displayError(error.Error);
+                    });
+                } else {
+                    blockUiService.unblockIt();
+                    errorService.displayError(siteResponse.Error);
+                }
             }, function (error) {
-                errorService.displayError({ Message: error });
+                blockUiService.unblockIt();
+                errorService.displayError(error.Error);
             });
         };
     };

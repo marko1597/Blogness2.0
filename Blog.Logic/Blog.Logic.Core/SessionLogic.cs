@@ -4,8 +4,8 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils;
 using Blog.DataAccess.Database.Repository.Interfaces;
-using Blog.Logic.Core.Factory;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
@@ -13,10 +13,12 @@ namespace Blog.Logic.Core
     public class SessionLogic
     {
         private readonly ISessionRepository _sessionRepository;
+        private readonly IUserRepository _userRepository;
 
-        public SessionLogic(ISessionRepository sessionRepository)
+        public SessionLogic(ISessionRepository sessionRepository, IUserRepository userRepository)
         {
             _sessionRepository = sessionRepository;
+            _userRepository = userRepository;
         }
 
         public List<Session> GetAll()
@@ -27,9 +29,9 @@ namespace Blog.Logic.Core
                 var db = _sessionRepository.Find(a => a.SessionId > 0, true).ToList();
                 db.ForEach(a => sessions.Add(SessionMapper.ToDto(a)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new List<Session>();
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return sessions;
         }
@@ -39,19 +41,39 @@ namespace Blog.Logic.Core
             try
             {
                 CleanupExpiredSessions();
-                var user = UsersFactory.GetInstance().CreateLogic().GetByUserName(username);
-                var session = new DataAccess.Database.Entities.Objects.Session();
+                var user = _userRepository.Find(a => a.UserName == username, null, string.Empty).FirstOrDefault();
 
                 if (user != null)
                 {
-                    session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
+                    var session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
+
+                    if (session != null)
+                    {
+                        return SessionMapper.ToDto(session);
+                    }
+                    
+                    return new Session
+                    {
+                        Error = new Error
+                        {
+                            Id = (int)Constants.Error.RecordNotFound,
+                            Message = string.Format("No valid session found for user {0}", username)
+                        }
+                    };
                 }
 
-                return SessionMapper.ToDto(session) ?? new Session();
+                return new Session
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Constants.Error.RecordNotFound,
+                        Message = string.Format("No user with {0} as username found", username)
+                    }
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new Session();
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -60,13 +82,24 @@ namespace Blog.Logic.Core
             try
             {
                 CleanupExpiredSessions();
-                var session = _sessionRepository.Find(a => a.IpAddress == ipAddress, true).FirstOrDefault();
 
-                return SessionMapper.ToDto(session) ?? new Session();
+                var session = _sessionRepository.Find(a => a.IpAddress == ipAddress, true).FirstOrDefault();
+                if (session != null)
+                {
+                    return SessionMapper.ToDto(session);
+                }
+                return new Session
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Constants.Error.RecordNotFound,
+                        Message = string.Format("No session with {0} IP address found", ipAddress)
+                    }
+                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new Session();
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -76,8 +109,16 @@ namespace Blog.Logic.Core
             {
                 DeleteSessionFromSameIp(ipAddress);
 
-                var user = UsersFactory.GetInstance().CreateLogic().GetByCredentials(userName, passWord);
-                if (user == null || user.UserId == 0) return new LoggedUser { Session = null, User = null };
+                var user = _userRepository.Find(a => a.UserName == userName && a.Password == passWord, null, string.Empty).FirstOrDefault();
+                if (user == null || user.UserId == 0) 
+                    return new LoggedUser
+                    {
+                        Error = new Error
+                        {
+                            Id = (int)Constants.Error.InvalidCredentials,
+                            Message = "Invalid username/password"
+                        }     
+                    };
 
                 var session = new Session
                 {
@@ -88,53 +129,59 @@ namespace Blog.Logic.Core
                     UserId = user.UserId
                 };
 
-                _sessionRepository.Add(SessionMapper.ToEntity(session));
+                var dbSession = _sessionRepository.Add(SessionMapper.ToEntity(session));
 
                 CleanupExpiredSessions();
 
                 return new LoggedUser
                 {
-                    User = user,
-                    Session = session
+                    User = UserMapper.ToDto(user),
+                    Session = SessionMapper.ToDto(dbSession)
                 };
-            }
-            catch (Exception)
-            {
-                return new LoggedUser
-                {
-                    User = null,
-                    Session = null
-                };
-            }
-        }
-
-        public bool Logout(string userName)
-        {
-            try
-            {
-                var user = UsersFactory.GetInstance().CreateLogic().GetByUserName(userName);
-                var session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
-
-                if (user != null)
-                {
-                    _sessionRepository.Delete(session);
-                }
-
-                CleanupExpiredSessions();
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
-
-            return true;
         }
 
-        public void DeleteSessionFromSameIp(string ipAddress)
+        public Error Logout(string userName)
         {
             try
             {
-                var sessions = _sessionRepository.Find(a => a.IpAddress == ipAddress, true).ToList();
+                var user = _userRepository.Find(a => a.UserName == userName, null, string.Empty).FirstOrDefault();
+
+                if (user == null)
+                    return new Error
+                    {
+                        Id = (int)Constants.Error.RecordNotFound,
+                        Message = string.Format("No user found with username {0}", userName)
+                    };
+
+                var session = _sessionRepository.Find(a => a.UserId == user.UserId, true).FirstOrDefault();
+
+                if (session == null)
+                    return new Error
+                    {
+                        Id = (int)Constants.Error.RecordNotFound,
+                        Message = string.Format("No session found for username {0}", userName)
+                    };
+
+                _sessionRepository.Delete(session);
+                CleanupExpiredSessions();
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        private void DeleteSessionFromSameIp(string ipAddress)
+        {
+            try
+            {
+                var sessions = _sessionRepository.Find(a => a.IpAddress == ipAddress, false).ToList();
                 sessions.ForEach(a => _sessionRepository.Delete(a));
             }
             catch (Exception ex)
@@ -145,7 +192,7 @@ namespace Blog.Logic.Core
 
         public void CleanupExpiredSessions()
         {
-            var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.Now, true).ToList();
+            var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.Now, false).ToList();
             oldSessions.ForEach(a => _sessionRepository.Delete(a));
         }
     }

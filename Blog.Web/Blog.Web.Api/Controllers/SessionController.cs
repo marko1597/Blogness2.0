@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Services.Implementation.Interfaces;
 
@@ -25,8 +27,9 @@ namespace Blog.Web.Api.Controllers
             {
                 return _session.GetAll();
             }
-            catch
+            catch (Exception ex)
             {
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
                 return null;
             }
         }
@@ -39,9 +42,18 @@ namespace Blog.Web.Api.Controllers
             {
                 return _session.GetByUser(username);
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return new Session
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Constants.Error.InternalError,
+                        Message = ex.Message,
+                        Exception = ex
+                    }
+                };
             }
         }
 
@@ -54,9 +66,18 @@ namespace Blog.Web.Api.Controllers
                 ipAddress = ipAddress.Replace('x', ':');
                 return _session.GetByIp(ipAddress);
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return new Session
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Constants.Error.InternalError,
+                        Message = ex.Message,
+                        Exception = ex
+                    }
+                };
             }
         }
 
@@ -69,23 +90,38 @@ namespace Blog.Web.Api.Controllers
                 var ip = ((HttpContextBase)Request.Properties["MS_HttpContext"]).Request.UserHostAddress;
                 return _session.Login(credentials.Username, credentials.Password, ip);
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return new LoggedUser
+                {
+                    Error = new Error
+                    {
+                        Id = (int) Constants.Error.InternalError,
+                        Message = ex.Message,
+                        Exception = ex
+                    }
+                };
             }
         }
 
         [HttpPut]
         [Route("api/session")]
-        public bool Put([FromBody]Login credentials)
+        public Error Put([FromBody]Login credentials)
         {
             try
             {
                 return _session.Logout(credentials.Username);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return new Error
+                {
+                    Id = (int)Constants.Error.InternalError,
+                    Message = ex.Message,
+                    Exception = ex
+                };
             }
         }
     }

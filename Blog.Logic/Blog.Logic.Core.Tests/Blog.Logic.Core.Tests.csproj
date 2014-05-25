@@ -58,6 +58,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="SessionLogicTest.cs" />
+    <Compile Include="TagsLogicTest.cs" />
     <Compile Include="UsersLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,32 +9,32 @@ namespace Blog.Services.Implementation
     {
         public Post GetPost(int postId)
         {
-            return PostsFactory.GetInstance().CreatePosts().GetPost(postId);
+            return PostsFactory.GetInstance().CreateLogic().GetPost(postId);
         }
 
         public List<Post> GetPostsByTag(string tagName)
         {
-            return PostsFactory.GetInstance().CreatePosts().GetPostsByTag(tagName);
+            return PostsFactory.GetInstance().CreateLogic().GetPostsByTag(tagName);
         }
 
         public List<Post> GetPostsByUser(int userId)
         {
-            return PostsFactory.GetInstance().CreatePosts().GetPostsByUser(userId);
+            return PostsFactory.GetInstance().CreateLogic().GetPostsByUser(userId);
         }
 
         public Post AddPost(Post post)
         {
-            return PostsFactory.GetInstance().CreatePosts().AddPost(post);
+            return PostsFactory.GetInstance().CreateLogic().AddPost(post);
         }
 
         public Post UpdatePost(Post post)
         {
-            return PostsFactory.GetInstance().CreatePosts().UpdatePost(post);
+            return PostsFactory.GetInstance().CreateLogic().UpdatePost(post);
         }
 
         public bool DeletePost(int postId)
         {
-            return PostsFactory.GetInstance().CreatePosts().DeletePost(postId);
+            return PostsFactory.GetInstance().CreateLogic().DeletePost(postId);
         }
     }
 }
