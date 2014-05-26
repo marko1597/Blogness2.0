@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Blog.Common.Web.Helper
+namespace Blog.Common.Utils.Helpers
 {
     public static class JsonHelper
     {

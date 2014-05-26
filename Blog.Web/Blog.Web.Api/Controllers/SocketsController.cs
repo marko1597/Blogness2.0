@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Http;
-using Blog.Common.Web.Helper.Hub.Factory;
+using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
 
 namespace Blog.Web.Api.Controllers
 {

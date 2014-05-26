@@ -1,4 +1,6 @@
-﻿namespace Blog.Common.Utils
+﻿using Blog.Common.Utils.Helpers;
+
+namespace Blog.Common.Utils
 {
     public static class Constants
     {

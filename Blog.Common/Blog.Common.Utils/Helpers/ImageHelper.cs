@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using NReco.VideoConverter;
 
-namespace Blog.Common.Utils
+namespace Blog.Common.Utils.Helpers
 {
     public class ImageHelper : IImageHelper
     {

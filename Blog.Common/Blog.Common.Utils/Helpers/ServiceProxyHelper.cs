@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
-namespace Blog.Common.Web.Helper
+namespace Blog.Common.Utils.Helpers
 {
     public class ServiceProxyHelper<TInterface> : ClientBase<TInterface>, IDisposable where TInterface : class
     {

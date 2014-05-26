@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Blog.Common.Web.Helper
+namespace Blog.Common.Utils.Helpers
 {
     public class HttpClientHelper
     {

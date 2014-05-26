@@ -2,7 +2,7 @@
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Blog.Common.Utils
+namespace Blog.Common.Utils.Helpers
 {
     public static class SslValidator
     {

@@ -4,8 +4,8 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Helper.Hub.Factory;
 using Blog.Services.Implementation.Interfaces;
+using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
 
 namespace Blog.Web.Api.Controllers
 {

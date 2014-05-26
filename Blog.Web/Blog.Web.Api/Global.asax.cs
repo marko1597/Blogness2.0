@@ -3,9 +3,10 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Blog.Common.Utils;
+using Blog.Common.Utils.Helpers;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
-using Blog.Common.Web.Helper;
+using Blog.Common.Web.Extensions;
 using Blog.Services.Implementation;
 using Blog.Services.Implementation.Interfaces;
 using SimpleInjector;
@@ -27,6 +28,9 @@ namespace Blog.Web.Api
             
             // Simple Injection Setup
             var container = new Container();
+            container.Options.PropertySelectionBehavior = new ImportPropertySelectionBehavior();
+
+            // SI Controllers Dependency Injection
             container.Register<IComments, CommentsService>(Lifestyle.Singleton);
             container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
             container.Register<IPosts, PostsService>(Lifestyle.Singleton);
@@ -44,8 +48,14 @@ namespace Blog.Web.Api
             container.Register<ITag, TagsService>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
+            // SI Attributes Dependency Injection
+            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+
+            // SI Registrations
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
-            container.RegisterMvcAttributeFilterProvider();
+            container.RegisterMvcIntegratedFilterProvider();
+            container.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
 
             container.EnableLifetimeScoping();
             container.Verify();

@@ -2,17 +2,20 @@
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
+using Blog.Services.Implementation.Interfaces;
 using Blog.Web.Site.Models;
 
 namespace Blog.Web.Site.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private readonly IAuthenticationHelper _authentication;
+        private readonly ISession _session;
+        private readonly IAuthenticationHelper _authenticationHelper;
 
-        public AuthenticationController(IAuthenticationHelper authentication)
+        public AuthenticationController(ISession session, IAuthenticationHelper authenticationHelper)
         {
-            _authentication = authentication;
+            _session = session;
+            _authenticationHelper = authenticationHelper;
         }
 
         public ActionResult Index()
@@ -23,17 +26,12 @@ namespace Blog.Web.Site.Controllers
         [AllowCrossSite]
         public JsonResult Login(LoginViewModel model, string returnUrl)
         {
-            var login = new Common.Contracts.ViewModels.Login
-            {
-                Username = model.UserName,
-                Password = model.Password,
-                RememberMe = model.RememberMe
-            };
+            var ip = Request.ServerVariables["REMOTE_ADDR"];
+            var result = _session.Login(model.UserName, model.Password, ip);
 
-            var result = AuthenticationApiFactory.GetInstance().Create().Login(login);
             if (result.User != null && result.Session != null)
             {
-                _authentication.SignIn(result.User);
+                _authenticationHelper.SignIn(result.User);
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -42,16 +40,11 @@ namespace Blog.Web.Site.Controllers
         [AllowCrossSite]
         public JsonResult Logout(LoginViewModel model, string returnUrl)
         {
-            var login = new Common.Contracts.ViewModels.Login
-            {
-                Username = model.UserName
-            };
-
-            var result = AuthenticationApiFactory.GetInstance().Create().Logout(login);
+            var result = _session.Logout(model.UserName);
 
             if (result == null)
             {
-                _authentication.SignOut(new User { UserName = login.Username });
+                _authenticationHelper.SignOut(new User { UserName = model.UserName });
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);

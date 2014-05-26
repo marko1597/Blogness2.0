@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Blog.Common.Utils
+namespace Blog.Common.Utils.Helpers
 {
     public static class PasswordManager
     {

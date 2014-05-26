@@ -164,7 +164,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.1.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.1.2\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -695,6 +698,10 @@
     <ProjectReference Include="..\..\Blog.Common\Blog.Common.Web\Blog.Common.Web.csproj">
       <Project>{a591cf4a-f004-4d92-ade8-8937ff290b63}</Project>
       <Name>Blog.Common.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Services\Blog.Services.Implementation\Blog.Services.Implementation.csproj">
+      <Project>{e8d4c1b0-f3bf-4497-9ce7-922e90b1cf5b}</Project>
+      <Name>Blog.Services.Implementation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

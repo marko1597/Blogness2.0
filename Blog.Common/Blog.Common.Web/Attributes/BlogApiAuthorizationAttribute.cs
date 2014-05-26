@@ -1,17 +1,23 @@
 ﻿using System;
-using System.Web;
+using System.ComponentModel.Composition;
 using System.Web.Http;
-using Blog.Common.Web.Authentication;
+using System.Web.Http.Controllers;
+using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Common.Web.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class BlogApiAuthorizationAttribute : AuthorizeAttribute
     {
-        protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
+        [Import]
+        public ISession Session { get; set; }
+        
+        protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            if (!HttpContext.Current.User.Identity.IsAuthenticated) return base.IsAuthorized(actionContext);
-            var session = AuthenticationApiFactory.GetInstance().Create().IsLoggedIn(HttpContext.Current.User.Identity.Name);
+            var user = ((ApiController)actionContext.ControllerContext.Controller).User.Identity;
+
+            if (!user.IsAuthenticated) return base.IsAuthorized(actionContext);
+            var session = Session.GetByUser(user.Name);
             return session != null;
         }
     }

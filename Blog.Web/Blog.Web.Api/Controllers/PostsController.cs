@@ -5,7 +5,6 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Authentication;
 using Blog.Services.Implementation.Interfaces;
 using Microsoft.AspNet.Identity;
 using WebApi.OutputCache.V2;
@@ -169,9 +168,8 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                var isAllowed = AuthenticationApiFactory.GetInstance()
-                    .Create()
-                    .IsUserAllowedAccess(User.Identity.GetUserName(), post.PostId);
+                var tPost = _postsSvc.GetPost(post.PostId);
+                var isAllowed = User.Identity.GetUserName() == tPost.User.UserName;
 
                 if (!isAllowed)
                 {

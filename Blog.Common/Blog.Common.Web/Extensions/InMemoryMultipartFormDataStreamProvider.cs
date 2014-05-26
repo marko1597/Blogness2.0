@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Blog.Common.Web.Helper
+namespace Blog.Common.Web.Extensions
 {
     public class InMemoryMultipartFormDataStreamProvider : MultipartStreamProvider
     {

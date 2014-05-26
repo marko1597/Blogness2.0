@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace Blog.Common.Utils
+namespace Blog.Common.Utils.Helpers
 {
     public class UserHelper
     {

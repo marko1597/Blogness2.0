@@ -2,8 +2,12 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Blog.Common.Utils;
+using Blog.Common.Utils.Helpers;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
+using Blog.Common.Web.Extensions;
+using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 using SimpleInjector;
 
 namespace Blog.Web.Site
@@ -19,12 +23,18 @@ namespace Blog.Web.Site
 
             // Allow Any Certificates
             // This should not be the same in Production
-            //ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            // ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
             SslValidator.OverrideValidation();
 
             // Create the container as usual.
             var container = new Container();
+            container.Options.PropertySelectionBehavior = new ImportPropertySelectionBehavior();
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
+            container.Register<ISession, SessionRemoteService>(Lifestyle.Singleton);
+
+            // SI Attributes Dependency Injection
+            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionRemoteService>());
+            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionRemoteService>());
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
