@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using WebApi.OutputCache.V2;
 
@@ -19,12 +20,14 @@ namespace Blog.Web.Api.Controllers
     {
         private readonly IMedia _media;
         private readonly IUser _user;
+        private readonly IErrorSignaler _errorSignaler;
         private readonly string _mediaPath = ConfigurationManager.AppSettings.Get("MediaLocation");
 
-        public MediaController(IMedia media, IUser user)
+        public MediaController(IMedia media, IUser user, IErrorSignaler errorSignaler)
         {
             _media = media;
             _user = user;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -38,7 +41,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return media;
         }
@@ -54,7 +57,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return media;
         }
@@ -70,7 +73,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
         }
@@ -87,7 +90,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
         }
@@ -104,7 +107,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
         }
@@ -174,7 +177,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
         }

@@ -48,7 +48,6 @@ namespace Blog.Common.Web.Authentication
             {
                 return false;
             }
-            
         }
     }
 }

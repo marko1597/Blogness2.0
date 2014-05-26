@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -11,10 +12,12 @@ namespace Blog.Web.Api.Controllers
     public class PostContentController : ApiController
     {
         private readonly IPostContents _postContentsSvc;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public PostContentController(IPostContents postContentsSvc)
+        public PostContentController(IPostContents postContentsSvc, IErrorSignaler errorSignaler)
         {
             _postContentsSvc = postContentsSvc;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -28,7 +31,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return postContents;
         }
@@ -43,7 +46,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
         }

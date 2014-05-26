@@ -171,8 +171,8 @@
     <Compile Include="Authentication\AuthenticationHelper.cs" />
     <Compile Include="Authentication\IAuthenticationHelper.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Helper\Hub\Factory\PostsHubFactory.cs" />
-    <Compile Include="Helper\Hub\PostsHub.cs" />
+    <Compile Include="Extensions\Elmah\ErrorSignaler.cs" />
+    <Compile Include="Extensions\Elmah\IErrorSignaler.cs" />
     <Compile Include="Extensions\ImportPropertySelectionBehavior.cs" />
     <Compile Include="Extensions\InMemoryMultipartFormDataStreamProvider.cs" />
     <Compile Include="Extensions\SimpleInjectorWebApiDependencyResolver.cs" />

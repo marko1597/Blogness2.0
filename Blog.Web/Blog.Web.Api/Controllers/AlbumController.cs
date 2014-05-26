@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -11,10 +12,12 @@ namespace Blog.Web.Api.Controllers
     public class AlbumController : ApiController
     {
         private readonly IAlbum _service;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public AlbumController(IAlbum service)
+        public AlbumController(IAlbum service, IErrorSignaler errorSignaler)
         {
             _service = service;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -28,7 +31,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return albums;
         }
@@ -44,7 +47,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return album;
         }

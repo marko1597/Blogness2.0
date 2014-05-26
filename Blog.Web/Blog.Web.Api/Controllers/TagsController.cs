@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -11,10 +12,12 @@ namespace Blog.Web.Api.Controllers
     public class TagsController : ApiController
     {
         private readonly ITag _tag;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public TagsController(ITag tag)
+        public TagsController(ITag tag, IErrorSignaler errorSignaler)
         {
             _tag = tag;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -30,7 +33,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return tags;
         }

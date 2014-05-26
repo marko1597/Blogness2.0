@@ -2,6 +2,7 @@
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using Blog.Web.Site.Models;
 
@@ -11,11 +12,13 @@ namespace Blog.Web.Site.Controllers
     {
         private readonly ISession _session;
         private readonly IAuthenticationHelper _authenticationHelper;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public AuthenticationController(ISession session, IAuthenticationHelper authenticationHelper)
+        public AuthenticationController(ISession session, IAuthenticationHelper authenticationHelper, IErrorSignaler errorSignaler)
         {
             _session = session;
             _authenticationHelper = authenticationHelper;
+            _errorSignaler = errorSignaler;
         }
 
         public ActionResult Index()

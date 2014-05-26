@@ -90,6 +90,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.1.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebApi.AuthenticationFilter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\WebApi.AuthenticationFilter.1.0.0.0\lib\net45\WebApi.AuthenticationFilter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -108,7 +112,6 @@
     <Compile Include="Attributes\AllowCrossSiteAttributeTest.cs" />
     <Compile Include="Attributes\BlogApiAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttributeTest.cs" />
-    <Compile Include="Attributes\ValidateMimeMultipartContentFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

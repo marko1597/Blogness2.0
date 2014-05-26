@@ -6,6 +6,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -14,9 +15,12 @@ namespace Blog.Web.Api.Controllers
     public class SessionController : ApiController
     {
         private readonly ISession _session;
-        public SessionController(ISession session)
+        private readonly IErrorSignaler _errorSignaler;
+
+        public SessionController(ISession session, IErrorSignaler errorSignaler)
         {
             _session = session;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -29,7 +33,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return null;
             }
         }
@@ -44,7 +48,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new Session
                 {
                     Error = new Error
@@ -68,7 +72,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new Session
                 {
                     Error = new Error
@@ -92,7 +96,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new LoggedUser
                 {
                     Error = new Error
@@ -115,7 +119,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new Error
                 {
                     Id = (int)Constants.Error.InternalError,

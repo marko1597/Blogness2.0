@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Web.Http;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 
 namespace Blog.Web.Api.Controllers
 {
     public class DebugController : ApiController
     {
+        private readonly IErrorSignaler _errorSignaler;
+
+        public DebugController(IErrorSignaler errorSignaler)
+        {
+            _errorSignaler = errorSignaler;
+        }
+
         [HttpGet]
         [Route("api/debug/sendmessage/{message}")]
         [BlogApiAuthorization]
@@ -17,7 +25,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return string.Empty;
             }
         }

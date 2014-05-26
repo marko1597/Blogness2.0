@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Net;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.Utils;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using Moq;
 using NUnit.Framework;
@@ -76,11 +77,12 @@ namespace Blog.Common.Web.Tests.Attributes
 
             var session = new Mock<ISession>();
             session.Setup(a => a.GetByUser(It.IsAny<string>())).Throws(new Exception());
+            var errorSignaler = new Mock<IErrorSignaler>();
+            errorSignaler.Setup(a => a.SignalFromCurrentContext(It.IsAny<Exception>()));
 
-            var attribute = new BlogAuthorizationAttribute { Session = session.Object };
+             var attribute = new BlogAuthorizationAttribute { Session = session.Object, ErrorSignaler = errorSignaler.Object };
             
-
-            Assert.Throws<Exception>(() => attribute.OnAuthentication(_authenticationContext.Object));
+            Assert.Throws<BlogException>(() => attribute.OnAuthentication(_authenticationContext.Object));
         }
 
         [Test]

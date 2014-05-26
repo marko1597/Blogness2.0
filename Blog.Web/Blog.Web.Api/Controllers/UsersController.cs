@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using WebApi.OutputCache.V2;
 
@@ -11,10 +12,12 @@ namespace Blog.Web.Api.Controllers
     public class UsersController : ApiController
     {
         private readonly IUser _user;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public UsersController(IUser user)
+        public UsersController(IUser user, IErrorSignaler errorSignaler)
         {
             _user = user;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return user;
@@ -51,7 +54,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return user;
@@ -67,7 +70,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
@@ -81,7 +84,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
     }

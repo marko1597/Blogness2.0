@@ -4,6 +4,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
 
@@ -14,11 +15,13 @@ namespace Blog.Web.Api.Controllers
     {
         private readonly IPostLikes _service;
         private readonly IUser _user;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public PostLikesController(IPostLikes service, IUser user)
+        public PostLikesController(IPostLikes service, IUser user, IErrorSignaler errorSignaler)
         {
             _service = service;
             _user = user;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -34,7 +37,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return postLikes;
         }
@@ -60,7 +63,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
     }

@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
+using Blog.Common.Contracts.Utils;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Common.Web.Attributes
@@ -12,9 +14,20 @@ namespace Blog.Common.Web.Attributes
         [Import]
         public ISession Session { get; set; }
 
+        [Import]
+        public IErrorSignaler ErrorSignaler { get; set; }
+
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            filterContext.Result = GetCodeResult(filterContext);
+            try
+            {
+                filterContext.Result = GetCodeResult(filterContext);
+            }
+            catch (Exception ex)
+            {
+                ErrorSignaler.SignalFromCurrentContext(ex);
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

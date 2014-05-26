@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Web.Http;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Web.Api.Models;
 using Blog.Common.Web.Attributes;
 
@@ -9,6 +10,13 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class LogController : ApiController
     {
+        private readonly IErrorSignaler _errorSignaler;
+
+        public LogController(IErrorSignaler errorSignaler)
+        {
+            _errorSignaler = errorSignaler;
+        }
+
         [HttpGet]
         [Route("api/log")]
         public ErrorLogModel Get()
@@ -39,7 +47,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
     }

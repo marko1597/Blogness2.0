@@ -5,6 +5,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using Microsoft.AspNet.Identity;
 using WebApi.OutputCache.V2;
@@ -16,11 +17,13 @@ namespace Blog.Web.Api.Controllers
     {
         private readonly IPosts _postsSvc;
         private readonly IPostsPage _postsPageSvc;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public PostsController(IPosts postsSvc, IPostsPage postsPageSvc)
+        public PostsController(IPosts postsSvc, IPostsPage postsPageSvc, IErrorSignaler errorSignaler)
         {
             _postsSvc = postsSvc;
             _postsPageSvc = postsPageSvc;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -35,7 +38,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return post;
         }
@@ -53,7 +56,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return posts;
@@ -73,7 +76,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return posts;
@@ -93,7 +96,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return posts;
@@ -113,7 +116,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return posts;
@@ -132,7 +135,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
 
             return posts;
@@ -149,7 +152,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new Post
                 {
                     Error = new Error
@@ -187,7 +190,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
                 return new Post
                 {
                     Error = new Error
@@ -210,7 +213,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
     }

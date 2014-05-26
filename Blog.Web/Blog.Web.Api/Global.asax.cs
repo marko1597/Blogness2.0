@@ -7,8 +7,10 @@ using Blog.Common.Utils.Helpers;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation;
 using Blog.Services.Implementation.Interfaces;
+using Blog.Web.Api.Helper.Hub;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -46,11 +48,17 @@ namespace Blog.Web.Api
             container.Register<IAddress, AddressService>(Lifestyle.Singleton);
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<ITag, TagsService>(Lifestyle.Singleton);
+            container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
 
             // SI Attributes Dependency Injection
             container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
+
+            // SI Helper Classes Property Injections
+            container.RegisterInitializer<PostsHub>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
             // SI Registrations
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());

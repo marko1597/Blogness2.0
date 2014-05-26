@@ -3,6 +3,8 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
+using Blog.Common.Contracts.Utils;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using WebApi.AuthenticationFilter;
 
@@ -14,6 +16,9 @@ namespace Blog.Common.Web.Attributes
         [Import]
         public ISession Session { get; set; }
 
+        [Import]
+        public IErrorSignaler ErrorSignaler { get; set; }
+
         public override void OnAuthentication(HttpAuthenticationContext context)
         {
             if (!Authenticate(context))
@@ -24,15 +29,23 @@ namespace Blog.Common.Web.Attributes
 
         private bool Authenticate(HttpAuthenticationContext context)
         {
-            var user = context.Principal.Identity;
-
-            if (!user.IsAuthenticated)
+            try
             {
-                return false;
-            }
+                var user = context.Principal.Identity;
 
-            var session = Session.GetByUser(user.Name);
-            return session != null && session.Error == null;
+                if (!user.IsAuthenticated)
+                {
+                    return false;
+                }
+
+                var session = Session.GetByUser(user.Name);
+                return session != null && session.Error == null;
+            }
+            catch (Exception ex)
+            {
+                ErrorSignaler.SignalFromCurrentContext(ex);
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
     }
 }

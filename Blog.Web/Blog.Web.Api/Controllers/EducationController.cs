@@ -3,6 +3,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using System;
 using System.Web.Http;
+using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -11,10 +12,12 @@ namespace Blog.Web.Api.Controllers
     public class EducationController : ApiController
     {
         private readonly IEducation _service;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public EducationController(IEducation education)
+        public EducationController(IEducation education, IErrorSignaler errorSignaler)
         {
             _service = education;
+            _errorSignaler = errorSignaler;
         }
 
         [HttpGet]
@@ -28,7 +31,7 @@ namespace Blog.Web.Api.Controllers
             }
             catch (Exception ex)
             {
-                Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
             return education;
         }
