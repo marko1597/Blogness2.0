@@ -158,6 +158,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebApi.AuthenticationFilter">
+      <HintPath>..\..\packages\WebApi.AuthenticationFilter.1.0.0.0\lib\net45\WebApi.AuthenticationFilter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\AllowCrossSiteApiAttribute.cs" />

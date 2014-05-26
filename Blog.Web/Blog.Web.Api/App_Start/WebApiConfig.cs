@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
+using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api
 {
@@ -9,11 +10,8 @@ namespace Blog.Web.Api
         {
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
-            GlobalConfiguration.Configure(x => x.MapHttpAttributeRoutes());
-            /*var json = config.Formatters.JsonFormatter;
-            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
-            config.Formatters.Remove(config.Formatters.XmlFormatter);*/
 
+            GlobalConfiguration.Configure(x => x.MapHttpAttributeRoutes());
         }
     }
 }

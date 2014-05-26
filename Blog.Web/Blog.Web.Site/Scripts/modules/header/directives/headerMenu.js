@@ -1,5 +1,5 @@
 ﻿ngHeader.directive('headerMenu', function () {
-    var ctrlFn = function ($scope, $location, $rootScope, snapRemote) {
+    var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, configProvider) {
         $scope.userLoggedIn = false;
         $scope.toggleClass = "nav-close";
 
@@ -15,7 +15,18 @@
 
         $scope.yetAnotherTestDisplayError = function () {
             $('#blog-header-collapsible').collapse("hide");
-            $rootScope.$broadcast("displayError", { Message: "This is a different test error message." });
+
+            var api = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "debug/sendmessage" :
+                configProvider.getSettings().BlogApi + "debug/sendmessage";
+
+            $http({
+                url: api + "/test-message",
+                method: "GET"
+            }).success(function (response) {
+                $rootScope.$broadcast("displayError", { Message: response });
+            }).error(function (error) {
+                $rootScope.$broadcast("displayError", { Message: error.Message });
+            });
         };
 
         snapRemote.getSnapper().then(function (snapper) {
@@ -37,7 +48,7 @@
             });
         });
     };
-    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote"];
+    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "configProvider"];
 
     return {
         restrict: 'EA',

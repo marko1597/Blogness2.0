@@ -202,6 +202,9 @@
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebApi.AuthenticationFilter">
+      <HintPath>..\..\packages\WebApi.AuthenticationFilter.1.0.0.0\lib\net45\WebApi.AuthenticationFilter.dll</HintPath>
+    </Reference>
     <Reference Include="WebApi.OutputCache.Core">
       <HintPath>..\..\packages\Strathweb.CacheOutput.WebApi2.0.5\lib\net45\WebApi.OutputCache.Core.dll</HintPath>
     </Reference>
@@ -232,6 +235,7 @@
     <Compile Include="Controllers\CommentsController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

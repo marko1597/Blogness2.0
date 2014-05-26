@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Web.Http;
-using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
+using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api.Controllers
 {
-    public class SocketsController : ApiController
+    public class DebugController : ApiController
     {
         [HttpGet]
-        [Route("api/sockets/message/{message}")]
-        public void Get(string message)
+        [Route("api/debug/sendmessage/{message}")]
+        [BlogApiAuthorization]
+        public string Get(string message)
         {
             try
             {
-                PostsHubFactory.GetInstance().Create().PushTestMessage(message);
+                return message;
             }
             catch (Exception ex)
             {
                 Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
+                return string.Empty;
             }
         }
     }
