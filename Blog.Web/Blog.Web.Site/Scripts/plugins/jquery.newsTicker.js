@@ -57,7 +57,8 @@
                         start: function() {},
                         stop: function() {},
                         pause: function() {},
-                        unpause: function() {}
+                        unpause: function() {},
+						toggle: function() {}
                 };
 
         function Plugin(element, options) {
@@ -110,10 +111,22 @@
                                                 this.unpause();
                                 }.bind(this));
                         }
-
+						
                         if(this.options.autostart)
                                 this.start();
                 },
+				
+				toggle: function () {
+					if (this.state == 1) {
+						clearInterval(this.moveInterval);
+						this.state = 0;
+						this.options.stop();
+					} else {
+						this.state = 1;
+						this.resetInterval();
+						this.options.start();
+					}
+				},
 
                 start: function() {
                         if (!this.state) {

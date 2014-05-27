@@ -9,12 +9,7 @@
 
         if (attrs.enablePause) {
             $(element).on("click", $(element).find("[data-pause-trigger]"), function (ev) {
-                var pauseElement = $(ev.target).next("div." + attrs.pauseElement);
-                if (pauseElement.length > 0) {
-                    ticker.newsTicker('stop');
-                } else {
-                    ticker.newsTicker('start');
-                }
+                ticker.newsTicker('toggle');
             });
         }
     };
