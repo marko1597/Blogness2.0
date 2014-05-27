@@ -21,6 +21,12 @@ namespace Blog.Services.SessionCleaner
             EventLogger.Log = "Application";
         }
 
+        public void Start()
+        {
+            string[] args = {};
+            OnStart(args);
+        }
+
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Console.WriteLine("The Elapsed event was raised at {0}", e.SignalTime);

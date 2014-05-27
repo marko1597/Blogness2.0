@@ -41,10 +41,13 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|AnyCPU'">
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Blog.Services.SessionCleaner.Program</StartupObject>
@@ -52,6 +55,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\</OutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">

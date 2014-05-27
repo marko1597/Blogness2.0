@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Blog.Web.Site</id>
+    <version>1.0</version>
+    <title>Blog Website Application</title>
+    <authors>Jason Magpantay</authors>
+    <owners>Jason Magpantay</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Blogness' Website with ASP.Net MVC and Angular JS goodness</description>
+    <releaseNotes>Blogness' Website</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Blog Website</tags>
+  </metadata>
+</package>

@@ -322,6 +322,7 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="Blog.Web.Site.nuspec" />
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\modules\error\controllers\errorPageController.js" />
     <Content Include="Scripts\modules\error\directives\errorDisplay.js" />

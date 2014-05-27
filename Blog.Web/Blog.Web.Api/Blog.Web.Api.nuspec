@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Blog.Web.Api</id>
+    <version>1.0</version>
+    <title>Blog WebApi Application</title>
+    <authors>Jason Magpantay</authors>
+    <owners>Jason Magpantay</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Blogness' Restful API</description>
+    <releaseNotes>Blogness' Restful API</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>Blog WebApi</tags>
+  </metadata>
+</package>
