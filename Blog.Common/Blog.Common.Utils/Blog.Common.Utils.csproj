@@ -54,6 +54,7 @@
       <HintPath>..\..\packages\NReco.VideoConverter.1.0.1.0\lib\net20\NReco.VideoConverter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -70,8 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
-    <Compile Include="Helpers\IImageHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IConfigurationHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IImageHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IHttpClientHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\PasswordManager.cs" />
     <Compile Include="Helpers\ServiceProxyHelper.cs" />

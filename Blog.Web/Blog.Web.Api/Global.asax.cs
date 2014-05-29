@@ -4,13 +4,13 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation;
 using Blog.Services.Implementation.Interfaces;
-using Blog.Web.Api.Helper.Hub;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -50,6 +50,8 @@ namespace Blog.Web.Api
             container.Register<ITag, TagsService>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
+            container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
+            container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
             // SI Attributes Dependency Injection
             container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
@@ -57,8 +59,7 @@ namespace Blog.Web.Api
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
-            // SI Helper Classes Property Injections
-            container.RegisterInitializer<PostsHub>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
+            //// SI Helper Classes Property Injections
             container.RegisterInitializer<AuthenticationHelper>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
             // SI Registrations

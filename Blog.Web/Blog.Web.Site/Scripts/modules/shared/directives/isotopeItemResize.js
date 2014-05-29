@@ -3,6 +3,7 @@
         var linkFn = function (scope, elem, attrs) {
             scope.applyLayout = function () {
                 $interval(function () {
+                    resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
                 }, 2000, 5);
             };
@@ -15,7 +16,6 @@
             });
 
             scope.$on("resizeIsotopeItems", function () {
-                resizeItems($window.innerWidth);
                 scope.applyLayout();
             });
 

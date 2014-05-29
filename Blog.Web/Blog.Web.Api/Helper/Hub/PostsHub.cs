@@ -1,27 +1,32 @@
 ﻿using System;
-using System.ComponentModel.Composition;
-using System.Configuration;
 using Blog.Common.Contracts.ViewModels;
-using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Extensions.Elmah;
 
 namespace Blog.Web.Api.Helper.Hub
 {
     public class PostsHub
     {
-        [Import]
-        public IErrorSignaler ErrorSignaler { get; set; }
+        private readonly IErrorSignaler _errorSignaler;
+        private readonly IHttpClientHelper _httpClientHelper;
+        private readonly IConfigurationHelper _configurationHelper;
+
+        public PostsHub(IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        {
+            _errorSignaler = errorSignaler;
+            _httpClientHelper = httpClientHelper;
+            _configurationHelper = configurationHelper;
+        }
 
         public void PushPostLikes(PostLikesUpdate postLikesUpdate)
         {
             try
             {
-                new HttpClientHelper(ConfigurationManager.AppSettings["BlogRoot"])
-                    .Post("hub/postlikesupdate?format=json", postLikesUpdate);
+                _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/postlikesupdate?format=json", postLikesUpdate);
             }
             catch (Exception ex)
             {
-                ErrorSignaler.SignalFromCurrentContext(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
@@ -29,12 +34,11 @@ namespace Blog.Web.Api.Helper.Hub
         {
             try
             {
-                new HttpClientHelper(ConfigurationManager.AppSettings["Blog"])
-                    .Post("hub/testmessage?format=json", message);
+                _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/testmessage?format=json", message);
             }
             catch (Exception ex)
             {
-                ErrorSignaler.SignalFromCurrentContext(ex);
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
     }

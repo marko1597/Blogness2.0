@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Blog.Common.Utils.Helpers
+namespace Blog.Common.Utils.Helpers.Interfaces
 {
     public interface IImageHelper
     {

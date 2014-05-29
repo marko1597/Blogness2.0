@@ -1,40 +1,52 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Blog.Common.Utils.Helpers.Interfaces;
 
 namespace Blog.Common.Utils.Helpers
 {
-    public class HttpClientHelper
+    public class HttpClientHelper : IHttpClientHelper
     {
-        private static HttpClient _httpClient;
+        private string BaseUri { get; set; }
 
-        public HttpClientHelper(string url)
+        private HttpClient _httpClientObj;
+        public HttpClient HttpClientObj
         {
-            if (_httpClient == null || _httpClient.BaseAddress.AbsoluteUri != url)
+            get
             {
-                _httpClient = new HttpClient {BaseAddress = new Uri(url)};
-                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                if (_httpClientObj == null || _httpClientObj.BaseAddress.AbsoluteUri != BaseUri)
+                {
+                    _httpClientObj = new HttpClient { BaseAddress = new Uri(BaseUri) };
+                    _httpClientObj.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                }
+
+                return _httpClientObj;
             }
+            set { _httpClientObj = value; }
         }
 
-        public string Get(string url)
+        public string Get(string baseUri, string url)
         {
-            return _httpClient.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
+            BaseUri = baseUri;
+            return HttpClientObj.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
         }
 
-        public string Post<T>(string url, T obj) where T : class
+        public string Post<T>(string baseUri, string url, T obj) where T : class
         {
+            BaseUri = baseUri;
             HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var result = _httpClient.PostAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
+            var result = HttpClientObj.PostAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
             return result;
         }
 
-        public string Put<T>(string url, T obj) where T : class
+        public string Put<T>(string baseUri, string url, T obj) where T : class
         {
+            BaseUri = baseUri;
             HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var result = _httpClient.PutAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
+            var result = HttpClientObj.PutAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
             return result;
         }
     }

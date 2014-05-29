@@ -1,20 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers;
-using Blog.Logic.Core.Factory;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
     public class SessionRemoteService : ISession
     {
+        private readonly IConfigurationHelper _configurationHelper;
+        private readonly IHttpClientHelper _httpClientHelper;
+
+        public SessionRemoteService(IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        {
+            _httpClientHelper = httpClientHelper;
+            _configurationHelper = configurationHelper;
+        }
+
         public List<Session> GetAll()
         {
-            return SessionFactory.GetInstance().CreateSession().GetAll();
+            var sessions = JsonHelper.DeserializeJson<List<Session>>(
+                _httpClientHelper.Get(_configurationHelper.GetAppSettings("BlogApi"), "session"));
+            return sessions;
         }
 
         public Session GetByUser(string username)
@@ -22,9 +32,7 @@ namespace Blog.Services.Implementation
             try
             {
                 var session = JsonHelper.DeserializeJson<Session>(
-                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
-                    .Get("session/" + username));
-
+                    _httpClientHelper.Get(_configurationHelper.GetAppSettings("BlogApi"), "session/" + username));
                 return session;
             }
             catch (Exception ex)
@@ -38,9 +46,7 @@ namespace Blog.Services.Implementation
             try
             {
                 var session = JsonHelper.DeserializeJson<Session>(
-                    new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
-                    .Get("session/ip/" + ipAddress));
-
+                    _httpClientHelper.Get(_configurationHelper.GetAppSettings("BlogApi"), "session/ip/" + ipAddress));
                 return session;
             }
             catch (Exception ex)
@@ -54,8 +60,8 @@ namespace Blog.Services.Implementation
             try
             {
                 var loginModel = new Login { Username = userName, Password = passWord };
-                var loggedUser = JsonHelper.DeserializeJson<LoggedUser>(new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
-                    .Post("session?format=json", loginModel));
+                var loggedUser = JsonHelper.DeserializeJson<LoggedUser>(
+                    _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogApi"), "session?format=json", loginModel));
                 return loggedUser;
             }
             catch (Exception ex)
@@ -69,8 +75,8 @@ namespace Blog.Services.Implementation
             try
             {
                 var loginModel = new Login { Username = userName };
-                var result = JsonHelper.DeserializeJson<Error>(new HttpClientHelper(ConfigurationManager.AppSettings["BlogApi"])
-                    .Put("session", loginModel));
+                var result = JsonHelper.DeserializeJson<Error>(
+                    _httpClientHelper.Put(_configurationHelper.GetAppSettings("BlogApi"), "session", loginModel));
                 return result;
             }
             catch (Exception ex)

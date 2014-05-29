@@ -1,6 +1,4 @@
-﻿@using System.Net.Sockets
-@using System.Text
-@using Blog.Common.Utils
+﻿@using System.Text
 @using Blog.Common.Utils.Helpers
 <!DOCTYPE html>
 <html>
@@ -83,7 +81,7 @@
 {
     private string GetLocalIpAddress()
     {
-        return new UserHelper().GetLocalIpAddress();
+        return UserHelper.GetLocalIpAddress();
     }
 
     public string GetBlogApi()

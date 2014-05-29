@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Http;
 using Blog.Common.Web.Extensions.Elmah;
-using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -20,7 +19,7 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                PostsHubFactory.GetInstance().Create().PushTestMessage(message);
+                //PostsHubFactory.GetInstance().Create().PushTestMessage(message);
             }
             catch (Exception ex)
             {

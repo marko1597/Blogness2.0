@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
-using PostsHubFactory = Blog.Web.Api.Helper.Hub.Factory.PostsHubFactory;
+using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -16,12 +17,16 @@ namespace Blog.Web.Api.Controllers
         private readonly IPostLikes _service;
         private readonly IUser _user;
         private readonly IErrorSignaler _errorSignaler;
+        private readonly IHttpClientHelper _httpClientHelper;
+        private readonly IConfigurationHelper _configurationHelper;
 
-        public PostLikesController(IPostLikes service, IUser user, IErrorSignaler errorSignaler)
+        public PostLikesController(IPostLikes service, IUser user, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _service = service;
             _user = user;
             _errorSignaler = errorSignaler;
+            _httpClientHelper = httpClientHelper;
+            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
@@ -55,11 +60,11 @@ namespace Blog.Web.Api.Controllers
                                    UserId = user.UserId
                                };
                 _service.Add(postLike);
-                PostsHubFactory.GetInstance().Create().PushPostLikes(new PostLikesUpdate
-                                                                     {
-                                                                         PostId = postId,
-                                                                         PostLikes = _service.Get(postId)
-                                                                     });
+                new PostsHub(_errorSignaler, _httpClientHelper, _configurationHelper).PushPostLikes(new PostLikesUpdate
+                {
+                    PostId = postId,
+                    PostLikes = _service.Get(postId)
+                });
             }
             catch (Exception ex)
             {

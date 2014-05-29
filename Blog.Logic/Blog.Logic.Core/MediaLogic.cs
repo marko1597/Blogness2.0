@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Blog.Common.Contracts.Utils;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Factory;

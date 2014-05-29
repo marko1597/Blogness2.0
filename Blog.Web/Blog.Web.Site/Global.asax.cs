@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions;
@@ -33,6 +34,8 @@ namespace Blog.Web.Site
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
             container.Register<ISession, SessionRemoteService>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
+            container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
+            container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
             // SI Attributes Dependency Injection
             container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionRemoteService>());

@@ -4,9 +4,9 @@ using System.Net.Sockets;
 
 namespace Blog.Common.Utils.Helpers
 {
-    public class UserHelper
+    public static class UserHelper
     {
-        public string GetLocalIpAddress()
+        public static string GetLocalIpAddress()
         {
             var localIp = "localhost";
             var host = Dns.GetHostEntry(Dns.GetHostName());

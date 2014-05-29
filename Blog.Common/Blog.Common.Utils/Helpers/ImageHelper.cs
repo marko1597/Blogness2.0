@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using Blog.Common.Utils.Helpers.Interfaces;
 using NReco.VideoConverter;
 
 namespace Blog.Common.Utils.Helpers
