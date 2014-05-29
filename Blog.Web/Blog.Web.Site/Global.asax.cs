@@ -40,6 +40,9 @@ namespace Blog.Web.Site
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionRemoteService>());
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
+            // SI Helper Classes Property Injection
+            container.RegisterInitializer<AuthenticationHelper>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
+
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcAttributeFilterProvider();

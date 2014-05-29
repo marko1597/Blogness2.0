@@ -59,6 +59,7 @@ namespace Blog.Web.Api
 
             // SI Helper Classes Property Injections
             container.RegisterInitializer<PostsHub>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
+            container.RegisterInitializer<AuthenticationHelper>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
             // SI Registrations
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());

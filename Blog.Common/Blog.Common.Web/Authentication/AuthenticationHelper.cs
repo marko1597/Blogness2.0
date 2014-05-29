@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Security.Claims;
 using System.Web;
+using Blog.Common.Contracts.Utils;
+using Blog.Common.Web.Extensions.Elmah;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Blog.Common.Contracts;
@@ -9,10 +13,28 @@ namespace Blog.Common.Web.Authentication
 {
     public class AuthenticationHelper : IAuthenticationHelper
     {
+        [Import]
+        public IErrorSignaler ErrorSignaler { get; set; }
+
+        private IAuthenticationManager _authenticationManager;
+        public IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return _authenticationManager ?? (_authenticationManager = HttpContext.Current.GetOwinContext().Authentication);
+            }
+            set { _authenticationManager = value; }
+        }
+
         public bool SignIn(User user)
         {
             try
             {
+                if (user == null || user.Error != null)
+                {
+                    return false;
+                }
+
                 var identity = new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, user.UserName) },
                     DefaultAuthenticationTypes.ApplicationCookie,
                     ClaimTypes.Name, ClaimTypes.Role);
@@ -24,14 +46,14 @@ namespace Blog.Common.Web.Authentication
                     new Claim(ClaimTypes.GivenName, string.Format("{0}-{1}", user.FirstName, user.LastName))
                 });
 
-                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-                authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
+                AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                ErrorSignaler.SignalFromCurrentContext(ex);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -39,14 +61,18 @@ namespace Blog.Common.Web.Authentication
         {
             try
             {
-                var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
-                authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                if (user == null || user.Error != null)
+                {
+                    return false;
+                }
 
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                ErrorSignaler.SignalFromCurrentContext(ex);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }
