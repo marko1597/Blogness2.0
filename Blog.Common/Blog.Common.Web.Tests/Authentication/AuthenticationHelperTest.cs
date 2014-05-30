@@ -29,6 +29,7 @@ namespace Blog.Common.Web.Tests.Authentication
         {
             var mockAuthenticationManager = new Mock<IAuthenticationManager>();
             mockAuthenticationManager.Setup(am => am.SignIn());
+            mockAuthenticationManager.Setup(am => am.SignOut());
 
             _authenticationHelper.AuthenticationManager = mockAuthenticationManager.Object;
 
@@ -50,6 +51,7 @@ namespace Blog.Common.Web.Tests.Authentication
         public void ShouldThrowExceptionWhenSignInOnAuthenticationManagerFails()
         {
             var mockAuthenticationManager = new Mock<IAuthenticationManager>();
+            mockAuthenticationManager.Setup(am => am.SignOut());
             mockAuthenticationManager.Setup(am => am.SignIn()).Throws(new Exception());
 
             var user = new User

@@ -11,7 +11,7 @@
 
         var linkFn = function (scope, element) {
             scope.$on("displayError", function (e, d) {
-                scope.errorMessage = d.Message;
+                scope.errorMessage = d.Message != undefined ? d.Message : d;
                 $(element).removeClass("hidden");
             });
 

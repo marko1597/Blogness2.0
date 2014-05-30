@@ -14,7 +14,17 @@
             var username = localStorageService.get("username");
             loginService.logout(username).then(function (resp) {
                 if (resp == null || resp == "") {
-                    $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
+                    loginService.logoutApi(username).then(function (apiResponse) {
+                        if (apiResponse === "true") {
+                            $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
+                        } else {
+                            $rootScope.$broadcast("displayError", apiResponse);
+                            $location.path("/error");
+                        }
+                    }, function (apiError) {
+                        $rootScope.$broadcast("displayError", apiError);
+                        $location.path("/error");
+                    });
                 } else {
                     $rootScope.$broadcast("displayError", d);
                     $location.path("/error");
@@ -31,7 +41,7 @@
             },
 
             displayErrorRedirect: function (d) {
-                $rootScope.$broadcast("displayError", { Message: d.Message });
+                $rootScope.$broadcast("displayError", d);
 
                 if (isAuthorized(d)) {
                     $location.path("/error");

@@ -46,6 +46,7 @@ namespace Blog.Common.Web.Authentication
                     new Claim(ClaimTypes.GivenName, string.Format("{0}-{1}", user.FirstName, user.LastName))
                 });
 
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
                 AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = true }, identity);
 
                 return true;
