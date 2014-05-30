@@ -56,7 +56,7 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
-        public bool CreateThumbnail(string filename, string destinationPath)
+        public bool CreateThumbnail(string filename, string destinationPath, string thumbnailPrefix)
         {
             try
             {
@@ -67,9 +67,7 @@ namespace Blog.Common.Utils.Helpers
 
                 var thumb = ResizeImage(image, GetComputedImageSize(image.Width, image.Height));
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                thumb.Save(destinationPath + 
-                    ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
-                    Path.GetFileName(filename), jgpEncoder, encoderParams);
+                thumb.Save(destinationPath + thumbnailPrefix + Path.GetFileName(filename), jgpEncoder, encoderParams);
                 
                 thumb.Dispose();
                 image.Dispose();
@@ -83,13 +81,11 @@ namespace Blog.Common.Utils.Helpers
             
         }
 
-        public bool CreateVideoThumbnail(string filename, string destinationPath)
+        public bool CreateVideoThumbnail(string filename, string destinationPath, string thumbnailPrefix)
         {
             try
             {
-                new FFMpegConverter().GetVideoThumbnail(filename,
-                    destinationPath + ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
-                    Path.GetFileNameWithoutExtension(filename) + ".jpg");
+                new FFMpegConverter().GetVideoThumbnail(filename, thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg");
                 return true;
             }
             catch (Exception)
@@ -98,7 +94,7 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
-        public bool CreateGifThumbnail(string filename, string destinationPath)
+        public bool CreateGifThumbnail(string filename, string destinationPath, string thumbnailPrefix)
         {
             try
             {
@@ -115,9 +111,7 @@ namespace Blog.Common.Utils.Helpers
                 var encoderParams = new EncoderParameters(1);
 
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                compressedImage.Save(destinationPath + 
-                    ConfigurationManager.AppSettings.Get("ThumbnailPrefix") + 
-                    Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
+                compressedImage.Save(destinationPath + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
 
                 compressedImage.Dispose();
                 img.Dispose();

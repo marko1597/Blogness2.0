@@ -9,9 +9,9 @@ namespace Blog.Common.Utils.Helpers.Interfaces
         string GenerateImagePath(int id, string name, string guid, string storageRoot);
         bool CreateDirectory(string path);
         bool DeleteDirectory(string path);
-        bool CreateThumbnail(string filename, string destinationPath);
-        bool CreateVideoThumbnail(string filename, string destinationPath);
-        bool CreateGifThumbnail(string filename, string destinationPath);
+        bool CreateThumbnail(string filename, string destinationPath, string thumbnailPrefix);
+        bool CreateVideoThumbnail(string filename, string destinationPath, string thumbnailPrefix);
+        bool CreateGifThumbnail(string filename, string destinationPath, string thumbnailPrefix);
         bool CreateThumbnailPath(string path);
         bool DeleteThumbnailPath(string path);
     }

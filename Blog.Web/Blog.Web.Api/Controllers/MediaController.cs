@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -8,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
@@ -21,13 +21,16 @@ namespace Blog.Web.Api.Controllers
         private readonly IMedia _media;
         private readonly IUser _user;
         private readonly IErrorSignaler _errorSignaler;
-        private readonly string _mediaPath = ConfigurationManager.AppSettings.Get("MediaLocation");
+        private readonly IConfigurationHelper _configurationHelper;
+        private readonly string _mediaPath = string.Empty;
 
-        public MediaController(IMedia media, IUser user, IErrorSignaler errorSignaler)
+        public MediaController(IMedia media, IUser user, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _media = media;
             _user = user;
             _errorSignaler = errorSignaler;
+            _configurationHelper = configurationHelper;
+            _mediaPath = _configurationHelper.GetAppSettings("MediaLocation");
         }
 
         [HttpGet]
@@ -165,7 +168,7 @@ namespace Blog.Web.Api.Controllers
                 {
                     Content = isThumb ?
                         new StreamContent(new FileStream(media.ThumbnailPath +
-                            ConfigurationManager.AppSettings.Get("ThumbnailPrefix") +
+                            _configurationHelper.GetAppSettings("ThumbnailPrefix") +
                             Path.GetFileNameWithoutExtension(media.FileName) + ".jpg",
                             FileMode.Open, FileAccess.Read)) :
                         new StreamContent(new FileStream(media.MediaPath +

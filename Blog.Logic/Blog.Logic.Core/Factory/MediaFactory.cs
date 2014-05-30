@@ -29,7 +29,8 @@ namespace Blog.Logic.Core.Factory
             IAlbumRepository albumRepository = new AlbumRepository();
             IMediaRepository mediaRepository = new MediaRepository();
             IImageHelper imageHelper = new ImageHelper();
-            return new MediaLogic(mediaRepository, albumRepository, imageHelper);
+            IConfigurationHelper configurationHelper = new ConfigurationHelper();
+            return new MediaLogic(mediaRepository, albumRepository, imageHelper, configurationHelper);
         }
     }
 }

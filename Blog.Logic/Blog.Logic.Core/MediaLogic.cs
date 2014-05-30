@@ -20,12 +20,14 @@ namespace Blog.Logic.Core
         private readonly IMediaRepository _mediaRepository;
         private readonly IAlbumRepository _albumRepository;
         private readonly IImageHelper _imageHelper;
+        private readonly IConfigurationHelper _configurationHelper;
 
-        public MediaLogic(IMediaRepository mediaRepository, IAlbumRepository albumRepository, IImageHelper imageHelper)
+        public MediaLogic(IMediaRepository mediaRepository, IAlbumRepository albumRepository, IImageHelper imageHelper, IConfigurationHelper configurationHelper)
         {
             _mediaRepository = mediaRepository;
             _albumRepository = albumRepository;
             _imageHelper = imageHelper;
+            _configurationHelper = configurationHelper;
         }
 
         public List<Media> GetByUser(int userId)
@@ -252,15 +254,18 @@ namespace Blog.Logic.Core
 
                 if (IsVideo(media.MediaType))
                 {
-                    Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + filename, media.ThumbnailPath));
+                    Task.Run(() => _imageHelper.CreateVideoThumbnail(mediaPath + filename, media.ThumbnailPath,
+                        _configurationHelper.GetAppSettings("ThumbnailPrefix")));
                 }
                 else if (media.MediaType == "image/gif")
                 {
-                    Task.Run(() => _imageHelper.CreateGifThumbnail(mediaPath + filename, media.ThumbnailPath));
+                    Task.Run(() => _imageHelper.CreateGifThumbnail(mediaPath + filename, media.ThumbnailPath, 
+                        _configurationHelper.GetAppSettings("ThumbnailPrefix")));
                 }
                 else
                 {
-                    Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + filename, media.ThumbnailPath));
+                    Task.Run(() => _imageHelper.CreateThumbnail(mediaPath + filename, media.ThumbnailPath,
+                        _configurationHelper.GetAppSettings("ThumbnailPrefix")));
                 }
             }
         }

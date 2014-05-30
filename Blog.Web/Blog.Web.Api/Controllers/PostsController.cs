@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
@@ -18,12 +18,14 @@ namespace Blog.Web.Api.Controllers
         private readonly IPosts _postsSvc;
         private readonly IPostsPage _postsPageSvc;
         private readonly IErrorSignaler _errorSignaler;
+        private readonly IConfigurationHelper _configurationHelper;
 
-        public PostsController(IPosts postsSvc, IPostsPage postsPageSvc, IErrorSignaler errorSignaler)
+        public PostsController(IPosts postsSvc, IPostsPage postsPageSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _postsSvc = postsSvc;
             _postsPageSvc = postsPageSvc;
             _errorSignaler = errorSignaler;
+            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
@@ -72,7 +74,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 posts = _postsPageSvc.GetPopularPosts(
-                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("DefaultPostsThreshold"))) ?? new List<Post>();
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -92,7 +94,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 posts = _postsPageSvc.GetRecentPosts(
-                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("DefaultPostsThreshold"))) ?? new List<Post>();
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -112,7 +114,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 posts = _postsPageSvc.GetMorePosts(
-                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("MorePostsTakeValue")), skip) ?? new List<Post>();
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
             }
             catch (Exception ex)
             {
