@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions.Elmah;
 using Microsoft.Owin.Security;

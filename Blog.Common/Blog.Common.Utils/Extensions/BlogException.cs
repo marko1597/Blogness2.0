@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Blog.Common.Contracts.Utils
+namespace Blog.Common.Utils.Extensions
 {
     [Serializable]
     public class BlogException : Exception

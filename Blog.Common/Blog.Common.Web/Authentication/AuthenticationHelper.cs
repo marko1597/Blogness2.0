@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Security.Claims;
 using System.Web;
-using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;

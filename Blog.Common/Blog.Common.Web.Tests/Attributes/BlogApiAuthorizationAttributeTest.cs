@@ -7,7 +7,7 @@ using System.Web.Http.Filters;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;

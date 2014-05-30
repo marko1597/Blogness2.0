@@ -1,7 +1,7 @@
 ﻿using System;
-using System.ComponentModel.Composition;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers.Interfaces;
 
 namespace Blog.Common.Utils.Helpers
@@ -28,26 +28,43 @@ namespace Blog.Common.Utils.Helpers
 
         public string Get(string baseUri, string url)
         {
-            BaseUri = baseUri;
-            return HttpClientObj.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
+            try
+            {
+                BaseUri = baseUri;
+                return HttpClientObj.GetAsync(url).Result.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public string Post<T>(string baseUri, string url, T obj) where T : class
         {
-            BaseUri = baseUri;
-            HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var result = HttpClientObj.PostAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
-            return result;
+            try
+            {
+                BaseUri = baseUri;
+                var result = HttpClientObj.PostAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public string Put<T>(string baseUri, string url, T obj) where T : class
         {
-            BaseUri = baseUri;
-            HttpContent content = new StringContent(JsonHelper.SerializeJson(obj));
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var result = HttpClientObj.PutAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
-            return result;
+            try
+            {
+                BaseUri = baseUri;
+                var result = HttpClientObj.PutAsJsonAsync(url, obj).Result.Content.ReadAsStringAsync().Result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
     }
 }

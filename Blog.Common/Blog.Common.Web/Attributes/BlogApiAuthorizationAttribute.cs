@@ -3,7 +3,7 @@ using System.ComponentModel.Composition;
 using System.Net;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
-using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
 using WebApi.AuthenticationFilter;

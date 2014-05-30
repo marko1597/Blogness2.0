@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.Utils;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Services.Implementation.Interfaces;
@@ -22,9 +22,16 @@ namespace Blog.Services.Implementation
 
         public List<Session> GetAll()
         {
-            var sessions = JsonHelper.DeserializeJson<List<Session>>(
+            try
+            {
+                var sessions = JsonHelper.DeserializeJson<List<Session>>(
                 _httpClientHelper.Get(_configurationHelper.GetAppSettings("BlogApi"), "session"));
-            return sessions;
+                return sessions;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public Session GetByUser(string username)

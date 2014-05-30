@@ -68,7 +68,6 @@
     <Compile Include="Session.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="Utils\BlogException.cs" />
     <Compile Include="ViewModels\LoggedUser.cs" />
     <Compile Include="ViewModels\Login.cs" />
     <Compile Include="ViewModels\PostLikesUpdate.cs" />

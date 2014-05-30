@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.Utils;
 using Blog.Common.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.ObjectMapper;
 

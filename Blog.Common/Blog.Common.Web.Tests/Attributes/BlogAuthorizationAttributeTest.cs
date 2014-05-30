@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;

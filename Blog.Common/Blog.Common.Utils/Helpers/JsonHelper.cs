@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace Blog.Common.Utils.Helpers
@@ -13,16 +11,10 @@ namespace Blog.Common.Utils.Helpers
             if (Equals(obj, null))
                 return "";
 
-            string r = "";
+            var r = "";
             try
             {
-                var serializer = new System.Runtime.Serialization.Json.DataContractJsonSerializer(obj.GetType());
-                using (var ms = new MemoryStream())
-                {
-                    serializer.WriteObject(ms, obj);
-                    r = Encoding.UTF8.GetString(ms.ToArray());
-                    ms.Close();
-                }
+                r = JsonConvert.SerializeObject(obj);
             }
             catch (Exception ex)
             {
@@ -33,7 +25,7 @@ namespace Blog.Common.Utils.Helpers
 
         public static T DeserializeJson<T>(string json)
         {
-            T obj = default(T);
+            var obj = default(T);
             try
             {
                 obj = JsonConvert.DeserializeObject<T>(json);
