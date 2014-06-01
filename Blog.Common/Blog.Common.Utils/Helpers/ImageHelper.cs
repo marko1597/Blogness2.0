@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers.Interfaces;
 using NReco.VideoConverter;
 
@@ -13,15 +14,29 @@ namespace Blog.Common.Utils.Helpers
     {
         public byte[] ImageToByteArray(Image image)
         {
-            var ms = new MemoryStream();
-            image.Save(ms, ImageFormat.Png);
-            return ms.ToArray();
+            try
+            {
+                var ms = new MemoryStream();
+                image.Save(ms, ImageFormat.Png);
+                return ms.ToArray();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public Image ByteArrayToImage(byte[] byteArray)
         {
-            var ms = new MemoryStream(byteArray);
-            return Image.FromStream(ms);
+            try
+            {
+                var ms = new MemoryStream(byteArray);
+                return Image.FromStream(ms);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public string GenerateImagePath(int id, string name, string guid, string storageRoot)
@@ -154,7 +169,7 @@ namespace Blog.Common.Utils.Helpers
             return codecs.FirstOrDefault(codec => codec.FormatID == format.Guid);
         }
 
-        private Size GetComputedImageSize(int width, int height)
+        public Size GetComputedImageSize(int width, int height)
         {
             if (width > 400)
             {
@@ -172,7 +187,7 @@ namespace Blog.Common.Utils.Helpers
             return new Size(width, height);
         }
 
-        private Image ResizeImage(Image mg, Size newSize)
+        public Image ResizeImage(Image mg, Size newSize)
         {
             var thumbSize = new Size(newSize.Width, newSize.Height);
             var image = new Bitmap(newSize.Width, newSize.Height);

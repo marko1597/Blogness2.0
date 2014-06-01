@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Reflection;
+﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Hosting;

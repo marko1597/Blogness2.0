@@ -7,6 +7,8 @@ namespace Blog.Common.Utils.Helpers.Interfaces
         byte[] ImageToByteArray(Image image);
         Image ByteArrayToImage(byte[] byteArray);
         string GenerateImagePath(int id, string name, string guid, string storageRoot);
+        Size GetComputedImageSize(int width, int height);
+        Image ResizeImage(Image mg, Size newSize);
         bool CreateDirectory(string path);
         bool DeleteDirectory(string path);
         bool CreateThumbnail(string filename, string destinationPath, string thumbnailPrefix);

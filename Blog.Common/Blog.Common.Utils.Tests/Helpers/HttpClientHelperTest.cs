@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers;
-using Moq;
 using NUnit.Framework;
 
 namespace Blog.Common.Utils.Tests.Helpers
