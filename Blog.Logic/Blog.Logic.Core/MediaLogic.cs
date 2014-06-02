@@ -102,7 +102,7 @@ namespace Blog.Logic.Core
 
                 if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
                 {
-                    _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
+                    _imageHelper.CreateDirectory(media.ThumbnailPath);
                     media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
                 }
 
@@ -165,7 +165,7 @@ namespace Blog.Logic.Core
                 _mediaRepository.Delete(db);
                 File.Delete(db.ThumbnailPath);
                 File.Delete(db.MediaPath);
-                _imageHelper.DeleteThumbnailPath(db.ThumbnailPath);
+                _imageHelper.DeleteDirectory(db.ThumbnailPath);
                 _imageHelper.DeleteDirectory(db.MediaPath);
 
                 return true;
@@ -249,7 +249,7 @@ namespace Blog.Logic.Core
         {
             if (IsMediaSupported(media.MediaType))
             {
-                _imageHelper.CreateThumbnailPath(media.ThumbnailPath);
+                _imageHelper.CreateDirectory(media.ThumbnailPath);
 
                 if (IsVideo(media.MediaType))
                 {

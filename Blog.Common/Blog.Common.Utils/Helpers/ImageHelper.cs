@@ -41,7 +41,18 @@ namespace Blog.Common.Utils.Helpers
 
         public string GenerateImagePath(int id, string name, string guid, string storageRoot)
         {
-            return storageRoot + id + "\\" + name + "\\" + guid + "\\";
+            try
+            {
+                if (string.IsNullOrEmpty(storageRoot) || string.IsNullOrEmpty(guid) || string.IsNullOrEmpty(name))
+                {
+                    throw new BlogException("Empty string in parameters. Provide non-empty strings.");
+                }
+                return storageRoot.TrimEnd('\\') + @"\" + id + @"\" + name.TrimEnd('\\') + @"\" + guid.TrimEnd('\\') + @"\";
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public bool CreateDirectory(string path)
@@ -51,9 +62,9 @@ namespace Blog.Common.Utils.Helpers
                 Directory.CreateDirectory(path);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -64,9 +75,9 @@ namespace Blog.Common.Utils.Helpers
                 Directory.Delete(path, true);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -79,18 +90,23 @@ namespace Blog.Common.Utils.Helpers
                 var encoder = Encoder.Quality;
                 var encoderParams = new EncoderParameters(1);
 
+                if (!Directory.Exists(destinationPath.TrimEnd('\\')))
+                {
+                    CreateDirectory(destinationPath);
+                }
+
                 var thumb = ResizeImage(image, GetComputedImageSize(image.Width, image.Height));
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                thumb.Save(destinationPath + thumbnailPrefix + Path.GetFileName(filename), jgpEncoder, encoderParams);
+                thumb.Save(destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileName(filename), jgpEncoder, encoderParams);
                 
                 thumb.Dispose();
                 image.Dispose();
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             
         }
@@ -99,12 +115,18 @@ namespace Blog.Common.Utils.Helpers
         {
             try
             {
-                new FFMpegConverter().GetVideoThumbnail(filename, thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg");
+                if (!Directory.Exists(destinationPath.TrimEnd('\\')))
+                {
+                    CreateDirectory(destinationPath);
+                }
+
+                new FFMpegConverter().GetVideoThumbnail(filename, 
+                    destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg");
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -114,10 +136,15 @@ namespace Blog.Common.Utils.Helpers
             {
                 var img = Image.FromFile(filename);
                 var frames = img.GetFrameCount(FrameDimension.Time);
-                if (frames <= 1) throw new ArgumentException("Image not animated");
+                if (frames <= 1) throw new Exception("Image not animated");
 
                 var frame = Convert.ToInt32(Math.Round(Convert.ToDouble(frames / 2), MidpointRounding.AwayFromZero));
                 img.SelectActiveFrame(FrameDimension.Time, frame);
+
+                if (!Directory.Exists(destinationPath.TrimEnd('\\')))
+                {
+                    CreateDirectory(destinationPath);
+                }
 
                 var compressedImage = ResizeImage(img, GetComputedImageSize(img.Width, img.Height));
                 var jgpEncoder = GetEncoder(ImageFormat.Jpeg);
@@ -125,44 +152,19 @@ namespace Blog.Common.Utils.Helpers
                 var encoderParams = new EncoderParameters(1);
 
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                compressedImage.Save(destinationPath + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
+                compressedImage.Save(destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
 
                 compressedImage.Dispose();
                 img.Dispose();
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool CreateThumbnailPath(string path)
-        {
-            try
-            {
-                Directory.CreateDirectory(path);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool DeleteThumbnailPath(string path)
-        {
-            try
-            {
-                Directory.Delete(path, true);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
         private ImageCodecInfo GetEncoder(ImageFormat format)
         {
             var codecs = ImageCodecInfo.GetImageDecoders();
@@ -173,7 +175,7 @@ namespace Blog.Common.Utils.Helpers
         {
             if (width > 400)
             {
-                var divisor = width/400;
+                var divisor = Convert.ToDouble(width)/400;
                 var tHeight = Math.Round(Convert.ToDouble(height/divisor), 0, MidpointRounding.AwayFromZero);
                 var size = new Size
                            {

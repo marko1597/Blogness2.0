@@ -14,7 +14,5 @@ namespace Blog.Common.Utils.Helpers.Interfaces
         bool CreateThumbnail(string filename, string destinationPath, string thumbnailPrefix);
         bool CreateVideoThumbnail(string filename, string destinationPath, string thumbnailPrefix);
         bool CreateGifThumbnail(string filename, string destinationPath, string thumbnailPrefix);
-        bool CreateThumbnailPath(string path);
-        bool DeleteThumbnailPath(string path);
     }
 }
