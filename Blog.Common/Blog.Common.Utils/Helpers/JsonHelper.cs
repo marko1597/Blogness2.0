@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Blog.Common.Utils.Extensions;
 using Newtonsoft.Json;
 
 namespace Blog.Common.Utils.Helpers
@@ -11,28 +12,28 @@ namespace Blog.Common.Utils.Helpers
             if (Equals(obj, null))
                 return "";
 
-            var r = "";
+            string r;
             try
             {
                 r = JsonConvert.SerializeObject(obj);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("#ERR SerializeJson:\t" + ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return r;
         }
 
         public static T DeserializeJson<T>(string json)
         {
-            var obj = default(T);
+            T obj;
             try
             {
                 obj = JsonConvert.DeserializeObject<T>(json);
             }
             catch (Exception ex)
             {
-               Debug.WriteLine("#ERR DeserializeJson:\t" + ex.Message);
+                throw new BlogException(ex.Message, ex.InnerException);
             }
             return obj;
         }

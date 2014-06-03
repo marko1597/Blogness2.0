@@ -16,7 +16,8 @@ namespace Blog.Common.Utils
             Weak = 2,
             Medium = 3,
             Strong = 4,
-            VeryStrong = 5
+            VeryStrong = 5,
+            LikeABoss = 6
         }
 
         public enum Error

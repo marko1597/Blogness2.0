@@ -86,7 +86,6 @@ namespace Blog.Common.Utils.Helpers
         {
             var channel = new ChannelFactory<TInterface>(endpointConfigurationName);
 
-
             try
             {
                 proxyDelegate(channel.CreateChannel());

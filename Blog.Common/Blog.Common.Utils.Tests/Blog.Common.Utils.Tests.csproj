@@ -81,6 +81,9 @@
     <Compile Include="Helpers\ConfigurationHelperTest.cs" />
     <Compile Include="Helpers\HttpClientHelperTest.cs" />
     <Compile Include="Helpers\ImageHelperTest.cs" />
+    <Compile Include="Helpers\JsonHelperTest.cs" />
+    <Compile Include="Helpers\PasswordManagerTest.cs" />
+    <Compile Include="Helpers\UserHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
