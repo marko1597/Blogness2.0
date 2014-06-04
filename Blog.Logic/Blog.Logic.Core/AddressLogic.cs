@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.ObjectMapper;
@@ -18,17 +19,28 @@ namespace Blog.Logic.Core
 
         public Address GetByUser(int userId)
         {
-            Address address;
             try
             {
                 var db = _addressRepository.Find(a => a.UserId == userId, true).FirstOrDefault();
-                address = AddressMapper.ToDto(db);
+
+                if (db != null)
+                {
+                    return AddressMapper.ToDto(db);
+                }
+
+                return new Address
+                {
+                    Error = new Error
+                    {
+                        Id = (int) Constants.Error.RecordNotFound,
+                        Message = string.Format("No address found for userId {0}", userId)
+                    }
+                };
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
-            return address;
         }
 
         public bool Add(Address address)
