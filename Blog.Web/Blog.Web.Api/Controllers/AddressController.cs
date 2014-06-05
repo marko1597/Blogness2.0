@@ -24,16 +24,16 @@ namespace Blog.Web.Api.Controllers
         [Route("api/users/{userId:int}/address")]
         public Address GetByUser(int userId)
         {
-            var address = new Address();
             try
             {
-                address = _service.GetByUser(userId) ?? new Address();
+                return _service.GetByUser(userId) ?? new Address();
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return new Address().GenerateError<Address>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
-            return address;
         }
 
         [HttpPost]

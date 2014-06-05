@@ -17,12 +17,12 @@ namespace Blog.Services.Implementation
             return AlbumFactory.GetInstance().CreateAlbumLogic().GetUserDefaultGroup(userId);
         }
 
-        public bool Add(Album album)
+        public Album Add(Album album)
         {
             return AlbumFactory.GetInstance().CreateAlbumLogic().Add(album);
         }
 
-        public bool Update(Album album)
+        public Album Update(Album album)
         {
             return AlbumFactory.GetInstance().CreateAlbumLogic().Update(album);
         }

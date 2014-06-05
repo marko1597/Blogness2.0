@@ -7,8 +7,8 @@ namespace Blog.Services.Implementation.Interfaces
     {
         List<Album> GetByUser(int userId);
         Album GetUserDefaultGroup(int userId);
-        bool Add(Album album);
-        bool Update(Album album);
+        Album Add(Album album);
+        Album Update(Album album);
         bool Delete(int albumId);
     }
 }

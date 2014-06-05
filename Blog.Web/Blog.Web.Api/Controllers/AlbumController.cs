@@ -5,6 +5,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
+using Blog.Common.Utils;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -40,45 +41,47 @@ namespace Blog.Web.Api.Controllers
         [Route("api/users/{userId:int}/albums/default")]
         public Album GetUserDefault(int userId)
         {
-            var album = new Album();
             try
             {
-                album = _service.GetUserDefaultGroup(userId) ?? new Album();
+                return _service.GetUserDefaultGroup(userId) ?? new Album();
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
-            return album;
         }
 
         [HttpPost]
         [Route("api/albums")]
-        public bool Post([FromBody]Album album)
+        public Album Post([FromBody]Album album)
         {
             try
             {
-                _service.Add(album);
-                return true;
+                return _service.Add(album);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 
         [HttpPut]
         [Route("api/albums")]
-        public bool Put([FromBody]Album album)
+        public Album Put([FromBody]Album album)
         {
             try
             {
-                _service.Add(album);
-                return true;
+                return _service.Add(album);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 

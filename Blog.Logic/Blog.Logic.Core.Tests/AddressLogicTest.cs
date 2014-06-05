@@ -3,7 +3,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using Blog.Common.Utils;
-using Blog.DataAccess.Database.Entities;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Moq;

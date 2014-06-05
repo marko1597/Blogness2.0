@@ -5,6 +5,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.ObjectMapper;
+using Blog.Common.Utils;
 
 namespace Blog.Logic.Core
 {
@@ -34,58 +35,62 @@ namespace Blog.Logic.Core
 
         public Album GetUserDefaultGroup(int userId)
         {
-            Album album;
             try
             {
                 var db = _albumRepository.Find(a => a.IsUserDefault && a.UserId == userId, false).First();
-                album = AlbumMapper.ToDto(db);
+
+                if (db != null)
+                {
+                    return AlbumMapper.ToDto(db);
+                }
+
+                return new Album().GenerateError<Album>(
+                    (int)Constants.Error.RecordNotFound,
+                    string.Format("Cannot find default album for user with Id {0}", userId));
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
-            return album;
         }
 
         public bool Delete(int albumId)
         {
             try
             {
-                _albumRepository.Delete(_albumRepository.Find(a => a.AlbumId == albumId, false).FirstOrDefault());
+                var db = _albumRepository.Find(a => a.AlbumId == albumId, false).FirstOrDefault();
+                if (db == null) return false;
+
+                _albumRepository.Delete(db);
                 return true;
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool Add(Album album)
+        public Album Add(Album album)
         {
             try
             {
-                _albumRepository.Add(AlbumMapper.ToEntity(album));
-                return true;
+                return AlbumMapper.ToDto(_albumRepository.Add(AlbumMapper.ToEntity(album)));
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool Update(Album album)
+        public Album Update(Album album)
         {
             try
             {
-                _albumRepository.Edit(AlbumMapper.ToEntity(album));
-                return true;
+                return AlbumMapper.ToDto(_albumRepository.Edit(AlbumMapper.ToEntity(album)));
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }
