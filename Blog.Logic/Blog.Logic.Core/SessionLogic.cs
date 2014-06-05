@@ -51,25 +51,13 @@ namespace Blog.Logic.Core
                     {
                         return SessionMapper.ToDto(session);
                     }
-                    
-                    return new Session
-                    {
-                        Error = new Error
-                        {
-                            Id = (int)Constants.Error.RecordNotFound,
-                            Message = string.Format("No valid session found for user {0}", username)
-                        }
-                    };
+
+                    return new Session().GenerateError<Session>((int)Constants.Error.RecordNotFound,
+                        string.Format("No valid session found for user {0}", username));
                 }
 
-                return new Session
-                {
-                    Error = new Error
-                    {
-                        Id = (int)Constants.Error.RecordNotFound,
-                        Message = string.Format("No user with {0} as username found", username)
-                    }
-                };
+                return new Session().GenerateError<Session>((int)Constants.Error.RecordNotFound,
+                        string.Format("No user with {0} as username found", username));
             }
             catch (Exception ex)
             {
@@ -88,14 +76,9 @@ namespace Blog.Logic.Core
                 {
                     return SessionMapper.ToDto(session);
                 }
-                return new Session
-                {
-                    Error = new Error
-                    {
-                        Id = (int)Constants.Error.RecordNotFound,
-                        Message = string.Format("No session with {0} IP address found", ipAddress)
-                    }
-                };
+
+                return new Session().GenerateError<Session>((int)Constants.Error.RecordNotFound,
+                       string.Format("No session with {0} IP address found", ipAddress));
             }
             catch (Exception ex)
             {
@@ -110,15 +93,12 @@ namespace Blog.Logic.Core
                 DeleteSessionFromSameIp(ipAddress);
 
                 var user = _userRepository.Find(a => a.UserName == userName && a.Password == passWord, null, string.Empty).FirstOrDefault();
-                if (user == null || user.UserId == 0) 
-                    return new LoggedUser
-                    {
-                        Error = new Error
-                        {
-                            Id = (int)Constants.Error.InvalidCredentials,
-                            Message = "Invalid username/password"
-                        }     
-                    };
+                if (user == null || user.UserId == 0)
+                {
+                    return new LoggedUser().GenerateError<LoggedUser>(
+                        (int)Constants.Error.InvalidCredentials,
+                        "Invalid username/password");
+                }
 
                 var session = new Session
                 {

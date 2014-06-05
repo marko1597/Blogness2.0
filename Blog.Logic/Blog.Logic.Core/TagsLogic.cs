@@ -67,14 +67,7 @@ namespace Blog.Logic.Core
                     return TagMapper.ToDto(tTag);
                 }
 
-                return new Tag
-                {
-                    Error = new Error
-                    {
-                        Id = (int) Constants.Error.ValidationError,
-                        Message = "Record already exists"
-                    }
-                };
+                return new Tag().GenerateError<Tag>((int) Constants.Error.ValidationError, "Record already exists");
             }
             catch (Exception ex)
             {

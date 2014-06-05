@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Collections.Generic;
 using Blog.Common.Utils;
+using Blog.DataAccess.Database.Entities;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Moq;
@@ -12,9 +12,6 @@ using Blog.Common.Utils.Extensions;
 
 namespace Blog.Logic.Core.Tests
 {
-    /// <summary>
-    /// Summary description for AddressLogicTest
-    /// </summary>
     [TestFixture]
     public class AddressLogicTest
     {
@@ -95,11 +92,11 @@ namespace Blog.Logic.Core.Tests
 
             Assert.IsNotNull(result.Error);
             Assert.AreEqual((int)Constants.Error.RecordNotFound, result.Error.Id);
-            Assert.AreEqual("No address found for userId 1", result.Error.Message);
+            Assert.AreEqual("No address found for user with Id 1", result.Error.Message);
         }
 
         [Test]
-        public void ShouldThrowExceptionGetByUserFails()
+        public void ShouldThrowExceptionWhenGetByUserFails()
         {
             _addressRepository = new Mock<IAddressRepository>();
             _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), true))
@@ -108,6 +105,142 @@ namespace Blog.Logic.Core.Tests
             _addressLogic = new AddressLogic(_addressRepository.Object);
 
             Assert.Throws<BlogException>(() => _addressLogic.GetByUser(1));
+        }
+
+        [Test]
+        public void ShouldAddAddress()
+        {
+            var dbResult = new Address
+            {
+                AddressId = 3,
+                StreetAddress = "Wiggle",
+                City = "Berry",
+                State = "Carrot",
+                Country = "Gumbo",
+                Zip = 1234,
+                UserId = 5,
+                User = new User
+                {
+                    UserId = 5,
+                    UserName = "FooBar"
+                }
+            };
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Add(It.IsAny<Address>())).Returns(dbResult);
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            var result = _addressLogic.Add(new Common.Contracts.Address
+            {
+                AddressId = 3,
+                StreetAddress = "Wiggle",
+                City = "Berry",
+                State = "Carrot",
+                Country = "Gumbo",
+                Zip = 1234
+            });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.UserId);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenAddAddressFails()
+        {
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Add(It.IsAny<Address>())).Throws(new Exception());
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            Assert.Throws<BlogException>(() => _addressLogic.Add(new Common.Contracts.Address()));
+        }
+
+        [Test]
+        public void ShouldUpdateAddress()
+        {
+            var dbResult = new Address
+            {
+                AddressId = 3,
+                StreetAddress = "Wiggle",
+                City = "Berry",
+                State = "Carrot",
+                Country = "Gumbo",
+                Zip = 1234,
+                UserId = 5,
+                User = new User
+                {
+                    UserId = 5,
+                    UserName = "FooBar"
+                }
+            };
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Edit(It.IsAny<Address>())).Returns(dbResult);
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            var result = _addressLogic.Update(new Common.Contracts.Address
+            {
+                AddressId = 3,
+                StreetAddress = "Wiggle",
+                City = "Berry",
+                State = "Carrot",
+                Country = "Gumbo",
+                Zip = 1234
+            });
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.UserId);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenUpdateAddressFails()
+        {
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Edit(It.IsAny<Address>())).Throws(new Exception());
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            Assert.Throws<BlogException>(() => _addressLogic.Update(new Common.Contracts.Address()));
+        }
+
+        [Test]
+        public void ShouldReturnTrueOnDeleteAddress()
+        {
+            var dbResult = new List<Address> { new Address { AddressId = 1 } };
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), false))
+               .Returns(dbResult);
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            var result = _addressLogic.Delete(1);
+
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void ShouldReturnFalseWhenDeleteAddressFoundNoRecord()
+        {
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), false))
+               .Returns(new List<Address>());
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            var result = _addressLogic.Delete(1);
+
+            Assert.IsFalse(result);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenDeleteAddressFails()
+        {
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Delete(It.IsAny<Address>())).Throws(new Exception());
+
+            _addressLogic = new AddressLogic(_addressRepository.Object);
+
+            Assert.Throws<BlogException>(() => _addressLogic.Delete(1));
         }
     }
 }

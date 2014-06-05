@@ -378,7 +378,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldGetByCredentials()
+        public void ShouldGetUserByCredentials()
         {
             const string username = "jama";
             const string password = "testtest1";
@@ -410,7 +410,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenGetByCredentialsFails()
+        public void ShouldThrowExceptionWhenGetUserByCredentialsFails()
         {
             _userRepository = new Mock<IUserRepository>();
             _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),

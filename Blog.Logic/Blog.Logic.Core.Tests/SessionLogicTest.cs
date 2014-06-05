@@ -97,7 +97,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldGetByUser()
+        public void ShouldGetSessionByUser()
         {
             var user = _users.Where(a => a.UserName == "foo").ToList();
             var session = _sessions.Where(a => a.UserId == 1).ToList();
@@ -121,7 +121,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenGetByUserFoundNoUser()
+        public void ShouldErrorWhenGetSessionByUserFoundNoUser()
         {
             _sessionRepository = new Mock<ISessionRepository>();
             _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
@@ -142,7 +142,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenGetByUserFoundNoSession()
+        public void ShouldErrorWhenGetSessionByUserFoundNoSession()
         {
             var user = _users.Where(a => a.UserName == "foo").ToList();
 
@@ -165,7 +165,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenUserLookupOnGetByUserFails()
+        public void ShouldThrowExceptionWhenUserLookupOnGetSessionByUserFails()
         {
             _sessionRepository = new Mock<ISessionRepository>();
             _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
@@ -181,7 +181,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenSessionLookupOnGetByUserFails()
+        public void ShouldThrowExceptionWhenSessionLookupOnGetSessionByUserFails()
         {
             var user = _users.Where(a => a.UserName == "foo").ToList();
 
@@ -200,7 +200,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldGetByIp()
+        public void ShouldGetSessionByIp()
         {
             var session = _sessions.Where(a => a.IpAddress == "::1").ToList();
 
@@ -220,7 +220,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenGetByIpFoundNoSession()
+        public void ShouldErrorWhenGetSessionByIpFoundNoSession()
         {
             _sessionRepository = new Mock<ISessionRepository>();
             _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
@@ -239,7 +239,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenGetByIpFoundFails()
+        public void ShouldThrowExceptionWhenGetSessionByIpFoundFails()
         {
             _sessionRepository = new Mock<ISessionRepository>();
             _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());

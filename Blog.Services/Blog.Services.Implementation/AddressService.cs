@@ -11,12 +11,12 @@ namespace Blog.Services.Implementation
             return AddressFactory.GetInstance().CreateAddressLogic().GetByUser(userId);
         }
 
-        public bool Add(Address address)
+        public Address Add(Address address)
         {
             return AddressFactory.GetInstance().CreateAddressLogic().Add(address);
         }
 
-        public bool Update(Address address)
+        public Address Update(Address address)
         {
             return AddressFactory.GetInstance().CreateAddressLogic().Update(address);
         }

@@ -28,14 +28,9 @@ namespace Blog.Logic.Core
                     return AddressMapper.ToDto(db);
                 }
 
-                return new Address
-                {
-                    Error = new Error
-                    {
-                        Id = (int) Constants.Error.RecordNotFound,
-                        Message = string.Format("No address found for userId {0}", userId)
-                    }
-                };
+                return new Address().GenerateError<Address>(
+                    (int) Constants.Error.RecordNotFound,
+                    string.Format("No address found for user with Id {0}", userId));
             }
             catch (Exception ex)
             {
@@ -43,29 +38,27 @@ namespace Blog.Logic.Core
             }
         }
 
-        public bool Add(Address address)
+        public Address Add(Address address)
         {
             try
             {
-                _addressRepository.Add(AddressMapper.ToEntity(address));
-                return true;
+                return AddressMapper.ToDto(_addressRepository.Add(AddressMapper.ToEntity(address)));
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool Update(Address address)
+        public Address Update(Address address)
         {
             try
             {
-                _addressRepository.Add(AddressMapper.ToEntity(address));
-                return true;
+                return AddressMapper.ToDto(_addressRepository.Edit(AddressMapper.ToEntity(address)));
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -74,12 +67,14 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _addressRepository.Find(a => a.AddressId == addressId, false).FirstOrDefault();
+                if (db == null) return false;
+
                 _addressRepository.Delete(db);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return true;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }

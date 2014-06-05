@@ -55,14 +55,7 @@ namespace Blog.Logic.Core
                     var user = UserMapper.ToDto(tUser);
                     return user;
                 }
-                return new User
-                {
-                    Error = new Error
-                    {
-                        Id = (int)Constants.Error.InvalidCredentials,
-                        Message = "Invalid credentials"
-                    }
-                };
+                return new User().GenerateError<User>((int) Constants.Error.InvalidCredentials, "Invalid credentials");
             }
             catch (Exception ex)
             {
@@ -95,10 +88,7 @@ namespace Blog.Logic.Core
                     return UserMapper.ToDto(dbUser);
                 }
 
-                return new User
-                {
-                    Error = hasPassedValidations
-                };
+                return new User().GenerateError<User>(hasPassedValidations.Id, hasPassedValidations.Message);
             }
             catch (Exception ex)
             {
@@ -135,14 +125,7 @@ namespace Blog.Logic.Core
                 return user;
             }
 
-            return new User
-            {
-                Error = new Error
-                {
-                    Id = (int)Constants.Error.RecordNotFound,
-                    Message = "Record not found"
-                }
-            };
+            return new User().GenerateError<User>((int) Constants.Error.RecordNotFound, "User not found");
         }
 
         private Error ValidateUser(User user)
