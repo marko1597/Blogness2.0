@@ -77,12 +77,11 @@ namespace Blog.Logic.Core
             return comments;
         }
 
-        public bool Add(Comment comment)
+        public Comment Add(Comment comment)
         {
             try
             {
-                _commentRepository.Add(CommentMapper.ToEntity(comment));
-                return true;
+                return CommentMapper.ToDto(_commentRepository.Add(CommentMapper.ToEntity(comment)));
             }
             catch (Exception ex)
             {
