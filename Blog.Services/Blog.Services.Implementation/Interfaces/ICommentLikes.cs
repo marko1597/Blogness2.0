@@ -6,6 +6,6 @@ namespace Blog.Services.Implementation.Interfaces
     public interface ICommentLikes
     {
         List<CommentLike> Get(int commentId);
-        void Add(CommentLike commentLike);
+        CommentLike Add(CommentLike commentLike);
     }
 }

@@ -32,7 +32,7 @@ namespace Blog.Logic.Core
             return commentLikes;
         }
 
-        public void Add(CommentLike commentLike)
+        public CommentLike Add(CommentLike commentLike)
         {
             try
             {
@@ -40,11 +40,9 @@ namespace Blog.Logic.Core
                 if (tmpCommentLike.Count > 0)
                 {
                     _commentLikeRepository.Delete(tmpCommentLike.FirstOrDefault());
+                    return null;
                 }
-                else
-                {
-                    _commentLikeRepository.Add(CommentLikeMapper.ToEntity(commentLike));
-                }
+                return CommentLikeMapper.ToDto(_commentLikeRepository.Add(CommentLikeMapper.ToEntity(commentLike)));
             }
             catch (Exception ex)
             {

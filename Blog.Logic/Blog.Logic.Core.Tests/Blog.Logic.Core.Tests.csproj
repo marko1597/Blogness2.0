@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="AddressLogicTest.cs" />
     <Compile Include="AlbumLogicTest.cs" />
+    <Compile Include="CommentLikesLogicTest.cs" />
     <Compile Include="SessionLogicTest.cs" />
     <Compile Include="TagsLogicTest.cs" />
     <Compile Include="UsersLogicTest.cs" />
