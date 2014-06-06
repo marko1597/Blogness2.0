@@ -63,7 +63,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldGetByUser()
+        public void ShouldGetAddressByUser()
         {
             var expected = _addresses.Where(a => a.UserId == 1).ToList();
             _addressRepository = new Mock<IAddressRepository>();
@@ -79,7 +79,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenGetByUserFoundNoRecord()
+        public void ShouldErrorWhenGetAddressByUserFoundNoRecord()
         {
             _addressRepository = new Mock<IAddressRepository>();
             _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), true))
@@ -95,7 +95,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenGetByUserFails()
+        public void ShouldThrowExceptionWhenGetAddressByUserFails()
         {
             _addressRepository = new Mock<IAddressRepository>();
             _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), true))

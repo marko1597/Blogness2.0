@@ -37,7 +37,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _albumRepository.Find(a => a.IsUserDefault && a.UserId == userId, false).First();
+                var db = _albumRepository.Find(a => a.IsUserDefault && a.UserId == userId, false).FirstOrDefault();
 
                 if (db != null)
                 {

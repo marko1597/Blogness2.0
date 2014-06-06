@@ -127,7 +127,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldReturnEmptyWhenGetTagsByPostIdFoundNoPost()
+        public void ShouldReturnEmptyListWhenGetTagsByPostIdFoundNoRecords()
         {
             _tagRepository = new Mock<ITagRepository>();
             _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), null, string.Empty))
