@@ -32,29 +32,27 @@ namespace Blog.Logic.Core
             return education;
         }
 
-        public bool Add(Education education)
+        public Education Add(Education education)
         {
             try
             {
-                _educationRepository.Add(EducationMapper.ToEntity(education));
-                return true;
+                return EducationMapper.ToDto(_educationRepository.Add(EducationMapper.ToEntity(education)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool Update(Education education)
+        public Education Update(Education education)
         {
             try
             {
-                 _educationRepository.Edit(EducationMapper.ToEntity(education));
-                return true;
+                return EducationMapper.ToDto(_educationRepository.Edit(EducationMapper.ToEntity(education)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -62,12 +60,15 @@ namespace Blog.Logic.Core
         {
             try
             {
-                _educationRepository.Delete(_educationRepository.Find(a => a.EducationId == educationId, false).FirstOrDefault());
+                var db = _educationRepository.Find(a => a.EducationId == educationId, false).FirstOrDefault();
+                if (db == null) return false;
+
+                _educationRepository.Delete(db);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }

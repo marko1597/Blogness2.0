@@ -32,29 +32,27 @@ namespace Blog.Logic.Core
             return hobbies;
         }
 
-        public bool Add(Hobby hobby)
+        public Hobby Add(Hobby hobby)
         {
             try
             {
-                _hobbyRepository.Add(HobbyMapper.ToEntity(hobby));
-                return true;
+                return HobbyMapper.ToDto(_hobbyRepository.Add(HobbyMapper.ToEntity(hobby)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
-        public bool Update(Hobby hobby)
+        public Hobby Update(Hobby hobby)
         {
             try
             {
-                _hobbyRepository.Edit(HobbyMapper.ToEntity(hobby));
-                return true;
+                return HobbyMapper.ToDto(_hobbyRepository.Edit(HobbyMapper.ToEntity(hobby)));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
 
@@ -62,12 +60,15 @@ namespace Blog.Logic.Core
         {
             try
             {
-                _hobbyRepository.Delete(_hobbyRepository.Find(a => a.HobbyId == hobbyId, false).FirstOrDefault());
+                var db = _hobbyRepository.Find(a => a.HobbyId == hobbyId, false).FirstOrDefault();
+                if (db == null) return false;
+
+                _hobbyRepository.Delete(db);
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return false;
+                throw new BlogException(ex.Message, ex.InnerException);
             }
         }
     }
