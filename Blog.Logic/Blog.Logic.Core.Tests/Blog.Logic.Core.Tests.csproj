@@ -72,6 +72,7 @@
     <Compile Include="CommentLikesLogicTest.cs" />
     <Compile Include="CommentsLogicTest.cs" />
     <Compile Include="EducationLogicTest.cs" />
+    <Compile Include="MediaLogicTest.cs" />
     <Compile Include="SessionLogicTest.cs" />
     <Compile Include="TagsLogicTest.cs" />
     <Compile Include="HobbyLogicTest.cs" />

@@ -44,7 +44,7 @@ namespace Blog.Logic.Core
             return media;
         }
 
-        public List<Media> GetByGroup(int albumId)
+        public List<Media> GetByAlbum(int albumId)
         {
             var media = new List<Media>();
             try
@@ -63,7 +63,15 @@ namespace Blog.Logic.Core
         {
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.MediaId == mediaId).FirstOrDefault());
+                var db = _mediaRepository.Find(a => a.MediaId == mediaId, true).FirstOrDefault();
+
+                if (db != null)
+                {
+                    return MediaMapper.ToDto(db);
+                }
+
+                return new Media().GenerateError<Media>((int) Constants.Error.RecordNotFound,
+                    string.Format("Media with Id {0} not found", mediaId));
             }
             catch (Exception ex)
             {
@@ -75,7 +83,15 @@ namespace Blog.Logic.Core
         {
             try
             {
-                return MediaMapper.ToDto(_mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault());
+                var db = _mediaRepository.Find(a => a.CustomName == customName, true).FirstOrDefault();
+
+                if (db != null)
+                {
+                    return MediaMapper.ToDto(db);
+                }
+
+                return new Media().GenerateError<Media>((int)Constants.Error.RecordNotFound,
+                    string.Format("Media with name {0} not found", customName));
             }
             catch (Exception ex)
             {

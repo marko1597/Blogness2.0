@@ -19,7 +19,7 @@ namespace Blog.Services.Implementation
 
         public List<Media> GetByGroup(int albumId)
         {
-            return MediaFactory.GetInstance().CreateMedia().GetByGroup(albumId);
+            return MediaFactory.GetInstance().CreateMedia().GetByAlbum(albumId);
         }
 
         public Media GetByName(string customName)
