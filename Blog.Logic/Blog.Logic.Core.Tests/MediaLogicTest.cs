@@ -19,6 +19,7 @@ namespace Blog.Logic.Core.Tests
         private Mock<IAlbumRepository> _albumRepository;
         private Mock<IImageHelper> _imageHelper;
         private Mock<IConfigurationHelper> _configurationHelper;
+        private Mock<IFileHelper> _fileHelper;
         private MediaLogic _mediaLogic;
         private List<Media> _media;
         private List<Album> _albums;
@@ -133,9 +134,10 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository = new Mock<IMediaRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object, 
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByUser(1);
 
@@ -156,9 +158,10 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository = new Mock<IMediaRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByUser(1);
 
@@ -177,9 +180,10 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository = new Mock<IMediaRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             Assert.Throws<BlogException>(() => _mediaLogic.GetByUser(1));
         }
@@ -196,9 +200,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByAlbum(1);
 
@@ -217,9 +222,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByAlbum(1);
 
@@ -237,9 +243,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             Assert.Throws<BlogException>(() => _mediaLogic.GetByAlbum(1));
         }
@@ -256,9 +263,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByName("wigglefudge");
 
@@ -276,9 +284,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.GetByName("wigglefudge");
 
@@ -297,9 +306,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             Assert.Throws<BlogException>(() => _mediaLogic.GetByName("wigglefudge"));
         }
@@ -316,9 +326,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.Get(1);
 
@@ -336,9 +347,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             var result = _mediaLogic.Get(1);
 
@@ -357,9 +369,10 @@ namespace Blog.Logic.Core.Tests
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
+            _fileHelper = new Mock<IFileHelper>();
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object);
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
             Assert.Throws<BlogException>(() => _mediaLogic.Get(1));
         }

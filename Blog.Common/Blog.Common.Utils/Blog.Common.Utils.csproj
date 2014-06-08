@@ -74,7 +74,9 @@
     <Compile Include="Extensions\BlogException.cs" />
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\Interfaces\IConfigurationHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IFileHelper.cs" />
     <Compile Include="Helpers\Interfaces\IImageHelper.cs" />
     <Compile Include="Helpers\Interfaces\IHttpClientHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />

@@ -12,12 +12,12 @@ namespace Blog.Services.Implementation
             return EducationFactory.GetInstance().CreateEducation().GetByUser(userId);
         }
 
-        public bool Add(Education education)
+        public Education Add(Education education)
         {
             return EducationFactory.GetInstance().CreateEducation().Add(education);
         }
 
-        public bool Update(Education education)
+        public Education Update(Education education)
         {
             return EducationFactory.GetInstance().CreateEducation().Update(education);
         }

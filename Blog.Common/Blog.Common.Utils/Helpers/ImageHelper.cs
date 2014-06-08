@@ -12,6 +12,13 @@ namespace Blog.Common.Utils.Helpers
 {
     public class ImageHelper : IImageHelper
     {
+        private IFileHelper _fileHelper;
+        public IFileHelper FileHelper
+        {
+            get { return _fileHelper ?? new FileHelper(); }
+            set { _fileHelper = value; }
+        }
+
         public byte[] ImageToByteArray(Image image)
         {
             try
@@ -55,32 +62,6 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
-        public bool CreateDirectory(string path)
-        {
-            try
-            {
-                Directory.CreateDirectory(path);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public bool DeleteDirectory(string path)
-        {
-            try
-            {
-                Directory.Delete(path, true);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
         public bool CreateThumbnail(string filename, string destinationPath, string thumbnailPrefix)
         {
             try
@@ -92,13 +73,13 @@ namespace Blog.Common.Utils.Helpers
 
                 if (!Directory.Exists(destinationPath.TrimEnd('\\')))
                 {
-                    CreateDirectory(destinationPath);
+                    FileHelper.CreateDirectory(destinationPath);
                 }
 
                 var thumb = ResizeImage(image, GetComputedImageSize(image.Width, image.Height));
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
                 thumb.Save(destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileName(filename), jgpEncoder, encoderParams);
-                
+
                 thumb.Dispose();
                 image.Dispose();
 
@@ -108,7 +89,7 @@ namespace Blog.Common.Utils.Helpers
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
-            
+
         }
 
         public bool CreateVideoThumbnail(string filename, string destinationPath, string thumbnailPrefix)
@@ -117,10 +98,10 @@ namespace Blog.Common.Utils.Helpers
             {
                 if (!Directory.Exists(destinationPath.TrimEnd('\\')))
                 {
-                    CreateDirectory(destinationPath);
+                    FileHelper.CreateDirectory(destinationPath);
                 }
 
-                new FFMpegConverter().GetVideoThumbnail(filename, 
+                new FFMpegConverter().GetVideoThumbnail(filename,
                     destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg");
                 return true;
             }
@@ -143,7 +124,7 @@ namespace Blog.Common.Utils.Helpers
 
                 if (!Directory.Exists(destinationPath.TrimEnd('\\')))
                 {
-                    CreateDirectory(destinationPath);
+                    FileHelper.CreateDirectory(destinationPath);
                 }
 
                 var compressedImage = ResizeImage(img, GetComputedImageSize(img.Width, img.Height));
@@ -175,8 +156,8 @@ namespace Blog.Common.Utils.Helpers
         {
             if (width > 400)
             {
-                var divisor = Convert.ToDouble(width)/400;
-                var tHeight = Math.Round(Convert.ToDouble(height/divisor), 0, MidpointRounding.AwayFromZero);
+                var divisor = Convert.ToDouble(width) / 400;
+                var tHeight = Math.Round(Convert.ToDouble(height / divisor), 0, MidpointRounding.AwayFromZero);
                 var size = new Size
                            {
                                Height = Convert.ToInt32(tHeight),

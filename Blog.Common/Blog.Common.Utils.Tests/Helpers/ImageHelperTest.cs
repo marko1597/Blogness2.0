@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers;
-using Blog.Common.Utils.Helpers.Interfaces;
 using NUnit.Framework;
 
 namespace Blog.Common.Utils.Tests.Helpers
@@ -12,7 +11,7 @@ namespace Blog.Common.Utils.Tests.Helpers
     [TestFixture]
     public class ImageHelperTest
     {
-        private IImageHelper _imageHelper;
+        private ImageHelper _imageHelper;
         private string _rootPath;
 
         [TestFixtureSetUp]
@@ -73,41 +72,6 @@ namespace Blog.Common.Utils.Tests.Helpers
             Assert.Throws<BlogException>(() => _imageHelper.GenerateImagePath(1, "foo", "bar", string.Empty));
         }
 
-        [Test]
-        public void ShouldCreateDirectory()
-        {
-            var result = _imageHelper.CreateDirectory(_rootPath + @"\TestDir");
-
-            Assert.AreEqual(true, result);
-            Assert.IsTrue(Directory.Exists(_rootPath + @"\TestDir"));
-
-            Directory.Delete(_rootPath + @"\TestDir");
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenCreateDirectoryFails()
-        {
-            Assert.Throws<BlogException>(() => _imageHelper.CreateDirectory(null));
-        }
-
-        [Test]
-        public void ShouldSuccessfullyDeleteDirectory()
-        {
-            Directory.CreateDirectory(_rootPath + @"\TestDir");
-            var result = _imageHelper.DeleteDirectory(_rootPath + @"\TestDir");
-
-            Assert.AreEqual(true, result);
-            Assert.IsFalse(Directory.Exists(_rootPath + @"\TestDir"));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenDeleteDirectoryFails()
-        {
-            Directory.CreateDirectory(_rootPath + @"\TestDir");
-            Assert.Throws<BlogException>(() => _imageHelper.CreateDirectory(null));
-            Directory.Delete(_rootPath + @"\TestDir");
-        }
-        
         [Test]
         public void ShouldCreateImageThumbnailLargeWidth()
         {
@@ -180,8 +144,7 @@ namespace Blog.Common.Utils.Tests.Helpers
         [TestFixtureTearDown]
         public void Dispose()
         {
-            Directory.Delete(_rootPath + @"\TestImages\New", true);
+            Directory.Delete(_rootPath + @"\TestImages", true);
         }
-
     }
 }

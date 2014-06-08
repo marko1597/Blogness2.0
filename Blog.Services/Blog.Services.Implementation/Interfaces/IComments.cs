@@ -8,7 +8,7 @@ namespace Blog.Services.Implementation.Interfaces
         List<Comment> GetByPostId(int postId);
         List<Comment> GetByUser(int userId);
         List<Comment> GetReplies(int commentId);
-        bool Add(Comment comment);
+        Comment Add(Comment comment);
         bool Delete(int commentId);
     }
 }

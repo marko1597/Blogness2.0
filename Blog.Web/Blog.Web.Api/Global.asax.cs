@@ -59,7 +59,7 @@ namespace Blog.Web.Api
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
-            //// SI Helper Classes Property Injections
+            // SI Helper Classes Property Injections
             container.RegisterInitializer<AuthenticationHelper>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
             // SI Registrations

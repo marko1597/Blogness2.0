@@ -12,12 +12,12 @@ namespace Blog.Services.Implementation
             return HobbyFactory.GetInstance().CreateHobby().GetByUser(userId);
         }
 
-        public bool Add(Hobby hobby)
+        public Hobby Add(Hobby hobby)
         {
             return HobbyFactory.GetInstance().CreateHobby().Add(hobby);
         }
 
-        public bool Update(Hobby hobby)
+        public Hobby Update(Hobby hobby)
         {
             return HobbyFactory.GetInstance().CreateHobby().Update(hobby);
         }

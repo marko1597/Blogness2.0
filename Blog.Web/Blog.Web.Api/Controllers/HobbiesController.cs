@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Extensions.Elmah;
@@ -38,31 +39,33 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/hobbies")]
-        public bool Post([FromBody]Hobby hobby)
+        public Hobby Post([FromBody]Hobby hobby)
         {
             try
             {
-                _service.Add(hobby);
-                return true;
+                return _service.Add(hobby);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Hobby().GenerateError<Hobby>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 
         [HttpPut]
         [Route("api/hobbies")]
-        public bool Put([FromBody]Hobby hobby)
+        public Hobby Put([FromBody]Hobby hobby)
         {
             try
             {
-                _service.Add(hobby);
-                return true;
+                return _service.Update(hobby);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Hobby().GenerateError<Hobby>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 

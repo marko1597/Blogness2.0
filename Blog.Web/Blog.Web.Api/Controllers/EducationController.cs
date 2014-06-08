@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using System;
 using System.Web.Http;
@@ -38,31 +39,33 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/education")]
-        public bool Post([FromBody]Education education)
+        public Education Post([FromBody]Education education)
         {
             try
             {
-                _service.Add(education);
-                return true;
+                return _service.Add(education);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Education().GenerateError<Education>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 
         [HttpPut]
         [Route("api/education")]
-        public bool Put([FromBody]Education education)
+        public Education Put([FromBody]Education education)
         {
             try
             {
-                _service.Add(education);
-                return true;
+                return _service.Update(education);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new Education().GenerateError<Education>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 

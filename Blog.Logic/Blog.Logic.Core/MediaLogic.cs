@@ -20,13 +20,16 @@ namespace Blog.Logic.Core
         private readonly IAlbumRepository _albumRepository;
         private readonly IImageHelper _imageHelper;
         private readonly IConfigurationHelper _configurationHelper;
+        private readonly IFileHelper _fileHelper;
 
-        public MediaLogic(IMediaRepository mediaRepository, IAlbumRepository albumRepository, IImageHelper imageHelper, IConfigurationHelper configurationHelper)
+        public MediaLogic(IMediaRepository mediaRepository, IAlbumRepository albumRepository, 
+            IImageHelper imageHelper, IConfigurationHelper configurationHelper, IFileHelper fileHelper)
         {
             _mediaRepository = mediaRepository;
             _albumRepository = albumRepository;
             _imageHelper = imageHelper;
             _configurationHelper = configurationHelper;
+            _fileHelper = fileHelper;
         }
 
         public List<Media> GetByUser(int userId)
@@ -112,13 +115,13 @@ namespace Blog.Logic.Core
                 media.CustomName = Guid.NewGuid().ToString();
                 media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
 
-                _imageHelper.CreateDirectory(media.MediaPath);
+                _fileHelper.CreateDirectory(media.MediaPath);
                 var fs = new FileStream(media.MediaPath + media.FileName, FileMode.Create);
                 fs.Write(media.MediaContent, 0, media.MediaContent.Length);
 
                 if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
                 {
-                    _imageHelper.CreateDirectory(media.ThumbnailPath);
+                    _fileHelper.CreateDirectory(media.ThumbnailPath);
                     media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
                 }
 
@@ -153,7 +156,7 @@ namespace Blog.Logic.Core
                 var mediaPath = _imageHelper.GenerateImagePath(user.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
                 if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
 
-                var hasCreatedDir = _imageHelper.CreateDirectory(mediaPath);
+                var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
                 if (!hasCreatedDir) throw new Exception("Error creating media directory");
 
                 var hasSuccessfullyMovedMedia = MoveMediaFileToCorrectPath(filename, path, mediaPath);
@@ -181,8 +184,8 @@ namespace Blog.Logic.Core
                 _mediaRepository.Delete(db);
                 File.Delete(db.ThumbnailPath);
                 File.Delete(db.MediaPath);
-                _imageHelper.DeleteDirectory(db.ThumbnailPath);
-                _imageHelper.DeleteDirectory(db.MediaPath);
+                _fileHelper.DeleteDirectory(db.ThumbnailPath);
+                _fileHelper.DeleteDirectory(db.MediaPath);
 
                 return true;
             }
@@ -192,7 +195,7 @@ namespace Blog.Logic.Core
             }
         }
 
-        private static bool MoveMediaFileToCorrectPath(string filename, string path, string mediaPath)
+        private bool MoveMediaFileToCorrectPath(string filename, string path, string mediaPath)
         {
             try
             {
@@ -200,7 +203,7 @@ namespace Blog.Logic.Core
                 {
                     if (path != null)
                     {
-                        File.Move(path, mediaPath + "\\" + filename);
+                        _fileHelper.MoveFile(path, mediaPath + "\\" + filename);
                         return true;
                     }
                     throw new Exception("Path name is empty");
@@ -265,7 +268,7 @@ namespace Blog.Logic.Core
         {
             if (IsMediaSupported(media.MediaType))
             {
-                _imageHelper.CreateDirectory(media.ThumbnailPath);
+                _fileHelper.CreateDirectory(media.ThumbnailPath);
 
                 if (IsVideo(media.MediaType))
                 {

@@ -22,7 +22,7 @@ namespace Blog.Services.Implementation
             return CommentsFactory.GetInstance().CreateComments().GetReplies(id);
         }
 
-        public bool Add(Comment comment)
+        public Comment Add(Comment comment)
         {
             return CommentsFactory.GetInstance().CreateComments().Add(comment);
         }
