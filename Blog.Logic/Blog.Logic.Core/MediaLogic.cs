@@ -107,24 +107,22 @@ namespace Blog.Logic.Core
             try
             {
                 var guid = Guid.NewGuid().ToString();
-                var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, null, "User").FirstOrDefault();
-                if (album == null) return null;
+                var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, false).FirstOrDefault();
+                if (album == null) throw new Exception("Error creating or finding album");
 
                 media.MediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
                 media.ThumbnailPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation) + "tn\\";
-                media.CustomName = Guid.NewGuid().ToString();
+                media.CustomName = guid;
                 media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
+                media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
 
                 _fileHelper.CreateDirectory(media.MediaPath);
+
                 var fs = new FileStream(media.MediaPath + media.FileName, FileMode.Create);
                 fs.Write(media.MediaContent, 0, media.MediaContent.Length);
 
-                if (media.MediaType != "image/gif" && media.MediaType.Substring(0, 5) != "video")
-                {
-                    _fileHelper.CreateDirectory(media.ThumbnailPath);
-                    media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
-                }
-
+                CreateThumbnail(media, media.MediaPath, media.FileName);
+                
                 if (media.AlbumId == 0)
                 {
                     media.AlbumId =
@@ -147,7 +145,6 @@ namespace Blog.Logic.Core
         {
             try
             {
-                filename = filename.Substring(1, filename.Length - 2);
                 var guid = Guid.NewGuid().ToString();
 
                 var album = GetAlbumByName(albumName, user.UserId);
@@ -165,8 +162,7 @@ namespace Blog.Logic.Core
                 var media = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, user.UserId, contentType, guid);
                 CreateThumbnail(media, mediaPath, filename);
 
-                var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
-                return MediaMapper.ToDto(result);
+                return MediaMapper.ToDto(_mediaRepository.Add(MediaMapper.ToEntity(media)));
             }
             catch (Exception ex)
             {
@@ -178,14 +174,14 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _mediaRepository.Find(a => a.MediaId == mediaId, true).FirstOrDefault();
+                var db = _mediaRepository.Find(a => a.MediaId == mediaId, false).FirstOrDefault();
                 if (db == null) return false;
 
-                _mediaRepository.Delete(db);
-                File.Delete(db.ThumbnailPath);
-                File.Delete(db.MediaPath);
+                _fileHelper.DeleteFile(db.ThumbnailPath);
+                _fileHelper.DeleteFile(db.MediaPath);
                 _fileHelper.DeleteDirectory(db.ThumbnailPath);
                 _fileHelper.DeleteDirectory(db.MediaPath);
+                _mediaRepository.Delete(db);
 
                 return true;
             }
@@ -241,9 +237,9 @@ namespace Blog.Logic.Core
         {
             var album = albumName.ToLower() != "default"
                 ? _albumRepository.Find(a => a.AlbumName.ToLower() == albumName.ToLower()
-                                            && a.UserId == userId).FirstOrDefault()
+                                            && a.UserId == userId, false).FirstOrDefault()
                 : _albumRepository.Find(a => a.IsUserDefault
-                                            && a.UserId == userId).FirstOrDefault();
+                                            && a.UserId == userId, false).FirstOrDefault();
 
             if (album == null)
             {

@@ -134,6 +134,7 @@ namespace Blog.Web.Api.Controllers
                         filename = streamProvider.FileData.Select(entry => entry.Headers.ContentDisposition.FileName).FirstOrDefault();
                     });
 
+                filename = filename.Substring(1, filename.Length - 2);
                 var resultMedia = _media.Add(user, album, filename, chunkName,
                     streamProvider.FileData[0].Headers.ContentType.ToString());
 
