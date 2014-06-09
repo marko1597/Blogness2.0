@@ -140,11 +140,5 @@ namespace Blog.Common.Utils.Tests.Helpers
         {
             Assert.Throws<BlogException>(() => _imageHelper.CreateVideoThumbnail(null, string.Empty, "tn_"));
         }
-
-        [TestFixtureTearDown]
-        public void Dispose()
-        {
-            Directory.Delete(_rootPath + @"\TestImages", true);
-        }
     }
 }
