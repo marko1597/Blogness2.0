@@ -1,4 +1,5 @@
-﻿using Blog.DataAccess.Database.Repository.Interfaces;
+﻿using Blog.DataAccess.Database.Repository;
+using Blog.DataAccess.Database.Repository.Interfaces;
 using Db = Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.Logic.Core.Factory

@@ -1,5 +1,4 @@
-﻿using Blog.Common.Contracts;
-using Blog.DataAccess.Database.Repository;
+﻿using Blog.DataAccess.Database.Repository;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Db = Blog.DataAccess.Database.Entities.Objects;
 

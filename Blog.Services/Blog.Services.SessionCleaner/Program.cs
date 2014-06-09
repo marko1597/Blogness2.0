@@ -1,6 +1,4 @@
-﻿using System.ServiceProcess;
-
-namespace Blog.Services.SessionCleaner
+﻿namespace Blog.Services.SessionCleaner
 {
     static class Program
     {

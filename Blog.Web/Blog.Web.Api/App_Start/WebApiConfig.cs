@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
-using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api
 {
