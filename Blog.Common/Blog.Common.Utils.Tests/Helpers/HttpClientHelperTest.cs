@@ -97,6 +97,20 @@ namespace Blog.Common.Utils.Tests.Helpers
             Assert.Throws<BlogException>(() => httpClientHelper.Put("http://localhost/", "foo", testObj));
         }
 
+        [Test]
+        public void ShouldCreateHttpClientPropertyWhenItIsNull()
+        {
+            var httpClientHelper = new HttpClientHelper
+            {
+                HttpClientObj = null,
+                BaseUri = "http://localhost/foo"
+            };
+            var result = httpClientHelper.HttpClientObj;
+
+            Assert.NotNull(result);
+            Assert.AreEqual("http://localhost/foo", result.BaseAddress.ToString());
+        }
+
         public class FakeHttpMessageHandler : HttpMessageHandler
         {
             readonly HttpResponseMessage _response;

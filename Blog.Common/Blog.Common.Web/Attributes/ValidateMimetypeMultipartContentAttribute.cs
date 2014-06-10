@@ -15,11 +15,5 @@ namespace Blog.Common.Web.Attributes
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
         }
-
-        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
-        {
-
-        }
-
     }
 }

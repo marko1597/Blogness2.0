@@ -128,16 +128,16 @@ namespace Blog.Common.Utils.Helpers
                 }
 
                 var compressedImage = ResizeImage(img, GetComputedImageSize(img.Width, img.Height));
-                var jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                var jpgEncoder = GetEncoder(ImageFormat.Jpeg);
                 var encoder = Encoder.Quality;
                 var encoderParams = new EncoderParameters(1);
 
                 encoderParams.Param[0] = new EncoderParameter(encoder, 100L);
-                compressedImage.Save(destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg", jgpEncoder, encoderParams);
+                compressedImage.Save(destinationPath.TrimEnd('\\') + @"\" + thumbnailPrefix + Path.GetFileNameWithoutExtension(filename) + ".jpg", jpgEncoder, encoderParams);
 
                 compressedImage.Dispose();
                 img.Dispose();
-
+                
                 return true;
             }
             catch (Exception ex)
@@ -184,7 +184,8 @@ namespace Blog.Common.Utils.Helpers
 
             var rect = new Rectangle(x, y, thumbSize.Width, thumbSize.Height);
             g.DrawImage(mg, rect, 0, 0, mg.Width, mg.Height, GraphicsUnit.Pixel);
-
+            g.Dispose();
+            
             return image;
         }
     }

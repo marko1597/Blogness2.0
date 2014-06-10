@@ -89,6 +89,23 @@ namespace Blog.Common.Utils.Tests.Helpers
             _fileHelper.DeleteDirectory(_rootPath + @"\TestFile");
         }
 
+        [Test]
+        public void ShouldMoveFile()
+        {
+            _fileHelper.CreateFile(_rootPath + @"\TestFile\fudge.txt");
+            var result = _fileHelper.MoveFile(_rootPath + @"\TestFile\fudge.txt", _rootPath + @"\TestFile\tumbler.txt");
+
+            Assert.AreEqual(true, result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestFile\tumbler.txt"));
+            _fileHelper.DeleteFile(_rootPath + @"\TestFile\tumbler.txt");
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenMoveFileFails()
+        {
+            Assert.Throws<BlogException>(() => _fileHelper.MoveFile(null, null));
+        }
+
         [TestFixtureTearDown]
         public void Dispose()
         {

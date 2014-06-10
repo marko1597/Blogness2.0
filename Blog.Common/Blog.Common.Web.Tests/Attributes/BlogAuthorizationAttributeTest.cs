@@ -112,5 +112,15 @@ namespace Blog.Common.Web.Tests.Attributes
 
             Assert.IsInstanceOf(typeof(HttpUnauthorizedResult), _authenticationContext.Object.Result);
         }
+
+        [Test]
+        public void ShouldDoNothingOnAuthenticationChallenge()
+        {
+            var session = new Mock<ISession>();
+            var authChallengeContext = new Mock<AuthenticationChallengeContext>();
+            var attribute = new BlogAuthorizationAttribute { Session = session.Object };
+            
+            Assert.DoesNotThrow(() => attribute.OnAuthenticationChallenge(authChallengeContext.Object));
+        }
     }
 }

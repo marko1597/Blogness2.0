@@ -8,7 +8,7 @@ namespace Blog.Common.Utils.Helpers
 {
     public class HttpClientHelper : IHttpClientHelper
     {
-        private string BaseUri { get; set; }
+        public string BaseUri { get; set; }
 
         private HttpClient _httpClientObj;
         public HttpClient HttpClientObj

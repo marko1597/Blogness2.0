@@ -49,6 +49,13 @@ namespace Blog.Common.Utils.Tests.Helpers
         }
 
         [Test]
+        public void ShouldReturnMediumOnPasswordWithNumbersAndUpperAndLowerCaseLetters()
+        {
+            var result = PasswordManager.CheckStrength("LOREMipsum");
+            Assert.AreEqual(Constants.PasswordScore.Medium, result);
+        }
+
+        [Test]
         public void ShouldReturnLikeABossOnPasswordWithNumbersAndUpperCaseLettersAndSpecialCharacters()
         {
             var result = PasswordManager.CheckStrength("LoremIpsumDolor123!!");

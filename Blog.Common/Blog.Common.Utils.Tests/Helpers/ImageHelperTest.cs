@@ -19,6 +19,26 @@ namespace Blog.Common.Utils.Tests.Helpers
         {
             _imageHelper = new ImageHelper();
             _rootPath = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
+
+            if (Directory.Exists(_rootPath + @"\TestImages\New")) Directory.Delete(_rootPath + @"\TestImages\New", true);
+            if (Directory.Exists(_rootPath + @"\TestImages\DirJpg")) Directory.Delete(_rootPath + @"\TestImages\DirJpg", true);
+            if (Directory.Exists(_rootPath + @"\TestImages\DirGif")) Directory.Delete(_rootPath + @"\TestImages\DirGif", true);
+            if (Directory.Exists(_rootPath + @"\TestImages\DirVid")) Directory.Delete(_rootPath + @"\TestImages\DirVid", true);
+        }
+
+        [Test]
+        public void ShouldBeAbleToSetFileHelper()
+        {
+            Assert.DoesNotThrow(() => _imageHelper.FileHelper = new FileHelper());
+        }
+
+        [Test]
+        public void ShouldBeAbleToGetFileHelper()
+        {
+            var result = _imageHelper.FileHelper = new FileHelper();
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf(typeof(FileHelper), result);
         }
         
         [Test]
@@ -95,6 +115,17 @@ namespace Blog.Common.Utils.Tests.Helpers
         }
 
         [Test]
+        public void ShouldCreateDirectoryOnCreateThumbnailIfNotExists()
+        {
+            var result = _imageHelper.CreateThumbnail(_rootPath + @"\TestImages\Jpg_Image_Small.jpg", _rootPath + @"\TestImages\DirJpg\", "tn_");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\DirJpg\tn_Jpg_Image_Small.jpg"));
+            Assert.AreEqual(394, Image.FromFile(_rootPath + @"\TestImages\DirJpg\tn_Jpg_Image_Small.jpg").Width);
+            Assert.AreEqual(500, Image.FromFile(_rootPath + @"\TestImages\DirJpg\tn_Jpg_Image_Small.jpg").Height);
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenCreateImageThumbnailFails()
         {
             Assert.Throws<BlogException>(() => _imageHelper.CreateThumbnail(null, string.Empty, "tn_"));
@@ -109,6 +140,17 @@ namespace Blog.Common.Utils.Tests.Helpers
             Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\New\tn_Gif_Image.jpg"));
             Assert.AreEqual(400, Image.FromFile(_rootPath + @"\TestImages\New\tn_Gif_Image.jpg").Width);
             Assert.AreEqual(176, Image.FromFile(_rootPath + @"\TestImages\New\tn_Gif_Image.jpg").Height);
+        }
+
+        [Test]
+        public void ShouldCreateDirectoryOnCreateGifThumbnailIfNotExists()
+        {
+            var result = _imageHelper.CreateGifThumbnail(_rootPath + @"\TestImages\Gif_Image.gif", _rootPath + @"\TestImages\DirGif\", "tn_");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\DirGif\tn_Gif_Image.jpg"));
+            Assert.AreEqual(400, Image.FromFile(_rootPath + @"\TestImages\DirGif\tn_Gif_Image.jpg").Width);
+            Assert.AreEqual(176, Image.FromFile(_rootPath + @"\TestImages\DirGif\tn_Gif_Image.jpg").Height);
         }
 
         [Test]
@@ -133,6 +175,15 @@ namespace Blog.Common.Utils.Tests.Helpers
 
             Assert.IsTrue(result);
             Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\New\tn_Video_Image.jpg"));
+        }
+
+        [Test]
+        public void ShouldCreateDirectoryOnCreateVideoThumbnailIfNotExists()
+        {
+            var result = _imageHelper.CreateVideoThumbnail(_rootPath + @"\TestImages\Video_Image.mp4", _rootPath + @"\TestImages\DirVid\", "tn_");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\DirVid\tn_Video_Image.jpg"));
         }
 
         [Test]
