@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Net;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -26,7 +27,10 @@ namespace Blog.Web.Api
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatConfig.RegisterFormats(GlobalConfiguration.Configuration.Formatters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            SslValidator.OverrideValidation();
+
+            // Allow Any Certificates
+            // This should not be the same in Production
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
             
             // Simple Injection Setup
             var container = new Container();

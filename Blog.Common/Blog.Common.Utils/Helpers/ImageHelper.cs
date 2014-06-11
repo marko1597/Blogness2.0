@@ -46,6 +46,46 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
+        public bool SaveImage(Image image, string destinationPath, string fileName)
+        {
+            try
+            {
+                if (!Directory.Exists(destinationPath.TrimEnd('\\')))
+                {
+                    FileHelper.CreateDirectory(destinationPath);
+                }
+                image.Save(string.Format("{0}{1}{2}", destinationPath.TrimEnd('\\'), "\\", fileName));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public bool SaveImage(byte[] bytes, string destinationPath, string fileName)
+        {
+            try
+            {
+                if (!Directory.Exists(destinationPath.TrimEnd('\\')))
+                {
+                    FileHelper.CreateDirectory(destinationPath);
+                }
+
+                using (var image = ByteArrayToImage(bytes))
+                {
+                    image.Save(string.Format("{0}{1}{2}", destinationPath.TrimEnd('\\'), "\\", fileName));
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public string GenerateImagePath(int id, string name, string guid, string storageRoot)
         {
             try

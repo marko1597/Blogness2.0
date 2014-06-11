@@ -21,6 +21,8 @@ namespace Blog.Common.Utils.Tests.Helpers
             _rootPath = Path.GetDirectoryName(Uri.UnescapeDataString(new UriBuilder(Assembly.GetExecutingAssembly().CodeBase).Path));
 
             if (Directory.Exists(_rootPath + @"\TestImages\New")) Directory.Delete(_rootPath + @"\TestImages\New", true);
+            if (Directory.Exists(_rootPath + @"\TestImages\SaveImage")) Directory.Delete(_rootPath + @"\TestImages\SaveImage", true);
+            if (Directory.Exists(_rootPath + @"\TestImages\SaveBytes")) Directory.Delete(_rootPath + @"\TestImages\SaveBytes", true);
             if (Directory.Exists(_rootPath + @"\TestImages\DirJpg")) Directory.Delete(_rootPath + @"\TestImages\DirJpg", true);
             if (Directory.Exists(_rootPath + @"\TestImages\DirGif")) Directory.Delete(_rootPath + @"\TestImages\DirGif", true);
             if (Directory.Exists(_rootPath + @"\TestImages\DirVid")) Directory.Delete(_rootPath + @"\TestImages\DirVid", true);
@@ -48,6 +50,7 @@ namespace Blog.Common.Utils.Tests.Helpers
             var result = _imageHelper.ImageToByteArray(image);
 
             Assert.IsInstanceOf(typeof(byte[]), result);
+            image.Dispose();
         }
 
         [Test]
@@ -64,12 +67,79 @@ namespace Blog.Common.Utils.Tests.Helpers
             var result = _imageHelper.ByteArrayToImage(byteArray);
 
             Assert.IsInstanceOf(typeof(Image), result);
+            image.Dispose();
         }
 
         [Test]
         public void ShouldThrowExceptionWhenTransformByteArrayToImageHasNullArray()
         {
             Assert.Throws<BlogException>(() => _imageHelper.ByteArrayToImage(null));
+        }
+
+        [Test]
+        public void ShouldSaveImageFromImage()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            var result = _imageHelper.SaveImage(image, _rootPath + @"\TestImages\New", "Jpg_SaveFromImage.jpg");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\New\Jpg_SaveFromImage.jpg"));
+            image.Dispose();
+        }
+
+        [Test]
+        public void ShouldCreateDirectoryWhenSaveImageFromImageDirectoryDoesNotExist()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            var result = _imageHelper.SaveImage(image, _rootPath + @"\TestImages\SaveImage", "Jpg_SaveFromImage.jpg");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\SaveImage\Jpg_SaveFromImage.jpg"));
+            image.Dispose();
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSaveImageFromImageFails()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            Assert.Throws<BlogException>(() => _imageHelper.SaveImage(image, null, null));
+            image.Dispose();
+        }
+
+        [Test]
+        public void ShouldSaveImageFromByteArray()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            var bytes = _imageHelper.ImageToByteArray(image);
+            image.Dispose();
+
+            var result = _imageHelper.SaveImage(bytes, _rootPath + @"\TestImages\New", "Jpg_SaveFromBytes.jpg");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\New\Jpg_SaveFromBytes.jpg"));
+        }
+
+        [Test]
+        public void ShouldCreateDirectoryWhenSaveImageFromByteArrayDirectoryDoesNotExist()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            var bytes = _imageHelper.ImageToByteArray(image);
+            image.Dispose();
+
+            var result = _imageHelper.SaveImage(bytes, _rootPath + @"\TestImages\SaveBytes", "Jpg_SaveFromBytes.jpg");
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(_rootPath + @"\TestImages\SaveBytes\Jpg_SaveFromBytes.jpg"));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSaveImageFromByteArrayFails()
+        {
+            var image = Image.FromFile(_rootPath + @"\TestImages\Jpg_Image.jpg");
+            var bytes = _imageHelper.ImageToByteArray(image);
+            image.Dispose();
+
+            Assert.Throws<BlogException>(() => _imageHelper.SaveImage(bytes, null, null));
         }
 
         [Test]

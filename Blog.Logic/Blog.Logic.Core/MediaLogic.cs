@@ -107,33 +107,25 @@ namespace Blog.Logic.Core
             try
             {
                 var guid = Guid.NewGuid().ToString();
+                var extension = media.MediaType != null ? media.MediaType.Split('/')[1] ?? "jpg" : "jpg";
+                var filename = guid + "." + extension;
+
                 var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, false).FirstOrDefault();
                 if (album == null) throw new Exception("Error creating or finding album");
 
-                media.MediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
-                media.ThumbnailPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation) + "tn\\";
-                media.CustomName = guid;
-                media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
-                media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
+                var mediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
 
-                _fileHelper.CreateDirectory(media.MediaPath);
+                var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
+                if (!hasCreatedDir) throw new Exception("Error creating media directory");
 
-                var fs = new FileStream(media.MediaPath + media.FileName, FileMode.Create);
-                fs.Write(media.MediaContent, 0, media.MediaContent.Length);
+                var hasCreatedMedia = _imageHelper.SaveImage(media.MediaContent, mediaPath, filename);
+                if (!hasCreatedMedia) throw new Exception("Error saving media");
 
-                CreateThumbnail(media, media.MediaPath, media.FileName);
-                
-                if (media.AlbumId == 0)
-                {
-                    media.AlbumId =
-                        AlbumFactory.GetInstance()
-                            .CreateAlbumLogic()
-                            .GetUserDefaultGroup(album.UserId)
-                            .AlbumId;
-                }
+                var tMedia = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, album.UserId, media.MediaType, guid);
+                CreateThumbnail(tMedia, mediaPath, filename);
 
-                var result = _mediaRepository.Add(MediaMapper.ToEntity(media));
-                return MediaMapper.ToDto(result);
+                return MediaMapper.ToDto(_mediaRepository.Add(MediaMapper.ToEntity(media)));
             }
             catch (Exception ex)
             {

@@ -84,7 +84,6 @@
     <Compile Include="Helpers\ServiceProxyHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
-    <Compile Include="Helpers\SslValidator.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -25,8 +26,7 @@ namespace Blog.Web.Site
 
             // Allow Any Certificates
             // This should not be the same in Production
-            // ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-            SslValidator.OverrideValidation();
+            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
             // Create the container as usual.
             var container = new Container();
