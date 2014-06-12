@@ -12,10 +12,12 @@ namespace Blog.Logic.Core
     public class PostContentsLogic
     {
         private readonly IPostContentRepository _postContentRepository;
+        private readonly IMediaRepository _mediaRepository;
 
-        public PostContentsLogic(IPostContentRepository postContentRepository)
+        public PostContentsLogic(IPostContentRepository postContentRepository, IMediaRepository mediaRepository)
         {
             _postContentRepository = postContentRepository;
+            _mediaRepository = mediaRepository;
         }
 
         public List<PostContent> GetByPostId(int postId)
@@ -54,7 +56,7 @@ namespace Blog.Logic.Core
             {
                 if (postContent.Media != null && postContent.Media.MediaId == 0)
                 {
-                    MediaFactory.GetInstance().CreateMedia().Add(postContent.Media);
+                    _mediaRepository.Add(MediaMapper.ToEntity(postContent.Media));
                 }
                 _postContentRepository.Add(PostContentMapper.ToEntity(postContent));
 
