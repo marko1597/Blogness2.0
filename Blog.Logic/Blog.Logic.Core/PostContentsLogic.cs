@@ -12,12 +12,10 @@ namespace Blog.Logic.Core
     public class PostContentsLogic
     {
         private readonly IPostContentRepository _postContentRepository;
-        private readonly IMediaRepository _mediaRepository;
 
-        public PostContentsLogic(IPostContentRepository postContentRepository, IMediaRepository mediaRepository)
+        public PostContentsLogic(IPostContentRepository postContentRepository)
         {
             _postContentRepository = postContentRepository;
-            _mediaRepository = mediaRepository;
         }
 
         public List<PostContent> GetByPostId(int postId)
@@ -44,7 +42,7 @@ namespace Blog.Logic.Core
                 if (db != null)
                 {
                     return PostContentMapper.ToDto(db);
-            }
+                }
 
                 return new PostContent().GenerateError<PostContent>(
                     (int)Constants.Error.RecordNotFound,

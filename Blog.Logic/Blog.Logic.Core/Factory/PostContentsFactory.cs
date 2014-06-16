@@ -25,8 +25,7 @@ namespace Blog.Logic.Core.Factory
         public PostContentsLogic CreatePostContents()
         {
             IPostContentRepository postContentRepository = new PostContentRepository();
-            IMediaRepository mediaRepository =  new MediaRepository();
-            return new PostContentsLogic(postContentRepository, mediaRepository);
+            return new PostContentsLogic(postContentRepository);
         }
     }
 }
