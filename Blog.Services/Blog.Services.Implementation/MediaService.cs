@@ -27,9 +27,9 @@ namespace Blog.Services.Implementation
             return MediaFactory.GetInstance().CreateMedia().GetByName(customName);
         }
 
-        public Media Add(Media media)
+        public Media Add(Media media, int userId)
         {
-            return MediaFactory.GetInstance().CreateMedia().Add(media);
+            return MediaFactory.GetInstance().CreateMedia().Add(media, userId);
         }
 
 
