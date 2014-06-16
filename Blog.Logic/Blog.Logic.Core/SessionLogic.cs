@@ -172,8 +172,15 @@ namespace Blog.Logic.Core
 
         public void CleanupExpiredSessions()
         {
-            var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.Now, false).ToList();
-            oldSessions.ForEach(a => _sessionRepository.Delete(a));
+            try
+            {
+                var oldSessions = _sessionRepository.Find(a => a.TimeValidity <= DateTime.Now, false).ToList();
+                oldSessions.ForEach(a => _sessionRepository.Delete(a));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
     }
 }

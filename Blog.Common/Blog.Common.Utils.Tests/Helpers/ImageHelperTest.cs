@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -9,6 +10,7 @@ using NUnit.Framework;
 namespace Blog.Common.Utils.Tests.Helpers
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class ImageHelperTest
     {
         private ImageHelper _imageHelper;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.Common.Utils;
@@ -12,6 +13,7 @@ using NUnit.Framework;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class UsersLogicTest
     {
         #region Objects
@@ -260,6 +262,77 @@ namespace Blog.Logic.Core.Tests
             Assert.NotNull(user.Picture);
             Assert.NotNull(user.Background);
             Assert.AreEqual(user.UserId, userId);
+        }
+
+        [Test]
+        public void ShouldGetEmptyAddressWhenGetUserHasNoId()
+        {
+            const int userId = 1;
+            var educations = _educations.Where(a => a.UserId == userId).ToList();
+            var dbUser = _users.Where(a => a.UserId == 1).ToList();
+            dbUser[0].UserId = 0;
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Returns(dbUser);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), false))
+                .Returns(_addresses);
+
+            _educationRepository = new Mock<IEducationRepository>();
+            _educationRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Education, bool>>>(), true))
+                .Returns(educations);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), null, string.Empty))
+                .Returns(_mediae);
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.Get(userId);
+
+            Assert.NotNull(user);
+            Assert.NotNull(user.Address);
+            Assert.AreEqual(0, user.Address.AddressId);
+        }
+
+        [Test]
+        public void ShouldGetEmptyEducationListWhenGetUserHasNoId()
+        {
+            const int userId = 1;
+            var educations = _educations.Where(a => a.UserId == userId).ToList();
+            var dbUser = _users.Where(a => a.UserId == 1).ToList();
+            dbUser[0].UserId = 0;
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Returns(dbUser);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _addressRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Address, bool>>>(), false))
+                .Returns(_addresses);
+
+            _educationRepository = new Mock<IEducationRepository>();
+            _educationRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Education, bool>>>(), true))
+                .Returns(educations);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), null, string.Empty))
+                .Returns(_mediae);
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.Get(userId);
+
+            Assert.NotNull(user);
+            Assert.NotNull(user.Address);
+            Assert.NotNull(user.Education);
+            Assert.AreEqual(0, user.Education.Count);
         }
 
         [Test]
@@ -739,6 +812,91 @@ namespace Blog.Logic.Core.Tests
             Assert.NotNull(user.Error);
             Assert.AreEqual(user.Error.Id, (int)Constants.Error.ValidationError);
             Assert.AreEqual(user.Error.Message, "Password is not too complex");
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenAddUserFails()
+        {
+            var request = new Common.Contracts.User
+            {
+                UserName = "foo",
+                Password = "fooBar12345!",
+                FirstName = "foo",
+                LastName = "bar",
+                EmailAddress = "test@mgail.com",
+                BirthDate = DateTime.Now
+            };
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Add(It.IsAny<User>()))
+                .Throws(new Exception());
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false))
+                .Returns(new List<User>());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _usersLogic.Add(request));
+        }
+
+        [Test]
+        public void ShouldUpdateUser()
+        {
+            var request = new Common.Contracts.User
+            {
+                UserName = "foo",
+                Password = "fooBar12345!",
+                FirstName = "foo",
+                LastName = "bar",
+                EmailAddress = "test@mgail.com",
+                BirthDate = DateTime.Now
+            };
+            var result = new User
+            {
+                UserName = "foo",
+                Password = "fooBar12345!",
+                FirstName = "foo",
+                LastName = "bar",
+                EmailAddress = "test@gmail.com",
+                BirthDate = DateTime.Now
+            };
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Edit(It.IsAny<User>()))
+                .Returns(result);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.Update(request);
+
+            Assert.NotNull(user);
+            Assert.IsNull(user.Error);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenUpdateUserFails()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Edit(It.IsAny<User>()))
+                .Throws(new Exception());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _usersLogic.Update(new Common.Contracts.User()));
         }
     }
 }

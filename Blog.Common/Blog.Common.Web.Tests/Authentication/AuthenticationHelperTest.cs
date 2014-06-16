@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Authentication;
@@ -10,6 +11,7 @@ using NUnit.Framework;
 namespace Blog.Common.Web.Tests.Authentication
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class AuthenticationHelperTest
     {
         private Mock<IErrorSignaler> _errorSignaler;

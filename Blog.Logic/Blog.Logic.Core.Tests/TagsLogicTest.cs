@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.Common.Utils;
@@ -12,6 +13,7 @@ using NUnit.Framework;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class TagsLogicTest
     {
         private Mock<ITagRepository> _tagRepository;

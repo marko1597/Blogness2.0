@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{36A4328A-BF39-4080-8D22-00971679532B}</ProjectGuid>
+    <ProjectGuid>{CFC68387-43FD-4EAD-9F24-B99CC4941D4E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blog.Logic.Core.Tests</RootNamespace>
-    <AssemblyName>Blog.Logic.Core.Tests</AssemblyName>
+    <RootNamespace>Blog.Common.Contracts.Tests</RootNamespace>
+    <AssemblyName>Blog.Common.Contracts.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -19,14 +19,14 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Remote|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Home|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>3</WarningLevel>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Home|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -49,11 +49,10 @@
     <Reference Include="Moq">
       <HintPath>..\..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -68,50 +67,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AddressLogicTest.cs" />
-    <Compile Include="AlbumLogicTest.cs" />
-    <Compile Include="CommentLikesLogicTest.cs" />
-    <Compile Include="CommentsLogicTest.cs" />
-    <Compile Include="EducationLogicTest.cs" />
-    <Compile Include="MediaLogicTest.cs" />
-    <Compile Include="PostContentsLogicTest.cs" />
-    <Compile Include="PostLikesLogicTest.cs" />
-    <Compile Include="PostsLogicTest.cs" />
-    <Compile Include="SessionLogicTest.cs" />
-    <Compile Include="TagsLogicTest.cs" />
-    <Compile Include="HobbyLogicTest.cs" />
-    <Compile Include="UsersLogicTest.cs" />
+    <Compile Include="BaseContractTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">
+    <ProjectReference Include="..\Blog.Common.Contracts\Blog.Common.Contracts.csproj">
       <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
       <Name>Blog.Common.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Utils\Blog.Common.Utils.csproj">
-      <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
-      <Name>Blog.Common.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Blog.DataAccess\Blog.DataAccess.Database\Blog.DataAccess.Database.csproj">
-      <Project>{9caf7700-6fba-41d0-9c55-efdacfa2e073}</Project>
-      <Name>Blog.DataAccess.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Blog.Logic.Core\Blog.Logic.Core.csproj">
-      <Project>{388f088c-90f5-46e7-b7d1-422e0f577513}</Project>
-      <Name>Blog.Logic.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Blog.Logic.ObjectMapper\Blog.Logic.ObjectMapper.csproj">
-      <Project>{b7b41254-99cc-439c-b40b-6c0cd4978adf}</Project>
-      <Name>Blog.Logic.ObjectMapper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="TestImages\Jpg_Image.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

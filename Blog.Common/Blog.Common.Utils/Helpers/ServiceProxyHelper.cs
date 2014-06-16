@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
 namespace Blog.Common.Utils.Helpers
 {
+    [ExcludeFromCodeCoverage]
     public class ServiceProxyHelper<TInterface> : ClientBase<TInterface>, IDisposable where TInterface : class
     {
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
@@ -14,6 +15,7 @@ using NUnit.Framework;
 namespace Blog.Common.Web.Tests.Attributes
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class BlogAuthorizationAttributeTest
     {
         private Mock<HttpRequestBase> _requestBase;

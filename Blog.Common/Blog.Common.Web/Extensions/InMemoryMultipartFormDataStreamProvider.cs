@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Common.Web.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public class InMemoryMultipartFormDataStreamProvider : MultipartStreamProvider
     {
         private readonly NameValueCollection _formData = new NameValueCollection();

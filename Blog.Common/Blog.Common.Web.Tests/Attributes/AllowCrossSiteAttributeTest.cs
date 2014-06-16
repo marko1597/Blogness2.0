@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using NUnit.Framework;
 namespace Blog.Common.Web.Tests.Attributes
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class AllowCrossSiteAttributeTest
     {
         [Test]

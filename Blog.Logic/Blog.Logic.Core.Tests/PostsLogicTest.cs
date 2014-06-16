@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -12,6 +13,7 @@ using NUnit.Framework;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class PostsLogicTest
     {
         private Mock<IPostRepository> _postRepository;

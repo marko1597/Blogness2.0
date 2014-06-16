@@ -1,9 +1,11 @@
-﻿using Blog.Common.Utils.Helpers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Blog.Common.Utils.Helpers;
 using NUnit.Framework;
 
 namespace Blog.Common.Utils.Tests.Helpers
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class ConfigurationHelperTest
     {
         [Test]

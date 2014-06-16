@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using Blog.Common.Utils.Extensions;
@@ -8,6 +9,7 @@ using NUnit.Framework;
 namespace Blog.Common.Utils.Tests.Helpers
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class FileHelperTest
     {
         private FileHelper _fileHelper;

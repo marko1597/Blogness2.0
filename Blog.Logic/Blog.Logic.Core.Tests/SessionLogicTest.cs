@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.Common.Utils;
@@ -12,6 +13,7 @@ using NUnit.Framework;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class SessionLogicTest
     {
         private Mock<ISessionRepository> _sessionRepository;
@@ -92,7 +94,7 @@ namespace Blog.Logic.Core.Tests
             _userRepository = new Mock<IUserRepository>();
 
             _sessionLogic = new SessionLogic(_sessionRepository.Object, _userRepository.Object);
-            
+
             Assert.Throws<BlogException>(() => _sessionLogic.GetAll());
         }
 
@@ -264,8 +266,13 @@ namespace Blog.Logic.Core.Tests
                               TimeValidity = DateTime.Now.AddHours(3),
                               UserId = 1
                           };
+            var sessions = new List<Session>
+                           {
+                               new Session {SessionId = 1},
+                               new Session {SessionId = 2}
+                           };
             _sessionRepository = new Mock<ISessionRepository>();
-            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
+            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(sessions);
             _sessionRepository.Setup(a => a.Add(It.IsAny<Session>())).Returns(session);
             _sessionRepository.Setup(a => a.Delete(It.IsAny<Session>()));
 
@@ -303,6 +310,25 @@ namespace Blog.Logic.Core.Tests
             Assert.IsNotNull(result.Error);
             Assert.AreEqual((int)Constants.Error.InvalidCredentials, result.Error.Id);
             Assert.AreEqual("Invalid username/password", result.Error.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenLoginHasFailedOnDeletingSessionFromSameIp()
+        {
+            var sessions = new List<Session>
+                           {
+                               new Session {SessionId = 1},
+                               new Session {SessionId = 2}
+                           };
+            _sessionRepository = new Mock<ISessionRepository>();
+            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(sessions);
+            _sessionRepository.Setup(a => a.Delete(It.IsAny<Session>())).Throws(new Exception());
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _sessionLogic = new SessionLogic(_sessionRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _sessionLogic.Login("foo", "bar", "::1"));
         }
 
         [Test]
@@ -458,17 +484,50 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenCleanUpSessionFails()
+        public void ShouldBeAbleToCleanUpSessions()
         {
+            var sessions = new List<Session>
+                           {
+                               new Session {SessionId = 1},
+                               new Session {SessionId = 2}
+                           };
             _sessionRepository = new Mock<ISessionRepository>();
-            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
-            _sessionRepository.Setup(a => a.Delete(It.IsAny<Session>())).Throws(new Exception());
+            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(sessions);
+            _sessionRepository.Setup(a => a.Delete(It.IsAny<Session>()));
 
             _userRepository = new Mock<IUserRepository>();
 
             _sessionLogic = new SessionLogic(_sessionRepository.Object, _userRepository.Object);
 
-            Assert.Throws<BlogException>(() => _sessionLogic.GetByUser("foo"));
+            Assert.DoesNotThrow(() => _sessionLogic.CleanupExpiredSessions());
+        }
+
+        [Test]
+        public void ShouldNotThrowExceptionWhenCleanUpSessionsFoundNoEligibleSessionsToBeCleaned()
+        {
+            _sessionRepository = new Mock<ISessionRepository>();
+            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false)).Returns(new List<Session>());
+            _sessionRepository.Setup(a => a.Delete(It.IsAny<Session>()));
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _sessionLogic = new SessionLogic(_sessionRepository.Object, _userRepository.Object);
+
+            Assert.DoesNotThrow(() => _sessionLogic.CleanupExpiredSessions());
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenCleanUpSessionFails()
+        {
+            _sessionRepository = new Mock<ISessionRepository>();
+            _sessionRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Session, bool>>>(), false))
+                .Throws(new Exception());
+            
+            _userRepository = new Mock<IUserRepository>();
+
+            _sessionLogic = new SessionLogic(_sessionRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _sessionLogic.CleanupExpiredSessions());
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +18,7 @@ using NUnit.Framework;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class MediaLogicTest
     {
         private Mock<IMediaRepository> _mediaRepository;
@@ -491,6 +493,55 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldAddVideoMediaWithDefaultAlbum()
+        {
+            var guid = Guid.NewGuid().ToString();
+            var album = _albums.Where(a => a.IsUserDefault).ToList();
+            var dbResult = new Media
+            {
+                MediaId = 5,
+                AlbumId = 1,
+                Album = _albums[0],
+                FileName = "foobarbaz.mp4",
+                MediaPath = _rootPath + @"\AddedImages\1\foo\" + guid,
+                CustomName = guid,
+                MediaType = "video/mp4",
+                MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", UserHelper.GetLocalIpAddress(), guid),
+                ThumbnailPath = _rootPath + @"\AddedImages\1\foo\" + guid + @"\tn",
+                ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/{1}/{2}", UserHelper.GetLocalIpAddress(), guid, "thumb")
+            };
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Add(It.IsAny<Media>()))
+                .Returns(dbResult);
+
+            _fileHelper = new Mock<IFileHelper>();
+            _fileHelper.Setup(a => a.MoveFile(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(true);
+
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), false))
+                .Returns(album);
+
+            _imageHelper = new Mock<IImageHelper>();
+            _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
+                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+            _imageHelper.Setup(a => a.CreateVideoThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+                .Returns(true);
+
+            _configurationHelper = new Mock<IConfigurationHelper>();
+            _configurationHelper.Setup(a => a.GetAppSettings(It.IsAny<string>())).Returns("tn_");
+
+            _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
+
+            var result = _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, "default", "foobarbaz.gif",
+                _rootPath + @"\TestImages\foobarbaz.gif", "image/gif");
+
+            Assert.NotNull(result);
+        }
+
+        [Test]
         public void ShouldAddMediaWithDefaultAlbum()
         {
             var guid = Guid.NewGuid().ToString();
@@ -669,13 +720,14 @@ namespace Blog.Logic.Core.Tests
             _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), false))
                 .Returns(new List<Album>());
             _albumRepository.Setup(a => a.Add(It.IsAny<Album>()))
-                .Throws(new Exception());
+                .Returns((Album)null);
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
+            Assert.AreEqual("Error creating or finding album", result.Message);
         }
 
         [Test]
@@ -692,7 +744,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+                It.IsAny<string>(), It.IsAny<string>())).Returns((string)null);
 
             _fileHelper = new Mock<IFileHelper>();
             _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(true);
@@ -700,8 +752,9 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
+            Assert.AreEqual("Error generating media directory path", result.Message);
         }
 
         [Test]
@@ -718,16 +771,17 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\");
 
             _fileHelper = new Mock<IFileHelper>();
-            _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Throws(new Exception());
+            _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(false);
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
+            Assert.AreEqual("Error creating media directory", result.Message);
         }
 
         [Test]
@@ -744,17 +798,18 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\");
 
             _fileHelper = new Mock<IFileHelper>();
-            _fileHelper.Setup(a => a.MoveFile(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
-            _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Throws(new Exception());
+            _fileHelper.Setup(a => a.MoveFile(It.IsAny<string>(), It.IsAny<string>())).Returns(false);
+            _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(true);
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
+            Assert.AreEqual("Error moving media to correct directory", result.Message);
         }
 
         [Test]
@@ -1031,6 +1086,27 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenAddMediaByObjectFailedDueToMimeTypeError()
+        {
+            var objParam = new Common.Contracts.Media
+            {
+                AlbumId = 1,
+                MediaType = "jpg"
+            };
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _fileHelper = new Mock<IFileHelper>();
+            _imageHelper = new Mock<IImageHelper>();
+            _configurationHelper = new Mock<IConfigurationHelper>();
+            _albumRepository = new Mock<IAlbumRepository>();
+
+            _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
+                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
+
+            Assert.Throws<BlogException>(() => _mediaLogic.Add(objParam, 1));
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenAddMediaByObjectFailedToAddAlbum()
         {
             var objParam = new Common.Contracts.Media
@@ -1046,7 +1122,7 @@ namespace Blog.Logic.Core.Tests
 
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), false)).Returns(new List<Album>());
-            _albumRepository.Setup(a => a.Add(It.IsAny<Album>())).Throws(new Exception());
+            _albumRepository.Setup(a => a.Add(It.IsAny<Album>())).Returns((Album)null);
             
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);

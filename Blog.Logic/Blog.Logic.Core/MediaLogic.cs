@@ -150,7 +150,7 @@ namespace Blog.Logic.Core
                 var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
                 if (!hasCreatedDir) throw new Exception("Error creating media directory");
 
-                var hasSuccessfullyMovedMedia = MoveMediaFileToCorrectPath(filename, path, mediaPath);
+                var hasSuccessfullyMovedMedia = _fileHelper.MoveFile(path, mediaPath + "\\" + filename);
                 if (!hasSuccessfullyMovedMedia) throw new Exception("Error moving media to correct directory");
 
                 var media = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, user.UserId, contentType, guid);
@@ -182,27 +182,6 @@ namespace Blog.Logic.Core
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        private bool MoveMediaFileToCorrectPath(string filename, string path, string mediaPath)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(filename))
-                {
-                    if (path != null)
-                    {
-                        _fileHelper.MoveFile(path, mediaPath + "\\" + filename);
-                        return true;
-                    }
-                    throw new Exception("Path name is empty");
-                }
-                throw new Exception("File name is empty");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message, ex.InnerException);
             }
         }
 

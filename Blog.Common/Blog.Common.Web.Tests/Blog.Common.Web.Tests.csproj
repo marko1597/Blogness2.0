@@ -135,6 +135,7 @@
     <Compile Include="Attributes\BlogAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\ValidateMimeMultipartContentTest.cs" />
     <Compile Include="Authentication\AuthenticationHelperTest.cs" />
+    <Compile Include="ConstantsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

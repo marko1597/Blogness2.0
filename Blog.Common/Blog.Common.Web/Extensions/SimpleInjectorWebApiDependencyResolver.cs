@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Http.Dependencies;
 using SimpleInjector;
 using SimpleInjector.Extensions.LifetimeScoping;
 
 namespace Blog.Common.Web.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public class SimpleInjectorWebApiDependencyResolver : IDependencyResolver
     {
         private readonly Container _container;

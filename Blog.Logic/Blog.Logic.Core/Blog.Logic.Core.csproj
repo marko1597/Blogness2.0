@@ -87,7 +87,6 @@
     <Compile Include="PostContentsLogic.cs" />
     <Compile Include="PostLikesLogic.cs" />
     <Compile Include="PostsLogic.cs" />
-    <Compile Include="PostsPageLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionLogic.cs" />
     <Compile Include="TagsLogic.cs" />

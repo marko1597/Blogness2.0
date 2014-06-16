@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Web.Http;
@@ -17,6 +18,7 @@ using NUnit.Framework;
 namespace Blog.Common.Web.Tests.Attributes
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class BlogApiAuthorizationAttributeTest
     {
         private TestController _controller;

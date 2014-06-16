@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Hosting;
@@ -10,6 +11,7 @@ using NUnit.Framework;
 namespace Blog.Common.Web.Tests.Attributes
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class ValidateMimeMultipartContentFilterTest
     {
         private TestController _controller;

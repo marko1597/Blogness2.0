@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using Blog.Common.Utils.Extensions;
 namespace Blog.Logic.Core.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class AddressLogicTest
     {
         private Mock<IAddressRepository> _addressRepository;
