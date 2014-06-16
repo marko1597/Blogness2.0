@@ -100,16 +100,20 @@ namespace Blog.Logic.Core
             }
         }
 
-        public Media Add(Media media)
+        public Media Add(Media media, int userId)
         {
             try
             {
                 var guid = Guid.NewGuid().ToString();
-                var extension = media.MediaType != null ? media.MediaType.Split('/')[1] ?? "jpg" : "jpg";
+                var extension = !string.IsNullOrEmpty(media.MediaType) ? media.MediaType.Split('/')[1] ?? "jpg" : "jpg";
                 var filename = guid + "." + extension;
 
                 var album = _albumRepository.Find(a => a.AlbumId == media.AlbumId, false).FirstOrDefault();
-                if (album == null) throw new Exception("Error creating or finding album");
+                if (album == null)
+                {
+                    album = GetAlbumByName(DateTime.Now.ToShortDateString(), userId);
+                    if (album == null) throw new Exception("Error creating or finding album");
+                }
 
                 var mediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
                 if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
