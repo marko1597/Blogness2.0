@@ -27,7 +27,9 @@ namespace Blog.Logic.Core.Factory
             IPostRepository postRepository = new PostRepository();
             IPostContentRepository postContentRepository = new PostContentRepository();
             ITagRepository tagRepository = new TagRepository();
-            return new PostsLogic(postRepository, postContentRepository, tagRepository);
+            ICommentRepository commentRepository = new CommentRepository();
+            IMediaRepository mediaRepository = new MediaRepository();
+            return new PostsLogic(postRepository, postContentRepository, tagRepository, commentRepository, mediaRepository);
         }
     }
 }

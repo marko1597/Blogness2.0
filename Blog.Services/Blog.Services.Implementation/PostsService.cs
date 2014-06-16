@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Blog.Logic.Core.Factory;
 using Blog.Services.Implementation.Interfaces;
-
+ 
 namespace Blog.Services.Implementation
 {
     public class PostsService : IPosts
@@ -20,6 +21,21 @@ namespace Blog.Services.Implementation
         public List<Post> GetPostsByUser(int userId)
         {
             return PostsFactory.GetInstance().CreateLogic().GetPostsByUser(userId);
+        }
+        
+        public List<Post> GetPopularPosts(int postsCount)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetPopularPosts(postsCount);
+        }
+
+        public List<Post> GetRecentPosts(int postsCount)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetRecentPosts(postsCount);
+        }
+
+        public List<Post> GetMorePosts(int postsCount, int skip)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetMorePosts(postsCount, skip);
         }
 
         public Post AddPost(Post post)

@@ -40,7 +40,6 @@ namespace Blog.Web.Api
             container.Register<IComments, CommentsService>(Lifestyle.Singleton);
             container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
             container.Register<IPosts, PostsService>(Lifestyle.Singleton);
-            container.Register<IPostsPage, PostsPageService>(Lifestyle.Singleton);
             container.Register<IUser, UsersService>(Lifestyle.Singleton);
             container.Register<ISession, SessionService>(Lifestyle.Singleton);
             container.Register<IPostLikes, PostLikesService>(Lifestyle.Singleton);

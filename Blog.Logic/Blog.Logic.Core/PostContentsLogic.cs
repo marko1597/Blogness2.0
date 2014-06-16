@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
-using Blog.Logic.Core.Factory;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
@@ -35,30 +35,30 @@ namespace Blog.Logic.Core
 
         public PostContent Get(int postContentId)
         {
-            PostContent postContent;
             try
             {
                 var db = _postContentRepository.Find(a => a.PostContentId == postContentId, true).FirstOrDefault();
-                postContent = PostContentMapper.ToDto(db);
+
+                if (db != null)
+                {
+                    return PostContentMapper.ToDto(db);
+                }
+
+                return new PostContent().GenerateError<PostContent>(
+                    (int)Constants.Error.RecordNotFound,
+                    string.Format("Cannot find post content with Id {0}", postContentId));
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
-            return postContent;
         }
 
-        public bool Add(PostContent postContent)
+        public PostContent Add(PostContent postContent)
         {
             try
             {
-                if (postContent.Media != null && postContent.Media.MediaId == 0)
-                {
-                    MediaFactory.GetInstance().CreateMedia().Add(postContent.Media);
-                }
-                _postContentRepository.Add(PostContentMapper.ToEntity(postContent));
-
-                return true;
+                return PostContentMapper.ToDto(_postContentRepository.Add(PostContentMapper.ToEntity(postContent)));
             }
             catch (Exception ex)
             {
@@ -70,7 +70,9 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _postContentRepository.Find(a => a.PostContentId == postContentId, true).FirstOrDefault();
+                var db = _postContentRepository.Find(a => a.PostContentId == postContentId, false).FirstOrDefault();
+                if (db == null) return false;
+
                 _postContentRepository.Delete(db);
                 return true;
             }

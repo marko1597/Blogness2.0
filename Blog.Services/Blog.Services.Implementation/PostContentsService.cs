@@ -17,7 +17,7 @@ namespace Blog.Services.Implementation
             return PostContentsFactory.GetInstance().CreatePostContents().Get(postContentId);
         }
 
-        public bool Add(PostContent postImage)
+        public PostContent Add(PostContent postImage)
         {
             return PostContentsFactory.GetInstance().CreatePostContents().Add(postImage);
         }

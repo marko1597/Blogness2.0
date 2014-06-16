@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
@@ -47,22 +48,24 @@ namespace Blog.Web.Api.Controllers
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
-            return null;
         }
 
         [HttpPost]
         [Route("api/postcontent")]
-        public bool Post([FromBody]PostContent postContent)
+        public PostContent Post([FromBody]PostContent postContent)
         {
             try
             {
-                _postContentsSvc.Add(postContent);
-                return true;
+                return _postContentsSvc.Add(postContent);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
+                    "Server technical error");
             }
         }
 

@@ -7,7 +7,7 @@ namespace Blog.Services.Implementation.Interfaces
     {
         List<PostContent> GetByPostId(int postId);
         PostContent Get(int postContentId);
-        bool Add(PostContent postContent);
+        PostContent Add(PostContent postContent);
         bool Delete(int postContentId);
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
@@ -16,14 +15,12 @@ namespace Blog.Web.Api.Controllers
     public class PostsController : ApiController
     {
         private readonly IPosts _postsSvc;
-        private readonly IPostsPage _postsPageSvc;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public PostsController(IPosts postsSvc, IPostsPage postsPageSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
+        public PostsController(IPosts postsSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _postsSvc = postsSvc;
-            _postsPageSvc = postsPageSvc;
             _errorSignaler = errorSignaler;
             _configurationHelper = configurationHelper;
         }
@@ -73,7 +70,7 @@ namespace Blog.Web.Api.Controllers
 
             try
             {
-                posts = _postsPageSvc.GetPopularPosts(
+                posts = _postsSvc.GetPopularPosts(
                     Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
@@ -93,7 +90,7 @@ namespace Blog.Web.Api.Controllers
 
             try
             {
-                posts = _postsPageSvc.GetRecentPosts(
+                posts = _postsSvc.GetRecentPosts(
                     Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
@@ -113,7 +110,7 @@ namespace Blog.Web.Api.Controllers
 
             try
             {
-                posts = _postsPageSvc.GetMorePosts(
+                posts = _postsSvc.GetMorePosts(
                     Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
             }
             catch (Exception ex)
@@ -127,13 +124,13 @@ namespace Blog.Web.Api.Controllers
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/user/{userId}/posts")]
-        public UserPosts GetUserPosts(int userId)
+        public List<Post> GetUserPosts(int userId)
         {
-            var posts = new UserPosts();
+            var posts = new List<Post>();
 
             try
             {
-                posts = _postsPageSvc.GetUserPosts(userId) ?? new UserPosts();
+                posts = _postsSvc.GetPostsByUser(userId) ?? new List<Post>();
             }
             catch (Exception ex)
             {

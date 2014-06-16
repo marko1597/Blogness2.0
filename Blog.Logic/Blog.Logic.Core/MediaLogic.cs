@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Blog.Common.Utils;
@@ -8,7 +7,6 @@ using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
-using Blog.Logic.Core.Factory;
 using Blog.Logic.ObjectMapper;
 using Media = Blog.Common.Contracts.Media;
 

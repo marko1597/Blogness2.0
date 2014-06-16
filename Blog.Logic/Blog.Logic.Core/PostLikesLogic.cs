@@ -32,23 +32,22 @@ namespace Blog.Logic.Core
             return postLikes;
         }
 
-        public void Add(PostLike postLike)
+        public PostLike Add(PostLike postLike)
         {
             try
             {
-                var tmpPostLike = _postLikeRepository.Find(a => a.PostId == postLike.PostId && a.UserId == postLike.UserId, true).ToList();
+                var tmpPostLike = _postLikeRepository.Find(a => a.PostId == postLike.PostId && a.UserId == postLike.UserId, false).ToList();
                 if (tmpPostLike.Count > 0)
                 {
                     _postLikeRepository.Delete(tmpPostLike.FirstOrDefault());
+                    return null;
                 }
-                else
-                {
-                    postLike.CreatedDate = DateTime.Now;
-                    postLike.CreatedBy = postLike.UserId;
-                    postLike.ModifiedDate = DateTime.Now;
-                    postLike.ModifiedBy = postLike.UserId;
-                    _postLikeRepository.Add(PostLikeMapper.ToEntity(postLike));
-                }
+
+                postLike.CreatedDate = DateTime.Now;
+                postLike.CreatedBy = postLike.UserId;
+                postLike.ModifiedDate = DateTime.Now;
+                postLike.ModifiedBy = postLike.UserId;
+                return PostLikeMapper.ToDto(_postLikeRepository.Add(PostLikeMapper.ToEntity(postLike)));
             }
             catch (Exception ex)
             {

@@ -157,7 +157,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldAddAddress()
+        public void ShouldAddAlbum()
         {
             var dbResult = new Album
             {
@@ -193,7 +193,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenAddAddressFails()
+        public void ShouldThrowExceptionWhenAddAlbumFails()
         {
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Add(It.IsAny<Album>())).Throws(new Exception());
@@ -240,7 +240,7 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenUpdateAddressFails()
+        public void ShouldThrowExceptionWhenUpdateAlbumFails()
         {
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Edit(It.IsAny<Album>())).Throws(new Exception());

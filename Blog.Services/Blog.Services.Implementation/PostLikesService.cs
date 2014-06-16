@@ -12,9 +12,9 @@ namespace Blog.Services.Implementation
             return PostLikesFactory.GetInstance().CreatePostLikes().Get(postId);
         }
 
-        public void Add(PostLike postLike)
+        public PostLike Add(PostLike postLike)
         {
-            PostLikesFactory.GetInstance().CreatePostLikes().Add(postLike);
+            return PostLikesFactory.GetInstance().CreatePostLikes().Add(postLike);
         }
     }
 }
