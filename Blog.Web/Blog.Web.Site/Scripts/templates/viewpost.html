@@ -42,12 +42,8 @@
             </ul>
         </div>
 
-        <div class="post-comments-{{post.PostId}}" class="comments post-board content-item">
-            <ul ticker data-enable-pause="true" data-pause-element="popover">
-                <li ng-repeat="comment in post.Comments">
-                    <div post-item-comment comment="comment"></div>
-                </li>
-            </ul>
+        <div id="post-comments-{{post.PostId}}" class="comments post-board content-item">
+            <div comments-list comments="comments" user="user"></div>
         </div>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">

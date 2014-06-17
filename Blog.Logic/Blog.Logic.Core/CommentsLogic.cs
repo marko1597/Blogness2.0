@@ -22,7 +22,7 @@ namespace Blog.Logic.Core
             var comments = new List<Comment>();
             try
             {
-                var db = _commentRepository.Find(a => a.PostId == postId, null, "ParentComment,Comments,CommentLikes").OrderByDescending(a => a.CreatedDate).ToList();
+                var db = _commentRepository.Find(a => a.PostId == postId, null, "ParentComment,Comments,CommentLikes,User").OrderByDescending(a => a.CreatedDate).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
             }
             catch (Exception ex)

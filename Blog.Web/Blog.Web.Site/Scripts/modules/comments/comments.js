@@ -1,0 +1,1 @@
+﻿var ngComments = angular.module("ngComments", ["ngShared", "ngSignalr", "iso.directives", "ngConfig", "localStorageModule"]);

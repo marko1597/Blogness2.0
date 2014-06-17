@@ -1,0 +1,82 @@
+﻿.comment-item {
+    position: relative;
+    background: #f8f8f8;
+    margin: 5px;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px #000000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .comment-item > p {
+        margin: 0;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .comment-item > div.comment-header {
+        background: #56c2e1;
+        color: #fff;
+        margin: 0;
+        height: 25px;
+    }
+
+        .comment-item > div.comment-header > a {
+            color: #fff;
+        }
+
+        .comment-item > div.comment-header > span {
+            font-size: .7em;
+        }
+
+        .comment-item > div.comment-header > div.comment-expand {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            padding-left: 6px;
+            padding-top: 4px;
+            border-right: 1px solid #ddd;
+            margin-right: 5px;
+        }
+
+            .comment-item > div.comment-header > div.comment-expand:hover {
+                background: #3f9db8;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            }
+
+            .comment-item > div.comment-header > div.comment-expand > div.fa {
+                font-size: .8em;
+                cursor: pointer;
+            }
+
+        .comment-item > div.comment-header > div.comment-likes-count {
+            display: inline-block;
+            width: 50px;
+            height: 25px;
+            padding: 3px 6px;
+            border-left: 1px solid #ddd;
+            float: right;
+        }
+
+            .comment-item > div.comment-header > div.comment-likes-count:hover {
+                background: #3f9db8;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            }
+
+        .comment-item > div.comment-header > div.comment-reply {
+            display: inline-block;
+            width: 51px;
+            height: 25px;
+            padding: 3px 6px;
+            border-left: 1px solid #ddd;
+            float: right;
+        }
+
+            .comment-item > div.comment-header > div.comment-reply:hover {
+                background: #3f9db8;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            }
