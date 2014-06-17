@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics.CodeAnalysis;
+using NUnit.Framework;
 
 namespace Blog.Common.Web.Tests
 {
     [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class ConstantsTest
     {
         [Test]
