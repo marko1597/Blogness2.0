@@ -15,7 +15,7 @@
                 });
             };
 
-            scope.$on("postsLikeUpdate", function (e, d) {
+            scope.$on("postLikesUpdate", function (e, d) {
                 if (d.PostId == scope.data.PostId) {
                     scope.postLikes = d.PostLikes;
                     scope.$apply();

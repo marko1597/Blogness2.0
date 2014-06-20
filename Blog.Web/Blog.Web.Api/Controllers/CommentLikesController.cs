@@ -2,22 +2,31 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
+using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
     [AllowCrossSiteApi]
     public class CommentLikesController : ApiController
     {
+        private readonly IUser _user;
         private readonly ICommentLikes _service;
         private readonly IErrorSignaler _errorSignaler;
+        private readonly IHttpClientHelper _httpClientHelper;
+        private readonly IConfigurationHelper _configurationHelper;
 
-        public CommentLikesController(ICommentLikes service, IErrorSignaler errorSignaler)
+        public CommentLikesController(ICommentLikes service, IErrorSignaler errorSignaler, IUser user, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _service = service;
             _errorSignaler = errorSignaler;
+            _user = user; 
+            _httpClientHelper = httpClientHelper;
+            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
@@ -40,11 +49,22 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/comments/likes")]
-        public void Post([FromBody]CommentLike commentLike)
+        public void Post([FromUri]int commentId, string username)
         {
             try
             {
+                var user = _user.GetByUserName(username);
+                var commentLike = new CommentLike
+                {
+                    CommentId = commentId,
+                    UserId = user.UserId
+                };
                 _service.Add(commentLike);
+                new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper).PushCommentLikes(new CommentLikesUpdate
+                {
+                    CommentId = commentId,
+                    CommentLikes = _service.Get(commentId)
+                });
             }
             catch (Exception ex)
             {

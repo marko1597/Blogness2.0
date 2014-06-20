@@ -81,6 +81,10 @@ namespace Blog.Logic.Core
         {
             try
             {
+                comment.CreatedBy = comment.User.UserId;
+                comment.CreatedDate = DateTime.Now;
+                comment.ModifiedBy = comment.User.UserId;
+                comment.ModifiedDate = DateTime.Now;
                 return CommentMapper.ToDto(_commentRepository.Add(CommentMapper.ToEntity(comment)));
             }
             catch (Exception ex)

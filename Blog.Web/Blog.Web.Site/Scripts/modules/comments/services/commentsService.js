@@ -1,15 +1,15 @@
 ﻿ngComments.factory('commentsService', ["$http", "$q", "configProvider", "dateHelper",
     function ($http, $q, configProvider, dateHelper) {
         var commentsApi = configProvider.getSettings().BlogApi == "" ?
-            window.blogConfiguration.blogApi + "Posts/" :
-            configProvider.getSettings().BlogApi + "Posts/";
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
 
         return {
             getCommentsByPost: function (id) {
                 var deferred = $q.defer();
 
                 $http({
-                    url: commentsApi + id + "/Comments",
+                    url: commentsApi + "Posts/" + id + "/Comments",
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (c) {
@@ -22,6 +22,21 @@
                             r.Url = "#";
                         });
                     });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            likeComment: function (commentId, username) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: commentsApi + "comments/likes?username=" + username + "&commentId=" + commentId,
+                    method: "POST"
+                }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);

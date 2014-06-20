@@ -5,16 +5,16 @@
         $scope.rememberMe = false;
 
         $scope.login = function () {
-            blockUiService.blockIt(
-                '<h4>' +
-                    '<img src="../blog/content/images/loader-girl.gif" height="128" />' +
-                '</h4>', {
+            blockUiService.blockIt({
+                html: '<h4><img src="../blog/content/images/loader-girl.gif" height="128" /></h4>',
+                css: {
                     border: 'none',
                     padding: '5px',
                     backgroundColor: '#000',
                     opacity: .5,
                     color: '#fff'
-                });
+                }
+            });
 
             loginService.login($scope.username, $scope.password, $scope.rememberMe).then(function (siteResponse) {
                 if (siteResponse.Error == undefined || siteResponse.Error == null) {

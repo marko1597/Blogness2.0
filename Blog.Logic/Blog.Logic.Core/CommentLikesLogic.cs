@@ -42,6 +42,11 @@ namespace Blog.Logic.Core
                     _commentLikeRepository.Delete(tmpCommentLike.FirstOrDefault());
                     return null;
                 }
+
+                commentLike.CreatedDate = DateTime.Now;
+                commentLike.CreatedBy = commentLike.UserId;
+                commentLike.ModifiedDate = DateTime.Now;
+                commentLike.ModifiedBy = commentLike.UserId;
                 return CommentLikeMapper.ToDto(_commentLikeRepository.Add(CommentLikeMapper.ToEntity(commentLike)));
             }
             catch (Exception ex)

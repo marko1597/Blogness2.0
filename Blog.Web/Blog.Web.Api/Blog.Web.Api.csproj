@@ -264,6 +264,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\Hub\CommentsHub.cs" />
     <Compile Include="Helper\Hub\PostsHub.cs" />
     <Compile Include="Models\ErrorLogModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,7 +13,7 @@ namespace Blog.Web.Site.Hubs
             if (firstOrDefault != null)
             {
                 var postId = firstOrDefault.PostId;
-                Clients.All.postsLikeUpdate(postId, postLikes);
+                Clients.All.postLikesUpdate(postId, postLikes);
             }
         }
     }

@@ -34,19 +34,9 @@
         }
 
         .comment-item > div.comment-header > div.comment-expand {
-            display: inline-block;
             width: 25px;
             height: 25px;
-            padding-left: 6px;
-            padding-top: 4px;
-            border-right: 1px solid #ddd;
-            margin-right: 5px;
         }
-
-            .comment-item > div.comment-header > div.comment-expand:hover {
-                background: #3f9db8;
-                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-            }
 
             .comment-item > div.comment-header > div.comment-expand > div.fa {
                 font-size: .8em;
@@ -54,29 +44,54 @@
             }
 
         .comment-item > div.comment-header > div.comment-likes-count {
-            display: inline-block;
             width: 50px;
             height: 25px;
-            padding: 3px 6px;
-            border-left: 1px solid #ddd;
-            float: right;
         }
 
-            .comment-item > div.comment-header > div.comment-likes-count:hover {
-                background: #3f9db8;
-                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            .comment-item > div.comment-header > div.comment-likes-count > i {
+                padding-right: 3px;
             }
 
         .comment-item > div.comment-header > div.comment-reply {
-            display: inline-block;
             width: 51px;
             height: 25px;
-            padding: 3px 6px;
-            border-left: 1px solid #ddd;
-            float: right;
         }
 
-            .comment-item > div.comment-header > div.comment-reply:hover {
-                background: #3f9db8;
-                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
-            }
+.comment-item-new {
+    position: relative;
+    background: #f8f8f8;
+    margin: 10px 10px 0 10px;
+    height: 90px;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px #000000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    .comment-item-new > textarea {
+        resize: none;
+        max-width: 80%;
+        width: 80%;
+        height: 100%;
+    }
+
+    .comment-item-new > div {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        width: 20%;
+    }
+
+        .comment-item-new > div > button {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+@media (max-width: 320px) {
+    .comment-item-new > div > button.fa {
+        padding: 7px;
+    }
+}

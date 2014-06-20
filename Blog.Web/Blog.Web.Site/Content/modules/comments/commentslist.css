@@ -1,4 +1,13 @@
-﻿.comments-list-container {
+﻿.comment-items-list {
     background: #eee;
     padding: 5px;
 }
+
+    .comment-items-list > .comments-empty-message {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .comment-items-list > .comments-empty-message > p {
+        margin: 10px 0;
+    }

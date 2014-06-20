@@ -1,0 +1,9 @@
+﻿<div class="comments-container">
+    <div class="comments-header">
+        <h4>Comments</h4>
+        <div class="comment-button right" ng-click="toggleShowAddComment()">Add comment</div>
+    </div>
+
+    <div ng-show="showAddComment" comments-add-new commentid="commentid" postid="postid"></div>
+    <div comments-list postid="postid" user="user"></div>
+</div>

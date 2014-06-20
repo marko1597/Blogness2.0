@@ -1,12 +1,14 @@
 ﻿ngShared.factory('blockUiService', [function () {
     return {
-        blockIt: function (html, css, elem) {
-            if (html == undefined) {
-                html = '<h4>Loading...</h4>';
+        blockIt: function (properties) {
+            if (properties == undefined) properties = {};
+
+            if (properties.html == undefined) {
+                properties.html = '<h4>Loading...</h4>';
             }
 
-            if (css == undefined) {
-                css = {
+            if (properties.css == undefined) {
+                properties.css = {
                     border: 'none',
                     padding: '5px',
                     backgroundColor: '#000',
@@ -15,15 +17,15 @@
                 };
             }
 
-            if (elem == undefined) {
+            if (properties.elem == undefined) {
                 $.blockUI({
-                    message: html,
-                    css: css
+                    message: properties.html,
+                    css: properties.css
                 });
             } else {
-                $(elem).block({
-                    message: html,
-                    css: css
+                $(properties.elem).block({
+                    message: properties.html,
+                    css: properties.css
                 });
             }
         },

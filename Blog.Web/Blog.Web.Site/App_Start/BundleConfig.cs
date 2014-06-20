@@ -118,7 +118,10 @@ namespace Blog.Web.Site
 
             bundles.Add(new ScriptBundle("~/scripts/comments").Include(
                       "~/Scripts/modules/comments/comments.js",
+                      "~/Scripts/modules/comments/directives/commentsContainer.js",
                       "~/Scripts/modules/comments/directives/commentsList.js",
+                      "~/Scripts/modules/comments/directives/commentsAddNew.js",
+                      "~/Scripts/modules/comments/services/commentsHubService.js",
                       "~/Scripts/modules/comments/services/commentsService.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/navigation").Include(
@@ -174,7 +177,9 @@ namespace Blog.Web.Site
                       "~/Content/modules/loginform/loginform.css"));
             
             bundles.Add(new StyleBundle("~/content/comments").Include(
+                      "~/Content/modules/comments/commentsmain.css",
                       "~/Content/modules/comments/commentitem.css",
+                      "~/Content/modules/comments/commentscontainer.css",
                       "~/Content/modules/comments/commentslist.css"));
 
             bundles.Add(new StyleBundle("~/content/navigation").Include(

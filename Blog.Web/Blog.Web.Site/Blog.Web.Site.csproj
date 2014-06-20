@@ -243,6 +243,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\CommentsHub.cs" />
     <Compile Include="Hubs\PostsHub.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -273,7 +274,9 @@
     <Content Include="Content\images\nav-home.png" />
     <Content Include="Content\images\nav-profile.png" />
     <Content Include="Content\modules\comments\commentitem.css" />
+    <Content Include="Content\modules\comments\commentscontainer.css" />
     <Content Include="Content\modules\comments\commentslist.css" />
+    <Content Include="Content\modules\comments\commentsmain.css" />
     <Content Include="Content\modules\error\errorpage.css" />
     <Content Include="Content\modules\error\globalerrormessage.css" />
     <Content Include="Content\modules\header\header.css" />
@@ -290,7 +293,10 @@
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
     <Content Include="Scripts\modules\comments\comments.js" />
+    <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
+    <Content Include="Scripts\modules\comments\directives\commentsContainer.js" />
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
+    <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
     <Content Include="Scripts\plugins\json2.js" />
     <Content Include="Scripts\plugins\json2.min.js" />
@@ -637,6 +643,8 @@
     <Content Include="Scripts\plugins\video-js\video.js" />
     <Content Include="Scripts\templates\events.html" />
     <Content Include="Scripts\templates\groups.html" />
+    <Content Include="Scripts\templates\modules\comments\commentsAddNew.html" />
+    <Content Include="Scripts\templates\modules\comments\commentsContainer.html" />
     <Content Include="Scripts\templates\modules\comments\commentsList.html" />
     <Content Include="Scripts\templates\modules\error\errorDisplay.html" />
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />

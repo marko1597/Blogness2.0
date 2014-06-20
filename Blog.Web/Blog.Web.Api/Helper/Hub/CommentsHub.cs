@@ -5,24 +5,24 @@ using Blog.Common.Web.Extensions.Elmah;
 
 namespace Blog.Web.Api.Helper.Hub
 {
-    public class PostsHub
+    public class CommentsHub
     {
         private readonly IErrorSignaler _errorSignaler;
         private readonly IHttpClientHelper _httpClientHelper;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public PostsHub(IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public CommentsHub(IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _errorSignaler = errorSignaler;
             _httpClientHelper = httpClientHelper;
             _configurationHelper = configurationHelper;
         }
 
-        public void PushPostLikes(PostLikesUpdate postLikesUpdate)
+        public void PushCommentLikes(CommentLikesUpdate commentLikesUpdate)
         {
             try
             {
-                _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/postlikesupdate?format=json", postLikesUpdate);
+                _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/commentLikesUpdate?format=json", commentLikesUpdate);
             }
             catch (Exception ex)
             {
