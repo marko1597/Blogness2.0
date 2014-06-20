@@ -11,3 +11,7 @@
     .comment-items-list > .comments-empty-message > p {
         margin: 10px 0;
     }
+
+.comment-replies {
+    padding-left: 20px;
+}

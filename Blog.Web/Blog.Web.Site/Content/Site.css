@@ -221,6 +221,10 @@
     border: 2px dashed #cecece;
 }
 
+.hide-me {
+    visibility: hidden !important;
+}
+
 .sleek-button {
     padding: 4px 12px;
     font-size: 12px;

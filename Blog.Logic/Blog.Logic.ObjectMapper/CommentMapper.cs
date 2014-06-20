@@ -48,21 +48,23 @@ namespace Blog.Logic.ObjectMapper
                     ? comment.Comments.Select(ToEntity).ToList()
                     : null;
 
-                return new Db.Comment
-                {
-                    CommentId = comment.CommentId,
-                    CommentLikes = commentLikes,
-                    CommentLocation = comment.CommentLocation,
-                    CommentMessage = comment.CommentMessage,
-                    ParentCommentId = comment.ParentCommentId,
-                    PostId = comment.PostId,
-                    Comments = comments,
-                    User = comment.User != null ? UserMapper.ToEntity(comment.User) : null,
-                    CreatedBy = comment.CreatedBy,
-                    CreatedDate = comment.CreatedDate,
-                    ModifiedBy = comment.ModifiedBy,
-                    ModifiedDate = comment.ModifiedDate
-                };
+                if (comment.User != null)
+                    return new Db.Comment
+                    {
+                        CommentId = comment.CommentId,
+                        CommentLikes = commentLikes,
+                        CommentLocation = comment.CommentLocation,
+                        CommentMessage = comment.CommentMessage,
+                        ParentCommentId = comment.ParentCommentId,
+                        PostId = comment.PostId,
+                        Comments = comments,
+                        User = UserMapper.ToEntity(comment.User),
+                        UserId = comment.User.UserId,
+                        CreatedBy = comment.CreatedBy,
+                        CreatedDate = comment.CreatedDate,
+                        ModifiedBy = comment.ModifiedBy,
+                        ModifiedDate = comment.ModifiedDate
+                    };
             }
             return null;
         }

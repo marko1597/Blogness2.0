@@ -121,6 +121,7 @@ namespace Blog.Web.Site
                       "~/Scripts/modules/comments/directives/commentsContainer.js",
                       "~/Scripts/modules/comments/directives/commentsList.js",
                       "~/Scripts/modules/comments/directives/commentsAddNew.js",
+                      "~/Scripts/modules/comments/directives/commentItem.js",
                       "~/Scripts/modules/comments/services/commentsHubService.js",
                       "~/Scripts/modules/comments/services/commentsService.js"));
 

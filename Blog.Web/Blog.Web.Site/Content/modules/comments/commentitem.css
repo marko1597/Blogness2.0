@@ -25,13 +25,20 @@
         height: 25px;
     }
 
-        .comment-item > div.comment-header > a {
+        .comment-item > div.comment-header > div.comment-details {
             color: #fff;
+            display: inline-block;
+            position: absolute;
+            top: 3px;
         }
 
-        .comment-item > div.comment-header > span {
-            font-size: .7em;
-        }
+            .comment-item > div.comment-header > div.comment-details > a {
+                color: #fff;
+            }
+
+            .comment-item > div.comment-header > div.comment-details > span {
+                font-size: .7em;
+            }
 
         .comment-item > div.comment-header > div.comment-expand {
             width: 25px;

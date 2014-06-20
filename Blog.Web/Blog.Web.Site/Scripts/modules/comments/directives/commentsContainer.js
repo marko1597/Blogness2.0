@@ -16,7 +16,8 @@
         restrict: 'EA',
         scope: {
             user: '=',
-            postid: '='
+            postid: '=',
+            poster: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesUrl + "comments/commentsContainer.html",

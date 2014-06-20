@@ -2,21 +2,11 @@
     <div class="comments-empty-message" ng-class="showEmptyCommentsMessage(comments)">
         <p>There are no comments yet.</p>
     </div>
-    <div ng-repeat="comment in comments" class="comment-item" data-comment-id="{{comment.CommentId}}">
-        <div class="comment-header">
-            <div class="comment-expand comment-button left" ng-class="canExpandComment(comment)">
-                <i class="fa fa-plus"></i>
-            </div>
-            <a href="{{comment.Url}}">{{comment.NameDisplay}}</a>
-            <span class="hidden-xs">{{comment.DateDisplay}}</span>
-            <div class="comment-likes-count comment-button right" ng-click="likeComment(comment.CommentId)">
-                <i class="fa" ng-class="isUserLiked(comment)"></i>
-                <span>{{comment.CommentLikes.length}}</span>
-            </div>
-            <div class="comment-reply comment-button right" ng-class="canReplyToComment(comment)">
-                <span>Reply</span>
-            </div>
+    <div ng-repeat="comment in comments">
+        <div comment-item comment="comment" user="user" poster="poster"></div>
+        <div ng-show="comment.ShowAddReply" comments-add-new commentid="comment.CommentId" postid="postid" user="user"></div>
+        <div ng-repeat="reply in comment.Comments" class="comment-replies" ng-show="comment.ShowReplies">
+            <div comment-item comment="reply" user="user" poster="poster"></div>
         </div>
-        <p>{{comment.CommentMessage}}</p>
     </div>
 </div>

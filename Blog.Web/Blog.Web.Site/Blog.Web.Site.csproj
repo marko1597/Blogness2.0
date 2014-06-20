@@ -293,6 +293,7 @@
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
     <Content Include="Scripts\modules\comments\comments.js" />
+    <Content Include="Scripts\modules\comments\directives\commentItem.js" />
     <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
     <Content Include="Scripts\modules\comments\directives\commentsContainer.js" />
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
@@ -643,6 +644,7 @@
     <Content Include="Scripts\plugins\video-js\video.js" />
     <Content Include="Scripts\templates\events.html" />
     <Content Include="Scripts\templates\groups.html" />
+    <Content Include="Scripts\templates\modules\comments\commentItem.html" />
     <Content Include="Scripts\templates\modules\comments\commentsAddNew.html" />
     <Content Include="Scripts\templates\modules\comments\commentsContainer.html" />
     <Content Include="Scripts\templates\modules\comments\commentsList.html" />
