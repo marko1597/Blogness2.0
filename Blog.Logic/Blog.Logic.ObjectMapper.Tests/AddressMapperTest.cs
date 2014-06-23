@@ -51,7 +51,7 @@ namespace Blog.Logic.ObjectMapper.Tests
 
             var result = AddressMapper.ToEntity(param);
 
-            Assert.IsInstanceOf(typeof(Address), result);
+            Assert.IsInstanceOf(typeof(Db.Address), result);
             Assert.IsNull(result.User);
             Assert.NotNull(result);
         }

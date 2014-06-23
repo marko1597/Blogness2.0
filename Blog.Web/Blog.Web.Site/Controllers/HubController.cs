@@ -25,5 +25,12 @@ namespace Blog.Web.Site.Controllers
             commentLikesUpdate.CommentLikes = commentLikesUpdate.CommentLikes ?? new List<CommentLike>();
             context.Clients.All.commentLikesUpdate(commentLikesUpdate.CommentId, commentLikesUpdate.CommentLikes);
         }
+
+        [ActionName("CommentAddedForPost")]
+        public void CommentAddedForPost(CommentAdded commentAdded)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<CommentsHub>();
+            context.Clients.Group("post_" + commentAdded.PostId).commentAddedForPost(commentAdded.Comment);
+        }
 	}
 }

@@ -60,7 +60,7 @@ namespace Blog.Web.Api.Controllers
                     UserId = user.UserId
                 };
                 _service.Add(commentLike);
-                new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper).PushCommentLikes(new CommentLikesUpdate
+                new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper).CommentsLikeUpdate(new CommentLikesUpdate
                 {
                     CommentId = commentId,
                     CommentLikes = _service.Get(commentId)

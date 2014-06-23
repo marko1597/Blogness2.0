@@ -18,11 +18,23 @@ namespace Blog.Web.Api.Helper.Hub
             _configurationHelper = configurationHelper;
         }
 
-        public void PushCommentLikes(CommentLikesUpdate commentLikesUpdate)
+        public void CommentsLikeUpdate(CommentLikesUpdate commentLikesUpdate)
         {
             try
             {
                 _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/commentLikesUpdate?format=json", commentLikesUpdate);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+        }
+
+        public void CommentAddedForPost(CommentAdded commentAdded)
+        {
+            try
+            {
+                _httpClientHelper.Post(_configurationHelper.GetAppSettings("BlogRoot"), "hub/commentAddedForPost?format=json", commentAdded);
             }
             catch (Exception ex)
             {

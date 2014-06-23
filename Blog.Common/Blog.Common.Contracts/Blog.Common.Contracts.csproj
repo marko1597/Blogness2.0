@@ -68,6 +68,7 @@
     <Compile Include="Session.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="ViewModels\CommentAdded.cs" />
     <Compile Include="ViewModels\CommentLikesUpdate.cs" />
     <Compile Include="ViewModels\LoggedUser.cs" />
     <Compile Include="ViewModels\Login.cs" />

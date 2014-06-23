@@ -63,8 +63,6 @@
         $rootScope.$on("hideAddReply", function () {
             $scope.comment.ShowAddReply = false;
         });
-
-        console.log($scope.comment);
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService"];
 

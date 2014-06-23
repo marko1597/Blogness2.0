@@ -59,6 +59,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AddressMapperTest.cs" />
+    <Compile Include="EducationMapperTest.cs" />
+    <Compile Include="EducationTypeMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

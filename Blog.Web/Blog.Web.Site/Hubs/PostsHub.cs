@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Blog.Common.Contracts;
 using Microsoft.AspNet.SignalR;
 
@@ -15,6 +16,11 @@ namespace Blog.Web.Site.Hubs
                 var postId = firstOrDefault.PostId;
                 Clients.All.postLikesUpdate(postId, postLikes);
             }
+        }
+
+        public Task ViewPost(int postId)
+        {
+            return Groups.Add(Context.ConnectionId, "post_" + postId);
         }
     }
 }

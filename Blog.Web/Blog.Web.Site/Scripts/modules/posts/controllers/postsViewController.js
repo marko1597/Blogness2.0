@@ -1,6 +1,6 @@
 ﻿ngPosts.controller('postsViewController', ["$scope", "$location", "$routeParams", "postsService",
-    "userService", "errorService", "blockUiService",
-    function ($scope, $location, $routeParams, postsService, userService, errorService, blockUiService) {
+    "postsHubService", "userService", "errorService", "blockUiService",
+    function ($scope, $location, $routeParams, postsService, postsHubService, userService, errorService, blockUiService) {
         $scope.postId = $routeParams.postId;
         $scope.post = {};
         $scope.user = {};
@@ -12,6 +12,8 @@
                 return;
             }
             $scope.isBusy = true;
+
+            postsHubService.viewPost($scope.postId);
 
             userService.getUserInfo().then(function (user) {
                 $scope.user = user;

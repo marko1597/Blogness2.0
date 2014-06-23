@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Microsoft.AspNet.SignalR;
 
 namespace Blog.Web.Site.Hubs
@@ -15,6 +16,11 @@ namespace Blog.Web.Site.Hubs
                 var postId = firstOrDefault.CommentId;
                 Clients.All.commentLikesUpdate(postId, commentLikes);
             }
+        }
+
+        public void CommentAddedForPost(CommentAdded commentAdded)
+        {
+            Clients.All.commentAddedForPost(commentAdded.PostId, commentAdded.Comment);
         }
     }
 }

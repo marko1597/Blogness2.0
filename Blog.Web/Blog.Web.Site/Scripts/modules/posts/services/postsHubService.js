@@ -6,6 +6,10 @@
             }
         }, []);
 
-        return {};
+        return {
+            viewPost: function (postId) {
+                hub.viewPost(postId);
+            }
+        };
     }
 ]);

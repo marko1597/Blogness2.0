@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Implementation.Interfaces;
+using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -13,11 +16,15 @@ namespace Blog.Web.Api.Controllers
     {
         private readonly IComments _service;
         private readonly IErrorSignaler _errorSignaler;
+        private readonly IHttpClientHelper _httpClientHelper;
+        private readonly IConfigurationHelper _configurationHelper;
 
-        public CommentsController(IComments service, IErrorSignaler errorSignaler)
+        public CommentsController(IComments service, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _service = service;
             _errorSignaler = errorSignaler;
+            _httpClientHelper = httpClientHelper;
+            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
@@ -79,7 +86,15 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                _service.Add(comment);
+                var tComment = _service.Add(comment);
+                var commentAdded = new CommentAdded
+                                   {
+                                       Comment = tComment,
+                                       PostId = comment.PostId,
+                                       ParentCommentId = comment.ParentCommentId
+                                   };
+                new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper)
+                    .CommentAddedForPost(commentAdded);
             }
             catch (Exception ex)
             {

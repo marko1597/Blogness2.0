@@ -7,8 +7,9 @@ namespace Blog.Logic.ObjectMapper
     {
         public static Education ToDto(Db.Education education)
         {
-            return education == null ? null : 
-                new Education
+            if (education == null) return null;
+
+            return new Education
                 {
                     City = education.City,
                     Country = education.Country,
@@ -28,8 +29,10 @@ namespace Blog.Logic.ObjectMapper
 
         public static Db.Education ToEntity(Education education)
         {
-            return education == null ? null : 
-                new Db.Education
+            if (education == null) return null;
+            if (education.EducationType == null) return null;
+
+            return new Db.Education
                 {
                     City = education.City,
                     Country = education.Country,
