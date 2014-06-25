@@ -1,0 +1,20 @@
+﻿<div class="comment-item" data-comment-id="{{comment.CommentId}}">
+    <div class="comment-header">
+        <div class="comment-expand comment-button left" ng-click="toggleReplies()">
+            <i class="fa" ng-show="canExpandComment()" ng-class="isExpanded()"></i>
+        </div>
+        <div class="comment-details">
+            <i class="fa fa-user" ng-class="isFromPostOwner()"></i>
+            <a href="{{comment.Url}}">{{comment.NameDisplay}}</a>
+            <span class="hidden-xs">{{comment.DateDisplay}}</span>
+        </div>
+        <div class="comment-likes-count comment-button right" data-comment-id="{{comment.CommentId}}" ng-click="likeComment()">
+            <i class="fa" ng-class="isUserLiked()"></i>
+            <span>{{comment.CommentLikes == null ? 0 : comment.CommentLikes.length}}</span>
+        </div>
+        <div class="comment-reply comment-button right" ng-class="canReplyToComment()" ng-click="showAddReply()">
+            <span>Reply</span>
+        </div>
+    </div>
+    <p>{{comment.CommentMessage}}</p>
+</div>
