@@ -1,0 +1,12 @@
+﻿<div class="post-related-items-container board-item">
+    <div class="board-item-header">
+        <h4>Related posts</h4>
+    </div>
+    <div class="post-related-list">
+        <div ng-repeat="post in posts" class="post-related-item">
+            <div class="header">
+                <a href="{{post.Url}}">{{post.PostTitle}}</a>
+            </div>
+        </div>
+    </div>
+</div>

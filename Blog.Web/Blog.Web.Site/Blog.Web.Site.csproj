@@ -283,6 +283,7 @@
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postcontentupload.css" />
+    <Content Include="Content\modules\posts\postrelateditems.css" />
     <Content Include="Content\modules\posts\postsmodify.css" />
     <Content Include="Content\modules\posts\postsmain.css" />
     <Content Include="Content\modules\shared\fileupload.css" />
@@ -299,6 +300,7 @@
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
     <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
+    <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\plugins\json2.js" />
     <Content Include="Scripts\plugins\json2.min.js" />
     <Content Include="Scripts\modules\posts\services\postsHubService.js" />
@@ -654,6 +656,7 @@
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
+    <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItemComment.html" />

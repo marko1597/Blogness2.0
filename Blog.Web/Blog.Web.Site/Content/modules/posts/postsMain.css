@@ -290,3 +290,20 @@ div.post-likes {
 div.post-item-tags {
     padding: 10px 10px 0 10px;
 }
+
+/* Post view board item
+ * ====================================== */
+.board-item {
+    background: #eee;
+}
+
+    .board-item > .board-item-header {
+        position: relative;
+    }
+
+        .board-item > .board-item-header > h4 {
+            background: #4c4c4c;
+            color: #fff;
+            padding: 10px;
+            margin: 0;
+        }

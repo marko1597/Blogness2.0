@@ -138,6 +138,7 @@ namespace Blog.Web.Site
                       "~/Scripts/modules/posts/directives/postContents.js",
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postListItemComment.js",
+                      "~/Scripts/modules/posts/directives/postRelatedItems.js",
                       "~/Scripts/modules/posts/services/postsService.js",
                       "~/Scripts/modules/posts/services/postsHubService.js"));
 
@@ -192,7 +193,8 @@ namespace Blog.Web.Site
             bundles.Add(new StyleBundle("~/content/posts").Include(
                       "~/Content/modules/posts/postcontentupload.css",
                       "~/Content/modules/posts/postsmain.css",
-                      "~/Content/modules/posts/postsmodify.css"));
+                      "~/Content/modules/posts/postsmodify.css",
+                      "~/Content/modules/posts/postrelateditems.css"));
 
             #endregion
 

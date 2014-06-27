@@ -2,26 +2,15 @@
     background: #eee;
 }
 
-    .comments-container > .comments-header {
-        position: relative;
+    .comments-container > .board-item-header > div.comment-button {
+        height: 100%;
+        color: #fff;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding-top: 10px;
     }
 
-        .comments-container > .comments-header > h4 {
-            background: #4c4c4c;
-            color: #fff;
-            padding: 10px;
-            margin: 0;
+        .comments-container > .board-item-header > div.comment-button:hover {
+            background: #3c3c3c;
         }
-
-        .comments-container > .comments-header > div.comment-button {
-            height: 100%;
-            color: #fff;
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding-top: 10px;
-        }
-
-            .comments-container > .comments-header > div.comment-button:hover {
-                background: #3c3c3c;
-            }
