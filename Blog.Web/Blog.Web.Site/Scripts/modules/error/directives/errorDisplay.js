@@ -15,7 +15,7 @@
                 $(element).removeClass("hidden");
             });
 
-            $("#blog-error-global span.close-error").on("click", function (ev) {
+            $("#blog-error-global .close-error").on("click", function (ev) {
                 ev.preventDefault();
                 $(element).addClass('hidden');
             });

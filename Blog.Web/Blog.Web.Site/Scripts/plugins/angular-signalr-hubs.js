@@ -3,7 +3,6 @@
 .factory('signalrHub', ['$', function ($) {
     return function (connectionName, hubName, listeners, methods) {
         var hub = {};
-        hub.isConnected = false;
         hub.connection = $.hubConnection(connectionName, { useDefaultPath: false });
         hub.proxy = hub.connection.createHubProxy(hubName);
         hub.on = function (event, fn) {
@@ -28,7 +27,6 @@
             });
         }
         hub.connection.start();
-        hub.isConnected = true;
         return hub;
     };
 }]);

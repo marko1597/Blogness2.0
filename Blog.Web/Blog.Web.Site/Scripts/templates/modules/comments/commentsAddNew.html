@@ -1,5 +1,6 @@
 ﻿<div class="comment-item-new">
-    <textarea maxlength="140" placeholder="Enter your comment here..." ng-model="comment.CommentMessage"></textarea>
+    <textarea ng-class="commentMessageStyle()" maxlength="140" placeholder="Enter your comment here..." 
+              ng-model="comment.CommentMessage" ng-focus="removeCommentMessageError()"></textarea>
     <div>
         <button class="btn btn-primary hidden-xs" ng-click="saveComment()">Submit</button>
         <button class="btn btn-primary fa fa-paper-plane visible-xs" ng-click="saveComment()"></button>

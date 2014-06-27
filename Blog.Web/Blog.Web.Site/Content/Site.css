@@ -278,6 +278,11 @@ textarea {
     max-width: 280px;
 }
 
+.field-error {
+    border: 1px solid #d9534f;
+    color: #d9534f;
+}
+
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;

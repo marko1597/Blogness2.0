@@ -50,6 +50,10 @@
                 }
             },
 
+            highlightField : function() {
+                return "field-error";
+            },
+
             setError: function (e) {
                 error = e;
             },

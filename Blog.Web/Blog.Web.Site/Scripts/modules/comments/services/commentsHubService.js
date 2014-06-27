@@ -20,14 +20,14 @@
         return {
             viewPost: function (postId) {
                 stop = $interval(function () {
-                    if (hub.isConnected) {
+                    if (hub.connection.state != 0) {
                         hub.viewPost(postId);
                         if (angular.isDefined(stop)) {
                             $interval.cancel(stop);
                             stop = undefined;
                         }
                     }
-                }, 100);
+                }, 200);
             }
         };
     }
