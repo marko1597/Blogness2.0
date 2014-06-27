@@ -6,6 +6,7 @@
             blockUiService.blockIt({ elem: ".comment-items-list"});
             commentsService.getCommentsByPost($scope.postid).then(function (comments) {
                 $scope.comments = comments;
+                commentsHubService.viewPost($scope.postid);
                 blockUiService.unblockIt(".comment-items-list");
             }, function (e) {
                 errorService.displayErrorRedirect({ Message: e });

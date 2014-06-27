@@ -30,7 +30,7 @@ namespace Blog.Web.Site.Controllers
         public void CommentAddedForPost(CommentAdded commentAdded)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<CommentsHub>();
-            context.Clients.Group("post_" + commentAdded.PostId).commentAddedForPost(commentAdded.Comment);
+            context.Clients.Group("post_" + commentAdded.PostId).commentAdded(commentAdded.PostId, commentAdded.Comment);
         }
 	}
 }

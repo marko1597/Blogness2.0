@@ -17,8 +17,10 @@
 
         $scope.saveComment = function () {
             blockUiService.blockIt({ elem: ".comment-item-new" });
-            commentsService.addComment($scope.comment).then(function (resp) {
+            commentsService.addComment($scope.createCommentForAdding()).then(function (resp) {
                 if (resp.Error == undefined) {
+                    $scope.comment.CommentMessage = "";
+                    $scope.hideAddComment();
                     blockUiService.unblockIt(".comment-item-new");
                 } else {
                     blockUiService.unblockIt(".comment-item-new");
@@ -29,6 +31,13 @@
                 errorService.displayErrorRedirect(e);
             });
         };
+
+        $scope.createCommentForAdding = function() {
+            return {
+                PostId: $scope.parentpostid,
+                Comment: $scope.comment
+            };
+        };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "blockUiService", "errorService"];
 
@@ -37,7 +46,8 @@
         scope: {
             commentid: '=',
             postid: '=',
-            user: '='
+            user: '=',
+            parentpostid: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesUrl + "comments/commentsAddNew.html",

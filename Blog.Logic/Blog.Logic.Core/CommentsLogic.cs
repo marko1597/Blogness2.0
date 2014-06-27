@@ -11,10 +11,12 @@ namespace Blog.Logic.Core
     public class CommentsLogic
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IUserRepository _userRepository;
 
-        public CommentsLogic(ICommentRepository commentRepository)
+        public CommentsLogic(ICommentRepository commentRepository, IUserRepository userRepository)
         {
             _commentRepository = commentRepository;
+            _userRepository = userRepository;
         }
 
         public List<Comment> GetByPostId(int postId)
@@ -88,7 +90,11 @@ namespace Blog.Logic.Core
                 comment.ModifiedDate = DateTime.Now;
                 var dbComment = CommentMapper.ToEntity(comment);
                 dbComment.User = null;
-                return CommentMapper.ToDto(_commentRepository.Add(dbComment));
+
+                var dbResult = _commentRepository.Add(dbComment);
+                dbResult.User = _userRepository.Find(a => a.UserId == comment.User.UserId, false).FirstOrDefault();
+
+                return CommentMapper.ToDto(dbResult);
             }
             catch (Exception ex)
             {

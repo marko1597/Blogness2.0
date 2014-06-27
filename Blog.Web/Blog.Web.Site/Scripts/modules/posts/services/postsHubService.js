@@ -1,14 +1,25 @@
-﻿ngPosts.factory("postsHubService", ["$rootScope", "signalrHub",
-    function ($rootScope, signalrHub) {
+﻿ngPosts.factory("postsHubService", ["$rootScope", "$interval", "signalrHub",
+    function ($rootScope, $interval, signalrHub) {
         var hub = new signalrHub("/blog/signalr", "postsHub", {
             postLikesUpdate: function (postId, postLikes) {
                 $rootScope.$broadcast("postLikesUpdate", { PostId: postId, PostLikes: postLikes });
             }
-        }, []);
+        }, ["viewPost"]);
+
+        var stop;
 
         return {
             viewPost: function (postId) {
-                hub.viewPost(postId);
+                stop = $interval(function() {
+                    if (hub.isConnected) {
+                        hub.viewPost(postId);
+                        if (angular.isDefined(stop)) {
+                            $interval.cancel(stop);
+                            stop = undefined;
+                        }
+                    }
+                }, 100);
+                
             }
         };
     }

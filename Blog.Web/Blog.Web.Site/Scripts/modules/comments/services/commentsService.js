@@ -7,22 +7,17 @@
         return {
             getCommentsByPost: function (id) {
                 var deferred = $q.defer();
+                var that = this;
 
                 $http({
                     url: commentsApi + "Posts/" + id + "/Comments",
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (c) {
-                        c.DateDisplay = dateHelper.getDateDisplay(c.CreatedDate);
-                        c.NameDisplay = c.User.FirstName + " " + c.User.LastName;
-                        c.Url = "#";
-                        c.ShowReplies = false;
-                        c.ShowAddReply = false;
+                        c = that.addViewProperties(c, false, false);
 
                         _.each(c.Comments, function (r) {
-                            r.DateDisplay = dateHelper.getDateDisplay(r.CreatedDate);
-                            r.NameDisplay = r.User.FirstName + " " + r.User.LastName;
-                            r.Url = "#";
+                            r = that.addViewProperties(r);
                         });
                     });
                     deferred.resolve(response);
@@ -63,6 +58,22 @@
 
                 return deferred.promise;
             },
+
+            addViewProperties: function(comment, showReplies, showAddReply) {
+                comment.DateDisplay = dateHelper.getDateDisplay(comment.CreatedDate);
+                comment.NameDisplay = comment.User.FirstName + " " + comment.User.LastName;
+                comment.Url = "#";
+
+                if (showReplies != undefined) {
+                    comment.ShowReplies = false;
+                }
+
+                if (showAddReply != undefined) {
+                    comment.ShowAddReply = false;
+                }
+
+                return comment;
+            }
         };
     }
 ]);

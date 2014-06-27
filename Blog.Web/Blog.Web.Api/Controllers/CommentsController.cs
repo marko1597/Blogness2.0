@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
@@ -82,16 +83,21 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/comments")]
-        public void Post([FromBody]Comment comment)
+        public void Post([FromBody]CommentAdded comment)
         {
             try
             {
-                var tComment = _service.Add(comment);
+                var validationResult = IsValidComment(comment);
+                if (validationResult != null)
+                {
+                    throw new Exception(validationResult.Message);
+                }
+
+                var tComment = _service.Add(comment.Comment);
                 var commentAdded = new CommentAdded
                                    {
                                        Comment = tComment,
-                                       PostId = comment.PostId,
-                                       ParentCommentId = comment.ParentCommentId
+                                       PostId = comment.PostId
                                    };
                 new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper)
                     .CommentAddedForPost(commentAdded);
@@ -114,6 +120,21 @@ namespace Blog.Web.Api.Controllers
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
             }
+        }
+
+        private Error IsValidComment(CommentAdded commentAdded)
+        {
+            if (commentAdded == null)
+            {
+                return new Error{ Id = (int)Constants.Error.ValidationError, Message = "There was no comment to be submitted." };
+            }
+
+            if (commentAdded.PostId == null)
+            {
+                return new Error { Id = (int)Constants.Error.ValidationError, Message = "Comment should be attached to a post." };
+            }
+
+            return null;
         }
     }
 }

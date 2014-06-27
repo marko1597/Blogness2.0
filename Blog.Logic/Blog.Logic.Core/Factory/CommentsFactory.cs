@@ -25,7 +25,8 @@ namespace Blog.Logic.Core.Factory
         public CommentsLogic CreateComments()
         {
             ICommentRepository commentRepository = new CommentRepository();
-            return new CommentsLogic(commentRepository);
+            IUserRepository userRepository = new UserRepository();
+            return new CommentsLogic(commentRepository, userRepository);
         }
     }
 }

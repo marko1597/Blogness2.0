@@ -8,7 +8,12 @@
         };
 
         $scope.toggleReplies = function() {
-            $scope.comment.ShowReplies = !$scope.comment.ShowReplies;
+            var state = !$scope.comment.ShowReplies;
+            $scope.comment.ShowReplies = state;
+
+            if (!state) {
+                $rootScope.$broadcast("hideAddReply");
+            }
         };
 
         $scope.isExpanded = function() {
@@ -27,6 +32,11 @@
 
         $scope.showAddReply = function() {
             $scope.comment.ShowAddReply = true;
+
+            if (!$scope.comment.ShowReplies) {
+                $scope.toggleReplies();
+                $scope.isExpanded();
+            }
         };
 
         $scope.isUserLiked = function () {

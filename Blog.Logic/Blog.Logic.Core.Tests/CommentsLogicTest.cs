@@ -16,6 +16,7 @@ namespace Blog.Logic.Core.Tests
     public class CommentsLogicTest
     {
         private Mock<ICommentRepository> _commentsRepository;
+        private Mock<IUserRepository> _userRepository;
 
         private CommentsLogic _commentsLogic;
 
@@ -120,7 +121,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Returns(expected);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var results = _commentsLogic.GetByPostId(1);
 
@@ -139,7 +140,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.GetByPostId(1));
         }
@@ -153,7 +154,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Returns(expected);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var results = _commentsLogic.GetByUser(1);
 
@@ -172,7 +173,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.GetByUser(1));
         }
@@ -185,7 +186,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
                 .Returns(expected);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var results = _commentsLogic.GetTopComments(2, 5);
 
@@ -201,7 +202,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>())).Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.GetTopComments(2, 5));
         }
@@ -215,7 +216,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Returns(expected);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var results = _commentsLogic.GetReplies(5);
 
@@ -233,7 +234,7 @@ namespace Blog.Logic.Core.Tests
                 It.IsAny<Func<IQueryable<Comment>, IOrderedQueryable<Comment>>>(), It.IsAny<string>()))
                 .Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.GetReplies(5));
         }
@@ -247,17 +248,18 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 ParentCommentId = null,
                 CommentMessage = "Lorem ipsum dolor",
-                UserId = 1,
-                User = new User
-                {
-                    UserId = 1,
-                    UserName = "Lorem"
-                }
+                UserId = 1
             };
+
+            var dbUser = new User {UserId = 1, UserName = "Lorem"};
+
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.Add(It.IsAny<Comment>())).Returns(dbResult);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Returns(new List<User> { dbUser });
+
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var result = _commentsLogic.Add(new Common.Contracts.Comment
             {
@@ -281,7 +283,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.Add(It.IsAny<Comment>())).Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.Add(new Common.Contracts.Comment()));
         }
@@ -294,7 +296,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Comment, bool>>>(), false))
                .Returns(dbResult);
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var result = _commentsLogic.Delete(1);
 
@@ -308,7 +310,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Comment, bool>>>(), false))
                .Returns(new List<Comment>());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             var result = _commentsLogic.Delete(1);
 
@@ -321,7 +323,7 @@ namespace Blog.Logic.Core.Tests
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.Delete(It.IsAny<Comment>())).Throws(new Exception());
 
-            _commentsLogic = new CommentsLogic(_commentsRepository.Object);
+            _commentsLogic = new CommentsLogic(_commentsRepository.Object, _userRepository.Object);
 
             Assert.Throws<BlogException>(() => _commentsLogic.Delete(1));
         }

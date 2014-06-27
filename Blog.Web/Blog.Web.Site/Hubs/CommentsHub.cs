@@ -22,5 +22,10 @@ namespace Blog.Web.Site.Hubs
         {
             Clients.All.commentAddedForPost(commentAdded.PostId, commentAdded.Comment);
         }
+        
+        public void ViewPost(int postId)
+        {
+            Groups.Add(Context.ConnectionId, "post_" + postId);
+        }
     }
 }

@@ -10,9 +10,6 @@ namespace Blog.Common.Contracts.ViewModels
         public int? PostId { get; set; }
 
         [DataMember]
-        public int? ParentCommentId { get; set; }
-
-        [DataMember]
         public Comment Comment { get; set; }
     }
 }
