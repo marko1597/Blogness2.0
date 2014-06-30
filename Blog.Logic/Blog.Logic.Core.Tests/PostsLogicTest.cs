@@ -20,7 +20,6 @@ namespace Blog.Logic.Core.Tests
         private Mock<ICommentRepository> _commentsRepository;
         private Mock<IPostContentRepository> _postContentRepository;
         private Mock<IMediaRepository> _mediaRepository;
-        private Mock<ITagRepository> _tagRepository;
 
         private List<Post> _posts;
         private List<Comment> _comments;
@@ -289,10 +288,14 @@ namespace Blog.Logic.Core.Tests
                 .Returns(postContents);
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
@@ -316,9 +319,8 @@ namespace Blog.Logic.Core.Tests
 
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
@@ -343,9 +345,9 @@ namespace Blog.Logic.Core.Tests
 
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPost(1));
@@ -356,8 +358,7 @@ namespace Blog.Logic.Core.Tests
         {
             var post = _posts.FirstOrDefault(a => a.UserId == 1);
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -366,10 +367,14 @@ namespace Blog.Logic.Core.Tests
                 .Returns(postContents);
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> {new Media {MediaId = 1 }});
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+            
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByUser(1);
@@ -382,16 +387,14 @@ namespace Blog.Logic.Core.Tests
         public void ShouldReturnEmptyListWhenGetPostsByUserFoundNoRecords()
         {
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByUser(1);
@@ -403,28 +406,42 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetPostsByUserFails()
         {
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPostsByUser(1));
         }
 
         [Test]
-        public void ShouldGetPostsByTag()
+        public void ShouldGetMorePostsByUser()
         {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem"
+                }
+            };
+
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+            _postRepository.Setup(a => a.GetMorePostsByUser(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -432,15 +449,80 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMorePostsByUser(1);
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
+        public void ShouldReturnEmptyListWhenGetMorePostsByUserFoundNoRecords()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePostsByUser(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMorePostsByUser(1);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetMorePostsByUserFailsOnPostsLookup()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePostsByUser(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByUser(1));
+        }
+
+        [Test]
+        public void ShouldGetPostsByTag()
+        {
+            var post = _posts.FirstOrDefault(a => a.PostId == 1);
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByTag("lorem");
@@ -453,20 +535,14 @@ namespace Blog.Logic.Core.Tests
         public void ShouldReturnEmptyListWhenGetPostsByTagFoundNoRecords()
         {
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(new List<Post>());
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByTag("lorem");
@@ -477,20 +553,101 @@ namespace Blog.Logic.Core.Tests
         [Test]
         public void ShouldThrowExceptionWhenGetPostsByTagFails()
         {
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
                 .Throws(new Exception());
-
+                
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
-            _postRepository = new Mock<IPostRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPostsByTag("lorem"));
+        }
+        
+        [Test]
+        public void ShouldGetMorePostsByTag()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem"
+                }
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePostsByTag(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMorePostsByTag("foo");
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
+        public void ShouldReturnEmptyListWhenGetMorePostsByTagFoundNoRecords()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePostsByTag(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMorePostsByTag("foo");
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetMorePostsByTagFailsOnPostsLookup()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePostsByTag(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByTag("foo"));
         }
 
         [Test]
@@ -522,134 +679,20 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
 
             Assert.AreEqual(1, result.Count);
-        }
-
-        [Test]
-        public void ShouldFetchProfilePictureWhenGetRecentPostsUserHasNoProfilePicture()
-        {
-            var post = new Post
-            {
-                PostId = 1,
-                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User
-                {
-                    UserId = 1,
-                    UserName = "Lorem",
-                    PictureId = 1,
-                    BackgroundId = null
-                }
-            };
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
-
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            var result = _postsLogic.GetRecentPosts(5);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Picture);
-        }
-
-        [Test]
-        public void ShouldFetchBackgroundPictureWhenGetRecentPostsUserHasNoBackgroundPicture()
-        {
-            var post = new Post
-            {
-                PostId = 1,
-                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User
-                {
-                    UserId = 1,
-                    UserName = "Lorem",
-                    PictureId = null,
-                    BackgroundId = 1
-                }
-            };
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
-
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            var result = _postsLogic.GetRecentPosts(5);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Background);
         }
 
         [Test]
@@ -660,11 +703,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
@@ -680,44 +722,37 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenGetRecentPostsFailsOnPostContentsLookup()
+        public void ShouldGetMoreRecentPosts()
         {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem"
+                }
+            };
+
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Throws(new Exception());
-
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetRecentPostsFailsOnCommentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.GetMoreRecentPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -725,17 +760,58 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Throws(new Exception());
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
+            var result = _postsLogic.GetMoreRecentPosts(5, 5);
+
+            Assert.AreEqual(1, result.Count);
+        }
+
+        [Test]
+        public void ShouldReturnEmptyListWhenGetMoreRecentPostsFoundNoRecords()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMoreRecentPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMoreRecentPosts(5, 5);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetMoreRecentPostsFailsOnPostsLookup()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMoreRecentPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetMoreRecentPosts(5, 5));
         }
 
         [Test]
@@ -767,134 +843,20 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPopularPosts(5);
 
             Assert.AreEqual(1, result.Count);
-        }
-
-        [Test]
-        public void ShouldFetchProfilePictureWhenGetPopularPostsUserHasNoProfilePicture()
-        {
-            var post = new Post
-            {
-                PostId = 1,
-                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User
-                {
-                    UserId = 1,
-                    UserName = "Lorem",
-                    PictureId = 1,
-                    BackgroundId = null
-                }
-            };
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetPopular(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
-
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            var result = _postsLogic.GetPopularPosts(5);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Picture);
-        }
-
-        [Test]
-        public void ShouldFetchBackgroundPictureWhenGetPopularPostsUserHasNoBackgroundPicture()
-        {
-            var post = new Post
-            {
-                PostId = 1,
-                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User
-                {
-                    UserId = 1,
-                    UserName = "Lorem",
-                    PictureId = null,
-                    BackgroundId = 1
-                }
-            };
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetPopular(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
-
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            var result = _postsLogic.GetPopularPosts(5);
-
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Background);
         }
 
         [Test]
@@ -905,11 +867,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.GetPopularPosts(5);
@@ -925,66 +886,17 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPopularPosts(5));
         }
-
+        
         [Test]
-        public void ShouldThrowExceptionWhenGetPopularPostsFailsOnPostContentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetPopular(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Throws(new Exception());
-
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetPopularPosts(5));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetPopularPostsFailsOnCommentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetPopular(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Throws(new Exception());
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetPopularPosts(5));
-        }
-
-        [Test]
-        public void ShouldGetMorePosts()
+        public void ShouldGetMorePopularPosts()
         {
             var post = new Post
             {
@@ -1004,7 +916,7 @@ namespace Blog.Logic.Core.Tests
             };
 
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.GetMorePopularPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -1012,30 +924,62 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+            
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePosts(5, 5);
+            var result = _postsLogic.GetMorePopularPosts(5, 5);
 
             Assert.AreEqual(1, result.Count);
         }
 
         [Test]
-        public void ShouldFetchProfilePictureWhenGetMorePostsUserHasNoProfilePicture()
+        public void ShouldReturnEmptyListWhenGetMorePopularPostsFoundNoRecords()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePopularPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetMorePopularPosts(5, 5);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetMorePopularPostsFailsOnPostsLookup()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetMorePopularPosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetMorePopularPosts(5, 5));
+        }
+
+        [Test]
+        public void ShouldGetRelatedPosts()
         {
             var post = new Post
             {
@@ -1052,12 +996,17 @@ namespace Blog.Logic.Core.Tests
                     UserId = 1,
                     UserName = "Lorem",
                     PictureId = 1,
-                    BackgroundId = null
+                    BackgroundId = 1
                 }
             };
 
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -1065,31 +1014,26 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
-
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePosts(5, 5);
+            var result = _postsLogic.GetRelatedPosts(1);
 
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Picture);
+            Assert.NotNull(result);
+            Assert.NotNull(result.PostsByTags);
+            Assert.NotNull(result.PostsByUser);
         }
 
         [Test]
-        public void ShouldFetchBackgroundPictureWhenGetMorePostsUserHasNoBackgroundPicture()
+        public void ShouldGetRelatedPostsEvenIfPostHasNullForTags()
         {
             var post = new Post
             {
@@ -1097,7 +1041,7 @@ namespace Blog.Logic.Core.Tests
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
                 Comments = _comments.Where(a => a.PostId == 1).ToList(),
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
                 UserId = 1,
@@ -1105,109 +1049,72 @@ namespace Blog.Logic.Core.Tests
                 {
                     UserId = 1,
                     UserName = "Lorem",
-                    PictureId = null,
+                    PictureId = 1,
                     BackgroundId = 1
                 }
             };
 
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
             _postContentRepository = new Mock<IPostContentRepository>();
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
-
-            var tags = _tags.Where(a => a.TagName == "lorem").ToList();
-            _tagRepository = new Mock<ITagRepository>();
-            _tagRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Tag, bool>>>(), true))
-                .Returns(tags);
 
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-               .Returns(new List<Media> { new Media() });
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            var comments = _comments.Where(a => a.PostId == 1).ToList();
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(comments);
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePosts(5, 5);
+            var result = _postsLogic.GetRelatedPosts(1);
 
-            Assert.AreEqual(1, result.Count);
-            Assert.NotNull(result[0].User.Background);
+            Assert.NotNull(result);
+            Assert.NotNull(result.PostsByTags);
+            Assert.NotNull(result.PostsByUser);
         }
 
         [Test]
-        public void ShouldReturnEmptyListWhenGetMorePostsFoundNoRecords()
+        public void ShouldGetRelatedPostsEvenIfPostHasNullNoTags()
         {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = new List<Tag>(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem",
+                    PictureId = 1,
+                    BackgroundId = 1
+                }
+            };
+
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
-                .Returns(new List<Post>());
-
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            var result = _postsLogic.GetMorePosts(5, 5);
-
-            Assert.AreEqual(0, result.Count);
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetMorePostsFailsOnPostsLookup()
-        {
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
-                .Throws(new Exception());
-
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetMorePosts(5, 5));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetMorePostsFailsOnPostContentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
                 .Returns(new List<Post> { post });
-
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Throws(new Exception());
-
-            _tagRepository = new Mock<ITagRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetMorePosts(5, 5));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetMorePostsFailsOnCommentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetMorePosts(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>(), It.IsAny<int>()))
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
                 .Returns(new List<Post> { post });
 
             var postContents = _postContents.Where(a => a.PostId == 1).ToList();
@@ -1215,17 +1122,94 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
 
             _commentsRepository = new Mock<ICommentRepository>();
             _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Throws(new Exception());
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.GetMorePosts(5, 5));
+            var result = _postsLogic.GetRelatedPosts(1);
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.PostsByTags);
+            Assert.NotNull(result.PostsByUser);
+        }
+
+        [Test]
+        public void ShouldGetRelatedPostsEvenIfPostHasUserRelatedPostsFound()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = new List<Tag>(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem",
+                    PictureId = 1,
+                    BackgroundId = 1
+                }
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetPostsByTag(It.IsAny<string>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+            _postRepository.Setup(a => a.GetByUser(It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetRelatedPosts(1);
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.PostsByTags);
+            Assert.NotNull(result.PostsByUser);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetRelatedPostsFails()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetRelatedPosts(1));
         }
 
         [Test]
@@ -1297,11 +1281,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
@@ -1367,11 +1351,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
@@ -1431,11 +1415,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
@@ -1464,11 +1448,11 @@ namespace Blog.Logic.Core.Tests
             _postRepository.Setup(a => a.Add(It.IsAny<Post>())).Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.AddPost(param));
@@ -1543,11 +1527,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
@@ -1613,11 +1597,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
@@ -1677,11 +1661,11 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
@@ -1710,11 +1694,11 @@ namespace Blog.Logic.Core.Tests
             _postRepository.Setup(a => a.Edit(It.IsAny<Post>())).Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.UpdatePost(param));
@@ -1742,11 +1726,11 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post> { post });
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.DeletePost(1);
@@ -1762,11 +1746,11 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             var result = _postsLogic.DeletePost(1);
@@ -1782,14 +1766,201 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            _tagRepository = new Mock<ITagRepository>();
+            
             _mediaRepository = new Mock<IMediaRepository>();
             _commentsRepository = new Mock<ICommentRepository>();
 
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object, _tagRepository.Object,
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.DeletePost(1));
         }
+        
+        [Test]
+        public void ShouldFetchProfilePictureWhenGetPostsUserHasNoProfilePicture()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem",
+                    PictureId = 1,
+                    BackgroundId = null
+                }
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetRecentPosts(5);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.NotNull(result[0].User.Picture);
+        }
+
+        [Test]
+        public void ShouldFetchBackgroundPictureWhenGetPostsUserHasNoBackgroundPicture()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem",
+                    PictureId = null,
+                    BackgroundId = 1
+                }
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetRecentPosts(5);
+
+            Assert.AreEqual(1, result.Count);
+            Assert.NotNull(result[0].User.Background);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetPostsFailsOnPostContentsLookup()
+        {
+            var post = _posts.FirstOrDefault(a => a.PostId == 1);
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Throws(new Exception());
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _commentsRepository = new Mock<ICommentRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetPostsFailsOnCommentsLookup()
+        {
+            var post = _posts.FirstOrDefault(a => a.PostId == 1);
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetPostsFailsOnMediaLookup()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User
+                {
+                    UserId = 1,
+                    UserName = "Lorem",
+                    PictureId = 1,
+                    BackgroundId = 1
+                }
+            };
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Throws(new Exception());
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
+        }
+
     }
 }

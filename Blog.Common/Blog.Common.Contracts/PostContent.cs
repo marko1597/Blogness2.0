@@ -5,7 +5,7 @@ namespace Blog.Common.Contracts
 {
     
     [DataContract]
-    public class PostContent : BaseContract
+    public class PostContent : BaseObject
     {
         [DataMember]
         public int PostContentId { get; set; }

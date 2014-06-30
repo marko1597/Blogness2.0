@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Common.Contracts
 {
     [DataContract]
-    public class Education : BaseContract
+    public class Education : BaseObject
     {
         [DataMember]
         public int EducationId { get; set; }

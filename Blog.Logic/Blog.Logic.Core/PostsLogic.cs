@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
@@ -13,16 +14,13 @@ namespace Blog.Logic.Core
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostContentRepository _postContentRepository;
-        private readonly ITagRepository _tagRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly IMediaRepository _mediaRepository;
 
-        public PostsLogic(IPostRepository postRepository, IPostContentRepository postContentRepository, 
-            ITagRepository tagRepository, ICommentRepository commentRepository, IMediaRepository mediaRepository)
+        public PostsLogic(IPostRepository postRepository, IPostContentRepository postContentRepository, ICommentRepository commentRepository, IMediaRepository mediaRepository)
         {
             _postRepository = postRepository;
             _postContentRepository = postContentRepository;
-            _tagRepository = tagRepository;
             _commentRepository = commentRepository;
             _mediaRepository = mediaRepository;
         }
@@ -58,16 +56,25 @@ namespace Blog.Logic.Core
             var posts = new List<Post>();
             try
             {
-                var tag = _tagRepository.Find(a => a.TagName == tagName, true).FirstOrDefault();
-                var db = _postRepository.Find(a => a.Tags.Contains(tag), null, "Tags,User,Comments,PostLikes").ToList();
+                var db = _postRepository.GetPostsByTag(tagName).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
-                posts.ForEach(a =>
-                {
-                    var contents = new List<PostContent>();
-                    var dbContents = _postContentRepository.Find(b => b.PostId == a.PostId, true).ToList();
-                    dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
-                    a.PostContents = contents;
-                });
+                posts.ForEach(a => GetPostProperties(a));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return posts;
+        }
+
+        public List<Post> GetMorePostsByTag(string tagName)
+        {
+            var posts = new List<Post>();
+            try
+            {
+                var db = _postRepository.GetMorePostsByTag(tagName).ToList();
+                db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a => GetPostProperties(a));
             }
             catch (Exception ex)
             {
@@ -81,15 +88,25 @@ namespace Blog.Logic.Core
             var posts = new List<Post>();
             try
             {
-                var db = _postRepository.Find(a => a.UserId == userId, null, "Tags,User,Comments,PostLikes").ToList();
+                var db = _postRepository.GetByUser(userId).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
-                posts.ForEach(a =>
-                {
-                    var contents = new List<PostContent>();
-                    var dbContents = _postContentRepository.Find(b => b.PostId == a.PostId, true).ToList();
-                    dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
-                    a.PostContents = contents;
-                });
+                posts.ForEach(a => GetPostProperties(a));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return posts;
+        }
+
+        public List<Post> GetMorePostsByUser(int userId)
+        {
+            var posts = new List<Post>();
+            try
+            {
+                var db = _postRepository.GetMorePostsByUser(userId).ToList();
+                db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a => GetPostProperties(a));
             }
             catch (Exception ex)
             {
@@ -105,23 +122,23 @@ namespace Blog.Logic.Core
             {
                 var db = _postRepository.GetPopular(a => a.PostId > 0, postsCount).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
-                posts.ForEach(a =>
-                {
-                    var contents = new List<PostContent>();
-                    var dbContents = _postContentRepository.Find(b => b.PostId == a.PostId, true).ToList();
-                    dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
-                    a.PostContents = contents;
+                posts.ForEach(a => GetPostProperties(a));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return posts;
+        }
 
-                    var comments = new List<Comment>();
-                    var dbComments = _commentRepository.GetTop(b => b.PostId == a.PostId, 5).ToList();
-                    dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
-                    a.Comments = comments;
-
-                    if (a.User.PictureId != null)
-                        a.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.PictureId, false).FirstOrDefault());
-                    if (a.User.BackgroundId != null)
-                        a.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.BackgroundId, false).FirstOrDefault());
-                });
+        public List<Post> GetMorePopularPosts(int postsCount, int skip)
+        {
+            var posts = new List<Post>();
+            try
+            {
+                var db = _postRepository.GetMorePopularPosts(a => a.PostId > 0, postsCount, skip).ToList();
+                db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a => GetPostProperties(a));
             }
             catch (Exception ex)
             {
@@ -137,23 +154,7 @@ namespace Blog.Logic.Core
             {
                 var db = _postRepository.GetRecent(a => a.PostId > 0, postsCount).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
-                posts.ForEach(a =>
-                {
-                    var contents = new List<PostContent>();
-                    var dbContents = _postContentRepository.Find(b => b.PostId == a.PostId, true).ToList();
-                    dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
-                    a.PostContents = contents;
-
-                    var comments = new List<Comment>();
-                    var dbComments = _commentRepository.GetTop(b => b.PostId == a.PostId, 5).ToList();
-                    dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
-                    a.Comments = comments;
-
-                    if (a.User.PictureId != null)
-                        a.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.PictureId, false).FirstOrDefault());
-                    if (a.User.BackgroundId != null)
-                        a.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.BackgroundId, false).FirstOrDefault());
-                });
+                posts.ForEach(a => GetPostProperties(a));
             }
             catch (Exception ex)
             {
@@ -162,36 +163,58 @@ namespace Blog.Logic.Core
             return posts;
         }
 
-        public List<Post> GetMorePosts(int postsCount, int skip)
+        public List<Post> GetMoreRecentPosts(int postsCount, int skip)
         {
             var posts = new List<Post>();
             try
             {
-                var db = _postRepository.GetMorePosts(a => a.PostId > 0, postsCount, skip).ToList();
+                var db = _postRepository.GetMoreRecentPosts(a => a.PostId > 0, postsCount, skip).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
-                posts.ForEach(a =>
-                {
-                    var contents = new List<PostContent>();
-                    var dbContents = _postContentRepository.Find(b => b.PostId == a.PostId, true).ToList();
-                    dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
-                    a.PostContents = contents;
-
-                    var comments = new List<Comment>();
-                    var dbComments = _commentRepository.GetTop(b => b.PostId == a.PostId, 5).ToList();
-                    dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
-                    a.Comments = comments;
-
-                    if (a.User.PictureId != null)
-                        a.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.PictureId, false).FirstOrDefault());
-                    if (a.User.BackgroundId != null)
-                        a.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)a.User.BackgroundId, false).FirstOrDefault());
-                });
+                posts.ForEach(a => GetPostProperties(a));
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
             return posts;
+        }
+
+        public RelatedPosts GetRelatedPosts(int postId)
+        {
+            try
+            {
+                var relatedPosts = new RelatedPosts();
+                var post = GetPost(postId);
+
+                var postByTags = new List<Post>();
+                if (post.Tags == null || post.Tags.Count == 0)
+                {
+                    relatedPosts.PostsByTags = new List<Post>();
+                }
+                else
+                {
+                    post.Tags.ForEach(a =>
+                    {
+                        var tPosts = GetPostsByTag(a.TagName);
+                        tPosts.ForEach(b =>
+                        {
+                            var canAdd = postByTags.All(p => p.PostId != b.PostId);
+                            if (canAdd) postByTags.Add(b);
+                        });
+                    });
+                    relatedPosts.PostsByTags = postByTags;
+                }
+
+                var postsByUser = GetPostsByUser(post.User.UserId);
+                relatedPosts.PostsByUser = postsByUser == null || postsByUser.Count == 0 ? 
+                    new List<Post>() : postsByUser;
+
+                return relatedPosts;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public Post AddPost(Post post)
@@ -275,6 +298,26 @@ namespace Blog.Logic.Core
             }
 
             return postContents.ToList();
+        }
+
+        private Post GetPostProperties(Post post)
+        {
+            var contents = new List<PostContent>();
+            var dbContents = _postContentRepository.Find(b => b.PostId == post.PostId, true).ToList();
+            dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
+            post.PostContents = contents;
+
+            var comments = new List<Comment>();
+            var dbComments = _commentRepository.GetTop(b => b.PostId == post.PostId, 5).ToList();
+            dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
+            post.Comments = comments;
+
+            if (post.User.PictureId != null)
+                post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());
+            if (post.User.BackgroundId != null)
+                post.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.BackgroundId, false).FirstOrDefault());
+
+            return post;
         }
     }
 }

@@ -190,6 +190,10 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.page-content {
+    padding: 0 15px;
+}
+
 .body-content {
     margin: 51px 0 0 0;
     padding-top: 15px;

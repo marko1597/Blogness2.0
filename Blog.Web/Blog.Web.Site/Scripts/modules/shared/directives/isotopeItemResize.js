@@ -41,27 +41,34 @@
                     var container = $("#" + attrs.resizeContainer);
                     var containerWidth = container.outerWidth();
 
-                    if (containerWidth == 940) {
+                    if (containerWidth > 1200) {
                         _.each($(elem).children(".isotope-item"), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "448px" : attrs.resizeLarge;
-                            $(a).width(large);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "large");
-                    } else if (containerWidth == 1140) {
-                        _.each($(elem).children(".isotope-item"), function (a) {
-                            var xlarge = attrs.resizeXlarge == undefined ? "368px" : attrs.resizeXlarge;
+                            var xlarge = attrs.resizeXlarge == undefined ? "19%" : attrs.resizeXlarge;
                             $(a).width(xlarge);
                         });
                         if (attrs.resizeBroadcast != undefined)
                             scope.$emit(attrs.resizeBroadcast, "xlarge");
-                    } else if (containerWidth == 720) {
+                    } else if (containerWidth > 992) {
                         _.each($(elem).children(".isotope-item"), function (a) {
-                            var medium = attrs.resizeMedium == undefined ? "338px" : attrs.resizeMedium;
+                            var large = attrs.resizeLarge == undefined ? "24%" : attrs.resizeLarge;
+                            $(a).width(large);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "large");
+                    } else if (containerWidth > 768) {
+                        _.each($(elem).children(".isotope-item"), function (a) {
+                            var medium = attrs.resizeMedium == undefined ? "31.5%" : attrs.resizeMedium;
                             $(a).width(medium);
                         });
                         if (attrs.resizeBroadcast != undefined)
                             scope.$emit(attrs.resizeBroadcast, "medium");
+                    } else if (containerWidth > 568) {
+                        _.each($(elem).children(".isotope-item"), function (a) {
+                            var medium = attrs.resizeMedium == undefined ? "48%" : attrs.resizeSmall;
+                            $(a).width(medium);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "small");
                     } else {
                         _.each($(elem).children(".isotope-item"), function (a) {
                             var xsmall = attrs.resizeXsmall == undefined ? "98%" : attrs.resizeXsmall;

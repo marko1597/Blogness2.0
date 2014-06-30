@@ -3,7 +3,7 @@
 namespace Blog.Common.Contracts
 {
     [DataContract]
-    public class Address : BaseContract
+    public class Address : BaseObject
     {
         [DataMember]
         public int AddressId { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
@@ -43,6 +44,23 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/posts/{postId:int}/related")]
+        public RelatedPosts GetRelated(int postId)
+        {
+            var posts = new RelatedPosts();
+
+            try
+            {
+                posts = _postsSvc.GetRelatedPosts(postId) ?? new RelatedPosts();
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+            return posts;
+        }
+
+        [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/tag/{tagName}")]
         public List<Post> Get(string tagName)
@@ -63,6 +81,25 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/posts/tag/{tagName}/more")]
+        public List<Post> GetMoreByTag(string tagName)
+        {
+            var posts = new List<Post>();
+
+            try
+            {
+                posts = _postsSvc.GetMorePostsByTag(tagName) ?? new List<Post>();
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+
+            return posts;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/popular")]
         public List<Post> GetPopular()
         {
@@ -70,8 +107,26 @@ namespace Blog.Web.Api.Controllers
 
             try
             {
-                posts = _postsSvc.GetPopularPosts(
-                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
+                posts = _postsSvc.GetPopularPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+
+            return posts;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/posts/popular/more/{skip:int?}")]
+        public List<Post> GetMorePopular(int skip = 10)
+        {
+            var posts = new List<Post>();
+
+            try
+            {
+                posts = _postsSvc.GetMorePopularPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -90,8 +145,7 @@ namespace Blog.Web.Api.Controllers
 
             try
             {
-                posts = _postsSvc.GetRecentPosts(
-                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
+                posts = _postsSvc.GetRecentPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -103,15 +157,14 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
-        [Route("api/posts/more/{skip:int?}")]
-        public List<Post> GetMore(int skip = 10)
+        [Route("api/posts/recent/more/{skip:int?}")]
+        public List<Post> GetMoreRecent(int skip = 10)
         {
             var posts = new List<Post>();
 
             try
             {
-                posts = _postsSvc.GetMorePosts(
-                    Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
+                posts = _postsSvc.GetMoreRecentPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -125,6 +178,25 @@ namespace Blog.Web.Api.Controllers
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/user/{userId}/posts")]
         public List<Post> GetUserPosts(int userId)
+        {
+            var posts = new List<Post>();
+
+            try
+            {
+                posts = _postsSvc.GetPostsByUser(userId) ?? new List<Post>();
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+
+            return posts;
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/user/{userId}/posts/more/{skip:int?}")]
+        public List<Post> GetMoreUserPosts(int userId)
         {
             var posts = new List<Post>();
 

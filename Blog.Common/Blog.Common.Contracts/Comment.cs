@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Blog.Common.Contracts
 {
     [DataContract]
-    public class Comment : BaseContract
+    public class Comment : BaseObject
     {
         [DataMember]
         public int CommentId { get; set; }

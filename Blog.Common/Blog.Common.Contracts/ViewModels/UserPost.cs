@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Common.Contracts.ViewModels
 {
     [DataContract]
-    public class UserPosts : BaseContract
+    public class UserPosts : BaseObject
     {
         [DataMember]
         public User User { get; set; }

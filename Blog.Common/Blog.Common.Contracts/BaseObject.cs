@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Blog.Common.Contracts
 {
     [DataContract]
-    public abstract class BaseContract
+    public abstract class BaseObject
     {
         [DataMember]
         public Error Error { get; set; }
@@ -16,7 +16,7 @@ namespace Blog.Common.Contracts
         /// <param name="id">Error Id</param>
         /// <param name="message">Error message</param>
         /// <returns>Instance of T with Error object</returns>
-        public virtual T GenerateError<T>(int id, string message) where T : BaseContract, new()
+        public virtual T GenerateError<T>(int id, string message) where T : BaseObject, new()
         {
             return new T
             {
@@ -36,7 +36,7 @@ namespace Blog.Common.Contracts
         /// <param name="message">Error message</param>
         /// <param name="ex">Exception object</param>
         /// <returns>Instance of T with Error object</returns>
-        public virtual T GenerateError<T>(int id, string message, Exception ex) where T : BaseContract, new()
+        public virtual T GenerateError<T>(int id, string message, Exception ex) where T : BaseObject, new()
         {
             return new T
             {

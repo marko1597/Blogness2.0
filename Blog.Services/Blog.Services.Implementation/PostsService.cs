@@ -13,14 +13,29 @@ namespace Blog.Services.Implementation
             return PostsFactory.GetInstance().CreateLogic().GetPost(postId);
         }
 
+        public RelatedPosts GetRelatedPosts(int postId)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetRelatedPosts(postId);
+        }
+
         public List<Post> GetPostsByTag(string tagName)
         {
             return PostsFactory.GetInstance().CreateLogic().GetPostsByTag(tagName);
         }
 
+        public List<Post> GetMorePostsByTag(string tagName)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetMorePostsByTag(tagName);
+        }
+
         public List<Post> GetPostsByUser(int userId)
         {
             return PostsFactory.GetInstance().CreateLogic().GetPostsByUser(userId);
+        }
+
+        public List<Post> GetMorePostsByUser(int userId)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetMorePostsByUser(userId);
         }
         
         public List<Post> GetPopularPosts(int postsCount)
@@ -28,14 +43,19 @@ namespace Blog.Services.Implementation
             return PostsFactory.GetInstance().CreateLogic().GetPopularPosts(postsCount);
         }
 
+        public List<Post> GetMorePopularPosts(int postsCount, int skip)
+        {
+            return PostsFactory.GetInstance().CreateLogic().GetMorePopularPosts(postsCount, skip);
+        }
+
         public List<Post> GetRecentPosts(int postsCount)
         {
             return PostsFactory.GetInstance().CreateLogic().GetRecentPosts(postsCount);
         }
 
-        public List<Post> GetMorePosts(int postsCount, int skip)
+        public List<Post> GetMoreRecentPosts(int postsCount, int skip)
         {
-            return PostsFactory.GetInstance().CreateLogic().GetMorePosts(postsCount, skip);
+            return PostsFactory.GetInstance().CreateLogic().GetMoreRecentPosts(postsCount, skip);
         }
 
         public Post AddPost(Post post)

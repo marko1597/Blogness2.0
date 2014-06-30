@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Blog.Common.Contracts.ViewModels
 {
     [DataContract]
-    public class CommentAdded
+    public class CommentAdded : BaseObject
     {
         [DataMember]
         public int? PostId { get; set; }

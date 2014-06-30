@@ -23,13 +23,13 @@
             });
         };
 
-        $scope.getMorePosts = function () {
+        $scope.getMoreRecentPosts = function () {
             if ($scope.isBusy) {
                 return;
             }
             $scope.isBusy = true;
             
-            postsService.getMorePosts($scope.posts.length).then(function (resp) {
+            postsService.getMoreRecentPosts($scope.posts.length).then(function (resp) {
                 _.each(resp, function (p) {
                     $scope.posts.push(p);
                 });
@@ -49,7 +49,7 @@
         });
 
         $scope.$on("scrollBottom", function () {
-            $scope.getMorePosts();
+            $scope.getMoreRecentPosts();
         });
 
         $scope.getRecentPosts();

@@ -11,11 +11,42 @@ namespace Blog.DataAccess.Database.Repository
 {
     public class PostRepository : GenericRepository<BlogDb, Post>, IPostRepository
     {
+        public IList<Post> GetPostsByTag(string tagName, int threshold = 10)
+        {
+            var query = Find(a => a.Tags.Any(t => t.TagName == tagName), null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.PostLikes.Count)
+                .ThenByDescending(b => b.CreatedDate)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Post> GetMorePostsByTag(string tagName, int threshold = 5, int skip = 10)
+        {
+            var query = Find(a => a.Tags.Any(t => t.TagName == tagName), null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.PostLikes.Count)
+                .ThenByDescending(b => b.CreatedDate)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
         public IList<Post> GetPopular(Expression<Func<Post, bool>> predicate, int threshold = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
                 .OrderByDescending(a => a.PostLikes.Count)
                 .ThenByDescending(b => b.CreatedDate)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Post> GetMorePopularPosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10)
+        {
+            var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.PostLikes.Count)
+                .Skip(skip)
                 .Take(threshold)
                 .ToList();
             return query;
@@ -30,9 +61,28 @@ namespace Blog.DataAccess.Database.Repository
             return query;
         }
 
-        public IList<Post> GetMorePosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10)
+        public IList<Post> GetMoreRecentPosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10)
         {
             var query = Find(predicate, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(b => b.CreatedDate)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Post> GetByUser(int userId, int threshold = 10)
+        {
+            var query = Find(a => a.UserId == userId, null, "PostContents,Tags,User,PostLikes")
+                .OrderByDescending(a => a.ModifiedDate)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Post> GetMorePostsByUser(int userId, int threshold = 5, int skip = 10)
+        {
+            var query = Find(a => a.UserId == userId, null, "PostContents,Tags,User,PostLikes")
                 .OrderByDescending(b => b.CreatedDate)
                 .Skip(skip)
                 .Take(threshold)

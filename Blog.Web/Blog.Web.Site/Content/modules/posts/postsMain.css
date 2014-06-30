@@ -15,19 +15,19 @@
     }
 
         #posts-main > div.post-item.large {
-            width: 448px;
+            width: 24%;
         }
 
         #posts-main > div.post-item.xlarge {
-            width: 368px;
+            width: 19%;
         }
 
         #posts-main > div.post-item.medium {
-            width: 338px;
+            width: 31.5%;
         }
 
         #posts-main > div.post-item.small {
-            width: 46%;
+            width: 48%;
         }
 
         #posts-main > div.post-item.xsmall {

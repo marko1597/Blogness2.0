@@ -21,6 +21,28 @@
                 return deferred.promise;
             },
 
+            getRelatedPosts: function (id) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + id + "/related",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response.PostsByUser, function(p) {
+                        p.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+                    });
+                    _.each(response.PostsByTag, function (p) {
+                        p.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+                    });
+                    
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
             getPopularPosts: function () {
                 var deferred = $q.defer();
 
@@ -57,11 +79,11 @@
                 return deferred.promise;
             },
 
-            getMorePosts: function (c) {
+            getMoreRecentPosts: function (c) {
                 var deferred = $q.defer();
 
                 $http({
-                    url: postsApi + "more/" + c,
+                    url: postsApi + "recent/more/" + c,
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
