@@ -1,0 +1,20 @@
+﻿<div class="post-related-item">
+    <div class="header">
+        <a href="{{post.Url}}">{{post.PostTitle}}</a>
+    </div>
+    <div class="body">
+        <div class="center-cropped" style="background-image: url('{{post.PostContents[0].Media.ThumbnailUrl}}')">
+            <img ng-src="{{post.PostContents[0].Media.ThumbnailUrl}}" />
+        </div>
+        <div class="details">
+            <p>
+                <span>{{post.PostContents.length}} images by</span>
+                <a>{{post.User.UserName}}</a>
+            </p>
+            <p>
+                <span>{{post.DateDisplay}}</span>
+            </p>
+            <div post-likes  data="{ PostId: post.PostId, PostLikes: post.PostLikes}"></div>
+        </div>
+    </div>
+</div>
