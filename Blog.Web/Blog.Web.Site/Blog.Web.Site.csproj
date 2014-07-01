@@ -300,6 +300,7 @@
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
     <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
+    <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\plugins\json2.js" />
     <Content Include="Scripts\plugins\json2.min.js" />
@@ -656,6 +657,7 @@
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
+    <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItem.html" />

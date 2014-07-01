@@ -139,6 +139,7 @@ namespace Blog.Web.Site
                       "~/Scripts/modules/posts/directives/postLikes.js",
                       "~/Scripts/modules/posts/directives/postListItemComment.js",
                       "~/Scripts/modules/posts/directives/postRelatedItems.js",
+                      "~/Scripts/modules/posts/directives/postRelatedItem.js",
                       "~/Scripts/modules/posts/services/postsService.js",
                       "~/Scripts/modules/posts/services/postsHubService.js"));
 

@@ -1,20 +1,38 @@
 ﻿ngPosts.directive('postRelatedItems', [function () {
     var ctrlFn = function ($scope, $rootScope, postsService, blockUiService, errorService) {
-        $scope.posts = [];
+        $scope.postsByTag = [];
+        $scope.postsByUser = [];
+        
+        $scope.relatedCategories = [
+            { name: 'By user', id: "user" },
+            { name: 'By similar tags', id: "tags" }
+        ];
+        $scope.selectedCategory = $scope.relatedCategories[0];
 
         $scope.getRelatedPosts = function () {
             blockUiService.blockIt({ elem: ".post-related-list" });
 
-            postsService.getRecentPosts().then(function (resp) {
-                _.each(resp, function(p) {
-                    p.Url = "/blog/#/post/" + p.PostId;
-                });
-
-                $scope.posts = resp;
+            postsService.getRelatedPosts($scope.parentpostid).then(function (response) {
+                $scope.postsByTag = response.PostsByTags;
+                $scope.postsByUser = response.PostsByUser;
                 blockUiService.unblockIt(".post-related-list");
-            }, function(e) {
+            }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
+        };
+
+        $scope.displayUser = function() {
+            if ($scope.selectedCategory.id == "user") {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.displayTag = function () {
+            if ($scope.selectedCategory.id == "tags") {
+                return true;
+            }
+            return false;
         };
 
         $scope.getRelatedPosts();

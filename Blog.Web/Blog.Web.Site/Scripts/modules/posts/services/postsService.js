@@ -29,10 +29,12 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response.PostsByUser, function(p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
+                        p.Url = "/blog/#/post/" + p.PostId;
                     });
-                    _.each(response.PostsByTag, function (p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+                    _.each(response.PostsByTags, function (p) {
+                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
+                        p.Url = "/blog/#/post/" + p.PostId;
                     });
                     
                     deferred.resolve(response);
