@@ -230,18 +230,18 @@ namespace Blog.Logic.Core
         private Address GetAddress(User user)
         {
             var address = new Address();
-            if (user.UserId <= 0) return address;
+            if (user.Id <= 0) return address;
 
-            address = AddressMapper.ToDto(_addressRepository.Find(a => a.UserId == user.UserId, false).FirstOrDefault());
+            address = AddressMapper.ToDto(_addressRepository.Find(a => a.UserId == user.Id, false).FirstOrDefault());
             return address;
         }
 
         private List<Education> GetEducations(User user)
         {
             var educations = new List<Education>();
-            if (user.UserId <= 0) return educations;
+            if (user.Id <= 0) return educations;
 
-            var db = _educationRepository.Find(a => a.UserId == user.UserId, true).ToList();
+            var db = _educationRepository.Find(a => a.UserId == user.Id, true).ToList();
             db.ForEach(a => educations.Add(EducationMapper.ToDto(a)));
 
             return educations;

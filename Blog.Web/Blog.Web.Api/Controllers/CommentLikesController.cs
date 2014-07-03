@@ -57,7 +57,7 @@ namespace Blog.Web.Api.Controllers
                 var commentLike = new CommentLike
                 {
                     CommentId = commentId,
-                    UserId = user.UserId
+                    UserId = user.Id
                 };
                 _service.Add(commentLike);
                 new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper).CommentsLikeUpdate(new CommentLikesUpdate

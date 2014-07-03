@@ -58,11 +58,11 @@
         };
 
         $scope.likeComment = function () {
-            commentsService.likeComment($scope.comment.CommentId, $scope.user.UserName);
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName);
         };
 
         $scope.$on("commentLikesUpdate", function (e, d) {
-            if ($scope.comment.CommentId == d.CommentId) {
+            if ($scope.comment.Id == d.CommentId) {
                 $scope.comment.CommentLikes = d.CommentLikes;
                 $scope.$apply();
                 $(".comment-likes-count[data-comment-id='" + d.CommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);

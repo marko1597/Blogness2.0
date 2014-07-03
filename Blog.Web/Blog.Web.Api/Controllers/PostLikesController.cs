@@ -57,7 +57,7 @@ namespace Blog.Web.Api.Controllers
                 var postLike = new PostLike
                                {
                                    PostId = postId,
-                                   UserId = user.UserId
+                                   UserId = user.Id
                                };
                 _service.Add(postLike);
                 new PostsHub(_errorSignaler, _httpClientHelper, _configurationHelper).PushPostLikes(new PostLikesUpdate

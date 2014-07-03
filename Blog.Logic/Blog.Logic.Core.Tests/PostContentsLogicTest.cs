@@ -111,7 +111,7 @@ namespace Blog.Logic.Core.Tests
 
             var content = _postContentsLogic.Get(1);
 
-            Assert.AreEqual(1, content.PostContentId);
+            Assert.AreEqual(1, content.Id);
         }
 
         [Test]
@@ -159,7 +159,7 @@ namespace Blog.Logic.Core.Tests
 
             var result = _postContentsLogic.Add(new Common.Contracts.PostContent
             {
-                PostContentId = 4,
+                Id = 4,
                 PostContentTitle = "Foo",
                 PostContentText = "Lorem Ipsum Dolor",
                 PostId = 5

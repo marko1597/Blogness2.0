@@ -160,9 +160,9 @@ namespace Blog.Logic.Core.Tests
 
             Assert.NotNull(results);
             Assert.AreEqual(3, results.Count);
-            Assert.AreEqual(1, results[0].User.UserId);
-            Assert.AreEqual(1, results[1].User.UserId);
-            Assert.AreEqual(1, results[2].User.UserId);
+            Assert.AreEqual(1, results[0].User.Id);
+            Assert.AreEqual(1, results[1].User.Id);
+            Assert.AreEqual(1, results[2].User.Id);
         }
 
         [Test]
@@ -263,13 +263,13 @@ namespace Blog.Logic.Core.Tests
 
             var result = _commentsLogic.Add(new Common.Contracts.Comment
             {
-                CommentId = 7,
+                Id = 7,
                 PostId = 1,
                 ParentCommentId = null,
                 CommentMessage = "Lorem ipsum dolor",
                 User = new Common.Contracts.User
                 {
-                    UserId = 1,
+                    Id = 1,
                     UserName = "Lorem"
                 }
             });

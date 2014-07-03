@@ -198,14 +198,14 @@ namespace Blog.Logic.Core
                         var tPosts = GetPostsByTag(a.TagName);
                         tPosts.ForEach(b =>
                         {
-                            var canAdd = postByTags.All(p => p.PostId != b.PostId);
+                            var canAdd = postByTags.All(p => p.Id != b.Id);
                             if (canAdd) postByTags.Add(b);
                         });
                     });
                     relatedPosts.PostsByTags = postByTags;
                 }
 
-                var postsByUser = GetPostsByUser(post.User.UserId);
+                var postsByUser = GetPostsByUser(post.User.Id);
                 relatedPosts.PostsByUser = postsByUser == null || postsByUser.Count == 0 ? 
                     new List<Post>() : postsByUser;
 
@@ -221,11 +221,11 @@ namespace Blog.Logic.Core
         {
             try
             {
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.UserId) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.UserId, post.PostId) : null;
-                post.CreatedBy = post.User.UserId;
+                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
+                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
+                post.CreatedBy = post.User.Id;
                 post.CreatedDate = DateTime.Now;
-                post.ModifiedBy = post.User.UserId;
+                post.ModifiedBy = post.User.Id;
                 post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
@@ -241,8 +241,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.UserId) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.UserId, post.PostId) : null;
+                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
+                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
                 post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
@@ -303,12 +303,12 @@ namespace Blog.Logic.Core
         private Post GetPostProperties(Post post)
         {
             var contents = new List<PostContent>();
-            var dbContents = _postContentRepository.Find(b => b.PostId == post.PostId, true).ToList();
+            var dbContents = _postContentRepository.Find(b => b.PostId == post.Id, true).ToList();
             dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
             post.PostContents = contents;
 
             var comments = new List<Comment>();
-            var dbComments = _commentRepository.GetTop(b => b.PostId == post.PostId, 5).ToList();
+            var dbComments = _commentRepository.GetTop(b => b.PostId == post.Id, 5).ToList();
             dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
             post.Comments = comments;
 

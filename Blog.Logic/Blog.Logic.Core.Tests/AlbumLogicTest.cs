@@ -83,8 +83,8 @@ namespace Blog.Logic.Core.Tests
             var albums = _albumLogic.GetByUser(1);
 
             Assert.AreEqual(2, albums.Count);
-            Assert.AreEqual(1, albums[0].User.UserId);
-            Assert.AreEqual(1, albums[1].User.UserId);
+            Assert.AreEqual(1, albums[0].User.Id);
+            Assert.AreEqual(1, albums[1].User.Id);
         }
 
         [Test]
@@ -185,13 +185,13 @@ namespace Blog.Logic.Core.Tests
                 IsUserDefault = true,
                 User = new Common.Contracts.User
                 {
-                    UserId = 1,
+                    Id = 1,
                     UserName = "FooBar"
                 }
             });
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.User.UserId);
+            Assert.AreEqual(2, result.User.Id);
         }
 
         [Test]
@@ -232,13 +232,13 @@ namespace Blog.Logic.Core.Tests
                 IsUserDefault = true,
                 User = new Common.Contracts.User
                 {
-                    UserId = 1,
+                    Id = 1,
                     UserName = "FooBar"
                 }
             });
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.User.UserId);
+            Assert.AreEqual(1, result.User.Id);
         }
 
         [Test]

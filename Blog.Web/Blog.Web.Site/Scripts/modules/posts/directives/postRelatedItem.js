@@ -1,8 +1,10 @@
 ﻿ngPosts.directive('postRelatedItem', [function () {
-    var ctrlFn = function ($scope, $rootScope) {
-       
+    var ctrlFn = function ($scope) {
+        $scope.thumbnailUrl = {
+            "background-image": "url(" + $scope.post.PostContents[0].Media.ThumbnailUrl + ")"
+        };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope"];
+    ctrlFn.$inject = ["$scope"];
 
     return {
         restrict: 'EA',

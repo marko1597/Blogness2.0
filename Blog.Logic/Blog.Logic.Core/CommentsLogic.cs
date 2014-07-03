@@ -26,7 +26,7 @@ namespace Blog.Logic.Core
             {
                 var db = _commentRepository.Find(a => a.PostId == postId, null, "ParentComment,CommentLikes,User").OrderByDescending(a => a.CreatedDate).ToList();
                 db.ForEach(a => comments.Add(CommentMapper.ToDto(a)));
-                comments.ForEach(a => a.Comments = GetReplies(a.CommentId));
+                comments.ForEach(a => a.Comments = GetReplies(a.Id));
             }
             catch (Exception ex)
             {
@@ -84,15 +84,15 @@ namespace Blog.Logic.Core
         {
             try
             {
-                comment.CreatedBy = comment.User.UserId;
+                comment.CreatedBy = comment.User.Id;
                 comment.CreatedDate = DateTime.Now;
-                comment.ModifiedBy = comment.User.UserId;
+                comment.ModifiedBy = comment.User.Id;
                 comment.ModifiedDate = DateTime.Now;
                 var dbComment = CommentMapper.ToEntity(comment);
                 dbComment.User = null;
 
                 var dbResult = _commentRepository.Add(dbComment);
-                dbResult.User = _userRepository.Find(a => a.UserId == comment.User.UserId, false).FirstOrDefault();
+                dbResult.User = _userRepository.Find(a => a.UserId == comment.User.Id, false).FirstOrDefault();
 
                 return CommentMapper.ToDto(dbResult);
             }

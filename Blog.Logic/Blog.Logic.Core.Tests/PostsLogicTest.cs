@@ -301,7 +301,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.GetPost(1);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.PostId);
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]
@@ -380,7 +380,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.GetPostsByUser(1);
 
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(1, result[0].User.UserId);
+            Assert.AreEqual(1, result[0].User.Id);
         }
 
         [Test]
@@ -1235,7 +1235,7 @@ namespace Blog.Logic.Core.Tests
                 {
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 1,
+                        Id = 1,
                         PostContentTitle = "Foo",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1243,7 +1243,7 @@ namespace Blog.Logic.Core.Tests
                     },
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 2,
+                        Id = 2,
                         PostContentTitle = "Bar",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1265,7 +1265,7 @@ namespace Blog.Logic.Core.Tests
                 },
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1291,7 +1291,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.AddPost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1317,7 +1317,7 @@ namespace Blog.Logic.Core.Tests
                 {
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 1,
+                        Id = 1,
                         PostContentTitle = "Foo",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1325,7 +1325,7 @@ namespace Blog.Logic.Core.Tests
                     },
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 2,
+                        Id = 2,
                         PostContentTitle = "Bar",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1335,7 +1335,7 @@ namespace Blog.Logic.Core.Tests
                 Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1361,7 +1361,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.AddPost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1399,7 +1399,7 @@ namespace Blog.Logic.Core.Tests
                 },
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1425,7 +1425,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.AddPost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1439,7 +1439,7 @@ namespace Blog.Logic.Core.Tests
                 Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1481,7 +1481,7 @@ namespace Blog.Logic.Core.Tests
                 {
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 1,
+                        Id = 1,
                         PostContentTitle = "Foo",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1489,7 +1489,7 @@ namespace Blog.Logic.Core.Tests
                     },
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 2,
+                        Id = 2,
                         PostContentTitle = "Bar",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1511,7 +1511,7 @@ namespace Blog.Logic.Core.Tests
                 },
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1537,7 +1537,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.UpdatePost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1563,7 +1563,7 @@ namespace Blog.Logic.Core.Tests
                 {
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 1,
+                        Id = 1,
                         PostContentTitle = "Foo",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1571,7 +1571,7 @@ namespace Blog.Logic.Core.Tests
                     },
                     new Common.Contracts.PostContent
                     {
-                        PostContentId = 2,
+                        Id = 2,
                         PostContentTitle = "Bar",
                         PostContentText = "Lorem Ipsum Dolor",
                         PostId = 1,
@@ -1581,7 +1581,7 @@ namespace Blog.Logic.Core.Tests
                 Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1607,7 +1607,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.UpdatePost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1645,7 +1645,7 @@ namespace Blog.Logic.Core.Tests
                 },
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion
@@ -1671,7 +1671,7 @@ namespace Blog.Logic.Core.Tests
             var result = _postsLogic.UpdatePost(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.PostId);
+            Assert.AreEqual(3, result.Id);
         }
 
         [Test]
@@ -1685,7 +1685,7 @@ namespace Blog.Logic.Core.Tests
                 Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { UserId = 1, UserName = "Lorem" }
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
             };
 
             #endregion

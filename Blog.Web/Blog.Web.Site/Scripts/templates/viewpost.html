@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-        <div id="post-{{post.PostId}}" class="post-board content-item">
+        <div id="post-{{post.Id}}" class="post-board content-item">
             <div class="post-item-header row" data-user-id="{{post.CreatedBy}}">
                 <div>
                     <img ng-src="{{user.Picture.MediaUrl}}" />
@@ -20,14 +20,14 @@
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
             </div>
             <div class="post-item-details">
-                <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.PostId }"></div>
+                <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
             </div>
             <div class="post-item-tags">
                 <div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>
             </div>
         </div>
 
-        <div id="post-contents-{{post.PostId}}" class="contents post-board content-item">
+        <div id="post-contents-{{post.Id}}" class="contents post-board content-item">
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">
@@ -42,7 +42,7 @@
             </ul>
         </div>
 
-        <div id="post-comments-{{post.PostId}}" class="comments post-board content-item">
+        <div id="post-comments-{{post.Id}}" class="comments post-board content-item">
             <div comments-container user="user" postid="postId" poster="post.User.UserName"></div>
         </div>
     </div>

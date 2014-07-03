@@ -20,7 +20,7 @@ namespace Blog.Logic.ObjectMapper
 
                 return new Comment
                 {
-                    CommentId = comment.CommentId,
+                    Id = comment.CommentId,
                     CommentLikes = commentLikes,
                     CommentLocation = comment.CommentLocation,
                     CommentMessage = comment.CommentMessage,
@@ -51,7 +51,7 @@ namespace Blog.Logic.ObjectMapper
                 if (comment.User != null)
                     return new Db.Comment
                     {
-                        CommentId = comment.CommentId,
+                        CommentId = comment.Id,
                         CommentLikes = commentLikes,
                         CommentLocation = comment.CommentLocation,
                         CommentMessage = comment.CommentMessage,
@@ -59,7 +59,7 @@ namespace Blog.Logic.ObjectMapper
                         PostId = comment.PostId,
                         Comments = comments,
                         User = UserMapper.ToEntity(comment.User),
-                        UserId = comment.User.UserId,
+                        UserId = comment.User.Id,
                         CreatedBy = comment.CreatedBy,
                         CreatedDate = comment.CreatedDate,
                         ModifiedBy = comment.ModifiedBy,

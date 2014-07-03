@@ -261,7 +261,7 @@ namespace Blog.Logic.Core.Tests
             Assert.NotNull(user.Hobbies);
             Assert.NotNull(user.Picture);
             Assert.NotNull(user.Background);
-            Assert.AreEqual(user.UserId, userId);
+            Assert.AreEqual(user.Id, userId);
         }
 
         [Test]

@@ -10,7 +10,7 @@ namespace Blog.Logic.ObjectMapper
             return media == null ? null : 
                 new Media
                 {
-                    MediaId = media.MediaId,
+                    Id = media.MediaId,
                     MediaType = media.MediaType,
                     AlbumId = media.AlbumId,
                     MediaContent = null,
@@ -32,7 +32,7 @@ namespace Blog.Logic.ObjectMapper
             return media == null ? null : 
                 new Db.Media
                 {
-                    MediaId = media.MediaId,
+                    MediaId = media.Id,
                     MediaType = media.MediaType,
                     AlbumId = media.AlbumId,
                     MediaPath = media.MediaPath,

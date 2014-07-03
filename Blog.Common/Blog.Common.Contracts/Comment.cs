@@ -8,7 +8,7 @@ namespace Blog.Common.Contracts
     public class Comment : BaseObject
     {
         [DataMember]
-        public int CommentId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public int? PostId { get; set; }

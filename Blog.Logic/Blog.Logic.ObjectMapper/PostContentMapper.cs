@@ -10,7 +10,7 @@ namespace Blog.Logic.ObjectMapper
             return postContent == null ? null : 
                 new PostContent
                 {
-                    PostContentId = postContent.PostContentId,
+                    Id = postContent.PostContentId,
                     PostId = postContent.PostId,
                     Media = postContent.Media == null ? null : MediaMapper.ToDto(postContent.Media),
                     PostContentText = postContent.PostContentText,
@@ -27,12 +27,12 @@ namespace Blog.Logic.ObjectMapper
             return postContent == null ? null : 
                 new Db.PostContent
                 {
-                    PostContentId = postContent.PostContentId,
+                    PostContentId = postContent.Id,
                     PostId = postContent.PostId,
                     Media = null,
                     PostContentText = postContent.PostContentText,
                     PostContentTitle = postContent.PostContentTitle,
-                    MediaId = postContent.Media == null ? 0 : postContent.Media.MediaId,
+                    MediaId = postContent.Media == null ? 0 : postContent.Media.Id,
                     CreatedBy = postContent.CreatedBy,
                     CreatedDate = postContent.CreatedDate,
                     ModifiedBy = postContent.ModifiedBy,

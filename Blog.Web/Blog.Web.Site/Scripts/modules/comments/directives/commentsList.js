@@ -25,13 +25,13 @@
             if (d.Comment.PostId != null || d.Comment.PostId != undefined) {
                 $scope.comments.unshift(d.Comment);
                 $scope.$apply();
-                $(".comment-item[data-comment-id='" + d.Comment.CommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                $(".comment-item[data-comment-id='" + d.Comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
             } else {
                 _.each($scope.comments, function (comment) {
-                    if (comment.CommentId == d.Comment.ParentCommentId) {
+                    if (comment.Id == d.Comment.ParentCommentId) {
                         comment.Comments.unshift(d.Comment);
                         $scope.$apply();
-                        $(".comment-item[data-comment-id='" + d.Comment.CommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.Comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
                         $(".comment-item[data-comment-id='" + d.Comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
                         return;
                     }

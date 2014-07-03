@@ -7,7 +7,7 @@ namespace Blog.Common.Contracts
     public class Media : BaseObject
     {
         [DataMember]
-        public int MediaId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string MediaType { get; set; }

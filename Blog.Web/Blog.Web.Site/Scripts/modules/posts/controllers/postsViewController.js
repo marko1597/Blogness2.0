@@ -37,7 +37,7 @@
                 if (post.Error == undefined) {
                     $scope.post = post;
                     $scope.isBusy = false;
-                    $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.PostId, PostLikes: $scope.post.PostLikes });
+                    $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
                     $scope.$broadcast("resizeIsotopeItems");
                     blockUiService.unblockIt();
                 } else {

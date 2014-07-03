@@ -242,7 +242,7 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                var tPost = _postsSvc.GetPost(post.PostId);
+                var tPost = _postsSvc.GetPost(post.Id);
                 var isAllowed = User.Identity.GetUserName() == tPost.User.UserName;
 
                 if (!isAllowed)

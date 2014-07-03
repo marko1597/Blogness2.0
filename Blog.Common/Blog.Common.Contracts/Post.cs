@@ -10,7 +10,7 @@ namespace Blog.Common.Contracts
     public class Post : BaseObject
     {
         [DataMember]
-        public int PostId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public User User { get; set; }

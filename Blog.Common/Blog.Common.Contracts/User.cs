@@ -8,7 +8,7 @@ namespace Blog.Common.Contracts
     public class User : BaseObject
     {
         [DataMember]
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         [DataMember]
         public string UserName { get; set; }

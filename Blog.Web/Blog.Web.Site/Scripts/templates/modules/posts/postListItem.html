@@ -5,7 +5,7 @@
         </div>
         <div>
             <h4>
-                <a href="./#/post/{{post.PostId}}">{{post.PostTitle}}</a>
+                <a href="./#/post/{{post.Id}}">{{post.PostTitle}}</a>
             </h4>
             <p>
                 <a>{{post.User.UserName}}</a>
@@ -21,7 +21,7 @@
         <div post-contents contents="post.PostContents"></div>
     </div>
     <div class="post-item-details">
-        <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.PostId }"></div>
+        <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
     </div>
     <div class="post-item-comments">
         <ul ticker data-enable-pause="true" data-pause-element="popover">

@@ -25,7 +25,7 @@ namespace Blog.Logic.ObjectMapper
 
                 return new Post
                 {
-                    PostId = post.PostId,
+                    Id = post.PostId,
                     PostTitle = post.PostTitle,
                     PostMessage = post.PostMessage,
                     PostLikes = postLikes,
@@ -61,14 +61,14 @@ namespace Blog.Logic.ObjectMapper
 
                 return new Db.Post
                 {
-                    PostId = post.PostId,
+                    PostId = post.Id,
                     PostTitle = post.PostTitle,
                     PostMessage = post.PostMessage,
                     PostLikes = postLikes,
                     PostContents = contents,
                     Comments = comments,
                     User = null,
-                    UserId = post.User != null ? post.User.UserId : 0,
+                    UserId = post.User != null ? post.User.Id : 0,
                     Tags = tags,
                     CreatedBy = post.CreatedBy,
                     CreatedDate = post.CreatedDate,

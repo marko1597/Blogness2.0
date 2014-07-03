@@ -345,7 +345,7 @@ namespace Blog.Logic.Core.Tests
             var result = _mediaLogic.Get(1);
 
             Assert.NotNull(result);
-            Assert.AreEqual(1, result.MediaId);
+            Assert.AreEqual(1, result.Id);
         }
 
         [Test]
@@ -535,7 +535,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, "default", "foobarbaz.gif",
+            var result = _mediaLogic.Add(new Common.Contracts.User { Id = 1 }, "default", "foobarbaz.gif",
                 _rootPath + @"\TestImages\foobarbaz.gif", "image/gif");
 
             Assert.NotNull(result);
@@ -584,7 +584,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = _mediaLogic.Add(new Common.Contracts.User {UserId = 1}, "default", "foobarbaz.gif",
+            var result = _mediaLogic.Add(new Common.Contracts.User {Id = 1}, "default", "foobarbaz.gif",
                 _rootPath + @"\TestImages\foobarbaz.gif", "image/gif");
 
             Assert.NotNull(result);
@@ -633,7 +633,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, "foo", "foobarbaz.gif",
+            var result = _mediaLogic.Add(new Common.Contracts.User { Id = 1 }, "foo", "foobarbaz.gif",
                 _rootPath + @"\TestImages\foobarbaz.gif", "image/gif");
 
             Assert.NotNull(result);
@@ -683,7 +683,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, "foo", "foobarbaz.gif",
+            var result = _mediaLogic.Add(new Common.Contracts.User { Id = 1 }, "foo", "foobarbaz.gif",
                 _rootPath + @"\TestImages\foobarbaz.gif", "image/gif");
 
             Assert.NotNull(result);
@@ -704,7 +704,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, 
+            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 }, 
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
         }
 
@@ -725,7 +725,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
             Assert.AreEqual("Error creating or finding album", result.Message);
         }
@@ -752,7 +752,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
             Assert.AreEqual("Error generating media directory path", result.Message);
         }
@@ -779,7 +779,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
             Assert.AreEqual("Error creating media directory", result.Message);
         }
@@ -807,7 +807,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            var result = Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
             Assert.AreEqual("Error moving media to correct directory", result.Message);
         }
@@ -839,7 +839,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
         }
 
@@ -872,7 +872,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 },
+            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 },
                 "foo", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
         }
 
@@ -905,7 +905,7 @@ namespace Blog.Logic.Core.Tests
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
 
-            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { UserId = 1 }, 
+            Assert.Throws<BlogException>(() => _mediaLogic.Add(new Common.Contracts.User { Id = 1 }, 
                 "default", "foobarbaz.gif", _rootPath + @"\TestImages\foobarbaz.gif", "image/gif"));
         }
 

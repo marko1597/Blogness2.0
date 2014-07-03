@@ -19,7 +19,7 @@ namespace Blog.Logic.ObjectMapper
 
                 return new User
                 {
-                    UserId = user.UserId,
+                    Id = user.UserId,
                     UserName = user.UserName,
                     Password = user.Password,
                     BirthDate = user.BirthDate,
@@ -47,15 +47,15 @@ namespace Blog.Logic.ObjectMapper
                     ? user.Hobbies.Select(HobbyMapper.ToEntity).ToList()
                     : null;
                 var picture = user.Picture != null
-                    ? (int?)user.Picture.MediaId
+                    ? (int?)user.Picture.Id
                     : null;
                 var background = user.Background != null
-                    ? (int?)user.Background.MediaId
+                    ? (int?)user.Background.Id
                     : null;
 
                 return new Db.User
                 {
-                    UserId = user.UserId,
+                    UserId = user.Id,
                     UserName = user.UserName,
                     Password = user.Password,
                     BirthDate = user.BirthDate,

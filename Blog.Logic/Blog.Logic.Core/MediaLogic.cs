@@ -141,10 +141,10 @@ namespace Blog.Logic.Core
             {
                 var guid = Guid.NewGuid().ToString();
 
-                var album = GetAlbumByName(albumName, user.UserId);
+                var album = GetAlbumByName(albumName, user.Id);
                 if (album == null) throw new Exception("Error creating or finding album");
 
-                var mediaPath = _imageHelper.GenerateImagePath(user.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                var mediaPath = _imageHelper.GenerateImagePath(user.Id, album.AlbumName, guid, Constants.FileMediaLocation);
                 if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
 
                 var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
@@ -153,7 +153,7 @@ namespace Blog.Logic.Core
                 var hasSuccessfullyMovedMedia = _fileHelper.MoveFile(path, mediaPath + "\\" + filename);
                 if (!hasSuccessfullyMovedMedia) throw new Exception("Error moving media to correct directory");
 
-                var media = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, user.UserId, contentType, guid);
+                var media = PrepareMediaForAdding(filename, album.AlbumId, mediaPath, user.Id, contentType, guid);
                 CreateThumbnail(media, mediaPath, filename);
 
                 return MediaMapper.ToDto(_mediaRepository.Add(MediaMapper.ToEntity(media)));
