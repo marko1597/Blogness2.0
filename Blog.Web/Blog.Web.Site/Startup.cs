@@ -1,4 +1,6 @@
-﻿using Blog.Web.Site;
+﻿using System;
+using System.Configuration;
+using Blog.Web.Site;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
@@ -12,15 +14,21 @@ namespace Blog.Web.Site
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            //app.MapSignalR();
+
             app.UseCors(CorsOptions.AllowAll);
             app.Map("/signalr", map =>
             {
+                GlobalHost.DependencyResolver.UseRedis(
+                        ConfigurationManager.AppSettings.Get("RedisServer"),
+                        Convert.ToInt32(ConfigurationManager.AppSettings.Get("RedisPort")),
+                        string.Empty, "bloggity");
+
                 // Setup the CORS middleware to run before SignalR.
                 // By default this will allow all origins. You can 
                 // configure the set of origins and/or http verbs by
                 // providing a cors options with a different policy.
                 map.UseCors(CorsOptions.AllowAll);
+
                 var hubConfiguration = new HubConfiguration
                 {
                     // You can enable JSONP by uncommenting line below.

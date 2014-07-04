@@ -1,6 +1,6 @@
 ﻿ngPosts.factory("postsHubService", ["$rootScope", "$interval", "signalrHub",
     function ($rootScope, $interval, signalrHub) {
-        var hub = new signalrHub("/blog/signalr", "postsHub", {
+        var hub = new signalrHub("signalr", "postsHub", {
             postLikesUpdate: function (postId, postLikes) {
                 $rootScope.$broadcast("postLikesUpdate", { PostId: postId, PostLikes: postLikes });
             }

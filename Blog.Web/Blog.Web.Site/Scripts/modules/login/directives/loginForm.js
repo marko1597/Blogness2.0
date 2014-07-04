@@ -6,7 +6,7 @@
 
         $scope.login = function () {
             blockUiService.blockIt({
-                html: '<h4><img src="../blog/content/images/loader-girl.gif" height="128" /></h4>',
+                html: '<h4><img src="content/images/loader-girl.gif" height="128" /></h4>',
                 css: {
                     border: 'none',
                     padding: '5px',

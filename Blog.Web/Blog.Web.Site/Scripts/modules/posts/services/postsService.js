@@ -30,11 +30,11 @@
                 }).success(function (response) {
                     _.each(response.PostsByUser, function(p) {
                         p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
-                        p.Url = "/blog/#/post/" + p.Id;
+                        p.Url = "/#/post/" + p.Id;
                     });
                     _.each(response.PostsByTags, function (p) {
                         p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
-                        p.Url = "/blog/#/post/" + p.Id;
+                        p.Url = "/#/post/" + p.Id;
                     });
                     
                     deferred.resolve(response);

@@ -90,7 +90,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                DeleteSessionFromSameIp(ipAddress);
+                // TODO: Temporarily commented out for testing. This should be available in real scenarios
+                // DeleteSessionFromSameIp(ipAddress);
 
                 var user = _userRepository.Find(a => a.UserName == userName && a.Password == passWord, null, string.Empty).FirstOrDefault();
                 if (user == null || user.UserId == 0)

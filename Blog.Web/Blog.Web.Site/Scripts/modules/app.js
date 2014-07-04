@@ -53,39 +53,39 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
 
         $routeProvider
             .when('/', {
-                templateUrl: '/blog/scripts/templates/posts.html',
+                templateUrl: 'scripts/templates/posts.html',
                 controller: 'postsController'
             })
             .when('/friends', {
-                templateUrl: '/blog/scripts/templates/friends.html',
+                templateUrl: 'scripts/templates/friends.html',
                 controller: ''
             })
             .when('/groups', {
-                templateUrl: '/blog/scripts/templates/groups.html',
+                templateUrl: 'scripts/templates/groups.html',
                 controller: ''
             })
             .when('/profile', {
-                templateUrl: '/blog/scripts/templates/profile.html',
+                templateUrl: 'scripts/templates/profile.html',
                 controller: ''
             })
             .when('/post/new', {
-                templateUrl: '/blog/scripts/templates/modifypost.html',
+                templateUrl: 'scripts/templates/modifypost.html',
                 controller: 'postsModifyController'
             })
             .when('/post/new/:postId', {
-                templateUrl: '/blog/scripts/templates/modifypost.html',
+                templateUrl: 'scripts/templates/modifypost.html',
                 controller: 'postsModifyController'
             })
             .when('/events', {
-                templateUrl: '/blog/scripts/templates/events.html',
+                templateUrl: 'scripts/templates/events.html',
                 controller: ''
             })
             .when('/error', {
-                templateUrl: '/blog/scripts/templates/errorpage.html',
+                templateUrl: 'scripts/templates/errorpage.html',
                 controller: 'errorPageController'
             })
             .when('/post/:postId', {
-                templateUrl: '/blog/scripts/templates/viewpost.html',
+                templateUrl: 'scripts/templates/viewpost.html',
                 controller: 'postsViewController'
             })
             .otherwise({

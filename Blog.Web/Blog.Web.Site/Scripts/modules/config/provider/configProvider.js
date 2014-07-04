@@ -20,11 +20,11 @@
     };
 
     var navigationItems = [
-        { text: "Home", icon: "/blog/content/images/nav-home.png", href: "/blog/#/" },
-        { text: "Profile", icon: "/blog/content/images/nav-profile.png", href: "/blog/#/profile" },
-        { text: "Friends", icon: "/blog/content/images/nav-friends.png", href: "/blog/#/friends" },
-        { text: "Groups", icon: "/blog/content/images/nav-groups.png", href: "/blog/#/groups" },
-        { text: "Events", icon: "/blog/content/images/nav-events.png", href: "/blog/#/events" }
+        { text: "Home", icon: "content/images/nav-home.png", href: "/#/" },
+        { text: "Profile", icon: "content/images/nav-profile.png", href: "/#/profile" },
+        { text: "Friends", icon: "content/images/nav-friends.png", href: "/#/friends" },
+        { text: "Groups", icon: "content/images/nav-groups.png", href: "/#/groups" },
+        { text: "Events", icon: "content/images/nav-events.png", href: "/#/events" }
     ];
 
     this.$get = [function () {

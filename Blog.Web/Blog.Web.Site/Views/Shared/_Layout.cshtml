@@ -27,9 +27,10 @@
         {
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
-            templatesUrl: "/blog/scripts/templates/modules/",
+            templatesUrl: "scripts/templates/modules/",
             displayMode: "desktop"
         };
+        console.log(blogConfiguration);
     </script>
 </head>
 <body ng-app="blog" window-resize>
@@ -100,8 +101,8 @@
     {
         var sb = new StringBuilder();
         sb.Append("https://");
-        sb.Append(GetLocalIpAddress());
-        sb.Append("/blog/");
+        sb.Append(Request.Headers["Host"]);
+        sb.Append("/");
 
         return sb.ToString();
     }

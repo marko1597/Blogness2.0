@@ -13,7 +13,7 @@
         scope: { user: '=' },
         replace: true,
         template:
-            '<div data-user-id="{{user.UserId}}">' +
+            '<div data-user-id="{{user.Id}}">' +
                 '<p><a href="{{user.url}}">{{user.name}}</a></p>' +
                 '<p data-pause-trigger data-placement="top-right" data-animation="am-flip-x" bs-popover="popover">{{comment.CommentMessage}}</p>' +
             '</div>',

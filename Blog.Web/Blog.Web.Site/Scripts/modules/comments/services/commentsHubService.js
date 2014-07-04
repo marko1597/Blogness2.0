@@ -1,6 +1,6 @@
 ﻿ngComments.factory("commentsHubService", ["$rootScope", "$interval", "signalrHub", "commentsService",
     function ($rootScope, $interval, signalrHub, commentsService) {
-        var hub = new signalrHub("/blog/signalr", "commentsHub", {
+        var hub = new signalrHub("signalr", "commentsHub", {
             commentLikesUpdate: function (commentId, commentLikes) {
                 $rootScope.$broadcast("commentLikesUpdate", { CommentId: commentId, CommentLikes: commentLikes });
             },

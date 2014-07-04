@@ -37,7 +37,7 @@
             scope.isUserLiked = function() {
                 var isLiked = false;
                 _.each(scope.postLikes, function(p) {
-                    if (p.UserId == scope.user.UserId) {
+                    if (p.UserId == scope.user.Id) {
                         isLiked = true;
                     }
                 });
