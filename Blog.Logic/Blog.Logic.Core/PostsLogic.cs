@@ -202,12 +202,11 @@ namespace Blog.Logic.Core
                             if (canAdd) postByTags.Add(b);
                         });
                     });
-                    relatedPosts.PostsByTags = postByTags;
+                    relatedPosts.PostsByTags = postByTags.Where(p => p.Id != postId).ToList();
                 }
 
-                var postsByUser = GetPostsByUser(post.User.Id);
-                relatedPosts.PostsByUser = postsByUser == null || postsByUser.Count == 0 ? 
-                    new List<Post>() : postsByUser;
+                var postsByUser = GetPostsByUser(post.User.Id).Where(p => p.Id != postId).ToList();
+                relatedPosts.PostsByUser = postsByUser;
 
                 return relatedPosts;
             }
