@@ -43,7 +43,7 @@ namespace Blog.Web.Api.Controllers
                 sb.AppendLine(error.StackTrace + Environment.NewLine);
                 sb.AppendLine(error.Cause + Environment.NewLine);
 
-                Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception(sb.ToString()));
+                _errorSignaler.SignalFromCurrentContext(new Exception(sb.ToString()));
             }
             catch (Exception ex)
             {

@@ -247,6 +247,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\HubController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -713,6 +714,7 @@
     <Folder Include="Scripts\modules\comments\controllers\" />
     <Folder Include="Scripts\modules\messaging\directives\" />
     <Folder Include="Views\Hub\" />
+    <Folder Include="Views\Log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

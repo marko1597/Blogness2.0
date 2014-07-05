@@ -1,5 +1,5 @@
-﻿@using System.Text
-@using Blog.Common.Utils.Helpers
+﻿@using System.Configuration
+@using System.Text
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +27,7 @@
         {
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
+            hubUrl: "@GetHubUrl()",
             templatesUrl: "scripts/templates/modules/",
             displayMode: "desktop"
         };
@@ -61,10 +62,11 @@
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
             settings.setBlogApiEndpoint(blogConfiguration.blogApi);
             settings.setBlogRoot(blogConfiguration.blogRoot);
+            settings.setHubUrl(blogConfiguration.hubUrl);
             settings.setDimensions(window.innerWidth, window.innerHeight);
         });
 
-        var getDimensionMode = function() {
+        var getDimensionMode = function () {
             var w = window.innerWidth;
 
             if (w >= 320 && w <= 767) {
@@ -82,16 +84,16 @@
 </html>
 @functions
 {
-    private string GetLocalIpAddress()
+    public string GetHubUrl()
     {
-        return UserHelper.GetLocalIpAddress();
+        return Request.ApplicationPath + "/signalr";
     }
-
+    
     public string GetBlogApi()
     {
         var sb = new StringBuilder();
         sb.Append("https://");
-        sb.Append(GetLocalIpAddress());
+        sb.Append(Request.Headers["Host"]);
         sb.Append("/blogapi/api/");
 
         return sb.ToString();
@@ -102,7 +104,7 @@
         var sb = new StringBuilder();
         sb.Append("https://");
         sb.Append(Request.Headers["Host"]);
-        sb.Append("/");
+        sb.Append("/blog/");
 
         return sb.ToString();
     }

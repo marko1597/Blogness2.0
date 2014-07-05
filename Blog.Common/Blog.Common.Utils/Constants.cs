@@ -1,4 +1,5 @@
-﻿using Blog.Common.Utils.Helpers;
+﻿using System.Configuration;
+using Blog.Common.Utils.Helpers;
 
 namespace Blog.Common.Utils
 {
@@ -7,7 +8,7 @@ namespace Blog.Common.Utils
         public static int DefaultPostsThreshold = 10;
         public static double SessionValidityLength = 15.0;
         public static string FileMediaLocation = @"C:\Temp\SampleImages\";
-        public static string FileMediaUrl = string.Format("https://{0}/blogapi/api/media/", UserHelper.GetLocalIpAddress());
+        public static string FileMediaUrl = string.Format("https://{0}/blogapi/api/media/", ConfigurationManager.AppSettings.Get("ImageServer"));
 
         public enum PasswordScore
         {

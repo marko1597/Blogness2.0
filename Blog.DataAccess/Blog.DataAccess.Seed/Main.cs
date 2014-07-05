@@ -4,8 +4,6 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Reflection;
 using System.Windows.Forms;
 using Blog.DataAccess.Database.Entities.Objects;
@@ -23,13 +21,7 @@ namespace Blog.DataAccess.Seed
         public Main()
         {
             InitializeComponent();
-
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList.Where(ip => ip.AddressFamily == AddressFamily.InterNetwork))
-            {
-                _localIpAddress = ip.ToString();
-                break;
-            }
+            _localIpAddress = ConfigurationManager.AppSettings.Get("BlogServer");
         }
 
         private void AddConsoleMessage(string message)

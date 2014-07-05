@@ -8,6 +8,7 @@
     var settings = {
         "BlogApi": "",
         "BlogRoot": "",
+        "HubUrl": "",
         "IsLoggedIn": false,
         "SessionId": 0,
         "AlertTimer": 5000
@@ -54,6 +55,10 @@
 
             setBlogRoot: function (val) {
                 settings.BlogRoot = val;
+            },
+
+            setHubUrl: function (val) {
+                settings.HubUrl = val;
             },
 
             setSessionId: function (sessionId) {
