@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Blog.Common.Utils.Extensions;
 using Blog.Logic.Caching.DataSource;
 
 namespace Blog.Logic.Caching
@@ -16,82 +17,174 @@ namespace Blog.Logic.Caching
 
         public List<T> GetList()
         {
-            return _cacheDataSource.GetList();
+            try
+            {
+                return _cacheDataSource.GetList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public List<T> GetListByKey(string key)
         {
-            return _cacheDataSource.GetListByKey(key);
+            try
+            {
+                return _cacheDataSource.GetListByKey(key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public T Get(int id, string key)
         {
-            return _cacheDataSource.Get(id, key);
+            try
+            {
+                return _cacheDataSource.Get(id, key);
+
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public T Get(string name, string key)
         {
-            return _cacheDataSource.Get(name, key);
+            try
+            {
+                return _cacheDataSource.Get(name, key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public List<string> GetKeys()
         {
-            return _cacheDataSource.GetKeys();
+            try
+            {
+                return _cacheDataSource.GetKeys();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void SetAll(List<T> entities)
         {
-            _cacheDataSource.SetAll(entities);
+            try
+            {
+                _cacheDataSource.SetAll(entities);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void Set(T entity)
         {
-            _cacheDataSource.Set(entity);
+            try
+            {
+                _cacheDataSource.Set(entity);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void SetListByKey(string key, List<T> value)
         {
-            _cacheDataSource.SetListByKey(key, value);
+            try
+            {
+                _cacheDataSource.SetListByKey(key, value);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public List<T> SetItemAndUpdateList(string key, T entity, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
         {
-            var list = _cacheDataSource.GetListByKey(key);
-
-            if (list == null || list.Count == 0)
+            try
             {
-                return null;
+                var list = _cacheDataSource.GetListByKey(key);
+
+                if (list == null || list.Count == 0)
+                {
+                    return null;
+                }
+
+                list.Add(entity);
+
+                if (orderBy != null)
+                {
+                    list = orderBy(list.AsQueryable()).ToList();
+                }
+                _cacheDataSource.SetListByKey(key, list);
+
+                return _cacheDataSource.GetListByKey(key);
             }
-
-            list.Add(entity);
-
-            if (orderBy != null)
+            catch (Exception ex)
             {
-                list = orderBy(list.AsQueryable()).ToList();
+                throw new BlogException(ex.Message, ex.InnerException);
             }
-            _cacheDataSource.SetListByKey(key, list);
-
-            return _cacheDataSource.GetListByKey(key);
         }
 
         public void RemoveAll()
         {
-            _cacheDataSource.RemoveAll();
+            try
+            {
+                _cacheDataSource.RemoveAll();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void Remove(int id, string key)
         {
-            _cacheDataSource.Remove(id, key);
+            try
+            {
+                _cacheDataSource.Remove(id, key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void Remove(string name, string key)
         {
-            _cacheDataSource.Remove(name, key);
+            try
+            {
+                _cacheDataSource.Remove(name, key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
 
         public void Replace(string key, T entity)
         {
-            _cacheDataSource.Replace(key, entity);
+            try
+            {
+                _cacheDataSource.Replace(key, entity);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
         }
     }
 }

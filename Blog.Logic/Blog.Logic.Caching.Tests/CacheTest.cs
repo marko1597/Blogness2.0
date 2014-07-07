@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Blog.Common.Utils.Extensions;
 using Blog.Logic.Caching.DataSource;
 using Moq;
 using NUnit.Framework;
@@ -41,6 +43,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenGetAllCachedItemsFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetList()).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.GetList());
+        }
+
+        [Test]
         public void ShouldGetCachedItemById()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -51,6 +64,17 @@ namespace Blog.Logic.Caching.Tests
 
             Assert.NotNull(result);
             Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionGetCachedItemById()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Get(It.IsAny<int>(), It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Get(1, "foo"));
         }
 
         [Test]
@@ -67,6 +91,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionGetCachedListByKeyFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.GetListByKey("foo"));
+        }
+
+        [Test]
         public void ShouldGetCachedItemByName()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -77,6 +112,17 @@ namespace Blog.Logic.Caching.Tests
 
             Assert.NotNull(result);
             Assert.AreEqual("foo", result.Name);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionGetCachedItemByNameFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Get(It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Get("foo", "bar"));
         }
 
         [Test]
@@ -95,6 +141,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenGetCacheKeysFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetKeys()).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.GetKeys());
+        }
+
+        [Test]
         public void ShouldSetAllCacheItems()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -106,6 +163,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenSetAllCacheItemsFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.SetAll(_dummyList)).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.SetAll(_dummyList));
+        }
+
+        [Test]
         public void ShouldSetCacheListByKey()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -114,6 +182,17 @@ namespace Blog.Logic.Caching.Tests
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
 
             Assert.DoesNotThrow(() => cache.SetListByKey("foo", _dummyList));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSetCacheListByKeyFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.SetListByKey(It.IsAny<string>(), It.IsAny<List<DummyModel>>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.SetListByKey("foo", _dummyList));
         }
 
         [Test]
@@ -188,6 +267,18 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenSetItemAndUpdateListFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var dummyModel = new DummyModel { Id = 0, Name = "last" };
+
+            Assert.Throws<BlogException>(() => cache.SetItemAndUpdateList("foo", dummyModel));
+        }
+
+        [Test]
         public void ShouldSetCacheItem()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -196,6 +287,17 @@ namespace Blog.Logic.Caching.Tests
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
 
             Assert.DoesNotThrow(() => cache.Set(_dummyList[0]));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSetCacheItemFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Set(_dummyList[0])).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Set(_dummyList[0]));
         }
 
         [Test]
@@ -210,6 +312,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenRemoveAllCachedItemsFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.RemoveAll()).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(cache.RemoveAll);
+        }
+
+        [Test]
         public void ShouldRemoveCachedItemById()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -218,6 +331,17 @@ namespace Blog.Logic.Caching.Tests
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
 
             Assert.DoesNotThrow(() => cache.Remove(1, "foo"));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenRemoveCachedItemByIdFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Remove(It.IsAny<int>(), It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Remove(1, "foo"));
         }
 
         [Test]
@@ -232,6 +356,17 @@ namespace Blog.Logic.Caching.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenRemoveCachedItemByNameFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Remove(It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Remove("foo", "foo"));
+        }
+
+        [Test]
         public void ShouldReplaceCachedItem()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
@@ -240,6 +375,17 @@ namespace Blog.Logic.Caching.Tests
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
 
             Assert.DoesNotThrow(() => cache.Replace("foo", _dummyList[0]));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenReplaceCachedItemFails()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.Replace(It.IsAny<string>(), It.IsAny<DummyModel>())).Throws(new Exception());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.Throws<BlogException>(() => cache.Replace("foo", _dummyList[0]));
         }
 
         public class DummyModel
