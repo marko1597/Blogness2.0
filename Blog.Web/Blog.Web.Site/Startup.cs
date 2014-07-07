@@ -5,6 +5,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Owin;
+using ServiceStack.Redis;
 
 [assembly: OwinStartup(typeof(Startup))]
 namespace Blog.Web.Site
@@ -18,11 +19,16 @@ namespace Blog.Web.Site
             app.UseCors(CorsOptions.AllowAll);
             app.Map("/signalr", map =>
             {
-                GlobalHost.DependencyResolver.UseRedis(
+                if (IsRedisServerAvailable())
+                {
+                    // Sets up Redis persistence on all instances of Blog web application for SignalR
+                    // This allows SignalR to push data thru websockets to all instances of Blog web application
+                    GlobalHost.DependencyResolver.UseRedis(
                         ConfigurationManager.AppSettings.Get("RedisServer"),
                         Convert.ToInt32(ConfigurationManager.AppSettings.Get("RedisPort")),
                         string.Empty, "bloggity");
-
+                }
+                
                 // Setup the CORS middleware to run before SignalR.
                 // By default this will allow all origins. You can 
                 // configure the set of origins and/or http verbs by
@@ -41,6 +47,28 @@ namespace Blog.Web.Site
                 // path.
                 map.RunSignalR(hubConfiguration);
             });
+        }
+
+        /// <summary>
+        /// Checks if Redis service is running
+        /// </summary>
+        /// <returns>Boolean return that tells if Redis service is running</returns>
+        private static bool IsRedisServerAvailable()
+        {
+            try
+            {
+                using (var redisClient = new RedisClient(
+                    ConfigurationManager.AppSettings.Get("RedisServer"), 
+                    Convert.ToInt32(ConfigurationManager.AppSettings.Get("RedisPort"))))
+                {
+                    redisClient.Echo(string.Empty);
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -9,6 +9,12 @@ namespace Blog.Common.Contracts
         [DataMember]
         public Error Error { get; set; }
 
+        [DataMember]
+        public DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public int ModifiedBy { get; set; }
+
         /// <summary>
         /// Generates a child object from BaseContract with an instance of Error object
         /// </summary>
