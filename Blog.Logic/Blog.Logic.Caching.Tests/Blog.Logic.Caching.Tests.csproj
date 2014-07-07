@@ -62,9 +62,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Utils\Blog.Common.Utils.csproj">
+      <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
+      <Name>Blog.Common.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Blog.Logic.Caching\Blog.Logic.Caching.csproj">
       <Project>{f5933282-3d10-4b62-8ca7-5be3f4ba1dad}</Project>
       <Name>Blog.Logic.Caching</Name>

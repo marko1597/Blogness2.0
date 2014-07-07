@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -10,6 +11,7 @@ using Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.DataAccess.Seed
 {
+    [ExcludeFromCodeCoverage]
     public partial class Main : Form
     {
         private List<User> _users = new List<User>();

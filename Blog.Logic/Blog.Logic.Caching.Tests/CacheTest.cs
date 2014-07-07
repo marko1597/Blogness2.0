@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Blog.Logic.Caching.DataSource;
 using Moq;
 using NUnit.Framework;
@@ -22,7 +23,7 @@ namespace Blog.Logic.Caching.Tests
                 new DummyModel { Id = 2, Name = "bar" },
                 new DummyModel { Id = 3, Name = "baz" },
                 new DummyModel { Id = 4, Name = "lorem" },
-                new DummyModel { Id = 5, Name = "ipsum" },
+                new DummyModel { Id = 5, Name = "ipsum" }
             };
         }
 
@@ -30,10 +31,10 @@ namespace Blog.Logic.Caching.Tests
         public void ShouldGetAllCachedItems()
         {
             _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
-            _cacheDataSource.Setup(a => a.GetAll()).Returns(_dummyList);
+            _cacheDataSource.Setup(a => a.GetList()).Returns(_dummyList);
 
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
-            var result = cache.GetAll();
+            var result = cache.GetList();
 
             Assert.NotNull(result);
             Assert.AreEqual(5, result.Count);
@@ -50,6 +51,19 @@ namespace Blog.Logic.Caching.Tests
 
             Assert.NotNull(result);
             Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
+        public void ShouldGetCachedListByKey()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Returns(_dummyList);
+            
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var result = cache.GetListByKey("foo");
+
+            Assert.NotNull(result);
+            Assert.AreEqual(5, result.Count);
         }
 
         [Test]
@@ -89,6 +103,88 @@ namespace Blog.Logic.Caching.Tests
             var cache = new Cache<DummyModel>(_cacheDataSource.Object);
 
             Assert.DoesNotThrow(() => cache.SetAll(_dummyList));
+        }
+
+        [Test]
+        public void ShouldSetCacheListByKey()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.SetListByKey(It.IsAny<string>(), It.IsAny<List<DummyModel>>()));
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+
+            Assert.DoesNotThrow(() => cache.SetListByKey("foo", _dummyList));
+        }
+
+        [Test]
+        public void ShouldSetItemAndUpdateListWithoutOrder()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Returns(_dummyList);
+            _cacheDataSource.Setup(a => a.SetListByKey(It.IsAny<string>(), It.IsAny<List<DummyModel>>()));
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var dummyModel = new DummyModel {Id = 0, Name = "last"};
+            var result = cache.SetItemAndUpdateList("foo", dummyModel);
+
+            Assert.NotNull(result);
+            Assert.AreEqual(6, result.Count);
+            Assert.AreEqual(0, result.Last().Id);
+            Assert.AreEqual("last", result.Last().Name);
+        }
+
+        [Test]
+        public void ShouldReturnNullWhenSetItemAndUpdateListWithOrderReturnedEmptyCacheList()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Returns(new List<DummyModel>());
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var dummyModel = new DummyModel { Id = 0, Name = "foo" };
+            var result = cache.SetItemAndUpdateList("foo", dummyModel);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void ShouldReturnNullWhenSetItemAndUpdateListWithOrderReturnedNullCacheList()
+        {
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.Setup(a => a.GetListByKey(It.IsAny<string>())).Returns((List<DummyModel>)null);
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var dummyModel = new DummyModel { Id = 0, Name = "foo" };
+            var result = cache.SetItemAndUpdateList("foo", dummyModel);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void ShouldSetItemAndUpdateListWithOrder()
+        {
+            var orderedDummyList = new List<DummyModel>
+            {
+                new DummyModel { Id = 0, Name = "first" },
+                new DummyModel { Id = 1, Name = "foo" },
+                new DummyModel { Id = 2, Name = "bar" },
+                new DummyModel { Id = 3, Name = "baz" },
+                new DummyModel { Id = 4, Name = "lorem" },
+                new DummyModel { Id = 5, Name = "ipsum" }
+            };
+            _cacheDataSource = new Mock<ICacheDataSource<DummyModel>>();
+            _cacheDataSource.SetupSequence(a => a.GetListByKey(It.IsAny<string>()))
+                .Returns(_dummyList)
+                .Returns(orderedDummyList);
+            _cacheDataSource.Setup(a => a.SetListByKey(It.IsAny<string>(), It.IsAny<List<DummyModel>>()));
+
+            var cache = new Cache<DummyModel>(_cacheDataSource.Object);
+            var dummyModel = new DummyModel { Id = 0, Name = "first" };
+            var result = cache.SetItemAndUpdateList("foo", dummyModel, a => a.OrderBy(b => b.Id));
+
+            Assert.NotNull(result);
+            Assert.AreEqual(6, result.Count);
+            Assert.AreEqual(0, result.First().Id);
+            Assert.AreEqual("first", result.First().Name);
         }
 
         [Test]

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Blog.Logic.Caching.DataSource;
 
 namespace Blog.Logic.Caching
@@ -12,9 +14,14 @@ namespace Blog.Logic.Caching
             _cacheDataSource = cacheDataSource;
         }
 
-        public List<T> GetAll()
+        public List<T> GetList()
         {
-            return _cacheDataSource.GetAll();
+            return _cacheDataSource.GetList();
+        }
+
+        public List<T> GetListByKey(string key)
+        {
+            return _cacheDataSource.GetListByKey(key);
         }
 
         public T Get(int id, string key)
@@ -40,6 +47,31 @@ namespace Blog.Logic.Caching
         public void Set(T entity)
         {
             _cacheDataSource.Set(entity);
+        }
+
+        public void SetListByKey(string key, List<T> value)
+        {
+            _cacheDataSource.SetListByKey(key, value);
+        }
+
+        public List<T> SetItemAndUpdateList(string key, T entity, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
+        {
+            var list = _cacheDataSource.GetListByKey(key);
+
+            if (list == null || list.Count == 0)
+            {
+                return null;
+            }
+
+            list.Add(entity);
+
+            if (orderBy != null)
+            {
+                list = orderBy(list.AsQueryable()).ToList();
+            }
+            _cacheDataSource.SetListByKey(key, list);
+
+            return _cacheDataSource.GetListByKey(key);
         }
 
         public void RemoveAll()

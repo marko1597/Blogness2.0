@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.DataAccess.Database.Entities;
@@ -9,6 +10,7 @@ using Blog.DataAccess.Database.Repository.Interfaces;
 
 namespace Blog.DataAccess.Database.Repository
 {
+    [ExcludeFromCodeCoverage]
     public class PostRepository : GenericRepository<BlogDb, Post>, IPostRepository
     {
         public IList<Post> GetPostsByTag(string tagName, int threshold = 10)

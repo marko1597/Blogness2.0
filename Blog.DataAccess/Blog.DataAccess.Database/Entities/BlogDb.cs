@@ -1,8 +1,10 @@
 ﻿using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.DataAccess.Database.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class BlogDb : DbContext
     {
         public BlogDb() : base("name=BlogDb")

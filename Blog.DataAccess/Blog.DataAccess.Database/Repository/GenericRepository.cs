@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.DataAccess.Database.Repository.Interfaces;
 
 namespace Blog.DataAccess.Database.Repository
 {
+    [ExcludeFromCodeCoverage]
     public abstract class GenericRepository<TC, T> : IGenericRepository<T>
         where T : class
         where TC : DbContext, new()
