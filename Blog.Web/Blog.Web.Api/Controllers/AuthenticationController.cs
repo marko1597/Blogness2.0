@@ -4,7 +4,7 @@ using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -12,11 +12,11 @@ namespace Blog.Web.Api.Controllers
     public class AuthenticationController : ApiController
     {
         private readonly IAuthenticationHelper _authentication;
-        private readonly ISession _session;
-        private readonly IUser _user;
+        private readonly ISessionResource _session;
+        private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
 
-        public AuthenticationController(IAuthenticationHelper authentication, ISession session, IUser user, IErrorSignaler errorSignaler)
+        public AuthenticationController(IAuthenticationHelper authentication, ISessionResource session, IUsersResource user, IErrorSignaler errorSignaler)
         {
             _authentication = authentication;
             _session = session;
@@ -34,6 +34,7 @@ namespace Blog.Web.Api.Controllers
                 if (result != null && result.Error == null)
                 {
                     _authentication.SignIn(_user.GetByUserName(login.Username));
+                    _errorSignaler.SignalFromCurrentContext(new Exception(string.Format("User {0} logged in", login.Username)));
                     return true;
                 }
                 return false;
@@ -52,6 +53,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 _authentication.SignOut(_user.GetByUserName(login.Username));
+                _errorSignaler.SignalFromCurrentContext(new Exception(string.Format("User {0} logged off", login.Username)));
                 return true;
             }
             catch (Exception ex)

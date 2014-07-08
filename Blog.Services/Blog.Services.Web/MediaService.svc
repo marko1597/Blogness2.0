@@ -1,0 +1,4 @@
+﻿<%@ ServiceHost
+    Service="Blog.Services.Implementation.MediaService"
+    CodeBehind="Blog.Services.Implementation.MediaService.cs"
+    Factory="SimpleInjector.Integration.Wcf.SimpleInjectorServiceHostFactory, SimpleInjector.Integration.Wcf" %>

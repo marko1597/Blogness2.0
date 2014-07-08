@@ -1,0 +1,70 @@
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Blog.Common.Contracts;
+using Blog.Common.Utils.Helpers;
+using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Implementation.Interfaces;
+
+namespace Blog.Services.Helpers.Wcf
+{
+    [ExcludeFromCodeCoverage]
+    public class MediaResource : BaseResource, IMediaResource
+    {
+        public List<Media> GetByUser(int userId)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.GetByUser(userId);
+            }
+        }
+
+        public Media Get(int mediaId)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.Get(mediaId);
+            }
+        }
+
+        public List<Media> GetByGroup(int albumId)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.GetByGroup(albumId);
+            }
+        }
+
+        public Media GetByName(string customName)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.GetByName(customName);
+            }
+        }
+
+        public Media Add(Media media, int userId)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.Add(media, userId);
+            }
+        }
+
+
+        public Media Add(User user, string albumName, string filename, string path, string contentType)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.Add(user, albumName, filename, path, contentType);
+            }
+        }
+
+        public bool Delete(int mediaId)
+        {
+            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
+            {
+                return svc.Proxy.Delete(mediaId);
+            }
+        }
+    }
+}

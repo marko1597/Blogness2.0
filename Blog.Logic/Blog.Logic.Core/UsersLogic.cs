@@ -8,12 +8,13 @@ using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 using Db = Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.Logic.Core
 {
-    public class UsersLogic
+    public class UsersLogic : IUsersLogic
     {
         private readonly IUserRepository _userRepository;
         private readonly IAddressRepository _addressRepository;

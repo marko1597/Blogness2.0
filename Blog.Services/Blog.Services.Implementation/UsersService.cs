@@ -1,34 +1,41 @@
 ﻿using Blog.Common.Contracts;
-using Blog.Logic.Core.Factory;
+using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class UsersService : IUser
+    public class UsersService : BaseService, IUsersService
     {
+        private readonly IUsersLogic _usersLogic;
+
+        public UsersService(IUsersLogic usersLogic)
+        {
+            _usersLogic = usersLogic;
+        }
+
         public User GetByCredentials(string username, string password)
         {
-            return UsersFactory.GetInstance().CreateLogic().GetByCredentials(username, password);
+            return _usersLogic.GetByCredentials(username, password);
         }
 
         public User GetByUserName(string username)
         {
-            return UsersFactory.GetInstance().CreateLogic().GetByUserName(username);
+            return _usersLogic.GetByUserName(username);
         }
 
         public User Get(int userId)
         {
-            return UsersFactory.GetInstance().CreateLogic().Get(userId);
+            return _usersLogic.Get(userId);
         }
 
         public User Add(User user)
         {
-            return UsersFactory.GetInstance().CreateLogic().Add(user);
+            return _usersLogic.Add(user);
         }
 
         public User Update(User user)
         {
-            return UsersFactory.GetInstance().CreateLogic().Update(user);
+            return _usersLogic.Update(user);
         }
     }
 }

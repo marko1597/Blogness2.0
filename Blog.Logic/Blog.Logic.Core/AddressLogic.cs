@@ -4,11 +4,12 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
-    public class AddressLogic
+    public class AddressLogic : IAddressLogic
     {
         private readonly IAddressRepository _addressRepository;
 

@@ -1,36 +1,43 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
-using Blog.Logic.Core.Factory;
+using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class SessionService : ISession
+    public class SessionService : BaseService, ISessionService
     {
+        private readonly ISessionLogic _sessionLogic;
+
+        public SessionService(ISessionLogic sessionLogic)
+        {
+            _sessionLogic = sessionLogic;
+        }
+
         public List<Session> GetAll()
         {
-            return SessionFactory.GetInstance().CreateSession().GetAll();
+            return _sessionLogic.GetAll();
         }
 
         public Session GetByUser(string username)
         {
-            return SessionFactory.GetInstance().CreateSession().GetByUser(username);
+            return _sessionLogic.GetByUser(username);
         }
 
         public Session GetByIp(string ipAddress)
         {
-            return SessionFactory.GetInstance().CreateSession().GetByIp(ipAddress);
+            return _sessionLogic.GetByIp(ipAddress);
         }
 
         public LoggedUser Login(string userName, string passWord, string ipAddress)
         {
-            return SessionFactory.GetInstance().CreateSession().Login(userName, passWord, ipAddress);
+            return _sessionLogic.Login(userName, passWord, ipAddress);
         }
 
         public Error Logout(string userName)
         {
-            return SessionFactory.GetInstance().CreateSession().Logout(userName);
+            return _sessionLogic.Logout(userName);
         }
     }
 }

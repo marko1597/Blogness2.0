@@ -5,17 +5,17 @@ using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
     [AllowCrossSiteApi]
     public class HobbiesController : ApiController
     {
-        private readonly IHobby _service;
+        private readonly IHobbyResource _service;
         private readonly IErrorSignaler _errorSignaler;
 
-        public HobbiesController(IHobby hobby, IErrorSignaler errorSignaler)
+        public HobbiesController(IHobbyResource hobby, IErrorSignaler errorSignaler)
         {
             _service = hobby;
             _errorSignaler = errorSignaler;

@@ -5,17 +5,17 @@ using Blog.Common.Web.Attributes;
 using System;
 using System.Web.Http;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
     [AllowCrossSiteApi]
     public class EducationController : ApiController
     {
-        private readonly IEducation _service;
+        private readonly IEducationResource _service;
         private readonly IErrorSignaler _errorSignaler;
 
-        public EducationController(IEducation education, IErrorSignaler errorSignaler)
+        public EducationController(IEducationResource education, IErrorSignaler errorSignaler)
         {
             _service = education;
             _errorSignaler = errorSignaler;

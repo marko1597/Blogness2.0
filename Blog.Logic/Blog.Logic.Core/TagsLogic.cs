@@ -5,11 +5,12 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
-    public class TagsLogic
+    public class TagsLogic : ITagsLogic
     {
         private readonly ITagRepository _tagRepository;
         private readonly IPostRepository _postRepository;

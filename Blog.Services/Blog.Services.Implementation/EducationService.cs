@@ -1,30 +1,37 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
-using Blog.Logic.Core.Factory;
+using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class EducationService : IEducation
+    public class EducationService : BaseService, IEducationService
     {
+        private readonly IEducationLogic _educationLogic;
+
+        public EducationService(IEducationLogic educationLogic)
+        {
+            _educationLogic = educationLogic;
+        }
+
         public List<Education> GetByUser(int userId)
         {
-            return EducationFactory.GetInstance().CreateEducation().GetByUser(userId);
+            return _educationLogic.GetByUser(userId);
         }
 
         public Education Add(Education education)
         {
-            return EducationFactory.GetInstance().CreateEducation().Add(education);
+            return _educationLogic.Add(education);
         }
 
         public Education Update(Education education)
         {
-            return EducationFactory.GetInstance().CreateEducation().Update(education);
+            return _educationLogic.Update(education);
         }
 
         public bool Delete(int educationId)
         {
-            return EducationFactory.GetInstance().CreateEducation().Delete(educationId);
+            return _educationLogic.Delete(educationId);
         }
     }
 }

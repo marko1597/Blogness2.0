@@ -6,7 +6,7 @@ using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
@@ -14,13 +14,13 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class PostLikesController : ApiController
     {
-        private readonly IPostLikes _service;
-        private readonly IUser _user;
+        private readonly IPostLikesResource _service;
+        private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IHttpClientHelper _httpClientHelper;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public PostLikesController(IPostLikes service, IUser user, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public PostLikesController(IPostLikesResource service, IUsersResource user, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _service = service;
             _user = user;

@@ -4,11 +4,12 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
-    public class CommentsLogic
+    public class CommentsLogic : ICommentsLogic
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IUserRepository _userRepository;

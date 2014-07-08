@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DCED2DA2-E615-41DA-BF80-3339D94473CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blog.Services.Helpers</RootNamespace>
+    <AssemblyName>Blog.Services.Helpers</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Home|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Remote|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wcf\AddressResource.cs" />
+    <Compile Include="Wcf\AlbumResource.cs" />
+    <Compile Include="Wcf\BaseResource.cs" />
+    <Compile Include="Wcf\CommentLikesResource.cs" />
+    <Compile Include="Wcf\CommentsResource.cs" />
+    <Compile Include="Wcf\EducationResource.cs" />
+    <Compile Include="Wcf\HobbyResource.cs" />
+    <Compile Include="Wcf\Interfaces\IAddressResource.cs" />
+    <Compile Include="Wcf\Interfaces\IAlbumResource.cs" />
+    <Compile Include="Wcf\Interfaces\IBaseResource.cs" />
+    <Compile Include="Wcf\Interfaces\ICommentLikesResource.cs" />
+    <Compile Include="Wcf\Interfaces\ICommentsResource.cs" />
+    <Compile Include="Wcf\Interfaces\IEducationResource.cs" />
+    <Compile Include="Wcf\Interfaces\IHobbyResource.cs" />
+    <Compile Include="Wcf\Interfaces\IMediaResource.cs" />
+    <Compile Include="Wcf\Interfaces\IPostContentsResource.cs" />
+    <Compile Include="Wcf\Interfaces\IPostLikesResource.cs" />
+    <Compile Include="Wcf\Interfaces\IPostsResource.cs" />
+    <Compile Include="Wcf\Interfaces\ISessionResource.cs" />
+    <Compile Include="Wcf\Interfaces\ITagsResource.cs" />
+    <Compile Include="Wcf\Interfaces\IUsersResource.cs" />
+    <Compile Include="Wcf\MediaResource.cs" />
+    <Compile Include="Wcf\PostContentsResource.cs" />
+    <Compile Include="Wcf\PostLikesResource.cs" />
+    <Compile Include="Wcf\PostsResource.cs" />
+    <Compile Include="Wcf\SessionResource.cs" />
+    <Compile Include="Wcf\TagsResource.cs" />
+    <Compile Include="Wcf\UsersResource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">
+      <Project>{c1cd2c2a-c6a0-4531-8513-938fc474ff1a}</Project>
+      <Name>Blog.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Utils\Blog.Common.Utils.csproj">
+      <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
+      <Name>Blog.Common.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blog.Services.Implementation\Blog.Services.Implementation.csproj">
+      <Project>{e8d4c1b0-f3bf-4497-9ce7-922e90b1cf5b}</Project>
+      <Name>Blog.Services.Implementation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

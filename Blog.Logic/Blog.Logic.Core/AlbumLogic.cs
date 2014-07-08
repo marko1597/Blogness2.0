@@ -4,12 +4,13 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 using Blog.Common.Utils;
 
 namespace Blog.Logic.Core
 {
-    public class AlbumLogic
+    public class AlbumLogic : IAlbumLogic
     {
         private readonly IAlbumRepository _albumRepository;
 

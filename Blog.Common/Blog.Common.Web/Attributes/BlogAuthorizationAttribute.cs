@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Common.Web.Attributes
 {
@@ -12,7 +12,7 @@ namespace Blog.Common.Web.Attributes
     public class BlogAuthorizationAttribute : ActionFilterAttribute, IAuthenticationFilter
     {
         [Import]
-        public ISession Session { get; set; }
+        public ISessionResource Session { get; set; }
 
         [Import]
         public IErrorSignaler ErrorSignaler { get; set; }

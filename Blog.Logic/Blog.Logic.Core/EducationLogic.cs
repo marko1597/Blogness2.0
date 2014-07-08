@@ -4,11 +4,12 @@ using System.Linq;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
-    public class EducationLogic
+    public class EducationLogic : IEducationLogic
     {
         private readonly IEducationRepository _educationRepository;
 

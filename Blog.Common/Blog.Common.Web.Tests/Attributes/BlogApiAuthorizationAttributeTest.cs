@@ -11,7 +11,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Moq;
 using NUnit.Framework;
 
@@ -56,7 +56,7 @@ namespace Blog.Common.Web.Tests.Attributes
             _principal.SetupGet(x => x.Identity.Name).Returns("foo");
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
-            var session = new Mock<ISession>();
+            var session = new Mock<ISessionResource>();
             session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns(new Session());
 
             var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };
@@ -86,7 +86,7 @@ namespace Blog.Common.Web.Tests.Attributes
             _principal.SetupGet(x => x.Identity.Name).Returns("foo");
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
-            var session = new Mock<ISession>();
+            var session = new Mock<ISessionResource>();
             session.Setup(a => a.GetByUser(It.IsAny<string>())).Throws(new BlogException());
             var errorSignaler = new Mock<IErrorSignaler>();
             errorSignaler.Setup(a => a.SignalFromCurrentContext(It.IsAny<Exception>()));
@@ -104,7 +104,7 @@ namespace Blog.Common.Web.Tests.Attributes
             _principal.SetupGet(x => x.Identity.Name).Returns("foo");
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
-            var session = new Mock<ISession>();
+            var session = new Mock<ISessionResource>();
             session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns(new Session { Error = new Error() });
 
             var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };
@@ -120,7 +120,7 @@ namespace Blog.Common.Web.Tests.Attributes
             _principal.SetupGet(x => x.Identity.Name).Returns("foo");
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
-            var session = new Mock<ISession>();
+            var session = new Mock<ISessionResource>();
             session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns((Session)null);
 
             var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };

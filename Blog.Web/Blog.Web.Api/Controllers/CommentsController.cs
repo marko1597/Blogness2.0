@@ -7,7 +7,7 @@ using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
@@ -15,12 +15,12 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class CommentsController : ApiController
     {
-        private readonly IComments _service;
+        private readonly ICommentsResource _service;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IHttpClientHelper _httpClientHelper;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public CommentsController(IComments service, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public CommentsController(ICommentsResource service, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
         {
             _service = service;
             _errorSignaler = errorSignaler;

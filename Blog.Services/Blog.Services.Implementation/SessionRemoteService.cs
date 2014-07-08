@@ -9,7 +9,7 @@ using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class SessionRemoteService : ISession
+    public class SessionRemoteService : BaseService, ISessionService
     {
         private readonly IConfigurationHelper _configurationHelper;
         private readonly IHttpClientHelper _httpClientHelper;

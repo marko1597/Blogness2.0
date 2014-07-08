@@ -6,11 +6,12 @@ using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 
 namespace Blog.Logic.Core
 {
-    public class PostsLogic
+    public class PostsLogic : IPostsLogic
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostContentRepository _postContentRepository;

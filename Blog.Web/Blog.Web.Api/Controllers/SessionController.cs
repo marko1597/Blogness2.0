@@ -7,17 +7,17 @@ using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
     [AllowCrossSiteApi]
     public class SessionController : ApiController
     {
-        private readonly ISession _session;
+        private readonly ISessionResource _session;
         private readonly IErrorSignaler _errorSignaler;
 
-        public SessionController(ISession session, IErrorSignaler errorSignaler)
+        public SessionController(ISessionResource session, IErrorSignaler errorSignaler)
         {
             _session = session;
             _errorSignaler = errorSignaler;

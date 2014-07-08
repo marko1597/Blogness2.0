@@ -6,7 +6,7 @@ using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
 using WebApi.OutputCache.V2;
 
@@ -15,11 +15,11 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class PostsController : ApiController
     {
-        private readonly IPosts _postsSvc;
+        private readonly IPostsResource _postsSvc;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public PostsController(IPosts postsSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
+        public PostsController(IPostsResource postsSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _postsSvc = postsSvc;
             _errorSignaler = errorSignaler;

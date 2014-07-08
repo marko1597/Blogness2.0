@@ -5,7 +5,7 @@ using System.Web.Http.Filters;
 using System.Web.Http.Results;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.AuthenticationFilter;
 
 namespace Blog.Common.Web.Attributes
@@ -14,7 +14,7 @@ namespace Blog.Common.Web.Attributes
     public class BlogApiAuthorizationAttribute : AuthenticationFilterAttribute
     {
         [Import]
-        public ISession Session { get; set; }
+        public ISessionResource Session { get; set; }
 
         [Import]
         public IErrorSignaler ErrorSignaler { get; set; }

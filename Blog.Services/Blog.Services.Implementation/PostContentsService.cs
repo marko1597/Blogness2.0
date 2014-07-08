@@ -1,30 +1,37 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
-using Blog.Logic.Core.Factory;
+using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class PostContentsService : IPostContents
+    public class PostContentsService : BaseService, IPostContentsService
     {
+        private readonly IPostContentsLogic _postContentsLogic;
+
+        public PostContentsService(IPostContentsLogic postsContentsLogic)
+        {
+            _postContentsLogic = postsContentsLogic;
+        }
+
         public List<PostContent> GetByPostId(int postId)
         {
-            return PostContentsFactory.GetInstance().CreatePostContents().GetByPostId(postId);
+            return _postContentsLogic.GetByPostId(postId);
         }
 
         public PostContent Get(int postContentId)
         {
-            return PostContentsFactory.GetInstance().CreatePostContents().Get(postContentId);
+            return _postContentsLogic.Get(postContentId);
         }
 
         public PostContent Add(PostContent postImage)
         {
-            return PostContentsFactory.GetInstance().CreatePostContents().Add(postImage);
+            return _postContentsLogic.Add(postImage);
         }
 
         public bool Delete(int postContentId)
         {
-            return PostContentsFactory.GetInstance().CreatePostContents().Delete(postContentId);
+            return _postContentsLogic.Delete(postContentId);
         }
     }
 }

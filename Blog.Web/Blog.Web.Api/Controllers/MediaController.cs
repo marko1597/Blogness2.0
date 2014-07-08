@@ -10,7 +10,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers
@@ -18,13 +18,13 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class MediaController : ApiController
     {
-        private readonly IMedia _media;
-        private readonly IUser _user;
+        private readonly IMediaResource _media;
+        private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IConfigurationHelper _configurationHelper;
         private readonly string _mediaPath = string.Empty;
 
-        public MediaController(IMedia media, IUser user, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
+        public MediaController(IMediaResource media, IUsersResource user, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _media = media;
             _user = user;

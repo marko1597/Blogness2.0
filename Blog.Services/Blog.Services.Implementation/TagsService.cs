@@ -1,25 +1,32 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
-using Blog.Logic.Core.Factory;
+using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
-    public class TagsService : ITag
+    public class TagsService : BaseService, ITagsService
     {
+        private readonly ITagsLogic _tagsLogic;
+
+        public TagsService(ITagsLogic tagsLogic)
+        {
+            _tagsLogic = tagsLogic;
+        }
+
         public List<Tag> GetByPostId(int postId)
         {
-            return TagsFactory.GetInstance().CreateLogic().GetByPostId(postId);
+            return _tagsLogic.GetByPostId(postId);
         }
 
         public List<Tag> GetByName(string tagName)
         {
-            return TagsFactory.GetInstance().CreateLogic().GetTagsByName(tagName);
+            return _tagsLogic.GetTagsByName(tagName);
         }
 
         public Tag Add(Tag tag)
         {
-            return TagsFactory.GetInstance().CreateLogic().Add(tag);
+            return _tagsLogic.Add(tag);
         }
     }
 }

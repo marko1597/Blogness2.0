@@ -334,6 +334,10 @@
       <Project>{a591cf4a-f004-4d92-ade8-8937ff290b63}</Project>
       <Name>Blog.Common.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Services\Blog.Services.Helpers\Blog.Services.Helpers.csproj">
+      <Project>{dced2da2-e615-41da-bf80-3339d94473ce}</Project>
+      <Name>Blog.Services.Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Blog.Services\Blog.Services.Implementation\Blog.Services.Implementation.csproj">
       <Project>{e8d4c1b0-f3bf-4497-9ce7-922e90b1cf5b}</Project>
       <Name>Blog.Services.Implementation</Name>

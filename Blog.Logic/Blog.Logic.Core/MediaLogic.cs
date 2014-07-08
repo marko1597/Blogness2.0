@@ -7,12 +7,13 @@ using Blog.Common.Utils.Extensions;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
+using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
 using Media = Blog.Common.Contracts.Media;
 
 namespace Blog.Logic.Core
 {
-    public class MediaLogic
+    public class MediaLogic : IMediaLogic
     {
         private readonly IMediaRepository _mediaRepository;
         private readonly IAlbumRepository _albumRepository;

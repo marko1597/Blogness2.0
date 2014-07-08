@@ -3,7 +3,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers
@@ -11,10 +11,10 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class UsersController : ApiController
     {
-        private readonly IUser _user;
+        private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
 
-        public UsersController(IUser user, IErrorSignaler errorSignaler)
+        public UsersController(IUsersResource user, IErrorSignaler errorSignaler)
         {
             _user = user;
             _errorSignaler = errorSignaler;

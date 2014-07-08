@@ -5,17 +5,17 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
     [AllowCrossSiteApi]
     public class PostContentController : ApiController
     {
-        private readonly IPostContents _postContentsSvc;
+        private readonly IPostContentsResource _postContentsSvc;
         private readonly IErrorSignaler _errorSignaler;
 
-        public PostContentController(IPostContents postContentsSvc, IErrorSignaler errorSignaler)
+        public PostContentController(IPostContentsResource postContentsSvc, IErrorSignaler errorSignaler)
         {
             _postContentsSvc = postContentsSvc;
             _errorSignaler = errorSignaler;

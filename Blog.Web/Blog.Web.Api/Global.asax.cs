@@ -10,8 +10,8 @@ using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -37,29 +37,29 @@ namespace Blog.Web.Api
             container.Options.PropertySelectionBehavior = new ImportPropertySelectionBehavior();
 
             // SI Controllers Dependency Injection
-            container.Register<IComments, CommentsService>(Lifestyle.Singleton);
-            container.Register<ICommentLikes, CommentLikesService>(Lifestyle.Singleton);
-            container.Register<IPosts, PostsService>(Lifestyle.Singleton);
-            container.Register<IUser, UsersService>(Lifestyle.Singleton);
-            container.Register<ISession, SessionService>(Lifestyle.Singleton);
-            container.Register<IPostLikes, PostLikesService>(Lifestyle.Singleton);
-            container.Register<IPostContents, PostContentsService>(Lifestyle.Singleton);
-            container.Register<IMedia, MediaService>(Lifestyle.Singleton);
-            container.Register<IAlbum, AlbumService>(Lifestyle.Singleton);
-            container.Register<IEducation, EducationService>(Lifestyle.Singleton);
-            container.Register<IHobby, HobbyService>(Lifestyle.Singleton);
-            container.Register<IAddress, AddressService>(Lifestyle.Singleton);
+            container.Register<ICommentsResource, CommentsResource>(Lifestyle.Singleton);
+            container.Register<ICommentLikesResource, CommentLikesResource>(Lifestyle.Singleton);
+            container.Register<IPostsResource, PostsResource>(Lifestyle.Singleton);
+            container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
+            container.Register<ISessionResource, SessionResource>(Lifestyle.Singleton);
+            container.Register<IPostLikesResource, PostLikesResource>(Lifestyle.Singleton);
+            container.Register<IPostContentsResource, PostContentsResource>(Lifestyle.Singleton);
+            container.Register<IMediaResource, MediaResource>(Lifestyle.Singleton);
+            container.Register<IAlbumResource, AlbumResource>(Lifestyle.Singleton);
+            container.Register<IEducationResource, EducationResource>(Lifestyle.Singleton);
+            container.Register<IHobbyResource, HobbyResource>(Lifestyle.Singleton);
+            container.Register<IAddressResource, AddressResource>(Lifestyle.Singleton);
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
-            container.Register<ITag, TagsService>(Lifestyle.Singleton);
+            container.Register<ITagsResource, TagsResource>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
             container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
             // SI Attributes Dependency Injection
-            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionResource>());
             container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
-            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionService>());
+            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionResource>());
             container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
 
             // SI Helper Classes Property Injections

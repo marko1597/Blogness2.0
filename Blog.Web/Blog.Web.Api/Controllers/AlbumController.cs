@@ -4,7 +4,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Implementation.Interfaces;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Common.Utils;
 
 namespace Blog.Web.Api.Controllers
@@ -12,10 +12,10 @@ namespace Blog.Web.Api.Controllers
     [AllowCrossSiteApi]
     public class AlbumController : ApiController
     {
-        private readonly IAlbum _service;
+        private readonly IAlbumResource _service;
         private readonly IErrorSignaler _errorSignaler;
 
-        public AlbumController(IAlbum service, IErrorSignaler errorSignaler)
+        public AlbumController(IAlbumResource service, IErrorSignaler errorSignaler)
         {
             _service = service;
             _errorSignaler = errorSignaler;
