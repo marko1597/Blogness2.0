@@ -38,9 +38,8 @@ namespace Blog.Services.Implementation
         {
             return _mediaLogic.Add(media, userId);
         }
-
-
-        public Media Add(User user, string albumName, string filename, string path, string contentType)
+        
+        public Media AddAsContent(User user, string albumName, string filename, string path, string contentType)
         {
             return _mediaLogic.Add(user, albumName, filename, path, contentType);
         }

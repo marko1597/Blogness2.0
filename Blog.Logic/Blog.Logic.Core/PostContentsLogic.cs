@@ -25,7 +25,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
-                db.ForEach(a => postContents.Add(PostContentMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    a.Media.MediaPath = null;
+                    a.Media.ThumbnailPath = null;
+                    postContents.Add(PostContentMapper.ToDto(a));
+                });
             }
             catch (Exception ex)
             {
@@ -42,6 +47,8 @@ namespace Blog.Logic.Core
 
                 if (db != null)
                 {
+                    db.Media.MediaPath = null;
+                    db.Media.ThumbnailPath = null;
                     return PostContentMapper.ToDto(db);
                 }
 

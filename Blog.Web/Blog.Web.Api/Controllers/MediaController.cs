@@ -41,6 +41,11 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 media = _media.GetByGroup(albumId) ?? new List<Media>();
+                media.ForEach(a =>
+                {
+                    a.MediaPath = null;
+                    a.ThumbnailPath = null;
+                });
             }
             catch (Exception ex)
             {
@@ -57,6 +62,11 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 media = _media.GetByUser(userId) ?? new List<Media>();
+                media.ForEach(a =>
+                {
+                    a.MediaPath = null;
+                    a.ThumbnailPath = null;
+                });
             }
             catch (Exception ex)
             {

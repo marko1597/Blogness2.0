@@ -34,14 +34,19 @@ namespace Blog.Logic.Core
 
                 if (db == null)
                 {
-                    return new Post().GenerateError<Post>((int)Constants.Error.RecordNotFound, 
+                    return new Post().GenerateError<Post>((int)Constants.Error.RecordNotFound,
                         string.Format("Cannot find post with Id {0}", postId));
                 }
-                    
+
                 var post = PostMapper.ToDto(db);
                 var dbContents = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
                 var postContents = new List<PostContent>();
-                dbContents.ForEach(a => postContents.Add(PostContentMapper.ToDto(a)));
+                dbContents.ForEach(a =>
+                {
+                    a.Media.MediaPath = null;
+                    a.Media.ThumbnailPath = null;
+                    postContents.Add(PostContentMapper.ToDto(a));
+                });
                 post.PostContents = postContents;
 
                 return post;
@@ -115,7 +120,7 @@ namespace Blog.Logic.Core
             }
             return posts;
         }
-        
+
         public List<Post> GetPopularPosts(int postsCount)
         {
             var posts = new List<Post>();
@@ -236,7 +241,7 @@ namespace Blog.Logic.Core
                 throw new BlogException(ex.Message, ex.InnerException);
             }
         }
-        
+
         public Post UpdatePost(Post post)
         {
             try
@@ -304,7 +309,12 @@ namespace Blog.Logic.Core
         {
             var contents = new List<PostContent>();
             var dbContents = _postContentRepository.Find(b => b.PostId == post.Id, true).ToList();
-            dbContents.ForEach(b => contents.Add(PostContentMapper.ToDto(b)));
+            dbContents.ForEach(b =>
+            {
+                b.Media.MediaPath = null;
+                b.Media.ThumbnailPath = null;
+                contents.Add(PostContentMapper.ToDto(b));
+            });
             post.PostContents = contents;
 
             var comments = new List<Comment>();

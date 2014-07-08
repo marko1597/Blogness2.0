@@ -23,7 +23,7 @@ namespace Blog.Services.Implementation.Interfaces
         Media Add(Media media, int userId);
 
         [OperationContract]
-        Media Add(User user, string albumName, string filename, string path, string contentType);
+        Media AddAsContent(User user, string albumName, string filename, string path, string contentType);
 
         [OperationContract]
         bool Delete(int mediaId);

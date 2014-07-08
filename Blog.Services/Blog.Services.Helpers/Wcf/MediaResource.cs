@@ -50,12 +50,11 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
-
         public Media Add(User user, string albumName, string filename, string path, string contentType)
         {
             using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
             {
-                return svc.Proxy.Add(user, albumName, filename, path, contentType);
+                return svc.Proxy.AddAsContent(user, albumName, filename, path, contentType);
             }
         }
 
