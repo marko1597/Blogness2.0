@@ -319,6 +319,7 @@
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
     <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
+    <Content Include="Scripts\modules\init.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\plugins\json2.js" />

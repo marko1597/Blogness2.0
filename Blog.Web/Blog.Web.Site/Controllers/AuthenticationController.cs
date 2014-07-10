@@ -5,7 +5,6 @@ using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 using Blog.Web.Site.Models;
 
 namespace Blog.Web.Site.Controllers

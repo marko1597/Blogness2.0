@@ -9,20 +9,60 @@
     <title>@ViewBag.Title - Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
-    @Styles.Render("~/content/css")
-    @Styles.Render("~/content/shared")
-    @Styles.Render("~/content/header")
-    @Styles.Render("~/content/login")
-    @Styles.Render("~/content/navigation")
-    @Styles.Render("~/content/posts")
-    @Styles.Render("~/content/error")
-    @Styles.Render("~/content/comments")
-    @Styles.Render("~/content/tags")
-    @Styles.Render("~/content/cssplugins")
-    @Scripts.Render("~/scripts/modernizr")
+    
+    <!-- site css -->
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    
+    <!-- blog shared module styles -->
+    <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
+    
+    <!-- blog header module styles -->
+    <link href="~/Content/modules/header/header.css" rel="stylesheet" />
+    
+    <!-- blog login module styles -->
+    <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
+    
+    <!-- blog navigation module styles -->
+    <link href="~/Content/modules/navigation/navigationmenu.css" rel="stylesheet" />
+    
+    <!-- blog posts module styles -->
+    <link href="~/Content/modules/posts/postsmain.css" rel="stylesheet" />
+    <link href="~/Content/modules/posts/postsmodify.css" rel="stylesheet" />
+    <link href="~/Content/modules/posts/postcontentupload.css" rel="stylesheet" />
+    <link href="~/Content/modules/posts/postrelateditems.css" rel="stylesheet" />
+    
+    <!-- blog error module styles -->
+    <link href="~/Content/modules/error/errorpage.css" rel="stylesheet" />
+    <link href="~/Content/modules/error/globalerrormessage.css" rel="stylesheet" />
+    
+    <!-- blog comments module styles -->
+    <link href="~/Content/modules/comments/commentsmain.css" rel="stylesheet" />
+    <link href="~/Content/modules/comments/commentitem.css" rel="stylesheet" />
+    <link href="~/Content/modules/comments/commentscontainer.css" rel="stylesheet" />
+    <link href="~/Content/modules/comments/commentslist.css" rel="stylesheet" />
+    
+    <!-- blog tags module styles -->
+    <link href="~/Content/modules/tags/tags.css" rel="stylesheet" />
+    
+    <!-- css plugins -->
+    <link href="~/Content/plugins/angular-loading-bar.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-carousel.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-ckeditor.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-motion.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-scrollbar.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-snap.css" rel="stylesheet" />
+    <link href="~/Content/plugins/angular-tags-input.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/plugins/bootstrap-additions.css" rel="stylesheet" />
+    <link href="~/Content/plugins/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/plugins/isotope.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+    
+    <script src="~/Scripts/plugins/modernizr-2.7.2.js"></script>
+
+    <!-- startup script to fetch global configurations -->
     <script>
-        @*var blogApi = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogApi"))";
-        var blogRoot = "@Html.Raw(System.Configuration.ConfigurationManager.AppSettings.Get("BlogRoot"))";*@
         var blogConfiguration =
         {
             blogApi: "@GetBlogApi()",
@@ -38,54 +78,133 @@
 <body ng-app="blog" window-resize>
     @RenderBody()
 
-    @Scripts.Render("~/scripts/jquery")
-    @Scripts.Render("~/scripts/jqueryui")
-    @Scripts.Render("~/scripts/jqueryplugins")
-    @Scripts.Render("~/scripts/jsplugins")
+    <!-- jQuery scripts -->
+    <script src="~/Scripts/plugins/jquery-2.1.1.js"></script>
+    <script src="~/Scripts/plugins/jquery-ui-1.10.4.custom.js"></script>
+    <script src="~/Scripts/plugins/jquery.blockui.js"></script>
+    <script src="~/Scripts/plugins/jquery.dotdotdot.js"></script>
+    <script src="~/Scripts/plugins/jquery.isotope.js"></script>
+    <script src="~/Scripts/plugins/jquery.newsTicker.js"></script>
+    <script src="~/Scripts/plugins/jquery.ui.touch-punch.js"></script>
+    <script src="~/Scripts/plugins/jquery.signalR-2.0.3.js"></script>
+
+    <!-- javascript plugins scripts -->
+    <script src="~/Scripts/plugins/classie.js"></script>
+    <script src="~/Scripts/plugins/json2.js"></script>
+    <script src="~/Scripts/plugins/es5-shim.js"></script>
+    <script src="~/Scripts/plugins/snap.js"></script>
+    <script src="~/Scripts/plugins/respond.js"></script>
+    <script src="~/Scripts/plugins/underscore.js"></script>
+    <script src="~/Scripts/plugins/stacktrace.js"></script>
+    <script src="~/Scripts/plugins/video-js/video.js"></script>
+    <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
+
+    <!-- signalr's dynamic hubs script -->
     <script src="@GetHubUrl()/hubs"></script>
-    @Scripts.Render("~/scripts/bootstrap")
-    @Scripts.Render("~/scripts/angular")
-    @Scripts.Render("~/scripts/angularplugins")
-    @Scripts.Render("~/scripts/blog")
-    @Scripts.Render("~/scripts/config")
-    @Scripts.Render("~/scripts/error")
-    @Scripts.Render("~/scripts/shared")
-    @Scripts.Render("~/scripts/logger")
-    @Scripts.Render("~/scripts/header")
-    @Scripts.Render("~/scripts/tags")
-    @Scripts.Render("~/scripts/login")
-    @Scripts.Render("~/scripts/user")
-    @Scripts.Render("~/scripts/navigation")
-    @Scripts.Render("~/scripts/posts")
-    @Scripts.Render("~/scripts/comments")
-    <script>
-        $(function () {
-            var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
-            settings.setBlogApiEndpoint(blogConfiguration.blogApi);
-            settings.setBlogRoot(blogConfiguration.blogRoot);
-            settings.setHubUrl(blogConfiguration.hubUrl);
-            settings.setDimensions(window.innerWidth, window.innerHeight);
 
-            // TODO: This is a temporary hack. It should be in its respective module
-            ngLogger.provider("$exceptionHandler", {
-                $get: function (errorLogService) {
-                    return (errorLogService);
-                }
-            });
-        });
+    <!-- twitter bootstrap js -->
+    <script src="~/Scripts/plugins/bootstrap.js"></script>
 
-        var getDimensionMode = function () {
-            var w = window.innerWidth;
+    <!-- angular js scripts -->
+    <script src="~/Scripts/plugins/angular.js"></script>
+    <script src="~/Scripts/plugins/angular-animate.js"></script>
+    <script src="~/Scripts/plugins/angular-cookies.js"></script>
+    <script src="~/Scripts/plugins/angular-route.js"></script>
+    <script src="~/Scripts/plugins/angular-sanitize.js"></script>
+    <script src="~/Scripts/plugins/angular-touch.js"></script>
 
-            if (w >= 320 && w <= 767) {
-                windowDimensions.mode = "mobile";
-            } else if (w >= 768 && w <= 1024) {
-                windowDimensions.mode = "tablet";
-            } else if (w > 1024) {
-                windowDimensions.mode = "desktop";
-            }
-        };
-    </script>
+    <!-- angular js plugins scripts -->
+    <script src="~/Scripts/plugins/angular-carousel.js"></script>
+    <script src="~/Scripts/plugins/angular-ckeditor.js"></script>
+    <script src="~/Scripts/plugins/angular-file-upload.js"></script>
+    <script src="~/Scripts/plugins/angular-local-storage.js"></script>
+    <script src="~/Scripts/plugins/angular-isotope.js"></script>
+    <script src="~/Scripts/plugins/angular-signalr-hubs.js"></script>
+    <script src="~/Scripts/plugins/angular-snap.js"></script>
+    <script src="~/Scripts/plugins/angular-strap.js"></script>
+    <script src="~/Scripts/plugins/angular-strap.tpl.js"></script>
+    <script src="~/Scripts/plugins/angular-tags-input.js"></script>
+
+    <!-- blog main module -->
+    <script src="~/Scripts/modules/app.js"></script>
+
+    <!-- blog config module -->
+    <script src="~/Scripts/modules/config/config.js"></script>
+    <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
+
+    <!-- blog error module -->
+    <script src="~/Scripts/modules/error/error.js"></script>
+    <script src="~/Scripts/modules/error/services/errorService.js"></script>
+    <script src="~/Scripts/modules/error/controllers/errorPageController.js"></script>
+    <script src="~/Scripts/modules/error/directives/errorDisplay.js"></script>
+
+    <!-- blog shared helpers module -->
+    <script src="~/Scripts/modules/shared/shared.js"></script>
+    <script src="~/Scripts/modules/shared/services/blockUi.js"></script>
+    <script src="~/Scripts/modules/shared/services/dateHelper.js"></script>
+    <script src="~/Scripts/modules/shared/directives/ellipsis.js"></script>
+    <script src="~/Scripts/modules/shared/directives/fileUpload.js"></script>
+    <script src="~/Scripts/modules/shared/directives/fileUploadItem.js"></script>
+    <script src="~/Scripts/modules/shared/directives/fileUploadThumbnail.js"></script>
+    <script src="~/Scripts/modules/shared/directives/isotopeItemResize.js"></script>
+    <script src="~/Scripts/modules/shared/directives/keypress.js"></script>
+    <script src="~/Scripts/modules/shared/directives/scrollTrigger.js"></script>
+    <script src="~/Scripts/modules/shared/directives/ticker.js"></script>
+
+    <!-- blog logger module -->
+    <script src="~/Scripts/modules/logger/logger.js"></script>
+    <script src="~/Scripts/modules/logger/services/errorLogService.js"></script>
+    <script src="~/Scripts/modules/logger/services/stacktraceService.js"></script>
+
+    <!-- blog header module -->
+    <script src="~/Scripts/modules/header/header.js"></script>
+    <script src="~/Scripts/modules/header/directives/headerMenu.js"></script>
+
+    <!-- blog tags module -->
+    <script src="~/Scripts/modules/tags/tags.js"></script>
+    <script src="~/Scripts/modules/tags/services/tagsService.js"></script>
+    <script src="~/Scripts/modules/tags/directives/tagItem.js"></script>
+
+    <!-- blog login module -->
+    <script src="~/Scripts/modules/login/login.js"></script>
+    <script src="~/Scripts/modules/login/services/loginService.js"></script>
+    <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
+
+    <!-- blog user module -->
+    <script src="~/Scripts/modules/user/user.js"></script>
+    <script src="~/Scripts/modules/user/services/userService.js"></script>
+    <script src="~/Scripts/modules/user/directives/userProfile.js"></script>
+
+    <!-- blog navigation module -->
+    <script src="~/Scripts/modules/navigation/navigation.js"></script>
+    <script src="~/Scripts/modules/navigation/directives/navigationMenu.js"></script>
+
+    <!-- blog posts module -->
+    <script src="~/Scripts/modules/posts/posts.js"></script>
+    <script src="~/Scripts/modules/posts/services/postsService.js"></script>
+    <script src="~/Scripts/modules/posts/services/postsHubService.js"></script>
+    <script src="~/Scripts/modules/posts/controllers/postsController.js"></script>
+    <script src="~/Scripts/modules/posts/controllers/postsModifyController.js"></script>
+    <script src="~/Scripts/modules/posts/controllers/postsViewController.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postContents.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postLikes.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postListItem.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postListItemComment.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postRelatedItem.js"></script>
+    <script src="~/Scripts/modules/posts/directives/postRelatedItems.js"></script>
+
+    <!-- blog comments module -->
+    <script src="~/Scripts/modules/comments/comments.js"></script>
+    <script src="~/Scripts/modules/comments/services/commentsService.js"></script>
+    <script src="~/Scripts/modules/comments/services/commentsHubService.js"></script>
+    <script src="~/Scripts/modules/comments/directives/commentItem.js"></script>
+    <script src="~/Scripts/modules/comments/directives/commentsAddNew.js"></script>
+    <script src="~/Scripts/modules/comments/directives/commentsContainer.js"></script>
+    <script src="~/Scripts/modules/comments/directives/commentsList.js"></script>
+
+    <!-- application initialize script -->
+    <script src="~/Scripts/modules/init.js"></script>
+    <script>$(function () { window.blogInit.start(); });</script>
 
     @RenderSection("scripts", false)
 </body>

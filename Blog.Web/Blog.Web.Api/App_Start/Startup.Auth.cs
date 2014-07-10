@@ -16,7 +16,8 @@ namespace Blog.Web.Api
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Unauthorized"),
                 ExpireTimeSpan = new TimeSpan(0, 12, 0, 0),
-                CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName")
+                CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName"),
+                CookieDomain = "*"
             });
         }
     }
