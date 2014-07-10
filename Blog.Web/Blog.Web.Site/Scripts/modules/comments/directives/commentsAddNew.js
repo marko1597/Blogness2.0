@@ -69,7 +69,7 @@
             parentpostid: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "comments/commentsAddNew.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsAddNew.html",
         controller: ctrlFn
     };
 }]);

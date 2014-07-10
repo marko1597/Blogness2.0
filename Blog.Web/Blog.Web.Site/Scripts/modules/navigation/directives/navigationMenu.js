@@ -23,7 +23,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "navigation/navigationMenu.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "navigation/navigationMenu.html",
         controller: ctrlFn
     };
 });

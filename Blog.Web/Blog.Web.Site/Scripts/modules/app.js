@@ -29,7 +29,7 @@ blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($
 
 blog.config(["$routeProvider", "$httpProvider", "$provide",
     function ($routeProvider, $httpProvider, $provide) {
-        $provide.factory('httpInterceptor', function ($q, $location) {
+        $provide.factory('httpInterceptor', ["$q", function ($q) {
             return {
                 request: function (config) {
                     return config || $q.when(config);
@@ -47,45 +47,45 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
                     return $q.reject(rejection);
                 }
             };
-        });
+        }]);
 
         $httpProvider.interceptors.push('httpInterceptor');
 
         $routeProvider
             .when('/', {
-                templateUrl: 'scripts/templates/posts.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'posts.html',
                 controller: 'postsController'
             })
             .when('/friends', {
-                templateUrl: 'scripts/templates/friends.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'friends.html',
                 controller: ''
             })
             .when('/groups', {
-                templateUrl: 'scripts/templates/groups.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'groups.html',
                 controller: ''
             })
             .when('/profile', {
-                templateUrl: 'scripts/templates/profile.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'profile.html',
                 controller: ''
             })
             .when('/post/new', {
-                templateUrl: 'scripts/templates/modifypost.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
                 controller: 'postsModifyController'
             })
             .when('/post/new/:postId', {
-                templateUrl: 'scripts/templates/modifypost.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
                 controller: 'postsModifyController'
             })
             .when('/events', {
-                templateUrl: 'scripts/templates/events.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'events.html',
                 controller: ''
             })
             .when('/error', {
-                templateUrl: 'scripts/templates/errorpage.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',
                 controller: 'errorPageController'
             })
             .when('/post/:postId', {
-                templateUrl: 'scripts/templates/viewpost.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'viewpost.html',
                 controller: 'postsViewController'
             })
             .otherwise({

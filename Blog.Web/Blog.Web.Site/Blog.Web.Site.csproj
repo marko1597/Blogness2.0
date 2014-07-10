@@ -272,7 +272,6 @@
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\bg-noise.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\edit-post.png" />
@@ -590,7 +589,7 @@
     <Content Include="Content\plugins\bootstrap-additions.css" />
     <Content Include="Content\plugins\bootstrap-theme.css" />
     <Content Include="Content\plugins\bootstrap.css" />
-    <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\plugins\images\animated-overlay.gif" />
     <Content Include="Content\plugins\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\plugins\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -707,9 +706,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\plugins\jquery-2.1.1.min.map" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -730,9 +726,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\plugins\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\plugins\video-js\.DS_Store" />
     <Content Include="Scripts\plugins\video-js\demo.captions.vtt" />

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Optimization;
 
 namespace Blog.Web.Site
@@ -50,9 +51,11 @@ namespace Blog.Web.Site
                       "~/Scripts/plugins/angular-route.js",
                       "~/Scripts/plugins/angular-cookies.js",
                       "~/Scripts/plugins/angular-animate.js",
-                      "~/Scripts/plugins/angular-carousel.js",
                       "~/Scripts/plugins/angular-sanitize.js",
-                      "~/Scripts/plugins/angular-touch.js",
+                      "~/Scripts/plugins/angular-touch.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/angularplugins").Include(
+                      "~/Scripts/plugins/angular-carousel.js",
                       "~/Scripts/plugins/angular-file-upload.js",
                       "~/Scripts/plugins/angular-isotope.js",
                       "~/Scripts/plugins/angular-ckeditor.js",
@@ -199,7 +202,7 @@ namespace Blog.Web.Site
 
             #endregion
 
-            BundleTable.EnableOptimizations = false;
+            BundleTable.EnableOptimizations = !(Convert.ToBoolean(ConfigurationManager.AppSettings.Get("IsDebug")));
         }
 
         public static void AddDefaultIgnorePatterns(IgnoreList ignoreList)
@@ -209,11 +212,11 @@ namespace Blog.Web.Site
                 throw new ArgumentNullException("ignoreList");
             }
 
-            ignoreList.Ignore("*.intellisense.js", OptimizationMode.WhenEnabled);
-            ignoreList.Ignore("*-vsdoc.js", OptimizationMode.WhenEnabled);
-            ignoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
-            ignoreList.Ignore("*.min.css", OptimizationMode.WhenEnabled);
-            ignoreList.Ignore("*.min.js", OptimizationMode.WhenEnabled);
+            ignoreList.Ignore("*.intellisense.js", OptimizationMode.Always);
+            ignoreList.Ignore("*-vsdoc.js", OptimizationMode.Always);
+            ignoreList.Ignore("*.debug.js", OptimizationMode.Always);
+            ignoreList.Ignore("*.min.css", OptimizationMode.Always);
+            //ignoreList.Ignore("*.min.js", OptimizationMode.WhenDisabled);
         }
     }
 }

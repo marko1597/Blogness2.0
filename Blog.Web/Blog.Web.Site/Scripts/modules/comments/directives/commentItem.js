@@ -84,7 +84,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "comments/commentItem.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentItem.html",
         controller: ctrlFn
     };
 }]);

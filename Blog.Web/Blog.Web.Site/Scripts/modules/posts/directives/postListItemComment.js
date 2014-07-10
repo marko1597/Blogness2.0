@@ -16,7 +16,7 @@
         restrict: 'EA',
         scope: { comment: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postListItemComment.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postListItemComment.html",
         controller: ctrlFn
     };
 }]);

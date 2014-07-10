@@ -54,7 +54,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "header/headerMenu.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "header/headerMenu.html",
         controller: ctrlFn
     };
 });

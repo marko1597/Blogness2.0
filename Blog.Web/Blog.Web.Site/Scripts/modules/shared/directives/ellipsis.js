@@ -1,4 +1,4 @@
-﻿ngShared.directive('ellipsis', ["$rootScope", function ($rootScope) {
+﻿ngShared.directive('ellipsis', [function () {
     var filterFn;
     filterFn = function (scope, element, attrs) {
         scope.$on("reapplyEllipsis", function () {

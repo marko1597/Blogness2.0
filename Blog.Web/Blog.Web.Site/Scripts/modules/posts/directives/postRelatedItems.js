@@ -43,7 +43,7 @@
         restrict: 'EA',
         scope: { parentpostid: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postrelateditems.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditems.html",
         controller: ctrlFn
     };
 }]);

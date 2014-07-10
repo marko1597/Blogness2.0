@@ -28,7 +28,8 @@
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
             hubUrl: "@GetHubUrl()",
-            templatesUrl: "scripts/templates/modules/",
+            templatesUrl: "@GetTemplatesPath()",
+            templatesModulesUrl: "@GetTemplatesPath()/modules/",
             displayMode: "desktop"
         };
         console.log(blogConfiguration);
@@ -41,22 +42,22 @@
     @Scripts.Render("~/scripts/jqueryui")
     @Scripts.Render("~/scripts/jqueryplugins")
     @Scripts.Render("~/scripts/jsplugins")
-    <script src="signalr/hubs"></script>
+    <script src="@GetHubUrl()/hubs"></script>
     @Scripts.Render("~/scripts/bootstrap")
     @Scripts.Render("~/scripts/angular")
+    @Scripts.Render("~/scripts/angularplugins")
     @Scripts.Render("~/scripts/blog")
+    @Scripts.Render("~/scripts/config")
     @Scripts.Render("~/scripts/error")
     @Scripts.Render("~/scripts/shared")
     @Scripts.Render("~/scripts/logger")
     @Scripts.Render("~/scripts/header")
     @Scripts.Render("~/scripts/tags")
-    @Scripts.Render("~/scripts/config")
     @Scripts.Render("~/scripts/login")
     @Scripts.Render("~/scripts/user")
     @Scripts.Render("~/scripts/navigation")
     @Scripts.Render("~/scripts/posts")
     @Scripts.Render("~/scripts/comments")
-
     <script>
         $(function () {
             var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
@@ -64,6 +65,13 @@
             settings.setBlogRoot(blogConfiguration.blogRoot);
             settings.setHubUrl(blogConfiguration.hubUrl);
             settings.setDimensions(window.innerWidth, window.innerHeight);
+
+            // TODO: This is a temporary hack. It should be in its respective module
+            ngLogger.provider("$exceptionHandler", {
+                $get: function (errorLogService) {
+                    return (errorLogService);
+                }
+            });
         });
 
         var getDimensionMode = function () {
@@ -88,7 +96,12 @@
     {
         return Request.ApplicationPath + "/signalr";
     }
-    
+
+    public string GetTemplatesPath()
+    {
+        return Request.ApplicationPath + "/scripts/templates/";
+    }
+
     public string GetBlogApi()
     {
         var sb = new StringBuilder();

@@ -8,7 +8,7 @@
         restrict: 'EA',
         scope: { tag: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "tags/tagItem.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "tags/tagItem.html",
         controller: ctrlFn
     };
 }]);

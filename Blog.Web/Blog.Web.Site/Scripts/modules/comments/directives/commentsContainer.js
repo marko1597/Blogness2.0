@@ -20,7 +20,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "comments/commentsContainer.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsContainer.html",
         controller: ctrlFn
     };
 }]);

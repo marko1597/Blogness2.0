@@ -30,7 +30,7 @@ snap-drawers,
     width: auto;
     left: 0;
     right: 0;
-    background: #ddd url(../images/bg.jpg) no-repeat right top;
+    background: #ddd url('../images/bg.jpg') no-repeat right top;
 }
 
 snap-drawer,

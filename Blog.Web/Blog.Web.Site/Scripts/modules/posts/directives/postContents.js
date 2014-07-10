@@ -7,7 +7,7 @@
         restrict: 'EA',
         scope: { contents: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "posts/postContents.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postContents.html",
         controller: ctrlFn
     };
 });

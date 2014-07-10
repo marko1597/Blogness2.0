@@ -47,7 +47,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "login/loginform.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "login/loginform.html",
         controller: ctrlFn
     };
 });

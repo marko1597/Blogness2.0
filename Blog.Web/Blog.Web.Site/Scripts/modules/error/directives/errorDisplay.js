@@ -25,7 +25,7 @@
             restrict: 'EA',
             scope: { data: '=' },
             replace: true,
-            templateUrl: window.blogConfiguration.templatesUrl + "error/errorDisplay.html",
+            templateUrl: window.blogConfiguration.templatesModulesUrl + "error/errorDisplay.html",
             controller: ctrlFn,
             link: linkFn
         };

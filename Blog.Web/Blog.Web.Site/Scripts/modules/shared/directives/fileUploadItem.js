@@ -18,7 +18,7 @@
                 uploader: '='
             },
             replace: true,
-            templateUrl: window.blogConfiguration.templatesUrl + "shared/fileUploadItem.html"
+            templateUrl: window.blogConfiguration.templatesModulesUrl + "shared/fileUploadItem.html"
         };
     }
 ]);

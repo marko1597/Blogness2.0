@@ -51,7 +51,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesUrl + "comments/commentsList.html",
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsList.html",
         controller: ctrlFn
     };
 }]);

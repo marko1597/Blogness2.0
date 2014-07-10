@@ -52,7 +52,7 @@
             restrict: 'EA',
             scope: { data: '=' },
             replace: true,
-            templateUrl: window.blogConfiguration.templatesUrl + "posts/postlikes.html",
+            templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postlikes.html",
             link: linkFn
         };
     }

@@ -86,7 +86,7 @@
 
     .rn-carousel-control.rn-carousel-control-prev {
         left: 0.5em;
-        background-image: url(../images/img-prev.png);
+        background-image: url('../images/img-prev.png');
         width: 40px;
         height: 40px;
         -moz-background-size: cover;
@@ -101,7 +101,7 @@
 
     .rn-carousel-control.rn-carousel-control-next {
         right: 0.5em;
-        background: url(../images/img-next.png) no-repeat;
+        background: url('../images/img-next.png') no-repeat;
         width: 40px;
         height: 40px;
         -moz-background-size: cover;

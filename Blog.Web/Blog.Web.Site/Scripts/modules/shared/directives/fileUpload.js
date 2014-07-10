@@ -4,7 +4,7 @@
             restrict: 'EA',
             scope: { uploader: '='},
             replace: true,
-            templateUrl: window.blogConfiguration.templatesUrl + "shared/fileUpload.html"
+            templateUrl: window.blogConfiguration.templatesModulesUrl + "shared/fileUpload.html"
         };
     }
 ]);

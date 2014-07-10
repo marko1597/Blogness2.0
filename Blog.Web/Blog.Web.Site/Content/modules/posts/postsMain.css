@@ -34,17 +34,30 @@
             width: 98%;
         }
 
+        #posts-main > div.post-item .empty-message {
+            text-align: left;
+        }
+
+        #posts-main > div.post-item > .post-item-tags > .empty-message {
+            padding-bottom: 10px;
+        }
+
+            #posts-main > div.post-item .empty-message > p {
+                margin-bottom: 0;
+            }
+
         #posts-main > div.post-item > div.post-item-comments {
             border-bottom: 1px solid #ddd;
+            padding: 10px;
         }
 
             #posts-main > div.post-item > div.post-item-comments ul {
-                height: 53px !important;
+                height: 40px !important;
                 width: 100%;
                 overflow: hidden;
                 margin: 0;
                 list-style-type: none;
-                padding: 10px;
+                padding: 0;
             }
 
                 #posts-main > div.post-item > div.post-item-comments ul > li p {
@@ -116,7 +129,7 @@ div.post-item-header {
 
     div.post-item-header div.edit-post {
         display: inline-block;
-        background: url(../../images/edit-post.png) no-repeat;
+        background: url('../../images/edit-post.png') no-repeat;
         position: absolute;
         top: 8px;
         right: 10px;
