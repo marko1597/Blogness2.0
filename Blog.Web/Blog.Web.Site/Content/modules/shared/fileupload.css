@@ -17,59 +17,6 @@ div.file-upload div.dropzone ul.upload-items {
         width: 100%;
     }
 
-    div.file-upload div.dropzone ul.upload-items div.upload-details {
-        background: #4c4c4c;
-        color: #f2f2f2;
-        padding: 10px;
-    }
-
-        div.file-upload div.dropzone ul.upload-items div.upload-details > div.popover {
-            color: #666;
-        }
-
-            div.file-upload div.dropzone ul.upload-items div.upload-details > div.popover > div.popover-content {
-                -ms-word-wrap: break-word;
-                word-wrap: break-word;
-            }
-
-        div.file-upload div.dropzone ul.upload-items div.upload-details > p {
-            margin: 0 0 5px 0;
-        }
-
-            div.file-upload div.dropzone ul.upload-items div.upload-details > p:first-child {
-                cursor: pointer;
-                font-weight: bold;
-                -ms-text-overflow: ellipsis;
-                -o-text-overflow: ellipsis;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-                opacity: 1;
-                -moz-transition: opacity .25s ease-in-out;
-                -webkit-transition: opacity .25s ease-in-out;
-                -o-transition: opacity .25s ease-in-out;
-                transition: opacity .25s ease-in-out;
-            }
-
-                div.file-upload div.dropzone ul.upload-items div.upload-details > p:first-child:hover,
-                div.file-upload div.dropzone ul.upload-items div.upload-details > p:first-child:focus {
-                    text-decoration: underline;
-                    opacity: 0.5;
-                }
-
-        div.file-upload div.dropzone ul.upload-items div.upload-details > div.buttons > button {
-            border-radius: 0;
-            width: 25px;
-            height: 25px;
-        }
-
-        div.file-upload div.dropzone ul.upload-items div.upload-details > div.status {
-            display: inline-block;
-            position: absolute;
-            left: 100px;
-            top: 63px;
-        }
-
     div.file-upload div.dropzone ul.upload-items div.thumbnail {
         border: 0;
         padding: 0;

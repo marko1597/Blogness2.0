@@ -1,11 +1,11 @@
-﻿<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="content-item">
-    <div class="post-item-header row" data-user-id="{{post.CreatedBy}}">
+﻿<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="post-list-item content-item">
+    <div class="header row" data-user-id="{{post.CreatedBy}}">
         <div>
             <img ng-src="{{user.Picture.MediaUrl}}" />
         </div>
         <div>
             <h4>
-                <a href="./#/post/{{post.Id}}">{{post.PostTitle}}</a>
+                <a href="/blog/#/post/{{post.Id}}">{{post.PostTitle}}</a>
             </h4>
             <p>
                 <a>{{post.User.UserName}}</a>
@@ -14,26 +14,26 @@
             <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
         </div>
     </div>
-    <div class="post-item-body">
+    <div class="body">
         <p ng-bind-html="post.PostMessage" ellipsis></p>
     </div>
-    <div class="post-item-contents">
+    <div class="contents">
         <div post-contents contents="post.PostContents"></div>
     </div>
-    <div class="post-item-details">
+    <div class="details">
         <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
     </div>
-    <div class="post-item-comments">
+    <div class="comments">
         <div class="empty-message" ng-show="!hasComments">
             <p>There are no comments yet.</p>
         </div>
         <ul ticker data-enable-pause="true" data-pause-element="popover" ng-show="hasComments">
             <li ng-repeat="comment in post.Comments">
-                <div post-item-comment comment="comment"></div>
+                <div post-list-item-comment comment="comment"></div>
             </li>
         </ul>
     </div>
-    <div class="post-item-tags">
+    <div class="tags">
         <div class="empty-message" ng-show="!hasTags">
             <p>There are no tags.</p>
         </div>

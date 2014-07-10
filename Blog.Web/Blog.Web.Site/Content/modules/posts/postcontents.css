@@ -1,0 +1,22 @@
+﻿.post-item-content > .content-image {
+    text-align: center;
+}
+
+    .post-item-content > .content-image > img {
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+    }
+
+.post-item-content p {
+    text-align: left;
+    font-size: 1em;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+    .post-item-content p:first-of-type {
+        font-weight: bold;
+        height: 20px;
+    }

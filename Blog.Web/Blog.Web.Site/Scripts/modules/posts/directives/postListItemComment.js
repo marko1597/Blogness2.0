@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postItemComment', [function () {
+﻿ngPosts.directive('postListItemComment', [function () {
     var ctrlFn = function ($scope) {
         $scope.user = {
             "name": $scope.comment.User.FirstName + " " + $scope.comment.User.LastName,

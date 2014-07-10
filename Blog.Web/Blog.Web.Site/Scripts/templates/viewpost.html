@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
         <div id="post-{{post.Id}}" class="post-board content-item">
-            <div class="post-item-header row" data-user-id="{{post.CreatedBy}}">
+            <div class="header row" data-user-id="{{post.CreatedBy}}">
                 <div>
                     <img ng-src="{{user.Picture.MediaUrl}}" />
                 </div>
@@ -16,13 +16,13 @@
                     <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
                 </div>
             </div>
-            <div class="post-item-body">
+            <div class="body">
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
             </div>
-            <div class="post-item-details">
+            <div class="details">
                 <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
             </div>
-            <div class="post-item-tags">
+            <div class="tags">
                 <div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>
             </div>
         </div>

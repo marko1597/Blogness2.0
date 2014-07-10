@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postItem', [function () {
+﻿ngPosts.directive('postListItem', [function () {
     var ctrlFn = function ($scope, $location, localStorageService) {
         $scope.post = $scope.data.Post;
         $scope.user = $scope.data.Post.User;
