@@ -1,6 +1,6 @@
 ﻿ngNavigation.directive('navigationMenu', function () {
     var ctrlFn = function ($scope, $rootScope, userService, configProvider) {
-        $scope.navigationItems = configProvider.navigationItems;
+        $scope.navigationItems = configProvider.getNavigationItems();
         $scope.user = {};
         $scope.userFullName = "";
 

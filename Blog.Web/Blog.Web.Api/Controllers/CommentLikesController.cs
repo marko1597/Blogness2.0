@@ -47,7 +47,7 @@ namespace Blog.Web.Api.Controllers
             return commentLikes;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("api/comments/likes")]
         public void Post([FromUri]int commentId, string username)
         {

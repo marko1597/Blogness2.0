@@ -1,5 +1,5 @@
 ﻿ngHeader.directive('headerMenu', function () {
-    var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, configProvider) {
+    var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, $window, configProvider, authenticationService) {
         $scope.userLoggedIn = false;
         $scope.toggleClass = "nav-close";
 
@@ -13,21 +13,24 @@
             $rootScope.$broadcast("displayError", { Message: "This is a test error message." });
         };
 
-        $scope.yetAnotherTestDisplayError = function () {
+        $scope.getUserInfo = function () {
             $('#blog-header-collapsible').collapse("hide");
 
-            var api = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "debug/sendmessage" :
-                configProvider.getSettings().BlogApi + "debug/sendmessage";
-
-            $http({
-                url: api + "/test-message",
-                method: "GET"
-            }).success(function (response) {
-                $rootScope.$broadcast("displayError", { Message: response });
-            }).error(function (error) {
-                $rootScope.$broadcast("displayError", { Message: error.Message });
+            authenticationService.getUserInfo().then(function (response) {
+                if (response.Message != undefined || response.Message != null) {
+                    $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
+                } else {
+                    $rootScope.$broadcast("displayError", { Message: JSON.stringify(response)});
+                }
+            }, function () {
+                $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
             });
         };
+
+        $scope.logout = function() {
+            authenticationService.logout();
+            $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
+        },
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
@@ -48,7 +51,7 @@
             });
         });
     };
-    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "$window", "configProvider", "authenticationService"];
 
     return {
         restrict: 'EA',

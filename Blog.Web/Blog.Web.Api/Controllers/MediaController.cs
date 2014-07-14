@@ -125,14 +125,15 @@ namespace Blog.Web.Api.Controllers
             return null;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("api/media")]
-        [BlogApiAuthorization]
         public async Task<Media> Post([FromUri]string username, string album)
         {
             try
             {
                 var user = _user.GetByUserName(username);
+                if (user == null || user.Error != null) throw new Exception("User not specified"); 
+
                 var filename = string.Empty;
                 var chunkName = string.Empty;
 
@@ -156,7 +157,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost, Authorize]
         [Route("api/media")]
         public bool Delete([FromBody]int mediaId)
         {

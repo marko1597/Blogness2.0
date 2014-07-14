@@ -1,5 +1,5 @@
 ﻿ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, loginService, blockUiService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, authenticationService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
@@ -16,32 +16,22 @@
                 }
             });
 
-            loginService.login($scope.username, $scope.password, $scope.rememberMe).then(function (siteResponse) {
-                if (siteResponse.Error == undefined || siteResponse.Error == null) {
-                    loginService.loginApi($scope.username, $scope.password, $scope.rememberMe).then(function (apiResponse) {
-                        if (apiResponse === "true") {
-                            localStorageService.add("username", siteResponse.User.UserName);
-                            blockUiService.unblockIt();
-                            $window.location.href = configProvider.getSettings().BlogRoot;
-                        } else {
-                            blockUiService.unblockIt();
-                            errorService.displayError({ Message: "Error authenticating with Api" });
-                        }
-                    }, function (error) {
-                        blockUiService.unblockIt();
-                        errorService.displayError(error.Error);
-                    });
+            authenticationService.login($scope.username, $scope.password).then(function (response) {
+                if (response.error == undefined || response.error == null) {
+                    localStorageService.add("username", $scope.username);
+                    blockUiService.unblockIt();
+                    $window.location.href = configProvider.getSettings().BlogRoot;
                 } else {
                     blockUiService.unblockIt();
-                    errorService.displayError(siteResponse.Error);
+                    errorService.displayError({ Message: response.error_description });
                 }
             }, function (error) {
                 blockUiService.unblockIt();
-                errorService.displayError(error.Error);
+                errorService.displayError(error);
             });
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "loginService", "blockUiService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService", "blockUiService"];
 
     return {
         restrict: 'EA',

@@ -1,1 +1,1 @@
-﻿var ngHeader = angular.module("ngHeader", ["ngConfig"]);
+﻿var ngHeader = angular.module("ngHeader", ["ngConfig", "ngLogin"]);

@@ -89,7 +89,7 @@ namespace Blog.DataAccess.Seed
             {
                 FirstName = "Jason",
                 LastName = "Magpantay",
-                UserName = "jama",
+                UserName = "jamaness",
                 Password = "testtest1",
                 EmailAddress = "jason.magpantay@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)
@@ -98,7 +98,7 @@ namespace Blog.DataAccess.Seed
             {
                 FirstName = "Jason",
                 LastName = "Avel",
-                UserName = "jaav",
+                UserName = "jaavness",
                 Password = "testtest1",
                 EmailAddress = "jason.avel@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)
@@ -107,7 +107,7 @@ namespace Blog.DataAccess.Seed
             {
                 FirstName = "Avel",
                 LastName = "Magpantay",
-                UserName = "avma",
+                UserName = "avmaness",
                 Password = "testtest1",
                 EmailAddress = "avel.magpantay@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)

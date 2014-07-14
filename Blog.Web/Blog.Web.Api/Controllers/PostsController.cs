@@ -212,8 +212,7 @@ namespace Blog.Web.Api.Controllers
             return posts;
         }
 
-        [HttpPost]
-        [BlogApiAuthorization]
+        [HttpPost, Authorize]
         [Route("api/posts")]
         public Post Post([FromBody]Post post)
         {
@@ -236,7 +235,6 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpPut]
-        [BlogApiAuthorization]
         [Route("api/posts")]
         public Post Put([FromBody]Post post)
         {
@@ -274,7 +272,6 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [BlogApiAuthorization]
         [Route("api/posts")]
         public void Delete([FromBody]int id)
         {

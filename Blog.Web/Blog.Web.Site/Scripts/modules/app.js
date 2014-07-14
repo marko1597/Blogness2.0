@@ -2,6 +2,27 @@
     "ngHeader", "ngLogin", "ngPosts", "ngComments", "ngError", "ngNavigation", "ngNavigation", "ngUser",
     "ngTags"]);
 
+blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "authenticationService",
+    function ($scope, $location, $rootScope, $log, $window, authenticationService) {
+        $rootScope.$on("$locationChangeStart", function (event, next, current) {
+            // TODO: Do something about this shiz yo! It's ddosing the server and shiz!
+            //if (next != window.blogConfiguration.blogRoot + "#/error" &&
+            //    current != window.blogConfiguration.blogRoot + "/authentication") {
+            //    authenticationService.getUserInfo().then(function (response) {
+            //        if (response.Message != undefined || response.Message != null) {
+            //            console.log(response);
+            //            //$window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
+            //        }
+            //    }, function (error) {
+            //        console.log(error);
+            //    });
+            //}
+            
+            $log.info("location changing from " + current + " to " + next);
+        });
+    }
+]);
+
 blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
     return {
         restrict: 'EA',
@@ -50,6 +71,7 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
         }]);
 
         $httpProvider.interceptors.push('httpInterceptor');
+        $httpProvider.interceptors.push('authenticationInterceptorService');
 
         $routeProvider
             .when('/', {
@@ -91,4 +113,5 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
             .otherwise({
                 redirectTo: '/error'
             });
-    }]);
+    }
+]);

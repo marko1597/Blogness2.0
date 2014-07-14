@@ -81,7 +81,7 @@ namespace Blog.Web.Api.Controllers
             return comments;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize]
         [Route("api/comments")]
         public void Post([FromBody]CommentAdded comment)
         {
@@ -108,7 +108,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         [Route("api/comments")]
         public void Delete([FromBody]int id)
         {

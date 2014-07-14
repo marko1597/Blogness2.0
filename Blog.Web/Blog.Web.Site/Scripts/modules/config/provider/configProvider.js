@@ -20,13 +20,7 @@
         USEROWNED: "UserOwned"
     };
 
-    var navigationItems = [
-        { text: "Home", icon: "content/images/nav-home.png", href: "/blog/#/" },
-        { text: "Profile", icon: "content/images/nav-profile.png", href: "/blog/#/profile" },
-        { text: "Friends", icon: "content/images/nav-friends.png", href: "/blog/#/friends" },
-        { text: "Groups", icon: "content/images/nav-groups.png", href: "/blog/#/groups" },
-        { text: "Events", icon: "content/images/nav-events.png", href: "/blog/#/events" }
-    ];
+    var navigationItems = [];
 
     this.$get = [function () {
         return {
@@ -35,6 +29,11 @@
                 return settings;
             },
 
+            getNavigationItems: function () {
+                return navigationItems;
+            },
+
+            /* Setters */
             setDimensions: function (w, h) {
                 windowDimensions.width = w;
                 windowDimensions.height = h;
@@ -48,7 +47,6 @@
                 }
             },
 
-            /* Setters */
             setBlogApiEndpoint: function (val) {
                 settings.BlogApi = val;
             },
@@ -66,9 +64,12 @@
                 settings.IsLoggedIn = sessionId !== "" ? true : false;
             },
 
+            setNavigationItems: function (items) {
+                navigationItems = items;
+            },
+
             /* Constants */
             pageState: pageState,
-            navigationItems: navigationItems,
             windowDimensions: windowDimensions
         };
     }];

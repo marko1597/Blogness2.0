@@ -4,6 +4,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Blog.Common.Identity;
+using Blog.Common.Identity.Interfaces;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
@@ -12,6 +14,10 @@ using Blog.Common.Web.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf;
 using Blog.Services.Helpers.Wcf.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.DataHandler;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -56,14 +62,11 @@ namespace Blog.Web.Api
             container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
-            // SI Attributes Dependency Injection
-            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionResource>());
-            container.RegisterInitializer<BlogApiAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
-            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.Session = container.GetInstance<SessionResource>());
-            container.RegisterInitializer<BlogAuthorizationAttribute>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
-
-            // SI Helper Classes Property Injections
-            container.RegisterInitializer<AuthenticationHelper>(a => a.ErrorSignaler = container.GetInstance<ErrorSignaler>());
+            // SI Token Identity Registers
+            container.Register<IdentityDbContext<BlogUser>, BlogIdentityDbContext>(Lifestyle.Singleton);
+            container.Register<IUserStore<BlogUser>, BlogUserStore>(Lifestyle.Singleton);
+            container.Register<IBlogDbRepository, BlogDbRepository>(Lifestyle.Singleton);
+            container.Register<BlogUserManager, BlogUserManager>(Lifestyle.Singleton);
 
             // SI Registrations
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());

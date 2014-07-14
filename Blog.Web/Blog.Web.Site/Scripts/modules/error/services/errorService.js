@@ -3,7 +3,7 @@
         var error = {};
 
         var isAuthorized = function (d) {
-            if (d.Message.Status == 401 || d.Message.Status == 403) {
+            if (d.error == "invalid_grant") {
                 return false;
             } else {
                 return true;
@@ -16,7 +16,7 @@
                 if (resp == null || resp == "") {
                     loginService.logoutApi(username).then(function (apiResponse) {
                         if (apiResponse === "true") {
-                            $window.location.href = configProvider.getSettings().BlogRoot + 'authentication';
+                            $window.location.href = configProvider.getSettings().BlogRoot + '/authentication';
                         } else {
                             $rootScope.$broadcast("displayError", apiResponse);
                             $location.path("/error");

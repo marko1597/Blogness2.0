@@ -1,6 +1,6 @@
 ﻿@using System.Text
 <!DOCTYPE html>
-<html>
+<html ng-app="blog">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +8,29 @@
     <title>@ViewBag.Title - Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
-    
+
     <!-- site css -->
     <link href="~/Content/Site.css" rel="stylesheet" />
-    
+
     <!-- blog pages styles -->
     <link href="~/Content/modules/errorpage.css" rel="stylesheet" />
     <link href="~/Content/modules/posts.css" rel="stylesheet" />
     <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
     <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
-    
+
     <!-- blog shared module styles -->
     <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
     <link href="~/Content/modules/shared/fileuploaditem.css" rel="stylesheet" />
-    
+
     <!-- blog header module styles -->
     <link href="~/Content/modules/header/headermenu.css" rel="stylesheet" />
-    
+
     <!-- blog login module styles -->
     <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
-    
+
     <!-- blog navigation module styles -->
     <link href="~/Content/modules/navigation/navigationmenu.css" rel="stylesheet" />
-    
+
     <!-- blog posts module styles -->
     <link href="~/Content/modules/posts/postcontents.css" rel="stylesheet" />
     <link href="~/Content/modules/posts/postlikes.css" rel="stylesheet" />
@@ -41,17 +41,17 @@
 
     <!-- blog error module styles -->
     <link href="~/Content/modules/error/errorDisplay.css" rel="stylesheet" />
-    
+
     <!-- blog comments module styles -->
     <link href="~/Content/modules/comments/commentsaddnew.css" rel="stylesheet" />
     <link href="~/Content/modules/comments/commentsmain.css" rel="stylesheet" />
     <link href="~/Content/modules/comments/commentitem.css" rel="stylesheet" />
     <link href="~/Content/modules/comments/commentscontainer.css" rel="stylesheet" />
     <link href="~/Content/modules/comments/commentslist.css" rel="stylesheet" />
-    
+
     <!-- blog tags module styles -->
     <link href="~/Content/modules/tags/tagitem.css" rel="stylesheet" />
-    
+
     <!-- css plugins -->
     <link href="~/Content/plugins/angular-loading-bar.css" rel="stylesheet" />
     <link href="~/Content/plugins/angular-carousel.css" rel="stylesheet" />
@@ -66,7 +66,7 @@
     <link href="~/Content/plugins/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/plugins/isotope.css" rel="stylesheet" />
     <link href="~/Content/plugins/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
-    
+
     <script src="~/Scripts/plugins/modernizr-2.7.2.js"></script>
 
     <!-- startup script to fetch global configurations -->
@@ -77,13 +77,13 @@
             blogRoot: "@GetBlogRoot()",
             hubUrl: "@GetHubUrl()",
             templatesUrl: "@GetTemplatesPath()",
-            templatesModulesUrl: "@GetTemplatesPath()/modules/",
+            templatesModulesUrl: "@GetTemplatesPath()modules/",
             displayMode: "desktop"
         };
         console.log(blogConfiguration);
     </script>
 </head>
-<body ng-app="blog" window-resize>
+<body ng-controller="blogMainController" window-resize>
     @RenderBody()
 
     <!-- jQuery scripts -->
@@ -176,6 +176,8 @@
     <!-- blog login module -->
     <script src="~/Scripts/modules/login/login.js"></script>
     <script src="~/Scripts/modules/login/services/loginService.js"></script>
+    <script src="~/Scripts/modules/login/services/authenticationService.js"></script>
+    <script src="~/Scripts/modules/login/services/authenticationInterceptorService.js"></script>
     <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
 
     <!-- blog user module -->
@@ -244,7 +246,7 @@
         var sb = new StringBuilder();
         sb.Append("https://");
         sb.Append(Request.Headers["Host"]);
-        sb.Append("/blog/");
+        sb.Append("/blog");
 
         return sb.ToString();
     }

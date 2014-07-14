@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Http;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 
 namespace Blog.Web.Api.Controllers
@@ -15,8 +14,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("api/debug/sendmessage/{message}")]
-        [BlogApiAuthorization]
         public string Get(string message)
         {
             try
