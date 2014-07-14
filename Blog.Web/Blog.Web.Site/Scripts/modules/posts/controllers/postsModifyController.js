@@ -138,9 +138,11 @@
 
         });
 
+        var authData = localStorageService.get('authorizationData');
         var uploader = $scope.uploader = $fileUploader.create({
             scope: $rootScope,
-            url: $scope.uploadUrl
+            url: $scope.uploadUrl,
+            headers: { Authorization: 'Bearer ' + authData.token }
         });
 
         uploader.filters.push(function (item /*{File|HTMLInputElement}*/) {

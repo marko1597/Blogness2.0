@@ -4,7 +4,24 @@
 
 div.file-upload input[type=file] {
     margin-bottom: 5px;
+    display: inline-block;
 }
+
+div.file-upload div.dropzone > h4 {
+    margin-left: 5px;
+}
+
+div.file-upload div.dropzone > p {
+    margin-left: 5px;
+}
+
+div.file-upload div.dropzone > .upload-all {
+    margin-left: 5px;
+}
+
+    div.file-upload div.dropzone > .upload-all > i {
+        padding-right: 5px;
+    }
 
 div.file-upload div.dropzone ul.upload-items {
     list-style-type: none;

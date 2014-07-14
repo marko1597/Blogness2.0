@@ -4,6 +4,8 @@
         <div class="well dropzone" ng-file-over>
             <h4>Drag files here...</h4>
             <p>You have {{ uploader.queue.length }} items</p>
+            <div class="btn btn-primary upload-all" ng-click="uploader.uploadAll()">
+                <i class="fa fa-upload"></i>Upload all</div>
             <div>
                 <ul class="upload-items" isotope-container isotope-item-resize>
                     <li ng-repeat="item in uploader.queue" isotope-item class="content-item">
