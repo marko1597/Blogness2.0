@@ -32,7 +32,7 @@ namespace Blog.Web.Api
                 TokenEndpointPath = new PathString("/api/account/login"),
                 Provider = new BlogOAuthAuthorizationServerProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/api/account/externalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
                 AllowInsecureHttp = true
             };
 

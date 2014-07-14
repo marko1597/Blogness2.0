@@ -3,7 +3,6 @@
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
-        $scope.errorContent = { Show: false, Type: "" };
         
         $scope.getRecentPosts = function () {
             blockUiService.blockIt();
@@ -38,10 +37,6 @@
             }, function (e) {
                 errorService.displayErrorRedirect(e);
             });
-        };
-
-        $scope.getErrorType = function () {
-            return $scope.errorContent.Type;
         };
 
         $scope.$on("updatePostsSize", function (ev, size) {
