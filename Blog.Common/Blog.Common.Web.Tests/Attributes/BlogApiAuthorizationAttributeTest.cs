@@ -7,11 +7,9 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
-using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Helpers.Wcf.Interfaces;
 using Moq;
 using NUnit.Framework;
 
@@ -56,10 +54,7 @@ namespace Blog.Common.Web.Tests.Attributes
             _principal.SetupGet(x => x.Identity.Name).Returns("foo");
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
-            var session = new Mock<ISessionResource>();
-            session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns(new Session());
-
-            var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };
+            var attribute = new BlogApiAuthorizationAttribute();
             attribute.OnAuthentication(httpAuthenticationContext);
 
             Assert.IsNull(httpAuthenticationContext.ErrorResult);
@@ -73,57 +68,6 @@ namespace Blog.Common.Web.Tests.Attributes
             var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
 
             var attribute = new BlogApiAuthorizationAttribute();
-            attribute.OnAuthentication(httpAuthenticationContext);
-
-            Assert.IsNotNull(httpAuthenticationContext.ErrorResult);
-        }
-
-        [Test]
-        [ExpectedException(typeof(BlogException))]
-        public void ShouldThrowExceptionWhenSessionLookupFails()
-        {
-            _principal.SetupGet(x => x.Identity.IsAuthenticated).Returns(true);
-            _principal.SetupGet(x => x.Identity.Name).Returns("foo");
-            var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
-
-            var session = new Mock<ISessionResource>();
-            session.Setup(a => a.GetByUser(It.IsAny<string>())).Throws(new BlogException());
-            var errorSignaler = new Mock<IErrorSignaler>();
-            errorSignaler.Setup(a => a.SignalFromCurrentContext(It.IsAny<Exception>()));
-
-            var attribute = new BlogApiAuthorizationAttribute { Session = session.Object, ErrorSignaler = errorSignaler.Object };
-            attribute.OnAuthentication(httpAuthenticationContext);
-
-            Assert.Throws<BlogException>(() => attribute.OnAuthentication(httpAuthenticationContext));
-        }
-
-        [Test]
-        public void ShouldReturnUnauthorizedWhenSessionLookupFoundNoRecords()
-        {
-            _principal.SetupGet(x => x.Identity.IsAuthenticated).Returns(true);
-            _principal.SetupGet(x => x.Identity.Name).Returns("foo");
-            var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
-
-            var session = new Mock<ISessionResource>();
-            session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns(new Session { Error = new Error() });
-
-            var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };
-            attribute.OnAuthentication(httpAuthenticationContext);
-
-            Assert.IsNotNull(httpAuthenticationContext.ErrorResult);
-        }
-
-        [Test]
-        public void ShouldReturnUnauthorizedWhenSessionLookupIsNull()
-        {
-            _principal.SetupGet(x => x.Identity.IsAuthenticated).Returns(true);
-            _principal.SetupGet(x => x.Identity.Name).Returns("foo");
-            var httpAuthenticationContext = new HttpAuthenticationContext(_httpActionContext, _principal.Object);
-
-            var session = new Mock<ISessionResource>();
-            session.Setup(a => a.GetByUser(It.IsAny<string>())).Returns((Session)null);
-
-            var attribute = new BlogApiAuthorizationAttribute { Session = session.Object };
             attribute.OnAuthentication(httpAuthenticationContext);
 
             Assert.IsNotNull(httpAuthenticationContext.ErrorResult);

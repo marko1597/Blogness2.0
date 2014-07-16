@@ -114,7 +114,6 @@ namespace Blog.DataAccess.Database.Entities
         public DbSet<EducationType> EducationTypes { get; set; }
         public DbSet<Education> Education { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
-        public DbSet<Session> Sessions { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Album> Albums { get; set; }

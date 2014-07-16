@@ -13,7 +13,7 @@ namespace Blog.Common.Contracts
         [DataMember]
         public string UserName { get; set; }
 
-        public string Password { get; set; }
+        public string IdentityId { get; set; }
 
         [DataMember]
         public string FirstName { get; set; }

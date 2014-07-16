@@ -68,14 +68,12 @@
     <Compile Include="Wcf\Interfaces\IPostContentsResource.cs" />
     <Compile Include="Wcf\Interfaces\IPostLikesResource.cs" />
     <Compile Include="Wcf\Interfaces\IPostsResource.cs" />
-    <Compile Include="Wcf\Interfaces\ISessionResource.cs" />
     <Compile Include="Wcf\Interfaces\ITagsResource.cs" />
     <Compile Include="Wcf\Interfaces\IUsersResource.cs" />
     <Compile Include="Wcf\MediaResource.cs" />
     <Compile Include="Wcf\PostContentsResource.cs" />
     <Compile Include="Wcf\PostLikesResource.cs" />
     <Compile Include="Wcf\PostsResource.cs" />
-    <Compile Include="Wcf\SessionResource.cs" />
     <Compile Include="Wcf\TagsResource.cs" />
     <Compile Include="Wcf\UsersResource.cs" />
   </ItemGroup>

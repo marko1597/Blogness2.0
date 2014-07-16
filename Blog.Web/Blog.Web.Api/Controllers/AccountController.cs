@@ -7,7 +7,10 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using Blog.Common.Contracts;
 using Blog.Common.Identity;
+using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Models.Account;
 using Blog.Web.Api.Models.Account.Binding;
 using Blog.Web.Api.Results;
@@ -25,10 +28,12 @@ namespace Blog.Web.Api.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private BlogUserManager _userManager;
+        private readonly IUsersResource _usersResource;
         
-        public AccountController(BlogUserManager userManager)
+        public AccountController(BlogUserManager userManager, IUsersResource usersResource)
         {
             UserManager = userManager;
+            _usersResource = usersResource;
         }
 
         public BlogUserManager UserManager
@@ -288,7 +293,7 @@ namespace Blog.Web.Api.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
-        [Route("Register")]
+        [Route("Register"), EnableCors(origins: "*", headers: "*", methods: "*")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -299,7 +304,10 @@ namespace Blog.Web.Api.Controllers
             var user = new BlogUser { UserName = model.Username, Email = model.Email };
             var result = await UserManager.CreateAsync(user, model.Password);
 
-            return !result.Succeeded ? GetErrorResult(result) : Ok();
+            if (!result.Succeeded) return GetErrorResult(result);
+
+            var blogUser = await AddBlogUser(model);
+            return blogUser.Error != null ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/RegisterExternal
@@ -342,6 +350,22 @@ namespace Blog.Web.Api.Controllers
         }
 
         #region Helpers
+
+        private async Task<User> AddBlogUser(RegisterBindingModel model)
+        {
+            var identityUser = await UserManager.FindByNameAsync(model.Username);
+            var blogUser = _usersResource.Add(new User
+            {
+                UserName = model.Username,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                BirthDate = model.BirthDate,
+                IdentityId = identityUser.Id,
+                EmailAddress = model.Email
+            });
+
+            return blogUser;
+        }
 
         private IAuthenticationManager Authentication
         {

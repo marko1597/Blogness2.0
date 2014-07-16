@@ -90,7 +90,7 @@ namespace Blog.DataAccess.Seed
                 FirstName = "Jason",
                 LastName = "Magpantay",
                 UserName = "jamaness",
-                Password = "testtest1",
+                IdentityId = Guid.NewGuid().ToString(),
                 EmailAddress = "jason.magpantay@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)
             });
@@ -99,7 +99,7 @@ namespace Blog.DataAccess.Seed
                 FirstName = "Jason",
                 LastName = "Avel",
                 UserName = "jaavness",
-                Password = "testtest1",
+                IdentityId = Guid.NewGuid().ToString(),
                 EmailAddress = "jason.avel@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)
             });
@@ -108,7 +108,7 @@ namespace Blog.DataAccess.Seed
                 FirstName = "Avel",
                 LastName = "Magpantay",
                 UserName = "avmaness",
-                Password = "testtest1",
+                IdentityId = Guid.NewGuid().ToString(),
                 EmailAddress = "avel.magpantay@gmail.com",
                 BirthDate = DateTime.Now.AddYears(-25)
             });
@@ -342,10 +342,10 @@ namespace Blog.DataAccess.Seed
                             ModifiedDate = DateTime.Now,
                             AlbumId = albumId,
                             FileName = i + (i > 2 && i < 8 ? ".gif" : ".jpg"),
-                            MediaUrl = string.Format("https://{0}/blogapi/api/media/{1}", _localIpAddress, customName),
+                            MediaUrl = string.Format("https://{0}/api/media/{1}", _localIpAddress, customName),
                             MediaType = (i > 2 && i < 8 ? "image/gif" : "image/jpeg"),
                             MediaPath = mediaPath,
-                            ThumbnailUrl = string.Format("https://{0}/blogapi/api/media/{1}/thumb", _localIpAddress, customName),
+                            ThumbnailUrl = string.Format("https://{0}/api/media/{1}/thumb", _localIpAddress, customName),
                             ThumbnailPath = tnPath
                         });
 

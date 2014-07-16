@@ -9,14 +9,6 @@ namespace Blog.Services.Helpers.Wcf
     [ExcludeFromCodeCoverage]
     public class UsersResource : BaseResource, IUsersResource
     {
-        public User GetByCredentials(string username, string password)
-        {
-            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
-            {
-                return svc.Proxy.GetByCredentials(username, password);
-            }
-        }
-
         public User GetByUserName(string username)
         {
             using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))

@@ -1,5 +1,5 @@
-﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService",
-    function ($rootScope, postsHubService, postsService, userService) {
+﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService", "errorService",
+    function ($rootScope, postsHubService, postsService, userService, errorService) {
         var linkFn = function (scope, elem) {
             scope.postId = scope.data.PostId;
             scope.postLikes = scope.data.PostLikes;
@@ -31,7 +31,13 @@
             });
 
             scope.likePost = function () {
-                postsService.likePost(scope.data.PostId, scope.user.UserName);
+                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function () {
+                    // TODO: This should call the logger api
+                        console.log(scope.user.UserName + " liked post " + scope.data.PostId);
+                    },
+                function(err) {
+                    errorService.displayError(err);
+                });
             };
 
             scope.isUserLiked = function() {

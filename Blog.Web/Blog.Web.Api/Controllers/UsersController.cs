@@ -8,7 +8,6 @@ using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class UsersController : ApiController
     {
         private readonly IUsersResource _user;

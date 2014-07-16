@@ -189,7 +189,7 @@ namespace Blog.Logic.Core.Tests
                                 FirstName = "Jason",
                                 LastName = "Magpantay",
                                 UserName = "jama",
-                                Password = "testtest1",
+                                IdentityId = "testtest1",
                                 EmailAddress = "jason.magpantay@gmail.com",
                                 BirthDate = DateTime.Now.AddYears(-25),
                                 PictureId = 1,
@@ -202,7 +202,7 @@ namespace Blog.Logic.Core.Tests
                                 FirstName = "Jason",
                                 LastName = "Avel",
                                 UserName = "jaav",
-                                Password = "testtest1",
+                                IdentityId = "testtest1",
                                 EmailAddress = "jason.avel@gmail.com",
                                 BirthDate = DateTime.Now.AddYears(-25),
                                 PictureId = 2,
@@ -215,7 +215,7 @@ namespace Blog.Logic.Core.Tests
                                 FirstName = "Avel",
                                 LastName = "Magpantay",
                                 UserName = "avma",
-                                Password = "testtest1",
+                                IdentityId = "testtest1",
                                 EmailAddress = "avel.magpantay@gmail.com",
                                 BirthDate = DateTime.Now.AddYears(-25),
                                 PictureId = 3,
@@ -451,83 +451,12 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldGetUserByCredentials()
-        {
-            const string username = "jama";
-            const string password = "testtest1";
-            var users = _users;
-            users.ForEach(a => a.Hobbies =null);
-
-            _userRepository = new Mock<IUserRepository>();
-            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
-                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
-                .Returns(users);
-
-            _addressRepository = new Mock<IAddressRepository>();
-            _educationRepository = new Mock<IEducationRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
-                _educationRepository.Object, _mediaRepository.Object);
-
-            var user = _usersLogic.GetByCredentials(username, password);
-
-            Assert.NotNull(user);
-            Assert.IsNull(user.Address);
-            Assert.IsNull(user.Education);
-            Assert.IsNull(user.Hobbies);
-            Assert.IsNull(user.Picture);
-            Assert.IsNull(user.Background);
-            Assert.AreEqual(user.UserName, username);
-            Assert.AreEqual(user.Password, password);
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetUserByCredentialsFails()
-        {
-            _userRepository = new Mock<IUserRepository>();
-            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
-                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
-                .Throws(new Exception());
-
-            _addressRepository = new Mock<IAddressRepository>();
-            _educationRepository = new Mock<IEducationRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
-                _educationRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _usersLogic.GetByCredentials("foo", "bar"));
-        }
-
-        [Test]
-        public void ShouldErrorWhenGetByCredentialsHasNoResult()
-        {
-            _userRepository = new Mock<IUserRepository>();
-            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
-                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
-                .Returns(new List<User>());
-
-            _addressRepository = new Mock<IAddressRepository>();
-            _educationRepository = new Mock<IEducationRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
-                _educationRepository.Object, _mediaRepository.Object);
-
-            var user = _usersLogic.GetByCredentials("foo", "bar");
-
-            Assert.IsNotNull(user.Error);
-            Assert.AreEqual(user.Error.Id, (int)Constants.Error.InvalidCredentials);
-        }
-
-        [Test]
         public void ShouldAddUser()
         {
             var request = new Common.Contracts.User
                            {
                                UserName = "foo",
-                               Password = "fooBar12345!",
+                               IdentityId = "fooBar12345!",
                                FirstName = "foo",
                                LastName = "bar",
                                EmailAddress = "test@mgail.com",
@@ -536,7 +465,7 @@ namespace Blog.Logic.Core.Tests
             var result = new User
                            {
                                UserName = "foo",
-                               Password = "fooBar12345!",
+                               IdentityId = "fooBar12345!",
                                FirstName = "foo",
                                LastName = "bar",
                                EmailAddress = "test@gmail.com",
@@ -567,7 +496,7 @@ namespace Blog.Logic.Core.Tests
         {
             var request = new Common.Contracts.User
             {
-                Password = "fooBar12345!",
+                IdentityId = "fooBar12345!",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@mail.com",
@@ -590,39 +519,12 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenAddUserHasNoPassword()
-        {
-            var request = new Common.Contracts.User
-            {
-                UserName = "foo",
-                FirstName = "foo",
-                LastName = "bar",
-                EmailAddress = "test@mail.com",
-                BirthDate = DateTime.Now
-            };
-
-            _userRepository = new Mock<IUserRepository>();
-            _addressRepository = new Mock<IAddressRepository>();
-            _educationRepository = new Mock<IEducationRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
-                _educationRepository.Object, _mediaRepository.Object);
-
-            var user = _usersLogic.Add(request);
-
-            Assert.NotNull(user.Error);
-            Assert.AreEqual(user.Error.Id, (int)Constants.Error.ValidationError);
-            Assert.AreEqual(user.Error.Message, "Password cannot be empty");
-        }
-
-        [Test]
         public void ShouldErrorWhenAddUserHasNoFirstName()
         {
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "bar",
+                IdentityId = "bar",
                 LastName = "bar",
                 EmailAddress = "test@mail.com",
                 BirthDate = DateTime.Now
@@ -649,7 +551,7 @@ namespace Blog.Logic.Core.Tests
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "bar",
+                IdentityId = "bar",
                 FirstName = "foo",
                 EmailAddress = "test@mail.com",
                 BirthDate = DateTime.Now
@@ -676,7 +578,7 @@ namespace Blog.Logic.Core.Tests
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "bar",
+                IdentityId = "bar",
                 FirstName = "foo",
                 LastName = "bar",
                 BirthDate = DateTime.Now
@@ -698,12 +600,39 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldErrorWhenAddUserHasNoIdentityId()
+        {
+            var request = new Common.Contracts.User
+            {
+                UserName = "foo",
+                EmailAddress = "foo@mail.com",
+                FirstName = "foo",
+                LastName = "bar",
+                BirthDate = DateTime.Now
+            };
+
+            _userRepository = new Mock<IUserRepository>();
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.Add(request);
+
+            Assert.NotNull(user.Error);
+            Assert.AreEqual(user.Error.Id, (int)Constants.Error.ValidationError);
+            Assert.AreEqual(user.Error.Message, "Identity Id cannot be empty");
+        }
+
+        [Test]
         public void ShouldErrorWhenAddUserHasNoBirthdate()
         {
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "bar",
+                IdentityId = "bar",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@mail.com"
@@ -730,7 +659,7 @@ namespace Blog.Logic.Core.Tests
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "bar",
+                IdentityId = "bar",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test",
@@ -758,7 +687,7 @@ namespace Blog.Logic.Core.Tests
             var request = new Common.Contracts.User
             {
                 UserName = "jama",
-                Password = "bar",
+                IdentityId = "bar",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@gmail.com",
@@ -784,43 +713,12 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldErrorWhenAddUserWhenPasswordWeak()
-        {
-            var request = new Common.Contracts.User
-            {
-                UserName = "jama",
-                Password = "bar",
-                FirstName = "foo",
-                LastName = "bar",
-                EmailAddress = "test@gmail.com",
-                BirthDate = DateTime.Now
-            };
-
-            _userRepository = new Mock<IUserRepository>();
-            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false))
-                .Returns(new List<User>());
-
-            _addressRepository = new Mock<IAddressRepository>();
-            _educationRepository = new Mock<IEducationRepository>();
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
-                _educationRepository.Object, _mediaRepository.Object);
-
-            var user = _usersLogic.Add(request);
-
-            Assert.NotNull(user.Error);
-            Assert.AreEqual(user.Error.Id, (int)Constants.Error.ValidationError);
-            Assert.AreEqual(user.Error.Message, "Password is not too complex");
-        }
-
-        [Test]
         public void ShouldThrowExceptionWhenAddUserFails()
         {
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "fooBar12345!",
+                IdentityId = "fooBar12345!",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@mgail.com",
@@ -849,7 +747,7 @@ namespace Blog.Logic.Core.Tests
             var request = new Common.Contracts.User
             {
                 UserName = "foo",
-                Password = "fooBar12345!",
+                IdentityId = "fooBar12345!",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@mgail.com",
@@ -858,7 +756,7 @@ namespace Blog.Logic.Core.Tests
             var result = new User
             {
                 UserName = "foo",
-                Password = "fooBar12345!",
+                IdentityId = "fooBar12345!",
                 FirstName = "foo",
                 LastName = "bar",
                 EmailAddress = "test@gmail.com",

@@ -3,7 +3,7 @@
         <div id="post-{{post.Id}}" class="post-board content-item">
             <div class="header row" data-user-id="{{post.CreatedBy}}">
                 <div>
-                    <img ng-src="{{user.Picture.MediaUrl}}" />
+                    <img ng-src="{{post.User.Picture.MediaUrl}}" />
                 </div>
                 <div>
                     <h4>
@@ -31,8 +31,12 @@
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">
-                    <div class="content-image">
-                        <img ng-src="{{content.Media.MediaUrl}}" />
+                    <div class="content-image" ng-switch="getContentType(content.Media.MediaType)">
+                        <video-player ng-switch-when="video" media="content.Media"></video-player>
+                        <!--<video ng-switch-when="video">
+                            <source src="{{content.Media.MediaUrl}}" type="{{content.Media.MediaType}}">
+                        </video>-->
+                        <img ng-switch-default ng-src="{{content.Media.MediaUrl}}" />
                     </div>
                     <div class="captions">
                         <p>{{content.PostContentTitle}}</p>
@@ -41,7 +45,7 @@
                 </li>
             </ul>
         </div>
-
+        
         <div id="post-comments-{{post.Id}}" class="comments post-board content-item">
             <div comments-container user="user" postid="postId" poster="post.User.UserName"></div>
         </div>

@@ -8,7 +8,6 @@ using Blog.Common.Identity;
 using Blog.Common.Identity.Interfaces;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Authentication;
 using Blog.Common.Web.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
@@ -16,8 +15,6 @@ using Blog.Services.Helpers.Wcf;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.DataHandler;
 using SimpleInjector;
 
 namespace Blog.Web.Api
@@ -47,7 +44,6 @@ namespace Blog.Web.Api
             container.Register<ICommentLikesResource, CommentLikesResource>(Lifestyle.Singleton);
             container.Register<IPostsResource, PostsResource>(Lifestyle.Singleton);
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
-            container.Register<ISessionResource, SessionResource>(Lifestyle.Singleton);
             container.Register<IPostLikesResource, PostLikesResource>(Lifestyle.Singleton);
             container.Register<IPostContentsResource, PostContentsResource>(Lifestyle.Singleton);
             container.Register<IMediaResource, MediaResource>(Lifestyle.Singleton);

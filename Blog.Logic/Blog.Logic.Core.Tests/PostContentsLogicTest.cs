@@ -34,21 +34,24 @@ namespace Blog.Logic.Core.Tests
                              PostContentId = 1,
                              PostContentTitle = "Foo",
                              PostContentText = "Lorem Ipsum Dolor",
-                             PostId = 1
+                             PostId = 1,
+                             Media = new Media { MediaId = 1, MediaPath = string.Empty, ThumbnailPath = string.Empty }
                          },
                          new PostContent
                          {
                              PostContentId = 2,
                              PostContentTitle = "Bar",
                              PostContentText = "Lorem Ipsum Dolor",
-                             PostId = 1
+                             PostId = 1,
+                             Media = new Media { MediaId = 1, MediaPath = string.Empty, ThumbnailPath = string.Empty }
                          },
                          new PostContent
                          {
                              PostContentId = 3,
                              PostContentTitle = "Baz",
                              PostContentText = "Lorem Ipsum Dolor",
-                             PostId = 2
+                             PostId = 2,
+                             Media = new Media { MediaId = 1, MediaPath = string.Empty, ThumbnailPath = string.Empty }
                          }
                      };
 

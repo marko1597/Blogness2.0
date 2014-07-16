@@ -6,7 +6,6 @@ using System.Net.Mail;
 using Blog.Common.Contracts;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Extensions;
-using Blog.Common.Utils.Helpers;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core.Interfaces;
 using Blog.Logic.ObjectMapper;
@@ -38,25 +37,6 @@ namespace Blog.Logic.Core
             try
             {
                 return GetUser(null, userName);
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public User GetByCredentials(string username, string password)
-        {
-            try
-            {
-                var tUser = _userRepository.Find(a => a.UserName == username && a.Password == password, null, string.Empty).FirstOrDefault();
-
-                if (tUser != null)
-                {
-                    var user = UserMapper.ToDto(tUser);
-                    return user;
-                }
-                return new User().GenerateError<User>((int) Constants.Error.InvalidCredentials, "Invalid credentials");
             }
             catch (Exception ex)
             {
@@ -136,9 +116,9 @@ namespace Blog.Logic.Core
                 return new Error { Id = (int) Constants.Error.ValidationError,  Message = "Username cannot be empty" };
             }
 
-            if (string.IsNullOrEmpty(user.Password))
+            if (string.IsNullOrEmpty(user.IdentityId))
             {
-                return new Error { Id = (int)Constants.Error.ValidationError, Message = "Password cannot be empty" };
+                return new Error { Id = (int)Constants.Error.ValidationError, Message = "Identity Id cannot be empty" };
             }
 
             if (string.IsNullOrEmpty(user.FirstName))
@@ -172,9 +152,7 @@ namespace Blog.Logic.Core
                 return new Error { Id = (int)Constants.Error.ValidationError, Message = "Username already exists" };
             }
 
-            return (int) PasswordManager.CheckStrength(user.Password) > 2
-                ? null
-                : new Error {Id = (int) Constants.Error.ValidationError, Message = "Password is not too complex"};
+            return null;
         }
 
         private static Db.User PrepareUserForAdding(User user)

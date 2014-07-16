@@ -239,10 +239,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\RemoveLoginBindingModel.cs" />
+    <Compile Include="Models\Account\Binding\RemoveLoginBindingModel.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
-    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\CommentLikesController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -264,9 +263,6 @@
     </Compile>
     <Compile Include="Controllers\PostLikesController.cs" />
     <Compile Include="Controllers\PostsController.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Controllers\SessionController.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controllers\UsersController.cs">

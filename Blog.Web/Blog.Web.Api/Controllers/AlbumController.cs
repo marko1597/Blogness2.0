@@ -9,7 +9,6 @@ using Blog.Common.Utils;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class AlbumController : ApiController
     {
         private readonly IAlbumResource _service;

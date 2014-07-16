@@ -12,7 +12,6 @@ using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class CommentsController : ApiController
     {
         private readonly ICommentsResource _service;

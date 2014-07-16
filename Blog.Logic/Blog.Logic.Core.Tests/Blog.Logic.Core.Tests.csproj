@@ -77,7 +77,6 @@
     <Compile Include="PostContentsLogicTest.cs" />
     <Compile Include="PostLikesLogicTest.cs" />
     <Compile Include="PostsLogicTest.cs" />
-    <Compile Include="SessionLogicTest.cs" />
     <Compile Include="TagsLogicTest.cs" />
     <Compile Include="HobbyLogicTest.cs" />
     <Compile Include="UsersLogicTest.cs" />

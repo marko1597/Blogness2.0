@@ -1,4 +1,5 @@
-﻿@using System.Text
+﻿@using System.Configuration
+@using System.Text
 <!DOCTYPE html>
 <html ng-app="blog">
 <head>
@@ -66,6 +67,9 @@
     <link href="~/Content/plugins/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/plugins/isotope.css" rel="stylesheet" />
     <link href="~/Content/plugins/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+    
+    <!-- videogular themes -->
+    <link href="~/Content/plugins/videogular/themes/default/videogular.css" rel="stylesheet" />
 
     <script src="~/Scripts/plugins/modernizr-2.7.2.js"></script>
 
@@ -132,6 +136,14 @@
     <script src="~/Scripts/plugins/angular-strap.js"></script>
     <script src="~/Scripts/plugins/angular-strap.tpl.js"></script>
     <script src="~/Scripts/plugins/angular-tags-input.js"></script>
+    
+    <!-- angular js video player plugin -->
+    <script src="~/Scripts/plugins/videogular/videogular.js"></script>
+    <script src="~/Scripts/plugins/videogular/plugins/buffering.js"></script>
+    <script src="~/Scripts/plugins/videogular/plugins/controls.js"></script>
+    <script src="~/Scripts/plugins/videogular/plugins/ima-ads.js"></script>
+    <script src="~/Scripts/plugins/videogular/plugins/overlay-play.js"></script>
+    <script src="~/Scripts/plugins/videogular/plugins/poster.js"></script>
 
     <!-- blog main module -->
     <script src="~/Scripts/modules/app.js"></script>
@@ -156,6 +168,7 @@
     <script src="~/Scripts/modules/shared/directives/fileUploadThumbnail.js"></script>
     <script src="~/Scripts/modules/shared/directives/isotopeItemResize.js"></script>
     <script src="~/Scripts/modules/shared/directives/keypress.js"></script>
+    <script src="~/Scripts/modules/shared/directives/videoPlayer.js"></script>
     <script src="~/Scripts/modules/shared/directives/scrollTrigger.js"></script>
     <script src="~/Scripts/modules/shared/directives/ticker.js"></script>
 
@@ -223,20 +236,18 @@
 {
     public string GetHubUrl()
     {
-        return Request.ApplicationPath + "/signalr";
+        return GetBlogRoot() + "/signalr";
     }
 
     public string GetTemplatesPath()
     {
-        return Request.ApplicationPath + "/scripts/templates/";
+        return GetBlogRoot() + "/scripts/templates/";
     }
 
     public string GetBlogApi()
     {
         var sb = new StringBuilder();
-        sb.Append("https://");
-        sb.Append(Request.Headers["Host"]);
-        sb.Append("/blogapi/api/");
+        sb.Append(ConfigurationManager.AppSettings.Get("BlogApi"));
 
         return sb.ToString();
     }
@@ -246,7 +257,6 @@
         var sb = new StringBuilder();
         sb.Append("https://");
         sb.Append(Request.Headers["Host"]);
-        sb.Append("/blog");
 
         return sb.ToString();
     }

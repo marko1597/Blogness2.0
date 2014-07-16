@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService) {
+    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService) {
         $scope.canExpandComment = function () {
             if ($scope.comment.Comments == undefined || $scope.comment.Comments == null || $scope.comment.Comments.length < 1) {
                 return false;
@@ -58,7 +58,13 @@
         };
 
         $scope.likeComment = function () {
-            commentsService.likeComment($scope.comment.Id, $scope.user.UserName);
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {
+                // TODO: This should call the logger api
+                console.log(scope.user.UserName + " liked comment " + scope.comment.Id);
+            },
+                function (err) {
+                    errorService.displayError(err);
+                });;
         };
 
         $scope.$on("commentLikesUpdate", function (e, d) {
@@ -74,7 +80,7 @@
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "errorService"];
 
     return {
         restrict: 'EA',

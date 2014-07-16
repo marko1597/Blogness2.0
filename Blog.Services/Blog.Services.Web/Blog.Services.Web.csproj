@@ -91,7 +91,6 @@
     <Content Include="PostContentsService.svc" />
     <Content Include="PostLikesService.svc" />
     <Content Include="PostsService.svc" />
-    <Content Include="SessionService.svc" />
     <Content Include="TagsService.svc" />
     <Content Include="UsersService.svc" />
     <Content Include="Web.config" />

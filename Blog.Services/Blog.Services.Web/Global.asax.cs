@@ -34,7 +34,6 @@ namespace Blog.Services.Web
             container.Register<IPostContentsLogic, PostContentsLogic>();
             container.Register<IPostLikesLogic, PostLikesLogic>();
             container.Register<IPostsLogic, PostsLogic>();
-            container.Register<ISessionLogic, SessionLogic>();
             container.Register<ITagsLogic, TagsLogic>();
             container.Register<IUsersLogic, UsersLogic>();
 
@@ -50,7 +49,6 @@ namespace Blog.Services.Web
             container.Register<IPostContentRepository, PostContentRepository>();
             container.Register<IPostLikeRepository, PostLikeRepository>();
             container.Register<IPostRepository, PostRepository>();
-            container.Register<ISessionRepository, SessionRepository>();
             container.Register<ITagRepository, TagRepository>();
             container.Register<IUserRepository, UserRepository>();
 

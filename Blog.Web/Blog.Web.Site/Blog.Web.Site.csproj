@@ -319,6 +319,9 @@
     <Content Include="Content\plugins\angular-tags-input.css" />
     <Content Include="Content\plugins\font-awesome.css" />
     <Content Include="Content\plugins\isotope.css" />
+    <Content Include="Content\plugins\videogular\themes\default\fonts\icomoon.dev.svg" />
+    <Content Include="Content\plugins\videogular\themes\default\fonts\icomoon.svg" />
+    <Content Include="Content\plugins\videogular\themes\default\videogular.css" />
     <Content Include="Scripts\modules\comments\comments.js" />
     <Content Include="Scripts\modules\comments\directives\commentItem.js" />
     <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
@@ -331,6 +334,7 @@
     <Content Include="Scripts\modules\login\services\authenticationService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
+    <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
     <Content Include="Scripts\plugins\json2.js" />
     <Content Include="Scripts\plugins\json2.min.js" />
     <Content Include="Scripts\modules\posts\services\postsHubService.js" />
@@ -367,6 +371,9 @@
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="Blog.Web.Site.nuspec" />
+    <Content Include="Content\plugins\videogular\themes\default\fonts\icomoon.eot" />
+    <Content Include="Content\plugins\videogular\themes\default\fonts\icomoon.ttf" />
+    <Content Include="Content\plugins\videogular\themes\default\fonts\icomoon.woff" />
     <None Include="Scripts\plugins\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\modules\error\controllers\errorPageController.js" />
     <Content Include="Scripts\modules\error\directives\errorDisplay.js" />
@@ -585,6 +592,12 @@
     <Content Include="Scripts\plugins\jquery.signalR-2.0.3.js" />
     <Content Include="Scripts\plugins\jquery.signalR-2.0.3.min.js" />
     <Content Include="Scripts\plugins\stacktrace.js" />
+    <Content Include="Scripts\plugins\videogular\plugins\buffering.js" />
+    <Content Include="Scripts\plugins\videogular\plugins\controls.js" />
+    <Content Include="Scripts\plugins\videogular\plugins\ima-ads.js" />
+    <Content Include="Scripts\plugins\videogular\plugins\overlay-play.js" />
+    <Content Include="Scripts\plugins\videogular\plugins\poster.js" />
+    <Content Include="Scripts\plugins\videogular\videogular.js" />
     <Content Include="Scripts\templates\modifypost.html" />
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
@@ -693,6 +706,7 @@
     <Content Include="Scripts\templates\modules\posts\postListItemComment.html" />
     <Content Include="Scripts\templates\modules\posts\postLikes.html" />
     <Content Include="Scripts\templates\modules\shared\fileUpload.html" />
+    <Content Include="Scripts\templates\modules\shared\videoPlayer.html" />
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
     <Content Include="Scripts\templates\errorpage.html" />
     <Content Include="Scripts\templates\profile.html" />

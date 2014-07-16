@@ -68,7 +68,6 @@
     <Compile Include="Interfaces\IPostContentsService.cs" />
     <Compile Include="Interfaces\IPostLikesService.cs" />
     <Compile Include="Interfaces\IPostsService.cs" />
-    <Compile Include="Interfaces\ISessionService.cs" />
     <Compile Include="Interfaces\ITagsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="MediaService.cs" />
@@ -77,8 +76,6 @@
     <Compile Include="PostLikesService.cs" />
     <Compile Include="PostsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionRemoteService.cs" />
-    <Compile Include="SessionService.cs" />
     <Compile Include="TagsService.cs" />
     <Compile Include="UsersService.cs" />
   </ItemGroup>

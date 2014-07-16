@@ -5,7 +5,6 @@ using System.Web.Http.Filters;
 using System.Web.Http.Results;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Extensions.Elmah;
-using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.AuthenticationFilter;
 
 namespace Blog.Common.Web.Attributes
@@ -13,9 +12,6 @@ namespace Blog.Common.Web.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class BlogApiAuthorizationAttribute : AuthenticationFilterAttribute
     {
-        [Import]
-        public ISessionResource Session { get; set; }
-
         [Import]
         public IErrorSignaler ErrorSignaler { get; set; }
 
@@ -32,14 +28,7 @@ namespace Blog.Common.Web.Attributes
             try
             {
                 var user = context.Principal.Identity;
-
-                if (!user.IsAuthenticated)
-                {
-                    return false;
-                }
-
-                var session = Session.GetByUser(user.Name);
-                return session != null && session.Error == null;
+                return user.IsAuthenticated;
             }
             catch (Exception ex)
             {

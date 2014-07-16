@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
+using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class MediaController : ApiController
     {
         private readonly IMediaResource _media;
@@ -125,6 +125,37 @@ namespace Blog.Web.Api.Controllers
             return null;
         }
 
+        [HttpGet]
+        [Route("api/media/video")]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
+        public HttpResponseMessage GetVideo()
+        {
+            try
+            {
+                var media = new Media
+                            {
+                                Id = 1,
+                                AlbumId = 1,
+                                CreatedBy = 1,
+                                CustomName = Guid.NewGuid().ToString(),
+                                FileName = "foo.webm",
+                                MediaType = "video/webm",
+                                MediaPath = @"C:\Temp\",
+                                ThumbnailPath = @"C:\Temp\",
+                                CreatedDate = DateTime.Now,
+                                ModifiedBy = 1,
+                                ModifiedDate = DateTime.Now
+                            };
+
+                return CreateResponseMediaMessage(media, false);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+            return null;
+        }
+
         [HttpPost, Authorize]
         [Route("api/media")]
         public async Task<Media> Post([FromUri]string username, string album)
@@ -176,17 +207,34 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                var response = new HttpResponseMessage
+                string mediaPath;
+                MediaTypeHeaderValue mediaType;
+
+                if (isThumb)
                 {
-                    Content = isThumb ?
-                        new StreamContent(new FileStream(media.ThumbnailPath +
-                            _configurationHelper.GetAppSettings("ThumbnailPrefix") +
-                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg",
-                            FileMode.Open, FileAccess.Read)) :
-                        new StreamContent(new FileStream(media.MediaPath +
-                            media.FileName, FileMode.Open, FileAccess.Read))
-                };
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue(isThumb ? "image/jpeg" : media.MediaType);
+                    if (IsVideo(media.MediaType))
+                    {
+                        mediaPath = _configurationHelper.GetAppSettings("MediaLocation") +
+                                    "default_vid_thumbnail.jpg";
+                    }
+                    else
+                    {
+                        mediaPath = media.ThumbnailPath + _configurationHelper.GetAppSettings("ThumbnailPrefix") + 
+                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg";
+                    }
+                    mediaType = new MediaTypeHeaderValue("image/jpg");
+                }
+                else
+                {
+                    mediaPath = media.MediaPath + media.FileName;
+                    mediaType = new MediaTypeHeaderValue(media.MediaType);
+                }
+
+                var tMedia = new MediaStream(mediaPath);
+
+                var response = Request.CreateResponse();
+                response.Content = new PushStreamContent(
+                    (Action<Stream, HttpContent, TransportContext>)tMedia.WriteToStream, mediaType);
 
                 return response;
             }
@@ -195,6 +243,21 @@ namespace Blog.Web.Api.Controllers
                 _errorSignaler.SignalFromCurrentContext(ex);
             }
             return null;
+        }
+
+        private static bool IsVideo(string mimeType)
+        {
+            var supportedMedia = new List<string>
+            {
+                "video/avi",
+                "video/quicktime",
+                "video/mpeg",
+                "video/mp4",
+                "video/x-flv",
+                "video/webm"
+            };
+
+            return supportedMedia.Contains(mimeType);
         }
     }
 }

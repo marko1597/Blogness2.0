@@ -4,11 +4,11 @@ window.blogInit =
 {
     start: function () {
         var navigationItems = [
-            { text: "Home", icon: window.blogConfiguration.blogRoot + "/content/images/nav-home.png", href: "/blog#/" },
-            { text: "Profile", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/blog#/profile" },
-            { text: "Friends", icon: window.blogConfiguration.blogRoot + "/content/images/nav-friends.png", href: "/blog#/friends" },
-            { text: "Groups", icon: window.blogConfiguration.blogRoot + "/content/images/nav-groups.png", href: "/blog#/groups" },
-            { text: "Events", icon: window.blogConfiguration.blogRoot + "/content/images/nav-events.png", href: "/blog#/events" }
+            { text: "Home", icon: window.blogConfiguration.blogRoot + "/content/images/nav-home.png", href: "/#/" },
+            { text: "Profile", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/#/profile" },
+            { text: "Friends", icon: window.blogConfiguration.blogRoot + "/content/images/nav-friends.png", href: "/#/friends" },
+            { text: "Groups", icon: window.blogConfiguration.blogRoot + "/content/images/nav-groups.png", href: "/#/groups" },
+            { text: "Events", icon: window.blogConfiguration.blogRoot + "/content/images/nav-events.png", href: "/#/events" }
         ];
 
         var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");

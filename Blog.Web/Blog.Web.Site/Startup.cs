@@ -47,6 +47,8 @@ namespace Blog.Web.Site
                 // path.
                 map.RunSignalR(hubConfiguration);
             });
+
+            app.UseCors(CorsOptions.AllowAll);
         }
 
         /// <summary>

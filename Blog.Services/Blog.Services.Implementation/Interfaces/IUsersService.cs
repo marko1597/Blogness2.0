@@ -7,9 +7,6 @@ namespace Blog.Services.Implementation.Interfaces
     public interface IUsersService : IBaseService
     {
         [OperationContract]
-        User GetByCredentials(string username, string password);
-
-        [OperationContract]
         User GetByUserName(string username);
 
         [OperationContract]

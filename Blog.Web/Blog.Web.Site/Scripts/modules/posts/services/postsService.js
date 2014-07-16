@@ -4,6 +4,13 @@
             window.blogConfiguration.blogApi + "Posts/" :
             configProvider.getSettings().BlogApi + "Posts/";
 
+        var addPostViewData = function(post) {
+            post.DateDisplay = dateHelper.getDateDisplay(post.CreatedDate);
+            post.Url = "/#/post/" + post.Id;
+
+            return post;
+        };
+
         return {
             getPost: function (id) {
                 var deferred = $q.defer();
@@ -12,8 +19,8 @@
                     url: postsApi + id,
                     method: "GET"
                 }).success(function (response) {
-                    response.DateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
-                    deferred.resolve(response);
+                    var post = addPostViewData(response);
+                    deferred.resolve(post);
                 }).error(function (e) {
                     deferred.reject(e);
                 });
@@ -29,12 +36,10 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response.PostsByUser, function(p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
-                        p.Url = "/blog/#/post/" + p.Id;
+                        addPostViewData(p);
                     });
                     _.each(response.PostsByTags, function (p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
-                        p.Url = "/blog/#/post/" + p.Id;
+                        addPostViewData(p);
                     });
                     
                     deferred.resolve(response);
@@ -53,7 +58,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
+                        addPostViewData(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -71,7 +76,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
+                        addPostViewData(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -89,7 +94,7 @@
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
-                        p.DateDisplay = dateHelper.getDateDisplay(p.CreatedDate);
+                        addPostViewData(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {

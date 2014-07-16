@@ -305,6 +305,94 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldGetPostByIdWithUserPicture()
+        {
+            var post = new Post
+                       {
+                           PostId = 1,
+                           PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                           PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                           Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                           Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                           PostTitle = "Foo",
+                           PostMessage = "Lorem Ipsum Dolor",
+                           UserId = 1,
+                           User = new User {UserId = 1, UserName = "Lorem", PictureId = 1 }
+                       };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetPost(1);
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.User.Picture);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
+        public void ShouldGetPostByIdWithUserBackground()
+        {
+            var post = new Post
+            {
+                PostId = 1,
+                PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
+                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
+                Comments = _comments.Where(a => a.PostId == 1).ToList(),
+                Tags = _tags.Where(a => a.TagId != 3).ToList(),
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                UserId = 1,
+                User = new User { UserId = 1, UserName = "Lorem", BackgroundId = 1 }
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
+                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
+                .Returns(new List<Post> { post });
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _commentsRepository = new Mock<ICommentRepository>();
+            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
+                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _commentsRepository.Object, _mediaRepository.Object);
+
+            var result = _postsLogic.GetPost(1);
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.User.Background);
+            Assert.AreEqual(1, result.Id);
+        }
+
+        [Test]
         public void ShouldErrorWhenGetPostByIdFoundNoRecord()
         {
             _postRepository = new Mock<IPostRepository>();

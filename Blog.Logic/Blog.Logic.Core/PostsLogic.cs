@@ -39,6 +39,11 @@ namespace Blog.Logic.Core
                 }
 
                 var post = PostMapper.ToDto(db);
+                if (post.User.PictureId != null)
+                    post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());
+                if (post.User.BackgroundId != null)
+                    post.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.BackgroundId, false).FirstOrDefault());
+
                 var dbContents = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
                 var postContents = new List<PostContent>();
                 dbContents.ForEach(a =>

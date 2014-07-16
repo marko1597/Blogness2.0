@@ -163,6 +163,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Blog.Common\Blog.Common.Identity\Blog.Common.Identity.csproj">
+      <Project>{b715a80f-f971-4af5-b884-9c3bd2ea7bd8}</Project>
+      <Name>Blog.Common.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Blog.Common\Blog.Common.Utils\Blog.Common.Utils.csproj">
       <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
       <Name>Blog.Common.Utils</Name>

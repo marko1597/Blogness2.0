@@ -85,7 +85,6 @@
     <Compile Include="Entities\Objects\Post.cs" />
     <Compile Include="Entities\Objects\PostContent.cs" />
     <Compile Include="Entities\Objects\PostLike.cs" />
-    <Compile Include="Entities\Objects\Session.cs" />
     <Compile Include="Entities\Objects\Tag.cs" />
     <Compile Include="Entities\Objects\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,7 +107,6 @@
     <Compile Include="Repository\Interfaces\IPostContentRepository.cs" />
     <Compile Include="Repository\Interfaces\IPostLikeRepository.cs" />
     <Compile Include="Repository\Interfaces\IPostRepository.cs" />
-    <Compile Include="Repository\Interfaces\ISessionRepository.cs" />
     <Compile Include="Repository\Interfaces\ITagRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRepository.cs" />
     <Compile Include="Repository\AlbumRepository.cs" />
@@ -116,7 +114,6 @@
     <Compile Include="Repository\PostContentRepository.cs" />
     <Compile Include="Repository\PostLikeRepository.cs" />
     <Compile Include="Repository\PostRepository.cs" />
-    <Compile Include="Repository\SessionRepository.cs" />
     <Compile Include="Repository\TagRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>

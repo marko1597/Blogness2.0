@@ -9,7 +9,6 @@ using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class PostContentController : ApiController
     {
         private readonly IPostContentsResource _postContentsSvc;

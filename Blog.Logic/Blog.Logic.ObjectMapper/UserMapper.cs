@@ -21,7 +21,7 @@ namespace Blog.Logic.ObjectMapper
                 {
                     Id = user.UserId,
                     UserName = user.UserName,
-                    Password = user.Password,
+                    IdentityId = user.IdentityId,
                     BirthDate = user.BirthDate,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -57,7 +57,7 @@ namespace Blog.Logic.ObjectMapper
                 {
                     UserId = user.Id,
                     UserName = user.UserName,
-                    Password = user.Password,
+                    IdentityId = user.IdentityId,
                     BirthDate = user.BirthDate,
                     FirstName = user.FirstName,
                     LastName = user.LastName,

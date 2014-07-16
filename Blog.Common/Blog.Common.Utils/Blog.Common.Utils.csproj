@@ -82,6 +82,7 @@
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\PasswordManager.cs" />
     <Compile Include="Helpers\ServiceProxyHelper.cs" />
+    <Compile Include="Helpers\MediaStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />

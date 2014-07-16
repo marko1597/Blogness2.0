@@ -8,7 +8,6 @@ using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class TagsController : ApiController
     {
         private readonly ITagsResource _tag;

@@ -9,7 +9,6 @@ using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class EducationController : ApiController
     {
         private readonly IEducationResource _service;

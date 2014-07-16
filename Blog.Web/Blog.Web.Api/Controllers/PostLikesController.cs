@@ -11,7 +11,6 @@ using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class PostLikesController : ApiController
     {
         private readonly IPostLikesResource _service;

@@ -9,7 +9,6 @@ using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class HobbiesController : ApiController
     {
         private readonly IHobbyResource _service;

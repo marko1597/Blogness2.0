@@ -22,6 +22,17 @@
             });
         };
 
+        $scope.getContentType = function (content) {
+            if (content == undefined) return "image";
+
+            var contentType = content.split('/');
+            if (contentType[0] == "video") {
+                return "video";
+            } else {
+                return "image";
+            }
+        };
+
         $scope.getPostsList = function() {
             postsService.getPopularPosts().then(function(list) {
                 $scope.postsList = list;

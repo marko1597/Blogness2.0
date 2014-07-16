@@ -61,7 +61,6 @@
     <Compile Include="PostLikeMapper.cs" />
     <Compile Include="PostMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionMapper.cs" />
     <Compile Include="TagMapper.cs" />
     <Compile Include="UserMapper.cs" />
   </ItemGroup>

@@ -13,11 +13,6 @@ namespace Blog.Services.Implementation
             _usersLogic = usersLogic;
         }
 
-        public User GetByCredentials(string username, string password)
-        {
-            return _usersLogic.GetByCredentials(username, password);
-        }
-
         public User GetByUserName(string username)
         {
             return _usersLogic.GetByUserName(username);

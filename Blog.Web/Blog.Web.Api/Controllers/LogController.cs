@@ -7,7 +7,6 @@ using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api.Controllers
 {
-    [AllowCrossSiteApi]
     public class LogController : ApiController
     {
         private readonly IErrorSignaler _errorSignaler;

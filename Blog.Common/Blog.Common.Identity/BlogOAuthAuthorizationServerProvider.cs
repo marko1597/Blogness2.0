@@ -23,6 +23,8 @@ namespace Blog.Common.Identity
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
             var userManager = context.OwinContext.GetUserManager<BlogUserManager>();
             var user = await userManager.FindAsync(context.UserName, context.Password);
             

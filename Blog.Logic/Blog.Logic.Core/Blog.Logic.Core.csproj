@@ -79,7 +79,6 @@
     <Compile Include="Factory\PostContentsFactory.cs" />
     <Compile Include="Factory\PostLikesFactory.cs" />
     <Compile Include="Factory\PostsFactory.cs" />
-    <Compile Include="Factory\SessionFactory.cs" />
     <Compile Include="Factory\TagsFactory.cs" />
     <Compile Include="Factory\UsersFactory.cs" />
     <Compile Include="HobbyLogic.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Interfaces\IPostContentsLogic.cs" />
     <Compile Include="Interfaces\IPostLikesLogic.cs" />
     <Compile Include="Interfaces\IPostsLogic.cs" />
-    <Compile Include="Interfaces\ISessionLogic.cs" />
     <Compile Include="Interfaces\ITagsLogic.cs" />
     <Compile Include="Interfaces\IUsersLogic.cs" />
     <Compile Include="MediaLogic.cs" />
@@ -102,7 +100,6 @@
     <Compile Include="PostLikesLogic.cs" />
     <Compile Include="PostsLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SessionLogic.cs" />
     <Compile Include="TagsLogic.cs" />
     <Compile Include="UsersLogic.cs" />
   </ItemGroup>
