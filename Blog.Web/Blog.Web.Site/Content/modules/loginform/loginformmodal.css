@@ -1,0 +1,9 @@
+﻿@media(min-width: 992px) {
+    #login-form-modal > .modal-dialog {
+        width: 35%;
+    }
+}
+
+#login-form-modal > .modal-dialog > .modal-content > .modal-body {
+    padding: 0;
+}
