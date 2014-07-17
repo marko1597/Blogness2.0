@@ -2,7 +2,7 @@
 
 namespace Blog.Web.Site.Controllers
 {
-    public class AuthenticationController : Controller
+    public class AccountController : Controller
     {
         public ActionResult Index()
         {

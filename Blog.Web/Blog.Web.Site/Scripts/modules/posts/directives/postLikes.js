@@ -1,18 +1,22 @@
-﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService", "errorService",
-    function ($rootScope, postsHubService, postsService, userService, errorService) {
+﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService", "errorService", "localStorageService",
+    function ($rootScope, postsHubService, postsService, userService, errorService, localStorageService) {
         var linkFn = function (scope, elem) {
             scope.postId = scope.data.PostId;
             scope.postLikes = scope.data.PostLikes;
             scope.user = {};
+            scope.username = localStorageService.get("username");
+            scope.authData = localStorageService.get("authenticationData");
 
             scope.tooltip = {
                 "title": "Click to favorite this post.",
             };
 
-            scope.init = function() {
-                userService.getUserInfo().then(function(resp) {
-                    scope.user = resp;
-                });
+            scope.init = function () {
+                if (scope.username) {
+                    userService.getUserInfo(scope.username).then(function (resp) {
+                        scope.user = resp;
+                    });
+                }
             };
 
             scope.$on("postLikesUpdate", function (e, d) {
@@ -24,29 +28,35 @@
                 }
             });
 
-            scope.$on("viewedPostLoaded", function(e, d) {
+            scope.$on("viewedPostLoaded", function (e, d) {
                 scope.postId = d.PostId;
                 scope.postLikes = d.PostLikes;
                 scope.isUserLiked();
             });
 
             scope.likePost = function () {
-                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function () {
-                    // TODO: This should call the logger api
+                if (scope.authData) {
+                    postsService.likePost(scope.data.PostId, scope.user.UserName).then(function() {
+                        // TODO: This should call the logger api
                         console.log(scope.user.UserName + " liked post " + scope.data.PostId);
                     },
-                function(err) {
-                    errorService.displayError(err);
-                });
+                    function(err) {
+                        errorService.displayError(err);
+                    });
+                } else {
+                    $rootScope.$broadcast("launchLoginForm");
+                }
             };
 
-            scope.isUserLiked = function() {
+            scope.isUserLiked = function () {
                 var isLiked = false;
-                _.each(scope.postLikes, function(p) {
-                    if (p.UserId == scope.user.Id) {
-                        isLiked = true;
-                    }
-                });
+                if (scope.authData) {
+                    _.each(scope.postLikes, function(p) {
+                        if (p.UserId == scope.user.Id) {
+                            isLiked = true;
+                        }
+                    });
+                }
 
                 return isLiked ? "fa-star" : "fa-star-o";
             };

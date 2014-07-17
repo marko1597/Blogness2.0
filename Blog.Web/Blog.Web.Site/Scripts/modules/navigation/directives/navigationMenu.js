@@ -1,23 +1,49 @@
 ﻿ngNavigation.directive('navigationMenu', function () {
-    var ctrlFn = function ($scope, $rootScope, userService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, userService, configProvider, localStorageService) {
         $scope.navigationItems = configProvider.getNavigationItems();
         $scope.user = {};
         $scope.userFullName = "";
+        $scope.authData = localStorageService.get("authorizationData");
 
+        $scope.isLoggedIn = function() {
+            if ($scope.authData) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.launchLoginForm = function() {
+            $rootScope.$broadcast("launchLoginForm");
+        };
+       
         $scope.getUserInfo = function () {
-            userService.getUserInfo().then(function(resp) {
-                $scope.user = resp;
-                $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-            });
+            var username = localStorageService.get("username");
+            if (username) {
+                userService.getUserInfo(username).then(function (resp) {
+                    $scope.user = resp;
+                    $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+                });
+            }
         };
 
         $scope.toggleNavigation = function() {
             $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
-        $scope.getUserInfo();
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+            $scope.getUserInfo();
+        });
+
+        $scope.init = function() {
+            if ($scope.authData) {
+                $scope.getUserInfo();
+            }
+        };
+
+        $scope.init();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "userService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "userService", "configProvider", "localStorageService"];
 
     return {
         restrict: 'EA',

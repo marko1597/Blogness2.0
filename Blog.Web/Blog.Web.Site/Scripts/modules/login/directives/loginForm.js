@@ -3,6 +3,21 @@
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
+        $scope.errorMessage = "";
+
+        $scope.showErrorMessage = function() {
+            if ($scope.errorMessage == "") {
+                return false;
+            }
+            return true;
+        };
+
+        $scope.hasError = function () {
+            if ($scope.errorMessage == "") {
+                return "";
+            }
+            return "has-error";
+        };
 
         $scope.login = function () {
             blockUiService.blockIt({
@@ -20,14 +35,20 @@
                 if (response.error == undefined || response.error == null) {
                     localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
-                    $window.location.href = configProvider.getSettings().BlogRoot;
+
+                    if ($scope.modal == undefined) {
+                        $window.location.href = configProvider.getSettings().BlogRoot;
+                    } else {
+                        $rootScope.$broadcast("hideLoginForm");
+                        $rootScope.$broadcast("userLoggedIn");
+                    }
                 } else {
                     blockUiService.unblockIt();
-                    errorService.displayError({ Message: response.error_description });
+                    $scope.errorMessage = response.error_description;
                 }
             }, function (error) {
                 blockUiService.unblockIt();
-                errorService.displayError(error);
+                $scope.errorMessage = error.Message;
             });
         };
     };
@@ -35,7 +56,7 @@
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: { modal: '=' },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "login/loginform.html",
         controller: ctrlFn

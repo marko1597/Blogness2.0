@@ -1,11 +1,12 @@
 ﻿ngPosts.controller('postsViewController', ["$scope", "$location", "$routeParams", "postsService",
-    "postsHubService", "userService", "errorService", "blockUiService",
-    function ($scope, $location, $routeParams, postsService, postsHubService, userService, errorService, blockUiService) {
+    "postsHubService", "userService", "errorService", "blockUiService", "localStorageService",
+    function ($scope, $location, $routeParams, postsService, postsHubService, userService, errorService, blockUiService, localStorageService) {
         $scope.postId = parseInt($routeParams.postId);
         $scope.post = {};
         $scope.user = {};
         $scope.postsList = [];
         $scope.isBusy = false;
+        $scope.authData = localStorageService.get("authorizationData");
 
         $scope.init = function () {
             if ($scope.isBusy) {
@@ -13,13 +14,17 @@
             }
             $scope.isBusy = true;
 
-            userService.getUserInfo().then(function (user) {
-                $scope.user = user;
-                $scope.getViewedPost();
-            }, function (e) {
-                blockUiService.unblockIt();
-                errorService.displayErrorRedirect({ Message: e });
-            });
+            if ($scope.authData) {
+                var username = localStorageService.get("username");
+                userService.getUserInfo(username).then(function (user) {
+                    $scope.user = user;
+                }, function (e) {
+                    blockUiService.unblockIt();
+                    errorService.displayErrorRedirect({ Message: e });
+                });
+            }
+
+            $scope.getViewedPost();
         };
 
         $scope.getContentType = function (content) {

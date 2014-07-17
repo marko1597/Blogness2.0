@@ -1,5 +1,5 @@
-﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "loginService", "localStorageService",
-    function ($location, $rootScope, $window, configProvider, loginService, localStorageService) {
+﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "authenticationService", "localStorageService",
+    function ($location, $rootScope, $window, configProvider, authenticationService, localStorageService) {
         var error = {};
 
         var isAuthorized = function (d) {
@@ -10,39 +10,21 @@
             }
         };
 
-        var logoutUser = function() {
-            var username = localStorageService.get("username");
-            loginService.logout(username).then(function (resp) {
-                if (resp == null || resp == "") {
-                    loginService.logoutApi(username).then(function (apiResponse) {
-                        if (apiResponse === "true") {
-                            $window.location.href = configProvider.getSettings().BlogRoot + '/authentication';
-                        } else {
-                            $rootScope.$broadcast("displayError", apiResponse);
-                            $location.path("/error");
-                        }
-                    }, function (apiError) {
-                        $rootScope.$broadcast("displayError", apiError);
-                        $location.path("/error");
-                    });
-                } else {
-                    $rootScope.$broadcast("displayError", d);
-                    $location.path("/error");
-                }
+        var logoutUser = function () {
+            authenticationService.logout().then(function () {
+                $window.location.href = configProvider.getSettings().BlogRoot + '/account';
             }, function (e) {
                 $rootScope.$broadcast("displayError", e);
                 $location.path("/error");
             });
         };
-        
+
         return {
             displayError: function (d) {
                 $rootScope.$broadcast("displayError", d);
             },
 
             displayErrorRedirect: function (d) {
-                $rootScope.$broadcast("displayError", d);
-
                 if (isAuthorized(d)) {
                     $location.path("/error");
                 } else {
@@ -50,7 +32,7 @@
                 }
             },
 
-            highlightField : function() {
+            highlightField: function () {
                 return "field-error";
             },
 

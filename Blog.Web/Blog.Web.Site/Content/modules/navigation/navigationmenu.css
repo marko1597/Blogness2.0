@@ -14,17 +14,20 @@
         border-right: 1px solid #333;
     }
 
-    nav.navigation-menu h4 {
+    nav.navigation-menu .user-info {
         margin: 0;
-        padding: 3.5em 1em 1em 1em;
+        padding: 4.3em 1em 1em 1em;
         -webkit-text-shadow: 0 0 1px #000000;
         -webkit-text-shadow: 0 0 1px rgba(0,0,0,0.1);
         -ms-text-shadow: 0 0 1px #000000;
         text-shadow: 0 0 1px #000000;
         text-shadow: 0 0 1px rgba(0,0,0,0.1);
-        font-weight: 300;
-        font-size: 1.5em;
     }
+
+        nav.navigation-menu .user-info h4 {
+            font-weight: 300;
+            font-size: 1.5em;
+        }
 
     nav.navigation-menu ul {
         margin: 0;

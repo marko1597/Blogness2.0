@@ -18,19 +18,23 @@
 
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message != undefined || response.Message != null) {
-                    $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
+                    $rootScope.$broadcast("launchLoginForm");
                 } else {
                     $rootScope.$broadcast("displayError", { Message: JSON.stringify(response)});
                 }
             }, function () {
-                $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
+                $rootScope.$broadcast("launchLoginForm");
             });
+        };
+
+        $scope.showLoginForm = function() {
+            $rootScope.$broadcast("launchLoginForm");
         };
 
         $scope.logout = function() {
             authenticationService.logout();
-            $window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
-        },
+            $window.location.href = configProvider.getSettings().BlogRoot + "/account";
+        };
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {

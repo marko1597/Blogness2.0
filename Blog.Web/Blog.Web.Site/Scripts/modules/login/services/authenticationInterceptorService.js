@@ -1,5 +1,5 @@
-﻿ngLogin.factory('authenticationInterceptorService', ['$q', '$location', 'localStorageService', 
-    function ($q, $location, localStorageService) {
+﻿ngLogin.factory('authenticationInterceptorService', ['$q', '$rootScope', '$location', 'localStorageService', 
+    function ($q, $rootScope, $location, localStorageService) {
         return {
             request: function(config) {
                 config.headers = config.headers || {};
@@ -13,7 +13,7 @@
 
             responseError: function(rejection) {
                 if (rejection.status === 401) {
-                    //$location.path('/login');
+                    $rootScope.$broadcast("launchLoginForm", {});
                 }
                 return $q.reject(rejection);
             }

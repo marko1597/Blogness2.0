@@ -257,7 +257,7 @@
     <Compile Include="App_Start\SimpleInjectorDependencyResolver.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HubController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Global.asax.cs">
@@ -292,6 +292,7 @@
     <Content Include="Content\images\nav-friends.png" />
     <Content Include="Content\images\nav-home.png" />
     <Content Include="Content\images\nav-profile.png" />
+    <Content Include="Content\modules\accountpage.css" />
     <Content Include="Content\modules\comments\commentitem.css" />
     <Content Include="Content\modules\comments\commentsaddnew.css" />
     <Content Include="Content\modules\comments\commentscontainer.css" />
@@ -301,6 +302,7 @@
     <Content Include="Content\modules\error\errorDisplay.css" />
     <Content Include="Content\modules\header\headermenu.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
+    <Content Include="Content\modules\loginform\loginformmodal.css" />
     <Content Include="Content\modules\modifypost.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postcontents.css" />
@@ -330,11 +332,15 @@
     <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
     <Content Include="Scripts\modules\init.js" />
+    <Content Include="Scripts\modules\login\directives\loginFormModal.js" />
     <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
     <Content Include="Scripts\modules\login\services\authenticationService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
+    <Content Include="Scripts\plugins\jquery.blockui.min.js">
+      <DependentUpon>jquery.blockui.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\plugins\json2.js" />
     <Content Include="Scripts\plugins\json2.min.js" />
     <Content Include="Scripts\modules\posts\services\postsHubService.js" />
@@ -696,6 +702,7 @@
     <Content Include="Scripts\templates\modules\error\errorDisplay.html" />
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
+    <Content Include="Scripts\templates\modules\login\loginFormModal.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
@@ -731,6 +738,9 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\plugins\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\plugins\jquery.blockui.min.js.map">
+      <DependentUpon>jquery.blockui.min.js</DependentUpon>
+    </Content>
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -760,7 +770,7 @@
     <Content Include="Scripts\plugins\video-js\font\vjs.eot" />
     <Content Include="Scripts\plugins\video-js\font\vjs.ttf" />
     <Content Include="Scripts\plugins\video-js\font\vjs.woff" />
-    <Content Include="Views\Authentication\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">

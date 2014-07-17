@@ -3,12 +3,10 @@
     var user = null;
 
     return {
-        getUserInfo: function () {
+        getUserInfo: function (username) {
             var deferred = $q.defer();
 
             if (user == null) {
-                var username = localStorageService.get("username");
-
                 $http({
                     url: userApi + "/" + username,
                     method: "GET"
