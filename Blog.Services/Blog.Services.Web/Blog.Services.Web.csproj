@@ -51,13 +51,13 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="SimpleInjector">
-      <HintPath>..\..\packages\SimpleInjector.2.5.0\lib\net45\SimpleInjector.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.2.5.2\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector.Diagnostics">
-      <HintPath>..\..\packages\SimpleInjector.2.5.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.2.5.2\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector.Integration.Wcf">
-      <HintPath>..\..\packages\SimpleInjector.Integration.Wcf.2.5.1\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Wcf.2.5.2\lib\net40\SimpleInjector.Integration.Wcf.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.ServiceModel.Activation" />

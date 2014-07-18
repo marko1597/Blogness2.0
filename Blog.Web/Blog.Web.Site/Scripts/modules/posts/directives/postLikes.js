@@ -44,7 +44,7 @@
                         errorService.displayError(err);
                     });
                 } else {
-                    $rootScope.$broadcast("launchLoginForm");
+                    $rootScope.$broadcast("launchLoginForm", { canClose: true });
                 }
             };
 

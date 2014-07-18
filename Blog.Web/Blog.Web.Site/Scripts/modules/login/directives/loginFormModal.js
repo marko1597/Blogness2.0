@@ -7,11 +7,18 @@
             backdrop: 'static'
         });
 
-        $rootScope.$on("launchLoginForm", function () {
+        $rootScope.$on("launchLoginForm", function (ev, data) {
+            if (data.canClose) {
+                $scope.loginModal.$options.keyboard = true;
+                $scope.loginModal.$options.backdrop = true;
+            } else {
+                $scope.loginModal.$options.keyboard = false;
+                $scope.loginModal.$options.backdrop = 'static';
+            }
             $scope.loginModal.$promise.then($scope.loginModal.show);
         });
 
-        $rootScope.$on("hideLoginForm", function() {
+        $rootScope.$on("hideLoginForm", function () {
             $scope.loginModal.hide();
         });
     };

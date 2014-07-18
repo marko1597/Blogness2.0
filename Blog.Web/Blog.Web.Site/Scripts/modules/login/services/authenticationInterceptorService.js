@@ -13,7 +13,7 @@
 
             responseError: function(rejection) {
                 if (rejection.status === 401) {
-                    $rootScope.$broadcast("launchLoginForm", {});
+                    $rootScope.$broadcast("launchLoginForm", { canClose: true });
                 }
                 return $q.reject(rejection);
             }

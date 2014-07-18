@@ -18,17 +18,17 @@
 
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message != undefined || response.Message != null) {
-                    $rootScope.$broadcast("launchLoginForm");
+                    $rootScope.$broadcast("launchLoginForm", { canClose: true });
                 } else {
                     $rootScope.$broadcast("displayError", { Message: JSON.stringify(response)});
                 }
             }, function () {
-                $rootScope.$broadcast("launchLoginForm");
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
             });
         };
 
         $scope.showLoginForm = function() {
-            $rootScope.$broadcast("launchLoginForm");
+            $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
 
         $scope.logout = function() {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Web.Http;
@@ -7,9 +6,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
-using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Extensions.Elmah;
 using Moq;
 using NUnit.Framework;
 

@@ -13,7 +13,7 @@
         };
 
         $scope.launchLoginForm = function() {
-            $rootScope.$broadcast("launchLoginForm");
+            $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
        
         $scope.getUserInfo = function () {
