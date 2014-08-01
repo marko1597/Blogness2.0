@@ -304,6 +304,7 @@
     <Content Include="Content\modules\header\headermenu.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\loginform\loginformmodal.css" />
+    <Content Include="Content\modules\loginform\registerform.css" />
     <Content Include="Content\modules\modifypost.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postcontents.css" />
@@ -336,6 +337,7 @@
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
     <Content Include="Scripts\modules\init.js" />
     <Content Include="Scripts\modules\login\directives\loginFormModal.js" />
+    <Content Include="Scripts\modules\login\directives\registerForm.js" />
     <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
     <Content Include="Scripts\modules\login\services\authenticationService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
@@ -709,6 +711,7 @@
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\login\loginFormModal.html" />
+    <Content Include="Scripts\templates\modules\login\registerForm.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />

@@ -1,0 +1,47 @@
+﻿<form name="register-form" class="login-form register" action="" method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Fill out the form below to register to Bloggity.</h3>
+        </div>
+        <div class="panel-body">
+            <div class="content">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="error-message" ng-show="showErrorMessage()">{{errorMessage}}</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="username" type="text" class="input" ng-class="hasError()" placeholder="Username" ng-model="username" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="password" type="password" class="input" ng-class="hasError()" placeholder="Password" ng-model="password" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="confirmpassword" type="password" class="input" ng-class="hasError()" placeholder="Confirm Password" ng-model="confirmPassword" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="firstname" type="text" class="input" ng-class="hasError()" placeholder="First Name" ng-model="firstName" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="lastname" type="text" class="input" ng-class="hasError()" placeholder="Last Name" ng-model="lastName" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="emailaddress" type="text" class="input" ng-class="hasError()" placeholder="Email" ng-model="emailAddress" ng-enter="register()" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="birthdate" type="text" class="input" ng-class="hasError()" placeholder="Birthdate" ng-model="birthDate" ng-enter="register()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="footer">
+                <input type="button" name="register" value="Back to login" />
+            </div>
+        </div>
+    </div>
+</form>

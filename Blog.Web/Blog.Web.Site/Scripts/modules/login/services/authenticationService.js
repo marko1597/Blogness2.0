@@ -9,20 +9,15 @@
         };
 
         return {
-            saveRegistration: function (username, password, confirmPassword) {
+            saveRegistration: function (registerInfo) {
                 this.logout();
 
                 var deferred = $q.defer();
-                var userDetails = {
-                    Username: username,
-                    Password: password,
-                    ConfirmPassword: confirmPassword
-                };
 
                 $http({
                     url: authenticationApi + "register",
                     method: "POST",
-                    data: userDetails
+                    data: registerInfo
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function () {
