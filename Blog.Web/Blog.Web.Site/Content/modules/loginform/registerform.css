@@ -1,3 +1,14 @@
-﻿.register-form {
-    
+﻿.login-form.register .content {
+    padding: 0;
 }
+
+.login-form.register .panel {
+    border: 0;
+}
+
+    .login-form.register .panel .panel-heading {
+        color: #f8f8f8;
+        background: #4c4c4c;
+        border-color: #333;
+        border-radius: 0;
+    }

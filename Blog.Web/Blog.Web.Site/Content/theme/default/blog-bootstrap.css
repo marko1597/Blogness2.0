@@ -5826,7 +5826,7 @@ a.list-group-item-danger {
 }
 
 .panel {
-    margin-bottom: 20px;
+    margin-bottom: 0;
     background-color: #ffffff;
     border: 1px solid transparent;
     border-radius: 0px;

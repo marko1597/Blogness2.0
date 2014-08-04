@@ -38,10 +38,12 @@
         .login-form .content .error-message {
             color: #d9534f;
             font-size: 1em;
+            margin: 5px 0 0;
         }
 
         .login-form .content .input {
             width: 100%;
+            min-width: 100%;
             padding: 15px 25px;
             font-weight: 400;
             font-size: 1em;
@@ -56,6 +58,46 @@
                 background: #d9534f;
                 color: #fff;
             }
+
+                .login-form .content .input.has-error::-webkit-input-placeholder { /* WebKit browsers */
+                    color: #fff;
+                }
+
+                .login-form .content .input.has-error:hover::-webkit-input-placeholder,
+                .login-form .content .input.has-error:focus::-webkit-input-placeholder { /* WebKit browsers */
+                    color: #333;
+                }
+
+                .login-form .content .input.has-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color: #fff;
+                    opacity: 1;
+                }
+
+                .login-form .content .input.has-error:hover:-moz-placeholder,
+                .login-form .content .input.has-error:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+                    color: #333;
+                    opacity: 1;
+                }
+
+                .login-form .content .input.has-error::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color: #fff;
+                    opacity: 1;
+                }
+
+                .login-form .content .input.has-error:hover::-moz-placeholder,
+                .login-form .content .input.has-error:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+                    color: #333;
+                    opacity: 1;
+                }
+
+                .login-form .content .input.has-error:-ms-input-placeholder { /* Internet Explorer 10+ */
+                    color: #fff;
+                }
+
+                .login-form .content .input.has-error:hover:-ms-input-placeholder,
+                .login-form .content .input.has-error:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+                    color: #333;
+                }
 
             .login-form .content .input:hover {
                 background: #ddd;
@@ -72,7 +114,7 @@
             font-size: .827em;
             margin-left: 5px;
             position: relative;
-			top: -3px;
+            top: -3px;
         }
 
 .user-icon, .pass-icon {
@@ -146,7 +188,8 @@
             box-shadow: inset 0 1px 6px hsla(0, 0%, 100%, 0.75);
         }
 
-    .login-form .footer .register {
+    .login-form .footer .register,
+    .login-form .footer .back {
         font-family: "Canter-Bold";
         display: block;
         float: right;

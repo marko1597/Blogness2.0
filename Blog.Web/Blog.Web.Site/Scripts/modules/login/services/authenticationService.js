@@ -20,9 +20,11 @@
                     data: registerInfo
                 }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function () {
-                    deferred.reject({ Message: "Error authenticating in the API!" });
+                }).error(function (err) {
+                    deferred.reject(err);
                 });
+
+                return deferred.promise;
             },
 
             getUserInfo: function () {

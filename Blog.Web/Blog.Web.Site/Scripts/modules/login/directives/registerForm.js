@@ -5,9 +5,9 @@
         $scope.confirmPassword = "";
         $scope.firstName = "";
         $scope.lastName = "";
-        $scope.emailAddress = "";
+        $scope.email = "";
         $scope.birthDate = "";
-        $scope.errorMessage = "";
+        $scope.errors = [];
         
         $scope.register = function () {
             blockUiService.blockIt({
@@ -27,7 +27,7 @@
                 ConfirmPassword: $scope.confirmPassword,
                 FirstName: $scope.firstName,
                 LastName: $scope.lastName,
-                EmailAddress: $scope.emailAddress,
+                Email: $scope.email,
                 BirthDate: $scope.birthDate
             };
 
@@ -47,17 +47,52 @@
                     $scope.errorMessage = response.error_description;
                 }
             }, function (error) {
+                for (var key in error.ModelState) {
+                    var errorItem = {
+                        field: key.split('.')[1].toLowerCase(),
+                        message: error.ModelState[key][0]
+                    };
+                    $scope.errors.push(errorItem);
+                }
+
                 blockUiService.unblockIt();
-                $scope.errorMessage = error.Message;
             });
+        };
+
+        $scope.hasError = function (name) {
+            var classStr = "";
+
+            _.each($scope.errors, function(e) {
+                if (e.field == name) {
+                    classStr = "has-error";
+                    $(".login-form.register").find(".content input[name='" + e.field + "']").prev('p').text(e.message);
+                }
+            });
+
+            return classStr;
+        };
+
+        $scope.isModal = function () {
+            if ($scope.modal == undefined) {
+                return false;
+            } else {
+                return $scope.modal ? true : false;
+            }
         };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService", "blockUiService"];
+
+    var linkFn = function (scope, elem) {
+        scope.showLoginForm = function () {
+            $(elem).closest(".modal-body").removeClass("hover");
+        };
+    };
 
     return {
         restrict: 'EA',
         scope: { modal: '=' },
         replace: true,
+        link: linkFn,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "login/registerform.html",
         controller: ctrlFn
     };

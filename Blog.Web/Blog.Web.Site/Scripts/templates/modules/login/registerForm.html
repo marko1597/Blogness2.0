@@ -7,40 +7,44 @@
             <div class="content">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <label class="error-message" ng-show="showErrorMessage()">{{errorMessage}}</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="username" type="text" class="input" ng-class="hasError()" placeholder="Username" ng-model="username" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="username" type="text" class="input" ng-class="hasError('username')" placeholder="Username" ng-model="username" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="password" type="password" class="input" ng-class="hasError()" placeholder="Password" ng-model="password" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="password" type="password" class="input" ng-class="hasError('password')" placeholder="Password" ng-model="password" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="confirmpassword" type="password" class="input" ng-class="hasError()" placeholder="Confirm Password" ng-model="confirmPassword" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="confirmpassword" type="password" class="input" ng-class="hasError('confirmpassword')" placeholder="Confirm Password" ng-model="confirmPassword" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="firstname" type="text" class="input" ng-class="hasError()" placeholder="First Name" ng-model="firstName" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="firstname" type="text" class="input" ng-class="hasError('firstname')" placeholder="First Name" ng-model="firstName" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="lastname" type="text" class="input" ng-class="hasError()" placeholder="Last Name" ng-model="lastName" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="lastname" type="text" class="input" ng-class="hasError('lastname')" placeholder="Last Name" ng-model="lastName" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="emailaddress" type="text" class="input" ng-class="hasError()" placeholder="Email" ng-model="emailAddress" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="email" type="text" class="input" ng-class="hasError('email')" placeholder="Email" ng-model="email" ng-enter="register()" />
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <input name="birthdate" type="text" class="input" ng-class="hasError()" placeholder="Birthdate" ng-model="birthDate" ng-enter="register()" />
+                        <p class="error-message"></p>
+                        <input name="birthdate" type="text" class="input" ng-class="hasError('birthdate')" placeholder="Birthdate"
+                               ng-model="birthDate" ng-enter="register()" bs-datepicker data-placement="top" data-iconLeft="fa fa-calendar" data-autoclose="true" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" ng-show="isModal()">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="footer">
-                <input type="button" name="register" value="Back to login" />
+                <input type="button" name="confirm" class="button" value="Register" ng-click="register()" />
+                <input type="button" name="backToLogin" class="back" value="Back to login" ng-click="showLoginForm()" />
             </div>
         </div>
     </div>

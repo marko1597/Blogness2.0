@@ -36,7 +36,7 @@
                     localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
 
-                    if ($scope.modal == undefined) {
+                    if (!$scope.isModal) {
                         $window.location.href = configProvider.getSettings().BlogRoot;
                     } else {
                         $rootScope.$broadcast("hideLoginForm");
@@ -51,12 +51,27 @@
                 $scope.errorMessage = error.Message;
             });
         };
+
+        $scope.isModal = function() {
+            if ($scope.modal == undefined) {
+                return false;
+            } else {
+                return $scope.modal ? true : false;
+            }
+        };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService", "blockUiService"];
+
+    var linkFn = function(scope, elem) {
+        scope.showRegisterForm = function() {
+            $(elem).closest(".modal-body").addClass("hover");
+        };
+    };
 
     return {
         restrict: 'EA',
         scope: { modal: '=' },
+        link: linkFn,
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "login/loginform.html",
         controller: ctrlFn
