@@ -36,7 +36,7 @@
                     localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
 
-                    if (!$scope.isModal) {
+                    if (!$scope.isModal()) {
                         $window.location.href = configProvider.getSettings().BlogRoot;
                     } else {
                         $rootScope.$broadcast("hideLoginForm");

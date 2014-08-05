@@ -5,7 +5,7 @@
             scope.postLikes = scope.data.PostLikes;
             scope.user = {};
             scope.username = localStorageService.get("username");
-            scope.authData = localStorageService.get("authenticationData");
+            scope.authData = localStorageService.get("authorizationData");
 
             scope.tooltip = {
                 "title": "Click to favorite this post.",

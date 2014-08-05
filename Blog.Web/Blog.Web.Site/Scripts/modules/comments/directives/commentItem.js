@@ -60,7 +60,7 @@
         $scope.likeComment = function () {
             commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {
                 // TODO: This should call the logger api
-                console.log(scope.user.UserName + " liked comment " + scope.comment.Id);
+                console.log($scope.user.UserName + " liked comment " + $scope.comment.Id);
             },
                 function (err) {
                     errorService.displayError(err);
