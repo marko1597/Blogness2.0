@@ -52,6 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Utils.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57EEC164-D018-4634-8394-37C848028310}"
 	ProjectSection(SolutionItems) = preProject
+		iisInstallationScript.ps1 = iisInstallationScript.ps1
 		mapIdentityUsersToBlogUsers.sql = mapIdentityUsersToBlogUsers.sql
 	EndProjectSection
 EndProject
