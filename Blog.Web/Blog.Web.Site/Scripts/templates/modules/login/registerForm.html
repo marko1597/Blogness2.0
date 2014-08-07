@@ -7,6 +7,9 @@
             <div class="content">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message" ng-show="showMainErrorMessage()">{{mainErrorMessage}}</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p class="error-message"></p>
                         <input name="username" type="text" class="input" ng-class="hasError('username')" placeholder="Username" ng-model="username" ng-enter="register()" />
                     </div>

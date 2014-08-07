@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Blog.Common.Contracts
 {
@@ -13,6 +14,7 @@ namespace Blog.Common.Contracts
         [DataMember]
         public string UserName { get; set; }
 
+        [DataMember, JsonIgnore]
         public string IdentityId { get; set; }
 
         [DataMember]

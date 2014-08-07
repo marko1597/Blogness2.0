@@ -307,6 +307,7 @@ namespace Blog.Web.Api.Controllers
             if (!result.Succeeded) return GetErrorResult(result);
 
             var blogUser = await AddBlogUser(model);
+
             return blogUser.Error != null ? GetErrorResult(result) : Ok();
         }
 

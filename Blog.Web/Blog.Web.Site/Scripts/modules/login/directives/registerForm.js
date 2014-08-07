@@ -8,7 +8,8 @@
         $scope.email = "";
         $scope.birthDate = "";
         $scope.errors = [];
-        
+        $scope.mainErrorMessage = "";
+
         $scope.register = function () {
             blockUiService.blockIt({
                 html: '<h4><img src="content/images/loader-girl.gif" height="128" /></h4>',
@@ -36,33 +37,49 @@
                     localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
 
-                    if ($scope.modal == undefined) {
-                        $window.location.href = configProvider.getSettings().BlogRoot;
-                    } else {
-                        $rootScope.$broadcast("hideLoginForm");
-                        $rootScope.$broadcast("userLoggedIn");
-                    }
+                    authenticationService.login($scope.username, $scope.password).then(function (loginResponse) {
+                        if (loginResponse.error == undefined || loginResponse.error == null) {
+                            localStorageService.add("username", $scope.username);
+                            blockUiService.unblockIt();
+
+                            if (!$scope.isModal()) {
+                                $window.location.href = configProvider.getSettings().BlogRoot;
+                            } else {
+                                $rootScope.$broadcast("hideLoginForm");
+                                $rootScope.$broadcast("userLoggedIn");
+                            }
+                        } else {
+                            blockUiService.unblockIt();
+                            $scope.errorMessage = response.error_description;
+                        }
+                    }, function(error) {
+                        blockUiService.unblockIt();
+                        $scope.errorMessage = error.Message;
+                    });
                 } else {
                     blockUiService.unblockIt();
-                    $scope.errorMessage = response.error_description;
+                    $scope.mainErrorMessage = error.Message;
                 }
             }, function (error) {
-                for (var key in error.ModelState) {
-                    var errorItem = {
-                        field: key.split('.')[1].toLowerCase(),
-                        message: error.ModelState[key][0]
-                    };
-                    $scope.errors.push(errorItem);
+                try {
+                    for (var key in error.ModelState) {
+                        var errorItem = {
+                            field: key == "" ? "username" : key.split('.')[1].toLowerCase(),
+                            message: error.ModelState[key][0]
+                        };
+                        $scope.errors.push(errorItem);
+                    }
+                    blockUiService.unblockIt();
+                } catch (ex) {
+                    blockUiService.unblockIt();
                 }
-
-                blockUiService.unblockIt();
             });
         };
 
         $scope.hasError = function (name) {
             var classStr = "";
 
-            _.each($scope.errors, function(e) {
+            _.each($scope.errors, function (e) {
                 if (e.field == name) {
                     classStr = "has-error";
                     $(".login-form.register").find(".content input[name='" + e.field + "']").prev('p').text(e.message);
@@ -70,6 +87,10 @@
             });
 
             return classStr;
+        };
+
+        $scope.mainErrorMessage = function() {
+            return !$scope.mainErrorMessage == "";
         };
 
         $scope.isModal = function () {
