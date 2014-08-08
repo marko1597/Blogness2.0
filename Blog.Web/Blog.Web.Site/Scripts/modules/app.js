@@ -20,6 +20,18 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
             
             $log.info("location changing from " + current + " to " + next);
         });
+
+        $scope.init = function() {
+            authenticationService.getUserInfo().then(function (response) {
+                if (response.Message != undefined || response.Message != null) {
+                    console.log("logged in");
+                }
+            }, function () {
+                authenticationService.logout();
+            });
+        };
+
+        $scope.init();
     }
 ]);
 

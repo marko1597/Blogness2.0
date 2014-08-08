@@ -2879,8 +2879,8 @@ input[type="button"].btn-block {
 
 @font-face {
     font-family: 'Glyphicons Halflings';
-    src: url('../app/fonts/glyphicons-halflings-regular.eot');
-    src: url('../app/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../app/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../app/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../app/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+    src: url('fonts/glyphicons-halflings-regular.eot');
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .glyphicon {
@@ -6467,7 +6467,7 @@ button.close {
     z-index: 1010;
     display: none;
     max-width: 276px;
-    padding: 1px;
+    padding: 0;
     text-align: left;
     background-color: #ffffff;
     background-clip: padding-box;
@@ -6501,9 +6501,10 @@ button.close {
     font-size: 14px;
     font-weight: normal;
     line-height: 18px;
-    background-color: #f7f7f7;
+    background-color: #4c4c4c;
+    color: #f8f8f8;
     border-bottom: 1px solid #ebebeb;
-    border-radius: 5px 5px 0 0;
+    border-radius: 0;
 }
 
 .popover-content {

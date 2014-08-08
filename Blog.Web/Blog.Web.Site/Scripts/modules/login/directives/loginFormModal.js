@@ -8,14 +8,20 @@
         });
 
         $rootScope.$on("launchLoginForm", function (ev, data) {
-            if (data.canClose) {
-                $scope.loginModal.$options.keyboard = true;
-                $scope.loginModal.$options.backdrop = true;
-            } else {
+            try {
+                if (data.canClose) {
+                    $scope.loginModal.$options.keyboard = true;
+                    $scope.loginModal.$options.backdrop = true;
+                } else {
+                    $scope.loginModal.$options.keyboard = false;
+                    $scope.loginModal.$options.backdrop = 'static';
+                }
+                $scope.loginModal.$promise.then($scope.loginModal.show);
+            } catch (ex) {
                 $scope.loginModal.$options.keyboard = false;
                 $scope.loginModal.$options.backdrop = 'static';
+                $scope.loginModal.$promise.then($scope.loginModal.show);
             }
-            $scope.loginModal.$promise.then($scope.loginModal.show);
         });
 
         $rootScope.$on("hideLoginForm", function () {

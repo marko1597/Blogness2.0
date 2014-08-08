@@ -1,9 +1,9 @@
-﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "authenticationService", "localStorageService",
-    function ($location, $rootScope, $window, configProvider, authenticationService, localStorageService) {
+﻿ngError.factory('errorService', ["$location", "$rootScope", "$window", "configProvider", "authenticationService",
+    function ($location, $rootScope, $window, configProvider, authenticationService) {
         var error = {};
 
         var isAuthorized = function (d) {
-            if (d.error == "invalid_grant") {
+            if (d.error == "invalid_grant" || d.Message == "Authorization has been denied for this request.") {
                 return false;
             } else {
                 return true;
@@ -21,7 +21,9 @@
 
         return {
             displayError: function (d) {
-                $rootScope.$broadcast("displayError", d);
+                if (isAuthorized(d)) {
+                    $rootScope.$broadcast("displayError", d);
+                }
             },
 
             displayErrorRedirect: function (d) {

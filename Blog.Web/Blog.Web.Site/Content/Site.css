@@ -352,6 +352,10 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+.blockUI.blockMsg > .alert {
+    margin: 0;
+}
+
 /* -------------------------------------
  * Bootstrap extensions
  * ------------------------------------- */

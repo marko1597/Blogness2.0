@@ -61,6 +61,7 @@
                 $http.post(authenticationApi + "login", credentials, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }).success(function (response) {
+                    localStorageService.add("username", username);
                     localStorageService.set('authorizationData', {
                          token: response.access_token, username: username
                     });
@@ -77,6 +78,7 @@
             },
 
             logout: function () {
+                localStorageService.remove('username');
                 localStorageService.remove('authorizationData');
                 authentication.isAuthenticated = false;
                 authentication.username = "";

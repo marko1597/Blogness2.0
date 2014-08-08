@@ -35,17 +35,13 @@
             });
 
             scope.likePost = function () {
-                if (scope.authData) {
-                    postsService.likePost(scope.data.PostId, scope.user.UserName).then(function() {
-                        // TODO: This should call the logger api
-                        console.log(scope.user.UserName + " liked post " + scope.data.PostId);
-                    },
-                    function(err) {
-                        errorService.displayError(err);
-                    });
-                } else {
-                    $rootScope.$broadcast("launchLoginForm", { canClose: true });
-                }
+                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function() {
+                    // TODO: This should call the logger api
+                    console.log(scope.user.UserName + " liked post " + scope.data.PostId);
+                },
+                function(err) {
+                    errorService.displayError(err);
+                });
             };
 
             scope.isUserLiked = function () {

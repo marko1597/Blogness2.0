@@ -32,7 +32,8 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="footer">
                 <input type="button" name="login" value="Login" class="button" ng-click="login()" />
-                <input type="button" name="register" value="Register" class="register" ng-show="isModal()" ng-click="showRegisterForm()" />
+                <input type="button" name="register" value="Register" class="register" ng-show="isModal()" ng-click="showRegisterForm()"
+                       data-placement="top" title="{{registerPopover.title}}" data-animation="am-flip-x" data-content="{{registerPopover.content}}" data-trigger="hover" bs-popover />
             </div>
         </div>
     </div>

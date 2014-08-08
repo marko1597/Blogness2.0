@@ -1,4 +1,5 @@
 ﻿<div data-comment-id="{{comment.Id}}" class="post-item-comment">
     <p><a href="{{user.url}}">{{user.name}}</a></p>
-    <p data-pause-trigger data-placement="top-right" data-animation="am-flip-x" bs-popover="popover">{{comment.CommentMessage}}</p>
+    <p data-pause-trigger data-placement="top" data-animation="am-flip-x" id="post-comment-{{comment.Id}}"
+           data-target=".post-item-comment[data-comment-id='{{comment.Id}}']" bs-popover="popover">{{comment.CommentMessage}}</p>
 </div>

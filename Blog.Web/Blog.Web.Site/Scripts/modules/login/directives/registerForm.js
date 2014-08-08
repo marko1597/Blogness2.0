@@ -1,5 +1,5 @@
 ﻿ngLogin.directive('registerForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, authenticationService, blockUiService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, configProvider, authenticationService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
         $scope.confirmPassword = "";
@@ -8,7 +8,11 @@
         $scope.email = "";
         $scope.birthDate = "";
         $scope.errors = [];
-        $scope.mainErrorMessage = "";
+        $scope.messageDisplay = {
+            show: false,
+            type: "alert-success",
+            message: ""
+        };
 
         $scope.register = function () {
             blockUiService.blockIt({
@@ -34,14 +38,19 @@
 
             authenticationService.saveRegistration(registrationInfo).then(function (response) {
                 if (response.error == undefined || response.error == null) {
-                    localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
+                    blockUiService.blockIt({
+                        html: '<div class="alert alert-success"><p>Hooray! You have successfully registered an account to Bloggity! Let\'s sign you in now.</p></div>',
+                        css: {
+                            border: 'none',
+                            padding: '0',
+                            backgroundColor: '#000',
+                            color: '#fff'
+                        }
+                    });
 
                     authenticationService.login($scope.username, $scope.password).then(function (loginResponse) {
                         if (loginResponse.error == undefined || loginResponse.error == null) {
-                            localStorageService.add("username", $scope.username);
-                            blockUiService.unblockIt();
-
                             if (!$scope.isModal()) {
                                 $window.location.href = configProvider.getSettings().BlogRoot;
                             } else {
@@ -49,16 +58,18 @@
                                 $rootScope.$broadcast("userLoggedIn");
                             }
                         } else {
-                            blockUiService.unblockIt();
-                            $scope.errorMessage = response.error_description;
+                            $scope.showMessageDisplay("alert-warning",
+                                "Oops! We've managed to create your account but there was a problem logging you in. (" + response.error_description + ")");
                         }
-                    }, function(error) {
                         blockUiService.unblockIt();
-                        $scope.errorMessage = error.Message;
+                    }, function (error) {
+                        $scope.showMessageDisplay("alert-warning",
+                                "Oops! We've managed to create your account but there was a problem logging you in. (" + error.Message + ")");
+                        blockUiService.unblockIt();
                     });
                 } else {
                     blockUiService.unblockIt();
-                    $scope.mainErrorMessage = error.Message;
+                    $scope.showMessageDisplay("alert-danger", error.Message);
                 }
             }, function (error) {
                 try {
@@ -89,8 +100,10 @@
             return classStr;
         };
 
-        $scope.mainErrorMessage = function() {
-            return !$scope.mainErrorMessage == "";
+        $scope.showMessageDisplay = function(type, message) {
+            $scope.messageDisplay.type = type;
+            $scope.messageDisplay.message = message;
+            $scope.messageDisplay.show = true;
         };
 
         $scope.isModal = function () {
@@ -101,7 +114,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService", "blockUiService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "configProvider", "authenticationService", "blockUiService"];
 
     var linkFn = function (scope, elem) {
         scope.showLoginForm = function () {

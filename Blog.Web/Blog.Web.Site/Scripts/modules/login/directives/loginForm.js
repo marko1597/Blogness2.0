@@ -4,6 +4,10 @@
         $scope.password = "";
         $scope.rememberMe = false;
         $scope.errorMessage = "";
+        $scope.registerPopover = {
+            title: "Don't have an account?",
+            content: "Create an account with Bloggity so you bloggity-bliggity-blog away!"
+        };
 
         $scope.showErrorMessage = function() {
             if ($scope.errorMessage == "") {
@@ -33,7 +37,6 @@
 
             authenticationService.login($scope.username, $scope.password).then(function (response) {
                 if (response.error == undefined || response.error == null) {
-                    localStorageService.add("username", $scope.username);
                     blockUiService.unblockIt();
 
                     if (!$scope.isModal()) {
