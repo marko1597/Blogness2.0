@@ -1,0 +1,35 @@
+﻿<div class="user-profile-details" data-user-id="{{user.Id}}">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message"></p>
+            <label ng-show="!isEditing">{{user.UserName}}</label>
+            <input name="username" type="text" class="input" ng-show="isEditing" 
+                   ng-class="hasError('username')" placeholder="Username" ng-model="user.UserName" ng-enter="register()" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message"></p>
+            <label ng-show="!isEditing">{{user.FirstName}}</label>
+            <input name="firstname" type="text" class="input" ng-show="isEditing"
+                   ng-class="hasError('firstname')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message"></p>
+            <label ng-show="!isEditing">{{user.LastName}}</label>
+            <input name="lastname" type="text" class="input" ng-show="isEditing"
+                   ng-class="hasError('lastname')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message"></p>
+            <label ng-show="!isEditing">{{user.EmailAddress}}</label>
+            <input name="email" type="text" class="input" ng-show="isEditing"
+                   ng-class="hasError('email')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message"></p>
+            <label ng-show="!isEditing">{{user.BirthDate}}</label>
+            <input name="birthdate" type="text" class="input" ng-show="isEditing"
+                   ng-class="hasError('birthdate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
+                   bs-datepicker data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
+        </div>
+    </div>
+</div>

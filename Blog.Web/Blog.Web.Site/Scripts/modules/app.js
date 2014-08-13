@@ -100,13 +100,13 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
             })
             .when('/profile', {
                 templateUrl: window.blogConfiguration.templatesUrl + 'profile.html',
-                controller: ''
+                controller: 'userProfileController'
             })
             .when('/post/new', {
                 templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
                 controller: 'postsModifyController'
             })
-            .when('/post/new/:postId', {
+            .when('/post/edit/:postId', {
                 templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
                 controller: 'postsModifyController'
             })

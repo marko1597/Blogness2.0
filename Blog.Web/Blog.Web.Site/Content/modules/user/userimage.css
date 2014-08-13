@@ -1,0 +1,58 @@
+﻿.user-image {
+    position: relative;
+}
+
+    .user-image .user-background-image {
+    }
+
+        .user-image .user-background-image > img {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            max-height: 350px;
+        }
+
+    .user-image .details {
+        height: 100%;
+        width: 30%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 40px;
+        background-color: #4c4c4c;
+        text-align: center;
+    }
+
+        .user-image .details > .user-profile-image {
+            text-align: center;
+        }
+
+            .user-image .details > .user-profile-image > img {
+                width: 120px;
+                height: 120px;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -webkit-background-size: cover;
+                background-size: cover;
+                border-radius: 60px;
+                -webkit-border-radius: 60px;
+                -moz-border-radius: 60px;
+                border: 3px solid #fff;
+            }
+
+        .user-image .details h4 {
+            color: #f8f8f8;
+        }
+
+        .user-image .details p > a {
+            color: #f8f8f8;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+@media (max-width: 767px) {
+    .user-image .details {
+        width: 100%;
+        height: auto;
+    }
+}

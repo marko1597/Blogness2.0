@@ -24,7 +24,7 @@
         };
 
         $scope.editPost = function() {
-            $location.path("/post/new/" + $scope.post.Id);
+            $location.path("/post/edit/" + $scope.post.Id);
         };
     };
     ctrlFn.$inject = ["$scope", "$location", "localStorageService"];

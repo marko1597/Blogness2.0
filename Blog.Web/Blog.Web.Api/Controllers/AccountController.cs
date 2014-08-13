@@ -294,7 +294,7 @@ namespace Blog.Web.Api.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register"), EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model, [FromUri]string trNsUm3GtEwsLe)
         {
             if (!ModelState.IsValid)
             {
@@ -306,9 +306,13 @@ namespace Blog.Web.Api.Controllers
 
             if (!result.Succeeded) return GetErrorResult(result);
 
-            var blogUser = await AddBlogUser(model);
-
-            return blogUser.Error != null ? GetErrorResult(result) : Ok();
+            if (string.IsNullOrEmpty(trNsUm3GtEwsLe))
+            {
+                var blogUser = await AddBlogUser(model);
+                return blogUser.Error != null ? GetErrorResult(result) : Ok();
+            }
+            
+            return Ok();
         }
 
         // POST api/Account/RegisterExternal
