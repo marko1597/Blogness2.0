@@ -8,18 +8,25 @@
                 localStorageService.get("username") : $rootScope.$stateParams.username;
 
         $scope.getUserInfo = function () {
-            if ($scope.username) {
-                userService.getUserInfo($scope.username).then(function (resp) {
-                    $scope.user = resp;
-                    $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            blockUiService.blockIt();
 
-                    //$rootScope.$state.go(($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined")
-                    //    ? 'ownprofile.details' : 'othersprofile.details');
-                }, function(err) {
+            if ($scope.username) {
+                userService.getUserInfo($scope.username).then(function (response) {
+                    if (response.Error == null) {
+                        $scope.user = response;
+                        $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+                        blockUiService.unblockIt();
+                    } else {
+                        errorService.displayErrorRedirect(response.Error);
+                        blockUiService.unblockIt();
+                    }
+                }, function (err) {
                     errorService.displayErrorRedirect(err);
+                    blockUiService.unblockIt();
                 });
             } else {
                 errorService.displayErrorRedirect({ Message: "User lookup failed. Sorry. :(" });
+                blockUiService.unblockIt();
             }
         };
 

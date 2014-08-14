@@ -1,6 +1,6 @@
 ﻿<nav class="navigation-menu navigation-effect" id="navigation-menu">
     <div class="user-info">
-        <h4 class="icon icon-lab" ng-show="isLoggedIn()">{{userFullName}}</h4>
+        <h4 class="icon icon-lab" ng-show="isLoggedIn()">{{user.FullName}}</h4>
         <div ng-show="!isLoggedIn()">
             <p>You are not logged in.</p>
             <button class="btn btn-primary" ng-click="launchLoginForm()">Click here to log in or register</button>

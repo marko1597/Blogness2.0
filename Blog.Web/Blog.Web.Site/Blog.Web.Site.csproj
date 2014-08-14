@@ -349,6 +349,9 @@
     <Content Include="Scripts\modules\login\directives\registerForm.js" />
     <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
     <Content Include="Scripts\modules\login\services\authenticationService.js" />
+    <Content Include="Scripts\modules\main\config\blogConfig.js" />
+    <Content Include="Scripts\modules\main\controllers\blogMainController.js" />
+    <Content Include="Scripts\modules\main\directives\windowResize.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
@@ -689,7 +692,7 @@
     <Content Include="Scripts\plugins\angular-tags-input.js" />
     <Content Include="Scripts\plugins\jquery.isotope.js" />
     <Content Include="Scripts\plugins\jquery.newsTicker.js" />
-    <Content Include="Scripts\modules\app.js" />
+    <Content Include="Scripts\modules\main\app.js" />
     <Content Include="Scripts\modules\config\config.js" />
     <Content Include="Scripts\modules\config\provider\configProvider.js" />
     <Content Include="Scripts\modules\header\directives\headerMenu.js" />

@@ -11,12 +11,16 @@
                 "title": "Click to favorite this post.",
             };
 
+            scope.$on("loggedInUserInfo", function (ev, data) {
+                scope.user = data;
+            });
+
             scope.init = function () {
-                if (scope.username) {
-                    userService.getUserInfo(scope.username).then(function (resp) {
-                        scope.user = resp;
-                    });
-                }
+                //if (scope.username) {
+                //    userService.getUserInfo(scope.username).then(function (resp) {
+                //        scope.user = resp;
+                //    });
+                //}
             };
 
             scope.$on("postLikesUpdate", function (e, d) {

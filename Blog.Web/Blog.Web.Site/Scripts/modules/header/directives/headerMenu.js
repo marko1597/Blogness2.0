@@ -5,7 +5,7 @@
 
         $scope.goAddNewPost = function () {
             $('#blog-header-collapsible').collapse("hide");
-            $location.path("/post/new");
+            $location.path("/post/create/new");
         };
 
         $scope.testDisplayError = function () {

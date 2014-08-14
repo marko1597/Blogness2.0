@@ -21,12 +21,14 @@
 
         return {
             displayError: function (d) {
+                error = d;
                 if (isAuthorized(d)) {
                     $rootScope.$broadcast("displayError", d);
                 }
             },
 
             displayErrorRedirect: function (d) {
+                error = d;
                 if (isAuthorized(d)) {
                     $location.path("/error");
                 } else {

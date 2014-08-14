@@ -203,6 +203,54 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
+        [Route("api/media/defaultprofilepicture")]
+        public HttpResponseMessage GetDefaultProfilePicture()
+        {
+            try
+            {
+                var mediaPath = _configurationHelper.GetAppSettings("MediaLocation") +
+                               "default-profile-picture.png";
+                var mediaType = new MediaTypeHeaderValue("image/png");
+                var tMedia = new MediaStream(mediaPath);
+
+                var response = Request.CreateResponse();
+                response.Content = new PushStreamContent(
+                    (Action<Stream, HttpContent, TransportContext>)tMedia.WriteToStream, mediaType);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+
+            return null;
+        }
+
+        [Route("api/media/defaultbackgroundpicture")]
+        public HttpResponseMessage GetDefaultBackgroundPicture()
+        {
+            try
+            {
+                var mediaPath = _configurationHelper.GetAppSettings("MediaLocation") +
+                               "default-background-picture.jpg";
+                var mediaType = new MediaTypeHeaderValue("image/jpg");
+                var tMedia = new MediaStream(mediaPath);
+
+                var response = Request.CreateResponse();
+                response.Content = new PushStreamContent(
+                    (Action<Stream, HttpContent, TransportContext>)tMedia.WriteToStream, mediaType);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+
+            return null;
+        }
+
         private HttpResponseMessage CreateResponseMediaMessage(Media media, bool isThumb)
         {
             try

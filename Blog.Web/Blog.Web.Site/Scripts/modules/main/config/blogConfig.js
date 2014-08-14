@@ -1,60 +1,4 @@
-﻿var blog = angular.module("blog", ["ngRoute", "ngAnimate", "mgcrea.ngStrap", "snap", "ngLogger",
-    "ngHeader", "ngLogin", "ngPosts", "ngComments", "ngError", "ngNavigation", "ngNavigation", "ngUser",
-    "ngTags", "ui.router"]);
-
-blog.run([
-    '$rootScope', '$state', '$stateParams',
-    function ($rootScope, $state, $stateParams) {
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-    }
-]);
-
-blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "authenticationService",
-    function ($scope, $location, $rootScope, $log, $window, authenticationService) {
-        $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            //$log.info("location changing from " + current + " to " + next);
-        });
-
-        $scope.init = function () {
-            authenticationService.getUserInfo().then(function (response) {
-                if (response.Message != undefined || response.Message != null) {
-                }
-            }, function () {
-                authenticationService.logout();
-            });
-        };
-
-        $scope.init();
-    }
-]);
-
-blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
-    return {
-        restrict: 'EA',
-        link: function postLink(scope) {
-            scope.onResizeFunction = function () {
-                scope.windowHeight = $window.innerHeight;
-                scope.windowWidth = $window.innerWidth;
-                $rootScope.$broadcast("windowSizeChanged", {
-                    height: scope.windowHeight,
-                    width: scope.windowWidth
-                });
-            };
-
-            scope.onResizeFunction();
-
-            angular.element($window).bind('resize', function () {
-                $timeout(function () {
-                    scope.onResizeFunction();
-                    scope.$apply();
-                }, 500);
-            });
-        }
-    };
-}]);
-
-blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
+﻿blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
     function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
         $provide.factory('httpInterceptor', ["$q", function ($q) {
             return {
@@ -105,7 +49,7 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
                 templateUrl: window.blogConfiguration.templatesUrl + 'events.html'
             })
             .state('newpost', {
-                url: "/posts/new",
+                url: "/post/create/new",
                 templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
                 controller: 'postsModifyController'
             })

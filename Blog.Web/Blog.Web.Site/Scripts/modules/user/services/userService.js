@@ -11,6 +11,12 @@
                     method: "GET"
                 }).success(function (response) {
                     response.BirthDate = dateHelper.getJsDate(response.BirthDate);
+
+                    if (response.FirstName == null) response.FirstName = "n/a";
+                    if (response.LastName == null) response.LastName = "n/a";
+                    if (response.Picture == null) response.Picture = { MediaUrl: configProvider.getDefaults().profilePictureUrl };
+                    if (response.Background == null) response.Background = { MediaUrl: configProvider.getDefaults().backgroundPictureUrl };
+
                     deferred.resolve(response);
                 }).error(function () {
                     deferred.reject("An error occurred!");

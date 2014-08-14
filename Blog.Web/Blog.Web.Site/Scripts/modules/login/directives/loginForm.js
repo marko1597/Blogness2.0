@@ -43,7 +43,7 @@
                         $window.location.href = configProvider.getSettings().BlogRoot;
                     } else {
                         $rootScope.$broadcast("hideLoginForm");
-                        $rootScope.$broadcast("userLoggedIn");
+                        $rootScope.$broadcast("userLoggedIn", { username: $scope.username });
                     }
                 } else {
                     blockUiService.unblockIt();

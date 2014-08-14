@@ -15,33 +15,18 @@
         $scope.launchLoginForm = function() {
             $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
-       
-        $scope.getUserInfo = function () {
-            var username = localStorageService.get("username");
-            if (username) {
-                userService.getUserInfo(username).then(function (resp) {
-                    $scope.user = resp;
-                    $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                });
-            }
-        };
-
+        
         $scope.toggleNavigation = function() {
             $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+        });
+        
         $rootScope.$on("userLoggedIn", function () {
             $scope.authData = localStorageService.get("authorizationData");
-            $scope.getUserInfo();
         });
-
-        $scope.init = function() {
-            if ($scope.authData) {
-                $scope.getUserInfo();
-            }
-        };
-
-        $scope.init();
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "userService", "configProvider", "localStorageService"];
 

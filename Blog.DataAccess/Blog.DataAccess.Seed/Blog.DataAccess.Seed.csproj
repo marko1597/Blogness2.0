@@ -501,6 +501,8 @@
     <Content Include="SampleImages\3\Stuff\tn\tn_9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SampleImages\default-background-picture.jpg" />
+    <Content Include="SampleImages\default-profile-picture.png" />
   </ItemGroup>
   <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
   <Target Name="AfterCompile" Condition="Exists('app.$(Configuration).config')">

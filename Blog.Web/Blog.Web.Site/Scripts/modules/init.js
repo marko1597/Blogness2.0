@@ -17,6 +17,8 @@ window.blogInit =
         settings.setHubUrl(window.blogConfiguration.hubUrl);
         settings.setDimensions(window.innerWidth, window.innerHeight);
         settings.setNavigationItems(navigationItems);
+        settings.setDefaultProfilePicture(window.blogConfiguration.blogApi + "media/defaultprofilepicture");
+        settings.setDefaultBackgroundPicture(window.blogConfiguration.blogApi + "media/defaultbackgroundpicture");
 
         // TODO: This is a temporary hack. It should be in its respective module
         ngLogger.provider("$exceptionHandler", {

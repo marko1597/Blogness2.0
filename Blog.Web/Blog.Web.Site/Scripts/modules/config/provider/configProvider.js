@@ -20,6 +20,11 @@
         USEROWNED: "UserOwned"
     };
 
+    var defaults = {
+        profilePictureUrl: "",
+        backgroundPictureUrl: ""
+    };
+
     var navigationItems = [];
 
     this.$get = [function () {
@@ -31,6 +36,10 @@
 
             getNavigationItems: function () {
                 return navigationItems;
+            },
+
+            getDefaults: function () {
+                return defaults;
             },
 
             /* Setters */
@@ -62,6 +71,14 @@
             setSessionId: function (sessionId) {
                 settings.SessionId = sessionId;
                 settings.IsLoggedIn = sessionId !== "" ? true : false;
+            },
+
+            setDefaultProfilePicture: function (val) {
+                defaults.profilePictureUrl = val;
+            },
+
+            setDefaultBackgroundPicture: function (val) {
+                defaults.backgroundPictureUrl = val;
             },
 
             setNavigationItems: function (items) {
