@@ -318,6 +318,12 @@
     <Content Include="Content\modules\shared\fileuploaditem.css" />
     <Content Include="Content\modules\tags\tagitem.css" />
     <Content Include="Content\modules\user\userimage.css" />
+    <Content Include="Content\modules\user\userprofilecomments.css" />
+    <Content Include="Content\modules\user\userprofiledetails.css" />
+    <Content Include="Content\modules\user\userprofilefavorites.css" />
+    <Content Include="Content\modules\user\userprofilemedia.css" />
+    <Content Include="Content\modules\user\userprofilenavigation.css" />
+    <Content Include="Content\modules\user\userprofileposts.css" />
     <Content Include="Content\modules\viewpost.css" />
     <Content Include="Content\plugins\angular-carousel.css" />
     <Content Include="Content\plugins\angular-ckeditor.css" />
@@ -346,9 +352,14 @@
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
+    <Content Include="Scripts\modules\user\controllers\userProfileCommentsController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileController.js" />
+    <Content Include="Scripts\modules\user\controllers\userProfileFavoritesController.js" />
+    <Content Include="Scripts\modules\user\controllers\userProfileMediaController.js" />
+    <Content Include="Scripts\modules\user\controllers\userProfilePostsController.js" />
     <Content Include="Scripts\modules\user\directives\userImage.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
+    <Content Include="Scripts\plugins\angular-ui-router.js" />
     <Content Include="Scripts\plugins\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\plugins\jquery.blockui.min.js">
       <DependentUpon>jquery.blockui.js</DependentUpon>
@@ -636,7 +647,7 @@
     <Content Include="Scripts\modules\shared\services\dateHelper.js" />
     <Content Include="Scripts\modules\tags\directives\tagItem.js" />
     <Content Include="Scripts\modules\tags\tags.js" />
-    <Content Include="Scripts\modules\user\directives\userProfile.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileNavigation.js" />
     <Content Include="Scripts\modules\user\services\userService.js" />
     <Content Include="Scripts\modules\user\user.js" />
     <Content Include="Content\plugins\angular-loading-bar.css" />
@@ -746,8 +757,13 @@
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
     <Content Include="Scripts\templates\errorpage.html" />
     <Content Include="Scripts\templates\modules\user\userImage.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetails.html" />
-    <Content Include="Scripts\templates\profile.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileFavorites.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileMedia.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileNavigation.html" />
+    <Content Include="Scripts\templates\modules\user\userProfilePosts.html" />
+    <Content Include="Scripts\templates\user.html" />
     <Content Include="Scripts\templates\friends.html" />
     <Content Include="Scripts\templates\posts.html" />
     <Content Include="Scripts\templates\viewpost.html" />

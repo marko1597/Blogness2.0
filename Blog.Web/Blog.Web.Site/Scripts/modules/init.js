@@ -5,7 +5,7 @@ window.blogInit =
     start: function () {
         var navigationItems = [
             { text: "Home", icon: window.blogConfiguration.blogRoot + "/content/images/nav-home.png", href: "/#/" },
-            { text: "Profile", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/#/profile" },
+            { text: "People", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/#/user" },
             { text: "Friends", icon: window.blogConfiguration.blogRoot + "/content/images/nav-friends.png", href: "/#/friends" },
             { text: "Groups", icon: window.blogConfiguration.blogRoot + "/content/images/nav-groups.png", href: "/#/groups" },
             { text: "Events", icon: window.blogConfiguration.blogRoot + "/content/images/nav-events.png", href: "/#/events" }

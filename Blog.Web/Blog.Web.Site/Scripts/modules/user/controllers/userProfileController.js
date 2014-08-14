@@ -4,18 +4,22 @@
         $scope.user = null;
         $scope.userFullName = null;
         $scope.isEditing = false;
+        $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
+                localStorageService.get("username") : $rootScope.$stateParams.username;
 
         $scope.getUserInfo = function () {
-            if ($scope.authData) {
-                var username = localStorageService.get("username");
-                if (username) {
-                    userService.getUserInfo(username).then(function(resp) {
-                        $scope.user = resp;
-                        $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                    }, function(err) {
-                        errorService.displayErrorRedirect(err);
-                    });
-                }
+            if ($scope.username) {
+                userService.getUserInfo($scope.username).then(function (resp) {
+                    $scope.user = resp;
+                    $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+
+                    //$rootScope.$state.go(($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined")
+                    //    ? 'ownprofile.details' : 'othersprofile.details');
+                }, function(err) {
+                    errorService.displayErrorRedirect(err);
+                });
+            } else {
+                errorService.displayErrorRedirect({ Message: "User lookup failed. Sorry. :(" });
             }
         };
 

@@ -3,6 +3,8 @@
 }
 
     .user-image .user-background-image {
+        min-width: 800px;
+        min-height: 350px;
     }
 
         .user-image .user-background-image > img {
@@ -54,5 +56,6 @@
     .user-image .details {
         width: 100%;
         height: auto;
+        position: relative;
     }
 }

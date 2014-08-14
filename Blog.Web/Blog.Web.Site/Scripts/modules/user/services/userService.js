@@ -1,26 +1,23 @@
-﻿ngUser.factory('userService', ["$http", "$q", "configProvider", "localStorageService", function ($http, $q, configProvider, localStorageService) {
-    var userApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Users" : configProvider.getSettings().BlogApi + "Users";
-    var user = null;
+﻿ngUser.factory('userService', ["$http", "$q", "configProvider", "dateHelper",
+    function ($http, $q, configProvider, dateHelper) {
+        var userApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Users" : configProvider.getSettings().BlogApi + "Users";
 
-    return {
-        getUserInfo: function (username) {
-            var deferred = $q.defer();
+        return {
+            getUserInfo: function (username) {
+                var deferred = $q.defer();
 
-            if (user == null) {
                 $http({
                     url: userApi + "/" + username,
                     method: "GET"
                 }).success(function (response) {
-                    user = response;
+                    response.BirthDate = dateHelper.getJsDate(response.BirthDate);
                     deferred.resolve(response);
-                }).error(function() {
+                }).error(function () {
                     deferred.reject("An error occurred!");
                 });
-            } else {
-                deferred.resolve(user);
-            }
 
-            return deferred.promise;
-        }
-    };
-}]);
+                return deferred.promise;
+            }
+        };
+    }
+]);

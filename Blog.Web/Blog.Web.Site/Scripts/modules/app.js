@@ -1,30 +1,24 @@
 ﻿var blog = angular.module("blog", ["ngRoute", "ngAnimate", "mgcrea.ngStrap", "snap", "ngLogger",
     "ngHeader", "ngLogin", "ngPosts", "ngComments", "ngError", "ngNavigation", "ngNavigation", "ngUser",
-    "ngTags"]);
+    "ngTags", "ui.router"]);
+
+blog.run([
+    '$rootScope', '$state', '$stateParams',
+    function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
+]);
 
 blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "authenticationService",
     function ($scope, $location, $rootScope, $log, $window, authenticationService) {
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            // TODO: Do something about this shiz yo! It's ddosing the server and shiz!
-            //if (next != window.blogConfiguration.blogRoot + "#/error" &&
-            //    current != window.blogConfiguration.blogRoot + "/authentication") {
-            //    authenticationService.getUserInfo().then(function (response) {
-            //        if (response.Message != undefined || response.Message != null) {
-            //            console.log(response);
-            //            //$window.location.href = configProvider.getSettings().BlogRoot + "/authentication";
-            //        }
-            //    }, function (error) {
-            //        console.log(error);
-            //    });
-            //}
-            
-            $log.info("location changing from " + current + " to " + next);
+            //$log.info("location changing from " + current + " to " + next);
         });
 
-        $scope.init = function() {
+        $scope.init = function () {
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message != undefined || response.Message != null) {
-                    console.log("logged in");
                 }
             }, function () {
                 authenticationService.logout();
@@ -60,8 +54,8 @@ blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($
     };
 }]);
 
-blog.config(["$routeProvider", "$httpProvider", "$provide",
-    function ($routeProvider, $httpProvider, $provide) {
+blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
+    function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
         $provide.factory('httpInterceptor', ["$q", function ($q) {
             return {
                 request: function (config) {
@@ -85,45 +79,107 @@ blog.config(["$routeProvider", "$httpProvider", "$provide",
         $httpProvider.interceptors.push('httpInterceptor');
         $httpProvider.interceptors.push('authenticationInterceptorService');
 
-        $routeProvider
-            .when('/', {
+        $urlRouterProvider.otherwise("/error");
+
+        $stateProvider
+            .state('posts', {
+                url: "/",
                 templateUrl: window.blogConfiguration.templatesUrl + 'posts.html',
                 controller: 'postsController'
             })
-            .when('/friends', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'friends.html',
-                controller: ''
-            })
-            .when('/groups', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'groups.html',
-                controller: ''
-            })
-            .when('/profile', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'profile.html',
-                controller: 'userProfileController'
-            })
-            .when('/post/new', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
-                controller: 'postsModifyController'
-            })
-            .when('/post/edit/:postId', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
-                controller: 'postsModifyController'
-            })
-            .when('/events', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'events.html',
-                controller: ''
-            })
-            .when('/error', {
-                templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',
-                controller: 'errorPageController'
-            })
-            .when('/post/:postId', {
+            .state('viewpost', {
+                url: "/post/:postId",
                 templateUrl: window.blogConfiguration.templatesUrl + 'viewpost.html',
                 controller: 'postsViewController'
             })
-            .otherwise({
-                redirectTo: '/error'
+            .state('friends', {
+                url: "/friends",
+                templateUrl: window.blogConfiguration.templatesUrl + 'friends.html'
+            })
+            .state('groups', {
+                url: "/groups",
+                templateUrl: window.blogConfiguration.templatesUrl + 'groups.html'
+            })
+            .state('events', {
+                url: "/events",
+                templateUrl: window.blogConfiguration.templatesUrl + 'events.html'
+            })
+            .state('newpost', {
+                url: "/posts/new",
+                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
+                controller: 'postsModifyController'
+            })
+            .state('editpost', {
+                url: "/post/edit/:postId",
+                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
+                controller: 'postsModifyController'
+            })
+            .state('ownprofile', {
+                url: "/user",
+                templateUrl: window.blogConfiguration.templatesUrl + 'user.html',
+                controller: 'userProfileController',
+                'abstract': true
+            })
+                .state('ownprofile.details', {
+                    url: '',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofiledetails.html',
+                    controller: 'userProfileController'
+                })
+                .state('ownprofile.posts', {
+                    url: '/posts',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofileposts.html',
+                    controller: 'userProfilePostsController'
+                })
+                .state('ownprofile.comments', {
+                    url: '/comments',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
+                    controller: 'userProfileCommentsController'
+                })
+                .state('ownprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
+                })
+                .state('ownprofile.favorites', {
+                    url: '/favorites',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
+                    controller: 'userProfileFavoritesController'
+                })
+            .state('othersprofile', {
+                url: "/user/:username",
+                templateUrl: window.blogConfiguration.templatesUrl + 'user.html',
+                controller: 'userProfileController',
+                'abstract': true
+            })
+                .state('othersprofile.details', {
+                    url: '',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofiledetails.html',
+                    controller: 'userProfileController'
+                })
+                .state('othersprofile.posts', {
+                    url: '/posts',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofileposts.html',
+                    controller: 'userProfilePostsController'
+                })
+                .state('othersprofile.comments', {
+                    url: '/comments',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
+                    controller: 'userProfileCommentsController'
+                })
+                .state('othersprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
+                })
+                .state('othersprofile.favorites', {
+                    url: '/favorites',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
+                    controller: 'userProfileFavoritesController'
+                })
+            .state('error', {
+                url: "/error",
+                templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',
+                controller: 'errorPageController'
             });
     }
 ]);

@@ -1,0 +1,27 @@
+﻿.user-profile-navigation {
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    background: #56c2e1;
+    border: 1px solid #46b3d3;
+    margin-bottom: 15px;
+}
+
+    .user-profile-navigation nav {
+        height: 100%;
+    }
+
+        .user-profile-navigation nav ul {
+            padding: 10px;
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+        }
+
+            .user-profile-navigation nav ul > li {
+                display: inline;
+                padding: 0 5px;
+            }
+
+                .user-profile-navigation nav ul > li a {
+                    color: #f8f8f8;
+                    font-weight: normal;
+                }

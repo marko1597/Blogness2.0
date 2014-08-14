@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$routeParams", "$timeout", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $rootScope, $location, $routeParams, $timeout, $fileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
+    function ($scope, $rootScope, $location, $timeout, $fileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
         $scope.isAdding = true;
         $scope.existingContents = [];
         $scope.username = localStorageService.get("username");
@@ -36,7 +36,7 @@
 
         $scope.getPost = function () {
             blockUiService.blockIt();
-            postsService.getPost($routeParams.postId).then(function(resp) {
+            postsService.getPost($rootScope.$stateParams.postId).then(function (resp) {
                 if ($scope.username === resp.User.UserName) {
                     if (resp.Error == undefined) {
                         $scope.isAdding = false;
@@ -136,7 +136,7 @@
 
         $scope.init = function () {
             if ($scope.authData) {
-                if (!isNaN($routeParams.postId)) {
+                if (!isNaN($rootScope.$stateParams.postId)) {
                     $scope.getPost();
                 }
             } else {

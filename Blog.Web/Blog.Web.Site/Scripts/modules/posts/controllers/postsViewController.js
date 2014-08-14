@@ -1,7 +1,7 @@
-﻿ngPosts.controller('postsViewController', ["$scope", "$location", "$routeParams", "postsService",
+﻿ngPosts.controller('postsViewController', ["$scope", "$location", "postsService",
     "postsHubService", "userService", "errorService", "blockUiService", "localStorageService",
-    function ($scope, $location, $routeParams, postsService, postsHubService, userService, errorService, blockUiService, localStorageService) {
-        $scope.postId = parseInt($routeParams.postId);
+    function ($scope, $location, postsService, postsHubService, userService, errorService, blockUiService, localStorageService) {
+        $scope.postId = parseInt($rootScope.$stateParams.postId);
         $scope.post = {};
         $scope.user = {};
         $scope.postsList = [];

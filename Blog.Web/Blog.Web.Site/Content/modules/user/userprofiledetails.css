@@ -1,0 +1,25 @@
+﻿.user-profile-details {
+}
+
+    .user-profile-details .information {
+        background: #f8f8f8;
+        padding: 10px;
+    }
+
+        .user-profile-details .information .form-group {
+            position: relative;
+        }
+
+            .user-profile-details .information .form-group label[data-display] {
+                font-weight: normal;
+                position: absolute;
+                left: 100px;
+                top: 0;
+            }
+
+@media(max-width: 767px) {
+    .user-profile-details .information .form-group label[data-display] {
+        position: static;
+        display: block;
+    }
+}
