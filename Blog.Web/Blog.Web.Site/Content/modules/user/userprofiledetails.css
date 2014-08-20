@@ -38,7 +38,7 @@
         }
 
             .user-profile-details .user-form .form-group label {
-                margin-top: 7px;
+                margin: 7px 0;
             }
 
             .user-profile-details .user-form .form-group .fa-edit {
@@ -56,9 +56,17 @@
                 width: 100%;
             }
 
-        .user-profile-details .user-form[name='user-hobbies-form'] .form-group label {
-            font-weight: normal;
+        .user-profile-details .user-form[name='user-hobbies-form'] .form-group {
+            margin-bottom: 5px;
         }
+
+            .user-profile-details .user-form[name='user-hobbies-form'] .form-group label {
+                font-weight: normal;
+            }
+
+            .user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {
+                margin-bottom: 10px;
+            }
 
 @media(max-width: 767px) {
     .user-profile-details .user-form .form-group label[data-display],
