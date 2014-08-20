@@ -1,24 +1,68 @@
 ﻿.user-profile-details {
+    overflow: visible !important;
 }
 
-    .user-profile-details .information {
+    .user-profile-details .content-item {
         background: #f8f8f8;
-        padding: 10px;
+        margin: 0 15px 15px 0;
     }
 
-        .user-profile-details .information .form-group {
+    .user-profile-details .header {
+        background: #4c4c4c;
+        color: #f8f8f8;
+        position: relative;
+    }
+
+        .user-profile-details .header > h4 {
+            padding: 10px;
+            margin: 0;
+        }
+
+        .user-profile-details .header > .btn-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+
+            .user-profile-details .header > .btn-header > i {
+                margin-right: 5px;
+            }
+
+    .user-profile-details .user-form {
+        padding: 0 10px;
+    }
+
+        .user-profile-details .user-form .form-group {
             position: relative;
         }
 
-            .user-profile-details .information .form-group label[data-display] {
-                font-weight: normal;
-                position: absolute;
-                left: 100px;
-                top: 0;
+            .user-profile-details .user-form .form-group label {
+                margin-top: 7px;
             }
 
+            .user-profile-details .user-form .form-group .fa-edit {
+                cursor: pointer;
+            }
+
+                .user-profile-details .user-form .form-group .fa-edit:hover {
+                    opacity: 0.5;
+                }
+
+            .user-profile-details .user-form .form-group label[data-display],
+            .user-profile-details .user-form .form-group input[type='text'] {
+                font-weight: normal;
+                max-width: 100%;
+                width: 100%;
+            }
+
+        .user-profile-details .user-form[name='user-hobbies-form'] .form-group label {
+            font-weight: normal;
+        }
+
 @media(max-width: 767px) {
-    .user-profile-details .information .form-group label[data-display] {
+    .user-profile-details .user-form .form-group label[data-display],
+    .user-profile-details .user-form .form-group input[type='text'] {
         position: static;
         display: block;
     }

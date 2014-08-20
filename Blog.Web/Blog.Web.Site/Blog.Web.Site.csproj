@@ -298,7 +298,6 @@
     <Content Include="Content\modules\comments\commentsaddnew.css" />
     <Content Include="Content\modules\comments\commentscontainer.css" />
     <Content Include="Content\modules\comments\commentslist.css" />
-    <Content Include="Content\modules\comments\commentsmain.css" />
     <Content Include="Content\modules\errorpage.css" />
     <Content Include="Content\modules\error\errorDisplay.css" />
     <Content Include="Content\modules\header\headermenu.css" />
@@ -349,11 +348,13 @@
     <Content Include="Scripts\modules\login\directives\registerForm.js" />
     <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
     <Content Include="Scripts\modules\login\services\authenticationService.js" />
+    <Content Include="Scripts\modules\main\app.js" />
     <Content Include="Scripts\modules\main\config\blogConfig.js" />
     <Content Include="Scripts\modules\main\controllers\blogMainController.js" />
     <Content Include="Scripts\modules\main\directives\windowResize.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
+    <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileCommentsController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileController.js" />
@@ -692,7 +693,6 @@
     <Content Include="Scripts\plugins\angular-tags-input.js" />
     <Content Include="Scripts\plugins\jquery.isotope.js" />
     <Content Include="Scripts\plugins\jquery.newsTicker.js" />
-    <Content Include="Scripts\modules\main\app.js" />
     <Content Include="Scripts\modules\config\config.js" />
     <Content Include="Scripts\modules\config\provider\configProvider.js" />
     <Content Include="Scripts\modules\header\directives\headerMenu.js" />
@@ -751,6 +751,7 @@
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
+    <Content Include="Scripts\templates\modules\shared\emptyRecordMessage.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItemComment.html" />

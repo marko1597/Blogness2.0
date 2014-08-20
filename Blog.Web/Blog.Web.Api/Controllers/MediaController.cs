@@ -93,7 +93,6 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/media/{name}")]
-        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         public HttpResponseMessage GetByName(string name)
         {
             try
@@ -117,37 +116,6 @@ namespace Blog.Web.Api.Controllers
             {
                 var media = _media.GetByName(name) ?? new Media();
                 return CreateResponseMediaMessage(media, true);
-            }
-            catch (Exception ex)
-            {
-                _errorSignaler.SignalFromCurrentContext(ex);
-            }
-            return null;
-        }
-
-        [HttpGet]
-        [Route("api/media/video")]
-        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
-        public HttpResponseMessage GetVideo()
-        {
-            try
-            {
-                var media = new Media
-                            {
-                                Id = 1,
-                                AlbumId = 1,
-                                CreatedBy = 1,
-                                CustomName = Guid.NewGuid().ToString(),
-                                FileName = "foo.webm",
-                                MediaType = "video/webm",
-                                MediaPath = @"C:\Temp\",
-                                ThumbnailPath = @"C:\Temp\",
-                                CreatedDate = DateTime.Now,
-                                ModifiedBy = 1,
-                                ModifiedDate = DateTime.Now
-                            };
-
-                return CreateResponseMediaMessage(media, false);
             }
             catch (Exception ex)
             {
@@ -204,6 +172,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [Route("api/media/defaultprofilepicture")]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         public HttpResponseMessage GetDefaultProfilePicture()
         {
             try
@@ -228,6 +197,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [Route("api/media/defaultbackgroundpicture")]
+        [CacheOutput(ClientTimeSpan = 86400, ServerTimeSpan = 86400)]
         public HttpResponseMessage GetDefaultBackgroundPicture()
         {
             try
@@ -257,32 +227,28 @@ namespace Blog.Web.Api.Controllers
             {
                 string mediaPath;
                 MediaTypeHeaderValue mediaType;
+                var isVideo = IsVideo(media.MediaType);
 
                 if (isThumb)
                 {
-                    if (IsVideo(media.MediaType))
-                    {
-                        mediaPath = _configurationHelper.GetAppSettings("MediaLocation") +
-                                    "default_vid_thumbnail.jpg";
-                    }
-                    else
-                    {
-                        mediaPath = media.ThumbnailPath + _configurationHelper.GetAppSettings("ThumbnailPrefix") + 
-                            Path.GetFileNameWithoutExtension(media.FileName) + ".jpg";
-                    }
+                    mediaPath = media.ThumbnailPath + _configurationHelper.GetAppSettings("ThumbnailPrefix") + 
+                        Path.GetFileNameWithoutExtension(media.FileName) + ".jpg";
                     mediaType = new MediaTypeHeaderValue("image/jpg");
                 }
                 else
                 {
                     mediaPath = media.MediaPath + media.FileName;
                     mediaType = new MediaTypeHeaderValue(media.MediaType);
+
+                    if (isVideo && Request.Headers.Range != null)
+                    {
+                        return CreatePartialVideoResponseMessage(media);
+                    }
                 }
 
                 var tMedia = new MediaStream(mediaPath);
-
                 var response = Request.CreateResponse();
-                response.Content = new PushStreamContent(
-                    (Action<Stream, HttpContent, TransportContext>)tMedia.WriteToStream, mediaType);
+                response.Content = new PushStreamContent((Action<Stream, HttpContent, TransportContext>)tMedia.WriteToStream, mediaType);
 
                 return response;
             }
@@ -293,6 +259,28 @@ namespace Blog.Web.Api.Controllers
             return null;
         }
 
+        private HttpResponseMessage CreatePartialVideoResponseMessage(Media media)
+        {
+            var mediaPath = media.MediaPath + media.FileName;
+            var memStream = new MemoryStream();
+
+            using (var fileStream = File.OpenRead(mediaPath))
+            {
+                memStream.SetLength(fileStream.Length);
+                fileStream.Read(memStream.GetBuffer(), 0, (int)fileStream.Length);
+            }
+            try
+            {
+                var partialResponse = Request.CreateResponse(HttpStatusCode.PartialContent);
+                partialResponse.Content = new ByteRangeStreamContent(memStream, Request.Headers.Range, media.MediaType);
+                return partialResponse;
+            }
+            catch (InvalidByteRangeException invalidByteRangeException)
+            {
+                return Request.CreateErrorResponse(invalidByteRangeException);
+            }
+        }
+        
         private static bool IsVideo(string mimeType)
         {
             var supportedMedia = new List<string>

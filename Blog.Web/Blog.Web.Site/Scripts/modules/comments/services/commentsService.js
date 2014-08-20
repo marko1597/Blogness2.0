@@ -62,7 +62,7 @@
             addViewProperties: function(comment, showReplies, showAddReply) {
                 comment.DateDisplay = dateHelper.getDateDisplay(comment.CreatedDate);
                 comment.NameDisplay = comment.User.FirstName + " " + comment.User.LastName;
-                comment.Url = "#";
+                comment.Url = "/#/user/" + comment.User.UserName;
 
                 if (showReplies != undefined) {
                     comment.ShowReplies = false;

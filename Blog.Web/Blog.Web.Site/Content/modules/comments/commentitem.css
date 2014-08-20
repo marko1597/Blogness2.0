@@ -23,7 +23,25 @@
         color: #fff;
         margin: 0;
         height: 25px;
+        position: relative;
     }
+
+        .comment-item > div.comment-header > .btn-header {
+            display: inline-block;
+            position: static;
+        }
+        
+            .comment-item > div.comment-header > .btn-header.left {
+                padding-left: 6px;
+                padding-top: 4px;
+                margin-right: 5px;
+            }
+
+            .comment-item > div.comment-header > .btn-header.right {
+                padding: 3px 6px;
+                float: right;
+            }
+
 
         .comment-item > div.comment-header > div.comment-details {
             color: #fff;

@@ -13,6 +13,7 @@
             };
 
             $scope.onCompleteVideo = function () {
+                $scope.currentTime = 0;
                 $scope.isCompleted = true;
             };
 
@@ -47,7 +48,7 @@
                 autoHideTime: 3000,
                 autoPlay: false,
                 responsive: false,
-                stretch: $scope.stretchModes[1],
+                stretch: $scope.stretchModes[2],
                 sources: [
                     {
                         src: $sce.trustAsResourceUrl($scope.media.MediaUrl),

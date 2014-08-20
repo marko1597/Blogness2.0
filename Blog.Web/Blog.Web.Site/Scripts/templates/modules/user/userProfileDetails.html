@@ -1,34 +1,205 @@
-﻿<div class="user-profile-details" data-user-id="{{user.Id}}">
-    <div class="content-item information">
-        <form name="user-details-form" ng-submit="submitForm(userForm.$valid)" novalidate>
+﻿<div id="user-profile-details" class="user-profile-details" data-user-id="{{user.Id}}" isotope-container isotope-item-resize
+     resize-layout-only="false" resize-container="user-profile-details" resize-broadcast="updatePostsSize"
+     resize-xlarge="31.5%" resize-large="48%" resize-medium="48%" resize-small="98%" resize-xsmall="98%">
+    <div class="content-item information" isotope-item>
+        <div class="header">
+            <h4>Personal Details</h4>
+            <div class="btn-header right" ng-show="isEditing.details" ng-click="saveDetails()">
+                <i class="fa fa-save"></i>Save
+            </div>
+            <div class="btn-header right" ng-show="!isEditing.details" ng-click="editDetails()">
+                <i class="fa fa-edit"></i>Edit
+            </div>
+        </div>
+        <form class="user-form" name="user-details-form" ng-submit="submitForm(userDetailsForm.$valid)" novalidate>
             <div class="form-group">
-                <p class="error-message"></p>
-                <label>First Name</label>
-                <label data-display ng-show="!isEditing">{{user.FirstName}}</label>
-                <input name="firstname" type="text" class="input" ng-show="isEditing" class="form-control"
-                       ng-class="hasError('firstname')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>First Name</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.details">{{user.FirstName}}</label>
+                        <input name="firstname" type="text" class="input form-control" ng-show="isEditing.details"
+                               ng-class="hasError('firstname')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <p class="error-message"></p>
-                <label>Last Name</label>
-                <label data-display ng-show="!isEditing">{{user.LastName}}</label>
-                <input name="lastname" type="text" class="input" ng-show="isEditing" class="form-control"
-                       ng-class="hasError('lastname')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.details">{{user.LastName}}</label>
+                        <input name="lastname" type="text" class="input form-control" ng-show="isEditing.details"
+                               ng-class="hasError('lastname')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <p class="error-message"></p>
-                <label>Email</label>
-                <label data-display ng-show="!isEditing">{{user.EmailAddress}}</label>
-                <input name="email" type="text" class="input" ng-show="isEditing" class="form-control" required
-                       ng-class="hasError('email')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.details">{{user.EmailAddress}}</label>
+                        <input name="email" type="text" class="input form-control" ng-show="isEditing.details" required
+                               ng-class="hasError('email')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <p class="error-message"></p>
-                <label>Birth Date</label>
-                <label data-display ng-show="!isEditing">{{user.BirthDate}}</label>
-                <input name="birthdate" type="text" class="input" ng-show="isEditing" class="form-control"
-                       ng-class="hasError('birthdate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
-                       bs-datepicker data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>Birth Date</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.details">{{user.BirthDate}}</label>
+                        <input name="birthdate" type="text" class="input form-control" ng-show="isEditing.details"
+                               ng-class="hasError('birthdate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
+                               bs-datepicker data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="content-item address" isotope-item>
+        <div class="header">
+            <h4>Hobbies</h4>
+            <div class="btn-header right" ng-show="isEditing.address" ng-click="saveAddress()">
+                <i class="fa fa-save"></i>Save
+            </div>
+            <div class="btn-header right" ng-show="!isEditing.address" ng-click="editAddress()">
+                <i class="fa fa-edit"></i>Edit
+            </div>
+        </div>
+        <form class="user-form" name="user-address-form" ng-submit="submitForm(userAddressForm.$valid)" novalidate>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>Street</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.address">{{address.StreetAddress}}</label>
+                        <input name="firstname" type="text" class="input form-control" ng-show="isEditing.address"
+                               ng-class="hasError('firstname')" placeholder="Street" ng-model="address.StreetAddress" ng-enter="register()" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>State</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.address">{{address.State}}</label>
+                        <input name="lastname" type="text" class="input form-control" ng-show="isEditing.address"
+                               ng-class="hasError('lastname')" placeholder="State" ng-model="address.State" ng-enter="register()" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>City</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.address">{{address.City}}</label>
+                        <input name="email" type="text" class="input form-control" ng-show="isEditing.address" required
+                               ng-class="hasError('email')" placeholder="City" ng-model="address.City" ng-enter="register()" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <label>Country</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                        <label data-display ng-show="!isEditing.address">{{address.Country}}</label>
+                        <input name="birthdate" type="text" class="input form-control" ng-show="isEditing.address"
+                               ng-class="hasError('birthdate')" placeholder="Country" ng-model="address.Country" ng-enter="register()" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="content-item hobbies" isotope-item>
+        <div class="header">
+            <h4>Hobbies</h4>
+            <div class="btn-header right" ng-show="isEditing.hobbies" ng-click="saveHobbies()">
+                <i class="fa fa-save"></i>Save
+            </div>
+            <div class="btn-header right" ng-show="!isEditing.hobbies" ng-click="editHobbies()">
+                <i class="fa fa-edit"></i>Edit
+            </div>
+        </div>
+        <form class="user-form" name="user-hobbies-form" ng-submit="submitForm(userHobbiesForm.$valid)" novalidate>
+            <div empty-record-message message="emptyRecordMessage.hobbies" ng-show="showNoHobbiesMessage()"></div>
+            <div class="form-group" ng-repeat="hobby in hobbies" data-hobby-id="hobby.HobbyId" ng-show="!showNoHobbiesMessage()">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="error-message"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <i ng-show="!isEditing.hobbies" class="fa fa-edit"></i>
+                        <label ng-show="!isEditing.hobbies">{{hobby.HobbyName}}</label>
+                        <input name="firstname" type="text" class="input form-control" ng-show="isEditing.hobbies"
+                               ng-class="hasError('firstname')" placeholder="Enter hobby" ng-model="hobby.HobbyName" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="new-hobby" type="text" class="input form-control" ng-show="isEditing.hobbies"
+                               ng-class="hasError('firstname')" placeholder="Enter hobby" ng-model="newHobby" />
+                    </div>
+                </div>
             </div>
         </form>
     </div>

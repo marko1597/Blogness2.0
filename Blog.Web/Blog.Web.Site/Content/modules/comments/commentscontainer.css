@@ -1,16 +1,3 @@
 ﻿.comments-container {
     background: #eee;
 }
-
-    .comments-container > .board-item-header > div.comment-button {
-        height: 100%;
-        color: #fff;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding-top: 10px;
-    }
-
-        .comments-container > .board-item-header > div.comment-button:hover {
-            background: #3c3c3c;
-        }
