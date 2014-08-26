@@ -18,6 +18,14 @@
             return month + " " + day + ", " + year;
         },
 
+        getMonthYear: function(jsonDate) {
+            var itemDate = new Date(jsonDate);
+            var month = this.getMonthName(itemDate.getMonth());
+            var year = itemDate.getFullYear();
+
+            return month + " " + year;
+        },
+
         getJsTime: function (jsonDate) {
             var itemDate = new Date(jsonDate);
             var hour = itemDate.getHours();

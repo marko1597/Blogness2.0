@@ -4,7 +4,7 @@
 
     .user-profile-details .content-item {
         background: #f8f8f8;
-        margin: 0 15px 15px 0;
+        margin-bottom: 15px;
     }
 
     .user-profile-details .header {
@@ -27,6 +27,22 @@
 
             .user-profile-details .header > .btn-header > i {
                 margin-right: 5px;
+            }
+
+    .user-profile-details .body {
+        padding: 10px;
+    }
+
+        .user-profile-details .body .panel {
+            margin-bottom: 10px;
+            background: #f0f0f0;
+            border-color: #ccc;
+        }
+
+            .user-profile-details .body .panel .panel-heading {
+                background-color: transparent;
+                border-color: transparent;
+                color: #4c4c4c;
             }
 
     .user-profile-details .user-form {
@@ -68,7 +84,41 @@
                 margin-bottom: 10px;
             }
 
+
+    .user-profile-details .body .user-education-item {
+        background: #f8f8f8;
+        border: 1px solid #ccc;
+        padding-top: 10px;
+        margin-bottom: 10px;
+    }
+
+        .user-profile-details .body .user-education-item label[data-display] {
+            font-weight: normal;
+            width: auto;
+        }
+
+        .user-profile-details .body .user-education-item .fa-edit,
+        .user-profile-details .body .user-education-item .fa-save {
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 7px;
+            cursor: pointer;
+        }
+
+            .user-profile-details .body .user-education-item .fa-edit:hover,
+            .user-profile-details .body .user-education-item .fa-save:hover {
+                opacity: 0.5;
+            }
+
+        .user-profile-details .body .user-education-item input[type='text'] {
+            margin-bottom: 10px;
+        }
+
 @media(max-width: 767px) {
+    .user-profile-details .content-item {
+        margin: 0 0 15px 0;
+    }
+
     .user-profile-details .user-form .form-group label[data-display],
     .user-profile-details .user-form .form-group input[type='text'] {
         position: static;

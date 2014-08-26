@@ -1,7 +1,6 @@
 ﻿ngShared.directive("emptyRecordMessage", [
     function () {
         var ctrlFn = function ($scope) {
-            console.log($scope.message);
         };
         ctrlFn.$inject = ["$scope"];
 

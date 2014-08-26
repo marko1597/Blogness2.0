@@ -3,7 +3,7 @@
 }
 
     .user-image .user-background-image {
-        min-width: 800px;
+        min-width: 100%;
         min-height: 350px;
     }
 
