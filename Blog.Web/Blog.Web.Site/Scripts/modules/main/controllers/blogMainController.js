@@ -1,5 +1,5 @@
-﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "authenticationService", "userService",
-    function ($scope, $location, $rootScope, $log, $window, authenticationService, userService) {
+﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "configProvider", "authenticationService", "userService",
+    function ($scope, $location, $rootScope, $log, $window, configProvider, authenticationService, userService) {
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             //$log.info("location changing from " + current + " to " + next);
         });
@@ -7,6 +7,7 @@
         $rootScope.$on("userLoggedIn", function (ev, data) {
             if (data.username) {
                 $scope.getUserInfo(data.username);
+                $window.location.href = configProvider.getSettings().BlogRoot;
             }
         });
 

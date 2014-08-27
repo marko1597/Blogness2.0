@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="error-message"></p>
+                                <p class="error-message">{{error.details.FirstName}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -25,13 +25,13 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.details">{{user.FirstName}}</label>
                                 <input name="firstname" type="text" class="input form-control" ng-show="isEditing.details"
-                                       ng-class="hasError('firstname')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
+                                       ng-class="hasError('details', 'FirstName')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="error-message"></p>
+                                <p class="error-message">{{error.details.LastName}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -41,13 +41,13 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.details">{{user.LastName}}</label>
                                 <input name="lastname" type="text" class="input form-control" ng-show="isEditing.details"
-                                       ng-class="hasError('lastname')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
+                                       ng-class="hasError('details', 'LastName')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="error-message"></p>
+                                <p class="error-message">{{error.details.EmailAddress}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -57,13 +57,13 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.details">{{user.EmailAddress}}</label>
                                 <input name="email" type="text" class="input form-control" ng-show="isEditing.details" required
-                                       ng-class="hasError('email')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
+                                       ng-class="hasError('details', 'EmailAddress')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <p class="error-message"></p>
+                                <p class="error-message">{{error.details.BirthDate}}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -71,10 +71,10 @@
                                 <label>Birth Date</label>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                                <label data-display ng-show="!isEditing.details">{{user.BirthDate}}</label>
+                                <label data-display ng-show="!isEditing.details">{{user.BirthDateDisplay}}</label>
                                 <input name="birthdate" type="text" class="input form-control" ng-show="isEditing.details"
-                                       ng-class="hasError('birthdate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
-                                       bs-datepicker data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                                       ng-class="hasError('details', 'BirthDate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
+                                       bs-datepicker data-date-format="MM/dd/yyyy" data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
                             </div>
                         </div>
                     </div>
@@ -105,7 +105,7 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.address">{{address.StreetAddress}}</label>
                                 <input name="firstname" type="text" class="input form-control" ng-show="isEditing.address"
-                                       ng-class="hasError('firstname')" placeholder="Street" ng-model="address.StreetAddress" ng-enter="register()" />
+                                       placeholder="Street" ng-model="address.StreetAddress" ng-enter="register()" />
                             </div>
                         </div>
 
@@ -121,7 +121,7 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.address">{{address.State}}</label>
                                 <input name="lastname" type="text" class="input form-control" ng-show="isEditing.address"
-                                       ng-class="hasError('lastname')" placeholder="State" ng-model="address.State" ng-enter="register()" />
+                                       placeholder="State" ng-model="address.State" ng-enter="register()" />
                             </div>
                         </div>
 
@@ -137,7 +137,7 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.address">{{address.City}}</label>
                                 <input name="email" type="text" class="input form-control" ng-show="isEditing.address" required
-                                       ng-class="hasError('email')" placeholder="City" ng-model="address.City" ng-enter="register()" />
+                                       placeholder="City" ng-model="address.City" ng-enter="register()" />
                             </div>
                         </div>
 
@@ -153,13 +153,14 @@
                             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                                 <label data-display ng-show="!isEditing.address">{{address.Country}}</label>
                                 <input name="birthdate" type="text" class="input form-control" ng-show="isEditing.address"
-                                       ng-class="hasError('birthdate')" placeholder="Country" ng-model="address.Country" ng-enter="register()" />
+                                       placeholder="Country" ng-model="address.Country" ng-enter="register()" />
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="content-item hobbies">
                 <div class="header">
@@ -181,17 +182,16 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <i ng-show="!isEditing.hobbies" class="fa fa-edit"></i>
                                 <label ng-show="!isEditing.hobbies">{{hobby.HobbyName}}</label>
                                 <input name="firstname" type="text" class="input form-control" ng-show="isEditing.hobbies"
-                                       ng-class="hasError('firstname')" placeholder="Enter hobby" ng-model="hobby.HobbyName" />
+                                       placeholder="Enter hobby" ng-model="hobby.HobbyName" />
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <input name="new-hobby" type="text" class="input form-control" ng-show="isEditing.hobbies"
-                                       ng-class="hasError('firstname')" placeholder="Enter hobby" ng-model="newHobby" />
+                                       placeholder="Enter hobby" ng-model="newHobby" />
                             </div>
                         </div>
                     </div>
@@ -208,6 +208,7 @@
                             <div class="panel panel-primary" ng-repeat="educ in education">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
+                                        <i class="fa fa-plus-circle" ng-click="addEducation(educ.id)"></i>
                                         {{educ.title}}
                                     </h4>
                                 </div>
@@ -221,11 +222,12 @@
                                                     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                                         <label ng-show="!info.isEditing">{{info.SchoolName}}</label>
                                                         <input name="firstname" type="text" class="input form-control" ng-show="info.isEditing"
-                                                               ng-class="hasError('firstname')" placeholder="School Name" ng-model="info.SchoolName" ng-enter="register()" />
+                                                               placeholder="School Name" ng-model="info.SchoolName" ng-enter="register()" />
                                                     </div>
                                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                                         <i class="fa fa-save" ng-show="info.isEditing" ng-click="saveEducation(educ.id, info.EducationId)"></i>
                                                         <i class="fa fa-edit" ng-show="!info.isEditing" ng-click="editEducation(educ.id, info.EducationId)"></i>
+                                                        <i class="fa fa-trash-o" ng-show="showCancelAddingEducation(info.isAdding)" ng-click="cancelAddingEducation(educ.id)"></i>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -235,35 +237,35 @@
                                                         </div>
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                             <label data-display>{{info.Course}}</label>
-                                                            <label data-display>From {{info.YearAttended}} to {{info.YearGraduated}}</label>
+                                                            <label data-display>From {{info.YearAttendedDisplay}} to {{info.YearGraduatedDisplay}}</label>
                                                         </div>
                                                     </div>
                                                     <div ng-show="info.isEditing">
                                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                                            <input name="state" type="text" class="input form-control" ng-class="hasError('firstname')"
+                                                            <input name="state" type="text" class="input form-control"
                                                                    placeholder="State" ng-model="info.State" />
                                                         </div>
                                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                                            <input name="city" type="text" class="input form-control" ng-class="hasError('firstname')"
+                                                            <input name="city" type="text" class="input form-control"
                                                                    placeholder="City" ng-model="info.City" />
                                                         </div>
                                                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                                            <input name="country" type="text" class="input form-control" ng-class="hasError('firstname')"
+                                                            <input name="country" type="text" class="input form-control"
                                                                    placeholder="Country" ng-model="info.Country" />
                                                         </div>
                                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                            <input name="course" type="text" class="input form-control" ng-class="hasError('firstname')"
+                                                            <input name="course" type="text" class="input form-control"
                                                                    placeholder="Course" ng-model="info.Course" />
                                                         </div>
                                                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                            <input name="yearattended" type="text" class="input form-control" ng-class="hasError('birthdate')"
+                                                            <input name="yearattended" type="text" class="input form-control"
                                                                    placeholder="Date attended" ng-model="info.YearAttended" bs-datepicker data-placement="top"
-                                                                   data-iconleft="fa fa-calendar" data-autoclose="true" />
+                                                                   data-date-format="MM/dd/yyyy" data-iconleft="fa fa-calendar" data-autoclose="true" />
                                                         </div>
                                                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                                            <input name="yeargraduated" type="text" class="input form-control" ng-class="hasError('birthdate')"
+                                                            <input name="yeargraduated" type="text" class="input form-control"
                                                                    placeholder="Date graduated" ng-model="info.YearGraduated" bs-datepicker data-placement="top"
-                                                                   data-iconleft="fa fa-calendar" data-autoclose="true" />
+                                                                   data-date-format="MM/dd/yyyy" data-iconleft="fa fa-calendar" data-autoclose="true" />
                                                         </div>
                                                     </div>
                                                 </div>

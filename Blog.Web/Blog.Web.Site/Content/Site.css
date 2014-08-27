@@ -357,6 +357,51 @@ input[type="checkbox"].input-validation-error {
     color: #b94a48;
 }
 
+.input.has-error {
+    background: #d9534f;
+    color: #fff;
+}
+
+    .input.has-error::-webkit-input-placeholder { /* WebKit browsers */
+        color: #fff;
+    }
+
+    .input.has-error:hover::-webkit-input-placeholder,
+    .input.has-error:focus::-webkit-input-placeholder { /* WebKit browsers */
+        color: #333;
+    }
+
+    .input.has-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #fff;
+        opacity: 1;
+    }
+
+    .input.has-error:hover:-moz-placeholder,
+    .input.has-error:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #333;
+        opacity: 1;
+    }
+
+    .input.has-error::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #fff;
+        opacity: 1;
+    }
+
+    .input.has-error:hover::-moz-placeholder,
+    .input.has-error:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #333;
+        opacity: 1;
+    }
+
+    .input.has-error:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #fff;
+    }
+
+    .input.has-error:hover:-ms-input-placeholder,
+    .input.has-error:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: #333;
+    }
+
 .validation-summary-valid {
     display: none;
 }

@@ -4,7 +4,6 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -213,16 +212,21 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost, Authorize]
         [Route("api/posts")]
-        public Post Post([FromBody]Post post)
+        public IHttpActionResult Post([FromBody]Post post)
         {
             try
             {
-                return _postsSvc.AddPost(post);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                return Ok(_postsSvc.AddPost(post));
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Post
+                var errorResult = new Post
                 {
                     Error = new Error
                     {
@@ -230,21 +234,27 @@ namespace Blog.Web.Api.Controllers
                         Message = ex.Message
                     }
                 };
+                return Ok(errorResult);
             }
         }
 
         [HttpPut]
         [Route("api/posts")]
-        public Post Put([FromBody]Post post)
+        public IHttpActionResult Put([FromBody]Post post)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 var tPost = _postsSvc.GetPost(post.Id);
                 var isAllowed = User.Identity.GetUserName() == tPost.User.UserName;
 
                 if (!isAllowed)
                 {
-                    return new Post
+                    var notAllowedResult = new Post
                     {
                         Error = new Error
                         {
@@ -252,14 +262,15 @@ namespace Blog.Web.Api.Controllers
                             Message = "Request not allowed. You cannot edit someone else's post."
                         }
                     };
+                    return Ok(notAllowedResult);
                 }
 
-                return _postsSvc.UpdatePost(post);
+                return Ok(_postsSvc.UpdatePost(post));
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Post
+                var errorResult = new Post
                 {
                     Error = new Error
                     {
@@ -267,6 +278,7 @@ namespace Blog.Web.Api.Controllers
                         Message = ex.Message
                     }
                 };
+                return Ok(errorResult);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿.user-image {
     position: relative;
+    height: 100%;
 }
 
     .user-image .user-background-image {
@@ -57,5 +58,12 @@
         width: 100%;
         height: auto;
         position: relative;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .user-image .user-background-image {
+        position: absolute;
+        height: 100%;
+        min-height: 0;
     }
 }

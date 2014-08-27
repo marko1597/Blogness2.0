@@ -81,6 +81,11 @@ namespace Blog.Logic.Core
         {
             try
             {
+                user.CreatedBy = user.Id;
+                user.CreatedDate = DateTime.Now;
+                user.ModifiedBy = user.Id;
+                user.ModifiedDate = DateTime.Now;
+
                 var tUser = _userRepository.Edit(UserMapper.ToEntity(user));
                 return UserMapper.ToDto(tUser);
             }

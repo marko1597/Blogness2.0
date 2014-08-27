@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
 namespace Blog.Common.Contracts
@@ -18,15 +19,19 @@ namespace Blog.Common.Contracts
         public string IdentityId { get; set; }
 
         [DataMember]
+        [Required]
         public string FirstName { get; set; }
 
         [DataMember]
+        [Required]
         public string LastName { get; set; }
 
         [DataMember]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         [DataMember]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [DataMember]

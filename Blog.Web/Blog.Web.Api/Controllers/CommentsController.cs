@@ -82,10 +82,15 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost, Authorize]
         [Route("api/comments")]
-        public void Post([FromBody]CommentAdded comment)
+        public IHttpActionResult Post([FromBody]CommentAdded comment)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 var validationResult = IsValidComment(comment);
                 if (validationResult != null)
                 {
@@ -100,10 +105,13 @@ namespace Blog.Web.Api.Controllers
                                    };
                 new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper)
                     .CommentAddedForPost(commentAdded);
+
+                return Ok();
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return Ok();
             }
         }
 

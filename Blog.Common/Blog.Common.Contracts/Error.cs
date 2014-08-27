@@ -11,6 +11,7 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         public string Message { get; set; }
+
         public Exception Exception { get; set; }
     }
 }

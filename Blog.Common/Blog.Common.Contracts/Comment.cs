@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Blog.Common.Contracts
@@ -16,6 +17,7 @@ namespace Blog.Common.Contracts
         public int? ParentCommentId { get; set; }
 
         [DataMember]
+        [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
         public string CommentMessage { get; set; }
 
         [DataMember]

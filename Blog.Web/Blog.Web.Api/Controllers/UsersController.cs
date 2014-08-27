@@ -1,20 +1,37 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Web.Attributes;
+using Blog.Common.Identity;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
+using Microsoft.AspNet.Identity.Owin;
 using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers
 {
     public class UsersController : ApiController
     {
+        private BlogUserManager _userManager;
         private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
 
-        public UsersController(IUsersResource user, IErrorSignaler errorSignaler)
+        public BlogUserManager UserManager
         {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<BlogUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public UsersController(BlogUserManager userManager, IUsersResource user, IErrorSignaler errorSignaler)
+        {
+            UserManager = userManager;
             _user = user;
             _errorSignaler = errorSignaler;
         }
@@ -29,7 +46,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 user = _user.Get(userId) ?? new User();
-
+                user = HideUserProperties(user);
             }
             catch (Exception ex)
             {
@@ -49,7 +66,7 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 user = _user.GetByUserName(name) ?? new User();
-
+                user = HideUserProperties(user);
             }
             catch (Exception ex)
             {
@@ -61,30 +78,82 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/users")]
-        public void Post([FromBody] User user)
+        public User Post([FromBody] User user)
         {
             try
             {
-                _user.Add(user);
+                var tUser = _user.Add(user);
+                tUser = HideUserProperties(tUser);
+
+                return tUser;
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+
+                return new User
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Common.Utils.Constants.Error.InternalError,
+                        Message = "Oops! That's not supposed to happen. Can you try again?"
+                    }
+                };
             }
         }
 
         [HttpPut]
         [Route("api/users")]
-        public void Put([FromBody] User user)
+        [Authorize]
+        public async Task<IHttpActionResult> Put([FromBody] User user)
         {
             try
             {
-                _user.Update(user);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var identityUser = await UserManager.FindByNameAsync(user.UserName);
+                user.IdentityId = identityUser.Id;
+
+                var tUser = _user.Update(user);
+                tUser = HideUserProperties(tUser);
+
+                return Ok(tUser);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                var errorResult = new User
+                {
+                    Error = new Error
+                    {
+                        Id = (int) Common.Utils.Constants.Error.InternalError,
+                        Message = "Oops! That's not supposed to happen. Can you try again?"
+                    }
+                };
+
+                return Ok(errorResult);
             }
+        }
+
+        private static User HideUserProperties(User user)
+        {
+            if (user.Picture != null)
+            {
+                user.Picture.FileName = null;
+                user.Picture.MediaPath = null;
+                user.Picture.ThumbnailPath = null;
+            }
+            if (user.Background != null)
+            {
+                user.Background.FileName = null;
+                user.Background.MediaPath = null;
+                user.Background.ThumbnailPath = null;
+            }
+
+            return user;
         }
     }
 }

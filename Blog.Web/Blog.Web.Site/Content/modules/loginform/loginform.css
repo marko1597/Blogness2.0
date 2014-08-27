@@ -54,51 +54,6 @@
             margin: 2px 0;
         }
 
-            .login-form .content .input.has-error {
-                background: #d9534f;
-                color: #fff;
-            }
-
-                .login-form .content .input.has-error::-webkit-input-placeholder { /* WebKit browsers */
-                    color: #fff;
-                }
-
-                .login-form .content .input.has-error:hover::-webkit-input-placeholder,
-                .login-form .content .input.has-error:focus::-webkit-input-placeholder { /* WebKit browsers */
-                    color: #333;
-                }
-
-                .login-form .content .input.has-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-                    color: #fff;
-                    opacity: 1;
-                }
-
-                .login-form .content .input.has-error:hover:-moz-placeholder,
-                .login-form .content .input.has-error:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-                    color: #333;
-                    opacity: 1;
-                }
-
-                .login-form .content .input.has-error::-moz-placeholder { /* Mozilla Firefox 19+ */
-                    color: #fff;
-                    opacity: 1;
-                }
-
-                .login-form .content .input.has-error:hover::-moz-placeholder,
-                .login-form .content .input.has-error:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
-                    color: #333;
-                    opacity: 1;
-                }
-
-                .login-form .content .input.has-error:-ms-input-placeholder { /* Internet Explorer 10+ */
-                    color: #fff;
-                }
-
-                .login-form .content .input.has-error:hover:-ms-input-placeholder,
-                .login-form .content .input.has-error:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
-                    color: #333;
-                }
-
             .login-form .content .input:hover {
                 background: #ddd;
                 color: #333;

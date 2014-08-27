@@ -2,10 +2,24 @@
     overflow: visible !important;
 }
 
+    .user-profile-details .fa {
+        cursor: pointer;
+    }
+
+        .user-profile-details .fa:hover {
+            opacity: 0.5;
+        }
+
     .user-profile-details .content-item {
         background: #f8f8f8;
         margin-bottom: 15px;
     }
+
+        .user-profile-details .content-item .error-message {
+            color: #d9534f;
+            font-size: 1em;
+            margin: 10px 0 0;
+        }
 
     .user-profile-details .header {
         background: #4c4c4c;
@@ -46,7 +60,7 @@
             }
 
     .user-profile-details .user-form {
-        padding: 0 10px;
+        padding: 0 10px 10px;
     }
 
         .user-profile-details .user-form .form-group {
@@ -54,23 +68,15 @@
         }
 
             .user-profile-details .user-form .form-group label {
-                margin: 7px 0;
+                margin: 5px 0;
             }
 
-            .user-profile-details .user-form .form-group .fa-edit {
-                cursor: pointer;
-            }
-
-                .user-profile-details .user-form .form-group .fa-edit:hover {
-                    opacity: 0.5;
+                .user-profile-details .user-form .form-group label[data-display],
+                .user-profile-details .user-form .form-group input[type='text'] {
+                    font-weight: normal;
+                    max-width: 100%;
+                    width: 100%;
                 }
-
-            .user-profile-details .user-form .form-group label[data-display],
-            .user-profile-details .user-form .form-group input[type='text'] {
-                font-weight: normal;
-                max-width: 100%;
-                width: 100%;
-            }
 
         .user-profile-details .user-form[name='user-hobbies-form'] .form-group {
             margin-bottom: 5px;
@@ -97,18 +103,14 @@
             width: auto;
         }
 
-        .user-profile-details .body .user-education-item .fa-edit,
-        .user-profile-details .body .user-education-item .fa-save {
+        .user-profile-details .body .user-education-item .fa,
+        .user-profile-details .body .user-education-item .fa {
             color: #666;
             font-size: 1.2em;
             margin-top: 7px;
+            margin-right: 3px;
             cursor: pointer;
         }
-
-            .user-profile-details .body .user-education-item .fa-edit:hover,
-            .user-profile-details .body .user-education-item .fa-save:hover {
-                opacity: 0.5;
-            }
 
         .user-profile-details .body .user-education-item input[type='text'] {
             margin-bottom: 10px;
