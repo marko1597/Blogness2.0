@@ -30,9 +30,9 @@ namespace Blog.Services.Implementation
             return _postsLogic.GetPostsByTag(tagName);
         }
 
-        public List<Post> GetMorePostsByTag(string tagName)
+        public List<Post> GetMorePostsByTag(string tagName, int skip)
         {
-            return _postsLogic.GetMorePostsByTag(tagName);
+            return _postsLogic.GetMorePostsByTag(tagName, skip);
         }
 
         public List<Post> GetPostsByUser(int userId)
@@ -40,9 +40,9 @@ namespace Blog.Services.Implementation
             return _postsLogic.GetPostsByUser(userId);
         }
 
-        public List<Post> GetMorePostsByUser(int userId)
+        public List<Post> GetMorePostsByUser(int userId, int skip)
         {
-            return _postsLogic.GetMorePostsByUser(userId);
+            return _postsLogic.GetMorePostsByUser(userId, skip);
         }
         
         public List<Post> GetPopularPosts(int postsCount)

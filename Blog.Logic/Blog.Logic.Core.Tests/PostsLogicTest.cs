@@ -548,7 +548,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePostsByUser(1);
+            var result = _postsLogic.GetMorePostsByUser(1, 10);
 
             Assert.AreEqual(1, result.Count);
         }
@@ -567,7 +567,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePostsByUser(1);
+            var result = _postsLogic.GetMorePostsByUser(1, 10);
 
             Assert.AreEqual(0, result.Count);
         }
@@ -586,7 +586,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByUser(1));
+            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByUser(1, 10));
         }
 
         [Test]
@@ -695,7 +695,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePostsByTag("foo");
+            var result = _postsLogic.GetMorePostsByTag("foo", 10);
 
             Assert.AreEqual(1, result.Count);
         }
@@ -715,7 +715,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            var result = _postsLogic.GetMorePostsByTag("foo");
+            var result = _postsLogic.GetMorePostsByTag("foo", 10);
 
             Assert.AreEqual(0, result.Count);
         }
@@ -735,7 +735,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _commentsRepository.Object, _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByTag("foo"));
+            Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByTag("foo", 10));
         }
 
         [Test]

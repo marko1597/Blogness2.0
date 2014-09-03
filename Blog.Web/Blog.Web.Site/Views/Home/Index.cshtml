@@ -9,14 +9,12 @@
         <navigation-menu></navigation-menu>
     </div>
     @*<div snap-drawer="right">
-        <h4>Right Drawer</h4>
-    </div>*@
+            <h4>Right Drawer</h4>
+        </div>*@
 </snap-drawers>
 
-<snap-content class="body-content" scroll-trigger scroll-trigger-watch="posts-main">
-    @*<div class="container">*@
-        <div class="page-content" ui-view></div>
-    @*</div>*@
+<snap-content class="body-content" scroll-trigger>
+    <div class="page-content" ui-view></div>
 </snap-content>
 
 <div error-display></div>

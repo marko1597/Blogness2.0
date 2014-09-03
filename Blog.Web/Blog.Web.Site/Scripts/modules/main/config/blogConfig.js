@@ -26,6 +26,9 @@
         $urlRouterProvider.otherwise("/error");
 
         $stateProvider
+            .state('account', {
+                url: "/"
+            })
             .state('posts', {
                 url: "/",
                 templateUrl: window.blogConfiguration.templatesUrl + 'posts.html',

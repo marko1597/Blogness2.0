@@ -1,9 +1,9 @@
 ﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$window", "configProvider", "authenticationService", "userService",
     function ($scope, $location, $rootScope, $log, $window, configProvider, authenticationService, userService) {
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            //$log.info("location changing from " + current + " to " + next);
+            $log.info("location changing from " + current + " to " + next);
         });
-
+        
         $rootScope.$on("userLoggedIn", function (ev, data) {
             if (data.username) {
                 $scope.getUserInfo(data.username);
@@ -12,13 +12,15 @@
         });
 
         $scope.init = function () {
-            authenticationService.getUserInfo().then(function (response) {
-                if (response.Message == undefined || response.Message == null) {
-                    $scope.getUserInfo(response.Email);
-                }
-            }, function () {
-                authenticationService.logout();
-            });
+            if (!$window.isInAccountPage) {
+                authenticationService.getUserInfo().then(function (response) {
+                    if (response.Message == undefined || response.Message == null) {
+                        $scope.getUserInfo(response.Email);
+                    }
+                }, function () {
+                    authenticationService.logout();
+                });
+            }
         };
 
         $scope.getUserInfo = function(username) {

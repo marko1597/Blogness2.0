@@ -35,11 +35,11 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
-        public List<Post> GetMorePostsByTag(string tagName)
+        public List<Post> GetMorePostsByTag(string tagName, int skip)
         {
             using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))
             {
-                return svc.Proxy.GetMorePostsByTag(tagName);
+                return svc.Proxy.GetMorePostsByTag(tagName, skip);
             }
         }
 
@@ -51,11 +51,11 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
-        public List<Post> GetMorePostsByUser(int userId)
+        public List<Post> GetMorePostsByUser(int userId, int skip)
         {
             using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))
             {
-                return svc.Proxy.GetMorePostsByUser(userId);
+                return svc.Proxy.GetMorePostsByUser(userId, skip);
             }
         }
         

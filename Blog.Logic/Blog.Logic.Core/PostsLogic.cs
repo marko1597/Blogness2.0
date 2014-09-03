@@ -78,12 +78,12 @@ namespace Blog.Logic.Core
             return posts;
         }
 
-        public List<Post> GetMorePostsByTag(string tagName)
+        public List<Post> GetMorePostsByTag(string tagName, int skip)
         {
             var posts = new List<Post>();
             try
             {
-                var db = _postRepository.GetMorePostsByTag(tagName).ToList();
+                var db = _postRepository.GetMorePostsByTag(tagName, 5, skip).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
                 posts.ForEach(a => GetPostProperties(a));
             }
@@ -110,12 +110,12 @@ namespace Blog.Logic.Core
             return posts;
         }
 
-        public List<Post> GetMorePostsByUser(int userId)
+        public List<Post> GetMorePostsByUser(int userId, int skip)
         {
             var posts = new List<Post>();
             try
             {
-                var db = _postRepository.GetMorePostsByUser(userId).ToList();
+                var db = _postRepository.GetMorePostsByUser(userId, 5, skip).ToList();
                 db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
                 posts.ForEach(a => GetPostProperties(a));
             }

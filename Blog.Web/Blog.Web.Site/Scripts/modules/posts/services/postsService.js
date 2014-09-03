@@ -104,6 +104,50 @@
                 return deferred.promise;
             },
 
+            getPostsByUser: function(userId) {
+                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+
+                $http({
+                    url: userPostsUrl + userId + "/posts",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMorePostsByUser: function (userId, skip) {
+                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+
+                $http({
+                    url: userPostsUrl + userId + "/posts/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
             addPost: function (post) {
                 var deferred = $q.defer();
 

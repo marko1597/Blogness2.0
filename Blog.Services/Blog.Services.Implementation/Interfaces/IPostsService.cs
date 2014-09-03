@@ -18,13 +18,13 @@ namespace Blog.Services.Implementation.Interfaces
         List<Post> GetPostsByTag(string tagName);
 
         [OperationContract]
-        List<Post> GetMorePostsByTag(string tagName);
+        List<Post> GetMorePostsByTag(string tagName, int skip);
 
         [OperationContract]
         List<Post> GetPostsByUser(int userId);
 
         [OperationContract]
-        List<Post> GetMorePostsByUser(int userId);
+        List<Post> GetMorePostsByUser(int userId, int skip);
 
         [OperationContract]
         List<Post> GetPopularPosts(int postsCount);

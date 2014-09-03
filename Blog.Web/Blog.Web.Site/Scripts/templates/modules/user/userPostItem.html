@@ -1,0 +1,28 @@
+﻿<div id="post-item-{{post.PostId}}" ng-class="getPostSize()" class="post-list-item user-post-item content-item">
+    <div class="header row" data-user-id="{{post.CreatedBy}}">
+        <div>
+            <h4>
+                <a href="{{post.Url}}">{{post.PostTitle}}</a>
+            </h4>
+            <p>
+                <span>{{post.DateDisplay}}</span>
+            </p>
+            <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
+        </div>
+    </div>
+    <div class="body">
+        <p ng-bind-html="post.PostMessage" ellipsis></p>
+    </div>
+    <div class="contents">
+        <div post-contents contents="post.PostContents"></div>
+    </div>
+    <div class="details">
+        <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
+    </div>
+    <div class="tags">
+        <div class="empty-message" ng-show="!hasTags">
+            <p>There are no tags.</p>
+        </div>
+        <div tag-item tag="tag" ng-repeat="tag in post.Tags" ng-show="hasTags"></div>
+    </div>
+</div>

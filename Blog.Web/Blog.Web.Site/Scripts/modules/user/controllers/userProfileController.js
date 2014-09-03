@@ -57,6 +57,10 @@
             work: false
         };
 
+        $scope.init = function() {
+            $scope.getUserInfo();
+        };
+
         $scope.editDetails = function () {
             $scope.isEditing.details = true;
         };
@@ -236,6 +240,6 @@
             $scope.getUserInfo();
         });
 
-        $scope.getUserInfo();
+        $scope.init();
     }
 ]);

@@ -79,14 +79,14 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
-        [Route("api/posts/tag/{tagName}/more")]
-        public List<Post> GetMoreByTag(string tagName)
+        [Route("api/posts/tag/{tagName}/more/{skip}")]
+        public List<Post> GetMoreByTag(string tagName, int skip)
         {
             var posts = new List<Post>();
 
             try
             {
-                posts = _postsSvc.GetMorePostsByTag(tagName) ?? new List<Post>();
+                posts = _postsSvc.GetMorePostsByTag(tagName, skip) ?? new List<Post>();
             }
             catch (Exception ex)
             {
@@ -193,14 +193,14 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
-        [Route("api/user/{userId}/posts/more/{skip:int?}")]
-        public List<Post> GetMoreUserPosts(int userId)
+        [Route("api/user/{userId}/posts/more/{skip}")]
+        public List<Post> GetMoreUserPosts(int userId, int skip)
         {
             var posts = new List<Post>();
 
             try
             {
-                posts = _postsSvc.GetPostsByUser(userId) ?? new List<Post>();
+                posts = _postsSvc.GetMorePostsByUser(userId, skip) ?? new List<Post>();
             }
             catch (Exception ex)
             {

@@ -1,12 +1,18 @@
 ﻿ngShared.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
     return {
         link: function (scope, element, attrs) {
-            var elemWatch = "#" + attrs.scrollTriggerWatch;
+            scope.scrollTriggerWatch = null;
 
-            angular.element(element).bind("scroll", function() {
-                var scroll = $(element).scrollTop();
-                if (scroll + $(window).height() >= $(elemWatch).outerHeight()) {
-                    $rootScope.$broadcast("scrollBottom");
+            $rootScope.$on("updateScrollTriggerWatch", function (event, data) {
+                scope.scrollTriggerWatch = "#" + data;
+            });
+
+            angular.element(element).bind("scroll", function () {
+                if (scope.scrollTriggerWatch != null) {
+                    var scroll = $(element).scrollTop();
+                    if (scroll + $(window).height() >= $(scope.scrollTriggerWatch).outerHeight()) {
+                        $rootScope.$broadcast("scrollBottom");
+                    }
                 }
             });
         }

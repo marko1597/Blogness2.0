@@ -1,8 +1,13 @@
-﻿ngPosts.controller('postsController', ["$scope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
-    function ($scope, $location, $timeout, $interval, localStorageService, postsService, blockUiService, errorService) {
+﻿ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
+    function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, blockUiService, errorService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
+
+        $scope.init = function() {
+            $scope.getRecentPosts();
+            $rootScope.$broadcast("updateScrollTriggerWatch", "posts-main");
+        };
         
         $scope.getRecentPosts = function () {
             blockUiService.blockIt();
@@ -47,6 +52,6 @@
             $scope.getMoreRecentPosts();
         });
 
-        $scope.getRecentPosts();
+        $scope.init();
     }
 ]);

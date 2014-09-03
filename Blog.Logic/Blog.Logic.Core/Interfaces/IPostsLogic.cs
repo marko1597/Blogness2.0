@@ -8,9 +8,9 @@ namespace Blog.Logic.Core.Interfaces
     {
         Post GetPost(int postId);
         List<Post> GetPostsByTag(string tagName);
-        List<Post> GetMorePostsByTag(string tagName);
+        List<Post> GetMorePostsByTag(string tagName, int skip);
         List<Post> GetPostsByUser(int userId);
-        List<Post> GetMorePostsByUser(int userId);
+        List<Post> GetMorePostsByUser(int userId, int skip);
         List<Post> GetPopularPosts(int postsCount);
         List<Post> GetMorePopularPosts(int postsCount, int skip);
         List<Post> GetRecentPosts(int postsCount);
