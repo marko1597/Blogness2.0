@@ -57,7 +57,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet]
-        [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
+        [CacheOutput(ClientTimeSpan = 20, ServerTimeSpan = 20)]
         [Route("api/users/{name}")]
         public User Get(string name)
         {

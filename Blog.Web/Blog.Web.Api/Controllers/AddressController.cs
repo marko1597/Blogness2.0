@@ -57,7 +57,7 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                return _service.Add(address);
+                return _service.Update(address);
             }
             catch (Exception ex)
             {

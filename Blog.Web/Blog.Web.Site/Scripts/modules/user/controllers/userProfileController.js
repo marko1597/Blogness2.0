@@ -65,20 +65,6 @@
             $scope.isEditing.details = true;
         };
 
-        $scope.editAddress = function () {
-            $scope.isEditing.address = true;
-        };
-
-        $scope.editHobbies = function () {
-            $scope.isEditing.hobbies = true;
-        };
-
-        $scope.editEducation = function (id, educationId) {
-            var educationGroup = _.where($scope.education, { id: id })[0];
-            var data = _.where(educationGroup.content, { EducationId: educationId })[0];
-            data.isEditing = true;
-        };
-
         $scope.saveDetails = function () {
             blockUiService.blockIt();
             userService.updateUser($scope.user).then(function (response) {
@@ -89,7 +75,6 @@
 
                     $scope.user = response;
                     $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                    $scope.$broadcast("resizeIsotopeItems");
 
                     blockUiService.unblockIt();
                     $scope.isEditing.details = false;
@@ -99,17 +84,80 @@
                     $scope.isEditing.details = false;
                 }
             }, function (err) {
+                $scope.getModelStateErrors(err.ModelState, "address");
+                blockUiService.unblockIt();
+            });
+        };
+
+        $scope.editAddress = function () {
+            $scope.isEditing.address = true;
+        };
+
+        $scope.saveAddress = function () {
+            userService.updateUserAddress($scope.address).then(function (response) {
+                if (response.Error == null) {
+                    $scope.address = response;
+                    blockUiService.unblockIt();
+                } else {
+                    errorService.displayErrorRedirect(response.Error);
+                    blockUiService.unblockIt();
+                }
+                $scope.isEditing.address = false;
+            }, function (err) {
                 $scope.getModelStateErrors(err.ModelState, "details");
                 blockUiService.unblockIt();
             });
         };
 
-        $scope.saveAddress = function () {
-            $scope.isEditing.address = false;
+        $scope.addHobby = function () {
+            $scope.isEditing.hobbies = true;
         };
 
-        $scope.saveHobbies = function () {
-            $scope.isEditing.hobbies = false;
+        $scope.editHobby = function (hobbyId) {
+            var hobby = _.where($scope.hobbies, { HobbyId: hobbyId })[0];
+            hobby.isEditing = true;
+        };
+
+        $scope.saveHobby = function (hobbyId) {
+            if (hobbyId == undefined) {
+                userService.addUserHobby($scope.newHobby).then(function (response) {
+                    if (response.Error == null) {
+                        $scope.hobbies.push(response);
+                        $scope.newHobby = "";
+                        blockUiService.unblockIt();
+                    } else {
+                        errorService.displayErrorRedirect(response.Error);
+                        blockUiService.unblockIt();
+                    }
+                    $scope.isEditing.hobbies = false;
+                }, function (err) {
+                    $scope.getModelStateErrors(err.ModelState, "hobbies");
+                    blockUiService.unblockIt();
+                });
+            } else {
+                var hobby = _.where($scope.hobbies, { HobbyId: hobbyId })[0];
+
+                userService.updateUserHobby(hobby).then(function (response) {
+                    if (response.Error == null) {
+                        hobby = response;
+                        blockUiService.unblockIt();
+                    } else {
+                        errorService.displayErrorRedirect(response.Error);
+                        blockUiService.unblockIt();
+                    }
+
+                    hobby.isEditing = false;
+                }, function (err) {
+                    $scope.getModelStateErrors(err.ModelState, "hobbies");
+                    blockUiService.unblockIt();
+                });
+            }
+        };
+        
+        $scope.editEducation = function (id, educationId) {
+            var educationGroup = _.where($scope.education, { id: id })[0];
+            var data = _.where(educationGroup.content, { EducationId: educationId })[0];
+            data.isEditing = true;
         };
 
         $scope.saveEducation = function (id, educationId) {
@@ -138,24 +186,21 @@
                 educationGroup.isAdding = true;
             }
         };
-
-        $scope.showCancelAddingEducation = function(isAdding) {
-            if (isAdding == undefined) {
-                return false;
-            }
-            return isAdding;
-        };
-
+        
         $scope.cancelAddingEducation = function (id) {
             var educationGroup = _.where($scope.education, { id: id })[0];
             educationGroup.isAdding = false;
 
             var data = _.where(educationGroup.content, { isAdding: true });
 
-            _.each(data, function(e) {
-                var index = educationGroup.content.indexOf(e);
-                educationGroup.content.splice(index, 1);
-            });
+            if (data.length > 0) {
+                _.each(data, function(e) {
+                    var index = educationGroup.content.indexOf(e);
+                    educationGroup.content.splice(index, 1);
+                });
+            } else {
+                
+            }
         };
 
         $scope.showNoRecordsMessage = function (field, subfield) {
@@ -180,8 +225,12 @@
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.address = response.Address;
-                        $scope.hobbies = response.Hobbies;
                         $scope.work = response.Work;
+
+                        _.each(response.Hobbies, function (h) {
+                            h.isEditing = false;
+                            $scope.hobbies.push(h);
+                        });
 
                         _.each(response.Education, function (e) {
                             e.isEditing = false;

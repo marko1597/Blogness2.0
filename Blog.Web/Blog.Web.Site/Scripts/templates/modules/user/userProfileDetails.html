@@ -165,11 +165,8 @@
             <div class="content-item hobbies">
                 <div class="header">
                     <h4>Hobbies</h4>
-                    <div class="btn-header right" ng-show="isEditing.hobbies" ng-click="saveHobbies()">
-                        <i class="fa fa-save"></i>Save
-                    </div>
-                    <div class="btn-header right" ng-show="!isEditing.hobbies" ng-click="editHobbies()">
-                        <i class="fa fa-edit"></i>Edit
+                    <div class="btn-header right" ng-show="!isEditing.hobbies" ng-click="addHobby()">
+                        <i class="fa fa-plus"></i>Add
                     </div>
                 </div>
                 <form class="user-form" name="user-hobbies-form" ng-submit="submitForm(userHobbiesForm.$valid)" novalidate>
@@ -181,17 +178,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <label ng-show="!isEditing.hobbies">{{hobby.HobbyName}}</label>
-                                <input name="firstname" type="text" class="input form-control" ng-show="isEditing.hobbies"
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
+                                <label ng-show="!hobby.isEditing">{{hobby.HobbyName}}</label>
+                                <input name="firstname" type="text" class="input form-control" ng-show="hobby.isEditing"
                                        placeholder="Enter hobby" ng-model="hobby.HobbyName" />
+                                <i class="fa fa-edit" ng-show="!hobby.isEditing" ng-click="editHobby(hobby.HobbyId)"></i>
+                                <i class="fa fa-save" ng-show="hobby.isEditing" ng-click="saveHobby(hobby.HobbyId)"></i>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
                                 <input name="new-hobby" type="text" class="input form-control" ng-show="isEditing.hobbies"
                                        placeholder="Enter hobby" ng-model="newHobby" />
+                                <i class="fa fa-save" ng-show="isEditing.hobbies" ng-click="saveHobby()"></i>
                             </div>
                         </div>
                     </div>
@@ -227,7 +227,7 @@
                                                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                                                         <i class="fa fa-save" ng-show="info.isEditing" ng-click="saveEducation(educ.id, info.EducationId)"></i>
                                                         <i class="fa fa-edit" ng-show="!info.isEditing" ng-click="editEducation(educ.id, info.EducationId)"></i>
-                                                        <i class="fa fa-trash-o" ng-show="showCancelAddingEducation(info.isAdding)" ng-click="cancelAddingEducation(educ.id)"></i>
+                                                        <i class="fa fa-trash-o" ng-show="{{!info.isEditing || info.isAdding}}" ng-click="cancelAddingEducation(educ.id)"></i>
                                                     </div>
                                                 </div>
                                                 <div class="row">

@@ -37,6 +37,10 @@ namespace Blog.Logic.Core
         {
             try
             {
+                hobby.CreatedBy = hobby.UserId;
+                hobby.CreatedDate = DateTime.Now;
+                hobby.ModifiedBy = hobby.UserId;
+                hobby.ModifiedDate = DateTime.Now;
                 return HobbyMapper.ToDto(_hobbyRepository.Add(HobbyMapper.ToEntity(hobby)));
             }
             catch (Exception ex)
@@ -49,6 +53,8 @@ namespace Blog.Logic.Core
         {
             try
             {
+                hobby.ModifiedBy = hobby.UserId;
+                hobby.ModifiedDate = DateTime.Now;
                 return HobbyMapper.ToDto(_hobbyRepository.Edit(HobbyMapper.ToEntity(hobby)));
             }
             catch (Exception ex)
