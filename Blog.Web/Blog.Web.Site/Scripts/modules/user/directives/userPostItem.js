@@ -1,5 +1,5 @@
 ﻿ngUser.directive('userPostItem', [function () {
-    var ctrlFn = function ($scope) {
+    var ctrlFn = function ($scope, $location) {
         $scope.post = $scope.data.Post;
         $scope.user = $scope.data.Post.User;
         $scope.username = $scope.user.Username;
@@ -13,7 +13,7 @@
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope"];
+    ctrlFn.$inject = ["$scope", "$location"];
 
     return {
         restrict: 'EA',

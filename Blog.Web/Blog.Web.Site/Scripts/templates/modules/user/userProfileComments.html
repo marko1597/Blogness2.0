@@ -1,5 +1,5 @@
-﻿<div class="user-profile-comments">
-    <div class="well">
-        User profile comments
+﻿<div class="user-profile-comments content-item">
+    <div id="user-profile-comments-list">
+        <div ng-repeat="comment in comments track by $index" user-comment-item comment="comment"></div>
     </div>
 </div>

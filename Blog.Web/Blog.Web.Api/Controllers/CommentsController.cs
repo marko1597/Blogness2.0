@@ -46,8 +46,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet]
-        [Route("api/users/{userId}/comments")]
-        public List<Comment> GetByComments(int userId)
+        [Route("api/user/{userId}/comments")]
+        public List<Comment> GetByUser(int userId)
         {
             var comments = new List<Comment>();
 

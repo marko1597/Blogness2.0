@@ -1,7 +1,6 @@
 ﻿ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$stateParams", "userService", "postsService", "blockUiService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, userService, postsService, blockUiService, errorService, localStorageService) {
         $scope.user = null;
-        $scope.userFullName = null;
         $scope.posts = [];
         $scope.isBusy = false;
         $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
@@ -20,7 +19,6 @@
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.user = response;
-                        $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
                         blockUiService.unblockIt();
                         $scope.getPostsByUser();
                     } else {

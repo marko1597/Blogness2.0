@@ -17,7 +17,34 @@
                         c = that.addViewProperties(c, false, false);
 
                         _.each(c.Comments, function (r) {
-                            r = that.addViewProperties(r);
+                            that.addViewProperties(r);
+                        });
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getCommentsByUser: function (userId) {
+                var userCommentsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+                var that = this;
+
+                $http({
+                    url: userCommentsUrl + userId + "/comments",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (c) {
+                        c = that.addViewProperties(c, false, false);
+
+                        _.each(c.Comments, function (r) {
+                            that.addViewProperties(r);
                         });
                     });
                     deferred.resolve(response);
@@ -61,8 +88,8 @@
 
             addViewProperties: function(comment, showReplies, showAddReply) {
                 comment.DateDisplay = dateHelper.getDateDisplay(comment.CreatedDate);
-                comment.NameDisplay = comment.User.FirstName + " " + comment.User.LastName;
-                comment.Url = "/#/user/" + comment.User.UserName;
+                comment.NameDisplay = comment.User != null ? comment.User.FirstName + " " + comment.User.LastName : "";
+                comment.Url = "/#/user/" + (comment.User != null ? comment.User.UserName : "");
 
                 if (showReplies != undefined) {
                     comment.ShowReplies = false;

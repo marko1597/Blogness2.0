@@ -316,6 +316,7 @@
     <Content Include="Content\modules\shared\fileupload.css" />
     <Content Include="Content\modules\shared\fileuploaditem.css" />
     <Content Include="Content\modules\tags\tagitem.css" />
+    <Content Include="Content\modules\user\usercommentitem.css" />
     <Content Include="Content\modules\user\userimage.css" />
     <Content Include="Content\modules\user\userpostitem.css" />
     <Content Include="Content\modules\user\userprofilecomments.css" />
@@ -362,6 +363,7 @@
     <Content Include="Scripts\modules\user\controllers\userProfileFavoritesController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileMediaController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfilePostsController.js" />
+    <Content Include="Scripts\modules\user\directives\userCommentItem.js" />
     <Content Include="Scripts\modules\user\directives\userImage.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
     <Content Include="Scripts\modules\user\directives\userPostItem.js" />
@@ -762,6 +764,7 @@
     <Content Include="Scripts\templates\modules\shared\videoPlayer.html" />
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
     <Content Include="Scripts\templates\errorpage.html" />
+    <Content Include="Scripts\templates\modules\user\userCommentItem.html" />
     <Content Include="Scripts\templates\modules\user\userImage.html" />
     <Content Include="Scripts\templates\modules\user\userPostItem.html" />
     <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
