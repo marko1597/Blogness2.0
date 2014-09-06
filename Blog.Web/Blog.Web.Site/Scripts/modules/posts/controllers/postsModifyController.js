@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$fileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $rootScope, $location, $timeout, $fileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
+    function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
         $scope.isAdding = true;
         $scope.existingContents = [];
         $scope.username = localStorageService.get("username");
@@ -42,11 +42,11 @@
                         $scope.isAdding = false;
                         $scope.post = resp;
 
-                        _.each(resp.Tags, function(t) {
+                        _.each(resp.Tags, function (t) {
                             $scope.Tags.push({ text: t.TagName });
                         });
 
-                        _.each(resp.PostContents, function(t) {
+                        _.each(resp.PostContents, function (t) {
                             var item = {
                                 file: {
                                     name: t.Media.FileName,
@@ -59,7 +59,7 @@
                                 isExisting: true,
                                 url: t.Media.ThumbnailUrl,
                                 base: t,
-                                remove: function() {
+                                remove: function () {
                                     var index = $scope.post.PostContents.indexOf(this.base);
                                     $scope.post.PostContents.splice(index);
                                     uploader.removeFromQueue(this);
@@ -69,8 +69,8 @@
                             $scope.existingContents.push(item);
                         });
 
-                        $timeout(function() {
-                            _.each($scope.existingContents, function(c) {
+                        $timeout(function () {
+                            _.each($scope.existingContents, function (c) {
                                 uploader.queue.push(c);
                             });
                             $scope.$broadcast("resizeIsotopeItems");
@@ -85,7 +85,7 @@
                     blockUiService.unblockIt();
                     errorService.displayErrorRedirect({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
                 }
-            }, function(e) {
+            }, function (e) {
                 blockUiService.unblockIt();
                 errorService.displayErrorRedirect(e);
             });
@@ -148,7 +148,7 @@
             $scope.user = data;
         });
 
-        $rootScope.$on("userLoggedIn", function() {
+        $rootScope.$on("userLoggedIn", function () {
             $scope.username = localStorageService.get("username");
             $scope.authData = localStorageService.get("authorizationData");
         });
@@ -159,20 +159,24 @@
 
         });
 
-        var uploader = $scope.uploader = $fileUploader.create({
+        var uploader = $scope.uploader = new FileUploader({
             scope: $rootScope,
             url: $scope.uploadUrl,
             headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
         });
 
-        uploader.filters.push(function (item /*{File|HTMLInputElement}*/) {
-            var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-            type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item /*{File|HTMLInputElement}*/) {
+                var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
+                type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
+            }
         });
 
-        uploader.bind('success', function (event, xhr, item, response) {
-            item.mediaId = response.MediaId;
+
+        uploader.onSuccessItem = function (fileItem, response) {
+            fileItem.mediaId = response.MediaId;
             var media = {
                 PostId: null,
                 Media: response,
@@ -180,16 +184,16 @@
                 PostContentText: item.postContentText
             };
             $scope.post.PostContents.push(media);
-        });
+        };
 
-        uploader.bind('afteraddingfile', function (e, a) {
-            a.allowCaptions = true;
-            a.postContentTitle = "";
-            a.postContentText = "";
-        });
+        uploader.onAfterAddingFile = function (fileItem) {
+            fileItem.allowCaptions = true;
+            fileItem.postContentTitle = "";
+            fileItem.postContentText = "";
+        };
 
-        uploader.bind('afteraddingall', function () {
-        });
+        uploader.onAfterAddingAll = function () {
+        };
 
         $scope.init();
     }

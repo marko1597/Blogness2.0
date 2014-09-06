@@ -62,13 +62,6 @@
                 plugins: {
                     poster: {
                         url: $scope.media.ThumbnailUrl
-                    },
-                    ads: {
-                        companion: "companionAd",
-                        companionSize: [728, 90],
-                        network: "6062",
-                        unitPath: "iab_vast_samples",
-                        adTagUrl: "http://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=%2F6062%2Fiab_vast_samples&ciu_szs=300x250%2C728x90&gdfp_req=1&env=vp&output=xml_vast2&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]&cust_params=iab_vast_samples%3Dlinear"
                     }
                 }
             };

@@ -1,1 +1,1 @@
-﻿var ngShared = angular.module("ngShared", []);
+﻿var ngShared = angular.module("ngShared", ['angularFileUpload']);

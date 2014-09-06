@@ -1,1 +1,8 @@
-﻿var ngComments = angular.module("ngComments", ["ngShared", "ngSignalr", "iso.directives", "ngConfig", "localStorageModule"]);
+﻿var ngComments = angular.module("ngComments",
+    [
+        "ngShared",
+        "SignalR",
+        "iso.directives",
+        "ngConfig",
+        "LocalStorageModule"
+    ]);

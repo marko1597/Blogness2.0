@@ -1,6 +1,6 @@
 ﻿var ngUser = angular.module("ngUser",
     [
-        "localStorageModule",
+        "LocalStorageModule",
         "ngSanitize",
         "ngShared",
         "ngComments"

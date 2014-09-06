@@ -8,6 +8,10 @@
             $location.path("/post/create/new");
         };
 
+        $scope.$on('toggleNavigation', function (ev, d) {
+            snapRemote.toggle(d.direction, undefined);
+        });
+
         $scope.testDisplayError = function () {
             $('#blog-header-collapsible').collapse("hide");
             $rootScope.$broadcast("displayError", { Message: "This is a test error message." });

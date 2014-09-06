@@ -1,23 +1,22 @@
-﻿ngComments.factory("commentsHubService", ["$rootScope", "$interval", "signalrHub", "commentsService", "configProvider", 
-    function ($rootScope, $interval, signalrHub, commentsService, configProvider) {
-        var hubUrl = configProvider.getSettings().HubUrl == "" ?
-            window.blogConfiguration.hubUrl :
-            configProvider.getSettings().HubUrl;
+﻿ngComments.factory("commentsHubService", ["$rootScope", "$interval", "Hub", "commentsService", "configProvider",
+    function ($rootScope, $interval, Hub, commentsService, configProvider) {
+        var hub = new Hub("commentsHub", {
+            listeners: {
+                commentLikesUpdate: function (commentId, commentLikes) {
+                    $rootScope.$broadcast("commentLikesUpdate", { CommentId: commentId, CommentLikes: commentLikes });
+                },
+                commentAdded: function (postId, comment) {
+                    if (comment.PostId != null) {
+                        comment = commentsService.addViewProperties(comment, false, false);
+                    } else {
+                        comment = commentsService.addViewProperties(comment);
+                    }
 
-        var hub = new signalrHub(hubUrl, "commentsHub", {
-            commentLikesUpdate: function (commentId, commentLikes) {
-                $rootScope.$broadcast("commentLikesUpdate", { CommentId: commentId, CommentLikes: commentLikes });
-            },
-            commentAdded: function (postId, comment) {
-                if (comment.PostId != null) {
-                    comment = commentsService.addViewProperties(comment, false, false);
-                } else {
-                    comment = commentsService.addViewProperties(comment);
+                    $rootScope.$broadcast("commentAdded", { PostId: postId, Comment: comment });
                 }
-                
-                $rootScope.$broadcast("commentAdded", { PostId: postId, Comment: comment });
-            }
-        }, ["viewPost"]);
+            },
+            methods: ["viewPost"],
+        });
 
         var stop;
 
