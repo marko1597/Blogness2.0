@@ -1,6 +1,5 @@
 ﻿ngUser.directive('userProfileDetailsEducationGroup', [function () {
-    var ctrlFn = function ($scope, $rootScope) {
-        $scope.user = {};
+    var ctrlFn = function ($scope) {
         $scope.isAdding = false;
         $scope.newEducation = {
             City: "",
@@ -53,24 +52,21 @@
         });
 
         $scope.$on("successAddingUserEducation", function (ev, data) {
-            $scope.educationGroup.content.push(data);
+            $scope.educationGroup.Content.push(data);
         });
 
         $scope.$on("successDeletingUserEducation", function(ev, data) {
-            var educationIndex = $scope.educationGroup.content.indexOf(data);
-            $scope.educationGroup.content.splice(educationIndex, 1);
-        });
-
-        $rootScope.$on("viewedUserLoaded", function (ev, data) {
-            $scope.newEducation.UserId = data.Id;
+            var educationIndex = $scope.educationGroup.Content.indexOf(data);
+            $scope.educationGroup.Content.splice(educationIndex, 1);
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope"];
+    ctrlFn.$inject = ["$scope"];
 
     return {
         restrict: 'EA',
         scope: {
-            educationGroup: '='
+            educationGroup: '=',
+            user: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducationGroup.html",

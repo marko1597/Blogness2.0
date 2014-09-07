@@ -37,6 +37,8 @@
         };
 
         $scope.addEducation = function () {
+            $scope.education.UserId = $scope.user.Id;
+
             userService.addUserEducation($scope.education).then(function (response) {
                 if (response.Error != null) {
                     errorService.displayErrorRedirect(response.Error);
@@ -70,7 +72,8 @@
         restrict: 'EA',
         scope: {
             education: '=',
-            isAdding: '='
+            isAdding: '=',
+            user: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducationItem.html",

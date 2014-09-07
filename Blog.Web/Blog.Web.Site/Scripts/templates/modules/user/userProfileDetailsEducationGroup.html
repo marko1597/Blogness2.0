@@ -10,10 +10,10 @@
         
         <div ng-show="!showNoRecordsMessage()">
             <div class="user-education-item" ng-repeat="education in educationGroup.Content track by $index"
-                 user-profile-details-education-item education="education"></div>
+                 user-profile-details-education-item education="education" user="user"></div>
         </div>
         
         <div class="user-education-item" ng-show="isAdding"
-             user-profile-details-education-item education="newEducation" is-adding="true"></div>
+             user-profile-details-education-item education="newEducation" user="user" is-adding="true"></div>
     </div>
 </div>

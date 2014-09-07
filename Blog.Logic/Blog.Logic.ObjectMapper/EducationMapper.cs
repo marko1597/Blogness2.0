@@ -42,7 +42,6 @@ namespace Blog.Logic.ObjectMapper
                     State = education.State,
                     YearAttended = education.YearAttended,
                     YearGraduated = education.YearGraduated,
-                    EducationType = EducationTypeMapper.ToEntity(education.EducationType),
                     EducationTypeId = education.EducationType.EducationTypeId,
                     EducationId = education.EducationId,
                     UserId = education.UserId,

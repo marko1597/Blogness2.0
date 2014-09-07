@@ -24,7 +24,6 @@
                         $scope.work = response.Work;
                         $scope.hobbies = response.Hobbies;
                         $scope.education = response.EducationGroups;
-                        $rootScope.$broadcast("viewedUserLoaded", response);
 
                         delete response.Education;
                         delete response.Address;
