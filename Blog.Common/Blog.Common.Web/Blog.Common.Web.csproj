@@ -173,6 +173,7 @@
     <Compile Include="Attributes\AllowCrossSiteAttribute.cs" />
     <Compile Include="Attributes\BlogApiAuthorizationAttribute.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttribute.cs" />
+    <Compile Include="Attributes\PreventCrossUserManipulationAttribute.cs" />
     <Compile Include="Attributes\ValidateMimetypeMultipartContentAttribute.cs" />
     <Compile Include="Authentication\AuthenticationHelper.cs" />
     <Compile Include="Authentication\IAuthenticationHelper.cs" />

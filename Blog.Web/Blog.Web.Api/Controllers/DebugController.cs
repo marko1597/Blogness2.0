@@ -1,31 +1,23 @@
-﻿using System;
-using System.Web.Http;
-using Blog.Common.Web.Extensions.Elmah;
+﻿using System.Web.Http;
+using Blog.Common.Contracts;
+using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api.Controllers
 {
     public class DebugController : ApiController
     {
-        private readonly IErrorSignaler _errorSignaler;
-
-        public DebugController(IErrorSignaler errorSignaler)
-        {
-            _errorSignaler = errorSignaler;
-        }
-
-        [HttpGet]
-        [Authorize]
-        [Route("api/debug/sendmessage/{message}")]
-        public string Get(string message)
+        [HttpPost]
+        [PreventCrossUserManipulation]
+        [Route("api/debug")]
+        public bool Post([FromBody] Comment comment)
         {
             try
             {
-                return message;
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                _errorSignaler.SignalFromCurrentContext(ex);
-                return string.Empty;
+                return false;
             }
         }
     }

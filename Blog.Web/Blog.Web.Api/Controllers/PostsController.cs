@@ -283,7 +283,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/posts/{id}")]
+        [Route("api/posts/{id:int}")]
         public void Delete(int id)
         {
             try

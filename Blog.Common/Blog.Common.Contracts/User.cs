@@ -19,11 +19,9 @@ namespace Blog.Common.Contracts
         public string IdentityId { get; set; }
 
         [DataMember]
-        [Required]
         public string FirstName { get; set; }
 
         [DataMember]
-        [Required]
         public string LastName { get; set; }
 
         [DataMember]

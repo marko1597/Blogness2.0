@@ -39,7 +39,7 @@
             });
 
             scope.likePost = function () {
-                postsService.likePost(scope.data.PostId, scope.user.UserName).then(function() {
+                postsService.likePost(scope.data.PostId, scope.username).then(function() {
                     // TODO: This should call the logger api
                     console.log(scope.user.UserName + " liked post " + scope.data.PostId);
                 },
