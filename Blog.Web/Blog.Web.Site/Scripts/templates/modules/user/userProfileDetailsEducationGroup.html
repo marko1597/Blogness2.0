@@ -1,0 +1,19 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <i class="fa fa-plus-circle" ng-click="addEducation()"></i>
+            {{educationGroup.Title}}
+        </h4>
+    </div>
+    <div id="{{educ.id}}" class="panel-body">
+        <div empty-record-message message="emptyRecordMessage" ng-show="showNoRecordsMessage()"></div>
+        
+        <div ng-show="!showNoRecordsMessage()">
+            <div class="user-education-item" ng-repeat="education in educationGroup.Content track by $index"
+                 user-profile-details-education-item education="education"></div>
+        </div>
+        
+        <div class="user-education-item" ng-show="isAdding"
+             user-profile-details-education-item education="newEducation" is-adding="true"></div>
+    </div>
+</div>

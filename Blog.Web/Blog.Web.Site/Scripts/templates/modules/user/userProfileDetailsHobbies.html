@@ -1,0 +1,27 @@
+﻿<div class="content-item hobbies">
+    <div class="header">
+        <h4>Hobbies</h4>
+        <div class="btn-header right" ng-show="!isAdding" ng-click="addHobby()">
+            <i class="fa fa-plus"></i>Add
+        </div>
+    </div>
+
+    <form class="user-form" name="user-hobbies-form" ng-submit="submitForm(userHobbiesForm.$valid)" novalidate>
+        <div empty-record-message message="emptyRecordMessage" ng-show="showNoRecordsMessage()"></div>
+        <div ng-repeat="hobby in hobbies track by $index" user-profile-details-hobby-item hobby="hobby"></div>
+
+        <div class="row" ng-show="isAdding">
+            <div class=" col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="error-message">{{error.HobbyName}}</p>
+            </div>
+        </div>
+        <div class="row" ng-show="isAdding">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
+                <input name="new-hobby" type="text" class="input form-control"
+                       ng-class="hasError()" placeholder="Enter hobby" ng-model="newHobby.HobbyName" />
+                <i class="fa fa-save" ng-show="isAdding" ng-click="saveHobby()"></i>
+                <i class="fa fa-times" ng-show="isAdding" ng-click="cancelAdding()"></i>
+            </div>
+        </div>
+    </form>
+</div>

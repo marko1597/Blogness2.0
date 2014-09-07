@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -6,6 +8,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Identity;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Web.Api.Models;
 using Microsoft.AspNet.Identity.Owin;
 using WebApi.OutputCache.V2;
 
@@ -39,14 +42,15 @@ namespace Blog.Web.Api.Controllers
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/users/{userId:int}")]
-        public User Get(int userId)
+        public UserProfileViewModel Get(int userId)
         {
-            var user = new User();
+            var user = new UserProfileViewModel();
 
             try
             {
-                user = _user.Get(userId) ?? new User();
-                user = HideUserProperties(user);
+                var tUser = _user.Get(userId) ?? new User();
+                tUser = HideUserProperties(tUser);
+                user = GetViewModel(tUser);
             }
             catch (Exception ex)
             {
@@ -59,14 +63,15 @@ namespace Blog.Web.Api.Controllers
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 20, ServerTimeSpan = 20)]
         [Route("api/users/{name}")]
-        public User Get(string name)
+        public UserProfileViewModel Get(string name)
         {
-            var user = new User();
+            var user = new UserProfileViewModel();
 
             try
             {
-                user = _user.GetByUserName(name) ?? new User();
-                user = HideUserProperties(user);
+                var tUser = _user.GetByUserName(name) ?? new User();
+                tUser = HideUserProperties(tUser);
+                user = GetViewModel(tUser);
             }
             catch (Exception ex)
             {
@@ -129,7 +134,7 @@ namespace Blog.Web.Api.Controllers
                 {
                     Error = new Error
                     {
-                        Id = (int) Common.Utils.Constants.Error.InternalError,
+                        Id = (int)Common.Utils.Constants.Error.InternalError,
                         Message = "Oops! That's not supposed to happen. Can you try again?"
                     }
                 };
@@ -138,7 +143,65 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        private static User HideUserProperties(User user)
+        private UserProfileViewModel GetViewModel(User user)
+        {
+            var userViewModel = new UserProfileViewModel
+                                {
+                                    Id = user.Id,
+                                    UserName = user.UserName,
+                                    IdentityId = user.IdentityId,
+                                    FirstName = user.FirstName,
+                                    LastName = user.LastName,
+                                    EmailAddress = user.EmailAddress,
+                                    BirthDate = user.BirthDate,
+                                    Address = user.Address,
+                                    Picture = user.Picture,
+                                    PictureId = user.PictureId,
+                                    Background = user.Background,
+                                    BackgroundId = user.BackgroundId,
+                                    Hobbies = user.Hobbies
+                                };
+
+            var educationGroups = new List<EducationGroup>();
+
+            var gradeSchool = user.Education.Where(a => a.EducationType.EducationTypeId == 1).ToList();
+            educationGroups.Add(new EducationGroup
+            {
+                EducationType = 1,
+                Title = "Grade School",
+                Content = gradeSchool
+            });
+
+            var highSchool = user.Education.Where(a => a.EducationType.EducationTypeId == 2).ToList();
+            educationGroups.Add(new EducationGroup
+            {
+                EducationType = 2,
+                Title = "High School",
+                Content = highSchool
+            });
+
+            var college = user.Education.Where(a => a.EducationType.EducationTypeId == 3).ToList();
+            educationGroups.Add(new EducationGroup
+            {
+                EducationType = 3,
+                Title = "College",
+                Content = college
+            });
+
+            var graduateSchool = user.Education.Where(a => a.EducationType.EducationTypeId == 4).ToList();
+            educationGroups.Add(new EducationGroup
+            {
+                EducationType = 4,
+                Title = "Graduate School",
+                Content = graduateSchool
+            });
+
+            userViewModel.EducationGroups = educationGroups;
+
+            return userViewModel;
+        }
+
+        private User HideUserProperties(User user)
         {
             if (user.Picture != null)
             {

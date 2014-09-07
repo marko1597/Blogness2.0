@@ -283,8 +283,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/posts")]
-        public void Delete([FromBody]int id)
+        [Route("api/posts/{id}")]
+        public void Delete(int id)
         {
             try
             {

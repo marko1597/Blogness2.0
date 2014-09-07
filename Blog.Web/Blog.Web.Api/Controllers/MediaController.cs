@@ -157,8 +157,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpPost, Authorize]
-        [Route("api/media")]
-        public bool Delete([FromBody]int mediaId)
+        [Route("api/media/{id}")]
+        public bool Delete(int mediaId)
         {
             try
             {

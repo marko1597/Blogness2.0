@@ -1,0 +1,58 @@
+﻿<div class="user-education-item" data-educ-id="education.EducationId">
+    <form class="user-form" name="user-education-form" ng-submit="submitForm(userEducationForm.$valid)" novalidate>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <label ng-show="!isEditing">{{education.SchoolName}}</label>
+                    <input name="firstname" type="text" class="input form-control" ng-show="isEditing"
+                           placeholder="School Name" ng-model="education.SchoolName" ng-enter="register()" />
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <i class="fa fa-close" ng-show="isEditing" ng-click="cancelEditing()"></i>
+                    <i class="fa fa-save" ng-show="isEditing" ng-click="saveEducation()"></i>
+                    <i class="fa fa-trash-o" ng-show="!isEditing" ng-click="deleteEducation()"></i>
+                    <i class="fa fa-edit" ng-show="!isEditing" ng-click="editEducation()"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-show="!isEditing">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label data-display>{{education.State}} {{education.City}}, {{education.Country}}</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label data-display>{{education.Course}}</label>
+                        <label data-display>From {{education.YearAttendedDisplay}} to {{education.YearGraduatedDisplay}}</label>
+                    </div>
+                </div>
+                <div ng-show="isEditing">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input name="state" type="text" class="input form-control"
+                               placeholder="State" ng-model="education.State" />
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input name="city" type="text" class="input form-control"
+                               placeholder="City" ng-model="education.City" />
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <input name="country" type="text" class="input form-control"
+                               placeholder="Country" ng-model="education.Country" />
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <input name="course" type="text" class="input form-control"
+                               placeholder="Course" ng-model="education.Course" />
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="yearattended" type="text" class="input form-control"
+                               placeholder="Date attended" ng-model="education.YearAttended" bs-datepicker data-placement="top"
+                               data-date-format="MM/dd/yyyy" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <input name="yeargraduated" type="text" class="input form-control"
+                               placeholder="Date graduated" ng-model="education.YearGraduated" bs-datepicker data-placement="top"
+                               data-date-format="MM/dd/yyyy" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

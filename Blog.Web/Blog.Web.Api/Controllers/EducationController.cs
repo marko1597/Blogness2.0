@@ -38,39 +38,55 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/education")]
-        public Education Post([FromBody]Education education)
+        public IHttpActionResult Post([FromBody]Education education)
         {
             try
             {
-                return _service.Add(education);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Add(education);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Education().GenerateError<Education>((int)Constants.Error.InternalError,
+                var errorResult = new Education().GenerateError<Education>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpPut]
         [Route("api/education")]
-        public Education Put([FromBody]Education education)
+        public IHttpActionResult Put([FromBody]Education education)
         {
             try
             {
-                return _service.Update(education);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Update(education);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Education().GenerateError<Education>((int)Constants.Error.InternalError,
+                var errorResult = new Education().GenerateError<Education>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpDelete]
-        [Route("api/education")]
-        public bool Delete([FromBody]int educationId)
+        [Route("api/education/{educationId}")]
+        public bool Delete(int educationId)
         {
             try
             {

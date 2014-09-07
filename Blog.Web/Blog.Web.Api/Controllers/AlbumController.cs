@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Common.Utils;
@@ -54,39 +53,55 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/albums")]
-        public Album Post([FromBody]Album album)
+        public IHttpActionResult Post([FromBody]Album album)
         {
             try
             {
-                return _service.Add(album);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Add(album);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+                var errorResult = new Album().GenerateError<Album>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpPut]
         [Route("api/albums")]
-        public Album Put([FromBody]Album album)
+        public IHttpActionResult Put([FromBody]Album album)
         {
             try
             {
-                return _service.Add(album);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Update(album);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+                var errorResult = new Album().GenerateError<Album>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpDelete]
-        [Route("api/albums")]
-        public bool Delete([FromBody]int albumId)
+        [Route("api/albums/{albumId}")]
+        public bool Delete(int albumId)
         {
             try
             {

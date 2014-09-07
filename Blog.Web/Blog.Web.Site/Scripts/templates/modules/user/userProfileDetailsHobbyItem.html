@@ -1,0 +1,18 @@
+﻿<div class="form-group" data-hobby-id="hobby.HobbyId">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="error-message">{{error.HobbyName}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
+            <label ng-show="!isEditing">{{hobby.HobbyName}}</label>
+            <input name="firstname" type="text" class="input form-control" ng-show="isEditing"
+                   ng-class="hasError()" placeholder="Enter hobby" ng-model="hobby.HobbyName" />
+            <i class="fa fa-edit" ng-show="!isEditing" ng-click="editHobby()"></i>
+            <i class="fa fa-trash" ng-show="!isEditing" ng-click="deleteHobby()"></i>
+            <i class="fa fa-save" ng-show="isEditing" ng-click="saveHobby()"></i>
+            <i class="fa fa-times" ng-show="isEditing" ng-click="cancelEditing()"></i>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿<div class="content-item information">
+    <div class="header">
+        <h4>Personal Details</h4>
+        <div class="btn-header right" ng-show="isEditing" ng-click="saveDetails()">
+            <i class="fa fa-save"></i>Save
+        </div>
+        <div class="btn-header right" ng-show="!isEditing" ng-click="editDetails()">
+            <i class="fa fa-edit"></i>Edit
+        </div>
+    </div>
+    <form class="user-form" name="user-details-form" ng-submit="submitForm(userDetailsForm.$valid)" novalidate>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="error-message">{{error.FirstName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                    <label>First Name</label>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                    <label data-display ng-show="!isEditing">{{user.FirstName}}</label>
+                    <input name="firstname" type="text" class="input form-control" ng-show="isEditing"
+                           ng-class="hasError('FirstName')" placeholder="First Name" ng-model="user.FirstName" ng-enter="register()" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="error-message">{{error.LastName}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                    <label>Last Name</label>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                    <label data-display ng-show="!isEditing">{{user.LastName}}</label>
+                    <input name="lastname" type="text" class="input form-control" ng-show="isEditing"
+                           ng-class="hasError('LastName')" placeholder="Last Name" ng-model="user.LastName" ng-enter="register()" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="error-message">{{error.EmailAddress}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                    <label>Email</label>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                    <label data-display ng-show="!isEditing">{{user.EmailAddress}}</label>
+                    <input name="email" type="text" class="input form-control" ng-show="isEditing" required
+                           ng-class="hasError('EmailAddress')" placeholder="Email" ng-model="user.EmailAddress" ng-enter="register()" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="error-message">{{error.BirthDate}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                    <label>Birth Date</label>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                    <label data-display ng-show="!isEditing">{{user.BirthDateDisplay}}</label>
+                    <input name="birthdate" type="text" class="input form-control" ng-show="isEditing"
+                           ng-class="hasError('BirthDate')" placeholder="Birthdate" ng-model="user.BirthDate" ng-enter="register()"
+                           bs-datepicker data-date-format="MM/dd/yyyy" data-placement="top" data-iconleft="fa fa-calendar" data-autoclose="true" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -69,8 +69,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/postcontent")]
-        public bool Delete([FromBody]int postContentId)
+        [Route("api/postcontent/{postContentId}")]
+        public bool Delete(int postContentId)
         {
             try
             {

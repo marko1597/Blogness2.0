@@ -19,10 +19,18 @@
             position: relative;
         }
 
-            .user-profile-details .content-item .user-hobby-item .fa {
+            .user-profile-details .content-item .user-hobby-item .fa-edit,
+            .user-profile-details .content-item .user-hobby-item .fa-save {
                 position: absolute;
                 top: 8px;
                 right: 30px;
+            }
+
+            .user-profile-details .content-item .user-hobby-item .fa-trash,
+            .user-profile-details .content-item .user-hobby-item .fa-times {
+                position: absolute;
+                top: 7px;
+                right: 50px;
             }
 
         .user-profile-details .content-item .error-message {
@@ -81,8 +89,8 @@
                 margin: 5px 0;
             }
 
-                .user-profile-details .user-form .form-group label[data-display],
-                .user-profile-details .user-form .form-group input[type='text'] {
+                .user-profile-details input[type='text'],
+                .user-profile-details .user-form .form-group label[data-display] {
                     font-weight: normal;
                     max-width: 100%;
                     width: 100%;
@@ -96,6 +104,7 @@
                 font-weight: normal;
             }
 
+            .user-profile-details .content-item.hobbies input[type='text'],
             .user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {
                 margin-bottom: 10px;
             }

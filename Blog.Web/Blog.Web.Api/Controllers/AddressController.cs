@@ -2,7 +2,6 @@
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
@@ -37,39 +36,55 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost]
         [Route("api/address")]
-        public Address Post([FromBody]Address address)
+        public IHttpActionResult Post([FromBody]Address address)
         {
             try
             {
-                return _service.Add(address);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Add(address);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Address().GenerateError<Address>((int) Constants.Error.InternalError,
+                var errorResult = new Address().GenerateError<Address>((int) Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpPut]
         [Route("api/address")]
-        public Address Put([FromBody]Address address)
+        public IHttpActionResult Put([FromBody]Address address)
         {
             try
             {
-                return _service.Update(address);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = _service.Update(address);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Address().GenerateError<Address>((int)Constants.Error.InternalError,
+                var errorResult = new Address().GenerateError<Address>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpDelete]
-        [Route("api/address")]
-        public bool Delete([FromBody]int addressId)
+        [Route("api/address/{addressId}")]
+        public bool Delete(int addressId)
         {
             try
             {

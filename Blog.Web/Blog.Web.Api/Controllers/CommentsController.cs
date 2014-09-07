@@ -5,7 +5,6 @@ using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Helper.Hub;
@@ -116,8 +115,8 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete, Authorize]
-        [Route("api/comments")]
-        public void Delete([FromBody]int id)
+        [Route("api/comments/{id}")]
+        public void Delete(int id)
         {
             try
             {

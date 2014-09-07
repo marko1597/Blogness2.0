@@ -3,6 +3,7 @@
         var userApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Users" : configProvider.getSettings().BlogApi + "Users";
         var addressApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Address" : configProvider.getSettings().BlogApi + "Address";
         var hobbyApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Hobbies" : configProvider.getSettings().BlogApi + "Hobbies";
+        var educationApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "Education" : configProvider.getSettings().BlogApi + "Education";
 
         var applyUserModelDefaults = function(user) {
             user.BirthDateDisplay = dateHelper.getJsDate(user.BirthDate);
@@ -36,11 +37,27 @@
                 var deferred = $q.defer();
                 
                 $http({
-                    url: addressApi,
+                    url: userApi,
                     method: "PUT",
                     data: user
                 }).success(function (response) {
                     deferred.resolve(applyUserModelDefaults(response));
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            addUserAddress: function (address) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: addressApi,
+                    method: "POST",
+                    data: address
+                }).success(function (response) {
+                    deferred.resolve(response);
                 }).error(function (error) {
                     deferred.reject(error);
                 });
@@ -87,6 +104,68 @@
                     url: hobbyApi,
                     method: "PUT",
                     data: hobby
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            deleteUserHobby: function (hobbyId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: hobbyApi + "/" + hobbyId,
+                    method: "DELETE"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            addUserEducation: function (education) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: educationApi,
+                    method: "POST",
+                    data: education
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            updateUserEducation: function (education) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: educationApi,
+                    method: "PUT",
+                    data: education
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            deleteUserEducation: function (educationId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: educationApi + "/" + educationId,
+                    method: "DELETE",
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (error) {

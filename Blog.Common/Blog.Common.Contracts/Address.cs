@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Blog.Common.Contracts
 {
@@ -9,21 +10,26 @@ namespace Blog.Common.Contracts
         public int AddressId { get; set; }
 
         [DataMember]
+        [Required]
         public int UserId { get; set; }
 
         [DataMember]
+        [Required]
         public string StreetAddress { get; set; }
 
         [DataMember]
+        [Required]
         public string City { get; set; }
 
         [DataMember]
+        [Required]
         public string State { get; set; }
 
         [DataMember]
         public int? Zip { get; set; }
 
         [DataMember]
+        [Required]
         public string Country { get; set; }
     }
 }

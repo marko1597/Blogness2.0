@@ -2550,6 +2550,13 @@
     <Content Include="Scripts\modules\posts\directives\postContents.js" />
     <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
     <Content Include="Scripts\modules\tags\services\tagsService.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsAddress.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducation.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducationGroup.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducationItem.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbies.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbyItem.js" />
+    <Content Include="Scripts\modules\user\directives\userProfileDetailsInfo.js" />
     <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />
@@ -2832,6 +2839,13 @@
     <Content Include="Scripts\templates\modules\user\userPostItem.html" />
     <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetails.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsAddress.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducation.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducationGroup.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducationItem.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsHobbies.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsHobbyItem.html" />
+    <Content Include="Scripts\templates\modules\user\userProfileDetailsInfo.html" />
     <Content Include="Scripts\templates\modules\user\userProfileFavorites.html" />
     <Content Include="Scripts\templates\modules\user\userProfileMedia.html" />
     <Content Include="Scripts\templates\modules\user\userProfileNavigation.html" />

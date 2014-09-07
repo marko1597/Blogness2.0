@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Blog.Common.Contracts
@@ -10,12 +11,15 @@ namespace Blog.Common.Contracts
         public int EducationId { get; set; }
 
         [DataMember]
+        [Required]
         public int UserId { get; set; }
 
         [DataMember]
+        [Required]
         public EducationType EducationType { get; set; }
 
         [DataMember]
+        [Required]
         public string SchoolName { get; set; }
 
         [DataMember]

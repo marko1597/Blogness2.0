@@ -1,20 +1,24 @@
 ﻿blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
     function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
-        $provide.factory('httpInterceptor', ["$q", function ($q) {
+        $provide.factory('httpInterceptor', ["$q", "blockUiService", function ($q, blockUiService) {
             return {
                 request: function (config) {
+                    blockUiService.blockIt();
                     return config || $q.when(config);
                 },
 
                 requestError: function (rejection) {
+                    blockUiService.blockIt();
                     return $q.reject(rejection);
                 },
 
                 response: function (response) {
+                    blockUiService.unblockIt();
                     return response || $q.when(response);
                 },
 
                 responseError: function (rejection) {
+                    blockUiService.unblockIt();
                     return $q.reject(rejection);
                 }
             };
