@@ -1,8 +1,9 @@
 ﻿ngUser.directive('userProfileDetailsHobbyItem', [function () {
-    var ctrlFn = function ($scope, blockUiService, errorService, userService) {
+    var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
         $scope.isEditing = false;
         $scope.error = {};
         $scope.hobbyNameStore = "";
+        $scope.username = localStorageService.get("username");
 
         $scope.cancelEditing = function () {
             $scope.hobby.HobbyName = $scope.hobbyNameStore;
@@ -51,13 +52,29 @@
             }
             return "has-error";
         };
+
+        $scope.showButtons = function () {
+            if ($scope.username == undefined || $scope.username == null || $scope.username == "") {
+                return "hidden";
+            } else {
+                if ($scope.user == undefined) {
+                    return "hidden";
+                } else {
+                    if ($scope.username !== $scope.user.UserName) {
+                        return "hidden";
+                    }
+                    return "";
+                }
+            }
+        };
     };
-    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService"];
+    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',
         scope: {
-            hobby: '='
+            hobby: '=',
+            user: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsHobbyItem.html",

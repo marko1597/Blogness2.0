@@ -37,10 +37,9 @@
     src: url('fonts/CanterBold3D.otf') format('opentype');
 }
 
-/*
- * Animations on ng-views   
- * --------------------------------------------------
- */
+/* -------------------------------------
+ * Ng-view animations
+ * ------------------------------------- */
 @-moz-keyframes scaleUp {
     from {
         opacity: 0.3;
@@ -201,9 +200,9 @@
 }
 
 
-/* Isotope styles 
- ==============================================*/
-
+/* -------------------------------------
+ * Isotope styles 
+ * ------------------------------------- */
 .isotope-item {
     z-index: 2;
 }
@@ -251,15 +250,16 @@
         transition: none;
     }
 
-
-/* Videogular overrides 
- ==============================================*/
+/* -------------------------------------
+ * Videogular overrides 
+ * ------------------------------------- */
 videogular vg-video {
     min-height: 380px;
 }
 
-/* CK Editor overrides
- ============================================= */
+/* -------------------------------------
+ * CK Editor overrides 
+ * ------------------------------------- */
 #cke_post-message-editor {
     background: none !important;
     padding: 3px 5px 5px 5px !important;
@@ -288,15 +288,17 @@ videogular vg-video {
     background: none !important;
 }
 
-/* Error page
- ============================================= */
+/* -------------------------------------
+ * Error page
+ * ------------------------------------- */
 #page-not-found > img {
     width: 100%;
     height: auto;
 }
-
-/* Block UI message base css 
- ============================================= */
+ 
+/* -------------------------------------
+ * Block UI message base css  
+ * ------------------------------------- */
 .blockUI.blockMsg {
     margin: 0;
     top: 40%;
@@ -394,7 +396,9 @@ textarea {
     color: #d9534f;
 }
 
-/* styles for validation helpers */
+/* -------------------------------------
+ * styles for validation helpers   
+ * ------------------------------------- */
 .field-validation-error {
     color: #b94a48;
 }
@@ -699,3 +703,15 @@ tags-input .autocomplete {
             color: black;
             background-color: white;
         }
+
+/* -------------------------------------
+ * Angular Carousel
+ * ------------------------------------- */
+.rn-carousel-control {
+    background: #56c2e1;
+    border: 1px solid #46b3d3;
+    border-radius: 20px;
+    width: 40px;
+    padding: 0 12px;
+    color: #fff;
+}

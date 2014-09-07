@@ -13,14 +13,12 @@
         };
 
         $scope.getUserInfo = function () {
-            blockUiService.blockIt();
-
             if ($scope.username) {
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.user = response;
                         blockUiService.unblockIt();
-                        $scope.getPostsByUser();
+                        $scope.getPostsByUser(response.Id);
                     } else {
                         errorService.displayErrorRedirect(response.Error);
                         blockUiService.unblockIt();
@@ -35,13 +33,13 @@
             }
         };
 
-        $scope.getPostsByUser = function () {
+        $scope.getPostsByUser = function (userId) {
             if ($scope.isBusy) {
                 return;
             }
             $scope.isBusy = true;
 
-            postsService.getPostsByUser($scope.user.Id).then(function (resp) {
+            postsService.getPostsByUser(userId).then(function (resp) {
                 $scope.posts = resp;
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");

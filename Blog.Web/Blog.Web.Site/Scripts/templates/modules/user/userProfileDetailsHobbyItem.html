@@ -9,8 +9,8 @@
             <label ng-show="!isEditing">{{hobby.HobbyName}}</label>
             <input name="firstname" type="text" class="input form-control" ng-show="isEditing"
                    ng-class="hasError()" placeholder="Enter hobby" ng-model="hobby.HobbyName" />
-            <i class="fa fa-edit" ng-show="!isEditing" ng-click="editHobby()"></i>
-            <i class="fa fa-trash" ng-show="!isEditing" ng-click="deleteHobby()"></i>
+            <i class="fa fa-edit" ng-show="!isEditing" ng-click="editHobby()" ng-class="showButtons()"></i>
+            <i class="fa fa-trash" ng-show="!isEditing" ng-click="deleteHobby()" ng-class="showButtons()"></i>
             <i class="fa fa-save" ng-show="isEditing" ng-click="saveHobby()"></i>
             <i class="fa fa-times" ng-show="isEditing" ng-click="cancelEditing()"></i>
         </div>

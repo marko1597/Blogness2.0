@@ -1,5 +1,6 @@
 ﻿ngUser.directive('userProfileDetailsEducationGroup', [function () {
-    var ctrlFn = function ($scope) {
+    var ctrlFn = function ($scope, localStorageService) {
+        $scope.username = localStorageService.get("username");
         $scope.isAdding = false;
         $scope.newEducation = {
             City: "",
@@ -7,7 +8,7 @@
             Course: "",
             EducationType: {
                 EducationTypeId: $scope.educationGroup.EducationType,
-                EducationTypeName: $scope.educationGroup.EducationTitle
+                EducationTypeName: $scope.educationGroup.Title
             },
             SchoolName: "",
             State: "",
@@ -18,7 +19,7 @@
             YearGraduatedDisplay: ""
         };
 
-        $scope.emptyRecordMessage = "It's alright, we know school is expensive..right?";
+        $scope.emptyRecordMessage = "This person has no " + $scope.educationGroup.Title + " education..pathetic right?";
 
         $scope.addEducation = function() {
             $scope.isAdding = true;
@@ -29,6 +30,21 @@
                 return false;
             }
             return true;
+        };
+
+        $scope.showButtons = function () {
+            if ($scope.username == undefined || $scope.username == null || $scope.username == "") {
+                return "hidden";
+            } else {
+                if ($scope.user == undefined) {
+                    return "hidden";
+                } else {
+                    if ($scope.username !== $scope.user.UserName) {
+                        return "hidden";
+                    }
+                    return "";
+                }
+            }
         };
 
         $scope.$on("cancelAddingUserEducation", function () {
@@ -60,7 +76,7 @@
             $scope.educationGroup.Content.splice(educationIndex, 1);
         });
     };
-    ctrlFn.$inject = ["$scope"];
+    ctrlFn.$inject = ["$scope", "localStorageService"];
 
     return {
         restrict: 'EA',

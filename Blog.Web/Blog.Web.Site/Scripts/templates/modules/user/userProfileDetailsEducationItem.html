@@ -10,8 +10,8 @@
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                     <i class="fa fa-close" ng-show="isEditing" ng-click="cancelEditing()"></i>
                     <i class="fa fa-save" ng-show="isEditing" ng-click="saveEducation()"></i>
-                    <i class="fa fa-trash-o" ng-show="!isEditing" ng-click="deleteEducation()"></i>
-                    <i class="fa fa-edit" ng-show="!isEditing" ng-click="editEducation()"></i>
+                    <i class="fa fa-trash-o" ng-show="!isEditing" ng-click="deleteEducation()" ng-class="showButtons()"></i>
+                    <i class="fa fa-edit" ng-show="!isEditing" ng-click="editEducation()" ng-class="showButtons()"></i>
                 </div>
             </div>
             <div class="row">

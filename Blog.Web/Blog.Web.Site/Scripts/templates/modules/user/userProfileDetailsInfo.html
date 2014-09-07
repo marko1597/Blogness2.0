@@ -4,7 +4,7 @@
         <div class="btn-header right" ng-show="isEditing" ng-click="saveDetails()">
             <i class="fa fa-save"></i>Save
         </div>
-        <div class="btn-header right" ng-show="!isEditing" ng-click="editDetails()">
+        <div class="btn-header right" ng-show="!isEditing" ng-class="showButtons()" ng-click="editDetails()">
             <i class="fa fa-edit"></i>Edit
         </div>
     </div>

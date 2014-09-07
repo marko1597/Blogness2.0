@@ -178,10 +178,10 @@
         uploader.onSuccessItem = function (fileItem, response) {
             fileItem.mediaId = response.MediaId;
             var media = {
-                PostId: null,
+                PostId: 0,
                 Media: response,
-                PostContentTitle: item.postContentTitle,
-                PostContentText: item.postContentText
+                PostContentTitle: fileItem.postContentTitle,
+                PostContentText: fileItem.postContentText
             };
             $scope.post.PostContents.push(media);
         };

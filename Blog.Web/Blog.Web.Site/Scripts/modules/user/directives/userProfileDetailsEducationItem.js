@@ -1,5 +1,6 @@
 ﻿ngUser.directive('userProfileDetailsEducationItem', [function () {
-    var ctrlFn = function ($scope, userService, dateHelper, blockUiService, errorService) {
+    var ctrlFn = function ($scope, userService, dateHelper, blockUiService, errorService, localStorageService) {
+        $scope.username = localStorageService.get("username");
         $scope.isEditing = $scope.isAdding == undefined ? false : ($scope.isAdding === "false" ? false : true);
 
         $scope.editEducation = function () {
@@ -65,8 +66,23 @@
                 $scope.setModelStateErrors(err.ModelState);
             });
         };
+
+        $scope.showButtons = function () {
+            if ($scope.username == undefined || $scope.username == null || $scope.username == "") {
+                return "hidden";
+            } else {
+                if ($scope.user == undefined) {
+                    return "hidden";
+                } else {
+                    if ($scope.username !== $scope.user.UserName) {
+                        return "hidden";
+                    }
+                    return "";
+                }
+            }
+        };
     };
-    ctrlFn.$inject = ["$scope", "userService", "dateHelper", "blockUiService", "errorService"];
+    ctrlFn.$inject = ["$scope", "userService", "dateHelper", "blockUiService", "errorService", "localStorageService"];
 
     return {
         restrict: 'EA',

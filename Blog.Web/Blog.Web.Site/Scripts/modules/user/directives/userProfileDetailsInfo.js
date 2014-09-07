@@ -1,8 +1,9 @@
 ﻿ngUser.directive('userProfileDetailsInfo', [function () {
-    var ctrlFn = function ($scope, blockUiService, errorService, userService) {
+    var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
         $scope.isEditing = false;
         $scope.userFullName = null;
         $scope.error = {};
+        $scope.username = localStorageService.get("username");
 
         $scope.editDetails = function () {
             $scope.isEditing = true;
@@ -45,8 +46,23 @@
             }
             return "has-error";
         };
+
+        $scope.showButtons = function () {
+            if ($scope.username == undefined || $scope.username == null || $scope.username == "") {
+                return "hidden";
+            } else {
+                if ($scope.user == undefined) {
+                    return "hidden";
+                } else {
+                    if ($scope.username !== $scope.user.UserName) {
+                        return "hidden";
+                    }
+                    return "";
+                }
+            }
+        };
     };
-    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService"];
+    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',
