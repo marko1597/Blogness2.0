@@ -1,5 +1,5 @@
-﻿ngComments.factory("commentsHubService", ["$rootScope", "$interval", "Hub", "commentsService", "configProvider",
-    function ($rootScope, $interval, Hub, commentsService, configProvider) {
+﻿ngComments.factory("commentsHubService", ["$rootScope", "$interval", "Hub", "commentsService",
+    function ($rootScope, $interval, Hub, commentsService) {
         var hub = new Hub("commentsHub", {
             listeners: {
                 commentLikesUpdate: function (commentId, commentLikes) {
@@ -16,7 +16,11 @@
                 }
             },
             methods: ["viewPost"],
+            logging: true
         });
+        // TODO: Oh so hackish way! Pleeeeaaaase update it to be better. :(
+        hub.disconnect();
+        hub.connect();
 
         var stop;
 

@@ -52,6 +52,7 @@
                     $scope.isBusy = false;
                     $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
                     $scope.$broadcast("resizeIsotopeItems");
+                    $scope.$broadcast("signalRConnect");
                 } else {
                     errorService.displayError({ Message: e });
                 }

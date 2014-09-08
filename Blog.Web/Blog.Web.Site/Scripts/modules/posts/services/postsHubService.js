@@ -1,12 +1,13 @@
-﻿ngPosts.factory("postsHubService", ["$rootScope", "$interval", "Hub", "configProvider",
-    function ($rootScope, $interval, Hub, configProvider) {
+﻿ngPosts.factory("postsHubService", ["$rootScope", "$interval", "Hub",
+    function ($rootScope, $interval, Hub) {
         var hub = new Hub("postsHub", {
             listeners: {
                 postLikesUpdate: function (postId, postLikes) {
                     $rootScope.$broadcast("postLikesUpdate", { PostId: postId, PostLikes: postLikes });
                 }
             },
-            methods: ["viewPost"]
+            methods: ["viewPost"],
+            logging: true
         });
 
         var stop;
