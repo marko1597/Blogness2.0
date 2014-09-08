@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
@@ -34,7 +35,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/address")]
         public IHttpActionResult Post([FromBody]Address address)
         {
@@ -58,7 +59,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut, PreventCrossUserManipulation, Authorize]
         [Route("api/address")]
         public IHttpActionResult Put([FromBody]Address address)
         {

@@ -1,5 +1,5 @@
 ﻿ngPosts.directive('postRelatedItems', [function () {
-    var ctrlFn = function ($scope, $rootScope, postsService, blockUiService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, postsService, errorService) {
         $scope.postsByTag = [];
         $scope.postsByUser = [];
         
@@ -10,14 +10,11 @@
         $scope.selectedCategory = $scope.relatedCategories[0];
 
         $scope.getRelatedPosts = function () {
-            blockUiService.blockIt({ elem: ".post-related-list" });
-
             postsService.getRelatedPosts($scope.parentpostid).then(function (response) {
                 $scope.postsByTag = response.PostsByTags;
                 $scope.postsByUser = response.PostsByUser;
-                blockUiService.unblockIt(".post-related-list");
             }, function (e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 
@@ -37,7 +34,7 @@
 
         $scope.getRelatedPosts();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "blockUiService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "errorService"];
 
     return {
         restrict: 'EA',

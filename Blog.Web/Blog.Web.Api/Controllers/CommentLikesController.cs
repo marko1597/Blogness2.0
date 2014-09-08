@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
@@ -53,6 +54,9 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 var user = _user.GetByUserName(username);
+                var loggedUser = _user.GetByUserName(User.Identity.Name);
+                if (loggedUser.Id != user.Id) throw new HttpResponseException(HttpStatusCode.Forbidden);
+
                 var commentLike = new CommentLike
                 {
                     CommentId = commentId,

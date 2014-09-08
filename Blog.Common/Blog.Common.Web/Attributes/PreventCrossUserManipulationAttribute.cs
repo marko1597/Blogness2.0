@@ -28,12 +28,26 @@ namespace Blog.Common.Web.Attributes
                 var model = actionContext.ActionArguments[name];
                 if (model == null) throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
-                var userIdProperty = GetIdFromUserProperty(model);
+                int? userIdProperty;
+
+                if (model.GetType() == typeof (User))
+                {
+                    userIdProperty = (int?) GetPropValue(model, "Id");
+                }
+                else
+                {
+                    userIdProperty = GetIdFromUserProperty(model);
+                    if (userIdProperty == null || userIdProperty == 0)
+                    {
+                        userIdProperty = (int?)GetPropValue(model, "UserId");
+                    }
+                }
 
                 if (userIdProperty != null && userIdProperty != 0)
                 {
                     var username = actionContext.RequestContext.Principal.Identity.Name;
-                    if (string.IsNullOrEmpty(username)) throw new HttpResponseException(HttpStatusCode.InternalServerError);
+                    if (string.IsNullOrEmpty(username))
+                        throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
                     var user = UsersResource.GetByUserName(username);
                     if (user == null) throw new HttpResponseException(HttpStatusCode.InternalServerError);

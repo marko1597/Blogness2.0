@@ -5,6 +5,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Common.Utils;
+using Blog.Common.Web.Attributes;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -51,7 +52,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/albums")]
         public IHttpActionResult Post([FromBody]Album album)
         {
@@ -75,7 +76,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut, PreventCrossUserManipulation, Authorize]
         [Route("api/albums")]
         public IHttpActionResult Put([FromBody]Album album)
         {

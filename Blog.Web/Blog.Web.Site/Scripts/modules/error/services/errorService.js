@@ -15,7 +15,6 @@
                 $window.location.href = configProvider.getSettings().BlogRoot + '/account';
             }, function (e) {
                 $rootScope.$broadcast("displayError", e);
-                $location.path("/error");
             });
         };
 

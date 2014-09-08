@@ -1,5 +1,5 @@
 ﻿ngUser.directive('userProfileDetailsAddress', [function () {
-    var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
+    var ctrlFn = function ($scope, errorService, userService, localStorageService) {
         $scope.isEditing = false;
         $scope.address = {};
         $scope.error = {};
@@ -13,15 +13,12 @@
             userService.updateUserAddress($scope.address).then(function (response) {
                 if (response.Error == null) {
                     $scope.address = response;
-                    blockUiService.unblockIt();
                 } else {
-                    errorService.displayErrorRedirect(response.Error);
-                    blockUiService.unblockIt();
+                    errorService.displayError(response.Error);
                 }
                 $scope.isEditing = false;
             }, function (err) {
                 $scope.setModelStateErrors(err.ModelState);
-                blockUiService.unblockIt();
             });
         };
 
@@ -54,7 +51,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',

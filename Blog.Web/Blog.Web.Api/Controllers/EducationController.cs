@@ -36,7 +36,7 @@ namespace Blog.Web.Api.Controllers
             return education;
         }
 
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/education")]
         public IHttpActionResult Post([FromBody]Education education)
         {
@@ -60,7 +60,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut, PreventCrossUserManipulation, Authorize]
         [Route("api/education")]
         public IHttpActionResult Put([FromBody]Education education)
         {

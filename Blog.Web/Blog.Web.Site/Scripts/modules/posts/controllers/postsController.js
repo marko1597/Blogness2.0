@@ -1,5 +1,5 @@
-﻿ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "blockUiService", "errorService",
-    function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, blockUiService, errorService) {
+﻿ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
+    function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, errorService) {
         $scope.posts = [];
         $scope.size = "";
         $scope.isBusy = false;
@@ -10,8 +10,6 @@
         };
         
         $scope.getRecentPosts = function () {
-            blockUiService.blockIt();
-
             if ($scope.isBusy) {
                 return;
             }
@@ -20,10 +18,9 @@
             postsService.getRecentPosts().then(function (resp) {
                 $scope.posts = resp;
                 $scope.isBusy = false;
-                blockUiService.unblockIt();
                 $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 
@@ -40,7 +37,7 @@
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 

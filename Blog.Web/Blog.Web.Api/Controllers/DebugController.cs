@@ -6,7 +6,7 @@ namespace Blog.Web.Api.Controllers
 {
     public class DebugController : ApiController
     {
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [PreventCrossUserManipulation]
         [Route("api/debug")]
         public bool Post([FromBody] Comment comment)

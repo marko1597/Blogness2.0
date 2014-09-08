@@ -23,7 +23,7 @@
                     $scope.hobbies.push(response);
                     $scope.newHobby = { HobbyName: "", UserId: $scope.user };
                 } else {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 $scope.isAdding = false;

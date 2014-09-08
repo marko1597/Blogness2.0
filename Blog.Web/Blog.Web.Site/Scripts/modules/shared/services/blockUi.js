@@ -4,7 +4,7 @@
             if (properties == undefined) properties = {};
 
             if (properties.html == undefined) {
-                properties.html = '<h4>Loading...</h4>';
+                properties.html = '<h4><img src="content/images/loader-girl.gif" height="128" /></h4>';
             }
 
             if (properties.css == undefined) {

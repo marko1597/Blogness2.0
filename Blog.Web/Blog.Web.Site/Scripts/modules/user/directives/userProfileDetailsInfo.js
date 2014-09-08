@@ -1,5 +1,5 @@
 ﻿ngUser.directive('userProfileDetailsInfo', [function () {
-    var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
+    var ctrlFn = function ($scope, errorService, userService, localStorageService) {
         $scope.isEditing = false;
         $scope.userFullName = null;
         $scope.error = {};
@@ -10,7 +10,6 @@
         };
 
         $scope.saveDetails = function () {
-            blockUiService.blockIt();
             userService.updateUser($scope.user).then(function (response) {
                 if (response.Error == null) {
                     delete response.Education;
@@ -20,16 +19,13 @@
                     $scope.user = response;
                     $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
 
-                    blockUiService.unblockIt();
                     $scope.isEditing = false;
                 } else {
-                    errorService.displayErrorRedirect(response.Error);
-                    blockUiService.unblockIt();
+                    errorService.displayError(response.Error);
                     $scope.isEditing = false;
                 }
             }, function (err) {
                 $scope.setModelStateErrors(err.ModelState);
-                blockUiService.unblockIt();
             });
         };
 
@@ -62,7 +58,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',

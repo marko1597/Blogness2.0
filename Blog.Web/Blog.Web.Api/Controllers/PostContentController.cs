@@ -52,7 +52,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/postcontent")]
         public PostContent Post([FromBody]PostContent postContent)
         {

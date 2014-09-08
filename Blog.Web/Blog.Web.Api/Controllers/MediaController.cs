@@ -10,6 +10,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
@@ -124,7 +125,7 @@ namespace Blog.Web.Api.Controllers
             return null;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/media")]
         public async Task<Media> Post([FromUri]string username, string album)
         {
@@ -156,7 +157,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/media/{id}")]
         public bool Delete(int mediaId)
         {

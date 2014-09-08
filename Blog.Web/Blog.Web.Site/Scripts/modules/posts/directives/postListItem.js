@@ -28,7 +28,7 @@
         };
     };
     ctrlFn.$inject = ["$scope", "$location", "localStorageService"];
-    
+
     return {
         restrict: 'EA',
         scope: { data: '=' },

@@ -18,7 +18,7 @@
         $scope.saveHobby = function () {
             userService.updateUserHobby($scope.hobby).then(function (response) {
                 if (response.Error != null) {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 $scope.isEditing = false;
@@ -30,7 +30,7 @@
         $scope.deleteHobby = function() {
             userService.deleteUserHobby($scope.hobby.HobbyId).then(function (response) {
                 if (response.Error != null) {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 $scope.$emit("successDeletingUserHobby", $scope.hobby);

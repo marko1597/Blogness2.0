@@ -1,5 +1,5 @@
-﻿ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$stateParams", "userService", "postsService", "blockUiService", "errorService", "localStorageService",
-    function ($scope, $rootScope, $stateParams, userService, postsService, blockUiService, errorService, localStorageService) {
+﻿ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$stateParams", "userService", "postsService", "errorService", "localStorageService",
+    function ($scope, $rootScope, $stateParams, userService, postsService, errorService, localStorageService) {
         $scope.user = null;
         $scope.posts = [];
         $scope.isBusy = false;
@@ -17,19 +17,15 @@
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.user = response;
-                        blockUiService.unblockIt();
                         $scope.getPostsByUser(response.Id);
                     } else {
-                        errorService.displayErrorRedirect(response.Error);
-                        blockUiService.unblockIt();
+                        errorService.displayError(response.Error);
                     }
                 }, function (err) {
-                    errorService.displayErrorRedirect(err);
-                    blockUiService.unblockIt();
+                    errorService.displayError(err);
                 });
             } else {
-                errorService.displayErrorRedirect({ Message: "User lookup failed. Sorry. :(" });
-                blockUiService.unblockIt();
+                errorService.displayError({ Message: "User lookup failed. Sorry. :(" });
             }
         };
 
@@ -44,7 +40,7 @@
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");
             }, function(e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 
@@ -61,7 +57,7 @@
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 

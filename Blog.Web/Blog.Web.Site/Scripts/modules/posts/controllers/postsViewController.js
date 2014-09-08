@@ -1,6 +1,6 @@
 ﻿ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
-    "postsHubService", "userService", "errorService", "blockUiService", "localStorageService",
-    function ($scope, $rootScope, $location, postsService, postsHubService, userService, errorService, blockUiService, localStorageService) {
+    "postsHubService", "userService", "errorService", "localStorageService",
+    function ($scope, $rootScope, $location, postsService, postsHubService, userService, errorService, localStorageService) {
         $scope.postId = parseInt($rootScope.$stateParams.postId);
         $scope.post = {};
         $scope.user = {};
@@ -19,8 +19,7 @@
                 userService.getUserInfo(username).then(function (user) {
                     $scope.user = user;
                 }, function (e) {
-                    blockUiService.unblockIt();
-                    errorService.displayErrorRedirect({ Message: e });
+                    errorService.displayError({ Message: e });
                 });
             }
 
@@ -47,22 +46,17 @@
         };
 
         $scope.getViewedPost = function () {
-            blockUiService.blockIt();
-
             postsService.getPost($scope.postId).then(function (post) {
                 if (post.Error == undefined) {
                     $scope.post = post;
                     $scope.isBusy = false;
                     $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
                     $scope.$broadcast("resizeIsotopeItems");
-                    blockUiService.unblockIt();
                 } else {
-                    blockUiService.unblockIt();
                     errorService.displayError({ Message: e });
                 }
             }, function (e) {
-                blockUiService.unblockIt();
-                errorService.displayErrorRedirect({ Message: e });
+                errorService.displayError({ Message: e });
             });
         };
 

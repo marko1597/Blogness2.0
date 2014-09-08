@@ -1,5 +1,5 @@
-﻿ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope", "localStorageService", "userService", "blockUiService", "errorService", "dateHelper",
-    function ($scope, $location, $rootScope, localStorageService, userService, blockUiService, errorService, dateHelper) {
+﻿ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope", "localStorageService", "userService", "errorService",
+    function ($scope, $location, $rootScope, localStorageService, userService, errorService) {
         $scope.authData = localStorageService.get("authorizationData");
         $scope.user = null;
         $scope.userFullName = null;
@@ -15,8 +15,6 @@
         };
         
         $scope.getUserInfo = function () {
-            blockUiService.blockIt();
-
             if ($scope.username) {
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
@@ -31,18 +29,14 @@
 
                         $scope.user = response;
                         $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                        blockUiService.unblockIt();
                     } else {
-                        errorService.displayErrorRedirect(response.Error);
-                        blockUiService.unblockIt();
+                        errorService.displayError(response.Error);
                     }
                 }, function (err) {
-                    errorService.displayErrorRedirect(err);
-                    blockUiService.unblockIt();
+                    errorService.displayError(err);
                 });
             } else {
-                errorService.displayErrorRedirect({ Message: "User lookup failed. Sorry. :(" });
-                blockUiService.unblockIt();
+                errorService.displayError({ Message: "User lookup failed. Sorry. :(" });
             }
         };
         

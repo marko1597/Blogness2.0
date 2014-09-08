@@ -30,7 +30,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/log")]
         public void Post(ErrorLogModel error)
         {

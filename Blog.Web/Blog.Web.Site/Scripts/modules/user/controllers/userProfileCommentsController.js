@@ -1,5 +1,5 @@
-﻿ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "blockUiService", "errorService", "localStorageService",
-    function ($scope, $rootScope, $stateParams, commentsService, userService, blockUiService, errorService, localStorageService) {
+﻿ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",
+    function ($scope, $rootScope, $stateParams, commentsService, userService, errorService, localStorageService) {
         $scope.user = null;
         $scope.comments = [];
         $scope.isBusy = false;
@@ -12,25 +12,19 @@
         };
 
         $scope.getUserInfo = function () {
-            blockUiService.blockIt();
-
             if ($scope.username) {
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.user = response;
-                        blockUiService.unblockIt();
                         $scope.getCommentsByUser();
                     } else {
-                        errorService.displayErrorRedirect(response.Error);
-                        blockUiService.unblockIt();
+                        errorService.displayError(response.Error);
                     }
                 }, function (err) {
-                    errorService.displayErrorRedirect(err);
-                    blockUiService.unblockIt();
+                    errorService.displayError(err);
                 });
             } else {
-                errorService.displayErrorRedirect({ Message: "User lookup failed. Sorry. :(" });
-                blockUiService.unblockIt();
+                errorService.displayError({ Message: "User lookup failed. Sorry. :(" });
             }
         };
 
@@ -44,7 +38,7 @@
                 $scope.comments = resp;
                 $scope.isBusy = false;
             }, function (e) {
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 

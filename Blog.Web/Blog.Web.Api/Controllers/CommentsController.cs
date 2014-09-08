@@ -5,6 +5,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Interfaces;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Helper.Hub;
@@ -79,7 +80,7 @@ namespace Blog.Web.Api.Controllers
             return comments;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/comments")]
         public IHttpActionResult Post([FromBody]CommentAdded comment)
         {
@@ -115,7 +116,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete, Authorize]
-        [Route("api/comments/{id}")]
+        [Route("api/comments/{id:int}")]
         public void Delete(int id)
         {
             try

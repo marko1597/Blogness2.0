@@ -241,7 +241,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Models\Account\Binding\RemoveLoginBindingModel.cs" />
-    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\CommentLikesController.cs">
       <SubType>Code</SubType>

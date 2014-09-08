@@ -61,11 +61,37 @@ namespace Blog.Common.Web.Tests.Attributes
         }
 
         [Test]
-        public void ShouldThrowForbiddenWhenUserNotAllowed()
+        public void ShouldSuccessWhenParameterIsUserAndUserIsAllowed()
         {
             _controller.ControllerContext.RequestContext.Principal =
                 new GenericPrincipal(new GenericIdentity("foo", "bar"), new[] { "user" });
             _userResource.Setup(a => a.GetByUserName(It.IsAny<string>())).Returns(new User { Id = 1 });
+            _httpActionContext.ActionArguments.Add("dummy", new User { Id = 1 });
+
+            var attribute = new PreventCrossUserManipulationAttribute { UsersResource = _userResource.Object };
+
+            Assert.DoesNotThrow(() => attribute.OnActionExecuting(_httpActionContext));
+        }
+
+        [Test]
+        public void ShouldSuccessfullyUseUserIdInParameter()
+        {
+            _controller.ControllerContext.RequestContext.Principal =
+                new GenericPrincipal(new GenericIdentity("foo", "bar"), new[] { "user" });
+            _userResource.Setup(a => a.GetByUserName(It.IsAny<string>())).Returns(new User { Id = 1 });
+            _httpActionContext.ActionArguments.Add("dummy", new UserIdOnlyDummyObject { UserId = 1 });
+
+            var attribute = new PreventCrossUserManipulationAttribute { UsersResource = _userResource.Object };
+
+            Assert.DoesNotThrow(() => attribute.OnActionExecuting(_httpActionContext));
+        }
+
+        [Test]
+        public void ShouldThrowForbiddenWhenUserNotAllowed()
+        {
+            _controller.ControllerContext.RequestContext.Principal =
+                new GenericPrincipal(new GenericIdentity("foo", "bar"), new[] { "user" });
+            _userResource.Setup(a => a.GetByUserName(It.IsAny<string>())).Returns(new User { Id = 2 });
             _httpActionContext.ActionArguments.Add("dummy", new DummyObject { User = new User { Id = 1 } });
 
             var attribute = new PreventCrossUserManipulationAttribute { UsersResource = _userResource.Object };
@@ -158,6 +184,11 @@ namespace Blog.Common.Web.Tests.Attributes
         {
             public string Name { get; set; }
             public User User { get; set; }
+        }
+
+        protected class UserIdOnlyDummyObject
+        {
+            public int UserId { get; set; }
         }
 
         protected class NoUserDummyObject

@@ -28,7 +28,7 @@
         $scope.deleteEducation = function () {
             userService.deleteUserEducation($scope.education.EducationId).then(function (response) {
                 if (response.Error != null) {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 $scope.$emit("successDeletingUserEducation", $scope.education);
@@ -42,7 +42,7 @@
 
             userService.addUserEducation($scope.education).then(function (response) {
                 if (response.Error != null) {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 response.YearAttendedDisplay = dateHelper.getMonthYear(response.YearAttended);
@@ -58,7 +58,7 @@
         $scope.updateEducation = function () {
             userService.updateUserEducation($scope.education).then(function (response) {
                 if (response.Error != null) {
-                    errorService.displayErrorRedirect(response.Error);
+                    errorService.displayError(response.Error);
                 }
 
                 $scope.isEditing = false;

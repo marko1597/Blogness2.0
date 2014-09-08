@@ -1,5 +1,7 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService", "blockUiService", "dateHelper", "configProvider",
-    function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService, errorService, blockUiService, dateHelper, configProvider) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService",
+    "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider",
+    function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService,
+        errorService, dateHelper, configProvider) {
         $scope.isAdding = true;
         $scope.existingContents = [];
         $scope.username = localStorageService.get("username");
@@ -35,7 +37,6 @@
         };
 
         $scope.getPost = function () {
-            blockUiService.blockIt();
             postsService.getPost($rootScope.$stateParams.postId).then(function (resp) {
                 if ($scope.username === resp.User.UserName) {
                     if (resp.Error == undefined) {
@@ -75,59 +76,45 @@
                             });
                             $scope.$broadcast("resizeIsotopeItems");
                         }, 500);
-
-                        blockUiService.unblockIt();
                     } else {
-                        blockUiService.unblockIt();
                         errorService.displayError(resp.Error);
                     }
                 } else {
-                    blockUiService.unblockIt();
-                    errorService.displayErrorRedirect({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
+                    errorService.displayError({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
                 }
             }, function (e) {
-                blockUiService.unblockIt();
-                errorService.displayErrorRedirect(e);
+                errorService.displayError(e);
             });
         };
 
         $scope.savePost = function () {
-            if ($scope.authData) {
-                blockUiService.blockIt();
-
+            if ($scope.authData) {;
                 userService.getUserInfo($scope.username).then(function (userinfo) {
                     $scope.post.User = userinfo;
 
                     if ($scope.isAdding) {
                         postsService.addPost($scope.post).then(function (resp) {
                             if (resp.Error == undefined) {
-                                blockUiService.unblockIt();
                                 $location.path("/");
                             } else {
-                                blockUiService.unblockIt();
                                 errorService.displayError(resp.Error);
                             }
                         }, function (e) {
-                            blockUiService.unblockIt();
-                            errorService.displayErrorRedirect(e);
+                            errorService.displayError(e);
                         });
                     } else {
                         postsService.updatePost($scope.post).then(function (resp) {
                             if (resp.Error == undefined) {
-                                blockUiService.unblockIt();
                                 $location.path("/");
                             } else {
-                                blockUiService.unblockIt();
                                 errorService.displayError(resp.Error);
                             }
                         }, function (e) {
-                            blockUiService.unblockIt();
-                            errorService.displayErrorRedirect(e);
+                            errorService.displayError(e);
                         });
                     }
                 }, function (e) {
-                    blockUiService.unblockIt();
-                    errorService.displayErrorRedirect(e);
+                    errorService.displayError(e);
                 });
             } else {
                 $rootScope.$broadcast("launchLoginForm");

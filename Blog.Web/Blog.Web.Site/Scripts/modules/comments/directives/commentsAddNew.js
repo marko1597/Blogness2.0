@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentsAddNew', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsService, blockUiService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, commentsService, errorService) {
         $scope.comment = {
             CommentMessage: "",
             PostId: $scope.postid,
@@ -28,25 +28,20 @@
         };
 
         $scope.saveComment = function () {
-            blockUiService.blockIt({ elem: ".comment-item-new" });
             if ($scope.comment.CommentMessage != "") {
                 commentsService.addComment($scope.createCommentForAdding()).then(function(resp) {
                     if (resp.Error == undefined) {
                         $scope.comment.CommentMessage = "";
                         $scope.hideAddComment();
-                        blockUiService.unblockIt(".comment-item-new");
                     } else {
                         $scope.hasError = true;
-                        blockUiService.unblockIt(".comment-item-new");
                         errorService.displayError(resp.Error);
                     }
                 }, function(e) {
-                    blockUiService.unblockIt(".comment-item-new");
-                    errorService.displayErrorRedirect(e);
+                    errorService.displayError(e);
                 });
             } else {
                 $scope.hasError = true;
-                blockUiService.unblockIt(".comment-item-new");
                 errorService.displayError({ Message: "Your comment message is empty. Please don't be that stupid." });
             }
         };
@@ -58,7 +53,7 @@
             };
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "blockUiService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
 
     return {
         restrict: 'EA',

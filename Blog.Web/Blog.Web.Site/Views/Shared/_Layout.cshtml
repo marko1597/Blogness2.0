@@ -4,7 +4,7 @@
 <html ng-app="blog">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><!--320-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>@ViewBag.Title - Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
@@ -258,7 +258,29 @@
 
     <!-- application initialize script -->
     <script src="~/Scripts/modules/init.js"></script>
-    <script>$(function () { window.blogInit.start(); });</script>
+    <script>
+        $(function() {
+            window.blogInit.start();
+            //var mousePos;
+
+            //window.onmousemove = handleMouseMove;
+            //setInterval(getMousePosition, 100);
+
+            //function handleMouseMove(event) {
+            //    event = event || window.event;
+            //    mousePos = {
+            //        x: event.clientX,
+            //        y: event.clientY
+            //    };
+            //}
+
+            //function getMousePosition() {
+            //    var pos = mousePos;
+            //    if (pos) {
+            //    }
+            //}
+        });
+    </script>
 
     @RenderSection("scripts", false)
 </body>

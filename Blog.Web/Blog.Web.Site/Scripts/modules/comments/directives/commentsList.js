@@ -1,16 +1,13 @@
 ﻿ngComments.directive('commentsList', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, userService, blockUiService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, userService, errorService) {
         $scope.comments = [];
 
         $scope.getComments = function () {
-            blockUiService.blockIt({ elem: ".comment-items-list"});
             commentsService.getCommentsByPost($scope.postid).then(function (comments) {
                 $scope.comments = comments;
                 commentsHubService.viewPost($scope.postid);
-                blockUiService.unblockIt(".comment-items-list");
             }, function (e) {
-                errorService.displayErrorRedirect({ Message: e });
-                blockUiService.unblockIt(".comment-items-list");
+                errorService.displayError({ Message: e });
             });
         };
 

@@ -4,6 +4,7 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -210,7 +211,7 @@ namespace Blog.Web.Api.Controllers
             return posts;
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/posts")]
         public IHttpActionResult Post([FromBody]Post post)
         {
@@ -238,7 +239,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut, PreventCrossUserManipulation, Authorize]
         [Route("api/posts")]
         public IHttpActionResult Put([FromBody]Post post)
         {
