@@ -40,6 +40,10 @@
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
         };
 
+        $scope.toggleSocketDebugger = function() {
+            $rootScope.$broadcast("toggleSocketDebugger");
+        };
+
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
                 if ($scope.toggleClass == "nav-open") {
@@ -61,7 +65,11 @@
     };
     ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "$window", "configProvider", "authenticationService"];
 
+    var linkFn = function() {
+    };
+
     return {
+        link: linkFn,
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,

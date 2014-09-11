@@ -7,6 +7,8 @@ using Blog.DataAccess.Database.Repository;
 using Blog.DataAccess.Database.Repository.Interfaces;
 using Blog.Logic.Core;
 using Blog.Logic.Core.Interfaces;
+using Blog.Services.Implementation;
+using Blog.Services.Implementation.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Integration.Wcf;
 
@@ -36,6 +38,7 @@ namespace Blog.Services.Web
             container.Register<IPostsLogic, PostsLogic>();
             container.Register<ITagsLogic, TagsLogic>();
             container.Register<IUsersLogic, UsersLogic>();
+            container.Register<IRedisService, RedisService>();
 
             // Db repository registry. All entity framework repositories are registered here.
             container.Register<IAddressRepository, AddressRepository>();

@@ -9,7 +9,7 @@
     <title>@ViewBag.Title - Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
-    
+
     <!-- css plugins -->
     <link href="~/Scripts/bower_components/angular-carousel/dist/angular-carousel.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css" rel="stylesheet" />
@@ -17,10 +17,11 @@
     <link href="~/Scripts/bower_components/angular-snap/angular-snap.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/jqueryui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Scripts/bower_components/animate.css/animate.css" rel="stylesheet" />
 
     <!-- videogular themes -->
     <link href="~/Scripts/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
-    
+
     <!-- css bootstrap -->
     <link href="~/Scripts/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/bootstrap-additions/dist/bootstrap-additions.css" rel="stylesheet" />
@@ -35,6 +36,9 @@
     <link href="~/Content/modules/posts.css" rel="stylesheet" />
     <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
     <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
+
+    <!-- blog socket module styles -->
+    <link href="~/Content/modules/sockets/socketdebugger.css" rel="stylesheet" />
 
     <!-- blog shared module styles -->
     <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
@@ -70,7 +74,7 @@
 
     <!-- blog tags module styles -->
     <link href="~/Content/modules/tags/tagitem.css" rel="stylesheet" />
-    
+
     <!-- blog users module styles -->
     <link href="~/Content/modules/user/userimage.css" rel="stylesheet" />
     <link href="~/Content/modules/user/userprofilenavigation.css" rel="stylesheet" />
@@ -119,12 +123,12 @@
     <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
     <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
     <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
-    
+
     <!-- socket.io js script -->
     <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
 
     <!-- signalr's dynamic hubs script -->
-    @*<script src="@GetHubUrl()/hubs"></script>*@
+    <script src="@GetHubUrl()/hubs"></script>
 
     <!-- twitter bootstrap js -->
     <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -149,7 +153,7 @@
     <script src="~/Scripts/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
     <script src="~/Scripts/bower_components/ng-tags-input/ng-tags-input.js"></script>
     <script src="~/Scripts/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    
+
     <!-- angular js video player plugin -->
     <script src="~/Scripts/bower_components/videogular/videogular.js"></script>
     <script src="~/Scripts/bower_components/videogular-buffering/buffering.js"></script>
@@ -231,10 +235,11 @@
     <script src="~/Scripts/modules/user/directives/userImage.js"></script>
     <script src="~/Scripts/modules/user/directives/userPostItem.js"></script>
     <script src="~/Scripts/modules/user/directives/userCommentItem.js"></script>
-    
+
     <!-- blog sockets module -->
     <script src="~/Scripts/modules/sockets/socket.js"></script>
     <script src="~/Scripts/modules/sockets/services/socketsService.js"></script>
+    <script src="~/Scripts/modules/sockets/directives/socketDebugger.js"></script>
 
     <!-- blog navigation module -->
     <script src="~/Scripts/modules/navigation/navigation.js"></script>
@@ -266,7 +271,7 @@
     <!-- application initialize script -->
     <script src="~/Scripts/modules/init.js"></script>
     <script>
-        $(function() {
+        $(function () {
             window.blogInit.start();
         });
     </script>

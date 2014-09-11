@@ -1,1 +1,11 @@
-﻿
+﻿#blog-header {
+    overflow: hidden;
+}
+
+    #blog-header .header-dropdown-item {
+        cursor: pointer;
+    }
+
+        #blog-header .header-dropdown-item:hover {
+            text-decoration: underline;
+        }

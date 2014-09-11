@@ -1,10 +1,14 @@
 <html>
-<title>Socket Test</title>
 <head>
+    <title>Socket Test</title>
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" />
-    <script src="http://localhost:4435/socket.io/socket.io.js"></script>
+    <style>
+        .panel:first-child {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -33,11 +37,13 @@
             </div>
         </div>
     </div>
+
+    <script src="https://localhost:4435/socket.io/socket.io.js"></script>
     <script>
         $(function () {
-            var address = "http://localhost:4335";
+            var address = "https://localhost:4435";
             var details = {
-                resource: "http://localhost:4335/socket.io"
+                resource: "https://localhost:4435/socket.io"
             };
             var socket = io.connect(address, details);
             socket.on('connect', function () {
@@ -52,17 +58,17 @@
             socket.on('publishMessage', function (message) {
                 $("li").after("<li>" + message.name + ": " + message.message + "</li>");
             });
-			
-			socket.on('postLikesUpdate', function (message) {
+
+            socket.on('postLikesUpdate', function (message) {
                 $("li").after("<li>" + JSON.stringify(message) + "</li>");
             });
-			
-			socket.on('commentLikesUpdate', function (message) {
-			    $("li").after("<li>" + JSON.stringify(message) + "</li>");
+
+            socket.on('commentLikesUpdate', function (message) {
+                $("li").after("<li>" + JSON.stringify(message) + "</li>");
             });
-			
-			socket.on('commentAdded', function (message) {
-			    $("li").after("<li>" + JSON.stringify(message) + "</li>");
+
+            socket.on('commentAdded', function (message) {
+                $("li").after("<li>" + JSON.stringify(message) + "</li>");
             });
 
             $("#subscribe").on("click", function () {

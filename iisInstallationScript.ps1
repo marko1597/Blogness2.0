@@ -2,19 +2,24 @@ Param(
     [Parameter(Mandatory=$true, HelpMessage="You must provide a path/location of the solution.")]
     $Path,
     $SitePort="13",
-	$ApiPort="14"
+	$ApiPort="14",
+	$SocketsPort="15"
 )
 
 Import-Module WebAdministration
 
 $IisAppPoolDotNetVersion = "v4.0"
 $IisAppPoolName = "bloggity"
+$IisSocketsAppPoolName = "blogsockets"
 
 $SiteAppName = "Bloggity"
 $SiteDirectoryPath = $($Path) + "\Blog.Web\Blog.Web.Site"
 
 $ApiAppName = "BloggityApi"
 $ApiDirectoryPath = $($Path) + "\Blog.Web\Blog.Web.Api"
+
+$SocketsAppName = "BlogSockets"
+$SocketsDirectoryPath = $($Path) + "\Blog.Web\Blog.Web.Sockets"
 
 $WcfBlogService = "BlogWcf"
 $WcfBlogServiceDirectoryPath = $($Path) + "\Blog.Services\Blog.Services.Web"
@@ -29,6 +34,15 @@ if (!(Test-Path $IisAppPoolName -pathType container))
     $appPool = New-Item $IisAppPoolName
     $appPool | Set-ItemProperty -Name "managedRuntimeVersion" -Value $IisAppPoolDotNetVersion
 	Write-Host "Successfully created Bloggity application pool"
+}
+
+#check if the sockets app pool exists
+if (!(Test-Path $IisSocketsAppPoolName -pathType container))
+{
+    #create the app pool
+    $appPoolSockets = New-Item $IisSocketsAppPoolName
+    $appPoolSockets | Set-ItemProperty -Name "managedRuntimeVersion" -Value $IisAppPoolDotNetVersion
+	Write-Host "Successfully created blog sockets application pool"
 }
 
 #navigate to the sites root
@@ -51,6 +65,15 @@ if (!(Test-Path $ApiAppName -pathType container))
     $iisApp | Set-ItemProperty -Name "applicationPool" -Value $IisAppPoolName
 	New-WebBinding -Name $ApiAppName -IP "*" -Port 4434 -Protocol https
 	Write-Host "Successfully created Bloggity Api Site"
+}
+
+if (!(Test-Path $SocketsAppName -pathType container))
+{
+    #create the site
+    $iisApp = New-Item $SocketsAppName -bindings @{protocol="http";bindingInformation=":" + $SocketsPort +":"} -physicalPath $SocketsDirectoryPath
+    $iisApp | Set-ItemProperty -Name "applicationPool" -Value $IisSocketsAppPoolName
+	New-WebBinding -Name $SocketsAppName -IP "*" -Port 4435 -Protocol https
+	Write-Host "Successfully created Bloggity Socket.io Site"
 }
 
 $WcfBlogServiceFullPath = "Default Web Site\" + $($WcfBlogService)
