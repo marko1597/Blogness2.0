@@ -85,7 +85,7 @@ namespace Blog.Logic.ObjectMapper.Tests
 
             Assert.IsInstanceOf(typeof(Db.Education), result);
             Assert.NotNull(result);
-            Assert.NotNull(result.EducationType);
+            Assert.IsNull(result.EducationType);
             Assert.AreNotEqual(0, result.EducationTypeId);
         }
 

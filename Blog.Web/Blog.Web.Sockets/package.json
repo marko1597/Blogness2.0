@@ -1,0 +1,10 @@
+{
+    "name": "Blog.Web.Sockets",
+    "version": "0.0.0",
+    "description": "Blog.Web.Sockets",
+    "main": "blogsockets.js",
+    "author": {
+        "name": "Jason Magpantay",
+        "email": ""
+    }
+}

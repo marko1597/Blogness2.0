@@ -1,5 +1,5 @@
 ﻿using System;
-using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Extensions.Elmah;
 

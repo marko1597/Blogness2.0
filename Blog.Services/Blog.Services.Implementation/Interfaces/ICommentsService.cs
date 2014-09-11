@@ -8,6 +8,9 @@ namespace Blog.Services.Implementation.Interfaces
     public interface ICommentsService : IBaseService
     {
         [OperationContract]
+        Comment Get(int commentId);
+
+        [OperationContract]
         List<Comment> GetByPostId(int postId);
 
         [OperationContract]

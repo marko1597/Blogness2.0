@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Microsoft.AspNet.SignalR;
 
 namespace Blog.Web.Site.Hubs

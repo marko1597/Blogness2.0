@@ -5,6 +5,7 @@ namespace Blog.Logic.Core.Interfaces
 {
     public interface ICommentsLogic
     {
+        Comment Get(int commentId);
         List<Comment> GetByPostId(int postId);
         List<Comment> GetByUser(int userId);
         List<Comment> GetTopComments(int postId, int commentsCount);

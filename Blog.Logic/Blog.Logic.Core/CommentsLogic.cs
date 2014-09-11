@@ -20,6 +20,19 @@ namespace Blog.Logic.Core
             _userRepository = userRepository;
         }
 
+        public Comment Get(int commentId)
+        {
+            try
+            {
+                var db = _commentRepository.Find(a => a.CommentId == commentId, null, null).FirstOrDefault();
+                return CommentMapper.ToDto(db);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public List<Comment> GetByPostId(int postId)
         {
             var comments = new List<Comment>();

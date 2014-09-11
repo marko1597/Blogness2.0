@@ -1,5 +1,4 @@
-﻿using System;
-using Blog.Common.Contracts;
+﻿using Blog.Common.Contracts;
 using NUnit.Framework;
 using Db = Blog.DataAccess.Database.Entities.Objects;
 

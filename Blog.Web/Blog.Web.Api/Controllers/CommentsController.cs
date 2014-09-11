@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;

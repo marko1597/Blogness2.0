@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Web.Site.Hubs;
 using Microsoft.AspNet.SignalR;
 using PostsHub = Blog.Web.Site.Hubs.PostsHub;

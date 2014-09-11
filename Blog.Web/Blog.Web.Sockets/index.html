@@ -1,0 +1,89 @@
+<html>
+<title>Socket Test</title>
+<head>
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="http://localhost:4335/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Subscribe/Unsubscribe Channel</div>
+            <div class="panel-body">
+                <button class="btn btn-success" id="subscribe">Subscribe</button>
+                <button class="btn btn-danger" id="unsubscribe">Unsubscribe</button>
+                <input type="text" id="subscribe-id" value="1" />
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Publish Messages</div>
+            <div class="panel-body">
+                <button class="btn btn-success" id="publish">Publish</button>
+                <input id="name" placeholder="Name" value="test-name" />
+                <input id="message" placeholder="Message" value="test-message-foo-bar-baz" />
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading">Response Messages</div>
+            <div class="panel-body">
+                <ul>
+                    <li>Messages</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var address = "http://localhost:4335";
+            var details = {
+                resource: "http://localhost:4335/socket.io"
+            };
+            var socket = io.connect(address, details);
+            socket.on('connect', function () {
+                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+                console.log('connected');
+            });
+
+            socket.on('message', function (message) {
+                console.log(message);
+            });
+
+            socket.on('publishMessage', function (message) {
+                $("li").after("<li>" + message.name + ": " + message.message + "</li>");
+            });
+			
+			socket.on('postLikesUpdate', function (message) {
+                $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            });
+			
+			socket.on('commentLikesUpdate', function (message) {
+			    $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            });
+			
+			socket.on('commentAdded', function (message) {
+			    $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            });
+
+            $("#subscribe").on("click", function () {
+                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+            });
+
+            $("#unsubscribe").on("click", function () {
+                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+            });
+
+            $("#publish").on("click", function () {
+                var msg = {};
+                msg.fn = "publishMessage";
+                msg.data = {
+                    postId: parseInt($("#subscribe-id").val()),
+                    name: $("#name").val(),
+                    message: $("#message").val()
+                };
+                socket.emit('publishMessage', JSON.stringify(msg));
+            });
+        });
+    </script>
+</body>
+</html>
