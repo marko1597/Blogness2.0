@@ -90,12 +90,12 @@
         {
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
+            blogSockets: "@GetBlogSockets()",
             hubUrl: "@GetHubUrl()",
             templatesUrl: "@GetTemplatesPath()",
             templatesModulesUrl: "@GetTemplatesPath()modules/",
             displayMode: "desktop"
         };
-        console.log(blogConfiguration);
     </script>
 </head>
 <body ng-controller="blogMainController" window-resize>
@@ -119,9 +119,12 @@
     <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
     <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
     <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
+    
+    <!-- socket.io js script -->
+    <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
 
     <!-- signalr's dynamic hubs script -->
-    <script src="@GetHubUrl()/hubs"></script>
+    @*<script src="@GetHubUrl()/hubs"></script>*@
 
     <!-- twitter bootstrap js -->
     <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -228,6 +231,10 @@
     <script src="~/Scripts/modules/user/directives/userImage.js"></script>
     <script src="~/Scripts/modules/user/directives/userPostItem.js"></script>
     <script src="~/Scripts/modules/user/directives/userCommentItem.js"></script>
+    
+    <!-- blog sockets module -->
+    <script src="~/Scripts/modules/sockets/socket.js"></script>
+    <script src="~/Scripts/modules/sockets/services/socketsService.js"></script>
 
     <!-- blog navigation module -->
     <script src="~/Scripts/modules/navigation/navigation.js"></script>
@@ -261,24 +268,6 @@
     <script>
         $(function() {
             window.blogInit.start();
-            //var mousePos;
-
-            //window.onmousemove = handleMouseMove;
-            //setInterval(getMousePosition, 100);
-
-            //function handleMouseMove(event) {
-            //    event = event || window.event;
-            //    mousePos = {
-            //        x: event.clientX,
-            //        y: event.clientY
-            //    };
-            //}
-
-            //function getMousePosition() {
-            //    var pos = mousePos;
-            //    if (pos) {
-            //    }
-            //}
         });
     </script>
 
@@ -301,6 +290,23 @@
     {
         var sb = new StringBuilder();
         sb.Append(ConfigurationManager.AppSettings.Get("BlogApi"));
+
+        return sb.ToString();
+    }
+
+    public string GetBlogSockets()
+    {
+        var sb = new StringBuilder();
+        sb.Append(ConfigurationManager.AppSettings.Get("BlogSockets"));
+
+        return sb.ToString();
+    }
+
+    public string GetBlogSocketsJs()
+    {
+        var sb = new StringBuilder();
+        sb.Append(ConfigurationManager.AppSettings.Get("BlogSockets"));
+        sb.Append("socket.io/socket.io.js");
 
         return sb.ToString();
     }

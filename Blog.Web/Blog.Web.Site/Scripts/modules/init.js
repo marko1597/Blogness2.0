@@ -12,6 +12,7 @@ window.blogInit =
         ];
 
         var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
+        settings.setBlogSockets(window.blogConfiguration.blogSockets);
         settings.setBlogApiEndpoint(window.blogConfiguration.blogApi);
         settings.setBlogRoot(window.blogConfiguration.blogRoot);
         settings.setHubUrl(window.blogConfiguration.hubUrl);

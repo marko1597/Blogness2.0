@@ -1954,6 +1954,8 @@
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
+    <Content Include="Scripts\modules\sockets\services\socketsService.js" />
+    <Content Include="Scripts\modules\sockets\socket.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileCommentsController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfileFavoritesController.js" />

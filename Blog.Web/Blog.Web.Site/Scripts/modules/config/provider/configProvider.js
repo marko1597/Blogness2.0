@@ -8,6 +8,7 @@
     var settings = {
         "BlogApi": "",
         "BlogRoot": "",
+        "BlogSockets": "",
         "HubUrl": "",
         "IsLoggedIn": false,
         "SessionId": 0,
@@ -66,6 +67,10 @@
 
             setHubUrl: function (val) {
                 settings.HubUrl = val;
+            },
+
+            setBlogSockets: function (val) {
+                settings.BlogSockets = val;
             },
 
             setSessionId: function (sessionId) {
