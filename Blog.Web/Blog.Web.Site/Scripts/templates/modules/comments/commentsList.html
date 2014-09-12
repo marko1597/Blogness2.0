@@ -1,6 +1,11 @@
 ﻿<div class="comment-items-list">
-    <div class="comments-empty-message" ng-class="showEmptyCommentsMessage(comments)">
-        <p>There are no comments yet.</p>
+    <div class="comments-empty-message alert" ng-class="emptyMessageStyle()" ng-show="showEmptyCommentsMessage()">
+        <p>
+            {{getEmptyCommentsMessage()}}
+            <div ng-show="hasError">
+                <a ng-click="getComments()">Click here</a> to reload
+            </div>
+        </p>
     </div>
     <div ng-repeat="comment in comments">
         <div comment-item comment="comment" user="user" poster="poster"></div>

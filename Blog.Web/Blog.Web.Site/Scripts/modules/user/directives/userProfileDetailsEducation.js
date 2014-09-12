@@ -1,6 +1,9 @@
 ﻿ngUser.directive('userProfileDetailsEducation', [function () {
     var ctrlFn = function ($scope, $rootScope, dateHelper) {
-        $scope.$watch("educationGroups", function() {
+        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+            $scope.educationGroups = data.EducationGroups;
+            $scope.user = data;
+
             _.each($scope.educationGroups, function (g) {
                 g.isAdding = false;
 
@@ -9,16 +12,12 @@
                     e.YearGraduatedDisplay = dateHelper.getMonthYear(e.YearGraduated);
                 });
             });
-        }, true);
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper"];
 
     return {
         restrict: 'EA',
-        scope: {
-            educationGroups: '=',
-            user: '='
-        },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducation.html",
         controller: ctrlFn

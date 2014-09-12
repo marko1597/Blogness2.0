@@ -1,7 +1,9 @@
 ﻿ngUser.directive('userProfileDetailsEducationGroup', [function () {
     var ctrlFn = function ($scope, localStorageService) {
         $scope.username = localStorageService.get("username");
+
         $scope.isAdding = false;
+
         $scope.newEducation = {
             City: "",
             Country: "",

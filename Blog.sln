@@ -76,6 +76,10 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Blog.Web.Sockets", "Blog.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.Implementation.Tests", "Blog.Services\Blog.Services.Implementation.Tests\Blog.Services.Implementation.Tests.csproj", "{34F5B0DE-5584-48BE-AAAE-0D041F6267F4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Admin", "Blog.Admin", "{F3FE5CEB-3D88-4F73-8240-51A924AC789C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Admin.Web", "Blog.Admin\Blog.Admin.Web\Blog.Admin.Web.csproj", "{DB89763E-B984-4D46-A08C-3469EA0653D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +264,14 @@ Global
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4}.Remote|Any CPU.Build.0 = Remote|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Home|Any CPU.ActiveCfg = Release|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Home|Any CPU.Build.0 = Release|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Remote|Any CPU.ActiveCfg = Release|Any CPU
+		{DB89763E-B984-4D46-A08C-3469EA0653D8}.Remote|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -290,5 +302,6 @@ Global
 		{768FAEF5-0558-49E1-B2FA-A5C98C97FAC6} = {D2E814AD-9733-41B0-B392-DF8559627441}
 		{D06A9965-32DF-44CA-80A0-0B6E42A8A22B} = {768FAEF5-0558-49E1-B2FA-A5C98C97FAC6}
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
+		{DB89763E-B984-4D46-A08C-3469EA0653D8} = {F3FE5CEB-3D88-4F73-8240-51A924AC789C}
 	EndGlobalSection
 EndGlobal

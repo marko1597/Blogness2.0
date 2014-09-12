@@ -2,20 +2,40 @@
     var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, userService, errorService) {
         $scope.comments = [];
 
+        $scope.emptyCommentsMessage = "";
+
+        $scope.hasError = false;
+
         $scope.getComments = function () {
-            commentsService.getCommentsByPost($scope.postid).then(function (comments) {
-                $scope.comments = comments;
-                commentsHubService.viewPost($scope.postid);
-            }, function (e) {
-                errorService.displayError({ Message: e });
-            });
+            if (!isNaN($scope.postid)) {
+                commentsService.getCommentsByPost($scope.postid).then(function (comments) {
+                    $scope.hasError = false;
+                    $scope.comments = comments;
+                    commentsHubService.viewPost($scope.postid);
+                }, function(err) {
+                    $scope.hasError = true;
+                    errorService.displayError(err);
+                });
+            } else {
+                $scope.hasError = true;
+            }
         };
 
-        $scope.showEmptyCommentsMessage = function (comments) {
-            if (comments.length != 0) {
-                return "hidden";
+        $scope.showEmptyCommentsMessage = function () {
+            if ($scope.comments.length != 0) {
+                return false;
             }
-            return "";
+            return true;
+        };
+
+        $scope.emptyMessageStyle = function() {
+            return $scope.hasError ? "alert-danger" : "alert-warning";
+        };
+
+        $scope.getEmptyCommentsMessage = function() {
+            return $scope.hasError ?
+                "Something went wrong with loading the comments! :(" :
+                "There are no comments yet.";
         };
 
         $scope.$on("commentAdded", function (e, d) {
@@ -38,7 +58,7 @@
 
         $scope.getComments();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "userService", "blockUiService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "userService", "errorService"];
 
     return {
         restrict: 'EA',

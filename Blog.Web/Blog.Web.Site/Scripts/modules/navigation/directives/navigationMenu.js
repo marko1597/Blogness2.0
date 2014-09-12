@@ -1,5 +1,5 @@
 ﻿ngNavigation.directive('navigationMenu', function () {
-    var ctrlFn = function ($scope, $rootScope, userService, configProvider, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
         $scope.navigationItems = configProvider.getNavigationItems();
         $scope.user = {};
         $scope.userFullName = "";
@@ -10,6 +10,11 @@
                 return true;
             }
             return false;
+        };
+
+        $scope.logout = function () {
+            authenticationService.logout();
+            $window.location.href = configProvider.getSettings().BlogRoot + "/account";
         };
 
         $scope.launchLoginForm = function() {
@@ -28,7 +33,7 @@
             $scope.authData = localStorageService.get("authorizationData");
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "userService", "configProvider", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
 
     return {
         restrict: 'EA',

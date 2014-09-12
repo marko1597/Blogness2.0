@@ -1,8 +1,11 @@
 ﻿ngUser.directive('userProfileDetailsAddress', [function () {
-    var ctrlFn = function ($scope, errorService, userService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, errorService, userService, localStorageService) {
         $scope.isEditing = false;
+
         $scope.address = {};
+
         $scope.error = {};
+
         $scope.username = localStorageService.get("username");
 
         $scope.editAddress = function () {
@@ -50,15 +53,16 @@
                 }
             }
         };
+
+        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+            $scope.address = data.Address;
+            $scope.user = data;
+        });
     };
-    ctrlFn.$inject = ["$scope", "errorService", "userService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',
-        scope: {
-            address: '=',
-            user: '='
-        },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsAddress.html",
         controller: ctrlFn

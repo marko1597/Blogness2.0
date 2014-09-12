@@ -37,28 +37,32 @@
             }
         };
 
-        $scope.getPostsList = function() {
-            postsService.getPopularPosts().then(function(list) {
+        $scope.getPostsList = function () {
+            postsService.getPopularPosts().then(function (list) {
                 $scope.postsList = list;
-            }, function(e) {
+            }, function (e) {
                 errorService.displayError({ Message: e });
             });
         };
 
         $scope.getViewedPost = function () {
-            postsService.getPost($scope.postId).then(function (post) {
-                if (post.Error == undefined) {
-                    $scope.post = post;
-                    $scope.isBusy = false;
-                    $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
-                    $scope.$broadcast("resizeIsotopeItems");
-                    $scope.$broadcast("signalRConnect");
-                } else {
+            if (!isNaN($rootScope.$stateParams.postId)) {
+                postsService.getPost($scope.postId).then(function (post) {
+                    if (post.Error == undefined) {
+                        $scope.post = post;
+                        $scope.isBusy = false;
+                        $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
+                        $scope.$broadcast("resizeIsotopeItems");
+                        $scope.$broadcast("signalRConnect");
+                    } else {
+                        errorService.displayError({ Message: e });
+                    }
+                }, function (e) {
                     errorService.displayError({ Message: e });
-                }
-            }, function (e) {
-                errorService.displayError({ Message: e });
-            });
+                });
+            } else {
+                errorService.displayErrorRedirect({ Message: "You're missing the post to edit bruh! Don't be stupid!" });
+            }
         };
 
         $scope.init();

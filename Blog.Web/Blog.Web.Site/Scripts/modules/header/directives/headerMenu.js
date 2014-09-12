@@ -26,8 +26,6 @@
                 } else {
                     $rootScope.$broadcast("displayError", { Message: JSON.stringify(response)});
                 }
-            }, function () {
-                $rootScope.$broadcast("launchLoginForm", { canClose: true });
             });
         };
 

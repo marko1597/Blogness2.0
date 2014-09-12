@@ -17,25 +17,25 @@
         </div>
         <div class="collapse navbar-collapse" id="blog-header-collapsible" data-toggle="false">
             <ul class="nav navbar-nav">
-                <li><a data-anijs="{{aniJsDropdownItem}}" ng-click="goAddNewPost()">Add new post</a></li>
+                <li>
+                    <a ng-click="goAddNewPost()">
+                        <i class="fa fa-plus-circle"></i>Add new post
+                    </a>
+                </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown">Testing stuff <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="header-dropdown-item">
                             <a data-anijs="if: mouseover, do: pulse animated" ng-click="testDisplayError()">Display error</a>
                         </li>
-                        <li class="header-dropdown-item" >
-                            <a data-anijs="{{aniJsDropdownItem}}" ng-click="getUserInfo()">Get user info</a>
+                        <li class="header-dropdown-item">
+                            <a ng-click="getUserInfo()">Get user info</a>
                         </li>
-                        <li class="header-dropdown-item" >
-                            <a data-anijs="{{aniJsDropdownItem}}" ng-click="toggleSocketDebugger()">Toggle socket debugger</a>
+                        <li class="header-dropdown-item">
+                            <a ng-click="toggleSocketDebugger()">Toggle socket debugger</a>
                         </li>
-                        <li class="header-dropdown-item" >
-                            <a data-anijs="{{aniJsDropdownItem}}" ng-click="showLoginForm()">Login form</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="header-dropdown-item" >
-                            <a data-anijs="{{aniJsDropdownItem}}" ng-click="logout()">Logout</a>
+                        <li class="header-dropdown-item">
+                            <a ng-click="showLoginForm()">Login form</a>
                         </li>
                     </ul>
                 </li>

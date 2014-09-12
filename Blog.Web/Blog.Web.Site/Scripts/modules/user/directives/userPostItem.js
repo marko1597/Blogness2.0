@@ -1,8 +1,11 @@
 ﻿ngUser.directive('userPostItem', [function () {
     var ctrlFn = function ($scope, $location) {
         $scope.post = $scope.data.Post;
+
         $scope.user = $scope.data.Post.User;
+
         $scope.username = $scope.user.Username;
+
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
 
         $scope.getPostSize = function () {

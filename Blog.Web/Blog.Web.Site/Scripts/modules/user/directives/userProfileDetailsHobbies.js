@@ -1,10 +1,15 @@
 ﻿ngUser.directive('userProfileDetailsHobbies', [function () {
-    var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, blockUiService, errorService, userService, localStorageService) {
         $scope.isAdding = false;
+
         $scope.hobbies = [];
+
         $scope.error = {};
+
         $scope.newHobby = { HobbyName: "" };
+
         $scope.emptyRecordMessage = "Uhhh..a no lifer..";
+
         $scope.username = localStorageService.get("username");
 
         $scope.addHobby = function () {
@@ -72,15 +77,16 @@
                 }
             }
         };
+
+        $rootScope.$on("viewedUserLoaded", function(ev, data) {
+            $scope.hobbies = data.Hobbies;
+            $scope.user = data;
+        });
     };
-    ctrlFn.$inject = ["$scope", "blockUiService", "errorService", "userService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "blockUiService", "errorService", "userService", "localStorageService"];
 
     return {
         restrict: 'EA',
-        scope: {
-            hobbies: '=',
-            user: '='
-        },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsHobbies.html",
         controller: ctrlFn

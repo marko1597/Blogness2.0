@@ -1,10 +1,14 @@
 ﻿ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$stateParams", "userService", "postsService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, userService, postsService, errorService, localStorageService) {
         $scope.user = null;
+
         $scope.posts = [];
+
         $scope.isBusy = false;
+
         $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
                 localStorageService.get("username") : $rootScope.$stateParams.username;
+
         $scope.size = "";
 
         $scope.init = function () {
@@ -13,10 +17,16 @@
         };
 
         $scope.getUserInfo = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
             if ($scope.username) {
                 userService.getUserInfo($scope.username).then(function (response) {
                     if (response.Error == null) {
                         $scope.user = response;
+                        $scope.isBusy = false;
                         $scope.getPostsByUser(response.Id);
                     } else {
                         errorService.displayError(response.Error);

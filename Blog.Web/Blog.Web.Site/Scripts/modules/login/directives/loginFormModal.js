@@ -9,6 +9,8 @@
 
         $rootScope.$on("launchLoginForm", function (ev, data) {
             try {
+                if ($scope.loginModal.$options.show) return;
+
                 if (data.canClose) {
                     $scope.loginModal.$options.keyboard = true;
                     $scope.loginModal.$options.backdrop = true;

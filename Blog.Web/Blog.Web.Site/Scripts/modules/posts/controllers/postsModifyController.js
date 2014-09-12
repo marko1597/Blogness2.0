@@ -1,11 +1,15 @@
 ﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService",
-    "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider",
+    "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService", 
     function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService,
-        errorService, dateHelper, configProvider) {
+        errorService, dateHelper, configProvider, authenticationService) {
+
         $scope.isAdding = true;
+
         $scope.existingContents = [];
-        $scope.username = localStorageService.get("username");
-        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.username = null;
+
+        $scope.authData = null;
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
             window.getDimensionMode() : configProvider.windowDimensions.mode;
@@ -88,7 +92,7 @@
         };
 
         $scope.savePost = function () {
-            if ($scope.authData) {;
+            if ($scope.authData) {
                 userService.getUserInfo($scope.username).then(function (userinfo) {
                     $scope.post.User = userinfo;
 
@@ -122,13 +126,19 @@
         };
 
         $scope.init = function () {
-            if ($scope.authData) {
-                if (!isNaN($rootScope.$stateParams.postId)) {
-                    $scope.getPost();
+            authenticationService.getUserInfo().then(function (response) {
+                if (response.Message == undefined || response.Message == null) {
+                    if (!isNaN($rootScope.$stateParams.postId)) {
+                        $scope.username = localStorageService.get("username");
+                        $scope.authData = localStorageService.get("authorizationData");
+                        $scope.getPost();
+                    } else {
+                        errorService.displayErrorRedirect({ Message: "You're missing the post to edit bruh! Don't be stupid!"});
+                    }
+                } else {
+                    errorService.displayErrorRedirect(response.Message);
                 }
-            } else {
-                $rootScope.$broadcast("launchLoginForm");
-            }
+            });
         };
 
         $rootScope.$on("loggedInUserInfo", function (ev, data) {

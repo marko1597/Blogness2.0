@@ -3,5 +3,6 @@
         "LocalStorageModule",
         "ngSanitize",
         "ngShared",
-        "ngComments"
+        "ngComments",
+        "ngLogin"
     ]);

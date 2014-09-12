@@ -2,6 +2,10 @@
     overflow: hidden;
 }
 
+    #blog-header i {
+        margin-right: 7px;
+    }
+
     #blog-header .header-dropdown-item {
         cursor: pointer;
     }

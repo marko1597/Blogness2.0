@@ -1,6 +1,7 @@
 ﻿ngUser.directive('userProfileDetailsEducationItem', [function () {
     var ctrlFn = function ($scope, userService, dateHelper, blockUiService, errorService, localStorageService) {
         $scope.username = localStorageService.get("username");
+
         $scope.isEditing = $scope.isAdding == undefined ? false : ($scope.isAdding === "false" ? false : true);
 
         $scope.editEducation = function () {
