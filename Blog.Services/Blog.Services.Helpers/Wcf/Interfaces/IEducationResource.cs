@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface IEducationResource : IBaseResource
+    public interface IEducationResource : IEducationService
     {
-        List<Education> GetByUser(int userId);
-        Education Add(Education education);
-        Education Update(Education education);
-        bool Delete(int educationId);
     }
 }

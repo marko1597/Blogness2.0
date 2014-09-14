@@ -1,5 +1,5 @@
-﻿ngPosts.factory('postsService', ["$http", "$q", "configProvider", "dateHelper",
-    function ($http, $q, configProvider, dateHelper) {
+﻿ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configProvider", "dateHelper",
+    function ($http, $q, blogSocketsService, configProvider, dateHelper) {
         var postsApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi + "Posts/" :
             configProvider.getSettings().BlogApi + "Posts/";
@@ -146,6 +146,11 @@
                 });
 
                 return deferred.promise;
+            },
+
+            subscribeToPost: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().unsubscribeViewPost, { postId: id });
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
             },
 
             addPost: function (post) {

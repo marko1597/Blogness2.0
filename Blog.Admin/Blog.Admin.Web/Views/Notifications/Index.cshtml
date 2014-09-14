@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "Notifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div data-bind="visible: showErrorMessage" class="alert alert-danger alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true" data-bind="click: hideErrorMessage">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <strong>Error!</strong> Cannot send the message!
+</div>
+
+<div data-bind="visible: showSuccessMessage" class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true" data-bind="click: hideSuccessMessage">&times;</span>
+        <span class="sr-only">Close</span>
+    </button>
+    <strong>Success!</strong> Message <span data-bind="text: successMessage"></span> has been sent! Yay!
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Send a notification</h3>
+            </div>
+            <div class="panel-body">
+                <form role="form" data-bind="submit: sendMessage">
+                    <div class="form-group">
+                        <label for="messageType">Type</label>
+                        <select class="form-control" id="messageType" data-bind="options: messageTypes,
+                       optionsText: 'Display',
+                       value: messageType,
+                       optionsCaption: 'Choose...'"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageChannelId">Channel ID</label>
+                        <input id="messageChannelId" type="text" class="form-control"
+                               data-bind="value: messageChannelId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="messageText">Message</label>
+                        <textarea data-bind="value: messageText" class="form-control" id="messageText" placeholder="Enter message"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">All notifications</h3>
+            </div>
+            <div class="panel-body">
+                <ul data-bind="foreach: notificationMessages">
+                    <li>
+                        <h4 data-bind="text: ClientFuntion"></h4>
+                        <p data-bind="text: Message"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var address = null;
+    var details = null;
+    var socket = null;
+
+    function NotificationMessage(data) {
+        this.Message = ko.observable(data.message);
+        this.Type = ko.observable(data.type);
+        this.ChannelId = ko.observable(data.channelId);
+    }
+
+    function SocketNotificationMessage(message, fn) {
+        this.ClientFuntion = ko.observable(fn);
+        this.Message = ko.observable(message);
+    }
+
+    function NotificationMessageType(type, display) {
+        this.Type = ko.observable(type);
+        this.Display = ko.observable(display);
+    }
+
+    function NotificationsViewModel() {
+        var self = this;
+
+        self.showErrorMessage = ko.observable(false);
+
+        self.showSuccessMessage = ko.observable(false);
+
+        self.messageType = ko.observable();
+
+        self.messageText = ko.observable();
+
+        self.messageChannelId = ko.observable();
+
+        self.notificationMessages = ko.observableArray([]);
+
+        self.messageType.subscribe(function () {
+            self.showSuccessMessage(false);
+            self.showErrorMessage(false);
+            self.messageText("");
+            self.messageChannelId("");
+        });
+
+        self.successMessage = ko.computed(function () {
+            if (self.messageType() == undefined) return "";
+            return self.messageType().Type();
+        });
+
+        self.hideErrorMessage = function () {
+            self.showErrorMessage(false);
+        };
+
+        self.hideSuccessMessage = function () {
+            self.showSuccessMessage(false);
+        };
+
+        self.messageTypes = ko.observableArray([
+            new NotificationMessageType("CommentAdded", "Added new comment"),
+            new NotificationMessageType("CommentLikesUpdate", "Update comment likes"),
+            new NotificationMessageType("PostLikesUpdate", "Update post likes"),
+            new NotificationMessageType("Message", "New message")
+        ]);
+
+        self.sendMessage = function () {
+            var message = new NotificationMessage({
+                type: self.messageType().Type(),
+                message: self.messageText(),
+                channelId: self.messageChannelId()
+            });
+
+            $.ajax("/notifications/sendmessage", {
+                data: ko.toJSON(message),
+                type: "post", contentType: "application/json",
+                success: function () {
+                    self.messageText("");
+                    self.showSuccessMessage(true);
+                },
+                error: function () {
+                    self.showErrorMessage(true);
+                }
+            });
+        };
+    }
+
+    ko.applyBindings(new NotificationsViewModel());
+</script>
+<script>
+    $(function () {
+        $(".alert > button > span:first-child").on("click", function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+        address = window.configuration.blogSockets;
+        details = {
+            resource: address + "socket.io"
+        };
+
+        if (typeof io !== "undefined") {
+            socket = io.connect(address, details);
+        }
+
+        socket.on('connect', function () {
+            console.log("Connected");
+        });
+    });
+</script>

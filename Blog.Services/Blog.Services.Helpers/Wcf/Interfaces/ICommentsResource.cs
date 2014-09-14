@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface ICommentsResource : IBaseResource
+    public interface ICommentsResource : ICommentsService
     {
-        List<Comment> GetByPostId(int postId);
-        List<Comment> GetByUser(int userId);
-        List<Comment> GetReplies(int commentId);
-        Comment Add(Comment comment);
-        bool Delete(int commentId);
     }
 }

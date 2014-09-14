@@ -270,6 +270,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\appmodules.css">
+      <DependentUpon>appmodules.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="Content\appmodules.min.css">
+      <DependentUpon>appmodules.css</DependentUpon>
+    </Content>
     <Content Include="Content\images\bg-noise.png" />
     <Content Include="Content\images\bg.jpg" />
     <Content Include="Content\images\edit-post.png" />
@@ -2018,7 +2024,25 @@
     <Content Include="Scripts\bower_components\videogular\Gruntfile.js" />
     <Content Include="Scripts\bower_components\videogular\videogular.js" />
     <Content Include="Scripts\bower_components\videogular\videogular.min.js" />
+    <Content Include="Scripts\cssbundle.css">
+      <DependentUpon>cssbundle.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\cssbundle.min.css">
+      <DependentUpon>cssbundle.css</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jsbundle.js">
+      <DependentUpon>jsbundle.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jsbundle.min.js">
+      <DependentUpon>jsbundle.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\appmodules.js">
+      <DependentUpon>appmodules.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modules\appmodules.min.js">
+      <DependentUpon>appmodules.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\modules\comments\comments.js" />
     <Content Include="Scripts\modules\comments\directives\commentItem.js" />
     <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
@@ -2967,6 +2991,16 @@
     <Content Include="Scripts\bower_components\animate.css\bower.json" />
     <Content Include="Scripts\bower_components\animate.css\package.json" />
     <Content Include="Scripts\bower_components\animate.css\README.md" />
+    <Content Include="Scripts\jsbundle.js.bundle" />
+    <Content Include="Scripts\jsbundle.min.js.map">
+      <DependentUpon>jsbundle.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modules\appmodules.js.bundle" />
+    <Content Include="Scripts\modules\appmodules.min.js.map">
+      <DependentUpon>appmodules.min.js</DependentUpon>
+    </Content>
+    <Content Include="Content\appmodules.css.bundle" />
+    <Content Include="Scripts\cssbundle.css.bundle" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

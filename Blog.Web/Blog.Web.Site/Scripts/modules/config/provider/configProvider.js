@@ -28,6 +28,8 @@
 
     var navigationItems = [];
 
+    var socketClientFunctions = {};
+
     this.$get = [function () {
         return {
             /* Getters */
@@ -43,6 +45,10 @@
                 return defaults;
             },
 
+            getSocketClientFunctions: function() {
+                return socketClientFunctions;
+            },
+
             /* Setters */
             setDimensions: function (w, h) {
                 windowDimensions.width = w;
@@ -55,6 +61,10 @@
                 } else if (w > 1024) {
                     windowDimensions.mode = "desktop";
                 }
+            },
+
+            setSocketClientFunctions: function(val) {
+                socketClientFunctions = val;
             },
 
             setBlogApiEndpoint: function (val) {

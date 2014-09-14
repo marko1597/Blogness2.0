@@ -7,7 +7,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class AddressResource : BaseResource, IAddressResource
+    public class AddressResource :  IAddressResource
     {
         public Address GetByUser(int userId)
         {
@@ -38,6 +38,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IAddressService>("AddressService"))
             {
                 return svc.Proxy.Delete(addressId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IAddressService>("AddressService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

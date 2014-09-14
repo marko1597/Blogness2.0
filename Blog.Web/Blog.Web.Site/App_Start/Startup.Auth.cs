@@ -16,8 +16,7 @@ namespace Blog.Web.Site
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Authentication"),
-                ExpireTimeSpan = new TimeSpan(0, 12, 0, 0),
-                CookieName = ConfigurationManager.AppSettings.Get("SessionCookieName")
+                ExpireTimeSpan = new TimeSpan(0, 12, 0, 0)
             });
 
             // Use a cookie to temporarily store information about a user logging in with a third party login provider

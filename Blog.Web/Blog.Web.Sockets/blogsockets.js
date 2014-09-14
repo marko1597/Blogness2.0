@@ -10,6 +10,15 @@ var blogChannels = {
     userLoggedIn: "user_"
 };
 
+var clientFunctions = {
+    publishMessage: "PublishMessage",
+    commentAdded: "CommentAdded",
+    commentLikesUpdate: "CommentLikesUpdate",
+    postLikesUpdate: "PostLikesUpdate",
+    subscribeViewPost: "SubscribeViewPost",
+    unsubscribeViewPost: "UnsubscribeViewPost"
+};
+
 var serverFunctions = {
     init: function (data) {
         if (data.fn !== undefined) {
@@ -17,56 +26,60 @@ var serverFunctions = {
         }
     },
     
-    publishMessage: function (d) {
-        io.sockets.in(blogChannels.viewPost + d.data.postId).emit("publishMessage", d.data);
+    PublishMessage: function (d) {
+        io.sockets.in(blogChannels.viewPost + d.data.postId).emit(clientFunctions.publishMessage, d.data);
     },
     
-    postLikesUpdate: function (d) {
+    PostLikesUpdate: function (d) {
         if (d != null) {
             var data = {
                 postId: d.PostId,
                 postLikes: d.PostLikes
             };
-            io.sockets.in(blogChannels.viewPost + data.postId).emit("postLikesUpdate", data);
+            io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.postLikesUpdate, data);
         }
     },
     
-    commentLikesUpdate: function (d) {
+    CommentLikesUpdate: function (d) {
         if (d != null) {
             var data = {
                 postId: d.PostId,
                 commentId: d.CommentId,
                 commentLikes: d.CommentLikes
             };
-            io.sockets.in(blogChannels.viewPost + data.postId).emit("commentLikesUpdate", data);
+            io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentLikesUpdate, data);
         }
     },
     
-    commentAdded: function (d) {
+    CommentAdded: function (d) {
         if (d != null) {
             var data = {
                 postId: d.PostId,
                 comment: d.Comment
             };
-            io.sockets.in(blogChannels.viewPost + data.postId).emit("commentAdded", data);
+            io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentAdded, data);
         }
     }
 };
 
-server.listen(process.env.PORT || 4335);
+server.listen(process.env.PORT || 4415);
 
 io.sockets.on('connection', function (socket) {
-    socket.on('subscribeViewPost', function (data) {
+    socket.on('echo', function (data) {
+        socket.emit('echo', data);
+    });
+    
+    socket.on(clientFunctions.subscribeViewPost, function (data) {
         socket.join(blogChannels.viewPost + data.postId);
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Subscribing to post:' + data.postId);
     });
     
-    socket.on('unsubscribeViewPost', function (data) {
+    socket.on(clientFunctions.unsubscribeViewPost, function (data) {
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Un-Subscribing to post:' + data.postId);
         socket.leave(blogChannels.viewPost + data.postId);
     });
     
-    socket.on('publishMessage', function (message) {
+    socket.on(clientFunctions.publishMessage, function (message) {
         redisPublisher.publish('bloggity', message);
     });
 });
@@ -85,7 +98,6 @@ redisSubscriber.on("message", function (channel, message) {
 
 bloggityServer.displayInfo = function (socket) {
     socket.send("Your Transport: " + io.transports[socket.id].name);
-    socket.send("Redis Server: " + process.env.redisServer);
 };
 
 bloggityServer.log2client = function (socket, msg) {

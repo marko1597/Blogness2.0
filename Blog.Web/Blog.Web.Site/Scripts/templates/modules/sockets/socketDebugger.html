@@ -1,4 +1,18 @@
 ﻿<div id="socket-debugger" class="content-item" ng-show="show">
+    <div>
+        <input type="text" ng-model="channelSubscription" placeholder="Enter channel to subscribe..."
+               ng-enter="subscribeToChannel()" class="form-control" />
+    </div>
+
+    <div>
+        <input type="text" ng-model="echoMessage" placeholder="Enter message..." ng-enter="doEcho()"
+               class="form-control" />
+    </div>
+
+    <div class="empty" ng-show="showEmptyMessage()">
+        No messages currently..
+    </div>
+
     <div ng-repeat="message in messages">
         <p>
             <strong>Function</strong> {{message.fn}}

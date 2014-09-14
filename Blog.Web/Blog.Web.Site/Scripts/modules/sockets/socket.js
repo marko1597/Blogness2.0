@@ -1,4 +1,4 @@
-﻿var ngSockets = angular.module("ngSockets",
+﻿var ngBlogSockets = angular.module("ngBlogSockets",
     [
         "ngConfig",
         "ngAnimate"

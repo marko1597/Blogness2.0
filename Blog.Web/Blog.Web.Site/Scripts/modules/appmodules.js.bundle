@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>false</runOnBuild>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/Scripts/modules/init.js</file>
+    <file>/Scripts/modules/comments/comments.js</file>
+    <file>/Scripts/modules/comments/directives/commentItem.js</file>
+    <file>/Scripts/modules/comments/directives/commentsAddNew.js</file>
+    <file>/Scripts/modules/comments/directives/commentsContainer.js</file>
+    <file>/Scripts/modules/comments/directives/commentsList.js</file>
+    <file>/Scripts/modules/comments/services/commentsHubService.js</file>
+    <file>/Scripts/modules/comments/services/commentsService.js</file>
+    <file>/Scripts/modules/config/config.js</file>
+    <file>/Scripts/modules/config/provider/configProvider.js</file>
+    <file>/Scripts/modules/error/error.js</file>
+    <file>/Scripts/modules/error/controllers/errorPageController.js</file>
+    <file>/Scripts/modules/error/directives/errorDisplay.js</file>
+    <file>/Scripts/modules/error/services/errorService.js</file>
+    <file>/Scripts/modules/header/header.js</file>
+    <file>/Scripts/modules/header/directives/headerMenu.js</file>
+    <file>/Scripts/modules/logger/logger.js</file>
+    <file>/Scripts/modules/logger/services/errorLogService.js</file>
+    <file>/Scripts/modules/logger/services/stacktraceService.js</file>
+    <file>/Scripts/modules/login/login.js</file>
+    <file>/Scripts/modules/login/directives/loginForm.js</file>
+    <file>/Scripts/modules/login/directives/loginFormModal.js</file>
+    <file>/Scripts/modules/login/directives/registerForm.js</file>
+    <file>/Scripts/modules/login/services/authenticationInterceptorService.js</file>
+    <file>/Scripts/modules/login/services/authenticationService.js</file>
+    <file>/Scripts/modules/login/services/loginService.js</file>
+    <file>/Scripts/modules/main/app.js</file>
+    <file>/Scripts/modules/main/config/blogConfig.js</file>
+    <file>/Scripts/modules/main/controllers/blogMainController.js</file>
+    <file>/Scripts/modules/main/directives/windowResize.js</file>
+    <file>/Scripts/modules/messaging/messaging.js</file>
+    <file>/Scripts/modules/navigation/navigation.js</file>
+    <file>/Scripts/modules/navigation/directives/navigationMenu.js</file>
+    <file>/Scripts/modules/posts/posts.js</file>
+    <file>/Scripts/modules/posts/controllers/postsController.js</file>
+    <file>/Scripts/modules/posts/controllers/postsModifyController.js</file>
+    <file>/Scripts/modules/posts/controllers/postsViewController.js</file>
+    <file>/Scripts/modules/posts/directives/postContents.js</file>
+    <file>/Scripts/modules/posts/directives/postLikes.js</file>
+    <file>/Scripts/modules/posts/directives/postListItem.js</file>
+    <file>/Scripts/modules/posts/directives/postListItemComment.js</file>
+    <file>/Scripts/modules/posts/directives/postRelatedItem.js</file>
+    <file>/Scripts/modules/posts/directives/postRelatedItems.js</file>
+    <file>/Scripts/modules/posts/services/postsHubService.js</file>
+    <file>/Scripts/modules/posts/services/postsService.js</file>
+    <file>/Scripts/modules/shared/shared.js</file>
+    <file>/Scripts/modules/shared/directives/ellipsis.js</file>
+    <file>/Scripts/modules/shared/directives/emptyRecordMessage.js</file>
+    <file>/Scripts/modules/shared/directives/fileUpload.js</file>
+    <file>/Scripts/modules/shared/directives/fileUploadItem.js</file>
+    <file>/Scripts/modules/shared/directives/fileUploadThumbnail.js</file>
+    <file>/Scripts/modules/shared/directives/isotopeItemResize.js</file>
+    <file>/Scripts/modules/shared/directives/keypress.js</file>
+    <file>/Scripts/modules/shared/directives/scrollTrigger.js</file>
+    <file>/Scripts/modules/shared/directives/ticker.js</file>
+    <file>/Scripts/modules/shared/directives/videoPlayer.js</file>
+    <file>/Scripts/modules/shared/services/blockUi.js</file>
+    <file>/Scripts/modules/shared/services/dateHelper.js</file>
+    <file>/Scripts/modules/sockets/socket.js</file>
+    <file>/Scripts/modules/sockets/directives/socketDebugger.js</file>
+    <file>/Scripts/modules/sockets/services/socketsService.js</file>
+    <file>/Scripts/modules/tags/tags.js</file>
+    <file>/Scripts/modules/tags/directives/tagItem.js</file>
+    <file>/Scripts/modules/tags/services/tagsService.js</file>
+    <file>/Scripts/modules/user/user.js</file>
+    <file>/Scripts/modules/user/controllers/userProfileCommentsController.js</file>
+    <file>/Scripts/modules/user/controllers/userProfileController.js</file>
+    <file>/Scripts/modules/user/controllers/userProfileFavoritesController.js</file>
+    <file>/Scripts/modules/user/controllers/userProfileMediaController.js</file>
+    <file>/Scripts/modules/user/controllers/userProfilePostsController.js</file>
+    <file>/Scripts/modules/user/directives/userCommentItem.js</file>
+    <file>/Scripts/modules/user/directives/userImage.js</file>
+    <file>/Scripts/modules/user/directives/userPostItem.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetails.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsAddress.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsEducation.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsEducationGroup.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsEducationItem.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsHobbies.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsHobbyItem.js</file>
+    <file>/Scripts/modules/user/directives/userProfileDetailsInfo.js</file>
+    <file>/Scripts/modules/user/directives/userProfileNavigation.js</file>
+    <file>/Scripts/modules/user/services/userService.js</file>
+  </files>
+</bundle>

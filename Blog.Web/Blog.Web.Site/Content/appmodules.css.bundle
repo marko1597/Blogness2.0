@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>false</runOnBuild>
+    <!--Use absolute path in the generated CSS files. By default, the URLs are relative to generated bundled CSS file.-->
+    <adjustRelativePaths>true</adjustRelativePaths>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/Content/Site.css</file>
+    <file>/Content/modules/accountpage.css</file>
+    <file>/Content/modules/errorpage.css</file>
+    <file>/Content/modules/modifypost.css</file>
+    <file>/Content/modules/posts.css</file>
+    <file>/Content/modules/viewpost.css</file>
+    <file>/Content/modules/comments/commentitem.css</file>
+    <file>/Content/modules/comments/commentsaddnew.css</file>
+    <file>/Content/modules/comments/commentscontainer.css</file>
+    <file>/Content/modules/comments/commentslist.css</file>
+    <file>/Content/modules/error/errorDisplay.css</file>
+    <file>/Content/modules/header/headermenu.css</file>
+    <file>/Content/modules/loginform/loginform.css</file>
+    <file>/Content/modules/loginform/loginformmodal.css</file>
+    <file>/Content/modules/loginform/registerform.css</file>
+    <file>/Content/modules/navigation/navigationmenu.css</file>
+    <file>/Content/modules/posts/postcontents.css</file>
+    <file>/Content/modules/posts/postlikes.css</file>
+    <file>/Content/modules/posts/postlistitem.css</file>
+    <file>/Content/modules/posts/postlistitemcomment.css</file>
+    <file>/Content/modules/posts/postrelateditem.css</file>
+    <file>/Content/modules/posts/postrelateditems.css</file>
+    <file>/Content/modules/shared/fileupload.css</file>
+    <file>/Content/modules/shared/fileuploaditem.css</file>
+    <file>/Content/modules/sockets/socketdebugger.css</file>
+    <file>/Content/modules/tags/tagitem.css</file>
+    <file>/Content/modules/user/usercommentitem.css</file>
+    <file>/Content/modules/user/userimage.css</file>
+    <file>/Content/modules/user/userpostitem.css</file>
+    <file>/Content/modules/user/userprofilecomments.css</file>
+    <file>/Content/modules/user/userprofiledetails.css</file>
+    <file>/Content/modules/user/userprofilefavorites.css</file>
+    <file>/Content/modules/user/userprofilemedia.css</file>
+    <file>/Content/modules/user/userprofilenavigation.css</file>
+    <file>/Content/modules/user/userprofileposts.css</file>
+  </files>
+</bundle>

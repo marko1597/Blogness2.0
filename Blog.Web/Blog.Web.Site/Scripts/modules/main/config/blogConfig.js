@@ -21,7 +21,6 @@
 
                 responseError: function (rejection) {
                     blockUiService.unblockIt();
-                    console.log(rejection);
 
                     return $q.reject(rejection);
                 }

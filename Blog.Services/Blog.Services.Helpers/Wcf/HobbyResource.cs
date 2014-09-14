@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class HobbyResource : BaseResource, IHobbyResource
+    public class HobbyResource : IHobbyResource
     {
         public List<Hobby> GetByUser(int userId)
         {
@@ -39,6 +39,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
             {
                 return svc.Proxy.Delete(hobbyId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

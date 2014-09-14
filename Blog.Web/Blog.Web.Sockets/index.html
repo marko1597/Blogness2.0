@@ -31,23 +31,24 @@
         <div class="panel panel-primary">
             <div class="panel-heading">Response Messages</div>
             <div class="panel-body">
-                <ul>
-                    <li>Messages</li>
+                <button id="clear" class="btn btn-info">Clear</button>
+                <ul id="messages">
                 </ul>
             </div>
         </div>
     </div>
 
-    <script src="https://localhost:4435/socket.io/socket.io.js"></script>
+    <script src="https://localhost:4415/socket.io/socket.io.js"></script>
     <script>
         $(function () {
-            var address = "https://localhost:4435";
+            var address = "https://localhost:4415";
             var details = {
-                resource: "https://localhost:4435/socket.io"
+                resource: "https://localhost:4415/socket.io"
             };
             var socket = io.connect(address, details);
+
             socket.on('connect', function () {
-                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+                socket.emit('SubscribeViewPost', { postId: $("#subscribe-id").val() });
                 console.log('connected');
             });
 
@@ -55,39 +56,47 @@
                 console.log(message);
             });
 
-            socket.on('publishMessage', function (message) {
-                $("li").after("<li>" + message.name + ": " + message.message + "</li>");
+            socket.on('ConnectedUsers', function (users) {
+                console.log(users);
             });
 
-            socket.on('postLikesUpdate', function (message) {
-                $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            socket.on('PublishMessage', function (message) {
+                $("#messages").prepend("<li>" + message.name + ": " + message.message + "</li>");
             });
 
-            socket.on('commentLikesUpdate', function (message) {
-                $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            socket.on('PostLikesUpdate', function (message) {
+                $("#messages").prepend("<li>" + JSON.stringify(message) + "</li>");
             });
 
-            socket.on('commentAdded', function (message) {
-                $("li").after("<li>" + JSON.stringify(message) + "</li>");
+            socket.on('CommentLikesUpdate', function (message) {
+                $("#messages").prepend("<li>" + JSON.stringify(message) + "</li>");
+            });
+
+            socket.on('CommentAdded', function (message) {
+                $("#messages").prepend("<li>" + JSON.stringify(message) + "</li>");
             });
 
             $("#subscribe").on("click", function () {
-                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+                socket.emit('SubscribeViewPost', { postId: $("#subscribe-id").val() });
             });
 
             $("#unsubscribe").on("click", function () {
-                socket.emit('subscribeViewPost', { postId: $("#subscribe-id").val() });
+                socket.emit('UnsubscribeViewPost', { postId: $("#subscribe-id").val() });
+            });
+
+            $("#clear").on("click", function() {
+                $("#messages > li").remove();
             });
 
             $("#publish").on("click", function () {
                 var msg = {};
-                msg.fn = "publishMessage";
+                msg.fn = "PublishMessage";
                 msg.data = {
                     postId: parseInt($("#subscribe-id").val()),
                     name: $("#name").val(),
                     message: $("#message").val()
                 };
-                socket.emit('publishMessage', JSON.stringify(msg));
+                socket.emit('PublishMessage', JSON.stringify(msg));
             });
         });
     </script>

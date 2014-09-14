@@ -9,7 +9,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class PostsResource : BaseResource, IPostsResource
+    public class PostsResource : IPostsResource
     {
         public Post GetPost(int postId)
         {
@@ -112,6 +112,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))
             {
                 return svc.Proxy.DeletePost(postId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

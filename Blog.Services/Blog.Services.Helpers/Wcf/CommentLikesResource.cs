@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class CommentLikesResource : BaseResource, ICommentLikesResource
+    public class CommentLikesResource : ICommentLikesResource
     {
         public List<CommentLike> Get(int commentId)
         {
@@ -23,6 +23,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<ICommentLikesService>("CommentLikesService"))
             {
                 return svc.Proxy.Add(commentLike);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<ICommentLikesService>("CommentLikesService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

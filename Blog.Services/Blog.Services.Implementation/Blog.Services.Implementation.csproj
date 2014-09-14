@@ -83,6 +83,7 @@
     <Compile Include="Interfaces\IHobbyService.cs" />
     <Compile Include="Interfaces\IMediaService.cs" />
     <Compile Include="Interfaces\IAlbumService.cs" />
+    <Compile Include="Interfaces\INotificationService.cs" />
     <Compile Include="Interfaces\IPostContentsService.cs" />
     <Compile Include="Interfaces\IPostLikesService.cs" />
     <Compile Include="Interfaces\IPostsService.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Interfaces\IUsersService.cs" />
     <Compile Include="MediaService.cs" />
     <Compile Include="AlbumService.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="PostContentsService.cs" />
     <Compile Include="PostLikesService.cs" />
     <Compile Include="PostsService.cs" />

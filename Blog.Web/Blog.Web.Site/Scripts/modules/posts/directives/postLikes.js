@@ -1,5 +1,5 @@
-﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService", "errorService", "localStorageService",
-    function ($rootScope, postsHubService, postsService, userService, errorService, localStorageService) {
+﻿ngPosts.directive('postLikes', ["$rootScope", "postsHubService", "postsService", "userService", "errorService", "localStorageService", "configProvider",
+    function ($rootScope, postsHubService, postsService, userService, errorService, localStorageService, configProvider) {
         var linkFn = function (scope, elem) {
             scope.postId = scope.data.PostId;
             scope.postLikes = scope.data.PostLikes;
@@ -15,17 +15,9 @@
                 scope.user = data;
             });
 
-            scope.init = function () {
-                //if (scope.username) {
-                //    userService.getUserInfo(scope.username).then(function (resp) {
-                //        scope.user = resp;
-                //    });
-                //}
-            };
-
-            scope.$on("postLikesUpdate", function (e, d) {
-                if (d.PostId == scope.data.PostId) {
-                    scope.postLikes = d.PostLikes;
+            scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                if (d.postId == scope.data.PostId) {
+                    scope.postLikes = d.postLikes;
                     scope.$apply();
                     $(elem).effect("highlight", { color: "#B3C833" }, 1500);
                     scope.isUserLiked();
@@ -39,10 +31,7 @@
             });
 
             scope.likePost = function () {
-                postsService.likePost(scope.data.PostId, scope.username).then(function() {
-                    // TODO: This should call the logger api
-                    console.log(scope.user.UserName + " liked post " + scope.data.PostId);
-                },
+                postsService.likePost(scope.data.PostId, scope.username).then(function() {},
                 function(err) {
                     errorService.displayError(err);
                 });
@@ -60,8 +49,6 @@
 
                 return isLiked ? "fa-star" : "fa-star-o";
             };
-
-            scope.init();
         };
 
         return {

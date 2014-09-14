@@ -1,11 +1,18 @@
 ﻿ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
-    "postsHubService", "userService", "errorService", "localStorageService",
-    function ($scope, $rootScope, $location, postsService, postsHubService, userService, errorService, localStorageService) {
+    "userService", "configProvider", "errorService", "localStorageService",
+    function ($scope, $rootScope, $location, postsService, userService, configProvider,
+        errorService, localStorageService) {
+
         $scope.postId = parseInt($rootScope.$stateParams.postId);
+
         $scope.post = {};
+
         $scope.user = {};
+
         $scope.postsList = [];
+
         $scope.isBusy = false;
+
         $scope.authData = localStorageService.get("authorizationData");
 
         $scope.init = function () {
@@ -53,7 +60,7 @@
                         $scope.isBusy = false;
                         $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
                         $scope.$broadcast("resizeIsotopeItems");
-                        $scope.$broadcast("signalRConnect");
+                        postsService.subscribeToPost($scope.post.Id);
                     } else {
                         errorService.displayError({ Message: e });
                     }
@@ -64,6 +71,10 @@
                 errorService.displayErrorRedirect({ Message: "You're missing the post to edit bruh! Don't be stupid!" });
             }
         };
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function() {
+            postsService.subscribeToPost($scope.post.Id);
+        });
 
         $scope.init();
     }

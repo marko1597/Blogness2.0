@@ -48,7 +48,7 @@ namespace Blog.Services.Implementation
                 CommentId = comment.Id,
                 PostId = comment.PostId,
                 Comment = result,
-                ClientFunction = Constants.SocketClientFunctions.commentAdded.ToString()
+                ClientFunction = Constants.SocketClientFunctions.CommentAdded.ToString()
             };
 
             _redisService.Publish(commentAdded);

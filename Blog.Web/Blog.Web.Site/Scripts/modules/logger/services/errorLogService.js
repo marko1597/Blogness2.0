@@ -21,7 +21,7 @@
                     Cause: (cause || "")
                 }),
                 success: function (d) {
-                    console.log(d);
+                    $log.error.apply(d);
                 }
             });
 

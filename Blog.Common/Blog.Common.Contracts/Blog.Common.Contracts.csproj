@@ -78,6 +78,7 @@
     <Compile Include="ViewModels\SocketViewModels\CommentAdded.cs" />
     <Compile Include="ViewModels\SocketViewModels\CommentLikesUpdate.cs" />
     <Compile Include="ViewModels\Login.cs" />
+    <Compile Include="ViewModels\SocketViewModels\GlobalMessage.cs" />
     <Compile Include="ViewModels\SocketViewModels\PostLikesUpdate.cs" />
     <Compile Include="ViewModels\RelatedPosts.cs" />
     <Compile Include="ViewModels\UserPost.cs" />

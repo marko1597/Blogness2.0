@@ -33,9 +33,13 @@ namespace Blog.Common.Utils
 
         public enum SocketClientFunctions
         {
-            postLikesUpdate,
-            commentLikesUpdate,
-            commentAdded
+            PublishMessage,
+            PostLikesUpdate,
+            CommentLikesUpdate,
+            CommentAdded,
+            SubscribeViewPost,
+            UnsubscribeViewPost,
+            WsConnected
         }
     }
 }

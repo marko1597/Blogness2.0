@@ -10,81 +10,90 @@
     <link rel="icon" href="~/favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
 
-    <!-- css plugins -->
-    <link href="~/Scripts/bower_components/angular-carousel/dist/angular-carousel.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/angular-snap/angular-snap.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/jqueryui/themes/smoothness/jquery-ui.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/animate.css/animate.css" rel="stylesheet" />
-
-    <!-- videogular themes -->
-    <link href="~/Scripts/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
-
-    <!-- css bootstrap -->
+    <!-- css bootstrap and fontawesome -->
     <link href="~/Scripts/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/bootstrap-additions/dist/bootstrap-additions.css" rel="stylesheet" />
+    <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/theme/default/blog-bootstrap.css" rel="stylesheet" />
 
-    <!-- site css -->
-    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- #region css styles -->
+    @if (UseBundle())
+    {
+        <link href="~/Scripts/cssbundle.min.css" rel="stylesheet" />
+        <link href="~/Content/appmodules.min.css" rel="stylesheet" />
+    }
+    else
+    {
+        <!-- css plugins -->
+        <link href="~/Scripts/bower_components/angular-carousel/dist/angular-carousel.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/angular-snap/angular-snap.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/animate.css/animate.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/bootstrap-additions/dist/bootstrap-additions.css" rel="stylesheet" />
 
-    <!-- blog pages styles -->
-    <link href="~/Content/modules/accountpage.css" rel="stylesheet" />
-    <link href="~/Content/modules/errorpage.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts.css" rel="stylesheet" />
-    <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
-    <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
+        <!-- videogular themes -->
+        <link href="~/Scripts/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
 
-    <!-- blog socket module styles -->
-    <link href="~/Content/modules/sockets/socketdebugger.css" rel="stylesheet" />
+        <!-- site css -->
+        <link href="~/Content/Site.css" rel="stylesheet" />
 
-    <!-- blog shared module styles -->
-    <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
-    <link href="~/Content/modules/shared/fileuploaditem.css" rel="stylesheet" />
+        <!-- blog pages styles -->
+        <link href="~/Content/modules/accountpage.css" rel="stylesheet" />
+        <link href="~/Content/modules/errorpage.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts.css" rel="stylesheet" />
+        <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
+        <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
 
-    <!-- blog header module styles -->
-    <link href="~/Content/modules/header/headermenu.css" rel="stylesheet" />
+        <!-- blog socket module styles -->
+        <link href="~/Content/modules/sockets/socketdebugger.css" rel="stylesheet" />
 
-    <!-- blog login module styles -->
-    <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
-    <link href="~/Content/modules/loginform/loginformmodal.css" rel="stylesheet" />
-    <link href="~/Content/modules/loginform/registerform.css" rel="stylesheet" />
+        <!-- blog shared module styles -->
+        <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
+        <link href="~/Content/modules/shared/fileuploaditem.css" rel="stylesheet" />
 
-    <!-- blog navigation module styles -->
-    <link href="~/Content/modules/navigation/navigationmenu.css" rel="stylesheet" />
+        <!-- blog header module styles -->
+        <link href="~/Content/modules/header/headermenu.css" rel="stylesheet" />
 
-    <!-- blog posts module styles -->
-    <link href="~/Content/modules/posts/postcontents.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts/postlikes.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts/postlistitem.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts/postlistitemcomment.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts/postrelateditem.css" rel="stylesheet" />
-    <link href="~/Content/modules/posts/postrelateditems.css" rel="stylesheet" />
+        <!-- blog login module styles -->
+        <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
+        <link href="~/Content/modules/loginform/loginformmodal.css" rel="stylesheet" />
+        <link href="~/Content/modules/loginform/registerform.css" rel="stylesheet" />
 
-    <!-- blog error module styles -->
-    <link href="~/Content/modules/error/errorDisplay.css" rel="stylesheet" />
+        <!-- blog navigation module styles -->
+        <link href="~/Content/modules/navigation/navigationmenu.css" rel="stylesheet" />
 
-    <!-- blog comments module styles -->
-    <link href="~/Content/modules/comments/commentsaddnew.css" rel="stylesheet" />
-    <link href="~/Content/modules/comments/commentitem.css" rel="stylesheet" />
-    <link href="~/Content/modules/comments/commentscontainer.css" rel="stylesheet" />
-    <link href="~/Content/modules/comments/commentslist.css" rel="stylesheet" />
+        <!-- blog posts module styles -->
+        <link href="~/Content/modules/posts/postcontents.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts/postlikes.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts/postlistitem.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts/postlistitemcomment.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts/postrelateditem.css" rel="stylesheet" />
+        <link href="~/Content/modules/posts/postrelateditems.css" rel="stylesheet" />
 
-    <!-- blog tags module styles -->
-    <link href="~/Content/modules/tags/tagitem.css" rel="stylesheet" />
+        <!-- blog error module styles -->
+        <link href="~/Content/modules/error/errorDisplay.css" rel="stylesheet" />
 
-    <!-- blog users module styles -->
-    <link href="~/Content/modules/user/userimage.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofilenavigation.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofiledetails.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofilecomments.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofilefavorites.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofilemedia.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userprofileposts.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/userpostitem.css" rel="stylesheet" />
-    <link href="~/Content/modules/user/usercommentitem.css" rel="stylesheet" />
+        <!-- blog comments module styles -->
+        <link href="~/Content/modules/comments/commentsaddnew.css" rel="stylesheet" />
+        <link href="~/Content/modules/comments/commentitem.css" rel="stylesheet" />
+        <link href="~/Content/modules/comments/commentscontainer.css" rel="stylesheet" />
+        <link href="~/Content/modules/comments/commentslist.css" rel="stylesheet" />
+
+        <!-- blog tags module styles -->
+        <link href="~/Content/modules/tags/tagitem.css" rel="stylesheet" />
+
+        <!-- blog users module styles -->
+        <link href="~/Content/modules/user/userimage.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofilenavigation.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofiledetails.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofilecomments.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofilefavorites.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofilemedia.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userprofileposts.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/userpostitem.css" rel="stylesheet" />
+        <link href="~/Content/modules/user/usercommentitem.css" rel="stylesheet" />
+    }
+    <!-- #endregion -->
 
     <script src="~/Scripts/bower_components/modernizr/modernizr.js"></script>
 
@@ -100,176 +109,204 @@
             templatesModulesUrl: "@GetTemplatesPath()modules/",
             displayMode: "desktop"
         };
+
+        var socketClientFunctions = {
+            publishMessage: "@Blog.Common.Utils.Constants.SocketClientFunctions.PublishMessage.ToString()",
+            commentAdded: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentAdded.ToString()",
+            commentLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentLikesUpdate.ToString()",
+            postLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.PostLikesUpdate.ToString()",
+            subscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.SubscribeViewPost.ToString()",
+            unsubscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.UnsubscribeViewPost.ToString()",
+            wsConnect: "@Blog.Common.Utils.Constants.SocketClientFunctions.WsConnected.ToString()"
+        };
     </script>
 </head>
 <body ng-controller="blogMainController" window-resize>
     @RenderBody()
 
-    <!-- jQuery scripts -->
-    <script src="~/Scripts/bower_components/jquery/dist/jquery.js"></script>
-    <script src="~/Scripts/bower_components/jqueryui/jquery-ui.js"></script>
-    <script src="~/Scripts/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js"></script>
-    <script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>
-    <script src="~/Scripts/bower_components/isotope/jquery.isotope.js"></script>
-    <script src="~/Scripts/plugins/jquery.blockui.js"></script>
-    <script src="~/Scripts/plugins/jquery.newsTicker.js"></script>
-
-    <!-- javascript plugins scripts -->
-    <script src="~/Scripts/bower_components/classie/classie.js"></script>
-    <script src="~/Scripts/bower_components/json2/json2.js"></script>
-    <script src="~/Scripts/bower_components/es5-shim/es5-shim.js"></script>
-    <script src="~/Scripts/bower_components/snapjs/snap.js"></script>
-    <script src="~/Scripts/bower_components/respond/src/respond.js"></script>
-    <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
-    <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
-    <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
-
     <!-- socket.io js script -->
     <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
 
-    <!-- signalr's dynamic hubs script -->
-    <script src="@GetHubUrl()/hubs"></script>
+    <!-- #region js plugins and app modules -->
+    @if (UseBundle())
+    {
+        <script src="~/Scripts/jsbundle.min.js"></script>
+        <script src="~/Scripts/modules/appmodules.min.js"></script>
 
-    <!-- twitter bootstrap js -->
-    <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <!-- Temporary Signalr scripts -->
+        @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>
+        <script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>
+        <script src="@GetHubUrl()/hubs"></script>*@
+    }
+    else
+    {
+        <!-- jQuery scripts -->
+        <script src="~/Scripts/bower_components/jquery/dist/jquery.js"></script>
+        <script src="~/Scripts/bower_components/jqueryui/jquery-ui.js"></script>
+        <script src="~/Scripts/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js"></script>
+        @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>*@
+        <script src="~/Scripts/bower_components/isotope/jquery.isotope.js"></script>
+        <script src="~/Scripts/plugins/jquery.blockui.js"></script>
+        <script src="~/Scripts/plugins/jquery.newsTicker.js"></script>
 
-    <!-- angular js scripts -->
-    <script src="~/Scripts/bower_components/angular/angular.js"></script>
-    <script src="~/Scripts/bower_components/angular-animate/angular-animate.js"></script>
-    <script src="~/Scripts/bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="~/Scripts/bower_components/angular-route/angular-route.js"></script>
-    <script src="~/Scripts/bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="~/Scripts/bower_components/angular-touch/angular-touch.js"></script>
+        <!-- javascript plugins scripts -->
+        <script src="~/Scripts/bower_components/classie/classie.js"></script>
+        <script src="~/Scripts/bower_components/json2/json2.js"></script>
+        <script src="~/Scripts/bower_components/es5-shim/es5-shim.js"></script>
+        <script src="~/Scripts/bower_components/snapjs/snap.js"></script>
+        <script src="~/Scripts/bower_components/respond/src/respond.js"></script>
+        <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
+        <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
+        <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
 
-    <!-- angular js plugins scripts -->
-    <script src="~/Scripts/bower_components/angular-carousel/dist/angular-carousel.js"></script>
-    <script src="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.js"></script>
-    <script src="~/Scripts/bower_components/angular-file-upload/angular-file-upload.js"></script>
-    <script src="~/Scripts/bower_components/angular-local-storage/angular-local-storage.js"></script>
-    <script src="~/Scripts/bower_components/angular-isotope/dist/angular-isotope.js"></script>
-    <script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>
-    <script src="~/Scripts/bower_components/angular-snap/angular-snap.js"></script>
-    <script src="~/Scripts/bower_components/angular-strap/dist/angular-strap.js"></script>
-    <script src="~/Scripts/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
-    <script src="~/Scripts/bower_components/ng-tags-input/ng-tags-input.js"></script>
-    <script src="~/Scripts/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+        <!-- twitter bootstrap js -->
+        <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
-    <!-- angular js video player plugin -->
-    <script src="~/Scripts/bower_components/videogular/videogular.js"></script>
-    <script src="~/Scripts/bower_components/videogular-buffering/buffering.js"></script>
-    <script src="~/Scripts/bower_components/videogular-controls/controls.js"></script>
-    <script src="~/Scripts/bower_components/videogular-overlay-play/overlay-play.js"></script>
-    <script src="~/Scripts/bower_components/videogular-poster/poster.js"></script>
-    <script src="~/Scripts/bower_components/videogular-ima-ads/ima-ads.js"></script>
+        <!-- Temporary Signalr scripts -->
+        @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>
+        <script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>
+        <script src="@GetHubUrl()/hubs"></script>*@
 
-    <!-- blog main module -->
-    <script src="~/Scripts/modules/main/app.js"></script>
-    <script src="~/Scripts/modules/main/config/blogConfig.js"></script>
-    <script src="~/Scripts/modules/main/controllers/blogMainController.js"></script>
-    <script src="~/Scripts/modules/main/directives/windowResize.js"></script>
+        <!-- angular js scripts -->
+        <script src="~/Scripts/bower_components/angular/angular.js"></script>
+        <script src="~/Scripts/bower_components/angular-animate/angular-animate.js"></script>
+        <script src="~/Scripts/bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="~/Scripts/bower_components/angular-route/angular-route.js"></script>
+        <script src="~/Scripts/bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="~/Scripts/bower_components/angular-touch/angular-touch.js"></script>
 
-    <!-- blog config module -->
-    <script src="~/Scripts/modules/config/config.js"></script>
-    <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
+        <!-- angular js plugins scripts -->
+        <script src="~/Scripts/bower_components/angular-carousel/dist/angular-carousel.js"></script>
+        <script src="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.js"></script>
+        <script src="~/Scripts/bower_components/angular-file-upload/angular-file-upload.js"></script>
+        <script src="~/Scripts/bower_components/angular-local-storage/angular-local-storage.js"></script>
+        <script src="~/Scripts/bower_components/angular-isotope/dist/angular-isotope.js"></script>
+        <script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>
+        <script src="~/Scripts/bower_components/angular-snap/angular-snap.js"></script>
+        <script src="~/Scripts/bower_components/angular-strap/dist/angular-strap.js"></script>
+        <script src="~/Scripts/bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+        <script src="~/Scripts/bower_components/ng-tags-input/ng-tags-input.js"></script>
+        <script src="~/Scripts/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
-    <!-- blog error module -->
-    <script src="~/Scripts/modules/error/error.js"></script>
-    <script src="~/Scripts/modules/error/services/errorService.js"></script>
-    <script src="~/Scripts/modules/error/controllers/errorPageController.js"></script>
-    <script src="~/Scripts/modules/error/directives/errorDisplay.js"></script>
+        <!-- angular js video player plugin -->
+        <script src="~/Scripts/bower_components/videogular/videogular.js"></script>
+        <script src="~/Scripts/bower_components/videogular-buffering/buffering.js"></script>
+        <script src="~/Scripts/bower_components/videogular-controls/controls.js"></script>
+        <script src="~/Scripts/bower_components/videogular-overlay-play/overlay-play.js"></script>
+        <script src="~/Scripts/bower_components/videogular-poster/poster.js"></script>
+        <script src="~/Scripts/bower_components/videogular-ima-ads/ima-ads.js"></script>
 
-    <!-- blog shared helpers module -->
-    <script src="~/Scripts/modules/shared/shared.js"></script>
-    <script src="~/Scripts/modules/shared/services/blockUi.js"></script>
-    <script src="~/Scripts/modules/shared/services/dateHelper.js"></script>
-    <script src="~/Scripts/modules/shared/directives/ellipsis.js"></script>
-    <script src="~/Scripts/modules/shared/directives/emptyRecordMessage.js"></script>
-    <script src="~/Scripts/modules/shared/directives/fileUpload.js"></script>
-    <script src="~/Scripts/modules/shared/directives/fileUploadItem.js"></script>
-    <script src="~/Scripts/modules/shared/directives/fileUploadThumbnail.js"></script>
-    <script src="~/Scripts/modules/shared/directives/isotopeItemResize.js"></script>
-    <script src="~/Scripts/modules/shared/directives/keypress.js"></script>
-    <script src="~/Scripts/modules/shared/directives/videoPlayer.js"></script>
-    <script src="~/Scripts/modules/shared/directives/scrollTrigger.js"></script>
-    <script src="~/Scripts/modules/shared/directives/ticker.js"></script>
+        <!-- blog main module -->
+        <script src="~/Scripts/modules/main/app.js"></script>
+        <script src="~/Scripts/modules/main/config/blogConfig.js"></script>
+        <script src="~/Scripts/modules/main/controllers/blogMainController.js"></script>
+        <script src="~/Scripts/modules/main/directives/windowResize.js"></script>
 
-    <!-- blog logger module -->
-    <script src="~/Scripts/modules/logger/logger.js"></script>
-    <script src="~/Scripts/modules/logger/services/errorLogService.js"></script>
-    <script src="~/Scripts/modules/logger/services/stacktraceService.js"></script>
+        <!-- blog config module -->
+        <script src="~/Scripts/modules/config/config.js"></script>
+        <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
 
-    <!-- blog header module -->
-    <script src="~/Scripts/modules/header/header.js"></script>
-    <script src="~/Scripts/modules/header/directives/headerMenu.js"></script>
+        <!-- blog error module -->
+        <script src="~/Scripts/modules/error/error.js"></script>
+        <script src="~/Scripts/modules/error/services/errorService.js"></script>
+        <script src="~/Scripts/modules/error/controllers/errorPageController.js"></script>
+        <script src="~/Scripts/modules/error/directives/errorDisplay.js"></script>
 
-    <!-- blog tags module -->
-    <script src="~/Scripts/modules/tags/tags.js"></script>
-    <script src="~/Scripts/modules/tags/services/tagsService.js"></script>
-    <script src="~/Scripts/modules/tags/directives/tagItem.js"></script>
+        <!-- blog shared helpers module -->
+        <script src="~/Scripts/modules/shared/shared.js"></script>
+        <script src="~/Scripts/modules/shared/services/blockUi.js"></script>
+        <script src="~/Scripts/modules/shared/services/dateHelper.js"></script>
+        <script src="~/Scripts/modules/shared/directives/ellipsis.js"></script>
+        <script src="~/Scripts/modules/shared/directives/emptyRecordMessage.js"></script>
+        <script src="~/Scripts/modules/shared/directives/fileUpload.js"></script>
+        <script src="~/Scripts/modules/shared/directives/fileUploadItem.js"></script>
+        <script src="~/Scripts/modules/shared/directives/fileUploadThumbnail.js"></script>
+        <script src="~/Scripts/modules/shared/directives/isotopeItemResize.js"></script>
+        <script src="~/Scripts/modules/shared/directives/keypress.js"></script>
+        <script src="~/Scripts/modules/shared/directives/videoPlayer.js"></script>
+        <script src="~/Scripts/modules/shared/directives/scrollTrigger.js"></script>
+        <script src="~/Scripts/modules/shared/directives/ticker.js"></script>
 
-    <!-- blog login module -->
-    <script src="~/Scripts/modules/login/login.js"></script>
-    <script src="~/Scripts/modules/login/services/authenticationService.js"></script>
-    <script src="~/Scripts/modules/login/services/authenticationInterceptorService.js"></script>
-    <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
-    <script src="~/Scripts/modules/login/directives/registerForm.js"></script>
-    <script src="~/Scripts/modules/login/directives/loginFormModal.js"></script>
+        <!-- blog logger module -->
+        <script src="~/Scripts/modules/logger/logger.js"></script>
+        <script src="~/Scripts/modules/logger/services/errorLogService.js"></script>
+        <script src="~/Scripts/modules/logger/services/stacktraceService.js"></script>
 
-    <!-- blog user module -->
-    <script src="~/Scripts/modules/user/user.js"></script>
-    <script src="~/Scripts/modules/user/controllers/userProfileController.js"></script>
-    <script src="~/Scripts/modules/user/controllers/userProfileCommentsController.js"></script>
-    <script src="~/Scripts/modules/user/controllers/userProfileFavoritesController.js"></script>
-    <script src="~/Scripts/modules/user/controllers/userProfileMediaController.js"></script>
-    <script src="~/Scripts/modules/user/controllers/userProfilePostsController.js"></script>
-    <script src="~/Scripts/modules/user/services/userService.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetails.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsInfo.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsAddress.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbies.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbyItem.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsEducation.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationGroup.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationItem.js"></script>
-    <script src="~/Scripts/modules/user/directives/userProfileNavigation.js"></script>
-    <script src="~/Scripts/modules/user/directives/userImage.js"></script>
-    <script src="~/Scripts/modules/user/directives/userPostItem.js"></script>
-    <script src="~/Scripts/modules/user/directives/userCommentItem.js"></script>
+        <!-- blog header module -->
+        <script src="~/Scripts/modules/header/header.js"></script>
+        <script src="~/Scripts/modules/header/directives/headerMenu.js"></script>
 
-    <!-- blog sockets module -->
-    <script src="~/Scripts/modules/sockets/socket.js"></script>
-    <script src="~/Scripts/modules/sockets/services/socketsService.js"></script>
-    <script src="~/Scripts/modules/sockets/directives/socketDebugger.js"></script>
+        <!-- blog tags module -->
+        <script src="~/Scripts/modules/tags/tags.js"></script>
+        <script src="~/Scripts/modules/tags/services/tagsService.js"></script>
+        <script src="~/Scripts/modules/tags/directives/tagItem.js"></script>
 
-    <!-- blog navigation module -->
-    <script src="~/Scripts/modules/navigation/navigation.js"></script>
-    <script src="~/Scripts/modules/navigation/directives/navigationMenu.js"></script>
+        <!-- blog login module -->
+        <script src="~/Scripts/modules/login/login.js"></script>
+        <script src="~/Scripts/modules/login/services/authenticationService.js"></script>
+        <script src="~/Scripts/modules/login/services/authenticationInterceptorService.js"></script>
+        <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
+        <script src="~/Scripts/modules/login/directives/registerForm.js"></script>
+        <script src="~/Scripts/modules/login/directives/loginFormModal.js"></script>
 
-    <!-- blog posts module -->
-    <script src="~/Scripts/modules/posts/posts.js"></script>
-    <script src="~/Scripts/modules/posts/services/postsService.js"></script>
-    <script src="~/Scripts/modules/posts/services/postsHubService.js"></script>
-    <script src="~/Scripts/modules/posts/controllers/postsController.js"></script>
-    <script src="~/Scripts/modules/posts/controllers/postsModifyController.js"></script>
-    <script src="~/Scripts/modules/posts/controllers/postsViewController.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postContents.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postLikes.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postListItem.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postListItemComment.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postRelatedItem.js"></script>
-    <script src="~/Scripts/modules/posts/directives/postRelatedItems.js"></script>
+        <!-- blog user module -->
+        <script src="~/Scripts/modules/user/user.js"></script>
+        <script src="~/Scripts/modules/user/controllers/userProfileController.js"></script>
+        <script src="~/Scripts/modules/user/controllers/userProfileCommentsController.js"></script>
+        <script src="~/Scripts/modules/user/controllers/userProfileFavoritesController.js"></script>
+        <script src="~/Scripts/modules/user/controllers/userProfileMediaController.js"></script>
+        <script src="~/Scripts/modules/user/controllers/userProfilePostsController.js"></script>
+        <script src="~/Scripts/modules/user/services/userService.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetails.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsInfo.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsAddress.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbies.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbyItem.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducation.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationGroup.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationItem.js"></script>
+        <script src="~/Scripts/modules/user/directives/userProfileNavigation.js"></script>
+        <script src="~/Scripts/modules/user/directives/userImage.js"></script>
+        <script src="~/Scripts/modules/user/directives/userPostItem.js"></script>
+        <script src="~/Scripts/modules/user/directives/userCommentItem.js"></script>
 
-    <!-- blog comments module -->
-    <script src="~/Scripts/modules/comments/comments.js"></script>
-    <script src="~/Scripts/modules/comments/services/commentsService.js"></script>
-    <script src="~/Scripts/modules/comments/services/commentsHubService.js"></script>
-    <script src="~/Scripts/modules/comments/directives/commentItem.js"></script>
-    <script src="~/Scripts/modules/comments/directives/commentsAddNew.js"></script>
-    <script src="~/Scripts/modules/comments/directives/commentsContainer.js"></script>
-    <script src="~/Scripts/modules/comments/directives/commentsList.js"></script>
+        <!-- blog sockets module -->
+        <script src="~/Scripts/modules/sockets/socket.js"></script>
+        <script src="~/Scripts/modules/sockets/services/socketsService.js"></script>
+        <script src="~/Scripts/modules/sockets/directives/socketDebugger.js"></script>
 
-    <!-- application initialize script -->
-    <script src="~/Scripts/modules/init.js"></script>
+        <!-- blog navigation module -->
+        <script src="~/Scripts/modules/navigation/navigation.js"></script>
+        <script src="~/Scripts/modules/navigation/directives/navigationMenu.js"></script>
+
+        <!-- blog posts module -->
+        <script src="~/Scripts/modules/posts/posts.js"></script>
+        <script src="~/Scripts/modules/posts/services/postsService.js"></script>
+        <script src="~/Scripts/modules/posts/services/postsHubService.js"></script>
+        <script src="~/Scripts/modules/posts/controllers/postsController.js"></script>
+        <script src="~/Scripts/modules/posts/controllers/postsModifyController.js"></script>
+        <script src="~/Scripts/modules/posts/controllers/postsViewController.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postContents.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postLikes.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postListItem.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postListItemComment.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postRelatedItem.js"></script>
+        <script src="~/Scripts/modules/posts/directives/postRelatedItems.js"></script>
+
+        <!-- blog comments module -->
+        <script src="~/Scripts/modules/comments/comments.js"></script>
+        <script src="~/Scripts/modules/comments/services/commentsService.js"></script>
+        <script src="~/Scripts/modules/comments/services/commentsHubService.js"></script>
+        <script src="~/Scripts/modules/comments/directives/commentItem.js"></script>
+        <script src="~/Scripts/modules/comments/directives/commentsAddNew.js"></script>
+        <script src="~/Scripts/modules/comments/directives/commentsContainer.js"></script>
+        <script src="~/Scripts/modules/comments/directives/commentsList.js"></script>
+
+        <!-- application initialize script -->
+        <script src="~/Scripts/modules/init.js"></script>
+    }
+    <!-- #endregion -->
+
     <script>
         $(function () {
             window.blogInit.start();
@@ -278,9 +315,16 @@
 
     @RenderSection("scripts", false)
 </body>
+
 </html>
 @functions
 {
+    public bool UseBundle()
+    {
+        var configValue = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("UseBundle"));
+        return configValue;
+    }
+
     public string GetHubUrl()
     {
         return GetBlogRoot() + "/signalr";

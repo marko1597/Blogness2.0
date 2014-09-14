@@ -1,21 +1,60 @@
-﻿ngSockets.directive("socketDebugger", [
+﻿ngBlogSockets.directive("socketDebugger", [
     function () {
-        var ctrlFn = function ($scope, $rootScope) {
+        var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
             $scope.messages = [];
-            $scope.show = true;
-            
-            for (var i = 0; i < 10; i++) {
-                $scope.messages.push({
-                    fn: "function_" + i,
-                    data: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
-                });
-            }
 
-            $rootScope.$on("toggleSocketDebugger", function() {
+            $scope.show = true;
+
+            $scope.channelSubscription = null;
+
+            $scope.echoMessage = null;
+
+            $scope.showEmptyMessage = function() {
+                if ($scope.messages.length > 0) {
+                    return false;
+                }
+                return true;
+            };
+
+            $scope.doEcho = function () {
+                blogSocketsService.emit("echo", { message: $scope.echoMessage });
+            };
+
+            $scope.subscribeToChannel = function () {
+                var id = parseInt($scope.channelSubscription);
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
+            };
+
+            $rootScope.$on("toggleSocketDebugger", function () {
                 $scope.show = !$scope.show;
             });
+
+            $rootScope.$on(configProvider.getSocketClientFunctions().publishMessage, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().publishMessage, data);
+            });
+
+            $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
+            });
+
+            $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
+            });
+
+            $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().postLikesUpdate, data);
+            });
+
+            $scope.addToMessages = function(fn, data) {
+                var message = {
+                    fn: fn,
+                    data: JSON.stringify(data)
+                };
+                $scope.messages.push(message);
+                console.log(message);
+            };
         };
-        ctrlFn.$inject = ["$scope", "$rootScope"];
+        ctrlFn.$inject = ["$scope", "$rootScope", "blogSocketsService", "configProvider"];
 
         return {
             controller: ctrlFn,

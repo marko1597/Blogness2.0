@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if ($scope.comment.Comments == undefined || $scope.comment.Comments == null || $scope.comment.Comments.length < 1) {
                 return false;
@@ -51,27 +51,24 @@
         };
 
         $scope.isFromPostOwner = function () {
-            if ($scope.comment.User.UserName == $scope.poster) {
+            if ($scope.comment.User != null && $scope.comment.User.UserName == $scope.poster) {
                 return "";
             }
             return "hidden";
         };
 
         $scope.likeComment = function () {
-            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {
-                // TODO: This should call the logger api
-                console.log($scope.user.UserName + " liked comment " + $scope.comment.Id);
-            },
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {},
                 function (err) {
                     errorService.displayError(err);
                 });;
         };
 
-        $scope.$on("commentLikesUpdate", function (e, d) {
-            if ($scope.comment.Id == d.CommentId) {
-                $scope.comment.CommentLikes = d.CommentLikes;
+        $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+            if ($scope.comment.Id == d.commentId) {
+                $scope.comment.CommentLikes = d.commentLikes;
                 $scope.$apply();
-                $(".comment-likes-count[data-comment-id='" + d.CommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
                 $scope.isUserLiked();
             }
         });
@@ -80,7 +77,7 @@
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "errorService", "configProvider"];
 
     return {
         restrict: 'EA',

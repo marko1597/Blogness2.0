@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace Blog.Common.Contracts.ViewModels.SocketViewModels
 {
+    [DataContract]
     public class BaseSocketViewModel : BaseObject
     {
         [DataMember]

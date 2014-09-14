@@ -68,7 +68,6 @@
                                     var index = $scope.post.PostContents.indexOf(this.base);
                                     $scope.post.PostContents.splice(index);
                                     uploader.removeFromQueue(this);
-                                    console.log($scope.post);
                                 }
                             };
                             $scope.existingContents.push(item);

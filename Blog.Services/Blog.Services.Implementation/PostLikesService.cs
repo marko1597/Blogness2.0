@@ -33,7 +33,7 @@ namespace Blog.Services.Implementation
             {
                 PostId = postLike.PostId,
                 PostLikes = postLikes,
-                ClientFunction = Constants.SocketClientFunctions.postLikesUpdate.ToString()
+                ClientFunction = Constants.SocketClientFunctions.PostLikesUpdate.ToString()
             };
 
             _redisService.Publish(postLikesUpdate);

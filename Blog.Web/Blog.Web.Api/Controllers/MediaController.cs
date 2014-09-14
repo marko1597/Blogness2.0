@@ -146,7 +146,7 @@ namespace Blog.Web.Api.Controllers
                     });
 
                 filename = filename.Substring(1, filename.Length - 2);
-                var resultMedia = _media.Add(user, album, filename, chunkName,
+                var resultMedia = _media.AddAsContent(user, album, filename, chunkName,
                     streamProvider.FileData[0].Headers.ContentType.ToString());
 
                 return resultMedia;

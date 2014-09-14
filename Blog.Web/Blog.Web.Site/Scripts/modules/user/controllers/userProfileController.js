@@ -29,7 +29,7 @@
         
         $scope.getUserInfo = function () {
             userService.getUserInfo($scope.username).then(function(user) {
-                if (response.Error == null) {
+                if (user.Error == null) {
                     $scope.user = user;
                     $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
                     $rootScope.$broadcast("viewedUserLoaded", user);

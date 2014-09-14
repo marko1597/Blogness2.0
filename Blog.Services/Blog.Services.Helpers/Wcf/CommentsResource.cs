@@ -8,8 +8,16 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class CommentsResource : BaseResource, ICommentsResource
+    public class CommentsResource : ICommentsResource
     {
+        public Comment Get(int commentId)
+        {
+            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
+            {
+                return svc.Proxy.Get(commentId);
+            }
+        }
+
         public List<Comment> GetByPostId(int id)
         {
             using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
@@ -47,6 +55,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
             {
                 return svc.Proxy.Delete(id);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

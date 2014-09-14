@@ -44,7 +44,7 @@ namespace Blog.Services.Implementation
                 CommentId = commentLike.CommentId,
                 PostId = parentComment.PostId,
                 CommentLikes = commentLikes,
-                ClientFunction = Constants.SocketClientFunctions.commentLikesUpdate.ToString()
+                ClientFunction = Constants.SocketClientFunctions.CommentLikesUpdate.ToString()
             };
 
             _redisService.Publish(commentLikesUpdate);

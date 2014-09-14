@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class EducationResource : BaseResource, IEducationResource
+    public class EducationResource : IEducationResource
     {
         public List<Education> GetByUser(int userId)
         {
@@ -39,6 +39,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
             {
                 return svc.Proxy.Delete(educationId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class PostContentsResource : BaseResource, IPostContentsResource
+    public class PostContentsResource : IPostContentsResource
     {
         public List<PostContent> GetByPostId(int postId)
         {
@@ -39,6 +39,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
             {
                 return svc.Proxy.Delete(postContentId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

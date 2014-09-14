@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface IPostLikesResource : IBaseResource
+    public interface IPostLikesResource : IPostLikesService
     {
-        List<PostLike> Get(int postId);
-        PostLike Add(PostLike postLike);
     }
 }

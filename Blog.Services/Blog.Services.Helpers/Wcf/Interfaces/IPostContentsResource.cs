@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface IPostContentsResource : IBaseResource
+    public interface IPostContentsResource : IPostContentsService
     {
-        List<PostContent> GetByPostId(int postId);
-        PostContent Get(int postContentId);
-        PostContent Add(PostContent postContent);
-        bool Delete(int postContentId);
     }
 }

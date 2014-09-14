@@ -39,6 +39,7 @@
         #socket-debugger > div > p {
             font-family: inherit;
             color: #333;
+            word-wrap: break-word;
         }
 
             #socket-debugger > div > p > code {

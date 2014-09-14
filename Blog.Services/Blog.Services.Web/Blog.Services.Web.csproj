@@ -88,6 +88,7 @@
     <Content Include="Global.asax" />
     <Content Include="HobbyService.svc" />
     <Content Include="MediaService.svc" />
+    <Content Include="NotificationService.svc" />
     <Content Include="PostContentsService.svc" />
     <Content Include="PostLikesService.svc" />
     <Content Include="PostsService.svc" />

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface ICommentLikesResource : IBaseResource
+    public interface ICommentLikesResource : ICommentLikesService
     {
-        List<CommentLike> Get(int commentId);
-        CommentLike Add(CommentLike commentLike);
     }
 }

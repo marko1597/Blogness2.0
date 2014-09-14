@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class AlbumResource : BaseResource, IAlbumResource
+    public class AlbumResource : IAlbumResource
     {
         public List<Album> GetByUser(int userId)
         {
@@ -47,6 +47,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
             {
                 return svc.Proxy.Delete(albumId);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

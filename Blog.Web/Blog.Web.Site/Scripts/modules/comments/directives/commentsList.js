@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentsList', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, userService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, postsService, commentsService, userService, errorService, configProvider) {
         $scope.comments = [];
 
         $scope.emptyCommentsMessage = "";
@@ -11,7 +11,7 @@
                 commentsService.getCommentsByPost($scope.postid).then(function (comments) {
                     $scope.hasError = false;
                     $scope.comments = comments;
-                    commentsHubService.viewPost($scope.postid);
+                    postsService.subscribeToPost($scope.postid);
                 }, function(err) {
                     $scope.hasError = true;
                     errorService.displayError(err);
@@ -38,27 +38,31 @@
                 "There are no comments yet.";
         };
 
-        $scope.$on("commentAdded", function (e, d) {
-            if (d.Comment.PostId != null || d.Comment.PostId != undefined) {
-                $scope.comments.unshift(d.Comment);
+        $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
+            if (d.postId != null || d.postId != undefined) {
+                $scope.comments.unshift(d.comment);
                 $scope.$apply();
-                $(".comment-item[data-comment-id='" + d.Comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
             } else {
                 _.each($scope.comments, function (comment) {
-                    if (comment.Id == d.Comment.ParentCommentId) {
-                        comment.Comments.unshift(d.Comment);
+                    if (comment.Id == d.cmment.ParentCommentId) {
+                        comment.Comments.unshift(d.comment);
                         $scope.$apply();
-                        $(".comment-item[data-comment-id='" + d.Comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        $(".comment-item[data-comment-id='" + d.Comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
                         return;
                     }
                 });
             }
         });
 
+        $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
+            postsService.subscribeToPost($scope.post.Id);
+        });
+
         $scope.getComments();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "userService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "commentsService", "userService", "errorService", "configProvider"];
 
     return {
         restrict: 'EA',

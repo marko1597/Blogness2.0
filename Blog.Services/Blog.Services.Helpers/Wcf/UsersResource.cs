@@ -7,7 +7,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class UsersResource : BaseResource, IUsersResource
+    public class UsersResource : IUsersResource
     {
         public User GetByUserName(string username)
         {
@@ -38,6 +38,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
             {
                 return svc.Proxy.Update(user);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

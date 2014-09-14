@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface IHobbyResource : IBaseResource
+    public interface IHobbyResource : IHobbyService
     {
-        List<Hobby> GetByUser(int userId);
-        Hobby Add(Hobby hobby);
-        Hobby Update(Hobby hobby);
-        bool Delete(int hobbyId);
     }
 }

@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface ITagsResource : IBaseResource
+    public interface ITagsResource : ITagsService
     {
-        List<Tag> GetByPostId(int postId);
-        List<Tag> GetByName(string tagName);
-        Tag Add(Tag tag);
     }
 }

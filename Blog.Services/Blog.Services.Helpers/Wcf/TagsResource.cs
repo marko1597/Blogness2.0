@@ -8,7 +8,7 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Wcf
 {
     [ExcludeFromCodeCoverage]
-    public class TagsResource : BaseResource, ITagsResource
+    public class TagsResource : ITagsResource
     {
         public List<Tag> GetByPostId(int postId)
         {
@@ -31,6 +31,14 @@ namespace Blog.Services.Helpers.Wcf
             using (var svc = new ServiceProxyHelper<ITagsService>("TagsService"))
             {
                 return svc.Proxy.Add(tag);
+            }
+        }
+
+        public bool GetHeartBeat()
+        {
+            using (var svc = new ServiceProxyHelper<ITagsService>("TagsService"))
+            {
+                return svc.Proxy.GetHeartBeat();
             }
         }
     }

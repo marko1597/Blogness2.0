@@ -22,12 +22,7 @@ namespace Blog.Admin.Web.Controllers
         public AccountController()
         {
         }
-
-        public AccountController(ApplicationUserManager userManager)
-        {
-            UserManager = userManager;
-        }
-
+        
         public ApplicationUserManager UserManager {
             get
             {

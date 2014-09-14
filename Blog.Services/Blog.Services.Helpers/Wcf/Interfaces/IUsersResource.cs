@@ -1,12 +1,8 @@
-﻿using Blog.Common.Contracts;
+﻿using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Wcf.Interfaces
 {
-    public interface IUsersResource : IBaseResource
+    public interface IUsersResource : IUsersService
     {
-        User GetByUserName(string username);
-        User Get(int userId);
-        User Add(User user);
-        User Update(User user);
     }
 }
