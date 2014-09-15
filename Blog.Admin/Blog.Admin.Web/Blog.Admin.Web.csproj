@@ -198,6 +198,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\modules\notificationmessage.css" />
+    <Content Include="Content\modules\notifications.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -228,7 +230,6 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\modules\messageNotification.js" />
     <Content Include="Scripts\modules\notifications.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -271,7 +272,7 @@
       <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
     </Content>
     <Content Include="Views\Notifications\Index.cshtml" />
-    <Content Include="Views\Shared\_NotificationMessage.cshtml" />
+    <Content Include="Views\Shared\_NotificationMessagePartial.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -17,7 +17,8 @@ var clientFunctions = {
     commentLikesUpdate: "CommentLikesUpdate",
     postLikesUpdate: "PostLikesUpdate",
     subscribeViewPost: "SubscribeViewPost",
-    unsubscribeViewPost: "UnsubscribeViewPost"
+    unsubscribeViewPost: "UnsubscribeViewPost",
+    subscribeAdmin: "SubscribeAdmin"
 };
 
 var serverFunctions = {
@@ -74,11 +75,16 @@ io.sockets.on('connection', function (socket) {
         socket.emit('echo', data);
     });
     
+    socket.on(clientFunctions.subscribeAdmin, function () {
+        socket.join(blogChannels.adminApp);
+        io.sockets.in(blogChannels.adminApp).send('>>> Subscribing admin app');
+    });
+    
     socket.on(clientFunctions.subscribeViewPost, function (data) {
         socket.join(blogChannels.viewPost + data.postId);
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Subscribing to post:' + data.postId);
     });
-    
+
     socket.on(clientFunctions.unsubscribeViewPost, function (data) {
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Un-Subscribing to post:' + data.postId);
         socket.leave(blogChannels.viewPost + data.postId);
