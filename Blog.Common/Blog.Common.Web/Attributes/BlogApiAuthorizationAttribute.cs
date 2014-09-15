@@ -4,7 +4,7 @@ using System.Net;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
 using Blog.Common.Utils.Extensions;
-using Blog.Common.Web.Extensions.Elmah;
+using Blog.Common.Utils.Helpers.Elmah;
 using WebApi.AuthenticationFilter;
 
 namespace Blog.Common.Web.Attributes

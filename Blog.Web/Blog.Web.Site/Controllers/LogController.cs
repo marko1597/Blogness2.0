@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Blog.Common.Web.Extensions.Elmah;
+using Blog.Common.Utils.Helpers.Elmah;
 
 namespace Blog.Web.Site.Controllers
 {

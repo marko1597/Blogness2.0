@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
 

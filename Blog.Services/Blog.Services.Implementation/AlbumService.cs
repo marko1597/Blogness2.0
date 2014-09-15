@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Logic.Core.Interfaces;
+using Blog.Services.Implementation.Attributes;
+using Blog.Services.Implementation.Handlers;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceErrorBehaviour(typeof(HttpErrorHandler))]
     public class AlbumService : BaseService, IAlbumService
     {
         private readonly IAlbumLogic _albumLogic;

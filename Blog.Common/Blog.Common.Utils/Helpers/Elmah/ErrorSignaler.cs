@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Web;
 using Elmah;
 
-namespace Blog.Common.Web.Extensions.Elmah
+namespace Blog.Common.Utils.Helpers.Elmah
 {
     [ExcludeFromCodeCoverage]
     public class ErrorSignaler : IErrorSignaler
@@ -11,7 +11,13 @@ namespace Blog.Common.Web.Extensions.Elmah
         public void SignalFromCurrentContext(Exception e)
         {
             if (HttpContext.Current != null)
+            {
                 ErrorSignal.FromCurrentContext().Raise(e);
+            }
+            else
+            {
+                ErrorLog.GetDefault(null).Log(new Error(e));
+            }
         }
     }
 }

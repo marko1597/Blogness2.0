@@ -4,9 +4,9 @@ using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Helper.Hub;
 

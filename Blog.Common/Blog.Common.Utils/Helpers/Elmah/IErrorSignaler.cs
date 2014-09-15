@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blog.Common.Web.Extensions.Elmah
+namespace Blog.Common.Utils.Helpers.Elmah
 {
     public interface IErrorSignaler
     {

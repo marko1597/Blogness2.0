@@ -144,13 +144,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Attributes\AllowCrossSiteApiAttributeTest.cs" />
-    <Compile Include="Attributes\AllowCrossSiteAttributeTest.cs" />
     <Compile Include="Attributes\BlogApiAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\PreventCrossUserManipulationTest.cs" />
-    <Compile Include="Attributes\ValidateMimeMultipartContentTest.cs" />
-    <Compile Include="Authentication\AuthenticationHelperTest.cs" />
     <Compile Include="ConstantsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

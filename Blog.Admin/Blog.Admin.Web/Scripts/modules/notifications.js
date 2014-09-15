@@ -140,8 +140,7 @@
                     // Show that growl yo!
                     self.growlTitle("Connected");
                     self.growlMessage("Successfully connected to node server!");
-                    self.notificationMessages.push(new socketNotificationMessage(self.growlTitle(), self.growlMessage()));
-
+                    
                     // Subscribe to admin in socket.io
                     socket.emit('SubscribeAdmin', {});
 

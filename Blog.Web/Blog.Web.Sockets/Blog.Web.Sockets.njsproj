@@ -37,6 +37,7 @@
     <Compile Include="js\bootstrap.js" />
     <Compile Include="js\jquery-1.9.1.js" />
     <Content Include="css\bootstrap.css" />
+    <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="package.json" />
     <Content Include="README.md" />

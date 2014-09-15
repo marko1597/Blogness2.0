@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Utils;
 using Blog.Common.Contracts;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
-using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Web.Extensions.Elmah;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Common.Utils;
 using Blog.Common.Web.Attributes;

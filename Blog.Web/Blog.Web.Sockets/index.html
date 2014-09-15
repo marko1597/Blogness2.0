@@ -4,6 +4,8 @@
     <script src="js/jquery-1.9.1.js"></script>
     <script src="js/bootstrap.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="favicon.ico" rel="icon" />
+
     <style>
         .panel:first-child {
             margin-top: 20px;
@@ -32,8 +34,7 @@
             <div class="panel-heading">Response Messages</div>
             <div class="panel-body">
                 <button id="clear" class="btn btn-info">Clear</button>
-                <ul id="messages">
-                </ul>
+                <ul id="messages"></ul>
             </div>
         </div>
     </div>
@@ -84,7 +85,7 @@
                 socket.emit('UnsubscribeViewPost', { postId: $("#subscribe-id").val() });
             });
 
-            $("#clear").on("click", function() {
+            $("#clear").on("click", function () {
                 $("#messages > li").remove();
             });
 

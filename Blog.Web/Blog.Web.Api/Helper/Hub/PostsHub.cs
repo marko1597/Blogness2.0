@@ -1,7 +1,7 @@
 ﻿using System;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Extensions.Elmah;
 
 namespace Blog.Web.Api.Helper.Hub
 {

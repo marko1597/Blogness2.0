@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Web.Http;
-using Blog.Common.Web.Extensions.Elmah;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Web.Api.Models;
 using Blog.Common.Web.Attributes;
 

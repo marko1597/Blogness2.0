@@ -1,11 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
 using Blog.Logic.Core.Interfaces;
+using Blog.Services.Implementation.Attributes;
+using Blog.Services.Implementation.Handlers;
 using Blog.Services.Implementation.Interfaces;
  
 namespace Blog.Services.Implementation
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceErrorBehaviour(typeof(HttpErrorHandler))]
     public class PostsService : BaseService, IPostsService
     {
         private readonly IPostsLogic _postsLogic;

@@ -1,16 +1,17 @@
 ﻿using System.Net;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Filters;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Common.Identity;
 using Blog.Common.Identity.Interfaces;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Authentication;
+using Blog.Common.Web.Attributes;
 using Blog.Common.Web.Extensions;
-using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
@@ -25,6 +26,7 @@ namespace Blog.Web.Api
         {
             AreaRegistration.RegisterAllAreas();
 
+            RegisterWebApiFilters(GlobalConfiguration.Configuration.Filters);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -54,7 +56,6 @@ namespace Blog.Web.Api
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<ITagsResource, TagsResource>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
-            container.Register<IAuthenticationHelper, AuthenticationHelper>(Lifestyle.Singleton);
             container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
@@ -75,6 +76,11 @@ namespace Blog.Web.Api
             // Register the dependency resolver.
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
             GlobalConfiguration.Configuration.EnsureInitialized();
+        }
+
+        public static void RegisterWebApiFilters(HttpFilterCollection filters)
+        {
+            filters.Add(new ApiRequestLoggerAttribute());
         }
     }
 }

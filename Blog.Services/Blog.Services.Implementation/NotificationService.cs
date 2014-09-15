@@ -1,8 +1,13 @@
-﻿using Blog.Common.Contracts.ViewModels.SocketViewModels;
+﻿using System.ServiceModel.Activation;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
+using Blog.Services.Implementation.Attributes;
+using Blog.Services.Implementation.Handlers;
 using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Implementation
 {
+    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+    [ServiceErrorBehaviour(typeof(HttpErrorHandler))]
     public class NotificationService : BaseService, INotificationService
     {
         private readonly IRedisService _redisService;

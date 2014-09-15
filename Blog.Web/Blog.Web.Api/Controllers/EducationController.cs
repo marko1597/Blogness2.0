@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using Blog.Common.Contracts;
 using Blog.Common.Utils;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
 using System;
 using System.Web.Http;
-using Blog.Common.Web.Extensions.Elmah;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
