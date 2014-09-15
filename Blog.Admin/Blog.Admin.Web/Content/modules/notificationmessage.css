@@ -1,0 +1,29 @@
+﻿#notification-message {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    position: absolute;
+    width: 350px;
+    top: 70px;
+    right: 15px;
+    border-radius: 6px;
+}
+
+    #notification-message > div {
+        display: inline-block;
+    }
+
+        #notification-message > div:first-child {
+            width: 20%;
+            height: auto;
+        }
+
+        #notification-message > div > i {
+            font-size: 40px;
+            color: #3c763d;
+        }
+
+        #notification-message > div > h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }

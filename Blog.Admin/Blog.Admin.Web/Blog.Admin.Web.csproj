@@ -219,6 +219,7 @@
     <Content Include="Scripts\jquery-2.1.1.min.js.map">
       <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery.blockUI.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -227,6 +228,8 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\messageNotification.js" />
+    <Content Include="Scripts\modules\notifications.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -268,6 +271,7 @@
       <DependentUpon>respond.matchmedia.addListener.min.js</DependentUpon>
     </Content>
     <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\Shared\_NotificationMessage.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

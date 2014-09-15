@@ -7,7 +7,8 @@ var redisPublisher = redis.createClient('6379', process.env.redisServer);
 
 var blogChannels = {
     viewPost: "post_",
-    userLoggedIn: "user_"
+    userLoggedIn: "user_",
+    adminApp: "adminApp"
 };
 
 var clientFunctions = {
@@ -28,6 +29,7 @@ var serverFunctions = {
     
     PublishMessage: function (d) {
         io.sockets.in(blogChannels.viewPost + d.data.postId).emit(clientFunctions.publishMessage, d.data);
+        io.sockets.in(blogChannels.adminApp).emit(clientFunctions.publishMessage, d.data);
     },
     
     PostLikesUpdate: function (d) {
@@ -37,6 +39,7 @@ var serverFunctions = {
                 postLikes: d.PostLikes
             };
             io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.postLikesUpdate, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.postLikesUpdate, data);
         }
     },
     
@@ -48,6 +51,7 @@ var serverFunctions = {
                 commentLikes: d.CommentLikes
             };
             io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentLikesUpdate, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.commentLikesUpdate, data);
         }
     },
     
@@ -58,6 +62,7 @@ var serverFunctions = {
                 comment: d.Comment
             };
             io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentAdded, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.commentAdded, data);
         }
     }
 };
