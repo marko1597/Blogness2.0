@@ -1,25 +1,23 @@
-﻿var server = require('http').createServer();
-var io = require('socket.io').listen(server);
-var redis = require('redis');
-var bloggityServer = {};
-var redisSubscriber = redis.createClient('6379', process.env.redisServer);
-var redisPublisher = redis.createClient('6379', process.env.redisServer);
-
-var blogChannels = {
-    viewPost: "post_",
-    userLoggedIn: "user_",
-    adminApp: "adminApp"
-};
-
-var clientFunctions = {
-    publishMessage: "PublishMessage",
-    commentAdded: "CommentAdded",
-    commentLikesUpdate: "CommentLikesUpdate",
-    postLikesUpdate: "PostLikesUpdate",
-    subscribeViewPost: "SubscribeViewPost",
-    unsubscribeViewPost: "UnsubscribeViewPost",
-    subscribeAdmin: "SubscribeAdmin"
-};
+﻿var server = require('http').createServer()
+    , io = require('socket.io').listen(server)
+    , redis = require('redis')
+    , bloggityServer = {}
+    , redisSubscriber = redis.createClient('6379', process.env.redisServer)
+    , redisPublisher = redis.createClient('6379', process.env.redisServer)
+    , blogChannels = {
+            viewPost: "post_",
+            userLoggedIn: "user_",
+            adminApp: "adminApp"
+        }
+    , clientFunctions = {
+            publishMessage: "PublishMessage",
+            commentAdded: "CommentAdded",
+            commentLikesUpdate: "CommentLikesUpdate",
+            postLikesUpdate: "PostLikesUpdate",
+            subscribeViewPost: "SubscribeViewPost",
+            unsubscribeViewPost: "UnsubscribeViewPost",
+            subscribeAdmin: "SubscribeAdmin"
+        };
 
 var serverFunctions = {
     init: function (data) {
@@ -84,7 +82,7 @@ io.sockets.on('connection', function (socket) {
         socket.join(blogChannels.viewPost + data.postId);
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Subscribing to post:' + data.postId);
     });
-
+    
     socket.on(clientFunctions.unsubscribeViewPost, function (data) {
         io.sockets.in(blogChannels.viewPost + data.postId).send('>>> Un-Subscribing to post:' + data.postId);
         socket.leave(blogChannels.viewPost + data.postId);

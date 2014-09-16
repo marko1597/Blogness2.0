@@ -1,12 +1,13 @@
 ﻿@using System.Configuration
 @using System.Text
+@using ServiceStack.Redis
 <!DOCTYPE html>
 <html ng-app="blog">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><!--320-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@ViewBag.Title - Bloggity</title>
+    <title>Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,600,700,800,300' rel='stylesheet' type='text/css'>
 
@@ -104,7 +105,7 @@
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
             blogSockets: "@GetBlogSockets()",
-            hubUrl: "@GetHubUrl()",
+            blogSocketsAvailable: ("@CheckBlogSocketsAvailability()").toLowerCase(),
             templatesUrl: "@GetTemplatesPath()",
             templatesModulesUrl: "@GetTemplatesPath()modules/",
             displayMode: "desktop"
@@ -125,18 +126,16 @@
     @RenderBody()
 
     <!-- socket.io js script -->
-    <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
-
+    @if (CheckBlogSocketsAvailability())
+    {
+        <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
+    }
+    
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
     {
         <script src="~/Scripts/jsbundle.min.js"></script>
         <script src="~/Scripts/modules/appmodules.min.js"></script>
-
-        <!-- Temporary Signalr scripts -->
-        @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>
-        <script src="~/Scripts/bower_components/angular-signalr-hub/signalr-hub.js"></script>
-        <script src="@GetHubUrl()/hubs"></script>*@
     }
     else
     {
@@ -144,7 +143,6 @@
         <script src="~/Scripts/bower_components/jquery/dist/jquery.js"></script>
         <script src="~/Scripts/bower_components/jqueryui/jquery-ui.js"></script>
         <script src="~/Scripts/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js"></script>
-        @*<script src="~/Scripts/bower_components/signalr/jquery.signalR.js"></script>*@
         <script src="~/Scripts/bower_components/isotope/jquery.isotope.js"></script>
         <script src="~/Scripts/plugins/jquery.blockui.js"></script>
         <script src="~/Scripts/plugins/jquery.newsTicker.js"></script>
@@ -325,11 +323,6 @@
         return configValue;
     }
 
-    public string GetHubUrl()
-    {
-        return GetBlogRoot() + "/signalr";
-    }
-
     public string GetTemplatesPath()
     {
         return GetBlogRoot() + "/scripts/templates/";
@@ -367,5 +360,27 @@
         sb.Append(Request.Headers["Host"]);
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Checks if Redis service is running
+    /// </summary>
+    /// <returns>Boolean return that tells if Redis service is running</returns>
+    public bool CheckBlogSocketsAvailability()
+    {
+        try
+        {
+            using (var redisClient = new RedisClient(
+                ConfigurationManager.AppSettings.Get("RedisServer"), 
+                Convert.ToInt32(ConfigurationManager.AppSettings.Get("RedisPort"))))
+            {
+                redisClient.Echo(string.Empty);
+                return true;
+            }
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

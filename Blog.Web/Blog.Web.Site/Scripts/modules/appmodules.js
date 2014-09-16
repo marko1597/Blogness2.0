@@ -16,7 +16,7 @@ window.blogInit =
         settings.setBlogSockets(window.blogConfiguration.blogSockets);
         settings.setBlogApiEndpoint(window.blogConfiguration.blogApi);
         settings.setBlogRoot(window.blogConfiguration.blogRoot);
-        settings.setHubUrl(window.blogConfiguration.hubUrl);
+        settings.setBlogSocketsAvailability(window.blogConfiguration.blogSocketsAvailable);
         settings.setDimensions(window.innerWidth, window.innerHeight);
         settings.setNavigationItems(navigationItems);
         settings.setDefaultProfilePicture(window.blogConfiguration.blogApi + "media/defaultprofilepicture");
@@ -480,9 +480,8 @@ ngConfig.provider('configProvider', function () {
         "BlogApi": "",
         "BlogRoot": "",
         "BlogSockets": "",
+        "BlogSocketsAvailable": true,
         "HubUrl": "",
-        "IsLoggedIn": false,
-        "SessionId": 0,
         "AlertTimer": 5000
     };
 
@@ -520,6 +519,10 @@ ngConfig.provider('configProvider', function () {
                 return socketClientFunctions;
             },
 
+            getBlogSocketsAvailability: function() {
+                return settings.BlogSocketsAvailable;
+            },
+
             /* Setters */
             setDimensions: function (w, h) {
                 windowDimensions.width = w;
@@ -554,9 +557,8 @@ ngConfig.provider('configProvider', function () {
                 settings.BlogSockets = val;
             },
 
-            setSessionId: function (sessionId) {
-                settings.SessionId = sessionId;
-                settings.IsLoggedIn = sessionId !== "" ? true : false;
+            setBlogSocketsAvailability: function(val) {
+                settings.BlogSocketsAvailable = val;
             },
 
             setDefaultProfilePicture: function (val) {
@@ -2929,30 +2931,32 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "configProvider", fun
         socket = io.connect(address, details);
     }
 
-    socket.on('connect', function () {
-        $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
-    });
+    if (configProvider.getSettings().BlogSocketsAvailable === "true") {
+        socket.on('connect', function () {
+            $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
+        });
 
-    socket.on('echo', function (data) {
-        console.log(data);
-    });
+        socket.on('echo', function (data) {
+            console.log(data);
+        });
 
-    socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
-        $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
-    });
+        socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
+            $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
+        });
 
-    socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
-        $rootScope.$broadcast(configProvider.getSocketClientFunctions().postLikesUpdate, data);
-    });
+        socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
+            $rootScope.$broadcast(configProvider.getSocketClientFunctions().postLikesUpdate, data);
+        });
 
-    socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
-        $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
-    });
+        socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
+            $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
+        });
 
-    socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
-        $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentAdded, data);
-    });
-
+        socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
+            $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentAdded, data);
+        });
+    }
+    
     return {
         emit: function (eventName, data, callback) {
             if (socket.connected) {

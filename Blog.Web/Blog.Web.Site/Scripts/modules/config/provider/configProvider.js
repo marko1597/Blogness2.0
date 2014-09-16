@@ -9,9 +9,8 @@
         "BlogApi": "",
         "BlogRoot": "",
         "BlogSockets": "",
+        "BlogSocketsAvailable": true,
         "HubUrl": "",
-        "IsLoggedIn": false,
-        "SessionId": 0,
         "AlertTimer": 5000
     };
 
@@ -49,6 +48,10 @@
                 return socketClientFunctions;
             },
 
+            getBlogSocketsAvailability: function() {
+                return settings.BlogSocketsAvailable;
+            },
+
             /* Setters */
             setDimensions: function (w, h) {
                 windowDimensions.width = w;
@@ -83,9 +86,8 @@
                 settings.BlogSockets = val;
             },
 
-            setSessionId: function (sessionId) {
-                settings.SessionId = sessionId;
-                settings.IsLoggedIn = sessionId !== "" ? true : false;
+            setBlogSocketsAvailability: function(val) {
+                settings.BlogSocketsAvailable = val;
             },
 
             setDefaultProfilePicture: function (val) {

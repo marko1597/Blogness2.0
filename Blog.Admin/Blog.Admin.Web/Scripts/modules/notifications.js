@@ -40,9 +40,10 @@
     }
 
     // Message received from socket server
-    function socketNotificationMessage(fn, message) {
-        this.ClientFuntion = ko.observable(fn);
+    function socketNotificationMessage(fn, message, data) {
+        this.ClientFunction = ko.observable(fn);
         this.Message = ko.observable(message);
+        this.Data = ko.observable(data);
     }
 
     // Message types displayed in the dropdown boxes
@@ -55,11 +56,17 @@
     function notificationsViewModel() {
         var self = this;
 
-        // Flag to show the error message
-        self.showErrorMessage = ko.observable(false);
+        // Flag to check if connected to node js server
+        self.isConnected = ko.observable(false);
+        
+        // Flag to show the alert message
+        self.alertMessageVisible = ko.observable(false);
 
-        // Flag to show the success message
-        self.showSuccessMessage = ko.observable(false);
+        // Text to display in alert messages
+        self.alertMessageText = ko.observable();
+
+        // Determine the alert class/style
+        self.alertMessageClass = ko.observable("alert-success");
 
         // Message type object (dropdown boxes)
         self.messageType = ko.observable();
@@ -69,38 +76,28 @@
 
         // Channel id to be sent to backend for publishing (this stands for the postId)
         self.messageChannelId = ko.observable();
-
-        // Growl notification message
-        self.growlMessage = ko.observable();
-
-        // Growl notification title
-        self.growlTitle = ko.observable();
-
+        
         // Messages received from socket server
         self.notificationMessages = ko.observableArray([]);
 
-        // Hides the success and error messages and clears the selection in message types
+        // Hides alert messages whenver the alertMessageVisible value changes
+        self.alertMessageVisible.subscribe(function() {
+            setTimeout(function() {
+                self.alertMessageVisible(false);
+            }, 5000);
+        });
+
+        // Hides the alert message and clears the selection in message types on change of 
+        // message type selection in the dropdown boxes
         self.messageType.subscribe(function () {
-            self.showSuccessMessage(false);
-            self.showErrorMessage(false);
+            self.alertMessageVisible(false);
             self.messageText("");
             self.messageChannelId("");
         });
-
-        // Determine the message type selected to show in the success message
-        self.successMessage = ko.computed(function () {
-            if (self.messageType() == undefined) return "";
-            return self.messageType().Type();
-        });
-
-        // Hides the error message
-        self.hideErrorMessage = function () {
-            self.showErrorMessage(false);
-        };
-
-        // Hides the success message
-        self.hideSuccessMessage = function () {
-            self.showSuccessMessage(false);
+        
+        // Hides the alert message manually
+        self.hideAlertMessage = function () {
+            self.alertMessageVisible(false);
         };
 
         // Message types shown in dropdown box Type
@@ -111,8 +108,20 @@
             new notificationMessageType("Message", "New message")
         ]);
 
+        // Clear the notification messages displayed
+        self.clearNotificationMessages = function() {
+            self.notificationMessages([]);
+        };
+
         // Send message to backend for publishing
         self.sendMessage = function () {
+            if (!self.isConnected()) {
+                self.alertMessageClass("alert-warning");
+                self.alertMessageText("You're not yet connected bruh! Chill down and wait fer it..");
+                self.alertMessageVisible(true);
+                return;
+            }
+
             var message = new notificationMessage({
                 type: self.messageType().Type(),
                 message: self.messageText(),
@@ -123,11 +132,14 @@
                 data: ko.toJSON(message),
                 type: "post", contentType: "application/json",
                 success: function () {
-                    self.messageText("");
-                    self.showSuccessMessage(true);
+                    self.alertMessageClass("alert-success");
+                    self.alertMessageText("Successfully published " + self.messageType().Display() + " to client! Yay!");
+                    self.alertMessageVisible(true);
                 },
                 error: function () {
-                    self.showErrorMessage(true);
+                    self.alertMessageClass("alert-danger");
+                    self.alertMessageText("Failed publishing " + self.messageType().Display() + " to client!");
+                    self.alertMessageVisible(true);
                 }
             });
         };
@@ -135,18 +147,20 @@
         // Poll to connect to socket server and when connected, bind objects
         var timerId = 0;
         timerId = setInterval(function () {
+            if (typeof io === "undefined") {
+                clearInterval(timerId);
+                return;
+            }
+
             if (socket) {
                 socket.on('connect', function () {
-                    // Show that growl yo!
-                    self.growlTitle("Connected");
-                    self.growlMessage("Successfully connected to node server!");
+                    self.isConnected(true);
+                    self.alertMessageClass("alert-success");
+                    self.alertMessageText("Successfully connected to node js! Do a chicken dance to celebrate!");
+                    self.alertMessageVisible(true);
                     
                     // Subscribe to admin in socket.io
                     socket.emit('SubscribeAdmin', {});
-
-                    // Ugh..use some js/css3 animation shit here later!
-                    $("#notification-message").removeClass("hidden");
-                    setTimeout(function() { $("#notification-message").addClass("hidden"); }, 5000);
 
                     clearInterval(timerId);
                     return;
@@ -154,21 +168,21 @@
 
                 bindEventsFromSocket(self);
             }
-        }, 200);
+        }, 500);
     }
 
     // Called when connected to socket and then bind events on socket emit to update view model
     function bindEventsFromSocket(viewModel) {
         socket.on(clientFunctions.commentAdded, function (message) {
-            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.commentAdded, JSON.stringify(message)));
+            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.commentAdded, "", message));
         });
 
         socket.on(clientFunctions.commentLikesUpdate, function (message) {
-            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.commentLikesUpdate, JSON.stringify(message)));
+            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.commentLikesUpdate, "", message));
         });
 
         socket.on(clientFunctions.postLikesUpdate, function (message) {
-            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.postLikesUpdate, JSON.stringify(message)));
+            viewModel.notificationMessages.push(new socketNotificationMessage(clientFunctions.postLikesUpdate, "", message));
         });
     }
 

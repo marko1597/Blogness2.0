@@ -15,7 +15,7 @@ window.blogInit =
         settings.setBlogSockets(window.blogConfiguration.blogSockets);
         settings.setBlogApiEndpoint(window.blogConfiguration.blogApi);
         settings.setBlogRoot(window.blogConfiguration.blogRoot);
-        settings.setHubUrl(window.blogConfiguration.hubUrl);
+        settings.setBlogSocketsAvailability(window.blogConfiguration.blogSocketsAvailable);
         settings.setDimensions(window.innerWidth, window.innerHeight);
         settings.setNavigationItems(navigationItems);
         settings.setDefaultProfilePicture(window.blogConfiguration.blogApi + "media/defaultprofilepicture");
