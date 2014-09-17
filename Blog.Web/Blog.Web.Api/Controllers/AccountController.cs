@@ -9,7 +9,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Blog.Common.Contracts;
-using Blog.Common.Identity;
+using Blog.Common.Identity.Models;
+using Blog.Common.Identity.OAuth;
+using Blog.Common.Identity.User;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Models.Account;
 using Blog.Web.Api.Models.Account.Binding;
@@ -294,7 +296,7 @@ namespace Blog.Web.Api.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register"), EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Register(RegisterBindingModel model, [FromUri]string trNsUm3GtEwsLe)
+        public async Task<IHttpActionResult> Register(BlogRegisterModel model, [FromUri]string trNsUm3GtEwsLe)
         {
             if (!ModelState.IsValid)
             {
@@ -356,7 +358,7 @@ namespace Blog.Web.Api.Controllers
 
         #region Helpers
 
-        private async Task<User> AddBlogUser(RegisterBindingModel model)
+        private async Task<User> AddBlogUser(BlogRegisterModel model)
         {
             var identityUser = await UserManager.FindByNameAsync(model.Username);
             var blogUser = _usersResource.Add(new User

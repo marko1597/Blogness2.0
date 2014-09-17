@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Blog.Common.Identity.Repository;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace Blog.Common.Identity
+namespace Blog.Common.Identity.User
 {
     public class BlogUserManager : UserManager<BlogUser>
     {

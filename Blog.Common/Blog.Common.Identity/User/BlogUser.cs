@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Blog.Common.Identity
+namespace Blog.Common.Identity.User
 {
     public class BlogUser : IdentityUser
     {

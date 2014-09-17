@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 
-namespace Blog.Common.Identity
+namespace Blog.Common.Identity.OAuth
 {
     public class BlogOAuthAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

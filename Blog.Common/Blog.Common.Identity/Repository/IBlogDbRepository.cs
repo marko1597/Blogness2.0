@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Blog.Common.Identity.Models;
+using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity;
 
-namespace Blog.Common.Identity.Interfaces
+namespace Blog.Common.Identity.Repository
 {
     public interface IBlogDbRepository
     {

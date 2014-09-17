@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Blog.Web.Api.Models.Account.Binding
+namespace Blog.Common.Identity.Models
 {
-    public class RegisterBindingModel
+    public class BlogRegisterModel
     {
         [Required]
         [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]

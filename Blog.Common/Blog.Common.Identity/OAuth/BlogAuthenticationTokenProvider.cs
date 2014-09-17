@@ -8,7 +8,7 @@ using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.DataHandler.Serializer;
 using Microsoft.Owin.Security.DataProtection;
 
-namespace Blog.Common.Identity
+namespace Blog.Common.Identity.OAuth
 {
     public class BlogAuthenticationTokenProvider : ISecureDataFormat<AuthenticationTicket>
     {

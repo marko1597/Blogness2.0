@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Identity;
+using Blog.Common.Identity.User;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
 using Blog.Services.Helpers.Wcf.Interfaces;

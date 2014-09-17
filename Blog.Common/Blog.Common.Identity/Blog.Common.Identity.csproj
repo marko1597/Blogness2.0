@@ -92,21 +92,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlogAuthenticationTokenProvider.cs" />
-    <Compile Include="BlogDbRepository.cs" />
-    <Compile Include="BlogIdentityDbContext.cs" />
-    <Compile Include="BlogOAuthAuthorizationServerProvider.cs" />
-    <Compile Include="BlogRegisterModel.cs" />
-    <Compile Include="BlogUser.cs" />
-    <Compile Include="BlogUserManager.cs" />
-    <Compile Include="BlogUserStore.cs" />
-    <Compile Include="Interfaces\IBlogDbRepository.cs" />
+    <Compile Include="OAuth\BlogAuthenticationTokenProvider.cs" />
+    <Compile Include="Repository\BlogDbRepository.cs" />
+    <Compile Include="Repository\BlogIdentityDbContext.cs" />
+    <Compile Include="OAuth\BlogOAuthAuthorizationServerProvider.cs" />
+    <Compile Include="Models\BlogRegisterModel.cs" />
+    <Compile Include="Role\BlogRole.cs" />
+    <Compile Include="Role\BlogRoleManager.cs" />
+    <Compile Include="User\BlogUser.cs" />
+    <Compile Include="User\BlogUserManager.cs" />
+    <Compile Include="User\BlogUserStore.cs" />
+    <Compile Include="Repository\IBlogDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

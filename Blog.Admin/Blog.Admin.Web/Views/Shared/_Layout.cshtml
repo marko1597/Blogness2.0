@@ -9,19 +9,26 @@
     <title>@ViewBag.Title - Bloggity Administration Tool</title>
     <link rel="icon" href="~/favicon.ico" />
 
-    <!-- bootstrap css -->
+    <!-- #region bootstrap css -->
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- #endregion -->
 
-    <!-- modules css -->
+    <!-- #region css plugins -->
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <!-- #endregion -->
+
+    <!-- #region modules css -->
     <link href="~/Content/modules/notificationmessage.css" rel="stylesheet" />
     <link href="~/Content/modules/notifications.css" rel="stylesheet" />
+    <!-- #endregion -->
 
-    <!-- jquery and knockout js -->
+    <!-- #region jquery and knockout js -->
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/knockout-3.2.0.js"></script>
     <script src="~/Scripts/jquery-2.1.1.js"></script>
+    <!-- #endregion -->
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -58,6 +65,7 @@
         </footer>
     </div>
 
+    <!-- #region site configuration objects -->
     <script>
         var configuration =
         {
@@ -74,21 +82,27 @@
             unsubscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.UnsubscribeViewPost.ToString()",
             wsConnect: "@Blog.Common.Utils.Constants.SocketClientFunctions.WsConnected.ToString()"
         };
-    </script>
 
-    <!-- socket.io js script -->
+        $(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+    <!-- #endregion -->
+    <!-- #region socket.io js script -->
     @if (CheckBlogSocketsAvailability())
     {
         <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
     }
-    
-    <!-- js plugins -->
+    <!-- #endregion -->
+
+    <!-- #region js plugins -->
     <script src="~/Scripts/jquery.blockUI.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
     <script src="~/Scripts/respond.js"></script>
-
+    <!-- #endregion -->
     @RenderSection("scripts", required: false)
 </body>
 </html>

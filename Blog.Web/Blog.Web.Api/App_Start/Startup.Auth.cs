@@ -1,5 +1,7 @@
 ﻿using System;
-using Blog.Common.Identity;
+using Blog.Common.Identity.OAuth;
+using Blog.Common.Identity.Repository;
+using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
