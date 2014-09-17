@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Blog.Common.Web.Attributes;
 
 namespace Blog.Common.Identity.Models
 {
@@ -7,7 +8,8 @@ namespace Blog.Common.Identity.Models
     {
         [Required]
         [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
-        [Display(Name = "User name")]
+        [ValidateUsername(ErrorMessage = "Username {0} is already taken.")]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]

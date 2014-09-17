@@ -1414,11 +1414,33 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
     }
 ]);
 ///#source 1 1 /Scripts/modules/main/controllers/blogMainController.js
-blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log",
-    function ($scope, $location, $rootScope, $log) {
+blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "localStorageService", "userService", "authenticationService",
+    function ($scope, $location, $rootScope, $log, localStorageService, userService, authenticationService) {
+        $scope.authData = localStorageService.get('authorizationData');
+
+        $scope.username = null;
+
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             $log.info("location changing from " + current + " to " + next);
         });
+
+        $scope.init = function() {
+            if ($scope.authData != null) {
+                $scope.username = localStorageService.get('username');
+
+                authenticationService.getUserInfo().then(function (response) {
+                    if (response.Message == undefined || response.Message == null) {
+                        userService.getUserInfo($scope.username).then(function (user) {
+                            if (user.Error == null) {
+                                $rootScope.$broadcast("loggedInUserInfo", user);
+                            }
+                        });
+                    }
+                });
+            }
+        };
+
+        $scope.init();
     }
 ]);
 ///#source 1 1 /Scripts/modules/main/directives/windowResize.js
@@ -1455,8 +1477,9 @@ var ngNavigation = angular.module("ngNavigation", ["ngConfig"]);
 ngNavigation.directive('navigationMenu', function () {
     var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
         $scope.navigationItems = configProvider.getNavigationItems();
+
         $scope.user = {};
-        $scope.userFullName = "";
+
         $scope.authData = localStorageService.get("authorizationData");
 
         $scope.isLoggedIn = function() {
@@ -1470,7 +1493,7 @@ ngNavigation.directive('navigationMenu', function () {
             authenticationService.logout();
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
         };
-
+        
         $scope.launchLoginForm = function() {
             $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
@@ -1481,6 +1504,7 @@ ngNavigation.directive('navigationMenu', function () {
 
         $rootScope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
+            $scope.user.FullName = data.FirstName + " " + data.LastName;
         });
         
         $rootScope.$on("userLoggedIn", function () {

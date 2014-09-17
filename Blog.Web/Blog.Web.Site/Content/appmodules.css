@@ -199,7 +199,6 @@
     }
 }
 
-
 /* -------------------------------------
  * Isotope styles 
  * ------------------------------------- */
@@ -319,6 +318,21 @@ videogular vg-video {
     box-shadow: 0 2px 4px #000000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+/* -------------------------------------
+ * Bloggity base css  
+ * ------------------------------------- */
+.blog-brand-icon {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    float: left;
+    position: relative;
+    top: -5px;
+    margin-right: 5px;
+}
+
 
 .content-item {
     /*border: 1px solid #ddd;*/

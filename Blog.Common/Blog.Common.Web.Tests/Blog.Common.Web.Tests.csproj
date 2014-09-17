@@ -88,6 +88,7 @@
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -147,6 +148,7 @@
     <Compile Include="Attributes\BlogApiAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\BlogAuthorizationAttributeTest.cs" />
     <Compile Include="Attributes\PreventCrossUserManipulationTest.cs" />
+    <Compile Include="Attributes\ValidateUsernameAttributeTest.cs" />
     <Compile Include="ConstantsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

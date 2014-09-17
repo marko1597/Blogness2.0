@@ -20,6 +20,7 @@ namespace Blog.Common.Web.Attributes
             }
             set { _usersResource = value; }
         }
+
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
             var name = actionContext.ActionArguments.Keys.FirstOrDefault();

@@ -16,3 +16,21 @@ select,
 textarea {
     max-width: 100%;
 }
+
+.radio input[type="radio"],
+.radio-inline input[type="radio"],
+.checkbox input[type="checkbox"],
+.checkbox-inline input[type="checkbox"] {
+    margin-left: 0 !important;
+}
+
+.blog-brand-icon {
+    background-image: url(images/brand-logo.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    float: left;
+    position: relative;
+    top: -5px;
+    margin-right: 5px;
+}

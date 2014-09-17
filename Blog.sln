@@ -50,11 +50,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Web.Tests", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Utils.Tests", "Blog.Common\Blog.Common.Utils.Tests\Blog.Common.Utils.Tests.csproj", "{0E172F08-095F-4BD6-BEA0-79A70DDB095C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57EEC164-D018-4634-8394-37C848028310}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.SolutionItems", "Blog.SolutionItems", "{57EEC164-D018-4634-8394-37C848028310}"
 	ProjectSection(SolutionItems) = preProject
-		iisInstallationScript.ps1 = iisInstallationScript.ps1
-		mapIdentityUsersToBlogUsers.sql = mapIdentityUsersToBlogUsers.sql
-		WebEssentials-Settings.json = WebEssentials-Settings.json
+		Blog.SolutionItems\applicationPoolsStartStop.bat = Blog.SolutionItems\applicationPoolsStartStop.bat
+		Blog.SolutionItems\iisInstallationScript.ps1 = Blog.SolutionItems\iisInstallationScript.ps1
+		Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql = Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql
+		Blog.SolutionItems\storedProcedure - mapIdentityUsersToBlogUsers.sql = Blog.SolutionItems\storedProcedure - mapIdentityUsersToBlogUsers.sql
+		Blog.SolutionItems\WebEssentials-Settings.json = Blog.SolutionItems\WebEssentials-Settings.json
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Contracts.Tests", "Blog.Common\Blog.Common.Contracts.Tests\Blog.Common.Contracts.Tests.csproj", "{CFC68387-43FD-4EAD-9F24-B99CC4941D4E}"
@@ -82,6 +84,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Admin.Web", "Blog.Admin\Blog.Admin.Web\Blog.Admin.Web.csproj", "{DB89763E-B984-4D46-A08C-3469EA0653D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.LogCleaner", "Blog.Services\Blog.Services.LogCleaner\Blog.Services.LogCleaner.csproj", "{497A2BC7-E94A-44FA-925B-EFE69457C5B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.UserIdentityMapper", "Blog.Services\Blog.Services.UserIdentityMapper\Blog.Services.UserIdentityMapper.csproj", "{F4872F4D-CE13-4AEA-AC90-14965501BCEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -283,6 +287,14 @@ Global
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Remote|Any CPU.ActiveCfg = Release|Any CPU
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Remote|Any CPU.Build.0 = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Home|Any CPU.ActiveCfg = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Home|Any CPU.Build.0 = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Remote|Any CPU.ActiveCfg = Release|Any CPU
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB}.Remote|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -315,5 +327,6 @@ Global
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 		{DB89763E-B984-4D46-A08C-3469EA0653D8} = {F3FE5CEB-3D88-4F73-8240-51A924AC789C}
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
+		{F4872F4D-CE13-4AEA-AC90-14965501BCEB} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 	EndGlobalSection
 EndGlobal
