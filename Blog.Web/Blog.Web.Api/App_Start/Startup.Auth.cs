@@ -1,6 +1,7 @@
 ﻿using System;
 using Blog.Common.Identity.OAuth;
 using Blog.Common.Identity.Repository;
+using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -18,9 +19,10 @@ namespace Blog.Web.Api
 
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
+            // Configure the db context and user and role manager to use a single instance per request
             app.CreatePerOwinContext(BlogIdentityDbContext.Create);
             app.CreatePerOwinContext<BlogUserManager>(BlogUserManager.Create);
+            app.CreatePerOwinContext<BlogRoleManager>(BlogRoleManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider

@@ -375,6 +375,47 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldGetUsersWithNoIdentityIdSuccessfully()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Returns(_users);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var users = _usersLogic.GetUsersWithNoIdentityId();
+
+            Assert.NotNull(users);
+            Assert.IsInstanceOf(typeof(List<Common.Contracts.User>), users);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetUsersWithNoIdentityIdFails()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Throws(new Exception());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var result = Assert.Throws<BlogException>(() => _usersLogic.GetUsersWithNoIdentityId());
+
+            Assert.IsInstanceOf(typeof(BlogException), result);
+        }
+
+        [Test]
         public void ShouldGetUserByUsername()
         {
             const string username = "jama";

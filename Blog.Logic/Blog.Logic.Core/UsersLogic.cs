@@ -32,6 +32,19 @@ namespace Blog.Logic.Core
             _mediaRepository = mediaRepository;
         }
 
+        public List<User> GetUsersWithNoIdentityId()
+        {
+            try
+            {
+                var db = _userRepository.Find(a => string.IsNullOrEmpty(a.IdentityId), null, null).ToList();
+                return db.Select(UserMapper.ToDto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public User GetByUserName(string userName)
         {
             try

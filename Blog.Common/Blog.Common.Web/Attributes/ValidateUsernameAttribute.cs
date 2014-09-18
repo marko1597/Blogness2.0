@@ -37,7 +37,7 @@ namespace Blog.Common.Web.Attributes
         
         private bool IsValidUsername(string username)
         {
-            var blogUser = _usersResource.GetByUserName(username);
+            var blogUser = UsersResource.GetByUserName(username);
 
             if (blogUser == null) return false;
             return blogUser.Error != null && blogUser.Error.Id == (int)Utils.Constants.Error.RecordNotFound;

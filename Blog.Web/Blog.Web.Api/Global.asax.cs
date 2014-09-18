@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Common.Identity.Repository;
+using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Elmah;

@@ -31,6 +31,12 @@ namespace Blog.Common.Identity.Repository
             return result;
         }
 
+        public async Task<BlogUser> FindUsers(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            return user;
+        }
+
         public async Task<BlogUser> FindUser(string userName, string password)
         {
             var user = await _userManager.FindAsync(userName, password);

@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.Models;
 using Blog.Common.Identity.OAuth;
+using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using Blog.Web.Api.Models.Account;
@@ -29,25 +30,38 @@ namespace Blog.Web.Api.Controllers
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
-        private BlogUserManager _userManager;
-        private readonly IUsersResource _usersResource;
         
-        public AccountController(BlogUserManager userManager, IUsersResource usersResource)
-        {
-            UserManager = userManager;
-            _usersResource = usersResource;
-        }
+        private readonly IUsersResource _usersResource;
 
+        private BlogUserManager _userManager;
         public BlogUserManager UserManager
         {
             get
             {
                 return _userManager ?? Request.GetOwinContext().GetUserManager<BlogUserManager>();
             }
-            private set
+            set
             {
                 _userManager = value;
             }
+        }
+
+        private BlogRoleManager _roleManager;
+        public BlogRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? Request.GetOwinContext().GetUserManager<BlogRoleManager>();
+            }
+            set
+            {
+                _roleManager = value;
+            }
+        }
+
+        public AccountController(IUsersResource usersResource)
+        {
+            _usersResource = usersResource;
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat
@@ -94,7 +108,8 @@ namespace Blog.Web.Api.Controllers
 
             var logins = user.Logins.Select(linkedAccount => new UserLoginInfoViewModel
             {
-                LoginProvider = linkedAccount.LoginProvider, ProviderKey = linkedAccount.ProviderKey
+                LoginProvider = linkedAccount.LoginProvider,
+                ProviderKey = linkedAccount.ProviderKey
             }).ToList();
 
             if (user.PasswordHash != null)
@@ -281,14 +296,15 @@ namespace Blog.Web.Api.Controllers
 
             return descriptions.Select(description => new ExternalLoginViewModel
             {
-                Name = description.Caption, Url = Url.Route("ExternalLogin", new
-                {
-                    provider = description.AuthenticationType, 
-                    response_type = "token", 
-                    client_id = Startup.PublicClientId, 
-                    redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri, 
-                    state
-                }),
+                Name = description.Caption,
+                Url = Url.Route("ExternalLogin", new
+                    {
+                        provider = description.AuthenticationType,
+                        response_type = "token",
+                        client_id = Startup.PublicClientId,
+                        redirect_uri = new Uri(Request.RequestUri, returnUrl).AbsoluteUri,
+                        state
+                    }),
                 State = state
             }).ToList();
         }
@@ -308,13 +324,14 @@ namespace Blog.Web.Api.Controllers
 
             if (!result.Succeeded) return GetErrorResult(result);
 
-            if (string.IsNullOrEmpty(trNsUm3GtEwsLe))
-            {
-                var blogUser = await AddBlogUser(model);
-                return blogUser.Error != null ? GetErrorResult(result) : Ok();
-            }
-            
-            return Ok();
+            var rolesResult = await UserManager.AddToRolesAsync(user.Id, new[] { "Blogger" });
+            if (!rolesResult.Succeeded) return GetErrorResult(result);
+
+            // Special flag to bypass creation of user in BlogDb
+            if (!string.IsNullOrEmpty(trNsUm3GtEwsLe)) return Ok();
+
+            var blogUser = await AddBlogUser(model);
+            return blogUser.Error != null ? GetErrorResult(result) : Ok();
         }
 
         // POST api/Account/RegisterExternal
@@ -373,7 +390,7 @@ namespace Blog.Web.Api.Controllers
 
             return blogUser;
         }
-
+        
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }

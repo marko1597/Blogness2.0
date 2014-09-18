@@ -6,19 +6,16 @@ using Microsoft.Owin;
 
 namespace Blog.Common.Identity.Role
 {
-    public class BlogRoleManager
+    public class BlogRoleManager : RoleManager<BlogRole>
     {
-        public class ApplicationRoleManager : RoleManager<BlogRole>
+        public BlogRoleManager(IRoleStore<BlogRole, string> roleStore)
+            : base(roleStore)
         {
-            public ApplicationRoleManager(IRoleStore<BlogRole, string> roleStore)
-                : base(roleStore)
-            {
-            }
+        }
 
-            public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-            {
-                return new ApplicationRoleManager(new RoleStore<BlogRole>(context.Get<BlogIdentityDbContext>()));
-            }
+        public static BlogRoleManager Create(IdentityFactoryOptions<BlogRoleManager> options, IOwinContext context)
+        {
+            return new BlogRoleManager(new RoleStore<BlogRole>(context.Get<BlogIdentityDbContext>()));
         }
     }
 }

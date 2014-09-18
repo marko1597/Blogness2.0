@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Web.Http.Controllers;
@@ -8,6 +9,7 @@ using Blog.Common.Utils.Helpers.Elmah;
 
 namespace Blog.Common.Web.Attributes
 {
+    [ExcludeFromCodeCoverage]
     public class ApiRequestLoggerAttribute : ActionFilterAttribute
     {
         private readonly Stopwatch _stopWatch = new Stopwatch();
