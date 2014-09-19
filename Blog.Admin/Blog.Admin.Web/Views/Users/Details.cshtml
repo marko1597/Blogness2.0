@@ -23,11 +23,29 @@
 
         <div class="row">
             <div class="col-md-6">
+                <!-- #region profile info -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h3 class="panel-title">Profile Details</h3>
                     </div>
                     <div class="panel-body">
+                        <div class="user-images">
+                            <div class="background-picture">
+                                <img src="../../Content/images/default-background-picture.jpg" alt="" />
+                            </div>
+                            <div class="details">
+                                <div class="user-profile-image">
+                                    <img src="../../Content/images/default-profile-picture.jpg" alt="" />
+                                </div>
+                                <div>
+                                    <h4>@Model.FirstName @Model.LastName</h4>
+                                    <p>
+                                        <a class="ng-binding">@@@Model.UserName</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
                                 @Html.LabelFor(model => model.UserName)
@@ -92,11 +110,12 @@
                         </div>
                     </div>
                 </div>
-
+                <!-- #endregion -->
+                <!-- #region address -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">Address</span>
-                        @Html.ActionLink("Edit", "Edit", "Address", new { id = Model.Address.AddressId }, new { @class = "pull-right" })
+                        @Html.ActionLink("Edit", "Index", "Address", new { userId = Model.Id }, new { @class = "pull-right" })
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -145,9 +164,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- #endregion-->
             </div>
 
             <div class="col-md-6">
+                <!-- #region hobbies -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">Hobbies</span>
@@ -160,7 +181,8 @@
                         }
                     </div>
                 </div>
-
+                <!-- #endregion -->
+                <!-- #region education -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">Education</span>
@@ -178,6 +200,7 @@
                         }
                     </div>
                 </div>
+                <!-- #endregion -->
             </div>
         </div>
     }
@@ -227,7 +250,7 @@
         {
             endString = "present";
         }
-        
+
         return string.Format("From {0} to {1}", startString, endString);
     }
 }

@@ -190,6 +190,14 @@ namespace Blog.Logic.Core
         private static Db.User PrepareUserForAdding(User user)
         {
             var dbUser = UserMapper.ToEntity(user);
+            dbUser.Address = new Db.Address
+            {
+                StreetAddress = string.Empty,
+                State = string.Empty,
+                City = string.Empty,
+                Country = string.Empty,
+                Zip = null
+            };
             dbUser.Albums = new Collection<Db.Album>
             {
                 new Db.Album

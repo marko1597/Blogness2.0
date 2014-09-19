@@ -4,7 +4,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Blog.Admin.Web.Helpers;
 using Blog.Common.Identity.Repository;
-using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Elmah;
@@ -35,6 +34,7 @@ namespace Blog.Admin.Web
             container.Register<IUserHelper, UserHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
+            container.Register<IAddressResource, AddressResource>(Lifestyle.Singleton);
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
             container.Register<INotificationResource, NotificationResource>(Lifestyle.Singleton);
 
