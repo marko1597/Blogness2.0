@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Wcf.Interfaces;
@@ -9,6 +10,22 @@ namespace Blog.Services.Helpers.Wcf
     [ExcludeFromCodeCoverage]
     public class UsersResource : IUsersResource
     {
+        public List<User> GetUsers(int threshold = 10, int skip = 10)
+        {
+            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
+            {
+                return svc.Proxy.GetUsers(threshold, skip);
+            }
+        }
+
+        public List<User> GetUsersWithNoIdentityId()
+        {
+            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
+            {
+                return svc.Proxy.GetUsersWithNoIdentityId();
+            }
+        }
+
         public User GetByUserName(string username)
         {
             using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))

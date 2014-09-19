@@ -22,12 +22,34 @@ namespace Blog.Common.Web.Attributes
         {
             try
             {
-                if (value.GetType() != typeof(string)) throw new Exception("Model property is not a string.");
+                if (value == null)
+                {
+                    ErrorMessage = "Model property is null/empty.";
+                    return false;
+                }
+
+                if (value.GetType() != typeof (string))
+                {
+                    ErrorMessage ="Model property is not a string.";
+                    return false;
+                }
 
                 var username = value.ToString();
-                if (string.IsNullOrEmpty(username)) throw new Exception("Model property is null/empty.");
+                if (!string.IsNullOrEmpty(username))
+                {
+                    var result = IsValidUsername(username);
+                    if (result)
+                    {
+                        ErrorMessage = string.Empty;
+                        return true;
+                    }
 
-                return IsValidUsername(username);
+                    ErrorMessage = "Username is already in use";
+                    return false;
+                }
+
+                ErrorMessage = "Model property is null/empty.";
+                return false;
             }
             catch (Exception ex)
             {

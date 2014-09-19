@@ -416,6 +416,43 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldGetUsersListSuccessfully()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.GetUsers(It.IsAny<int>(), It.IsAny<int>())).Returns(_users);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var users = _usersLogic.GetUsers(5, 5);
+
+            Assert.NotNull(users);
+            Assert.IsInstanceOf(typeof(List<Common.Contracts.User>), users);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetUsersFails()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.GetUsers(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var result = Assert.Throws<BlogException>(() => _usersLogic.GetUsers(5, 5));
+
+            Assert.IsInstanceOf(typeof(BlogException), result);
+        }
+
+        [Test]
         public void ShouldGetUserByUsername()
         {
             const string username = "jama";

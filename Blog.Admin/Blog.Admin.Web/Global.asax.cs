@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Blog.Admin.Web.Helpers;
 using Blog.Common.Identity.Repository;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
@@ -28,6 +29,7 @@ namespace Blog.Admin.Web
 
             // SI Controllers Dependency Injection
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
+            container.Register<IUserHelper, UserHelper>(Lifestyle.Singleton);
             container.Register<INotificationResource, NotificationResource>(Lifestyle.Singleton);
 
             // SI Token Identity Registers

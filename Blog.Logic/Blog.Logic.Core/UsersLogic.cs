@@ -32,6 +32,19 @@ namespace Blog.Logic.Core
             _mediaRepository = mediaRepository;
         }
 
+        public List<User> GetUsers(int threshold = 10, int skip = 10)
+        {
+            try
+            {
+                var db = _userRepository.GetUsers(threshold, skip).ToList();
+                return db.Select(UserMapper.ToDto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public List<User> GetUsersWithNoIdentityId()
         {
             try

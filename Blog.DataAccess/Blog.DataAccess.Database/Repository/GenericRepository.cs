@@ -38,14 +38,13 @@ namespace Blog.DataAccess.Database.Repository
                 query = query.Where(filter);
             }
 
-            query = includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
-
-            if (orderBy != null)
+            if (!string.IsNullOrEmpty(includeProperties))
             {
-                return orderBy(query).ToList();
+                query = includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
             }
-            return query.ToList();
+
+            return orderBy != null ? orderBy(query).ToList() : query.ToList();
         }
 
         public IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren)

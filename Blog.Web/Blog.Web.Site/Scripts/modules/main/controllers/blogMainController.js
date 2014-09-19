@@ -12,15 +12,19 @@
             if ($scope.authData != null) {
                 $scope.username = localStorageService.get('username');
 
-                authenticationService.getUserInfo().then(function (response) {
+                authenticationService.getUserInfo().then(function(response) {
                     if (response.Message == undefined || response.Message == null) {
-                        userService.getUserInfo($scope.username).then(function (user) {
+                        userService.getUserInfo($scope.username).then(function(user) {
                             if (user.Error == null) {
                                 $rootScope.$broadcast("loggedInUserInfo", user);
                             }
                         });
                     }
+                }, function() {
+                    authenticationService.logout();
                 });
+            } else {
+                authenticationService.logout();
             }
         };
 

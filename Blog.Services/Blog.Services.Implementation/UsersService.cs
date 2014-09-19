@@ -1,4 +1,5 @@
-﻿using System.ServiceModel.Activation;
+﻿using System.Collections.Generic;
+using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Attributes;
@@ -16,6 +17,16 @@ namespace Blog.Services.Implementation
         public UsersService(IUsersLogic usersLogic)
         {
             _usersLogic = usersLogic;
+        }
+
+        public List<User> GetUsers(int threshold = 10, int skip = 10)
+        {
+            return _usersLogic.GetUsers(threshold, skip);
+        }
+
+        public List<User> GetUsersWithNoIdentityId()
+        {
+            return _usersLogic.GetUsersWithNoIdentityId();
         }
 
         public User GetByUserName(string username)

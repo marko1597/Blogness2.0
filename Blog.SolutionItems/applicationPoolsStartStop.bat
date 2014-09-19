@@ -16,3 +16,4 @@ GOTO end
 GOTO end
 
 :end
+	ECHO "DONE!!"

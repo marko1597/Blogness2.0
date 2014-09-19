@@ -67,24 +67,37 @@ namespace Blog.Common.Web.Tests.Attributes
             var result = attr.IsValid("foo");
 
             Assert.IsFalse(result);
+            Assert.AreEqual("Username is already in use", attr.ErrorMessage);
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenUsernameIsNotString()
+        public void ShouldReturnFalseWhenParameterIsNull()
         {
             var attr = new ValidateUsernameAttribute { UsersResource = _userResource.Object };
-            var result = Assert.Throws<BlogException>(() => attr.IsValid(13));
+            var result = attr.IsValid(null);
 
-            Assert.AreEqual("Model property is not a string.", result.Message);
+            Assert.IsFalse(result);
+            Assert.AreEqual("Model property is null/empty.", attr.ErrorMessage);
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenUsernameIsEmptyOrNull()
+        public void ShouldReturnFalseWhenUsernameIsNotString()
         {
             var attr = new ValidateUsernameAttribute { UsersResource = _userResource.Object };
-            var result = Assert.Throws<BlogException>(() => attr.IsValid(string.Empty));
+            var result =  attr.IsValid(13);
 
-            Assert.AreEqual("Model property is null/empty.", result.Message);
+            Assert.IsFalse(result);
+            Assert.AreEqual("Model property is not a string.", attr.ErrorMessage);
+        }
+
+        [Test]
+        public void ShouldReturnFalseWhenUsernameIsEmptyOrNull()
+        {
+            var attr = new ValidateUsernameAttribute { UsersResource = _userResource.Object };
+            var result = attr.IsValid(string.Empty);
+
+            Assert.IsFalse(result);
+            Assert.AreEqual("Model property is null/empty.", attr.ErrorMessage);
         }
 
         [Test]

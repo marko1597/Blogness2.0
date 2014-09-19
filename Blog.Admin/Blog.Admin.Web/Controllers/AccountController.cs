@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Blog.Admin.Web.Helpers;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.Models;
 using Blog.Common.Identity.Role;
@@ -36,11 +37,11 @@ namespace Blog.Admin.Web.Controllers
             set { _roleManager = value; }
         }
 
-        private readonly IUsersResource _usersResource;
+        private readonly IUserHelper _userHelper;
 
-        public AccountController(IUsersResource usersResource)
+        public AccountController(IUserHelper userHelper)
         {
-            _usersResource = usersResource;
+            _userHelper = userHelper;
         }
 
         //
@@ -96,14 +97,14 @@ namespace Blog.Admin.Web.Controllers
             //Add User to the selected Roles 
             if (result.Succeeded)
             {
-                var roleResult = await UserManager.AddToRolesAsync(user.Id, new[] { "Blog Staff" });
+                var roleResult = await UserManager.AddToRolesAsync(user.Id, new[] { "Bloggity Staff" });
                 if (!roleResult.Succeeded)
                 {
                     AddErrors(roleResult);
                     return View();
                 }
 
-                var blogUser = await AddBlogUser(model);
+                var blogUser = await _userHelper.AddBlogUser(model);
                 if (blogUser.Error != null)
                 {
                     ViewBag.UserCreationError = blogUser.Error.Message;
@@ -447,22 +448,6 @@ namespace Blog.Admin.Web.Controllers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
-
-        private async Task<User> AddBlogUser(BlogRegisterModel model)
-        {
-            var identityUser = await UserManager.FindByNameAsync(model.Username);
-            var blogUser = _usersResource.Add(new User
-            {
-                UserName = model.Username,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                BirthDate = model.BirthDate,
-                IdentityId = identityUser.Id,
-                EmailAddress = model.Email
-            });
-
-            return blogUser;
-        }
 
         private IAuthenticationManager AuthenticationManager
         {

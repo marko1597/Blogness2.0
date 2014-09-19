@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using Blog.Common.Contracts;
 
 namespace Blog.Services.Implementation.Interfaces
@@ -6,6 +7,12 @@ namespace Blog.Services.Implementation.Interfaces
     [ServiceContract]
     public interface IUsersService : IBaseService
     {
+        [OperationContract]
+        List<User> GetUsers(int threshold = 10, int skip = 10);
+
+        [OperationContract]
+        List<User> GetUsersWithNoIdentityId();
+
         [OperationContract]
         User GetByUserName(string username);
 

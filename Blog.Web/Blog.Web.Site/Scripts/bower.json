@@ -24,6 +24,7 @@
     "angular-snap": "~1.6.0",
     "angular-file-upload": "~1.1.1",
     "jqueryui": "~1.11.1",
-    "ng-tags-input": "~2.1.1"
+    "ng-tags-input": "~2.1.1",
+    "moment": "~2.8.3"
   }
 }

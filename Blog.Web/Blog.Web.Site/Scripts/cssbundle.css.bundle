@@ -19,5 +19,7 @@
     <file>/Scripts/bower_components/videogular-themes-default/videogular.css</file>
     <file>/Scripts/bower_components/bootstrap-additions/dist/bootstrap-additions.css</file>
     <file>/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css</file>
+    <file>/Scripts/bower_components/offline/themes/offline-theme-slide-indicator.css</file>
+    <file>/Scripts/bower_components/offline/themes/offline-language-english.css</file>
   </files>
 </bundle>

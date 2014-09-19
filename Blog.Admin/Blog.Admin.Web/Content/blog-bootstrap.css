@@ -727,6 +727,12 @@ dd {
     margin-left: 0;
 }
 
+@media (max-width: 767px) {
+    .dl-horizontal dd {
+        margin-bottom: 10px;
+    }
+}
+
 @media (min-width: 768px) {
     .dl-horizontal dt {
         float: left;
@@ -734,8 +740,11 @@ dd {
         clear: left;
         text-align: right;
         overflow: hidden;
+        -ms-text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         white-space: nowrap;
+        margin-bottom: 10px;
     }
 
     .dl-horizontal dd {
