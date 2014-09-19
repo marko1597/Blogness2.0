@@ -44,6 +44,9 @@ namespace Blog.Common.Contracts
         public int? BackgroundId { get; set; }
 
         [DataMember]
+        public bool IsDeleted { get; set; }
+
+        [DataMember]
         public List<Education> Education { get; set; }
 
         [DataMember]

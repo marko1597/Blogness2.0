@@ -7,5 +7,6 @@ namespace Blog.Admin.Web.Helpers
     public interface IUserHelper
     {
         Task<User> AddBlogUser(BlogRegisterModel model);
+        User DeleteUser(string username);
     }
 }

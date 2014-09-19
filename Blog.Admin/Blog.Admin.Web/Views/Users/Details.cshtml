@@ -5,35 +5,229 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.UserName Information</h2>
+<h2>@GetUserDetailsHeader()</h2>
 
 <div>
     <h4>Displays identity information</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.UserName)</dt>
-        <dd>@Html.DisplayFor(model => model.UserName)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.EmailAddress)</dt>
-        <dd>@Html.DisplayFor(model => model.EmailAddress)</dd>
-        
-        <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
-        <dd>@Html.DisplayFor(model => model.FirstName)</dd>
-        
-        <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
-        <dd>@Html.DisplayFor(model => model.LastName)</dd>
+    @if (ViewBag.ErrorMessage != null && Model == null)
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Error!</strong> @ViewBag.ErrorMessage
+        </div>
+    }
+    else
+    {
+        <hr />
 
-        <dt>@Html.DisplayNameFor(model => model.IdentityId)</dt>
-        <dd>@Html.DisplayFor(model => model.IdentityId)</dd>
-        
-        <dt>@Html.DisplayNameFor(model => model.Role)</dt>
-        <dd>@Html.DisplayFor(model => model.Role)</dd>
-        
-        <dt>@Html.DisplayNameFor(model => model.BirthDate)</dt>
-        <dd>@Html.DisplayFor(model => model.BirthDate)</dd>
-    </dl>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Profile Details</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.UserName)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.UserName)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.EmailAddress)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.EmailAddress)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.FirstName)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.FirstName)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.LastName)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.LastName)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Role)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Role)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.IdentityId)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.IdentityId)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.BirthDate)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.BirthDate)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="panel-title">Address</span>
+                        @Html.ActionLink("Edit", "Edit", "Address", new { id = Model.Address.AddressId }, new { @class = "pull-right" })
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Address.StreetAddress)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Address.StreetAddress)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Address.State)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Address.State)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Address.City)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Address.City)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Address.Country)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Address.Country)</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                @Html.LabelFor(model => model.Address.Zip)
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                                <p>@Html.DisplayFor(model => model.Address.Zip)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="panel-title">Hobbies</span>
+                        @Html.ActionLink("Edit", "Edit", "Hobbies", new { userId = Model.Id }, new { @class = "pull-right" })
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var hobby in Model.Hobbies)
+                        {
+                            <p>@Html.DisplayFor(model => hobby.HobbyName)</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <span class="panel-title">Education</span>
+                        @Html.ActionLink("Edit", "Edit", "Education", new { userId = Model.Id }, new { @class = "pull-right" })
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var education in Model.Education)
+                        {
+                            <div class="content-item">
+                                <h5>@Html.DisplayFor(a => education.SchoolName)</h5>
+                                <p>@Html.DisplayFor(a => education.EducationType.EducationTypeName)</p>
+                                <p>@Html.DisplayFor(a => education.State) @Html.DisplayFor(a => education.City), @Html.DisplayFor(a => education.Country)</p>
+                                <p>@GetEducationDateRange(education.YearAttended, education.YearGraduated)</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @if (Model != null)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@functions {
+
+    private string GetUserDetailsHeader()
+    {
+        if (ViewBag.ErrorMessage == null)
+        {
+            return string.Format("{0}'s Information", Model.UserName);
+        }
+
+        return "No one's info is being viewed. How sad. :'(";
+    }
+
+    private static string GetEducationDateRange(DateTime? start, DateTime? end)
+    {
+        string startString;
+        string endString;
+
+        if (start != null)
+        {
+            var tmpStart = Convert.ToDateTime(start);
+            startString = tmpStart.ToString("MMM, yyyy");
+        }
+        else
+        {
+            startString = "present";
+        }
+
+        if (end != null)
+        {
+            var tmpEnd = Convert.ToDateTime(end);
+            endString = tmpEnd.ToString("MMM, yyyy");
+        }
+        else
+        {
+            endString = "present";
+        }
+        
+        return string.Format("From {0} to {1}", startString, endString);
+    }
+}

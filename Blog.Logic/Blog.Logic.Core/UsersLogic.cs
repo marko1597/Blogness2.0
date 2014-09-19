@@ -91,6 +91,7 @@ namespace Blog.Logic.Core
                 if (hasPassedValidations == null)
                 {
                     var dbUser = PrepareUserForAdding(user);
+                    user.IsDeleted = false;
                     dbUser = _userRepository.Add(dbUser);
                     return UserMapper.ToDto(dbUser);
                 }

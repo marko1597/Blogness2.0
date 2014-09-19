@@ -1,6 +1,6 @@
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
-    font-family: 'Open  Sans', sans-serif;
+    font-family: sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
 }
@@ -326,7 +326,7 @@ html {
 }
 
 body {
-    font-family: Open Sans;
+    font-family: inherit;
     font-size: 14px;
     line-height: 1.428571429;
     color: #333333;
@@ -428,7 +428,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: Open Sans;
+    font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
     color: inherit;
@@ -727,12 +727,6 @@ dd {
     margin-left: 0;
 }
 
-@media (max-width: 767px) {
-    .dl-horizontal dd {
-        margin-bottom: 10px;
-    }
-}
-
 @media (min-width: 768px) {
     .dl-horizontal dt {
         float: left;
@@ -740,11 +734,8 @@ dd {
         clear: left;
         text-align: right;
         overflow: hidden;
-        -ms-text-overflow: ellipsis;
-        -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         white-space: nowrap;
-        margin-bottom: 10px;
     }
 
     .dl-horizontal dd {
@@ -5835,6 +5826,7 @@ a.list-group-item-danger {
 }
 
 .panel {
+    margin-bottom: 0;
     background-color: #ffffff;
     border: 1px solid transparent;
     border-radius: 0px;
@@ -5849,8 +5841,8 @@ a.list-group-item-danger {
 .panel-heading {
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
+    border-top-right-radius: -1px;
+    border-top-left-radius: -1px;
 }
 
     .panel-heading > .dropdown .dropdown-toggle {

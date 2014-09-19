@@ -25,6 +25,36 @@ textarea {
     margin-left: 0 !important;
 }
 
+@media (max-width: 991px) {
+    .btn-group, .btn-group-vertical {
+        width: 100%;
+    }
+
+        .btn-group > .btn:first-child, .btn-group-vertical > .btn:first-child {
+            width: 95%;
+        }
+
+        .btn-group > .btn + .btn, .btn-group-vertical > .btn + .btn {
+            width: 5%;
+        }
+
+        .btn-group > .dropdown-menu {
+            width: 100%;
+        }
+}
+
+.btn-group > .dropdown-menu {
+    margin: 2px 15px;
+}
+
+.btn-group.open > .dropdown-menu {
+    display: inline-table;
+}
+
+.panel > .panel-heading > a {
+    color: #fff;
+}
+
 .blog-brand-icon {
     background-image: url(images/brand-logo.png);
     background-size: cover;
@@ -55,3 +85,16 @@ html {
     .footer p {
         margin: 15px 0;
     }
+
+.content-item {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px #000000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

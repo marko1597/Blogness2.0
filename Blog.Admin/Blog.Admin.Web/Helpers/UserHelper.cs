@@ -46,5 +46,14 @@ namespace Blog.Admin.Web.Helpers
 
             return blogUser;
         }
+
+        public User DeleteUser(string username)
+        {
+            var user = UsersResource.GetByUserName(username);
+            user.IsDeleted = true;
+
+            var result = UsersResource.Update(user);
+            return result;
+        }
     }
 }

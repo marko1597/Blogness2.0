@@ -22,6 +22,9 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public string LastName { get; set; }
 
         [Required]
+        public bool IsDeleted { get; set; }
+
+        [Required]
         public string EmailAddress { get; set; }
 
         public DateTime BirthDate { get; set; }

@@ -104,11 +104,11 @@
             $(function () {
                 $('.datepicker').datepicker();
 
-                $.ajaxStart(function () {
+                $(document).ajaxStart(function () {
                     $.blockUI({ message: '<h1>Just a moment...</h1>' });
                 });
 
-                $.ajaxComplete(function () {
+                $(document).ajaxComplete(function () {
                     $.unblockUI();
                 });
             });

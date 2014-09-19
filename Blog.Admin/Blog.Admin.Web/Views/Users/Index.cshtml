@@ -7,6 +7,22 @@
 
 <h2>Users</h2>
 
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Error!</strong> @ViewBag.ErrorMessage
+    </div>
+}
+
+@if (TempData.Count > 0 && TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Error!</strong> @TempData["ErrorMessage"]
+    </div>
+}
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -49,8 +65,8 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
                 @Html.ActionLink("Delete", "Delete", new { id = item.IdentityId })
             </td>
         </tr>

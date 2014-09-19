@@ -1,19 +1,19 @@
 ﻿@model Blog.Admin.Web.Models.Users.CreateUserViewModel
 
 @{
-    ViewBag.Title = "Create New User";
-    ViewBag.Mode = "Create";
+    ViewBag.Title = "Update User Information";
+    ViewBag.Mode = "Update";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create New User</h2>
+<h2>Update User</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Enter user information on the form below</h4>
+        <h4>Modify user information on the form below</h4>
 
         @if (ViewBag.ErrorMessage != null)
         {
@@ -22,14 +22,15 @@
                 <strong>Error!</strong> @ViewBag.ErrorMessage
             </div>
         }
-        
+
         <hr />
-        
+
         @Html.Partial("_UserForm", Model)
         
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Submit updated user" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -37,4 +38,5 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Details", "Details", new { id = Model.Id })
 </div>

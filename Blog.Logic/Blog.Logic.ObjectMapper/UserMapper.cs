@@ -30,7 +30,8 @@ namespace Blog.Logic.ObjectMapper
                     Education = education,
                     Hobbies = hobbies,
                     PictureId = user.PictureId,
-                    BackgroundId = user.BackgroundId
+                    BackgroundId = user.BackgroundId,
+                    IsDeleted = user.IsDeleted
                 };
             }
             return new User();
@@ -66,7 +67,8 @@ namespace Blog.Logic.ObjectMapper
                     Education = education,
                     Hobbies = hobbies,
                     PictureId = picture,
-                    BackgroundId = background
+                    BackgroundId = background,
+                    IsDeleted = user.IsDeleted
                 };
             }
             return null;

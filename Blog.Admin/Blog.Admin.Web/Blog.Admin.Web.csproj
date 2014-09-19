@@ -201,6 +201,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
@@ -241,6 +242,13 @@
     <Content Include="Content\images\brand-logo.png" />
     <Content Include="Content\modules\notificationmessage.css" />
     <Content Include="Content\modules\notifications.css" />
+    <Content Include="ErrorPage\css\blog-bootstrap.css" />
+    <Content Include="ErrorPage\css\bootstrap.css" />
+    <Content Include="ErrorPage\favicon.ico" />
+    <Content Include="ErrorPage\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ErrorPage\images\bg-noise.png" />
+    <Content Include="ErrorPage\images\bg.jpg" />
+    <Content Include="ErrorPage\index.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -284,6 +292,9 @@
     <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.eot" />
     <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.ttf" />
     <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.woff" />
+    <Content Include="ErrorPage\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ErrorPage\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="ErrorPage\fonts\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -358,6 +369,9 @@
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\_UserForm.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

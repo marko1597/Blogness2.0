@@ -6,6 +6,8 @@ namespace Blog.Admin.Web.Models.Users
 {
     public class CreateUserViewModel : BlogRegisterModel
     {
+        public int Id { get; set; }
+
         [Display(Name = "Identity")]
         public string IdentityId { get; set; }
 

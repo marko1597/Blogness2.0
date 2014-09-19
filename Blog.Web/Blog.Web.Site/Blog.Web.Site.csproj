@@ -3202,8 +3202,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\modules\comments\controllers\" />
     <Folder Include="Scripts\modules\messaging\directives\" />
-    <Folder Include="Views\Hub\" />
-    <Folder Include="Views\Log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

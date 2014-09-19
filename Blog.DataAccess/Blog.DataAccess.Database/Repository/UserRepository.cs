@@ -10,7 +10,7 @@ namespace Blog.DataAccess.Database.Repository
     {
         public IList<User> GetUsers(int threshold = 10, int skip = 10)
         {
-            var query = Find(a => a.UserId != 0, null, null)
+            var query = Find(a => a.IsDeleted == false, null, null)
                 .OrderByDescending(b => b.UserId)
                 .Skip(skip)
                 .Take(threshold)
