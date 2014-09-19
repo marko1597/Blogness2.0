@@ -14,11 +14,7 @@
 
                 authenticationService.getUserInfo().then(function(response) {
                     if (response.Message == undefined || response.Message == null) {
-                        userService.getUserInfo($scope.username).then(function(user) {
-                            if (user.Error == null) {
-                                $rootScope.$broadcast("loggedInUserInfo", user);
-                            }
-                        });
+                        $scope.getUserInfo($scope.username);
                     }
                 }, function() {
                     authenticationService.logout();
@@ -27,6 +23,18 @@
                 authenticationService.logout();
             }
         };
+
+        $scope.getUserInfo = function (username) {
+            userService.getUserInfo(username).then(function (user) {
+                if (user.Error == null) {
+                    $rootScope.$broadcast("loggedInUserInfo", user);
+                }
+            });
+        };
+
+        $rootScope.$on("userLoggedIn", function (ev, data) {
+            $scope.getUserInfo(data.username);
+        });
 
         $scope.init();
     }

@@ -29,116 +29,121 @@
     <script src="~/Scripts/jquery-2.1.1.js"></script>
     <!-- #endregion -->
 </head>
-    <body>
-        <!-- #region header navigation bar -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
-                        <span class="blog-brand-icon"></span>
-                        Bloggity
-                    </a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Manager <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Roles", "Index", "UserRole")</li>
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Message Notifications <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Notifications", "Index", "Notifications")</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+<body>
+    <!-- #region header navigation bar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home", new { area = "" })" class="navbar-brand">
+                    <span class="blog-brand-icon"></span>
+                    Bloggity
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="visible-xs">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="visible-xs">@Html.ActionLink("About", "About", "Home")</li>
+                    <li class="visible-xs">@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Manager <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Roles", "Index", "UserRole")</li>
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Message Notifications <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Notifications", "Index", "Notifications")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
-        <!-- #endregion -->
+    </div>
+    <!-- #endregion -->
 
-        <div class="container body-content">
-            @RenderBody()
-        </div>
-        
-        <!-- #region footer -->
-        <div class="footer">
-            <div class="container">
-                <p>&copy; Bloggity Administration Tool <span id="footer-time" class="label label-primary">@DateTime.Now</span></p>
-                <script>
-                    $(function() {
-                        setInterval(function() {
-                            var dateNow = moment().format('MMMM Do YYYY, h:mm:ss a');
-                            $("#footer-time").text(dateNow);
-                        }, 1000);
-                    });
-                </script>
-            </div>
-        </div>
-        <!-- #endregion -->
+    <div class="container body-content">
+        @RenderBody()
+    </div>
 
-        <!-- #region site configuration objects -->
-        <script>
-            var configuration =
-            {
-                blogSockets: "@GetBlogSockets()",
-                blogSocketsAvailable: ("@CheckBlogSocketsAvailability()").toLowerCase()
-            };
+    <!-- #region footer -->
+    <div class="footer">
+        <div class="container">
+            <p>
+                &copy; Bloggity Administration Tool
+                @Html.ActionLink("About", "About", "Home", null, new { @class = "hidden-xs" })
+                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "hidden-xs" })
 
-            var socketClientFunctions = {
-                publishMessage: "@Blog.Common.Utils.Constants.SocketClientFunctions.PublishMessage.ToString()",
-                commentAdded: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentAdded.ToString()",
-                commentLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentLikesUpdate.ToString()",
-                postLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.PostLikesUpdate.ToString()",
-                subscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.SubscribeViewPost.ToString()",
-                unsubscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.UnsubscribeViewPost.ToString()",
-                wsConnect: "@Blog.Common.Utils.Constants.SocketClientFunctions.WsConnected.ToString()"
-            };
-
-            $(function () {
-                $('.datepicker').datepicker();
-
-                $(document).ajaxStart(function () {
-                    $.blockUI({ message: '<h1>Just a moment...</h1>' });
+                <span id="footer-time" class="label label-primary hidden-xs pull-right">@DateTime.Now</span>
+            </p>
+           
+            <script>
+                $(function () {
+                    setInterval(function () {
+                        var dateNow = moment().format('MMMM Do YYYY, h:mm:ss a');
+                        $("#footer-time").text(dateNow);
+                    }, 1000);
                 });
-
-                $(document).ajaxComplete(function () {
-                    $.unblockUI();
-                });
-            });
-        </script>
-        <!-- #endregion -->
-
-        <!-- #region socket.io js script -->
-        @if (CheckBlogSocketsAvailability())
+            </script>
+        </div>
+    </div>
+    <!-- #endregion -->
+    <!-- #region site configuration objects -->
+    <script>
+        var configuration =
         {
-            <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
-        }
-        <!-- #endregion -->
+            blogSockets: "@GetBlogSockets()",
+            blogSocketsAvailable: ("@CheckBlogSocketsAvailability()").toLowerCase()
+        };
 
-        <!-- #region js plugins -->
-        <script src="~/Scripts/jquery.blockUI.js"></script>
-        <script src="~/Scripts/jquery.validate.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-        <script src="~/Scripts/bootstrap.js"></script>
-        <script src="~/Scripts/bootstrap-datepicker.js"></script>
-        <script src="~/Scripts/moment-with-locales.js"></script>
-        <script src="~/Scripts/respond.js"></script>
-        <!-- #endregion -->
-        @RenderSection("scripts", false)
-    </body>
+        var socketClientFunctions = {
+            publishMessage: "@Blog.Common.Utils.Constants.SocketClientFunctions.PublishMessage.ToString()",
+            commentAdded: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentAdded.ToString()",
+            commentLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.CommentLikesUpdate.ToString()",
+            postLikesUpdate: "@Blog.Common.Utils.Constants.SocketClientFunctions.PostLikesUpdate.ToString()",
+            subscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.SubscribeViewPost.ToString()",
+            unsubscribeViewPost: "@Blog.Common.Utils.Constants.SocketClientFunctions.UnsubscribeViewPost.ToString()",
+            wsConnect: "@Blog.Common.Utils.Constants.SocketClientFunctions.WsConnected.ToString()"
+        };
+
+        $(function () {
+            $('.datepicker').datepicker();
+
+            $(document).ajaxStart(function () {
+                $.blockUI({ message: '<h1>Just a moment...</h1>' });
+            });
+
+            $(document).ajaxComplete(function () {
+                $.unblockUI();
+            });
+        });
+    </script>
+    <!-- #endregion -->
+    <!-- #region socket.io js script -->
+    @if (CheckBlogSocketsAvailability())
+    {
+        <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
+    }
+    <!-- #endregion -->
+    <!-- #region js plugins -->
+    <script src="~/Scripts/jquery.blockUI.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/moment-with-locales.js"></script>
+    <script src="~/Scripts/respond.js"></script>
+    <!-- #endregion -->
+    @RenderSection("scripts", false)
+</body>
+
 </html>
 
 @functions

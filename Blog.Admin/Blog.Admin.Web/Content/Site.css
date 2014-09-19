@@ -2,6 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     margin-bottom: 50px;
+    overflow-x: hidden;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -31,11 +32,11 @@ textarea {
     }
 
         .btn-group > .btn:first-child, .btn-group-vertical > .btn:first-child {
-            width: 95%;
+            width: 90%;
         }
 
         .btn-group > .btn + .btn, .btn-group-vertical > .btn + .btn {
-            width: 5%;
+            width: 10%;
         }
 
         .btn-group > .dropdown-menu {
@@ -84,6 +85,11 @@ html {
 
     .footer p {
         margin: 15px 0;
+    }
+
+    .footer p > a {
+        margin: 0 15px;
+        color: #fff;
     }
 
 .content-item {
