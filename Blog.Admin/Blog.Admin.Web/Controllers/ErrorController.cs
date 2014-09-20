@@ -6,7 +6,7 @@ namespace Blog.Admin.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("Error");
         }
     }
 }

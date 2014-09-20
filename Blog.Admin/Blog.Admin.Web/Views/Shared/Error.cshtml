@@ -1,9 +1,71 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using System.Configuration
+@using ServiceStack
+@model HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<div class="error-page">
+    <div class="error-content bg-danger">
+        <h1 class="text-danger">
+            We're down!
+        </h1>
+        <h2 class="text-danger">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+            Sorry about that.. try again in a bit or send us an email.
+        </h2>
 
+        <div class="error-content form-group btn btn-danger hidden-xs">
+            <h3>
+                Click here to go to
+                <a href="@Url.Action("Index", "Home")">home page</a> or
+                <a href="http://www.imgur.com" target="_blank">take a break</a>
+            </h3>
+        </div>
+        
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger visible-xs">
+            Go to home
+        </a>
+        
+        <a href="http://www.imgur.com" target="_blank"  class="btn btn-danger visible-xs">
+            Take a break
+        </a>
+    </div>
+
+    @if (Model != null && IsDebugging())
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Error Information</h3>
+            </div>
+            <div class="panel-body">
+                <div class="content-item">
+                    <h4>Route</h4>
+                    <p>
+                        @Model.ControllerName.ToTitleCase() > @Model.ActionName
+                    </p>
+                </div>
+                <div class="content-item">
+                    <h4>Message</h4>
+                    <p>@Model.Exception.Message</p>
+                </div>
+                <div class="content-item">
+                    <h4>Stack Trace</h4>
+                    <pre>@Model.Exception.StackTrace</pre>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@functions
+{
+    private bool IsDebugging()
+    {
+        bool result;
+        bool.TryParse(ConfigurationManager.AppSettings.Get("IsDebugging"), out result);
+
+        return result;
+    }
+}

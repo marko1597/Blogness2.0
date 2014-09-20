@@ -54,5 +54,11 @@ namespace Blog.Admin.Web
             // Register the dependency resolver.
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
         }
+
+        protected void Application_Error()
+        {
+            //Server.ClearError();
+            //Response.Redirect("/Error/Index");
+        }
     }
 }

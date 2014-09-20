@@ -34,6 +34,14 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
+        public User GetByIdentityId(string identityId)
+        {
+            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
+            {
+                return svc.Proxy.GetByIdentityId(identityId);
+            }
+        }
+
         public User Get(int userId)
         {
             using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))

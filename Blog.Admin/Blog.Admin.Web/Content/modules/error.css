@@ -1,0 +1,70 @@
+﻿.error-page .content-item {
+    background: #f2dede;
+    color: #b94a48;
+    border: 1px solid #eed3d7;
+}
+
+    .error-page .content-item > p {
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    .error-page .content-item > pre {
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+        font-family: 'Consolas';
+        background: #b94a48;
+        color: #fff;
+    }
+
+.error-page .panel {
+    border: 1px solid #eed3d7;
+}
+
+.error-content {
+    width: 100%;
+    padding: 20px;
+    border-radius: 1px;
+    margin-bottom: 15px;
+    border: 1px solid #eed3d7;
+}
+
+    .error-content > h1,
+    .error-content > h2 {
+        opacity: 0.8;
+        margin-bottom: 40px;
+    }
+
+    .error-content > h1 {
+        font-size: 6em;
+    }
+
+    .error-content > h2 {
+        font-size: 1.2em;
+    }
+
+    .error-content > .error-content {
+        border: none;
+        color: #fff;
+    }
+
+        .error-content > .error-content > h3 {
+            opacity: 1;
+            text-align: left;
+            margin: 15px;
+        }
+
+            .error-content > .error-content > h3 > a {
+                text-decoration: underline;
+                color: #fff;
+            }
+
+@media (max-width: 767px) {
+    .error-content > h1 {
+        font-size: 3em;
+    }
+
+    .error-content > .btn {
+        margin-bottom: 15px;
+    }
+}

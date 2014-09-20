@@ -105,7 +105,7 @@ namespace Blog.Admin.Web.Controllers
 
         #endregion
 
-        #region Details
+	    #region Details
 
         // GET: Users/Details/5
 		public async Task<ActionResult> Details(int id)
@@ -153,7 +153,11 @@ namespace Blog.Admin.Web.Controllers
 		{
 			try
 			{
-				if (!ModelState.IsValid) return View(GetDefaultCreateUserModel());
+			    if (!ModelState.IsValid)
+			    {
+                    ViewBag.ErrorMessage = "Something went wrong. Please try again.";
+			        return View(GetDefaultCreateUserModel());
+			    }
 
 				var user = new BlogUser { UserName = model.Username, Email = model.Email };
 				var result = await UserManager.CreateAsync(user, model.Password);
@@ -224,7 +228,11 @@ namespace Blog.Admin.Web.Controllers
 		public async Task<ActionResult> Edit(CreateUserViewModel model)
 		{
             try{
-			    if (!ModelState.IsValid) return View(GetDefaultCreateUserModel());
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.ErrorMessage = "Something went wrong. Please try again.";
+                    return View(GetDefaultCreateUserModel());
+                }
 
 				var user = new BlogUser { UserName = model.Username, Email = model.Email };
 				var result = await UserManager.UpdateAsync(user);

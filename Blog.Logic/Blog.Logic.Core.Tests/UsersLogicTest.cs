@@ -336,6 +336,67 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldGetUserByIdentityId()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Returns(_users);
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.GetByIdentity("lorem-ipsum-dolor-sit-amet");
+
+            Assert.NotNull(user);
+            Assert.IsNull(user.Error);
+            Assert.IsInstanceOf(typeof(Common.Contracts.User), user);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetUserByIdentityIdFails()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Throws(new Exception());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _usersLogic.GetByIdentity("lorem-ipsum-dolor-sit-amet"));
+        }
+
+        [Test]
+        public void ShouldErrorWhenGetUserByIdentityIdHasNoResult()
+        {
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(),
+                It.IsAny<Func<IQueryable<User>, IOrderedQueryable<User>>>(), It.IsAny<string>()))
+                .Returns(new List<User>());
+
+            _addressRepository = new Mock<IAddressRepository>();
+            _educationRepository = new Mock<IEducationRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _usersLogic = new UsersLogic(_userRepository.Object, _addressRepository.Object,
+                _educationRepository.Object, _mediaRepository.Object);
+
+            var user = _usersLogic.GetByIdentity("lorem-ipsum-dolor-sit-amet");
+
+            Assert.IsNotNull(user.Error);
+            Assert.AreEqual(user.Error.Id, (int)Constants.Error.RecordNotFound);
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenGetUserByIdFails()
         {
             _userRepository = new Mock<IUserRepository>();

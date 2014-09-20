@@ -26,7 +26,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.UserName)
@@ -48,7 +49,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="@GetTableRowClass(item.IdentityId)">
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
@@ -73,3 +74,13 @@
     }
 
 </table>
+
+@functions
+{
+
+    private string GetTableRowClass(string identityId)
+    {
+        return string.IsNullOrEmpty(identityId) ? "warning" : "";
+    }
+
+}

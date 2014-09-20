@@ -200,10 +200,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Attributes\ElmahHandleErrorAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IdentityController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Identity\MapIdentityViewModel.cs" />
     <Compile Include="Models\Notifications\NotificationModel.cs" />
     <Compile Include="Models\UserRolesAdmin\UserRoleViewModel.cs" />
     <Compile Include="Models\Users\CreateUserViewModel.cs" />
@@ -243,6 +246,8 @@
     <Content Include="Content\images\brand-logo.png" />
     <Content Include="Content\images\default-background-picture.jpg" />
     <Content Include="Content\images\default-profile-picture.jpg" />
+    <Content Include="Content\modules\error.css" />
+    <Content Include="Content\modules\login.css" />
     <Content Include="Content\modules\notificationmessage.css" />
     <Content Include="Content\modules\notifications.css" />
     <Content Include="Content\modules\userdetails.css" />
@@ -317,6 +322,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\identityMapping.js" />
     <Content Include="Scripts\modules\notifications.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -373,10 +379,11 @@
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\_UserForm.cshtml" />
     <Content Include="Views\Address\Index.cshtml" />
+    <Content Include="Views\Identity\Index.cshtml" />
+    <Content Include="Views\Identity\Map.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

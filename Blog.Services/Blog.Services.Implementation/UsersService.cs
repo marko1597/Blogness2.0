@@ -34,6 +34,11 @@ namespace Blog.Services.Implementation
             return _usersLogic.GetByUserName(username);
         }
 
+        public User GetByIdentityId(string identityId)
+        {
+            return _usersLogic.GetByIdentity(identityId);
+        }
+
         public User Get(int userId)
         {
             return _usersLogic.Get(userId);

@@ -17,6 +17,9 @@ namespace Blog.Services.Implementation.Interfaces
         User GetByUserName(string username);
 
         [OperationContract]
+        User GetByIdentityId(string identityId);
+
+        [OperationContract]
         User Get(int userId);
 
         [OperationContract]

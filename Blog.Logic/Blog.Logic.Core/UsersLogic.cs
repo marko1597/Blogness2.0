@@ -70,6 +70,21 @@ namespace Blog.Logic.Core
             }
         }
 
+        public User GetByIdentity(string identityId)
+        {
+            try
+            {
+                var dbUser = _userRepository.Find(a => a.IdentityId == identityId, null, null).FirstOrDefault();
+                if (dbUser != null) return UserMapper.ToDto(dbUser);
+
+                return new User().GenerateError<User>((int)Constants.Error.RecordNotFound, "User not found"); 
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public User Get(int userId)
         {
             try

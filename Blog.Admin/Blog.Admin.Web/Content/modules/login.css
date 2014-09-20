@@ -1,0 +1,9 @@
+﻿#loginForm > form > p > a {
+    margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+    #loginForm > form > p > a {
+        display: block;
+    }
+}

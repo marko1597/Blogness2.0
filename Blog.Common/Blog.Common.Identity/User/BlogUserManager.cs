@@ -1,4 +1,5 @@
-﻿using Blog.Common.Identity.Repository;
+﻿using System.Collections.Generic;
+using Blog.Common.Identity.Repository;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -7,9 +8,10 @@ namespace Blog.Common.Identity.User
 {
     public class BlogUserManager : UserManager<BlogUser>
     {
-        public BlogUserManager(IUserStore<BlogUser> store)
-            : base(store)
+        private readonly BlogUserStore _blogUserStore;
+        public BlogUserManager(BlogUserStore store) : base(store)
         {
+            _blogUserStore = store;
         }
 
         public static BlogUserManager Create(IdentityFactoryOptions<BlogUserManager> options, IOwinContext context)
@@ -36,6 +38,11 @@ namespace Blog.Common.Identity.User
                     dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
+        }
+
+        public List<BlogUser> GetBlogUsers()
+        {
+            return _blogUserStore.GetBlogUsers();
         }
     }
 }

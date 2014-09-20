@@ -1,0 +1,118 @@
+﻿@model Blog.Admin.Web.Models.Identity.MapIdentityViewModel
+
+@{
+    ViewBag.Title = "Identity Mapping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@GetIdentityMapHeader()</h2>
+
+@if (ViewBag.ErrorMessage != null || Model == null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Error!</strong> @ViewBag.ErrorMessage
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        <h3>Warning!</h3>
+        <p>This will map a user to a new identity so be wary of which user is mapped to which identity! Can't have that identity crisis!</p>
+    </div>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Select a new identity</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            <!--hidden form fields -->
+            @Html.HiddenFor(model => model.User.UserName)
+            @Html.HiddenFor(model => model.User.FirstName)
+            @Html.HiddenFor(model => model.User.LastName)
+            @Html.HiddenFor(model => model.User.EmailAddress)
+            @Html.HiddenFor(model => model.User.BirthDate)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedIdentityId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input class="form-control text-box" 
+                           data-val="true" data-val-required="The Selected Identity for this user field is required." 
+                           disabled id="SelectedIdentityId" name="SelectedIdentityId" type="text" value=""
+                           data-bind="value: selectedIdentityId" />
+                    @Html.ValidationMessageFor(model => model.SelectedIdentityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BlogUsers, new { @class = "control-label col-md-2" })
+                <div class="btn-group col-md-10">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select identity for this user</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        @foreach (var user in Model.BlogUsers)
+                        {
+                            <li>
+                                <a>
+                                    @Html.RadioButtonFor(b => Model.SelectedIdentityId, user.Id,
+                                        GetIdentitySelectionAttribute(user.Id))
+                                    <span>@string.Format("{0} : {1}", user.UserName, user.Id)</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+                <div class="col-md-offset-2 col-md-12">
+                    @Html.ValidationMessageFor(model => model.BlogUsers, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/modules/identityMapping.js"></script>
+
+@functions
+{
+
+    private string GetIdentityMapHeader()
+    {
+        if (Model == null || Model.User == null || Model.User.Error != null)
+        {
+            return "Aww man! Something's wrong here!";
+        }
+        return string.Format("Map {0} to an identity", Model.User.UserName);
+    }
+
+    private Dictionary<string, object> GetIdentitySelectionAttribute(string userId)
+    {
+        var attrs = new Dictionary<string, object>
+        {
+            {
+                "data-bind",
+                string.Format("click: updateSelectedIdentityId.bind($data, '{0}')", userId)
+            }
+        };
+
+        return attrs;
+    } 
+}

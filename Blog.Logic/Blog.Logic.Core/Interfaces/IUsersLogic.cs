@@ -8,6 +8,7 @@ namespace Blog.Logic.Core.Interfaces
         List<User> GetUsers(int threshold = 10, int skip = 10);
         List<User> GetUsersWithNoIdentityId();
         User GetByUserName(string userName);
+        User GetByIdentity(string identityId);
         User Get(int userId);
         User Add(User user);
         User Update(User user);

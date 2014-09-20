@@ -52,6 +52,18 @@ textarea {
     display: inline-table;
 }
 
+    .btn-group.open > .dropdown-menu > li > a {
+        cursor: pointer;
+    }
+
+        .btn-group.open > .dropdown-menu > li > a:hover {
+            text-decoration: underline;
+        }
+
+.alert-dismissable .close, .alert-dismissible .close {
+    right: 0;
+}
+
 .panel > .panel-heading > a {
     color: #fff;
 }
@@ -87,10 +99,10 @@ html {
         margin: 15px 0;
     }
 
-    .footer p > a {
-        margin: 0 15px;
-        color: #fff;
-    }
+        .footer p > a {
+            margin: 0 15px;
+            color: #fff;
+        }
 
 .content-item {
     padding: 15px;
