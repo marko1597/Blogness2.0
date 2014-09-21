@@ -63433,7 +63433,7 @@ var styleDirective = valueFn({
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-animate){display:none !important;}ng\\:form{display:block;}</style>');
 ///#source 1 1 /Scripts/bower_components/angular-animate/angular-animate.js
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -65727,7 +65727,7 @@ angular.module('angular-carousel').run(['$templateCache', function($templateCach
 
 ///#source 1 1 /Scripts/bower_components/angular-cookies/angular-cookies.js
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68080,7 +68080,7 @@ angularLocalStorage.provider('localStorageService', function() {
 
 ///#source 1 1 /Scripts/bower_components/angular-route/angular-route.js
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68852,7 +68852,6 @@ ngRouteModule.directive('ngView', ngViewFillContentFactory);
                   controllerAs: 'chapter'
                 });
 
-              // configure html5 to get links working on jsfiddle
               $locationProvider.html5Mode(true);
           }])
           .controller('MainCtrl', ['$route', '$routeParams', '$location',
@@ -69007,7 +69006,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 ///#source 1 1 /Scripts/bower_components/angular-sanitize/angular-sanitize.js
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -74342,7 +74341,7 @@ angular.module('mgcrea.ngStrap.tooltip').run(['$templateCache', function($templa
 
 ///#source 1 1 /Scripts/bower_components/angular-touch/angular-touch.js
 /**
- * @license AngularJS v1.2.23
+ * @license AngularJS v1.2.25
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
