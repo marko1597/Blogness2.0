@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
@@ -14,42 +16,42 @@ namespace Blog.Admin.Web.Controllers
 
         private readonly IHobbyResource _hobbyResource;
 
-		private readonly IErrorSignaler _errorSignaler;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public HobbiesController(IHobbyResource hobbyResource, IUsersResource usersResource, 
+        public HobbiesController(IHobbyResource hobbyResource, IUsersResource usersResource,
             IErrorSignaler errorSignaler)
         {
             _hobbyResource = hobbyResource;
             _usersResource = usersResource;
-			_errorSignaler = errorSignaler;
-		}
+            _errorSignaler = errorSignaler;
+        }
 
-		#endregion
+        #endregion
 
         #region Index
 
         // GET: Users/1/Hobbies
-		public ActionResult Index(int userId)
-		{
-			try
-			{
-			    var user = _usersResource.Get(userId);
+        public ActionResult Index(int userId)
+        {
+            try
+            {
+                var user = _usersResource.Get(userId);
                 if (user.Hobbies == null) throw new Exception("Failed to get hobby list. Try refreshing the page.");
 
-			    ViewBag.HobbiesHeader = string.Format("{0} {1}'s Hobbies", user.FirstName, user.LastName);
-			    ViewBag.Username = user.UserName;
-			    ViewBag.UserId = user.Id;
+                ViewBag.HobbiesHeader = string.Format("{0} {1}'s Hobbies", user.FirstName, user.LastName);
+                ViewBag.Username = user.UserName;
+                ViewBag.UserId = user.Id;
 
                 return View(user.Hobbies);
-			}
-			catch (Exception ex)
-			{
-				_errorSignaler.SignalFromCurrentContext(ex);
-				ViewBag.ErrorMessage = ex.Message;
-				return View();
-			} 
-		}
-        
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                ViewBag.ErrorMessage = ex.Message;
+                return View();
+            }
+        }
+
         #endregion
 
         // POST: Hobbies/Create
@@ -58,7 +60,10 @@ namespace Blog.Admin.Web.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return Json(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return Json(GetErrorList(ModelState));
+                }
 
                 var result = _hobbyResource.Add(hobby);
                 if (result.Error != null) throw new Exception(result.Error.Message);
@@ -77,7 +82,10 @@ namespace Blog.Admin.Web.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return Json(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return Json(GetErrorList(ModelState));
+                }
 
                 var result = _hobbyResource.Update(hobby);
                 if (result.Error != null) throw new Exception(result.Error.Message);
@@ -96,7 +104,10 @@ namespace Blog.Admin.Web.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) return Json(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return Json(GetErrorList(ModelState));
+                }
 
                 var result = _hobbyResource.Delete(id);
                 if (!result) throw new Exception("Failed to remove hobby.");
@@ -108,6 +119,16 @@ namespace Blog.Admin.Web.Controllers
                 _errorSignaler.SignalFromCurrentContext(ex);
                 return Json(false);
             }
+        }
+
+        private Dictionary<string, string[]> GetErrorList(IEnumerable<KeyValuePair<string, ModelState>> modelState)
+        {
+            var errorList = modelState.ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+            Response.StatusCode = 400;
+            return errorList;
         }
     }
 }

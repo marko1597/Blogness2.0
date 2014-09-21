@@ -43,10 +43,10 @@ else
             <div class="form-group">
                 <label class="control-label col-md-2">Name</label>
                 <div class="col-md-10">
-                    <input id="HobbyName" name="HobbyName" type="text" class="form-control"
-                           data-bind="value: HobbyName" data-val-required="The Name field is required." />
+                    <input type="text" class="form-control"  data-bind="value: HobbyName" 
+                           data-val-required="The Name field is required." />
                     <span class="text-danger field-validation-valid"
-                          data-valmsg-for="HobbyName" data-valmsg-replace="true"></span>
+                          data-bind="visible: hasModelError, text: modelErrorMessage"></span>
                     <i class="glyphicon glyphicon-info-sign"
                        data-bind="click: toggleShowHobbyDetails, visible: !isNew()"></i>
                 </div>
@@ -72,6 +72,10 @@ else
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        <a href="@Url.Action("Details", "Users", new { id = ViewBag.UserId })">Back to @ViewBag.Username's details</a>
     </div>
 }
 

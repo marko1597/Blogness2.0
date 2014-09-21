@@ -19,6 +19,7 @@ textarea {
     max-width: 100%;
 }
 
+/* Radio input styles */
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
 .checkbox input[type="checkbox"],
@@ -26,6 +27,7 @@ textarea {
     margin-left: 0 !important;
 }
 
+/* Bootstrap overrides */
 @media (max-width: 991px) {
     .btn-group, .btn-group-vertical {
         width: 100%;
@@ -68,6 +70,8 @@ textarea {
     color: #fff;
 }
 
+
+/* The brand icon! */
 .blog-brand-icon {
     background-image: url(images/brand-logo.png);
     background-size: cover;
@@ -104,6 +108,20 @@ html {
             color: #fff;
         }
 
+/* Block UI overrides */
+.blockMsg {
+    left: 0 !important;
+    width: 100% !important;
+    background-color: rgb(255, 255, 255) !important;
+    opacity: 1 !important;
+    z-index: 1050 !important;
+}
+
+    .blockMsg > h1 {
+        margin: 15px 0 !important;
+    }
+
+/* Content item card thingy */
 .content-item {
     padding: 15px;
     margin-bottom: 15px;

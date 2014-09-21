@@ -1,4 +1,6 @@
 ﻿(function () {
+    "use strict";
+
     // Identity mapping view model..hooray!
     function identityMappingViewModel() {
         var self = this;

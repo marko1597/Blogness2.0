@@ -1,5 +1,7 @@
 ﻿// ReSharper disable UseOfImplicitGlobalInFunctionScope
 (function ($) {
+    "use strict";
+
     var address = null;
 
     var details = null;

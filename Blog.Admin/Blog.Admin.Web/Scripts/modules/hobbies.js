@@ -1,4 +1,6 @@
 ﻿$(function () {
+    "use strict";
+
     // Hobby item view model
     function hobbyViewModel(id, name, userId, createdBy, createdDate, modifiedBy, modifiedDate, isNew) {
         var self = this;
@@ -16,6 +18,12 @@
         self.ModifiedBy = ko.observable(modifiedBy);
 
         self.ModifiedDate = ko.observable(modifiedDate);
+
+        // Flag to show the model validation error message
+        self.hasModelError = ko.observable(false);
+
+        // Model validation error message text
+        self.modelErrorMessage = ko.observable();
 
         // Style of the hobby item view by checking the isNew flag
         self.getStyle = ko.pureComputed(function() {
@@ -57,6 +65,7 @@
                         parent.hasNew(false);
 
                         self.isNew(false);
+                        self.hasModelError(false);
                         self.CreatedBy(result.CreatedBy);
                         self.CreatedDate(result.CreatedDate);
                         self.ModifiedBy(result.ModifiedBy);
@@ -66,6 +75,9 @@
                         parent.alertMessageClass("alert-danger");
                         parent.alertMessageText("Failed adding new hobby! " + err.statusText);
                         parent.alertMessageVisible(true);
+
+                        self.hasModelError(true);
+                        self.modelErrorMessage(err.responseJSON.HobbyName[0]);
                     }
                 });
             } else {
@@ -77,15 +89,19 @@
                         parent.alertMessageText("Successfully updated hobby! Yay!");
                         parent.alertMessageVisible(true);
 
+                        self.hasModelError(false);
                         self.CreatedBy(result.CreatedBy);
                         self.CreatedDate(result.CreatedDate);
                         self.ModifiedBy(result.ModifiedBy);
                         self.ModifiedDate(result.ModifiedDate);
                     },
-                    error: function () {
+                    error: function (err) {
                         parent.alertMessageClass("alert-danger");
                         parent.alertMessageText("Failed updating hobby!");
                         parent.alertMessageVisible(true);
+
+                        self.hasModelError(true);
+                        self.modelErrorMessage(err.responseJSON.HobbyName[0]);
                     }
                 });
             }
