@@ -1,5 +1,4 @@
-﻿// ReSharper disable UseOfImplicitGlobalInFunctionScope
-(function ($) {
+﻿(function () {
     // Identity mapping view model..hooray!
     function identityMappingViewModel() {
         var self = this;
@@ -14,5 +13,4 @@
     }
 
     ko.applyBindings(new identityMappingViewModel());
-})(jQuery);
-// ReSharper restore UseOfImplicitGlobalInFunctionScope
+})();

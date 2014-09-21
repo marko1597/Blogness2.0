@@ -107,8 +107,6 @@ html {
 .content-item {
     padding: 15px;
     margin-bottom: 15px;
-    background: #f4f4f4;
-    border: 1px solid #ccc;
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
     -ms-box-shadow: 0 2px 4px #000000;
@@ -116,3 +114,39 @@ html {
     box-shadow: 0 2px 4px #000000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
+    .content-item.content-item-default {
+        color: #666;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+    }
+
+    .content-item.content-item-info {
+        color: #fff;
+        background: rgb(66, 139, 202);
+        border: 1px solid rgb(53, 126, 189);
+    }
+
+    .content-item.content-item-primary {
+        color: #fff;
+        background: rgb(86, 194, 225);
+        border: 1px solid rgb(64, 186, 221);
+    }
+
+    .content-item.content-item-success {
+        color: #fff;
+        background: rgb(92, 184, 92);
+        border: 1px solid rgb(76, 174, 76);
+    }
+
+    .content-item.content-item-danger {
+        color: #fff;
+        background: rgb(217, 83, 79);
+        border: 1px solid rgb(212, 63, 58);
+    }
+
+    .content-item.content-item-warning {
+        color: #fff;
+        background: rgb(240, 173, 78);
+        border: 1px solid rgb(238, 162, 54);
+    }

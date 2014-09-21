@@ -15,6 +15,7 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         [Required]
+        [Display(Name = "Street Address")]
         public string StreetAddress { get; set; }
 
         [DataMember]
@@ -26,6 +27,7 @@ namespace Blog.Common.Contracts
         public string State { get; set; }
 
         [DataMember]
+        [Display(Name = "Zip Code")]
         public int? Zip { get; set; }
 
         [DataMember]

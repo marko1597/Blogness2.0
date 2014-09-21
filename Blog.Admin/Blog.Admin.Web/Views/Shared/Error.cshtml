@@ -40,17 +40,17 @@
                 <h3 class="panel-title">Error Information</h3>
             </div>
             <div class="panel-body">
-                <div class="content-item">
+                <div class="content-item content-item-danger">
                     <h4>Route</h4>
                     <p>
                         @Model.ControllerName.ToTitleCase() > @Model.ActionName
                     </p>
                 </div>
-                <div class="content-item">
+                <div class="content-item content-item-danger">
                     <h4>Message</h4>
                     <p>@Model.Exception.Message</p>
                 </div>
-                <div class="content-item">
+                <div class="content-item content-item-danger">
                     <h4>Stack Trace</h4>
                     <pre>@Model.Exception.StackTrace</pre>
                 </div>

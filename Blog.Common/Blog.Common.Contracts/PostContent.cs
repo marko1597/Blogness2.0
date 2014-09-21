@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Blog.Common.Contracts
 {
@@ -12,9 +13,11 @@ namespace Blog.Common.Contracts
         public int PostId { get; set; }
 
         [DataMember]
+        [Display(Name = "Title")]
         public string PostContentTitle { get; set; }
 
         [DataMember]
+        [Display(Name = "Caption")]
         public string PostContentText { get; set; }
 
         [DataMember]

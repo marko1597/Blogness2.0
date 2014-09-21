@@ -20,6 +20,7 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         [Required]
+        [Display(Name = "School Name")]
         public string SchoolName { get; set; }
 
         [DataMember]
@@ -32,9 +33,11 @@ namespace Blog.Common.Contracts
         public string Country { get; set; }
 
         [DataMember]
+        [Display(Name = "Year Attended")]
         public DateTime? YearAttended { get; set; }
 
         [DataMember]
+        [Display(Name = "Year Graduated")]
         public DateTime? YearGraduated { get; set; }
 
         [DataMember]

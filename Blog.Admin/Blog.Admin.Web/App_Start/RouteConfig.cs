@@ -11,8 +11,14 @@ namespace Blog.Admin.Web
 
             routes.MapRoute(
                 "UserAddress",
-                "Users/{userId}/Address",
+                "Users/Details/{userId}/Address",
                 new { controller = "Address", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "UserHobbies",
+                "Users/Details/{userId}/Hobbies",
+                new { controller = "Hobbies", action = "Index" }
             );
 
             routes.MapRoute(

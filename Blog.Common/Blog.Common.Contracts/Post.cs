@@ -17,9 +17,11 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         [StringLength(200, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [Display(Name = "Title")]
         public string PostTitle { get; set; }
 
         [DataMember]
+        [Display(Name = "Message")]
         public string PostMessage { get; set; }
 
         [DataMember]

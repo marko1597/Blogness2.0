@@ -12,6 +12,7 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         [Required]
+        [Display(Name = "Album Name")]
         public string AlbumName { get; set; }
 
         [DataMember]

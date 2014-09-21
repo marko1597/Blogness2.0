@@ -172,7 +172,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">Hobbies</span>
-                        @Html.ActionLink("Edit", "Edit", "Hobbies", new { userId = Model.Id }, new { @class = "pull-right" })
+                        @Html.ActionLink("Edit", "Index", "Hobbies", new { userId = Model.Id }, new { @class = "pull-right" })
                     </div>
                     <div class="panel-body">
                         @foreach (var hobby in Model.Hobbies)
@@ -191,7 +191,7 @@
                     <div class="panel-body">
                         @foreach (var education in Model.Education)
                         {
-                            <div class="content-item">
+                            <div class="content-item content-item-default">
                                 <h5>@Html.DisplayFor(a => education.SchoolName)</h5>
                                 <p>@Html.DisplayFor(a => education.EducationType.EducationTypeName)</p>
                                 <p>@Html.DisplayFor(a => education.State) @Html.DisplayFor(a => education.City), @Html.DisplayFor(a => education.Country)</p>

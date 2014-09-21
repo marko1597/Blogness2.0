@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
@@ -247,6 +248,7 @@
     <Content Include="Content\images\default-background-picture.jpg" />
     <Content Include="Content\images\default-profile-picture.jpg" />
     <Content Include="Content\modules\error.css" />
+    <Content Include="Content\modules\hobbies.css" />
     <Content Include="Content\modules\login.css" />
     <Content Include="Content\modules\notificationmessage.css" />
     <Content Include="Content\modules\notifications.css" />
@@ -259,12 +261,12 @@
     <Content Include="ErrorPage\images\bg.jpg" />
     <Content Include="ErrorPage\index.html" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\site.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
@@ -322,6 +324,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\hobbies.js" />
     <Content Include="Scripts\modules\identityMapping.js" />
     <Content Include="Scripts\modules\notifications.js" />
     <Content Include="Scripts\moment-with-locales.js" />
@@ -384,6 +387,7 @@
     <Content Include="Views\Address\Index.cshtml" />
     <Content Include="Views\Identity\Index.cshtml" />
     <Content Include="Views\Identity\Map.cshtml" />
+    <Content Include="Views\Hobbies\Index.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -396,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

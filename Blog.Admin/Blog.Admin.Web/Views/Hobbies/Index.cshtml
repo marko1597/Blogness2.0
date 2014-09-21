@@ -1,0 +1,78 @@
+﻿@using Newtonsoft.Json
+@model IEnumerable<Blog.Common.Contracts.Hobby>
+
+@{
+    ViewBag.Title = "Hobbies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.ErrorMessage != null || Model == null || !Model.Any())
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Error!</strong> @ViewBag.ErrorMessage
+    </div>
+
+    <div>
+        <a href="@Url.Action("Index", "Users")">Go back to users list</a>
+    </div>
+}
+else
+{
+    <div data-bind="visible: alertMessageVisible, css: alertMessageClass" class="alert alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true" data-bind="click: hideAlertMessage">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <span data-bind="text: alertMessageText"></span>
+    </div>
+
+    <h2>@ViewBag.HobbiesHeader</h2>
+    
+    <p>
+        <a href="" data-bind="click: addHobby, visible: !hasNew()">Create new hobby</a>
+    </p>
+
+    <script>
+        var hobbies = @Html.Raw(JsonConvert.SerializeObject(Model));
+        var userId = @ViewBag.UserId;
+    </script>
+
+    <div data-bind="foreach: hobbies">
+        <div class="content-item hobby" data-bind="css: getStyle">
+            <div class="form-group">
+                <label class="control-label col-md-2">Name</label>
+                <div class="col-md-10">
+                    <input id="HobbyName" name="HobbyName" type="text" class="form-control"
+                           data-bind="value: HobbyName" data-val-required="The Name field is required." />
+                    <span class="text-danger field-validation-valid"
+                          data-valmsg-for="HobbyName" data-valmsg-replace="true"></span>
+                    <i class="glyphicon glyphicon-info-sign"
+                       data-bind="click: toggleShowHobbyDetails, visible: !isNew()"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button value="Save" class="btn btn-success" data-bind="click: saveHobby.bind($data, $parent)">Save</button>
+                    <button value="Delete" class="btn btn-danger" data-bind="click: deleteHobby.bind($data, $parent)">Delete</button>
+                </div>
+            </div>
+
+            <div class="alert alert-info details" data-bind="visible: showHobbyDetails">
+                <div>
+                    Created at
+                    <strong data-bind="text: createdDateDisplay"></strong> by user
+                    <strong data-bind="text: CreatedBy"></strong>
+                </div>
+                <div>
+                    Last modified at
+                    <strong data-bind="text: modifiedDateDisplay"></strong> by user
+                    <strong data-bind="text: ModifiedBy"></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/modules/hobbies.js"></script>

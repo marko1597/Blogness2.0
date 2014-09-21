@@ -1,0 +1,27 @@
+﻿.hobby, .hobby > .form-group {
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .hobby > .form-group > label {
+        margin-top: 7px;
+    }
+}
+
+.hobby > .form-group .glyphicon-info-sign {
+    cursor: pointer;
+    position: absolute;
+    color: inherit;
+    top: 10px;
+    right: 30px;
+}
+
+    .hobby > .form-group .glyphicon-info-sign:hover {
+        opacity: 0.7;
+        text-decoration: none;
+    }
+
+.hobby > .details {
+    margin: 0 15px;
+    padding: 6px 15px;
+}

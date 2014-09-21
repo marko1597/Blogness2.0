@@ -15,6 +15,7 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         [Required]
+        [Display(Name = "Name")]
         public string HobbyName { get; set; }
     }
 }
