@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Admin.Web.Models.Identity;
+using Blog.Common.Identity.Models;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils;
@@ -74,7 +75,8 @@ namespace Blog.Admin.Web.Controllers
 
         #endregion
 
-        
+        #region Map
+
         // GET: Identity/Map/5
         public ActionResult Map(int id)
         {
@@ -124,6 +126,8 @@ namespace Blog.Admin.Web.Controllers
                 return View(model);
             }
         }
+
+        #endregion
 
         private List<BlogUser> GetBlogUsers()
         {

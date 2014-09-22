@@ -1,7 +1,6 @@
 ﻿@model Blog.Admin.Web.Models.Users.CreateUserViewModel
 
-
-<div class="form-group">
+<div class="form-group @GetVisibiltyByMode()">
     @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
     <div class="col-md-10">
         @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
@@ -9,24 +8,21 @@
     </div>
 </div>
 
-@if (ViewBag.Mode != null && ViewBag.Mode == "Create")
-{
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
+<div class="form-group @GetVisibiltyByMode()">
+    @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
     </div>
+</div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-        </div>
+<div class="form-group @GetVisibiltyByMode()">
+    @Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
     </div>
-}
+</div>
 
 <div class="form-group">
     @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
@@ -84,3 +80,13 @@
         @Html.ValidationMessageFor(model => model.SelectedRole, "", new { @class = "text-danger" })
     </div>
 </div>
+
+@functions
+{
+
+    private string GetVisibiltyByMode()
+    {
+        return (ViewBag.Mode != null && ViewBag.Mode == "Create") ? "" : "hidden";
+    }
+
+}
