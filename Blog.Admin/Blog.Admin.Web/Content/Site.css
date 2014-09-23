@@ -133,6 +133,11 @@ html {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+    .content-item .form-group > select {
+        margin: 0 15px;
+        width: auto;
+    }
+
     .content-item.content-item-default {
         color: #666;
         background: #f4f4f4;

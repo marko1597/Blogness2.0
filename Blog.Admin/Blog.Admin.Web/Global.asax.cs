@@ -36,6 +36,7 @@ namespace Blog.Admin.Web
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IAddressResource, AddressResource>(Lifestyle.Singleton);
             container.Register<IHobbyResource, HobbyResource>(Lifestyle.Singleton);
+            container.Register<IEducationResource, EducationResource>(Lifestyle.Singleton);
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
             container.Register<INotificationResource, NotificationResource>(Lifestyle.Singleton);
 

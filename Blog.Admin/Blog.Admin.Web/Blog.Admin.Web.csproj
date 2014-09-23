@@ -203,6 +203,7 @@
     <Compile Include="Attributes\ElmahHandleErrorAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\EducationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HobbiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Helpers\IUserHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Education\EducationViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Identity\MapIdentityViewModel.cs" />
     <Compile Include="Models\Notifications\NotificationModel.cs" />
@@ -323,6 +325,7 @@
     <Content Include="Scripts\knockout-3.2.0.debug.js" />
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modules\education.js" />
     <Content Include="Scripts\modules\hobbies.js" />
     <Content Include="Scripts\modules\identityMapping.js" />
     <Content Include="Scripts\modules\notifications.js" />
@@ -387,6 +390,7 @@
     <Content Include="Views\Identity\Index.cshtml" />
     <Content Include="Views\Identity\Map.cshtml" />
     <Content Include="Views\Hobbies\Index.cshtml" />
+    <Content Include="Views\Education\Index.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

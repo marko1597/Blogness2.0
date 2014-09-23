@@ -186,7 +186,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="panel-title">Education</span>
-                        @Html.ActionLink("Edit", "Edit", "Education", new { userId = Model.Id }, new { @class = "pull-right" })
+                        @Html.ActionLink("Edit", "Index", "Education", new { userId = Model.Id }, new { @class = "pull-right" })
                     </div>
                     <div class="panel-body">
                         @foreach (var education in Model.Education)

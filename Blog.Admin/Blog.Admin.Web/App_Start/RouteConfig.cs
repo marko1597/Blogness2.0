@@ -22,6 +22,12 @@ namespace Blog.Admin.Web
             );
 
             routes.MapRoute(
+                "UserEducation",
+                "Users/Details/{userId}/Education",
+                new { controller = "Education", action = "Index" }
+            );
+
+            routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }
