@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Admin.Web.Helpers;
-using Blog.Admin.Web.Models.Users;
+using Blog.Admin.Web.Models;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
@@ -255,7 +255,9 @@ namespace Blog.Admin.Web.Controllers
                                           LastName = model.LastName,
                                           BirthDate = model.BirthDate,
                                           IdentityId = user.Id,
-                                          EmailAddress = model.EmailAddress
+                                          EmailAddress = model.EmailAddress,
+                                          Picture = model.Picture,
+                                          Background = model.Background
                                       };
 
                     var blogUser = _usersResource.Update(userProfile);

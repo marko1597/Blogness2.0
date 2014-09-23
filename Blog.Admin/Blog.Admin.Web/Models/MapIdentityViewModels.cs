@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.User;
 
-namespace Blog.Admin.Web.Models.Identity
+namespace Blog.Admin.Web.Models
 {
     public class MapIdentityViewModel
     {

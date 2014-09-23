@@ -26,8 +26,8 @@
                     method: "GET"
                 }).success(function (response) {
                     deferred.resolve(applyUserModelDefaults(response));
-                }).error(function () {
-                    deferred.reject("An error occurred!");
+                }).error(function (err) {
+                    deferred.reject(err);
                 });
 
                 return deferred.promise;

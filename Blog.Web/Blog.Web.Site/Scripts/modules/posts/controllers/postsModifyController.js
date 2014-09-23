@@ -131,8 +131,6 @@
                         $scope.username = localStorageService.get("username");
                         $scope.authData = localStorageService.get("authorizationData");
                         $scope.getPost();
-                    } else {
-                        errorService.displayErrorRedirect({ Message: "You're missing the post to edit bruh! Don't be stupid!"});
                     }
                 } else {
                     errorService.displayErrorRedirect(response.Message);

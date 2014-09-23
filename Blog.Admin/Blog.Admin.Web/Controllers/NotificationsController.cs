@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using Blog.Admin.Web.Models.Notifications;
+using Blog.Admin.Web.Models;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils;

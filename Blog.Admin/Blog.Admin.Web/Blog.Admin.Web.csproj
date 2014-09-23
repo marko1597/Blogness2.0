@@ -209,6 +209,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdentityController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\ProfileImageController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -217,12 +218,12 @@
     <Compile Include="Helpers\IUserHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Education\EducationViewModel.cs" />
+    <Compile Include="Models\EducationViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Identity\MapIdentityViewModel.cs" />
-    <Compile Include="Models\Notifications\NotificationModel.cs" />
-    <Compile Include="Models\UserRolesAdmin\UserRoleViewModel.cs" />
-    <Compile Include="Models\Users\UserViewModel.cs" />
+    <Compile Include="Models\MapIdentityViewModels.cs" />
+    <Compile Include="Models\NotificationModels.cs" />
+    <Compile Include="Models\UserRoleViewModels.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -270,6 +271,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\blogajax.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
@@ -391,6 +393,7 @@
     <Content Include="Views\Identity\Map.cshtml" />
     <Content Include="Views\Hobbies\Index.cshtml" />
     <Content Include="Views\Education\Index.cshtml" />
+    <Content Include="Views\ProfileImage\Index.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

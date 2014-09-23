@@ -3,7 +3,7 @@
         var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
             $scope.messages = [];
 
-            $scope.show = true;
+            $scope.show = false;
 
             $scope.channelSubscription = null;
 

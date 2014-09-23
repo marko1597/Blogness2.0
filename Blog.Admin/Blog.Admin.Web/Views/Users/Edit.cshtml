@@ -1,4 +1,4 @@
-﻿@model Blog.Admin.Web.Models.Users.UserViewModel
+﻿@model Blog.Admin.Web.Models.UserViewModel
 
 @{
     ViewBag.Title = "Update User Information";
@@ -16,13 +16,13 @@
         @if (ViewBag.IdentityMissing != null && ViewBag.IdentityMissing)
         {
             <span>
-                ViewBag.ErrorMessage
+                @ViewBag.ErrorMessage
                 <a href="@Url.Action("Map", "Identity", new { id = Model.Id })">Click here to map this user to an identity.</a>
             </span>
         }
         else
         {
-            <span>ViewBag.ErrorMessage;</span>
+            <span>@ViewBag.ErrorMessage;</span>
         }
     </div>
 }
@@ -39,6 +39,15 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.Role)
         @Html.HiddenFor(model => model.UserName)
+        
+        @if (Model.Picture != null)
+        {
+            @Html.HiddenFor(model => model.Picture.Id)
+        }
+        @if (Model.Background != null)
+        {
+            @Html.HiddenFor(model => model.Background.Id)
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })

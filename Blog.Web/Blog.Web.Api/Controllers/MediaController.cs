@@ -125,12 +125,15 @@ namespace Blog.Web.Api.Controllers
             return null;
         }
 
-        [HttpPost, PreventCrossUserManipulation, Authorize]
+        [HttpPost, Authorize]
         [Route("api/media")]
-        public async Task<Media> Post([FromUri]string username, string album)
+        public async Task<IHttpActionResult> Post([FromUri]string username, string album)
         {
             try
             {
+                if (username != RequestContext.Principal.Identity.Name) 
+                    throw new HttpResponseException(HttpStatusCode.Forbidden);
+
                 var user = _user.GetByUserName(username);
                 if (user == null || user.Error != null) throw new Exception("User not specified"); 
 
@@ -149,11 +152,33 @@ namespace Blog.Web.Api.Controllers
                 var resultMedia = _media.AddAsContent(user, album, filename, chunkName,
                     streamProvider.FileData[0].Headers.ContentType.ToString());
 
-                return resultMedia;
+                if (album.ToLower() != _configurationHelper.GetAppSettings("ProfileAlbumName") &&
+                    album.ToLower() != _configurationHelper.GetAppSettings("BackgroundAlbumName"))
+                    return Ok(resultMedia);
+
+                var isBackground = album.ToLower() == _configurationHelper.GetAppSettings("BackgroundAlbumName");
+
+                if (!isBackground)
+                {
+                    user.Picture = resultMedia;
+                }
+                else
+                {
+                    user.Background = resultMedia;
+                }
+                    
+                var userResult = _user.Update(user);
+                if (userResult.Error != null)
+                {
+                    return BadRequest(userResult.Error.Message);
+                }
+
+                return Ok(resultMedia);
             }
-            catch
+            catch (Exception ex)
             {
-                return new Media();
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest(ex.Message);
             }
         }
 

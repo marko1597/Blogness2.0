@@ -1,16 +1,39 @@
 ﻿<div class="user-image" data-user-id="{{user.Id}}">
     <div class="user-background-image">
-        <img ng-src="{{user.Background.MediaUrl}}" />
+        <img ng-src="{{backgroundImageUrl}}" />
     </div>
     <div class="details">
         <div class="user-profile-image">
-            <img ng-src="{{user.Picture.MediaUrl}}" />
+            <img ng-src="{{profileImageUrl}}" />
         </div>
         <div>
             <h4>{{fullname}}</h4>
             <p>
                 <a>@{{user.UserName}}</a>
             </p>
+        </div>
+        
+        <div class="edit" ng-show="showUpdateImages()">
+            <label class="label label-success" ng-click="updateProfileImage()">
+                <input nv-file-select type="file" uploader="uploader" />
+                Update profile image
+                <div class="status">
+                    <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
+                    <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
+                    <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
+                </div>
+            </label>
+        </div>
+        <div class="edit" ng-show="showUpdateImages()">
+            <label class="label label-primary" ng-click="updateBackgroundImage()">
+                <input nv-file-select type="file" uploader="uploader" />
+                Update background image
+                <div class="status">
+                    <span ng-show="item.isSuccess"><i class="fa fa-check"></i></span>
+                    <span ng-show="item.isCancel"><i class="fa fa-stop"></i></span>
+                    <span ng-show="item.isError"><i class="fa fa-exclamation-triangle"></i></span>
+                </div>
+            </label>
         </div>
     </div>
     <div class="clearfix"></div>

@@ -41,7 +41,7 @@
                     errorService.displayError(user.Error);
                 }
             }, function(err) {
-                errorService.displayError(err);
+                errorService.displayErrorRedirect(err);
             });
         };
         

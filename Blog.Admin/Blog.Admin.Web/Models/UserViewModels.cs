@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.Models;
 
-namespace Blog.Admin.Web.Models.Users
+namespace Blog.Admin.Web.Models
 {
     public class UserViewModel : User
     {

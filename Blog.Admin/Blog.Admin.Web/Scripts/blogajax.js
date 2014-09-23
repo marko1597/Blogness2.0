@@ -21,17 +21,17 @@ var ajax = function ajax(config) {
 	xhr.open(config.type, config.url, true);
 	
 	// Set event handler when ajax request completes
-	xhr.onreadystatechange = function  {
-		if (xmlhttp.readyState == 4 ) {
-			if(xmlhttp.status == 200){
-				// Ajax request success  
-				return (config.dataType && config.dataType.toLower() === 'json') ? config.success(JSON.parse(xhr.responseText)) : config.success(xhr.responseText);
-			} else {
-				// Ajax request error
-				return config.error ? error(xhr) : xhr;
-			}
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if (xhr.status == 200) {
+                // Ajax request success  
+                return (config.dataType && config.dataType.toLower() === 'json') ? config.success(JSON.parse(xhr.responseText)) : config.success(xhr.responseText);
+            } else {
+                // Ajax request error
+                return config.error ? error(xhr) : xhr;
+            }
         }
-	};
+    };
 	
 	// Prepares the data to be sent to server
 	if (config.data) {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Blog.Admin.Web.Models.Notifications
+namespace Blog.Admin.Web.Models
 {
     public class NotificationModel
     {

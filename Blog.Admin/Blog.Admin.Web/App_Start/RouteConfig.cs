@@ -11,20 +11,26 @@ namespace Blog.Admin.Web
 
             routes.MapRoute(
                 "UserAddress",
-                "Users/Details/{userId}/Address",
+                "Users/Edit/{userId}/Address",
                 new { controller = "Address", action = "Index" }
             );
 
             routes.MapRoute(
                 "UserHobbies",
-                "Users/Details/{userId}/Hobbies",
+                "Users/Edit/{userId}/Hobbies",
                 new { controller = "Hobbies", action = "Index" }
             );
 
             routes.MapRoute(
                 "UserEducation",
-                "Users/Details/{userId}/Education",
+                "Users/Edit/{userId}/Education",
                 new { controller = "Education", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "UserImages",
+                "Users/Edit/{userId}/ProfileImage",
+                new { controller = "ProfileImage", action = "Index" }
             );
 
             routes.MapRoute(

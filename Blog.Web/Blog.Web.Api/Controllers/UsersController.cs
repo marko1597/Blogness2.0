@@ -43,43 +43,45 @@ namespace Blog.Web.Api.Controllers
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/users/{userId:int}")]
-        public UserProfileViewModel Get(int userId)
+        public IHttpActionResult Get(int userId)
         {
-            var user = new UserProfileViewModel();
-
             try
             {
-                var tUser = _user.Get(userId) ?? new User();
+                var tUser = _user.Get(userId);
+                if (tUser.Error != null) throw new Exception(tUser.Error.Message);
+
                 tUser = HideUserProperties(tUser);
-                user = GetViewModel(tUser);
+                var user = GetViewModel(tUser);
+
+                return Ok(user);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest(ex.Message);
             }
-
-            return user;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 20, ServerTimeSpan = 20)]
         [Route("api/users/{name}")]
-        public UserProfileViewModel Get(string name)
+        public IHttpActionResult Get(string name)
         {
-            var user = new UserProfileViewModel();
-
             try
             {
-                var tUser = _user.GetByUserName(name) ?? new User();
+                var tUser = _user.GetByUserName(name);
+                if (tUser.Error != null) throw new Exception(tUser.Error.Message);
+
                 tUser = HideUserProperties(tUser);
-                user = GetViewModel(tUser);
+                var user = GetViewModel(tUser);
+
+                return Ok(user);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest(ex.Message);
             }
-
-            return user;
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
