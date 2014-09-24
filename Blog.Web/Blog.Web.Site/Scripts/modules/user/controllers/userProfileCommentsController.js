@@ -1,13 +1,18 @@
 ﻿ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, commentsService, userService, errorService, localStorageService) {
         $scope.user = null;
+
         $scope.comments = [];
+
         $scope.isBusy = false;
+
         $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
                 localStorageService.get("username") : $rootScope.$stateParams.username;
 
         $scope.init = function () {
-            $scope.getUserInfo();
+            if ($rootScope.$stateParams.username != null || $rootScope.$stateParams.username !== "undefined") {
+                $scope.getUserInfo();
+            }
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-comments-list");
         };
 
@@ -41,6 +46,11 @@
                 errorService.displayError(e);
             });
         };
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.getCommentsByUser();
+        });
 
         $scope.init();
     }

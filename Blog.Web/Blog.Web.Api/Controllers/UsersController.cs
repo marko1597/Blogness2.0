@@ -126,9 +126,13 @@ namespace Blog.Web.Api.Controllers
                 user.IdentityId = identityUser.Id;
 
                 var tUser = _user.Update(user);
-                tUser = HideUserProperties(tUser);
+                if (tUser.Error != null) throw new Exception(tUser.Error.Message);
 
-                return Ok(tUser);
+                var updatedUser = _user.GetByUserName(user.UserName);
+                if (updatedUser.Error != null) throw new Exception(updatedUser.Error.Message);
+
+                updatedUser = HideUserProperties(updatedUser);
+                return Ok(updatedUser);
             }
             catch (Exception ex)
             {

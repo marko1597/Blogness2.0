@@ -12,9 +12,16 @@
         $scope.size = "";
 
         $scope.init = function () {
-            $scope.getUserInfo();
+            if ($rootScope.$stateParams.username != null || $rootScope.$stateParams.username !== "undefined") {
+                $scope.getUserInfo();
+            }
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.getPostsByUser();
+        });
 
         $scope.getUserInfo = function () {
             if ($scope.isBusy) {
@@ -27,7 +34,7 @@
                     if (response.Error == null) {
                         $scope.user = response;
                         $scope.isBusy = false;
-                        $scope.getPostsByUser(response.Id);
+                        $scope.getPostsByUser();
                     } else {
                         errorService.displayError(response.Error);
                     }
@@ -39,13 +46,13 @@
             }
         };
 
-        $scope.getPostsByUser = function (userId) {
+        $scope.getPostsByUser = function () {
             if ($scope.isBusy) {
                 return;
             }
             $scope.isBusy = true;
 
-            postsService.getPostsByUser(userId).then(function (resp) {
+            postsService.getPostsByUser($scope.user.Id).then(function (resp) {
                 $scope.posts = resp;
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");

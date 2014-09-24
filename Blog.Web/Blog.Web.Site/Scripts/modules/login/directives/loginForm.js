@@ -1,5 +1,5 @@
 ﻿ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, authenticationService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $location, $window, errorService, localStorageService, configProvider, authenticationService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
@@ -32,6 +32,7 @@
                     } else {
                         $rootScope.$broadcast("hideLoginForm");
                         $rootScope.$broadcast("userLoggedIn", { username: $scope.username });
+                        $location.path("/");
                     }
                 } else {
                     $scope.errorMessage = response.error_description;
@@ -49,7 +50,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$location", "$window", "errorService", "localStorageService", "configProvider", "authenticationService"];
 
     var linkFn = function(scope, elem) {
         scope.showRegisterForm = function() {

@@ -28,6 +28,9 @@
 
         .user-image .details > .user-profile-image {
             text-align: center;
+            position: relative;
+            width: 120px;
+            margin: 0 auto;
         }
 
             .user-image .details > .user-profile-image > img {
@@ -43,29 +46,6 @@
                 border: 3px solid #fff;
             }
 
-        .user-image .details > .edit > label {
-            padding: 10px;
-            margin: 2px;
-            display: inline-block;
-            width: 100%;
-            cursor: pointer;
-            text-align: left;
-        }
-
-            .user-image .details > .edit > label:hover {
-                opacity: 0.7;
-            }
-
-            .user-image .details > .edit > label > input[type='file'] {
-                position: fixed;
-                top: -1000px;
-            }
-
-            .user-image .details > .edit > label > .status {
-                display: inline-block;
-                color: #fff;
-            }
-
         .user-image .details h4 {
             color: #f8f8f8;
         }
@@ -74,6 +54,39 @@
             color: #f8f8f8;
             font-size: 1em;
             cursor: pointer;
+        }
+
+    .user-image .user-background-image:hover > .edit,
+    .user-image .user-profile-image:hover > .edit {
+        display: inline-block;
+        visibility: visible;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .user-image .user-background-image > .edit {
+        bottom: 15px;
+        right: 15px;
+        margin: 0;
+    }
+
+    .user-image .user-profile-image > .edit {
+        top: 40%;
+        right: 40%;
+    }
+
+    .user-image .edit {
+        color: #fff;
+        font-size: 2em;
+        text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666;
+        visibility: hidden;
+        display: none;
+        position: absolute;
+    }
+
+        .user-image .edit input[type='file'] {
+            position: fixed;
+            top: -1000px;
         }
 
 @media (max-width: 767px) {
@@ -90,4 +103,11 @@
         height: 100%;
         min-height: 0;
     }
+
+        .user-image .user-background-image > .edit {
+            display: inline-block;
+            visibility: visible;
+            cursor: pointer;
+            z-index: 1000;
+        }
 }

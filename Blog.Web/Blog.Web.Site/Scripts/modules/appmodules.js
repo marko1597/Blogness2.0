@@ -808,7 +808,7 @@ var ngLogin = angular.module("ngLogin",
     ]);
 ///#source 1 1 /Scripts/modules/login/directives/loginForm.js
 ngLogin.directive('loginForm', function () {
-    var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, localStorageService, configProvider, authenticationService) {
+    var ctrlFn = function ($scope, $rootScope, $timeout, $location, $window, errorService, localStorageService, configProvider, authenticationService) {
         $scope.username = "";
         $scope.password = "";
         $scope.rememberMe = false;
@@ -841,6 +841,7 @@ ngLogin.directive('loginForm', function () {
                     } else {
                         $rootScope.$broadcast("hideLoginForm");
                         $rootScope.$broadcast("userLoggedIn", { username: $scope.username });
+                        $location.path("/");
                     }
                 } else {
                     $scope.errorMessage = response.error_description;
@@ -858,7 +859,7 @@ ngLogin.directive('loginForm', function () {
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$window", "errorService", "localStorageService", "configProvider", "authenticationService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$timeout", "$location", "$window", "errorService", "localStorageService", "configProvider", "authenticationService"];
 
     var linkFn = function(scope, elem) {
         scope.showRegisterForm = function() {
@@ -3026,13 +3027,18 @@ var ngUser = angular.module("ngUser",
 ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, commentsService, userService, errorService, localStorageService) {
         $scope.user = null;
+
         $scope.comments = [];
+
         $scope.isBusy = false;
+
         $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
                 localStorageService.get("username") : $rootScope.$stateParams.username;
 
         $scope.init = function () {
-            $scope.getUserInfo();
+            if ($rootScope.$stateParams.username != null || $rootScope.$stateParams.username !== "undefined") {
+                $scope.getUserInfo();
+            }
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-comments-list");
         };
 
@@ -3067,6 +3073,11 @@ ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$st
             });
         };
 
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.getCommentsByUser();
+        });
+
         $scope.init();
     }
 ]);
@@ -3084,14 +3095,13 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
                 $scope.username = localStorageService.get("username");
 
                 if ($scope.username == undefined || $scope.username == null) {
-                    errorService.displayErrorRedirect({ Message: "You are not logged in. Try logging in or maybe create an account and join us."});
+                    errorService.displayErrorRedirect({ Message: "You are not logged in. Try logging in or maybe create an account and join us." });
                 } else {
                     authenticationService.getUserInfo().then(function (response) {
-                        if (response.Message == undefined || response.Message == null) {
-                            $scope.getUserInfo();
-                        } else {
+                        if (response.Message != undefined || response.Message != null) {
                             errorService.displayError(response.Message);
                         }
+                        $scope.getUserInfo();
                     });
                 }
             } else {
@@ -3099,9 +3109,9 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
                 $scope.getUserInfo();
             }
         };
-        
+
         $scope.getUserInfo = function () {
-            userService.getUserInfo($scope.username).then(function(user) {
+            userService.getUserInfo($scope.username).then(function (user) {
                 if (user.Error == null) {
                     $scope.user = user;
                     $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
@@ -3113,11 +3123,17 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
                 } else {
                     errorService.displayError(user.Error);
                 }
-            }, function(err) {
+            }, function (err) {
                 errorService.displayErrorRedirect(err);
             });
         };
-        
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            $rootScope.$broadcast("viewedUserLoaded", $scope.user);
+        });
+
         $rootScope.$on("userLoggedIn", function () {
             $scope.getUserInfo();
         });
@@ -3150,9 +3166,16 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
         $scope.size = "";
 
         $scope.init = function () {
-            $scope.getUserInfo();
+            if ($rootScope.$stateParams.username != null || $rootScope.$stateParams.username !== "undefined") {
+                $scope.getUserInfo();
+            }
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.getPostsByUser();
+        });
 
         $scope.getUserInfo = function () {
             if ($scope.isBusy) {
@@ -3165,7 +3188,7 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
                     if (response.Error == null) {
                         $scope.user = response;
                         $scope.isBusy = false;
-                        $scope.getPostsByUser(response.Id);
+                        $scope.getPostsByUser();
                     } else {
                         errorService.displayError(response.Error);
                     }
@@ -3177,13 +3200,13 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
             }
         };
 
-        $scope.getPostsByUser = function (userId) {
+        $scope.getPostsByUser = function () {
             if ($scope.isBusy) {
                 return;
             }
             $scope.isBusy = true;
 
-            postsService.getPostsByUser(userId).then(function (resp) {
+            postsService.getPostsByUser($scope.user.Id).then(function (resp) {
                 $scope.posts = resp;
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");
@@ -3337,24 +3360,33 @@ ngUser.directive('userImage', [function () {
 
 ///#source 1 1 /Scripts/modules/user/directives/userPostItem.js
 ngUser.directive('userPostItem', [function () {
-    var ctrlFn = function ($scope, $location) {
+    var ctrlFn = function ($scope, $location, localStorageService) {
         $scope.post = $scope.data.Post;
 
         $scope.user = $scope.data.Post.User;
 
         $scope.username = $scope.user.Username;
 
+        $scope.loggedInUsername = localStorageService.get("username");
+
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
 
         $scope.getPostSize = function () {
             return $scope.data.Width;
+        };
+
+        $scope.isEditable = function() {
+            if (($scope.user != null || $scope.user != undefined) && $scope.username == $scope.loggedInUsername) {
+                return true;
+            }
+            return false;
         };
         
         $scope.editPost = function () {
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$location"];
+    ctrlFn.$inject = ["$scope", "$location", "localStorageService"];
 
     return {
         restrict: 'EA',
