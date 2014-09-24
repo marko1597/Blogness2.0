@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blog.Common.Identity.Models;
+using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Blog.Common.Identity.Repository
 {
@@ -12,18 +15,21 @@ namespace Blog.Common.Identity.Repository
     {
         private readonly BlogIdentityDbContext _ctx;
         private readonly BlogUserManager _userManager;
+        private readonly BlogRoleManager _roleManager;
 
         public BlogDbRepository()
         {
             _ctx = new BlogIdentityDbContext();
             _userManager = new BlogUserManager(new BlogUserStore(_ctx));
+            _roleManager = new BlogRoleManager(new RoleStore<BlogRole>(_ctx));
         }
  
         public async Task<IdentityResult> RegisterUser(BlogRegisterModel userModel)
         {
             var user = new BlogUser
             {
-                UserName = userModel.Username
+                UserName = userModel.Username,
+                Email = userModel.Email
             };
  
             var result = await _userManager.CreateAsync(user, userModel.Password);
@@ -60,7 +66,24 @@ namespace Blog.Common.Identity.Repository
             var result = await _userManager.GetClaimsAsync(userId);
             return result;
         }
- 
+
+        public async Task<IdentityResult> CreateRoleAsync(BlogRole blogRole)
+        {
+            var roleresult = await _roleManager.CreateAsync(blogRole);
+            return roleresult;
+        }
+
+        public async Task<IdentityResult> AddToRolesAsync(string id, string[] roles)
+        {
+            var result = await _userManager.AddToRolesAsync(id, roles);
+            return result;
+        }
+
+        public IEnumerable<BlogRole> GetRoles()
+        {
+            return _roleManager.Roles.ToList();
+        }
+
         public void Dispose()
         {
             _ctx.Dispose();

@@ -38,6 +38,7 @@ namespace Blog.Admin.Web
             container.Register<IHobbyResource, HobbyResource>(Lifestyle.Singleton);
             container.Register<IEducationResource, EducationResource>(Lifestyle.Singleton);
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);
+            container.Register<IMediaResource, MediaResource>(Lifestyle.Singleton);
             container.Register<INotificationResource, NotificationResource>(Lifestyle.Singleton);
 
             // SI Token Identity Registers

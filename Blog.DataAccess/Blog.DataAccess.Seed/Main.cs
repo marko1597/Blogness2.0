@@ -6,7 +6,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Blog.Common.Identity.Models;
+using Blog.Common.Identity.Role;
 using Blog.DataAccess.Database.Entities.Objects;
 
 namespace Blog.DataAccess.Seed
@@ -50,14 +53,17 @@ namespace Blog.DataAccess.Seed
             }
         }
 
-        private void BtnGenerateClick(object sender, EventArgs e)
+        private async void BtnGenerateClick(object sender, EventArgs e)
         {
             try
             {
+                Rollback();
                 TxtConsole.Text = string.Empty;
                 AddConsoleMessage("<================ START ================>");
                 CopyImages();
+                await LoadRoles();
                 LoadUsers();
+                await LoadIdentities();
                 LoadAddress();
                 LoadEducationType();
                 LoadEducation();
@@ -70,6 +76,7 @@ namespace Blog.DataAccess.Seed
                 LoadPostLikes();
                 LoadComments();
                 LoadCommentLikes();
+                MapUsersToIdentity();
 
                 AddConsoleMessage("<================ END ================>");
             }
@@ -82,6 +89,13 @@ namespace Blog.DataAccess.Seed
         }
 
         #region Load Data Stuff
+
+        private async Task LoadRoles()
+        {
+            await _blogDbRepository.CreateRoleAsync(new BlogRole { Name = "Admin", Description = "Admin" });
+            await _blogDbRepository.CreateRoleAsync(new BlogRole { Name = "Bloggity Staff", Description = "Bloggity Staff" });
+            await _blogDbRepository.CreateRoleAsync(new BlogRole { Name = "Blogger", Description = "Blogger" });
+        }
 
         private void LoadUsers()
         {
@@ -113,11 +127,36 @@ namespace Blog.DataAccess.Seed
                 BirthDate = DateTime.Now.AddYears(-25)
             });
 
-            _users =
-                _userRepository.Find(
+            _users = _userRepository.Find(
                     a => a.UserId > 0,
                     b => b.OrderBy(c => c.UserId),
                     "Address,Education,Hobbies").ToList();
+
+            AddConsoleMessage("Successfully added users...");
+        }
+
+        private async Task LoadIdentities()
+        {
+            foreach (var user in _users)
+            {
+                var bloguser = new BlogRegisterModel
+                               {
+                                   Username = user.UserName, 
+                                   Email = user.EmailAddress, 
+                                   Password = "Testtest1!"
+                               };
+                var result = await _blogDbRepository.RegisterUser(bloguser);
+                if (result.Succeeded)
+                {
+                    var savedUser = await _blogDbRepository.FindUser(bloguser.Username, bloguser.Password);
+                    var firstOrDefault = _blogDbRepository.GetRoles().FirstOrDefault();
+                    if (firstOrDefault != null)
+                    {
+                        var role = firstOrDefault.Name;
+                        await _blogDbRepository.AddToRolesAsync(savedUser.Id, new[] { role });
+                    }
+                }
+            }
 
             AddConsoleMessage("Successfully added users...");
         }
@@ -410,7 +449,7 @@ namespace Blog.DataAccess.Seed
                     });
                 }
             }
-            
+
             _posts = _postRepository.Find(a => a.PostId > 0, q => q.OrderByDescending(p => p.CreatedDate),
                 "Comments,User,PostLikes,Tags,PostContents").ToList();
 
@@ -445,7 +484,7 @@ namespace Blog.DataAccess.Seed
                         ModifiedDate = DateTime.Now,
                         PostId = userposts[i].PostId,
                         MediaId = media[i].MediaId
-                    }); 
+                    });
                 }
             }
 
@@ -547,41 +586,112 @@ namespace Blog.DataAccess.Seed
         {
             try
             {
-                var connectionstring = ConfigurationManager.AppSettings.Get("MasterDb");
-                var dbName = ConfigurationManager.AppSettings.Get("BlogDbName");
-
-                using (var con = new SqlConnection(connectionstring))
-                {
-                    con.Open();
-                    var sqlCommandText = @"
-                    ALTER DATABASE " + dbName + @" SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-                    DROP DATABASE [" + dbName + "]";
-                    var sqlCommand = new SqlCommand(sqlCommandText, con);
-                    sqlCommand.ExecuteNonQuery();
-                }
+                DropBlogDb();
+                DropIdentityDb();
             }
             catch (Exception ex)
             {
                 AddConsoleMessage(ex.Message);
             }
-            
+        }
+
+        private void DropBlogDb()
+        {
+            var connectionstring = ConfigurationManager.AppSettings.Get("MasterDb");
+            var dbName = ConfigurationManager.AppSettings.Get("BlogDbName");
+
+            using (var con = new SqlConnection(connectionstring))
+            {
+                con.Open();
+                var sqlCommandText = @"
+                    ALTER DATABASE " + dbName + @" SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                    DROP DATABASE [" + dbName + "]";
+                var sqlCommand = new SqlCommand(sqlCommandText, con);
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void DropIdentityDb()
+        {
+            var connectionstring = ConfigurationManager.AppSettings.Get("MasterDb");
+            var dbName = ConfigurationManager.AppSettings.Get("BlogIdentityDbName");
+
+            using (var con = new SqlConnection(connectionstring))
+            {
+                con.Open();
+                var sqlCommandText = @"
+                    ALTER DATABASE " + dbName + @" SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                    DROP DATABASE [" + dbName + "]";
+                var sqlCommand = new SqlCommand(sqlCommandText, con);
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void MapUsersToIdentity()
+        {
+            var connectionstring = ConfigurationManager.AppSettings.Get("MasterDb");
+
+            using (var con = new SqlConnection(connectionstring))
+            {
+                con.Open();
+
+                #region sql command string
+                const string sqlCommandText = @"
+                    declare @username varchar(max)
+	                declare @aspusers table 
+	                (
+		                username varchar(max),
+		                identityId varchar(max)
+	                )
+
+	                insert into @aspusers
+	                select username, id 
+	                from [blog_identity].[dbo].[aspnetusers]
+
+	                declare aspusers_cursor cursor for
+	                select username from @aspusers
+
+	                open aspusers_cursor
+	                fetch next from aspusers_cursor into @username   
+
+	                while @@FETCH_STATUS = 0   
+	                begin
+		                if exists (select * from [blog].[dbo].[users] where UserName = @username)
+		                begin
+			                update [blog].[dbo].[users] 
+			                set IdentityId = (select identityId from @aspusers where username = @username)
+			                where UserName = @username
+		                end
+		
+		                fetch next from aspusers_cursor into @username   
+	                end   
+
+	                close aspusers_cursor   
+	                deallocate aspusers_cursor";
+                #endregion
+
+                var sqlCommand = new SqlCommand(sqlCommandText, con);
+                sqlCommand.ExecuteNonQuery();
+            }
+
+            AddConsoleMessage("Successfully mapped users to identity...");
         }
 
         private void CopyImages()
         {
             var imagesPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\SampleImages";
             const string destinationPath = @"C:\Temp\SampleImages\";
-            
+
             foreach (var dest in Directory.GetDirectories(imagesPath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dest.Replace(imagesPath, destinationPath));
             }
-            
+
             foreach (var newPath in Directory.GetFiles(imagesPath, "*.*", SearchOption.AllDirectories))
             {
                 File.Copy(newPath, newPath.Replace(imagesPath, destinationPath), true);
             }
-            
+
             AddConsoleMessage("Successfully moved sample images...");
         }
     }

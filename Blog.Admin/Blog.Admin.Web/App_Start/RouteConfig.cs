@@ -28,9 +28,15 @@ namespace Blog.Admin.Web
             );
 
             routes.MapRoute(
-                "UserImages",
+                "UserProfileImage",
                 "Users/Edit/{userId}/ProfileImage",
-                new { controller = "ProfileImage", action = "Index" }
+                new { controller = "ProfileImage", action = "ProfileImage" }
+            );
+
+            routes.MapRoute(
+                "UserBackgroundImage",
+                "Users/Edit/{userId}/BackgroundImage",
+                new { controller = "ProfileImage", action = "BackgroundImage" }
             );
 
             routes.MapRoute(

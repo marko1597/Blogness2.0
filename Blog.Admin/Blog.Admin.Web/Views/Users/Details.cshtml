@@ -9,6 +9,16 @@
 
 <div>
     <h4>Displays user information</h4>
+    <p>
+        <a href="@Url.Action("ProfileImage", "ProfileImage", new { userId = Model.Id })">
+            Click here to change this user's profile picture
+        </a>
+    </p>
+    <p>
+        <a href="@Url.Action("BackgroundImage", "ProfileImage", new { userId = Model.Id })">
+            Click here to change this user's background picture
+        </a>
+    </p>
 
     @if (ViewBag.ErrorMessage != null && Model == null)
     {
@@ -26,16 +36,17 @@
                 <!-- #region profile info -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Profile Details</h3>
+                        <span class="panel-title">Profile Details</span>
+                        @Html.ActionLink("Edit", "Edit", "Users", new { id = Model.Id }, new { @class = "pull-right" })
                     </div>
                     <div class="panel-body">
                         <div class="user-images">
                             <div class="background-picture">
-                                <img src="../../Content/images/default-background-picture.jpg" alt="" />
+                                <img src="@Model.Background.MediaUrl" alt="" />
                             </div>
                             <div class="details">
                                 <div class="user-profile-image">
-                                    <img src="../../Content/images/default-profile-picture.jpg" alt="" />
+                                    <img src="@Model.Picture.MediaUrl" alt="" />
                                 </div>
                                 <div>
                                     <h4>@Model.FirstName @Model.LastName</h4>

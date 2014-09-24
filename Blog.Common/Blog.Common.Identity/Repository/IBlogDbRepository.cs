@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Blog.Common.Identity.Models;
+using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Microsoft.AspNet.Identity;
 
@@ -14,5 +15,8 @@ namespace Blog.Common.Identity.Repository
         Task<IdentityResult> AddClaim(string userId, Claim claim);
         Task<IdentityResult> RemoveClaim(string userId, Claim claim);
         Task<IList<Claim>> GetClaims(string userId);
+        Task<IdentityResult> CreateRoleAsync(BlogRole blogRole);
+        Task<IdentityResult> AddToRolesAsync(string id, string[] roles);
+        IEnumerable<BlogRole> GetRoles();
     }
 }

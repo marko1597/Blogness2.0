@@ -1,4 +1,5 @@
-﻿using Blog.Common.Utils.Helpers;
+﻿using Blog.Common.Identity.Repository;
+using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.DataAccess.Database.Repository;
 using Blog.DataAccess.Database.Repository.Interfaces;
@@ -104,6 +105,7 @@ namespace Blog.DataAccess.Seed
         private readonly ITagRepository _tagRepository = new TagRepository();
         private readonly IUserRepository _userRepository = new UserRepository();
         private readonly IImageHelper _imageHelper = new ImageHelper();
+        private readonly IBlogDbRepository _blogDbRepository = new BlogDbRepository();
         private System.Windows.Forms.TextBox TxtConsole;
         private System.Windows.Forms.Button BtnDropDatabase;
     }

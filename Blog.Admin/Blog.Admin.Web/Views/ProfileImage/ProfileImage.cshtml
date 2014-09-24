@@ -1,0 +1,98 @@
+﻿@model Blog.Admin.Web.Models.ImageUploadViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.ViewHeader</h2>
+
+@if (ViewBag.ErrorMessage != null && Model == null)
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Error!</strong> @ViewBag.ErrorMessage
+    </div>
+
+    <div>
+        <a href="@Url.Action("Index", "Users")">Return to users list</a>
+    </div>
+
+}
+else
+{
+    <div id="profile-image">
+        @using (Html.BeginForm(Model.IsBackground ? "EditBackground" : "Edit", "ProfileImage", FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Select image from your computer</h4>
+
+                <hr />
+
+                @Html.HiddenFor(model => model.UserId)
+                @Html.HiddenFor(model => model.Username)
+                @Html.HiddenFor(model => model.IsBackground)
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageUpload, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.ImageUpload, GetInputFileAttributes())
+                        @Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group current-image">
+                    @Html.LabelFor(model => model.MediaUrl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.MediaUrl)
+                        <img id="MediaUrlImage" data-bind="attr: { src: selectedImage }" 
+                             alt="Current image" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div>
+        <a href="@Url.Action("Details", "Users", new { id = Model.UserId })">Return to details</a>
+    </div>
+    
+    <script>var mediaUrl = "@Model.MediaUrl";</script>
+    <script src="~/Scripts/modules/profileImage.js"></script>
+}
+
+@functions
+{
+
+    private Dictionary<string, object> GetInputFileAttributes()
+    {
+        var attrs = new Dictionary<string, object>
+        {
+            {
+                "data-bind", "event: { change: function() { updateSelectedImage($element) } }"
+            },
+            {
+                "type", "file"
+            },
+            {
+                "class", "form-control"
+            },
+            {
+                "name", "ImageUpload"
+            }
+        };
+
+        return attrs;
+    } 
+
+}

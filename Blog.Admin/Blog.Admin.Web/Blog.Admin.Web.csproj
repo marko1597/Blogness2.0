@@ -222,6 +222,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MapIdentityViewModels.cs" />
     <Compile Include="Models\NotificationModels.cs" />
+    <Compile Include="Models\ProfileImageViewModels.cs" />
     <Compile Include="Models\UserRoleViewModels.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -254,6 +255,7 @@
     <Content Include="Content\modules\login.css" />
     <Content Include="Content\modules\notificationmessage.css" />
     <Content Include="Content\modules\notifications.css" />
+    <Content Include="Content\modules\profileimage.css" />
     <Content Include="Content\modules\userdetails.css" />
     <Content Include="ErrorPage\css\blog-bootstrap.css" />
     <Content Include="ErrorPage\css\bootstrap.css" />
@@ -331,6 +333,7 @@
     <Content Include="Scripts\modules\hobbies.js" />
     <Content Include="Scripts\modules\identityMapping.js" />
     <Content Include="Scripts\modules\notifications.js" />
+    <Content Include="Scripts\modules\profileImage.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
@@ -393,7 +396,7 @@
     <Content Include="Views\Identity\Map.cshtml" />
     <Content Include="Views\Hobbies\Index.cshtml" />
     <Content Include="Views\Education\Index.cshtml" />
-    <Content Include="Views\ProfileImage\Index.cshtml" />
+    <Content Include="Views\ProfileImage\ProfileImage.cshtml" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
