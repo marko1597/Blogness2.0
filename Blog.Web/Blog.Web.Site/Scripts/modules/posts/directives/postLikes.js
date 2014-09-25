@@ -18,11 +18,7 @@
 
         $scope.tooltip = { "title": "Click to favorite this post." };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-        });
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+        $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
             if (d.postId == $scope.data.PostId) {
                 $scope.postLikes = d.postLikes;
                 $scope.$apply();
@@ -30,9 +26,9 @@
                 $scope.isUserLiked();
             }
         });
-
-        $rootScope.$watch('user', function () {
-            $scope.user = $rootScope.user;
+        
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
             $scope.isUserLiked();
         });
 

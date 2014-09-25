@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels.SocketViewModels;
-using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Common.Web.Attributes;
 using Blog.Services.Helpers.Wcf.Interfaces;
-using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -16,15 +12,11 @@ namespace Blog.Web.Api.Controllers
     {
         private readonly ICommentsResource _service;
         private readonly IErrorSignaler _errorSignaler;
-        private readonly IHttpClientHelper _httpClientHelper;
-        private readonly IConfigurationHelper _configurationHelper;
 
-        public CommentsController(ICommentsResource service, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public CommentsController(ICommentsResource service, IErrorSignaler errorSignaler)
         {
             _service = service;
             _errorSignaler = errorSignaler;
-            _httpClientHelper = httpClientHelper;
-            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
@@ -82,7 +74,7 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/comments")]
-        public IHttpActionResult Post([FromBody]CommentAdded comment)
+        public IHttpActionResult Post([FromBody]Comment comment)
         {
             try
             {
@@ -90,22 +82,8 @@ namespace Blog.Web.Api.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-
-                var validationResult = IsValidComment(comment);
-                if (validationResult != null)
-                {
-                    throw new Exception(validationResult.Message);
-                }
-
-                var tComment = _service.Add(comment.Comment);
-                var commentAdded = new CommentAdded
-                                   {
-                                       Comment = tComment,
-                                       PostId = comment.PostId
-                                   };
-                new CommentsHub(_errorSignaler, _httpClientHelper, _configurationHelper)
-                    .CommentAddedForPost(commentAdded);
-
+                
+                _service.Add(comment);
                 return Ok();
             }
             catch (Exception ex)
@@ -127,21 +105,6 @@ namespace Blog.Web.Api.Controllers
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
             }
-        }
-
-        private Error IsValidComment(CommentAdded commentAdded)
-        {
-            if (commentAdded == null)
-            {
-                return new Error{ Id = (int)Constants.Error.ValidationError, Message = "There was no comment to be submitted." };
-            }
-
-            if (commentAdded.PostId == null)
-            {
-                return new Error { Id = (int)Constants.Error.ValidationError, Message = "Comment should be attached to a post." };
-            }
-
-            return null;
         }
     }
 }

@@ -78,7 +78,7 @@
             }
         };
 
-        $rootScope.$on("viewedUserLoaded", function(ev, data) {
+        $scope.$on("viewedUserLoaded", function(ev, data) {
             $scope.hobbies = data.Hobbies;
             $scope.user = data;
         });

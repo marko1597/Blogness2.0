@@ -58,6 +58,7 @@ var serverFunctions = {
         if (d != null) {
             var data = {
                 postId: d.PostId,
+                commentId: d.CommentId,
                 comment: d.Comment
             };
             io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentAdded, data);

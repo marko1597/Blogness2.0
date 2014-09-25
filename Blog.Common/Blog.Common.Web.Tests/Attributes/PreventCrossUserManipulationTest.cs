@@ -74,6 +74,32 @@ namespace Blog.Common.Web.Tests.Attributes
         }
 
         [Test]
+        public void ShouldSuccessfullyGetUserIdInComplexObjectParameter()
+        {
+            var complexDummyObject = new DummyComplexObject
+                                     {
+                                         SomeValue = 1,
+                                         DummyObject = new DummyObject
+                                                       {
+                                                           Name = "foobar",
+                                                           User = new User
+                                                                  {
+                                                                      Id = 1
+                                                                  }
+                                                       }
+                                     };
+
+            _controller.ControllerContext.RequestContext.Principal =
+                new GenericPrincipal(new GenericIdentity("foo", "bar"), new[] { "user" });
+            _userResource.Setup(a => a.GetByUserName(It.IsAny<string>())).Returns(new User { Id = 1 });
+            _httpActionContext.ActionArguments.Add("dummy", complexDummyObject);
+
+            var attribute = new PreventCrossUserManipulationAttribute { UsersResource = _userResource.Object };
+
+            Assert.DoesNotThrow(() => attribute.OnActionExecuting(_httpActionContext));
+        }
+
+        [Test]
         public void ShouldSuccessfullyUseUserIdInParameter()
         {
             _controller.ControllerContext.RequestContext.Principal =
@@ -178,6 +204,12 @@ namespace Blog.Common.Web.Tests.Attributes
             var result = Assert.Throws<HttpResponseException>(() => attribute.OnActionExecuting(_httpActionContext));
 
             Assert.AreEqual(HttpStatusCode.InternalServerError, result.Response.StatusCode);
+        }
+
+        protected class DummyComplexObject
+        {
+            public DummyObject DummyObject { get; set; }
+            public int SomeValue { get; set; }
         }
 
         protected class DummyObject

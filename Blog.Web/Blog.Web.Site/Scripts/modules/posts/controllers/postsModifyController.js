@@ -138,11 +138,11 @@
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
         });
 
-        $rootScope.$on("userLoggedIn", function () {
+        $scope.$on("userLoggedIn", function () {
             $scope.username = localStorageService.get("username");
             $scope.authData = localStorageService.get("authorizationData");
         });

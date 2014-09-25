@@ -6,6 +6,9 @@
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             $log.info("location changing from " + current + " to " + next);
+            if ($rootScope.user) {
+                $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
+            }
         });
 
         $scope.init = function() {

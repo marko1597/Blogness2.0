@@ -18,7 +18,7 @@
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.getPostsByUser();
         });

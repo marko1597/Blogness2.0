@@ -11,6 +11,7 @@ namespace Blog.Common.Contracts
         public int Id { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "This comment is not attached to a post.")]
         public int? PostId { get; set; }
 
         [DataMember]

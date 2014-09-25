@@ -1,6 +1,6 @@
 ﻿ngUser.directive('userProfileDetailsEducation', [function () {
     var ctrlFn = function ($scope, $rootScope, dateHelper) {
-        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+        $scope.$on("viewedUserLoaded", function (ev, data) {
             $scope.educationGroups = data.EducationGroups;
             $scope.user = data;
 

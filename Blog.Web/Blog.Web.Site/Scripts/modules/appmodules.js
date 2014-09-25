@@ -43,13 +43,13 @@ var ngComments = angular.module("ngComments",
 ngComments.directive('commentItem', [function () {
     var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
-            if ($scope.comment.Comments == undefined || $scope.comment.Comments == null || $scope.comment.Comments.length < 1) {
+            if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
             }
             return true;
         };
 
-        $scope.toggleReplies = function() {
+        $scope.toggleReplies = function () {
             var state = !$scope.comment.ShowReplies;
             $scope.comment.ShowReplies = state;
 
@@ -58,7 +58,7 @@ ngComments.directive('commentItem', [function () {
             }
         };
 
-        $scope.isExpanded = function() {
+        $scope.isExpanded = function () {
             if ($scope.comment.ShowReplies) {
                 return "fa-minus";
             }
@@ -66,13 +66,13 @@ ngComments.directive('commentItem', [function () {
         };
 
         $scope.canReplyToComment = function () {
-            if ($scope.comment.PostId == undefined || $scope.comment.PostId == null) {
+            if ($scope.comment.PostId == undefined || $scope.comment.PostId === null) {
                 return "hidden";
             }
             return "";
         };
 
-        $scope.showAddReply = function() {
+        $scope.showAddReply = function () {
             $scope.comment.ShowAddReply = true;
 
             if (!$scope.comment.ShowReplies) {
@@ -100,7 +100,7 @@ ngComments.directive('commentItem', [function () {
         };
 
         $scope.likeComment = function () {
-            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {},
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
                 function (err) {
                     errorService.displayError(err);
                 });;
@@ -183,12 +183,17 @@ ngComments.directive('commentsAddNew', [function () {
             }
         };
 
-        $scope.createCommentForAdding = function() {
-            return {
-                PostId: $scope.parentpostid,
-                Comment: $scope.comment
-            };
+        $scope.createCommentForAdding = function () {
+            if ($scope.comment.ParentCommentId) {
+                $scope.comment.PostId = $scope.parentpostid;
+                return $scope.comment;
+            }
+            return $scope.comment;
         };
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.comment.User = data;
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
 
@@ -276,25 +281,26 @@ ngComments.directive('commentsList', [function () {
         };
 
         $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
-            if (d.postId != null || d.postId != undefined) {
+            d.comment = commentsService.addViewProperties(d.comment);
+
+            if (d.commentId !== null && d.commentId != undefined) {
+                var comment = _.where($scope.comments, { Id: d.commentId })[0];
+
+                if (comment.Comments === null) comment.Comments = [];
+                comment.Comments.unshift(d.comment);
+                $scope.$apply();
+
+                $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+            } else {
                 $scope.comments.unshift(d.comment);
                 $scope.$apply();
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-            } else {
-                _.each($scope.comments, function (comment) {
-                    if (comment.Id == d.cmment.ParentCommentId) {
-                        comment.Comments.unshift(d.comment);
-                        $scope.$apply();
-                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        return;
-                    }
-                });
             }
         });
 
         $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
-            postsService.subscribeToPost($scope.post.Id);
+            postsService.subscribeToPost($scope.postid);
         });
 
         $scope.getComments();
@@ -1423,6 +1429,9 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             $log.info("location changing from " + current + " to " + next);
+            if ($rootScope.user) {
+                $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
+            }
         });
 
         $scope.init = function() {
@@ -1756,11 +1765,11 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
         });
 
-        $rootScope.$on("userLoggedIn", function () {
+        $scope.$on("userLoggedIn", function () {
             $scope.username = localStorageService.get("username");
             $scope.authData = localStorageService.get("authorizationData");
         });
@@ -1928,11 +1937,7 @@ ngPosts.directive('postLikes', [function () {
 
         $scope.tooltip = { "title": "Click to favorite this post." };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-        });
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+        $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
             if (d.postId == $scope.data.PostId) {
                 $scope.postLikes = d.postLikes;
                 $scope.$apply();
@@ -1940,9 +1945,9 @@ ngPosts.directive('postLikes', [function () {
                 $scope.isUserLiked();
             }
         });
-
-        $rootScope.$watch('user', function () {
-            $scope.user = $rootScope.user;
+        
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
             $scope.isUserLiked();
         });
 
@@ -3087,7 +3092,7 @@ ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$st
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.getCommentsByUser();
         });
@@ -3142,14 +3147,10 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
             $rootScope.$broadcast("viewedUserLoaded", $scope.user);
-        });
-
-        $rootScope.$on("userLoggedIn", function () {
-            $scope.getUserInfo();
         });
 
         $scope.init();
@@ -3186,7 +3187,7 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.getPostsByUser();
         });
@@ -3486,7 +3487,7 @@ ngUser.directive('userProfileDetailsAddress', [function () {
             }
         };
 
-        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+        $scope.$on("viewedUserLoaded", function (ev, data) {
             $scope.address = data.Address;
             $scope.user = data;
         });
@@ -3504,7 +3505,7 @@ ngUser.directive('userProfileDetailsAddress', [function () {
 ///#source 1 1 /Scripts/modules/user/directives/userProfileDetailsEducation.js
 ngUser.directive('userProfileDetailsEducation', [function () {
     var ctrlFn = function ($scope, $rootScope, dateHelper) {
-        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+        $scope.$on("viewedUserLoaded", function (ev, data) {
             $scope.educationGroups = data.EducationGroups;
             $scope.user = data;
 
@@ -3805,7 +3806,7 @@ ngUser.directive('userProfileDetailsHobbies', [function () {
             }
         };
 
-        $rootScope.$on("viewedUserLoaded", function(ev, data) {
+        $scope.$on("viewedUserLoaded", function(ev, data) {
             $scope.hobbies = data.Hobbies;
             $scope.user = data;
         });

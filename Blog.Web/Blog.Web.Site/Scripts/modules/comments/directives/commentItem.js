@@ -1,13 +1,13 @@
 ﻿ngComments.directive('commentItem', [function () {
     var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
-            if ($scope.comment.Comments == undefined || $scope.comment.Comments == null || $scope.comment.Comments.length < 1) {
+            if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
             }
             return true;
         };
 
-        $scope.toggleReplies = function() {
+        $scope.toggleReplies = function () {
             var state = !$scope.comment.ShowReplies;
             $scope.comment.ShowReplies = state;
 
@@ -16,7 +16,7 @@
             }
         };
 
-        $scope.isExpanded = function() {
+        $scope.isExpanded = function () {
             if ($scope.comment.ShowReplies) {
                 return "fa-minus";
             }
@@ -24,13 +24,13 @@
         };
 
         $scope.canReplyToComment = function () {
-            if ($scope.comment.PostId == undefined || $scope.comment.PostId == null) {
+            if ($scope.comment.PostId == undefined || $scope.comment.PostId === null) {
                 return "hidden";
             }
             return "";
         };
 
-        $scope.showAddReply = function() {
+        $scope.showAddReply = function () {
             $scope.comment.ShowAddReply = true;
 
             if (!$scope.comment.ShowReplies) {
@@ -58,7 +58,7 @@
         };
 
         $scope.likeComment = function () {
-            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () {},
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
                 function (err) {
                     errorService.displayError(err);
                 });;

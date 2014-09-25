@@ -39,25 +39,26 @@
         };
 
         $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
-            if (d.postId != null || d.postId != undefined) {
+            d.comment = commentsService.addViewProperties(d.comment);
+
+            if (d.commentId !== null && d.commentId != undefined) {
+                var comment = _.where($scope.comments, { Id: d.commentId })[0];
+                if (comment.Comments === null) comment.Comments = [];
+
+                comment.Comments.unshift(d.comment);
+                $scope.$apply();
+
+                $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+            } else {
                 $scope.comments.unshift(d.comment);
                 $scope.$apply();
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-            } else {
-                _.each($scope.comments, function (comment) {
-                    if (comment.Id == d.cmment.ParentCommentId) {
-                        comment.Comments.unshift(d.comment);
-                        $scope.$apply();
-                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        return;
-                    }
-                });
             }
         });
 
         $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
-            postsService.subscribeToPost($scope.post.Id);
+            postsService.subscribeToPost($scope.postid);
         });
 
         $scope.getComments();

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
@@ -45,13 +46,19 @@ namespace Blog.Services.Implementation
 
         public Comment Add(Comment comment)
         {
+            var postId = comment.PostId;
+            if (comment.ParentCommentId != null)
+            {
+                comment.PostId = null;
+            }
+
             var result = _commentsLogic.Add(comment);
-            if (result.Error == null) return result;
+            if (result != null && result.Error != null) throw new Exception(result.Error.Message);
 
             var commentAdded = new CommentAdded
             {
-                CommentId = comment.Id,
-                PostId = comment.PostId,
+                CommentId = comment.ParentCommentId,
+                PostId = postId,
                 Comment = result,
                 ClientFunction = Constants.SocketClientFunctions.CommentAdded.ToString()
             };

@@ -1,9 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using Blog.Common.Contracts;
 using Blog.Services.Helpers.Wcf;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
@@ -29,20 +29,7 @@ namespace Blog.Common.Web.Attributes
                 var model = actionContext.ActionArguments[name];
                 if (model == null) throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
-                int? userIdProperty;
-
-                if (model.GetType() == typeof (User))
-                {
-                    userIdProperty = (int?) GetPropValue(model, "Id");
-                }
-                else
-                {
-                    userIdProperty = GetIdFromUserProperty(model);
-                    if (userIdProperty == null || userIdProperty == 0)
-                    {
-                        userIdProperty = (int?)GetPropValue(model, "UserId");
-                    }
-                }
+                int? userIdProperty = GetUserIdProperty(model);
 
                 if (userIdProperty != null && userIdProperty != 0)
                 {
@@ -68,16 +55,42 @@ namespace Blog.Common.Web.Attributes
             base.OnActionExecuting(actionContext);
         }
 
-        private static int? GetIdFromUserProperty(object src)
+        private static int? GetUserIdProperty(object src)
         {
-            var property = src.GetType().GetProperty("User");
-            if (property == null) return null;
+            var properties = src.GetType().GetProperties();
 
-            var user = property.GetValue(src, null);
-            if (user == null) return null;
+            foreach (var property in properties)
+            {
+                if (property.Name == "User")
+                {
+                    var userValue = GetPropValue(src, "User");
+                    if (userValue == null) return null;
 
-            var userId = GetPropValue(user, "Id");
-            return (int)userId;
+                    var userIdFromObject = GetPropValue(userValue, "Id");
+                    if (userIdFromObject == null) return null;
+                    return (int)userIdFromObject;
+                }
+
+                if (property.Name == "UserId")
+                {
+                    var userIdAsProperty = GetPropValue(src, "UserId");
+                    return (int) userIdAsProperty;
+                }
+
+                var propertyValue = GetPropValue(src, property.Name);
+                if (propertyValue == null 
+                    ||propertyValue is string
+                    || propertyValue.GetType().IsPrimitive
+                    || propertyValue is IEnumerable
+                    || propertyValue.GetType().IsArray) continue;
+
+                var objectClass = GetPropValue(src, property.Name);
+                var recursiveResult = GetUserIdProperty(objectClass);
+
+                return recursiveResult;
+            }
+
+            return null;
         }
 
         private static object GetPropValue(object src, string propName)

@@ -46,12 +46,17 @@
             }
         };
 
-        $scope.createCommentForAdding = function() {
-            return {
-                PostId: $scope.parentpostid,
-                Comment: $scope.comment
-            };
+        $scope.createCommentForAdding = function () {
+            if ($scope.comment.ParentCommentId) {
+                $scope.comment.PostId = $scope.parentpostid;
+                return $scope.comment;
+            }
+            return $scope.comment;
         };
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.comment.User = data;
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
 

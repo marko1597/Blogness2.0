@@ -47,7 +47,7 @@
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.getCommentsByUser();
         });

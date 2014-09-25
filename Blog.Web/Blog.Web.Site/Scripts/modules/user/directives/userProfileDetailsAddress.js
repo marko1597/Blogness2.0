@@ -54,7 +54,7 @@
             }
         };
 
-        $rootScope.$on("viewedUserLoaded", function (ev, data) {
+        $scope.$on("viewedUserLoaded", function (ev, data) {
             $scope.address = data.Address;
             $scope.user = data;
         });

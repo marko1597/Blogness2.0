@@ -44,14 +44,10 @@
             });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+        $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
             $rootScope.$broadcast("viewedUserLoaded", $scope.user);
-        });
-
-        $rootScope.$on("userLoggedIn", function () {
-            $scope.getUserInfo();
         });
 
         $scope.init();
