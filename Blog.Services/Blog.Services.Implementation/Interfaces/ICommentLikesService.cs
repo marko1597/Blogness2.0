@@ -11,6 +11,6 @@ namespace Blog.Services.Implementation.Interfaces
         List<CommentLike> Get(int commentId);
 
         [OperationContract]
-        CommentLike Add(CommentLike commentLike);
+        void Add(CommentLike commentLike);
     }
 }

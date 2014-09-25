@@ -62,11 +62,6 @@ namespace Blog.Web.Api.Controllers
                                    UserId = user.Id
                                };
                 _service.Add(postLike);
-                new PostsHub(_errorSignaler, _httpClientHelper, _configurationHelper).PushPostLikes(new PostLikesUpdate
-                {
-                    PostId = postId,
-                    PostLikes = _service.Get(postId)
-                });
             }
             catch (Exception ex)
             {

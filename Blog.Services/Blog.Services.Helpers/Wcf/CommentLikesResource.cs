@@ -18,11 +18,11 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
-        public CommentLike Add(CommentLike commentLike)
+        public void Add(CommentLike commentLike)
         {
             using (var svc = new ServiceProxyHelper<ICommentLikesService>("CommentLikesService"))
             {
-                return svc.Proxy.Add(commentLike);
+                svc.Proxy.Add(commentLike);
             }
         }
 

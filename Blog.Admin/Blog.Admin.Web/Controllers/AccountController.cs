@@ -2,11 +2,9 @@
 using System.Web;
 using System.Web.Mvc;
 using Blog.Admin.Web.Helpers;
-using Blog.Common.Contracts;
 using Blog.Common.Identity.Models;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
-using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;

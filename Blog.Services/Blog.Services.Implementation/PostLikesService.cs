@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
@@ -28,10 +29,10 @@ namespace Blog.Services.Implementation
             return _postLikesLogic.Get(postId);
         }
 
-        public PostLike Add(PostLike postLike)
+        public void Add(PostLike postLike)
         {
             var result = _postLikesLogic.Add(postLike);
-            if (result.Error == null) return result;
+            if (result != null && result.Error != null) throw new Exception(result.Error.Message);
 
             var postLikes = _postLikesLogic.Get(postLike.PostId);
             var postLikesUpdate = new PostLikesUpdate
@@ -42,8 +43,6 @@ namespace Blog.Services.Implementation
             };
 
             _redisService.Publish(postLikesUpdate);
-
-            return _postLikesLogic.Add(postLike);
         }
     }
 }

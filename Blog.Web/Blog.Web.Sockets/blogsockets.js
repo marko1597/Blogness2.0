@@ -27,7 +27,7 @@ var serverFunctions = {
     },
     
     PublishMessage: function (d) {
-        io.sockets.in(blogChannels.viewPost + d.data.postId).emit(clientFunctions.publishMessage, d.data);
+        io.sockets.emit(clientFunctions.publishMessage, d.data);
         io.sockets.in(blogChannels.adminApp).emit(clientFunctions.publishMessage, d.data);
     },
     
@@ -37,7 +37,7 @@ var serverFunctions = {
                 postId: d.PostId,
                 postLikes: d.PostLikes
             };
-            io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.postLikesUpdate, data);
+            io.sockets.emit(clientFunctions.postLikesUpdate, data);
             io.sockets.in(blogChannels.adminApp).emit(clientFunctions.postLikesUpdate, data);
         }
     },
@@ -49,7 +49,7 @@ var serverFunctions = {
                 commentId: d.CommentId,
                 commentLikes: d.CommentLikes
             };
-            io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentLikesUpdate, data);
+            io.sockets.emit(clientFunctions.commentLikesUpdate, data);
             io.sockets.in(blogChannels.adminApp).emit(clientFunctions.commentLikesUpdate, data);
         }
     },

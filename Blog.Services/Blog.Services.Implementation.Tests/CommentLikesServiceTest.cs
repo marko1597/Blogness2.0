@@ -63,10 +63,8 @@ namespace Blog.Services.Implementation.Tests
             var redisService = new RedisService(new ConfigurationHelper());
 
             var commentLikesService = new CommentLikesService(_commentLikesLogic.Object, _commentsLogic.Object, redisService);
-            var result = commentLikesService.Add(new CommentLike { CommentLikeId = 1, CommentId = 1 });
 
-            Assert.NotNull(result);
-            Assert.IsInstanceOf(typeof(CommentLike), result);
+            Assert.DoesNotThrow(() => commentLikesService.Add(new CommentLike { CommentLikeId = 1, CommentId = 1 }));
         }
 
         [Test]
@@ -84,10 +82,8 @@ namespace Blog.Services.Implementation.Tests
             _redisService.Setup(a => a.Publish(It.IsAny<object>()));
 
             var commentLikesService = new CommentLikesService(_commentLikesLogic.Object, _commentsLogic.Object, _redisService.Object);
-            var result = commentLikesService.Add(new CommentLike {CommentLikeId = 1, CommentId = 1});
-            
-            Assert.NotNull(result);
-            Assert.IsInstanceOf(typeof(CommentLike), result);
+
+            Assert.DoesNotThrow(() => commentLikesService.Add(new CommentLike { CommentLikeId = 1, CommentId = 1 }));
         }
 
         [Test]

@@ -31,10 +31,10 @@ namespace Blog.Services.Implementation
             return _commentLikesLogic.Get(commentId);
         }
 
-        public CommentLike Add(CommentLike commentLike)
+        public void Add(CommentLike commentLike)
         {
             var result = _commentLikesLogic.Add(commentLike);
-            if (result.Error != null) return result;
+            if (result != null && result.Error != null) throw new Exception(result.Error.Message);
 
             var parentComment = _commentsLogic.Get(commentLike.CommentId);
             if (parentComment == null) throw new Exception(string.Format(
@@ -53,8 +53,6 @@ namespace Blog.Services.Implementation
             };
 
             _redisService.Publish(commentLikesUpdate);
-
-            return result;
         }
     }
 }

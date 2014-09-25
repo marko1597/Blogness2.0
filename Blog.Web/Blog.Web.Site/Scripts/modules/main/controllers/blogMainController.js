@@ -28,6 +28,7 @@
             userService.getUserInfo(username).then(function (user) {
                 if (user.Error == null) {
                     $rootScope.$broadcast("loggedInUserInfo", user);
+                    $rootScope.user = user;
                 }
             });
         };
