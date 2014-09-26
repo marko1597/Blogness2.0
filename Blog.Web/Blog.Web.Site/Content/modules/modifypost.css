@@ -25,8 +25,12 @@
         }
 
         #modify-post-main > div.modify-post-message {
-            padding: 10px 20px 10px 10px;
+            padding: 10px;
         }
+
+            #modify-post-main > div.modify-post-message > div {
+                overflow: hidden;
+            }
 
             #modify-post-main > div.modify-post-message textarea {
                 min-height: 150px;

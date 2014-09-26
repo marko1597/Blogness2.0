@@ -285,8 +285,8 @@ ngComments.directive('commentsList', [function () {
 
             if (d.commentId !== null && d.commentId != undefined) {
                 var comment = _.where($scope.comments, { Id: d.commentId })[0];
-
                 if (comment.Comments === null) comment.Comments = [];
+
                 comment.Comments.unshift(d.comment);
                 $scope.$apply();
 
@@ -1625,18 +1625,18 @@ ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$ti
     }
 ]);
 ///#source 1 1 /Scripts/modules/posts/controllers/postsModifyController.js
-ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService",
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "FileUploader", "localStorageService",
     "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService", 
-    function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService,
+    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService, postsService, userService, tagsService,
         errorService, dateHelper, configProvider, authenticationService) {
 
         $scope.isAdding = true;
 
         $scope.existingContents = [];
 
-        $scope.username = null;
+        $scope.username = localStorageService.get("username");
 
-        $scope.authData = null;
+        $scope.authData = localStorageService.get("authorizationData");
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
             window.getDimensionMode() : configProvider.windowDimensions.mode;
@@ -1755,8 +1755,6 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message == undefined || response.Message == null) {
                     if (!isNaN($rootScope.$stateParams.postId)) {
-                        $scope.username = localStorageService.get("username");
-                        $scope.authData = localStorageService.get("authorizationData");
                         $scope.getPost();
                     }
                 } else {
@@ -1767,6 +1765,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
+            $scope.username = $scope.user.UserName;
+            $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
         });
 
         $scope.$on("userLoggedIn", function () {
@@ -1776,8 +1776,6 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.$on("windowSizeChanged", function (e, d) {
             configProvider.setDimensions(d.width, d.height);
-            $scope.dimensionMode = configProvider.windowDimensions.mode;
-
         });
 
         var uploader = $scope.uploader = new FileUploader({
@@ -1794,8 +1792,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
             }
         });
-
-
+        
         uploader.onSuccessItem = function (fileItem, response) {
             fileItem.mediaId = response.MediaId;
             var media = {

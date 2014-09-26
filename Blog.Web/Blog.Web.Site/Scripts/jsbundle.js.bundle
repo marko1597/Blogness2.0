@@ -23,7 +23,6 @@
     <file>/Scripts/bower_components/es5-shim/es5-shim.js</file>
     <file>/Scripts/bower_components/moment/moment.js</file>
     <file>/Scripts/bower_components/offline/offline.min.js</file>
-    <file>/Scripts/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js</file>
     <file>/Scripts/bower_components/snapjs/snap.js</file>
     <file>/Scripts/bower_components/respond/src/respond.js</file>
     <file>/Scripts/bower_components/underscore/underscore.js</file>

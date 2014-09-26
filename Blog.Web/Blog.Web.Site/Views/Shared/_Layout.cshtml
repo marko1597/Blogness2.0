@@ -16,7 +16,6 @@
     <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
     <link href="~/Content/theme/default/blog-bootstrap.css" rel="stylesheet" />
     <!-- #endregion -->
-
     <!-- #region css styles -->
     @if (UseBundle())
     {
@@ -128,7 +127,7 @@
 </head>
 <body ng-controller="blogMainController" window-resize>
     @RenderBody()
-    
+
     <!-- #region offline simulator -->
     @if (IsDebug())
     {
@@ -136,16 +135,14 @@
             <input type="checkbox" id="offline-simulate-check" title="Simulate online/offline states">
         </div>
     }
-    
-    <!-- #endregion -->
 
+    <!-- #endregion -->
     <!-- #region socket.io js script -->
     @if (CheckBlogSocketsAvailability())
     {
         <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
     }
     <!-- #endregion -->
-
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
     {
@@ -168,12 +165,16 @@
         <script src="~/Scripts/bower_components/es5-shim/es5-shim.js"></script>
         <script src="~/Scripts/bower_components/moment/moment.js"></script>
         <script src="~/Scripts/bower_components/offline/offline.min.js"></script>
-        <script src="~/Scripts/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
         <script src="~/Scripts/bower_components/snapjs/snap.js"></script>
         <script src="~/Scripts/bower_components/respond/src/respond.js"></script>
         <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
         <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
         <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
+        
+        if (IsDebug())
+        {
+            <script src="~/Scripts/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
+        }
 
         <!-- twitter bootstrap js -->
         <script src="~/Scripts/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -316,7 +317,6 @@
         <script src="~/Scripts/modules/init.js"></script>
     }
     <!-- #endregion -->
-    
     <!-- #region initializes configProvider in application and triggers events if online/offline-->
     <script>
         $(function () {
@@ -330,7 +330,6 @@
         });
     </script>
     <!-- #endregion -->
-
     @RenderSection("scripts", false)
 </body>
 

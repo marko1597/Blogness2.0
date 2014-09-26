@@ -1,15 +1,15 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "FileUploader", "localStorageService",
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "FileUploader", "localStorageService",
     "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService", 
-    function ($scope, $rootScope, $location, $timeout, FileUploader, localStorageService, postsService, userService, tagsService,
+    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService, postsService, userService, tagsService,
         errorService, dateHelper, configProvider, authenticationService) {
 
         $scope.isAdding = true;
 
         $scope.existingContents = [];
 
-        $scope.username = null;
+        $scope.username = localStorageService.get("username");
 
-        $scope.authData = null;
+        $scope.authData = localStorageService.get("authorizationData");
 
         $scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
             window.getDimensionMode() : configProvider.windowDimensions.mode;
@@ -128,8 +128,6 @@
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message == undefined || response.Message == null) {
                     if (!isNaN($rootScope.$stateParams.postId)) {
-                        $scope.username = localStorageService.get("username");
-                        $scope.authData = localStorageService.get("authorizationData");
                         $scope.getPost();
                     }
                 } else {
@@ -140,6 +138,8 @@
 
         $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
+            $scope.username = $scope.user.UserName;
+            $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
         });
 
         $scope.$on("userLoggedIn", function () {
@@ -149,8 +149,6 @@
 
         $scope.$on("windowSizeChanged", function (e, d) {
             configProvider.setDimensions(d.width, d.height);
-            $scope.dimensionMode = configProvider.windowDimensions.mode;
-
         });
 
         var uploader = $scope.uploader = new FileUploader({
@@ -167,8 +165,7 @@
                 return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
             }
         });
-
-
+        
         uploader.onSuccessItem = function (fileItem, response) {
             fileItem.mediaId = response.MediaId;
             var media = {
