@@ -1,11 +1,17 @@
 ﻿<div class="content-item address">
     <div class="header">
-        <h4>Address</h4>
-        <div class="btn-header right" ng-show="isEditing" ng-click="saveAddress()">
-            <i class="fa fa-save"></i>Save
+        <h5>Address</h5>
+        <div class="btn-header right pull-right" ng-show="isEditing" ng-click="cancelEditAddress()">
+            <i class="fa fa-times"></i>
+            <span class="hidden-xs">Cancel</span>
         </div>
-        <div class="btn-header right" ng-show="!isEditing" ng-class="showButtons()" ng-click="editAddress()">
-            <i class="fa fa-edit"></i>Edit
+        <div class="btn-header right pull-right" ng-show="isEditing" ng-click="saveAddress()">
+            <i class="fa fa-save"></i>
+            <span class="hidden-xs">Save</span>
+        </div>
+        <div class="btn-header right pull-right" ng-show="!isEditing" ng-class="showButtons()" ng-click="editAddress()">
+            <i class="fa fa-edit"></i>
+            <span class="hidden-xs">Edit</span>
         </div>
     </div>
     <form class="user-form" name="user-address-form" ng-submit="submitForm(userAddressForm.$valid)" novalidate>

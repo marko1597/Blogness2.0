@@ -27,7 +27,7 @@
     <file>/Scripts/bower_components/respond/src/respond.js</file>
     <file>/Scripts/bower_components/underscore/underscore.js</file>
     <file>/Scripts/bower_components/stacktrace/stacktrace.js</file>
-    <file>/Scripts/plugins/ckeditor/ckeditor.js</file>
+    <!--<file>/Scripts/plugins/ckeditor/ckeditor.js</file>-->
     
     <file>/Scripts/bower_components/angular/angular.js</file>
     <file>/Scripts/bower_components/angular-animate/angular-animate.js</file>

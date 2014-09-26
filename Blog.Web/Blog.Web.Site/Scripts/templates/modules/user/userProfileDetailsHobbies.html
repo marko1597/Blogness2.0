@@ -1,8 +1,9 @@
 ﻿<div class="content-item hobbies">
     <div class="header">
-        <h4>Hobbies</h4>
-        <div class="btn-header right" ng-show="!isAdding" ng-click="addHobby()" ng-class="showButtons()">
-            <i class="fa fa-plus"></i>Add
+        <h5>Hobbies</h5>
+        <div class="btn-header right pull-right" ng-show="!isAdding" ng-click="addHobby()" ng-class="showButtons()">
+            <i class="fa fa-plus"></i>
+            <span class="hidden-xs">Add</span>
         </div>
     </div>
 
@@ -15,7 +16,7 @@
                 <p class="error-message">{{error.HobbyName}}</p>
             </div>
         </div>
-        <div class="row" ng-show="isAdding">
+        <div class="row animate fade-up" ng-show="isAdding">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
                 <input name="new-hobby" type="text" class="input form-control"
                        ng-class="hasError()" placeholder="Enter hobby" ng-model="newHobby.HobbyName" />

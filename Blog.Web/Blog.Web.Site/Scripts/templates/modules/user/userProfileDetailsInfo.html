@@ -1,11 +1,17 @@
 ﻿<div class="content-item information">
     <div class="header">
-        <h4>Personal Details</h4>
-        <div class="btn-header right" ng-show="isEditing" ng-click="saveDetails()">
-            <i class="fa fa-save"></i>Save
+        <h5>Personal Details</h5>
+        <div class="btn-header right pull-right" ng-show="isEditing" ng-click="cancelEditDetails()">
+            <i class="fa fa-times"></i>
+            <span class="hidden-xs">Cancel</span>
         </div>
-        <div class="btn-header right" ng-show="!isEditing" ng-class="showButtons()" ng-click="editDetails()">
-            <i class="fa fa-edit"></i>Edit
+        <div class="btn-header right pull-right" ng-show="isEditing" ng-click="saveDetails()">
+            <i class="fa fa-save"></i>
+            <span class="hidden-xs">Save</span>
+        </div>
+        <div class="btn-header right pull-right" ng-show="!isEditing" ng-class="showButtons()" ng-click="editDetails()">
+            <i class="fa fa-edit"></i>
+            <span class="hidden-xs">Edit</span>
         </div>
     </div>
     <form class="user-form" name="user-details-form" ng-submit="submitForm(userDetailsForm.$valid)" novalidate>

@@ -9,6 +9,10 @@
             $scope.isEditing = true;
         };
 
+        $scope.cancelEditDetails = function() {
+            $scope.isEditing = false;
+        };
+
         $scope.saveDetails = function () {
             userService.updateUser($scope.user).then(function (response) {
                 if (response.Error == null) {

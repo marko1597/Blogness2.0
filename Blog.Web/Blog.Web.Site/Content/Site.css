@@ -1,7 +1,5 @@
-﻿/*
- * Font Faces   
- * --------------------------------------------------
- */
+﻿/* #region font faces */
+
 @font-face {
     font-family: Bazar;
     src: url('fonts/Bazar.ttf') format('truetype');
@@ -37,41 +35,9 @@
     src: url('fonts/CanterBold3D.otf') format('opentype');
 }
 
-/* -------------------------------------
- * Ng Animations
- * ------------------------------------- */
-@-moz-keyframes scaleUp {
-    from {
-        opacity: 0.3;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        -o-transform: scale(0.8);
-        transform: scale(0.8);
-    }
-}
+/* #endregion */
 
-@-webkit-keyframes scaleUp {
-    from {
-        opacity: 0.3;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        -o-transform: scale(0.8);
-        transform: scale(0.8);
-    }
-}
-
-@keyframes scaleUp {
-    from {
-        opacity: 0.3;
-        -webkit-transform: scale(0.8);
-        -moz-transform: scale(0.8);
-        -ms-transform: scale(0.8);
-        -o-transform: scale(0.8);
-        transform: scale(0.8);
-    }
-}
+/* #region angular animations */
 
 .page-content.ng-enter {
     z-index: 8888;
@@ -87,6 +53,58 @@
     -o-animation-name: bounceInLeft;
     animation-name: bounceInLeft;
 }
+
+.animate {
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -o-animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+    .animate.fade-up {
+        -moz-animation-name: fadeInDown;
+        -o-animation-name: fadeInDown;
+        -webkit-animation-name: fadeInDown;
+        animation-name: fadeInDown;
+    }
+
+        .animate.fade-up.ng-hide {
+            -moz-animation-name: fadeOutUp;
+            -o-animation-name: fadeOutUp;
+            -webkit-animation-name: fadeOutUp;
+            animation-name: fadeOutUp;
+        }
+
+    .animate.fade-right {
+        -moz-animation-name: fadeInRight;
+        -o-animation-name: fadeInRight;
+        -webkit-animation-name: fadeInRight;
+        animation-name: fadeInRight;
+    }
+
+        .animate.fade-right.ng-hide {
+            -moz-animation-name: fadeOutLeft;
+            -o-animation-name: fadeOutLeft;
+            -webkit-animation-name: fadeOutLeft;
+            animation-name: fadeOutLeft;
+        }
+
+    .animate.bounce-up {
+        -moz-animation-name: bounceInUp;
+        -o-animation-name: bounceInUp;
+        -webkit-animation-name: bounceInUp;
+        animation-name: bounceInUp;
+    }
+
+        .animate.bounce-up.ng-hide {
+            -moz-animation-name: bounceInDown;
+            -o-animation-name: bounceInDown;
+            -webkit-animation-name: bounceInDown;
+            animation-name: bounceInDown;
+        }
 
 @-moz-keyframes bounceInLeft {
     0% {
@@ -196,9 +214,10 @@
     }
 }
 
-/* -------------------------------------
- * Isotope styles 
- * ------------------------------------- */
+/* #endregion */
+
+/* #region isotope animations */
+
 .isotope-item {
     z-index: 2;
 }
@@ -210,33 +229,41 @@
 
 .isotope,
 .isotope .isotope-item {
-    -webkit-transition-duration: 0.8s;
+    /*-webkit-transition-duration: 0.8s;
     -moz-transition-duration: 0.8s;
     -o-transition-duration: 0.8s;
-    transition-duration: 0.8s;
+    transition-duration: 0.8s;*/
 }
 
 .isotope {
-    -webkit-transition-property: height, width;
+    /*-webkit-transition-property: height, width;
     -moz-transition-property: height, width;
     -o-transition-property: height, width;
-    transition-property: height, width;
+    transition-property: height, width;*/
 }
 
     .isotope .isotope-item {
-        -webkit-transition-property: -webkit-transform, opacity;
+        /*-webkit-transition-property: -webkit-transform, opacity;
         -moz-transition-property: -moz-transform, opacity;
         -o-transition-property: -o-transform, opacity;
-        transition-property: transform, opacity;
+        transition-property: transform, opacity;*/
+        -moz-animation-duration: 1.5s;
+        -o-animation-duration: 1.5s;
+        -webkit-animation-duration: 1.5s;
+        animation-duration: 1.5s;
+        -moz-animation-name: fadeIn;
+        -o-animation-name: fadeIn;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
     }
 
         .isotope.no-transition,
         .isotope.no-transition .isotope-item,
         .isotope .isotope-item.no-transition {
-            -webkit-transition-duration: 0s;
-            -moz-transition-duration: 0s;
-            -o-transition-duration: 0s;
-            transition-duration: 0s;
+            -webkit-transition-duration: 0;
+            -moz-transition-duration: 0;
+            -o-transition-duration: 0;
+            transition-duration: 0;
         }
 
     .isotope.infinite-scrolling {
@@ -246,17 +273,18 @@
         transition: none;
     }
 
-/* -------------------------------------
- * Videogular overrides 
- * ------------------------------------- */
+/* #endregion */
+
+/* #region videogular styles */
+
 videogular vg-video {
     min-height: 380px;
     max-height: 500px;
 }
+/* #endregion */
 
-/* -------------------------------------
- * CK Editor overrides 
- * ------------------------------------- */
+/* #region ckeditor styles */
+
 #cke_post-message-editor {
     background: none !important;
     padding: 3px 5px 5px 5px !important;
@@ -286,17 +314,19 @@ videogular vg-video {
     background: none !important;
 }
 
-/* -------------------------------------
- * Error page
- * ------------------------------------- */
+/* #endregion */
+
+/* #region error page styles */
+
 #page-not-found > img {
     width: 100%;
     height: auto;
 }
 
-/* -------------------------------------
- * Block UI message base css  
- * ------------------------------------- */
+/* #endregion */
+
+/* #region blockUi styles */
+
 .blockUI.blockMsg {
     margin: 0;
     top: 40%;
@@ -317,9 +347,14 @@ videogular vg-video {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* -------------------------------------
- * Bloggity base css  
- * ------------------------------------- */
+    .blockUI.blockMsg > .alert {
+        margin: 0;
+    }
+
+/* #endregion */
+
+/* #region bloggity specific styles */
+
 .blog-brand-icon {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
     background-size: cover;
@@ -331,9 +366,7 @@ videogular vg-video {
     margin-right: 5px;
 }
 
-
 .content-item {
-    /*border: 1px solid #ddd;*/
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
     -ms-box-shadow: 0 2px 4px #000000;
@@ -381,6 +414,10 @@ videogular vg-video {
     visibility: hidden !important;
 }
 
+/* #endregion */
+
+/* #region base styles */
+
 html,
 body {
     font-family: 'Open Sans', sans-serif;
@@ -404,14 +441,15 @@ textarea {
     max-width: 280px;
 }
 
+/* #endregion */
+
+/* #region validation styles */
+
 .field-error {
     border: 1px solid #d9534f;
     color: #d9534f;
 }
 
-/* -------------------------------------
- * styles for validation helpers   
- * ------------------------------------- */
 .field-validation-error {
     color: #b94a48;
 }
@@ -481,13 +519,9 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.blockUI.blockMsg > .alert {
-    margin: 0;
-}
+/* #endregion */
 
-/* -------------------------------------
- * Bootstrap extensions
- * ------------------------------------- */
+/* #region bootstrap extension/overrides */
 
 /* Off Canvas */
 @media screen and (max-width: 768px) {
@@ -576,9 +610,10 @@ input[type="checkbox"].input-validation-error {
     left: -10px;
 }
 
-/* -------------------------------------
- * Angular Tags Input   
- * ------------------------------------- */
+/* #endregion */
+
+/* #region angular tags-input styles */
+
 tags-input *, *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -716,10 +751,10 @@ tags-input .autocomplete {
             color: black;
             background-color: white;
         }
+/* #endregion */
 
-/* -------------------------------------
- * Angular Carousel
- * ------------------------------------- */
+/* #region angular carousel styles */
+
 .rn-carousel-control {
     background: #56c2e1;
     border: 1px solid #46b3d3;
@@ -728,3 +763,5 @@ tags-input .autocomplete {
     padding: 0 12px;
     color: #fff;
 }
+
+/* #endregion */

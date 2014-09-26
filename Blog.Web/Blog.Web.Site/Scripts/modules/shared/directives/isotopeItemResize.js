@@ -2,6 +2,7 @@
     function ($window, $timeout, $interval) {
         var linkFn = function (scope, elem, attrs) {
             scope.columnCount = 0;
+            scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
 
             scope.applyLayout = function () {
                 $interval(function () {

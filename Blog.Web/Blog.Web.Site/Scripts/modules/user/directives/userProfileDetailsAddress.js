@@ -12,6 +12,10 @@
             $scope.isEditing = true;
         };
 
+        $scope.cancelEditAddress = function () {
+            $scope.isEditing = false;
+        };
+
         $scope.saveAddress = function () {
             userService.updateUserAddress($scope.address).then(function (response) {
                 if (response.Error == null) {

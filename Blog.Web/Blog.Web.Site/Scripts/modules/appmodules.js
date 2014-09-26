@@ -2529,6 +2529,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
     function ($window, $timeout, $interval) {
         var linkFn = function (scope, elem, attrs) {
             scope.columnCount = 0;
+            scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
 
             scope.applyLayout = function () {
                 $interval(function () {
@@ -3442,6 +3443,10 @@ ngUser.directive('userProfileDetailsAddress', [function () {
             $scope.isEditing = true;
         };
 
+        $scope.cancelEditAddress = function () {
+            $scope.isEditing = false;
+        };
+
         $scope.saveAddress = function () {
             userService.updateUserAddress($scope.address).then(function (response) {
                 if (response.Error == null) {
@@ -3913,6 +3918,10 @@ ngUser.directive('userProfileDetailsInfo', [function () {
 
         $scope.editDetails = function () {
             $scope.isEditing = true;
+        };
+
+        $scope.cancelEditDetails = function() {
+            $scope.isEditing = false;
         };
 
         $scope.saveDetails = function () {

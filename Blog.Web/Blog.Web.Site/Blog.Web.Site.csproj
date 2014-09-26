@@ -3013,7 +3013,7 @@
     <Content Include="Scripts\modules\user\user.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="Scripts\modules\posts\directives\postListItem.js" />
     <Content Include="Scripts\modules\posts\directives\postListItemComment.js" />
     <Content Include="Scripts\modules\posts\controllers\postsController.js" />
