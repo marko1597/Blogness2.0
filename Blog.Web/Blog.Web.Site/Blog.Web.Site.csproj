@@ -318,6 +318,8 @@
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\loginform\loginformmodal.css" />
     <Content Include="Content\modules\loginform\registerform.css" />
+    <Content Include="Content\modules\media\mediagroupedlist.css" />
+    <Content Include="Content\modules\media\mediaitem.css" />
     <Content Include="Content\modules\modifypost.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postcontents.css" />
@@ -2175,6 +2177,11 @@
     <Content Include="Scripts\modules\main\config\blogConfig.js" />
     <Content Include="Scripts\modules\main\controllers\blogMainController.js" />
     <Content Include="Scripts\modules\main\directives\windowResize.js" />
+    <Content Include="Scripts\modules\media\directives\mediaGroupedList.js" />
+    <Content Include="Scripts\modules\media\directives\mediaItem.js" />
+    <Content Include="Scripts\modules\media\media.js" />
+    <Content Include="Scripts\modules\media\services\albumService.js" />
+    <Content Include="Scripts\modules\media\services\mediaService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
@@ -3045,6 +3052,9 @@
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\login\loginFormModal.html" />
     <Content Include="Scripts\templates\modules\login\registerForm.html" />
+    <Content Include="Scripts\templates\modules\media\mediaDeleteDialog.html" />
+    <Content Include="Scripts\templates\modules\media\mediaGroupedList.html" />
+    <Content Include="Scripts\templates\modules\media\mediaItem.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />

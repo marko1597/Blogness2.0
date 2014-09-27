@@ -46,6 +46,10 @@
         <link href="~/Content/modules/posts.css" rel="stylesheet" />
         <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
         <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
+        
+        <!-- blog media module styles -->
+        <link href="~/Content/modules/media/mediagroupedlist.css" rel="stylesheet" />
+        <link href="~/Content/modules/media/mediaitem.css" rel="stylesheet" />
 
         <!-- blog socket module styles -->
         <link href="~/Content/modules/sockets/socketdebugger.css" rel="stylesheet" />
@@ -170,7 +174,8 @@
         <script src="~/Scripts/bower_components/respond/src/respond.js"></script>
         <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
         <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
-        
+        <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
+
         if (IsDebug())
         {
             <script src="~/Scripts/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
@@ -260,6 +265,13 @@
         <script src="~/Scripts/modules/login/directives/registerForm.js"></script>
         <script src="~/Scripts/modules/login/directives/loginFormModal.js"></script>
 
+        <!-- blog media module -->
+        <script src="~/Scripts/modules/media/media.js"></script>
+        <script src="~/Scripts/modules/media/services/mediaService.js"></script>
+        <script src="~/Scripts/modules/media/services/albumService.js"></script>
+        <script src="~/Scripts/modules/media/directives/mediaGroupedList.js"></script>
+        <script src="~/Scripts/modules/media/directives/mediaItem.js"></script>
+
         <!-- blog user module -->
         <script src="~/Scripts/modules/user/user.js"></script>
         <script src="~/Scripts/modules/user/controllers/userProfileController.js"></script>
@@ -336,23 +348,39 @@
 </html>
 @functions
 {
+    /// <summary>
+    /// Checks config value [UseBundle] to see if js and css files are going to be bundled
+    /// </summary>
+    /// <returns>True or false</returns>
     public bool UseBundle()
     {
         var configValue = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("UseBundle"));
         return configValue;
     }
 
+    /// <summary>
+    /// Checks config value [IsDbeug] to see if debug is enabled
+    /// </summary>
+    /// <returns>True or false</returns>
     public bool IsDebug()
     {
         var configValue = Convert.ToBoolean(ConfigurationManager.AppSettings.Get("IsDebug"));
         return configValue;
     }
 
+    /// <summary>
+    /// Gets html templates for the app
+    /// </summary>
+    /// <returns>Server side location of the templates</returns>
     public string GetTemplatesPath()
     {
         return GetBlogRoot() + "/scripts/templates/";
     }
 
+    /// <summary>
+    /// Gets the bloggity web api url
+    /// </summary>
+    /// <returns>Url string</returns>
     public string GetBlogApi()
     {
         var sb = new StringBuilder();
@@ -361,6 +389,10 @@
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Gets the bloggity node js app path
+    /// </summary>
+    /// <returns>Url string</returns>
     public string GetBlogSockets()
     {
         var sb = new StringBuilder();
@@ -369,6 +401,10 @@
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Gets the bloggity node js script
+    /// </summary>
+    /// <returns>Js file url</returns>
     public string GetBlogSocketsJs()
     {
         var sb = new StringBuilder();
@@ -378,6 +414,10 @@
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Gets the bloggity web site rool url
+    /// </summary>
+    /// <returns>Url string</returns>
     public string GetBlogRoot()
     {
         var sb = new StringBuilder();

@@ -3,9 +3,7 @@
         <a href="{{post.Url}}">{{post.PostTitle}}</a>
     </div>
     <div class="body">
-        <div class="center-cropped" ng-style="thumbnailUrl">
-            <img ng-src="{{post.PostContents[0].Media.ThumbnailUrl}}" />
-        </div>
+        <div media-item media="post.PostContents[0].Media" data-crop="true" data-mode="thumbnail"></div>
         <div class="details">
             <p>
                 <span>{{post.PostContents.length}} images by</span>

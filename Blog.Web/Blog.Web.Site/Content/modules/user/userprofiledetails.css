@@ -43,30 +43,6 @@
             margin: 10px 0 0;
         }
 
-    .user-profile-details .header {
-        background: #4c4c4c;
-        color: #f8f8f8;
-        position: relative;
-        height: 38px;
-    }
-
-        .user-profile-details .header > h5 {
-            padding: 10px;
-            margin: 0;
-            display: inline-block;
-        }
-
-        .user-profile-details .header > .btn-header {
-            position: inherit;
-            padding: 10px;
-            text-align: center;
-            width: 90px;
-        }
-
-            .user-profile-details .header > .btn-header > i {
-                margin-right: 5px;
-            }
-
     .user-profile-details .body {
         padding: 10px;
     }

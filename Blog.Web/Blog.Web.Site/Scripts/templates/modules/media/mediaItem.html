@@ -1,0 +1,12 @@
+﻿<div class="media-item" ng-switch on="viewMode()">
+    <div ng-switch-when="thumbnail" ng-class="isCropped()" ng-style="getThumbnailUrl()">
+        <img ng-src="{{media.ThumbnailUrl}}" />
+    </div>
+    <div ng-switch-default ng-switch="getContentType(media.MediaType)">
+        <video-player ng-switch-when="video" media="media"></video-player>
+        <img ng-switch-default ng-src="{{media.MediaUrl}}" ng-class="isCropped()" ng-style="getThumbnailUrl()" />
+    </div>
+    <button class="btn btn-danger" ng-show="toggleDelete()" ng-click="deleteMedia()">
+        <i class="fa fa-trash"></i>
+    </button>
+</div>

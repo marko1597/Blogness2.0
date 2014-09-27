@@ -12,6 +12,8 @@
 
     .login-form .header {
         padding: 40px 30px 30px 30px;
+        height: auto;
+        background: transparent;
     }
 
         .login-form .header h1 {

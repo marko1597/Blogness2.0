@@ -475,7 +475,7 @@ ngComments.factory('commentsService', ["$http", "$q", "configProvider", "dateHel
 ///#source 1 1 /Scripts/modules/config/config.js
 var ngConfig = angular.module("ngConfig", []);
 ///#source 1 1 /Scripts/modules/config/provider/configProvider.js
-ngConfig.provider('configProvider', function () {
+ngConfig.provider('configProvider', [function () {
     var windowDimensions = {
         width: 0,
         height: 0,
@@ -521,11 +521,11 @@ ngConfig.provider('configProvider', function () {
                 return defaults;
             },
 
-            getSocketClientFunctions: function() {
+            getSocketClientFunctions: function () {
                 return socketClientFunctions;
             },
 
-            getBlogSocketsAvailability: function() {
+            getBlogSocketsAvailability: function () {
                 return settings.BlogSocketsAvailable;
             },
 
@@ -543,7 +543,7 @@ ngConfig.provider('configProvider', function () {
                 }
             },
 
-            setSocketClientFunctions: function(val) {
+            setSocketClientFunctions: function (val) {
                 socketClientFunctions = val;
             },
 
@@ -555,15 +555,11 @@ ngConfig.provider('configProvider', function () {
                 settings.BlogRoot = val;
             },
 
-            setHubUrl: function (val) {
-                settings.HubUrl = val;
-            },
-
             setBlogSockets: function (val) {
                 settings.BlogSockets = val;
             },
 
-            setBlogSocketsAvailability: function(val) {
+            setBlogSocketsAvailability: function (val) {
                 settings.BlogSocketsAvailable = val;
             },
 
@@ -584,7 +580,7 @@ ngConfig.provider('configProvider', function () {
             windowDimensions: windowDimensions
         };
     }];
-});
+}]);
 ///#source 1 1 /Scripts/modules/error/error.js
 var ngError = angular.module("ngError", ["ngConfig", "ngLogin"]);
 ///#source 1 1 /Scripts/modules/error/controllers/errorPageController.js
@@ -1272,16 +1268,32 @@ ngLogin.factory('loginService', ["$http", "$q", "$window", "configProvider", fun
     };
 }]);
 ///#source 1 1 /Scripts/modules/main/app.js
-var blog = angular.module("blog", ["ngRoute", "ngAnimate", "mgcrea.ngStrap", "snap", "ngLogger",
-    "ngHeader", "ngLogin", "ngPosts", "ngComments", "ngError", "ngNavigation", "ngUser",
-    "ngTags", "ui.router"]);
-    
+var blog = angular.module("blog",
+    [
+        "ngRoute",
+        "ngAnimate",
+        "ngCookies",
+        "mgcrea.ngStrap",
+        "snap",
+        "ngConfig",
+        "ngLogger",
+        "ngHeader",
+        "ngLogin",
+        "ngPosts",
+        "ngComments",
+        "ngError",
+        "ngNavigation",
+        "ngUser",
+        "ngTags",
+        "ui.router"
+    ]);
+
 blog.run([
     '$rootScope', '$state', '$stateParams',
     function ($rootScope, $state, $stateParams) {
-            $rootScope.$state = $state;
-            $rootScope.$stateParams = $stateParams;
-        }
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
 ]);
 ///#source 1 1 /Scripts/modules/main/config/blogConfig.js
 blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
@@ -1421,8 +1433,11 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
     }
 ]);
 ///#source 1 1 /Scripts/modules/main/controllers/blogMainController.js
-blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "localStorageService", "userService", "authenticationService",
-    function ($scope, $location, $rootScope, $log, localStorageService, userService, authenticationService) {
+blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout",
+    "localStorageService", "userService", "authenticationService",
+    function ($scope, $location, $rootScope, $log, $timeout, localStorageService,
+        userService, authenticationService) {
+
         $scope.authData = localStorageService.get('authorizationData');
 
         $scope.username = null;
@@ -1453,8 +1468,11 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
         $scope.getUserInfo = function (username) {
             userService.getUserInfo(username).then(function (user) {
                 if (user.Error == null) {
-                    $rootScope.$broadcast("loggedInUserInfo", user);
                     $rootScope.user = user;
+                    $rootScope.authData = $scope.authData;
+                    $timeout(function () {
+                        $rootScope.$broadcast("loggedInUserInfo", user);
+                    }, 1500);
                 }
             });
         };
@@ -1492,6 +1510,298 @@ blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($
     };
 }]);
 
+///#source 1 1 /Scripts/modules/media/media.js
+var ngMedia = angular.module("ngMedia",
+    [
+        "ngShared",
+        "iso.directives"
+    ]);
+///#source 1 1 /Scripts/modules/media/directives/mediaGroupedList.js
+ngMedia.directive('mediaGroupedList', function () {
+    var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
+        $scope.authData = localStorageService.get("authorizationData");
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            albums: '=',
+            user: '='
+        },
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaGroupedList.html",
+        controller: ctrlFn
+    };
+});
+
+///#source 1 1 /Scripts/modules/media/directives/mediaItem.js
+ngMedia.directive('mediaItem', function () {
+    var ctrlFn = function ($scope, $rootScope, localStorageService, $modal, mediaService, errorService) {
+        var mediaDeleteDialog = $modal({
+            title: 'Delete?',
+            content: "Are you sure you want to delete this item?",
+            scope: $scope,
+            template: window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
+            show: false
+        });
+
+        $scope.username = localStorageService.get("username");
+
+        $scope.deleteButtonVisible = false;
+
+        $scope.viewMode = function () {
+            if ($scope.mode && $scope.mode === 'thumbnail') {
+                return "thumbnail";
+            }
+            return "";
+        };
+
+        $scope.getThumbnailUrl = function () {
+            if ($scope.crop && $scope.crop === 'true') {
+                return {
+                    "background-image": "url(" + $scope.media.ThumbnailUrl + ")"
+                };
+            }
+            return {};
+        };
+
+        $scope.toggleDelete = function () {
+            if ($scope.allowDelete && $scope.allowDelete === 'true' && $rootScope.authData) {
+                if ($scope.user && $scope.username === $scope.user.UserName) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        $scope.deleteMedia = function () {
+            mediaDeleteDialog.$promise.then(mediaDeleteDialog.show);
+        };
+
+        $scope.confirmDelete = function () {
+            mediaDeleteDialog.hide();
+            mediaService.deleteMedia($scope.media.Id).then(function (response) {
+                mediaDeleteDialog.hide();
+
+                if (response.Error != null) {
+                    errorService.displayError(response.Error);
+                    return;
+                }
+
+                $scope.$emit("successDeletingMedia", $scope.media);
+            }, function (err) {
+                $scope.setModelStateErrors(err.ModelState);
+                mediaDeleteDialog.hide();
+            });
+        };
+
+        $scope.getContentType = function (content) {
+            if (content == undefined) return "image";
+
+            var contentType = content.split('/');
+            if (contentType[0] == "video") {
+                return "video";
+            } else {
+                return "image";
+            }
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "localStorageService", "$modal", "mediaService", "errorService"];
+
+    var linkFn = function (scope, elem, attrs) {
+        scope.mode = attrs.mode;
+
+        scope.crop = attrs.crop;
+
+        scope.allowDelete = attrs.allowDelete;
+
+        scope.isCropped = function () {
+            if (attrs.crop && attrs.crop === 'true') {
+                return "center-cropped";
+            }
+            return "";
+        };
+    };
+
+    return {
+        restrict: 'EA',
+        scope: {
+            media: '=',
+            user: '='
+        },
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaItem.html",
+        controller: ctrlFn,
+        link: linkFn
+    };
+});
+
+///#source 1 1 /Scripts/modules/media/services/albumService.js
+ngMedia.factory('albumService', ["$http", "$q", "configProvider", "dateHelper",
+    function ($http, $q, configProvider, dateHelper) {
+        var albumApi = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getAlbumsByUser: function (userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: albumApi + "users/" + userId + "/albums",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+
+                        _.each(a.Media, function (m) {
+                            m.CreatedDateDisplay = dateHelper.getDateDisplay(m.CreatedDate);
+                        });
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getUserDefaultAlbum: function (userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: albumApi + "users/" + userId + "/albums/default",
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addAlbum: function (album) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: albumApi + "album",
+                    method: "POST",
+                    data: album
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            updateAlbum: function (album) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: albumApi + "album",
+                    method: "PUT",
+                    data: album
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            deleteAlbum: function (albumId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: albumApi + "album/" + albumId,
+                    method: "DELETE",
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            }
+        };
+    }
+]);
+///#source 1 1 /Scripts/modules/media/services/mediaService.js
+ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
+    function ($http, $q, configProvider) {
+        var mediaApi = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getMediaByAlbum: function(albumId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: mediaApi + "album/" + albumId + "/media",
+                    method: "GET"
+                }).success(function(response) {
+                    deferred.resolve(response);
+                }).error(function(e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMediaByUser: function(userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: mediaApi + "users/" + userId + "/media",
+                    method: "GET"
+                }).success(function(response) {
+                    deferred.resolve(response);
+                }).error(function(e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addMedia: function(media, albumName, username) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: mediaApi + "media?username=" + username + "&album=" + albumName,
+                    method: "POST",
+                    data: comment
+                }).success(function(response) {
+                    deferred.resolve(response);
+                }).error(function(e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            deleteMedia: function (mediaId) {
+            var deferred = $q.defer();
+
+            $http({
+                url: mediaApi + "media/" + mediaId,
+                method: "DELETE",
+            }).success(function (response) {
+                deferred.resolve(response);
+            }).error(function (error) {
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        }
+        };
+    }
+]);
 ///#source 1 1 /Scripts/modules/messaging/messaging.js
 var ngMessaging = angular.module("ngMessaging", ["ngConfig"]);
 ///#source 1 1 /Scripts/modules/navigation/navigation.js
@@ -1549,11 +1859,11 @@ ngNavigation.directive('navigationMenu', function () {
 var ngPosts = angular.module("ngPosts",
     [
         "ngSanitize",
-        "ngShared",
         "ngComments",
         "ngTags",
         "ngUser",
         "ngError",
+        "ngMedia",
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
@@ -1561,13 +1871,7 @@ var ngPosts = angular.module("ngPosts",
         "ngConfig",
         "LocalStorageModule",
         "angularFileUpload",
-        "angular-carousel",
-        "com.2fdevs.videogular",
-		"com.2fdevs.videogular.plugins.controls",
-		"com.2fdevs.videogular.plugins.overlayplay",
-		"com.2fdevs.videogular.plugins.buffering",
-		"com.2fdevs.videogular.plugins.poster",
-		"com.2fdevs.videogular.plugins.imaads"
+        "angular-carousel"
     ]);
 ///#source 1 1 /Scripts/modules/posts/controllers/postsController.js
 ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
@@ -1625,10 +1929,12 @@ ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$ti
     }
 ]);
 ///#source 1 1 /Scripts/modules/posts/controllers/postsModifyController.js
-ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "FileUploader", "localStorageService",
-    "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService", 
-    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService, postsService, userService, tagsService,
-        errorService, dateHelper, configProvider, authenticationService) {
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
+    "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService",
+    "dateHelper", "configProvider", "authenticationService",
+    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService,
+        postsService, userService, tagsService, errorService, dateHelper, configProvider,
+        authenticationService) {
 
         $scope.isAdding = true;
 
@@ -1749,6 +2055,10 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             } else {
                 $rootScope.$broadcast("launchLoginForm");
             }
+        };
+
+        $scope.cancelPost = function() {
+            $location.path("/");
         };
 
         $scope.init = function () {
@@ -2397,7 +2707,16 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
     }
 ]);
 ///#source 1 1 /Scripts/modules/shared/shared.js
-var ngShared = angular.module("ngShared", ['angularFileUpload']);
+var ngShared = angular.module("ngShared",
+    [
+        'angularFileUpload',
+        "com.2fdevs.videogular",
+		"com.2fdevs.videogular.plugins.controls",
+		"com.2fdevs.videogular.plugins.overlayplay",
+		"com.2fdevs.videogular.plugins.buffering",
+		"com.2fdevs.videogular.plugins.poster",
+		"com.2fdevs.videogular.plugins.imaads"
+    ]);
 ///#source 1 1 /Scripts/modules/shared/directives/ellipsis.js
 ngShared.directive('ellipsis', [function () {
     var filterFn;
@@ -2532,7 +2851,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
             scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
 
             scope.applyLayout = function () {
-                $interval(function () {
+                $timeout(function () {
                     resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
 
@@ -2542,7 +2861,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
                             $(isotopeElements[i]).css({ "margin-right": "0"});
                         }
                     }
-                }, 500, 5);
+                }, 1500);
             };
 
             scope.$on("windowSizeChanged", function (e, d) {
@@ -2633,7 +2952,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
                 }
             };
 
-            resizeItems($window.innerWidth);
+            scope.applyLayout();
         };
 
         return {
@@ -3160,8 +3479,61 @@ ngUser.controller('userProfileFavoritesController', ["$scope", "$stateParams", "
     }
 ]);
 ///#source 1 1 /Scripts/modules/user/controllers/userProfileMediaController.js
-ngUser.controller('userProfileMediaController', ["$scope", "$stateParams", "userService", "blockUiService", "errorService",
-    function ($scope, $stateParams, userService, blockUiService, errorService) {
+ngUser.controller('userProfileMediaController', ["$scope", "$rootScope", "$stateParams", "userService",
+    "albumService", "errorService", "localStorageService", 
+    function ($scope, $rootScope, $stateParams, userService, albumService, errorService, localStorageService) {
+        $scope.user = null;
+
+        $scope.albums = [];
+
+        $scope.isBusy = false;
+
+        $scope.username = ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") ?
+                localStorageService.get("username") : $rootScope.$stateParams.username;
+        
+        $scope.init = function () {
+            if ($rootScope.$stateParams.username != null || $rootScope.$stateParams.username !== "undefined") {
+                $scope.getUserInfo();
+            }
+        };
+
+        $scope.getUserInfo = function () {
+            if ($scope.username) {
+                userService.getUserInfo($scope.username).then(function (response) {
+                    if (response.Error == null) {
+                        $scope.user = response;
+                        $scope.getMediaByUser();
+                    } else {
+                        errorService.displayError(response.Error);
+                    }
+                }, function (err) {
+                    errorService.displayError(err);
+                });
+            } else {
+                errorService.displayError({ Message: "User lookup failed. Sorry. :(" });
+            }
+        };
+
+        $scope.getMediaByUser = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
+                $scope.albums = resp;
+                $scope.isBusy = false;
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.getMediaByUser();
+        });
+
+        $scope.init();
     }
 ]);
 ///#source 1 1 /Scripts/modules/user/controllers/userProfilePostsController.js

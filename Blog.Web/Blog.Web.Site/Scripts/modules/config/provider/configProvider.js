@@ -1,4 +1,4 @@
-﻿ngConfig.provider('configProvider', function () {
+﻿ngConfig.provider('configProvider', [function () {
     var windowDimensions = {
         width: 0,
         height: 0,
@@ -44,11 +44,11 @@
                 return defaults;
             },
 
-            getSocketClientFunctions: function() {
+            getSocketClientFunctions: function () {
                 return socketClientFunctions;
             },
 
-            getBlogSocketsAvailability: function() {
+            getBlogSocketsAvailability: function () {
                 return settings.BlogSocketsAvailable;
             },
 
@@ -66,7 +66,7 @@
                 }
             },
 
-            setSocketClientFunctions: function(val) {
+            setSocketClientFunctions: function (val) {
                 socketClientFunctions = val;
             },
 
@@ -78,15 +78,11 @@
                 settings.BlogRoot = val;
             },
 
-            setHubUrl: function (val) {
-                settings.HubUrl = val;
-            },
-
             setBlogSockets: function (val) {
                 settings.BlogSockets = val;
             },
 
-            setBlogSocketsAvailability: function(val) {
+            setBlogSocketsAvailability: function (val) {
                 settings.BlogSocketsAvailable = val;
             },
 
@@ -107,4 +103,4 @@
             windowDimensions: windowDimensions
         };
     }];
-});
+}]);

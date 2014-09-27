@@ -1,0 +1,24 @@
+﻿<div id="media-grouped-list">
+    <div class="media-group" ng-repeat="album in albums">
+        <div class="header">
+            <h5>{{album.AlbumName}}</h5>
+            <div class="btn-header right pull-right">
+                {{album.CreatedDateDisplay}}
+            </div>
+            <div class="btn-header right pull-right" ng-show="album.IsUserDefault">
+                Default Album
+            </div>
+        </div>
+        <div class="body">
+            <ul isotope-container isotope-item-resize reapply-layout-only="false"
+                resize-large="24%" resize-medium="48%" resize-small="96%">
+                <li ng-repeat="media in album.Media" isotope-item class="media-item-container">
+                    <div media-item media="media" user="user" data-mode="thumbnail" data-allow-delete="true"></div>
+                    <p class="details">
+                        Uploaded on {{media.CreatedDateDisplay}}
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,8 @@
-﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "localStorageService", "userService", "authenticationService",
-    function ($scope, $location, $rootScope, $log, localStorageService, userService, authenticationService) {
+﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout",
+    "localStorageService", "userService", "authenticationService",
+    function ($scope, $location, $rootScope, $log, $timeout, localStorageService,
+        userService, authenticationService) {
+
         $scope.authData = localStorageService.get('authorizationData');
 
         $scope.username = null;
@@ -30,8 +33,11 @@
         $scope.getUserInfo = function (username) {
             userService.getUserInfo(username).then(function (user) {
                 if (user.Error == null) {
-                    $rootScope.$broadcast("loggedInUserInfo", user);
                     $rootScope.user = user;
+                    $rootScope.authData = $scope.authData;
+                    $timeout(function () {
+                        $rootScope.$broadcast("loggedInUserInfo", user);
+                    }, 1500);
                 }
             });
         };

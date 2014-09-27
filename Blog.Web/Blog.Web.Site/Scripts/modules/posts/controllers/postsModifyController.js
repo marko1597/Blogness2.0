@@ -1,7 +1,9 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "FileUploader", "localStorageService",
-    "postsService", "userService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService", 
-    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService, postsService, userService, tagsService,
-        errorService, dateHelper, configProvider, authenticationService) {
+﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
+    "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService",
+    "dateHelper", "configProvider", "authenticationService",
+    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService,
+        postsService, userService, tagsService, errorService, dateHelper, configProvider,
+        authenticationService) {
 
         $scope.isAdding = true;
 
@@ -122,6 +124,10 @@
             } else {
                 $rootScope.$broadcast("launchLoginForm");
             }
+        };
+
+        $scope.cancelPost = function() {
+            $location.path("/");
         };
 
         $scope.init = function () {

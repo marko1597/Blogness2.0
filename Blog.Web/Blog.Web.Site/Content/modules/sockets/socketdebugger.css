@@ -9,25 +9,7 @@
     background: #eee;
     border: 1px solid #999;
     z-index: 10;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-    -o-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    -o-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-timing-function: ease-in-out;
-    -moz-animation-timing-function: ease-in-out;
-    -o-animation-timing-function: ease-in-out;
-    animation-timing-function: ease-in-out;
 }
-
-    #socket-debugger.ng-hide {
-        -webkit-animation-name: rotateOutUpRight;
-        -moz-animation-name: rotateOutUpRight;
-        -o-animation-name: rotateOutUpRight;
-        animation-name: rotateOutUpRight;
-    }
 
     #socket-debugger > div {
         background: #fff;
@@ -39,6 +21,7 @@
         #socket-debugger > div > p {
             font-family: inherit;
             color: #333;
+            -ms-word-wrap: break-word;
             word-wrap: break-word;
         }
 
@@ -46,93 +29,3 @@
                 font-family: Consolas;
                 width: 100%;
             }
-
-@-webkit-keyframes rotateOutUpRight {
-    0% {
-        -webkit-transform-origin: right bottom;
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -webkit-transform: rotate(0);
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        transform: rotate(0);
-        opacity: 1;
-    }
-
-    100% {
-        -webkit-transform-origin: right bottom;
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg);
-        opacity: 0;
-    }
-}
-
-@-moz-keyframes rotateOutUpRight {
-    0% {
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        -webkit-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-        opacity: 1;
-    }
-
-    100% {
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        -webkit-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-        transform: rotate(90deg);
-        opacity: 0;
-    }
-}
-
-@keyframes rotateOutUpRight {
-    0% {
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        -webkit-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -moz-transform: rotate(0);
-        -ms-transform: rotate(0);
-        -o-transform: rotate(0);
-        -webkit-transform: rotate(0);
-        transform: rotate(0);
-        opacity: 1;
-    }
-
-    100% {
-        -moz-transform-origin: right bottom;
-        -ms-transform-origin: right bottom;
-        -o-transform-origin: right bottom;
-        -webkit-transform-origin: right bottom;
-        transform-origin: right bottom;
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        -webkit-transform: rotate(90deg);
-        transform: rotate(90deg);
-        opacity: 0;
-    }
-}

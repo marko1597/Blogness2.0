@@ -40,6 +40,11 @@
     <file>/Scripts/modules/main/config/blogConfig.js</file>
     <file>/Scripts/modules/main/controllers/blogMainController.js</file>
     <file>/Scripts/modules/main/directives/windowResize.js</file>
+    <file>/Scripts/modules/media/media.js</file>
+    <file>/Scripts/modules/media/directives/mediaGroupedList.js</file>
+    <file>/Scripts/modules/media/directives/mediaItem.js</file>
+    <file>/Scripts/modules/media/services/albumService.js</file>
+    <file>/Scripts/modules/media/services/mediaService.js</file>
     <file>/Scripts/modules/messaging/messaging.js</file>
     <file>/Scripts/modules/navigation/navigation.js</file>
     <file>/Scripts/modules/navigation/directives/navigationMenu.js</file>

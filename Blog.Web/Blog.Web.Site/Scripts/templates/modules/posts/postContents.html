@@ -2,9 +2,7 @@
     <ul rn-carousel rn-carousel-buffered rn-carousel-indicator rn-carousel-control class="my-slider standard ng-cloak">
         <li class="post-item-content" ng-repeat="content in contents">
             <p>{{content.PostContentTitle}}</p>
-            <div class="content-image">
-                <img ng-src="{{content.Media.ThumbnailUrl}}" />
-            </div>
+            <div media-item media="content.Media" data-mode="thumbnail"></div>
             <p>{{content.PostContentText}}</p>
         </li>
     </ul>

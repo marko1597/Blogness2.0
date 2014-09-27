@@ -31,13 +31,7 @@
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">
-                    <div class="content-image" ng-switch="getContentType(content.Media.MediaType)">
-                        <video-player ng-switch-when="video" media="content.Media"></video-player>
-                        <!--<video ng-switch-when="video">
-                            <source src="{{content.Media.MediaUrl}}" type="{{content.Media.MediaType}}">
-                        </video>-->
-                        <img ng-switch-default ng-src="{{content.Media.MediaUrl}}" />
-                    </div>
+                    <div media-item media="content.Media"></div>
                     <div class="captions">
                         <p>{{content.PostContentTitle}}</p>
                         <p>{{content.PostContentText}}</p>

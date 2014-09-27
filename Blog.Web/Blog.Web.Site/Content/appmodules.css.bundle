@@ -28,6 +28,8 @@
     <file>/Content/modules/loginform/loginformmodal.css</file>
     <file>/Content/modules/loginform/registerform.css</file>
     <file>/Content/modules/navigation/navigationmenu.css</file>
+    <file>/Content/modules/media/mediagroupedlist.css</file>
+    <file>/Content/modules/media/mediaitem.css</file>
     <file>/Content/modules/posts/postcontents.css</file>
     <file>/Content/modules/posts/postlikes.css</file>
     <file>/Content/modules/posts/postlistitem.css</file>
