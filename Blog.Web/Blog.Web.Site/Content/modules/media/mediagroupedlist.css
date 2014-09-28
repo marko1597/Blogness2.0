@@ -1,34 +1,8 @@
-﻿#media-grouped-list > .media-group > .body {
-    background: #f8f8f8;
-    margin-bottom: 15px;
+﻿#media-grouped-list > .album-group.new:hover {
+    opacity: 0.7;
+    cursor: pointer;    
 }
 
-    #media-grouped-list > .media-group > .body > ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-        #media-grouped-list > .media-group > .body > ul > .media-item-container {
-            background: rgb(238, 238, 238);
-            margin: 5px;
-        }
-
-            #media-grouped-list > .media-group > .body > ul > .media-item-container > .details {
-                background: #fff;
-                border-left: 1px solid rgb(221, 221, 221);
-                border-right: 1px solid rgb(221, 221, 221);
-                border-bottom: 1px solid rgb(221, 221, 221);
-                padding: 10px;
-                overflow: hidden;
-            }
-
-@media(max-width: 767px) {
-    #media-grouped-list > .media-group > .body > ul > .media-item-container > .details > .btn {
-        width: 100%;
-    }
-
-        #media-grouped-list > .media-group > .body > ul > .media-item-container > .details > .btn > span > i {
-            margin-right: 5px;
-        }
+#media-grouped-list > .album-group.new i {
+    margin-right: 5px;
 }

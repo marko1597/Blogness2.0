@@ -1,6 +1,22 @@
 ﻿ngMedia.directive('mediaGroupedList', function () {
     var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
-        $scope.authData = localStorageService.get("authorizationData");
+        $scope.isAdding = false;
+
+        $scope.addAlbum = function () {
+            var newAlbum = {
+                AlbumName: '',
+                IsNew: true,
+                IsEditing: true
+            };
+            $scope.albums.push(newAlbum);
+            $scope.isAdding = true;
+        };
+
+        $scope.$on('cancelledAddingOfAlbum', function (ev, data) {
+            var index = $scope.albums.indexOf(data);
+            $scope.albums.splice(index, 1);
+            $scope.isAdding = false;
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
 

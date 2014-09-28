@@ -7,7 +7,7 @@
         max-width: 100%;
         width: 100%;
         height: auto;
-        border-bottom: 1px solid #ddd;
+        border: 1px solid #ddd;
     }
 
     .media-item .btn-danger {

@@ -47,9 +47,11 @@
             });
         };
 
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.getCommentsByUser();
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.getCommentsByUser();
+            }
         });
 
         $scope.init();

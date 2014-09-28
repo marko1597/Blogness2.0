@@ -145,6 +145,7 @@ ngComments.directive('commentsAddNew', [function () {
         };
 
         $scope.hasError = false;
+
         $scope.commentMessageStyle = function() {
             if ($scope.hasError) {
                 return errorService.highlightField();
@@ -191,8 +192,10 @@ ngComments.directive('commentsAddNew', [function () {
             return $scope.comment;
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.comment.User = data;
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.comment.User = $rootScope.user;
+            }
         });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
@@ -1516,10 +1519,70 @@ var ngMedia = angular.module("ngMedia",
         "ngShared",
         "iso.directives"
     ]);
+///#source 1 1 /Scripts/modules/media/directives/albumGroup.js
+ngMedia.directive('albumGroup', function () {
+    var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
+        $scope.isExpanded = true;
+
+        $scope.newAlbumName = '';
+        
+        $scope.toggleExpandClass = function() {
+            if ($scope.isExpanded) {
+                return "fa-minus";
+            }
+            return "fa-plus";
+        };
+
+        $scope.toggleExpanded = function() {
+            $scope.isExpanded = !$scope.isExpanded;
+        };
+
+        $scope.editAlbum = function() {
+            $scope.album.IsEditing = true;
+        };
+
+        $scope.cancelEditAlbum = function () {
+            if ($scope.album.IsNew) {
+                $scope.$emit('cancelledAddingOfAlbum', $scope.album);
+                $scope.album.IsEditing = false;
+            }
+            $scope.album.IsEditing = false;
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            album: '=',
+            user: '='
+        },
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/albumGroup.html",
+        controller: ctrlFn
+    };
+});
+
 ///#source 1 1 /Scripts/modules/media/directives/mediaGroupedList.js
 ngMedia.directive('mediaGroupedList', function () {
     var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
-        $scope.authData = localStorageService.get("authorizationData");
+        $scope.isAdding = false;
+
+        $scope.addAlbum = function () {
+            var newAlbum = {
+                AlbumName: '',
+                IsNew: true,
+                IsEditing: true
+            };
+            $scope.albums.push(newAlbum);
+            $scope.isAdding = true;
+        };
+
+        $scope.$on('cancelledAddingOfAlbum', function (ev, data) {
+            var index = $scope.albums.indexOf(data);
+            $scope.albums.splice(index, 1);
+            $scope.isAdding = false;
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
 
@@ -1654,6 +1717,8 @@ ngMedia.factory('albumService', ["$http", "$q", "configProvider", "dateHelper",
                 }).success(function (response) {
                     _.each(response, function (a) {
                         a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                        a.IsNew = false;
+                        a.IsEditing = false;
 
                         _.each(a.Media, function (m) {
                             m.CreatedDateDisplay = dateHelper.getDateDisplay(m.CreatedDate);
@@ -1835,11 +1900,13 @@ ngNavigation.directive('navigationMenu', function () {
             $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.user.FullName = data.FirstName + " " + data.LastName;
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
         });
-        
+
         $rootScope.$on("userLoggedIn", function () {
             $scope.authData = localStorageService.get("authorizationData");
         });
@@ -2072,9 +2139,9 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 }
             });
         };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
+        
+        $rootScope.$watch('user', function () {
+            $scope.user = $rootScope.user;
             $scope.username = $scope.user.UserName;
             $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
         });
@@ -2255,6 +2322,11 @@ ngPosts.directive('postLikes', [function () {
         
         $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
+            $scope.isUserLiked();
+        });
+
+        $rootScope.$watch('user', function () {
+            $scope.user = $rootScope.user;
             $scope.isUserLiked();
         });
 
@@ -3409,9 +3481,11 @@ ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$st
             });
         };
 
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.getCommentsByUser();
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.getCommentsByUser();
+            }
         });
 
         $scope.init();
@@ -3463,11 +3537,13 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
                 errorService.displayErrorRedirect(err);
             });
         };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-            $rootScope.$broadcast("viewedUserLoaded", $scope.user);
+        
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+                $scope.$broadcast("viewedUserLoaded", $scope.user);
+            }
         });
 
         $scope.init();
@@ -3528,9 +3604,11 @@ ngUser.controller('userProfileMediaController', ["$scope", "$rootScope", "$state
             });
         };
 
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.getMediaByUser();
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.getMediaByUser();
+            }
         });
 
         $scope.init();
@@ -3557,11 +3635,13 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
 
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.getPostsByUser();
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.getPostsByUser();
+            }
         });
-
+        
         $scope.getUserInfo = function () {
             if ($scope.isBusy) {
                 return;
@@ -3745,12 +3825,12 @@ ngUser.directive('userImage', [function () {
 
 ///#source 1 1 /Scripts/modules/user/directives/userPostItem.js
 ngUser.directive('userPostItem', [function () {
-    var ctrlFn = function ($scope, $location, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
         $scope.post = $scope.data.Post;
 
-        $scope.user = $scope.data.Post.User;
+        $scope.user = $scope.data.User;
 
-        $scope.username = $scope.user.Username;
+        $scope.username = $scope.user.UserName;
 
         $scope.loggedInUsername = localStorageService.get("username");
 
@@ -3761,7 +3841,7 @@ ngUser.directive('userPostItem', [function () {
         };
 
         $scope.isEditable = function() {
-            if (($scope.user != null || $scope.user != undefined) && $scope.username == $scope.loggedInUsername) {
+            if (($scope.user != null || $scope.user != undefined) && $scope.username === $scope.loggedInUsername) {
                 return true;
             }
             return false;
@@ -3770,8 +3850,14 @@ ngUser.directive('userPostItem', [function () {
         $scope.editPost = function () {
             $location.path("/post/edit/" + $scope.post.Id);
         };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.loggedInUsername = $rootScope.user.UserName;
+            }
+        });
     };
-    ctrlFn.$inject = ["$scope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
 
     return {
         restrict: 'EA',

@@ -43,11 +43,13 @@
                 errorService.displayErrorRedirect(err);
             });
         };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-            $rootScope.$broadcast("viewedUserLoaded", $scope.user);
+        
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
+                $scope.$broadcast("viewedUserLoaded", $scope.user);
+            }
         });
 
         $scope.init();

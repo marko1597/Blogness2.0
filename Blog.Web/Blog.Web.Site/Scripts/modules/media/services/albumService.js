@@ -14,6 +14,8 @@
                 }).success(function (response) {
                     _.each(response, function (a) {
                         a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                        a.IsNew = false;
+                        a.IsEditing = false;
 
                         _.each(a.Media, function (m) {
                             m.CreatedDateDisplay = dateHelper.getDateDisplay(m.CreatedDate);

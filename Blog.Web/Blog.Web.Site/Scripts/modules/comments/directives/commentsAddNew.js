@@ -8,6 +8,7 @@
         };
 
         $scope.hasError = false;
+
         $scope.commentMessageStyle = function() {
             if ($scope.hasError) {
                 return errorService.highlightField();
@@ -54,8 +55,10 @@
             return $scope.comment;
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.comment.User = data;
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.comment.User = $rootScope.user;
+            }
         });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];

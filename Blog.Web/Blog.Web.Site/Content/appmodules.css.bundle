@@ -12,34 +12,47 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Content/Site.css</file>
+    <file>/Content/site.css</file>
     <file>/Content/modules/accountpage.css</file>
     <file>/Content/modules/errorpage.css</file>
     <file>/Content/modules/modifypost.css</file>
     <file>/Content/modules/posts.css</file>
     <file>/Content/modules/viewpost.css</file>
+    
     <file>/Content/modules/comments/commentitem.css</file>
     <file>/Content/modules/comments/commentsaddnew.css</file>
     <file>/Content/modules/comments/commentscontainer.css</file>
     <file>/Content/modules/comments/commentslist.css</file>
+    
     <file>/Content/modules/error/errorDisplay.css</file>
+    
     <file>/Content/modules/header/headermenu.css</file>
+    
     <file>/Content/modules/loginform/loginform.css</file>
     <file>/Content/modules/loginform/loginformmodal.css</file>
     <file>/Content/modules/loginform/registerform.css</file>
+    
     <file>/Content/modules/navigation/navigationmenu.css</file>
+    
     <file>/Content/modules/media/mediagroupedlist.css</file>
+    <file>/Content/modules/media/albumgroup.css</file>
     <file>/Content/modules/media/mediaitem.css</file>
+    
     <file>/Content/modules/posts/postcontents.css</file>
     <file>/Content/modules/posts/postlikes.css</file>
+    
     <file>/Content/modules/posts/postlistitem.css</file>
     <file>/Content/modules/posts/postlistitemcomment.css</file>
     <file>/Content/modules/posts/postrelateditem.css</file>
     <file>/Content/modules/posts/postrelateditems.css</file>
+    
     <file>/Content/modules/shared/fileupload.css</file>
     <file>/Content/modules/shared/fileuploaditem.css</file>
+    
     <file>/Content/modules/sockets/socketdebugger.css</file>
+    
     <file>/Content/modules/tags/tagitem.css</file>
+    
     <file>/Content/modules/user/usercommentitem.css</file>
     <file>/Content/modules/user/userimage.css</file>
     <file>/Content/modules/user/userpostitem.css</file>

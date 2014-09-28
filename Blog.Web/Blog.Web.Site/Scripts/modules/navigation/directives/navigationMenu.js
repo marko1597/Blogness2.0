@@ -26,11 +26,13 @@
             $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
-        $rootScope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.user.FullName = data.FirstName + " " + data.LastName;
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
         });
-        
+
         $rootScope.$on("userLoggedIn", function () {
             $scope.authData = localStorageService.get("authorizationData");
         });

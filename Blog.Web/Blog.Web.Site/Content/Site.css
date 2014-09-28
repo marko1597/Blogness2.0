@@ -120,6 +120,20 @@
             animation-name: rotateOutUpRight;
         }
 
+    .animate.flip-x {
+        -moz-animation-name: flipInX;
+        -o-animation-name: flipInX;
+        -webkit-animation-name: flipInX;
+        animation-name: flipInX;
+    }
+
+        .animate.flip-x.ng-hide {
+            -moz-animation-name: flipOutX;
+            -o-animation-name: flipOutX;
+            -webkit-animation-name: flipOutX;
+            animation-name: flipOutX;
+        }
+
 @-moz-keyframes bounceInLeft {
     0% {
         opacity: 0;
@@ -419,15 +433,16 @@ videogular vg-video {
         .header > .btn-header.left {
             border-right: 1px solid #ddd;
             margin-right: 5px;
+            display: inline-block;
         }
 
         .header > .btn-header.right {
             border-left: 1px solid #ddd;
         }
 
-        .header > .btn-header > i {
-            margin-right: 5px;
-        }
+            .header > .btn-header.right > i {
+                margin-right: 5px;
+            }
 
 .center-cropped {
     float: left;

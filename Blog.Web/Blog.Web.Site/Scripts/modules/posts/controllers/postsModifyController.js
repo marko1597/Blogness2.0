@@ -141,9 +141,9 @@
                 }
             });
         };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
+        
+        $rootScope.$watch('user', function () {
+            $scope.user = $rootScope.user;
             $scope.username = $scope.user.UserName;
             $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
         });

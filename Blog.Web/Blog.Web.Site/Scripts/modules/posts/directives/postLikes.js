@@ -32,6 +32,11 @@
             $scope.isUserLiked();
         });
 
+        $rootScope.$watch('user', function () {
+            $scope.user = $rootScope.user;
+            $scope.isUserLiked();
+        });
+
         $scope.$on("viewedPostLoaded", function (e, d) {
             $scope.postId = d.PostId;
             $scope.postLikes = d.PostLikes;
