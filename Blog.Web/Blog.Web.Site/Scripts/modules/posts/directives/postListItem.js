@@ -1,9 +1,14 @@
 ﻿ngPosts.directive('postListItem', [function () {
     var ctrlFn = function ($scope, $location, localStorageService) {
+        
         $scope.post = $scope.data.Post;
+
         $scope.user = $scope.data.Post.User;
+
         $scope.username = localStorageService.get("username");
+
         $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
+
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
         
         $scope.getCommentPopover = function(commentId) {

@@ -21,8 +21,13 @@
 
         $scope.getThumbnailUrl = function () {
             if ($scope.crop && $scope.crop === 'true') {
+                if ($scope.media) {
+                    return {
+                        "background-image": "url(" + $scope.media.ThumbnailUrl + ")"
+                    };
+                }
                 return {
-                    "background-image": "url(" + $scope.media.ThumbnailUrl + ")"
+                    "background-image": "url(/content/images/warning.png)"
                 };
             }
             return {};

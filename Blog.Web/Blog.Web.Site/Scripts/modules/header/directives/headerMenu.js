@@ -1,6 +1,7 @@
 ﻿ngHeader.directive('headerMenu', function () {
     var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, $window, configProvider, authenticationService) {
         $scope.userLoggedIn = false;
+
         $scope.toggleClass = "nav-close";
 
         $scope.goAddNewPost = function () {

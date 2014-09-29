@@ -646,6 +646,10 @@ input[type="checkbox"].input-validation-error {
     display: inline-block;
     position: absolute;
     top: 15px;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
 }
 
     .navbar > .navbar-header > .navmenu-toggle > span {
@@ -658,18 +662,10 @@ input[type="checkbox"].input-validation-error {
     }
 
 .navbar > .navbar-header > .nav-open {
-    -moz-transition: 0.2s linear;
-    -o-transition: 0.2s linear;
-    -webkit-transition: 0.2s linear;
-    transition: 0.2s linear;
     left: -15px;
 }
 
 .navbar > .navbar-header > .nav-close {
-    -moz-transition: 0.2s linear;
-    -o-transition: 0.2s linear;
-    -webkit-transition: 0.2s linear;
-    transition: 0.2s linear;
     left: -10px;
 }
 
@@ -1587,8 +1583,8 @@ nav.navigation-menu {
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-            nav.navigation-menu ul li a > img {
-                width: 32px;
+            nav.navigation-menu ul li a > i {
+                font-size: 1.5em;
                 margin-right: 10px;
             }
 
@@ -1623,6 +1619,14 @@ nav.navigation-menu {
 .album-group {
     margin-bottom: 15px;
 }
+
+    .album-group > .header > input[type=text] {
+        min-width: 250px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin-right: 10px;
+    }
 
     .album-group > .header > .btn-header.right > i {
         margin-right: 0;

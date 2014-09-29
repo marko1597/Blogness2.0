@@ -4,11 +4,11 @@ window.blogInit =
 {
     start: function () {
         var navigationItems = [
-            { text: "Home", icon: window.blogConfiguration.blogRoot + "/content/images/nav-home.png", href: "/#/" },
-            { text: "People", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/#/user" },
-            { text: "Friends", icon: window.blogConfiguration.blogRoot + "/content/images/nav-friends.png", href: "/#/friends" },
-            { text: "Groups", icon: window.blogConfiguration.blogRoot + "/content/images/nav-groups.png", href: "/#/groups" },
-            { text: "Events", icon: window.blogConfiguration.blogRoot + "/content/images/nav-events.png", href: "/#/events" }
+            { text: "Home", icon: "fa-home", href: "/#/" },
+            { text: "People", icon: "fa-user", href: "/#/user" },
+            { text: "Friends", icon: "fa-comments", href: "/#/friends" },
+            { text: "Groups", icon: "fa-users", href: "/#/groups" },
+            { text: "Events", icon: "fa-calendar", href: "/#/events" }
         ];
 
         var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");

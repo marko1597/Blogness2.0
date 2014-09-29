@@ -4,6 +4,7 @@
         "ngSanitize",
         "ngShared",
         "ngComments",
+        "ngPosts",
         "ngLogin",
         "ngConfig",
         "angularFileUpload"

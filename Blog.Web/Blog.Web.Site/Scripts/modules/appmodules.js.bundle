@@ -17,7 +17,6 @@
     <file>/Scripts/modules/comments/directives/commentsAddNew.js</file>
     <file>/Scripts/modules/comments/directives/commentsContainer.js</file>
     <file>/Scripts/modules/comments/directives/commentsList.js</file>
-    <file>/Scripts/modules/comments/services/commentsHubService.js</file>
     <file>/Scripts/modules/comments/services/commentsService.js</file>
     
     <file>/Scripts/modules/config/config.js</file>
@@ -70,7 +69,6 @@
     <file>/Scripts/modules/posts/directives/postListItemComment.js</file>
     <file>/Scripts/modules/posts/directives/postRelatedItem.js</file>
     <file>/Scripts/modules/posts/directives/postRelatedItems.js</file>
-    <file>/Scripts/modules/posts/services/postsHubService.js</file>
     <file>/Scripts/modules/posts/services/postsService.js</file>
     
     <file>/Scripts/modules/shared/shared.js</file>
@@ -103,7 +101,6 @@
     <file>/Scripts/modules/user/controllers/userProfilePostsController.js</file>
     <file>/Scripts/modules/user/directives/userCommentItem.js</file>
     <file>/Scripts/modules/user/directives/userImage.js</file>
-    <file>/Scripts/modules/user/directives/userPostItem.js</file>
     <file>/Scripts/modules/user/directives/userProfileDetails.js</file>
     <file>/Scripts/modules/user/directives/userProfileDetailsAddress.js</file>
     <file>/Scripts/modules/user/directives/userProfileDetailsEducation.js</file>

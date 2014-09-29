@@ -2,6 +2,14 @@
     margin-bottom: 15px;
 }
 
+    .album-group > .header > input[type=text] {
+        min-width: 250px;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        margin-right: 10px;
+    }
+
     .album-group > .header > .btn-header.right > i {
         margin-right: 0;
     }

@@ -1,7 +1,7 @@
-﻿<nav class="navigation-menu navigation-effect" id="navigation-menu">
+﻿<nav class="navigation-menu" id="navigation-menu">
     <div class="user-info">
         <div ng-show="isLoggedIn()">
-            <h4 class="icon icon-lab" ng-show="isLoggedIn()">
+            <h4 class="icon" ng-show="isLoggedIn()">
                 <a href="/#/user" ng-click="toggleNavigation()">{{user.FullName}}</a>
             </h4>
             <a ng-click="logout()">
@@ -15,8 +15,8 @@
     </div>
     <ul>
         <li ng-repeat="navigationItem in navigationItems">
-            <a class="icon icon-data" href="{{navigationItem.href}}" ng-click="toggleNavigation()">
-                <img ng-src="{{navigationItem.icon}}" />
+            <a class="icon" href="{{navigationItem.href}}" ng-click="toggleNavigation()">
+                <i class="fa" ng-class="navigationItem.icon"></i>
                 {{navigationItem.text}}
             </a>
         </li>

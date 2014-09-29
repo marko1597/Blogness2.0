@@ -1,0 +1,46 @@
+﻿<div class="album-group">
+    <div class="header">
+        <div class="btn-header left" ng-click="toggleExpanded()">
+            <i class="fa" ng-class="toggleExpandClass()"></i>
+        </div>
+
+        <h5 ng-show="!album.IsEditing">{{album.AlbumName}}</h5>
+        <input type="text" ng-model="newAlbumName" ng-show="album.IsEditing"
+               placeholder="Enter new album name here..." />
+
+        <label class="label label-primary hidden-xs">{{album.CreatedDateDisplay}}</label>
+        <label class="label label-info hidden-xs" ng-show="album.IsUserDefault">Default Album</label>
+        
+        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="cancelEditAlbum()"
+             data-placement="left" data-type="info" data-trigger="hover" data-title="Cancel editing" bs-tooltip="tooltip">
+            <i class="fa fa-times"></i>
+        </div>
+        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="cancelEditAlbum()"
+             data-placement="left" data-type="info" data-trigger="hover" data-title="Save changes" bs-tooltip="tooltip">
+            <i class="fa fa-save"></i>
+        </div>
+        <div class="btn-header right pull-right" ng-show="!album.IsEditing" ng-click="editAlbum()"
+             data-placement="left" data-type="info" data-trigger="hover" data-title="Edit name of this album" bs-tooltip="tooltip">
+            <i class="fa fa-edit"></i>
+        </div>
+        <div class="btn-header right pull-right" ng-show="!album.IsEditing"
+             data-placement="left" data-type="info" data-trigger="hover" data-title="Delete this album" bs-tooltip="tooltip">
+            <i class="fa fa-trash"></i>
+        </div>
+        <div class="btn-header right pull-right" ng-show="!album.IsEditing"
+             data-placement="left" data-type="info" data-trigger="hover" data-title="Add new media to this album" bs-tooltip="tooltip">
+            <i class="fa fa-picture-o"></i>
+        </div>
+    </div>
+    <div class="body animate fade-up" ng-show="isExpanded">
+        <ul isotope-container isotope-item-resize reapply-layout-only="false"
+            resize-large="24%" resize-medium="48%" resize-small="96%">
+            <li ng-repeat="media in album.Media" isotope-item class="media-item-container">
+                <div media-item media="media" user="user" data-mode="thumbnail" data-allow-delete="true"></div>
+                <p class="details">
+                    Uploaded on {{media.CreatedDateDisplay}}
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>

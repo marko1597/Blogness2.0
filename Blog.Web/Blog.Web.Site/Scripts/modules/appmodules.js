@@ -5,11 +5,11 @@ window.blogInit =
 {
     start: function () {
         var navigationItems = [
-            { text: "Home", icon: window.blogConfiguration.blogRoot + "/content/images/nav-home.png", href: "/#/" },
-            { text: "People", icon: window.blogConfiguration.blogRoot + "/content/images/nav-profile.png", href: "/#/user" },
-            { text: "Friends", icon: window.blogConfiguration.blogRoot + "/content/images/nav-friends.png", href: "/#/friends" },
-            { text: "Groups", icon: window.blogConfiguration.blogRoot + "/content/images/nav-groups.png", href: "/#/groups" },
-            { text: "Events", icon: window.blogConfiguration.blogRoot + "/content/images/nav-events.png", href: "/#/events" }
+            { text: "Home", icon: "fa-home", href: "/#/" },
+            { text: "People", icon: "fa-user", href: "/#/user" },
+            { text: "Friends", icon: "fa-comments", href: "/#/friends" },
+            { text: "Groups", icon: "fa-users", href: "/#/groups" },
+            { text: "Events", icon: "fa-calendar", href: "/#/events" }
         ];
 
         var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
@@ -41,7 +41,7 @@ var ngComments = angular.module("ngComments",
     ]);
 ///#source 1 1 /Scripts/modules/comments/directives/commentItem.js
 ngComments.directive('commentItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
@@ -119,7 +119,7 @@ ngComments.directive('commentItem', [function () {
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "errorService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -323,51 +323,6 @@ ngComments.directive('commentsList', [function () {
     };
 }]);
 
-///#source 1 1 /Scripts/modules/comments/services/commentsHubService.js
-ngComments.factory("commentsHubService", [
-    function() {}
-]);
-//ngComments.factory("commentsHubService", ["$rootScope", "$interval", "Hub", "commentsService",
-//    function ($rootScope, $interval, Hub, commentsService) {
-//        var hub = new Hub("commentsHub", {
-//            listeners: {
-//                commentLikesUpdate: function (commentId, commentLikes) {
-//                    $rootScope.$broadcast("commentLikesUpdate", { CommentId: commentId, CommentLikes: commentLikes });
-//                },
-//                commentAdded: function (postId, comment) {
-//                    if (comment.PostId != null) {
-//                        comment = commentsService.addViewProperties(comment, false, false);
-//                    } else {
-//                        comment = commentsService.addViewProperties(comment);
-//                    }
-
-//                    $rootScope.$broadcast("commentAdded", { PostId: postId, Comment: comment });
-//                }
-//            },
-//            methods: ["viewPost"],
-//            logging: true
-//        });
-//        // TODO: Oh so hackish way! Pleeeeaaaase update it to be better. :(
-//        hub.disconnect();
-//        hub.connect();
-
-//        var stop;
-
-//        return {
-//            viewPost: function (postId) {
-//                stop = $interval(function () {
-//                    if (hub.connection.state != 0) {
-//                        hub.viewPost(postId);
-//                        if (angular.isDefined(stop)) {
-//                            $interval.cancel(stop);
-//                            stop = undefined;
-//                        }
-//                    }
-//                }, 200);
-//            }
-//        };
-//    }
-//]);
 ///#source 1 1 /Scripts/modules/comments/services/commentsService.js
 ngComments.factory('commentsService', ["$http", "$q", "configProvider", "dateHelper",
     function ($http, $q, configProvider, dateHelper) {
@@ -685,6 +640,7 @@ var ngHeader = angular.module("ngHeader", ["ngConfig", "ngLogin"]);
 ngHeader.directive('headerMenu', function () {
     var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, $window, configProvider, authenticationService) {
         $scope.userLoggedIn = false;
+
         $scope.toggleClass = "nav-close";
 
         $scope.goAddNewPost = function () {
@@ -1622,8 +1578,13 @@ ngMedia.directive('mediaItem', function () {
 
         $scope.getThumbnailUrl = function () {
             if ($scope.crop && $scope.crop === 'true') {
+                if ($scope.media) {
+                    return {
+                        "background-image": "url(" + $scope.media.ThumbnailUrl + ")"
+                    };
+                }
                 return {
-                    "background-image": "url(" + $scope.media.ThumbnailUrl + ")"
+                    "background-image": "url(/content/images/warning.png)"
                 };
             }
             return {};
@@ -2371,10 +2332,15 @@ ngPosts.directive('postLikes', [function () {
 ///#source 1 1 /Scripts/modules/posts/directives/postListItem.js
 ngPosts.directive('postListItem', [function () {
     var ctrlFn = function ($scope, $location, localStorageService) {
+        
         $scope.post = $scope.data.Post;
+
         $scope.user = $scope.data.Post.User;
+
         $scope.username = localStorageService.get("username");
+
         $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
+
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
         
         $scope.getCommentPopover = function(commentId) {
@@ -2435,19 +2401,11 @@ ngPosts.directive('postListItemComment', [function () {
 
 ///#source 1 1 /Scripts/modules/posts/directives/postRelatedItem.js
 ngPosts.directive('postRelatedItem', [function () {
-    var ctrlFn = function ($scope) {
-        $scope.thumbnailUrl = {
-            "background-image": "url(" + $scope.post.PostContents[0].Media.ThumbnailUrl + ")"
-        };
-    };
-    ctrlFn.$inject = ["$scope"];
-
     return {
         restrict: 'EA',
         scope: { post: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditem.html",
-        controller: ctrlFn
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditem.html"
     };
 }]);
 
@@ -2541,38 +2499,6 @@ ngPosts.directive('postRelatedItems', [function () {
     };
 }]);
 
-///#source 1 1 /Scripts/modules/posts/services/postsHubService.js
-ngPosts.factory("postsHubService", [function() {}]);
-//ngPosts.factory("postsHubService", ["$rootScope", "$interval", "Hub",
-//    function ($rootScope, $interval, Hub) {
-//        var hub = new Hub("postsHub", {
-//            listeners: {
-//                postLikesUpdate: function (postId, postLikes) {
-//                    $rootScope.$broadcast("postLikesUpdate", { PostId: postId, PostLikes: postLikes });
-//                }
-//            },
-//            methods: ["viewPost"],
-//            logging: true
-//        });
-
-//        var stop;
-
-//        return {
-//            viewPost: function (postId) {
-//                stop = $interval(function () {
-//                    if (hub.isConnected) {
-//                        hub.viewPost(postId);
-//                        if (angular.isDefined(stop)) {
-//                            $interval.cancel(stop);
-//                            stop = undefined;
-//                        }
-//                    }
-//                }, 100);
-
-//            }
-//        };
-//    }
-//]);
 ///#source 1 1 /Scripts/modules/posts/services/postsService.js
 ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configProvider", "dateHelper",
     function ($http, $q, blogSocketsService, configProvider, dateHelper) {
@@ -3427,6 +3353,7 @@ var ngUser = angular.module("ngUser",
         "ngSanitize",
         "ngShared",
         "ngComments",
+        "ngPosts",
         "ngLogin",
         "ngConfig",
         "angularFileUpload"
@@ -3819,51 +3746,6 @@ ngUser.directive('userImage', [function () {
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userImage.html",
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /Scripts/modules/user/directives/userPostItem.js
-ngUser.directive('userPostItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
-        $scope.post = $scope.data.Post;
-
-        $scope.user = $scope.data.User;
-
-        $scope.username = $scope.user.UserName;
-
-        $scope.loggedInUsername = localStorageService.get("username");
-
-        $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
-
-        $scope.getPostSize = function () {
-            return $scope.data.Width;
-        };
-
-        $scope.isEditable = function() {
-            if (($scope.user != null || $scope.user != undefined) && $scope.username === $scope.loggedInUsername) {
-                return true;
-            }
-            return false;
-        };
-        
-        $scope.editPost = function () {
-            $location.path("/post/edit/" + $scope.post.Id);
-        };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.loggedInUsername = $rootScope.user.UserName;
-            }
-        });
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
-
-    return {
-        restrict: 'EA',
-        scope: { data: '=' },
-        replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userPostItem.html",
         controller: ctrlFn
     };
 }]);

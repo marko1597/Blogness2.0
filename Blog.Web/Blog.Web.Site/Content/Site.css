@@ -646,6 +646,10 @@ input[type="checkbox"].input-validation-error {
     display: inline-block;
     position: absolute;
     top: 15px;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear;
 }
 
     .navbar > .navbar-header > .navmenu-toggle > span {
@@ -658,18 +662,10 @@ input[type="checkbox"].input-validation-error {
     }
 
 .navbar > .navbar-header > .nav-open {
-    -moz-transition: 0.2s linear;
-    -o-transition: 0.2s linear;
-    -webkit-transition: 0.2s linear;
-    transition: 0.2s linear;
     left: -15px;
 }
 
 .navbar > .navbar-header > .nav-close {
-    -moz-transition: 0.2s linear;
-    -o-transition: 0.2s linear;
-    -webkit-transition: 0.2s linear;
-    transition: 0.2s linear;
     left: -10px;
 }
 

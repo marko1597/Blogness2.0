@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, commentsHubService, commentsService, errorService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
@@ -77,7 +77,7 @@
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsHubService", "commentsService", "errorService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
 
     return {
         restrict: 'EA',

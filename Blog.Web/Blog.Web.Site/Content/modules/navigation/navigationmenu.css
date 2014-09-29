@@ -73,8 +73,8 @@
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-            nav.navigation-menu ul li a > img {
-                width: 32px;
+            nav.navigation-menu ul li a > i {
+                font-size: 1.5em;
                 margin-right: 10px;
             }
 

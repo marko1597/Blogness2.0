@@ -307,6 +307,7 @@
     <Content Include="Content\images\nav-friends.png" />
     <Content Include="Content\images\nav-home.png" />
     <Content Include="Content\images\nav-profile.png" />
+    <Content Include="Content\images\warning.png" />
     <Content Include="Content\modules\accountpage.css" />
     <Content Include="Content\modules\comments\commentitem.css" />
     <Content Include="Content\modules\comments\commentsaddnew.css" />
@@ -2167,7 +2168,6 @@
     <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
     <Content Include="Scripts\modules\comments\directives\commentsContainer.js" />
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
-    <Content Include="Scripts\modules\comments\services\commentsHubService.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
     <Content Include="Scripts\modules\init.js" />
     <Content Include="Scripts\modules\login\directives\loginFormModal.js" />
@@ -2199,8 +2199,6 @@
     <Content Include="Scripts\modules\user\directives\userCommentItem.js" />
     <Content Include="Scripts\modules\user\directives\userImage.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
-    <Content Include="Scripts\modules\user\directives\userPostItem.js" />
-    <Content Include="Scripts\modules\posts\services\postsHubService.js" />
     <Content Include="Blog.Web.Site.nuspec" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -3075,7 +3073,6 @@
     <Content Include="Scripts\templates\errorpage.html" />
     <Content Include="Scripts\templates\modules\user\userCommentItem.html" />
     <Content Include="Scripts\templates\modules\user\userImage.html" />
-    <Content Include="Scripts\templates\modules\user\userPostItem.html" />
     <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetails.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetailsAddress.html" />
