@@ -19,6 +19,25 @@ namespace Blog.Logic.Core
             _albumRepository = albumRepository;
         }
 
+        public Album Get(int id)
+        {
+            try
+            {
+                var db = _albumRepository.Find(a => a.AlbumId == id, true).FirstOrDefault();
+                if (db == null)
+                {
+                    return new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound,
+                        string.Format("Cannot find album with Id {0}", id));
+                }
+
+                return AlbumMapper.ToDto(db);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public List<Album> GetByUser(int userId)
         {
             var albums = new List<Album>();
@@ -75,6 +94,13 @@ namespace Blog.Logic.Core
         {
             try
             {
+                var checkAlbum = IsAlbumNameInUse(album.AlbumName);
+                if (checkAlbum)
+                {
+                    return new Album().GenerateError<Album>((int)Constants.Error.ValidationError,
+                        string.Format("Album name {0} is already in use.", album.AlbumName));
+                }
+
                 return AlbumMapper.ToDto(_albumRepository.Add(AlbumMapper.ToEntity(album)));
             }
             catch (Exception ex)
@@ -87,12 +113,29 @@ namespace Blog.Logic.Core
         {
             try
             {
+                var checkAlbum = IsAlbumNameInUse(album.AlbumName);
+                if (checkAlbum)
+                {
+                    return new Album().GenerateError<Album>((int) Constants.Error.ValidationError,
+                        string.Format("Album name {0} is already in use.", album.AlbumName));
+                }
+
                 return AlbumMapper.ToDto(_albumRepository.Edit(AlbumMapper.ToEntity(album)));
             }
             catch (Exception ex)
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
+        }
+
+        private bool IsAlbumNameInUse(string albumName)
+        {
+            var dbAlbum = _albumRepository.Find(a => a.AlbumName == albumName, null, null).FirstOrDefault();
+            if (dbAlbum != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

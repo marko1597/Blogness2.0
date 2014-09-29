@@ -10,6 +10,14 @@ namespace Blog.Services.Helpers.Wcf
     [ExcludeFromCodeCoverage]
     public class AlbumResource : IAlbumResource
     {
+        public Album Get(int id)
+        {
+            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            {
+                return svc.Proxy.Get(id);
+            }
+        }
+
         public List<Album> GetByUser(int userId)
         {
             using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))

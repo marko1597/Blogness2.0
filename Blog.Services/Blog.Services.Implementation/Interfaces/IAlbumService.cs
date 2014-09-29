@@ -8,6 +8,9 @@ namespace Blog.Services.Implementation.Interfaces
     public interface IAlbumService : IBaseService
     {
         [OperationContract]
+        Album Get(int id);
+
+        [OperationContract]
         List<Album> GetByUser(int userId);
 
         [OperationContract]

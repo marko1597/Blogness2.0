@@ -17,6 +17,11 @@
             $scope.albums.splice(index, 1);
             $scope.isAdding = false;
         });
+
+        $scope.$on('successDeletingAlbum', function (ev, data) {
+            var index = $scope.albums.indexOf(data);
+            $scope.albums.splice(index, 1);
+        });
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
 

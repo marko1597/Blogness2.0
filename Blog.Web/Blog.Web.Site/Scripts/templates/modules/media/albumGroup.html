@@ -15,7 +15,7 @@
              data-placement="left" data-type="info" data-trigger="hover" data-title="Cancel editing" bs-tooltip="tooltip">
             <i class="fa fa-times"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="cancelEditAlbum()"
+        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="saveAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Save changes" bs-tooltip="tooltip">
             <i class="fa fa-save"></i>
         </div>
@@ -23,7 +23,7 @@
              data-placement="left" data-type="info" data-trigger="hover" data-title="Edit name of this album" bs-tooltip="tooltip">
             <i class="fa fa-edit"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="!album.IsEditing"
+        <div class="btn-header right pull-right" ng-show="!album.IsEditing" ng-click="deleteAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Delete this album" bs-tooltip="tooltip">
             <i class="fa fa-trash"></i>
         </div>

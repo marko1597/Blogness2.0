@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
@@ -18,6 +19,22 @@ namespace Blog.Web.Api.Controllers
         {
             _service = service;
             _errorSignaler = errorSignaler;
+        }
+
+        [HttpGet]
+        [Route("api/album/{id}")]
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                var album = _service.Get(id);
+                return Ok(album);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
         }
 
         [HttpGet]
@@ -53,7 +70,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
-        [Route("api/albums")]
+        [Route("api/album")]
         public IHttpActionResult Post([FromBody]Album album)
         {
             try
@@ -77,7 +94,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpPut, PreventCrossUserManipulation, Authorize]
-        [Route("api/albums")]
+        [Route("api/album")]
         public IHttpActionResult Put([FromBody]Album album)
         {
             try
@@ -101,13 +118,29 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("api/albums/{albumId}")]
+        [Route("api/album/{albumId}")]
         public bool Delete(int albumId)
         {
             try
             {
-                _service.Delete(albumId);
-                return true;
+                var album = _service.Get(albumId);
+                if (album != null && album.Error != null)
+                {
+                    _errorSignaler.SignalFromCurrentContext(new Exception(album.Error.Message));
+                    return false;
+                }
+
+                if (album != null && album.User != null)
+                {
+                    var username = HttpContext.Current.User.Identity.Name;
+                    if (album.User.UserName == username)
+                    {
+                        _service.Delete(albumId);
+                        return true;
+                    }
+                }
+
+                return false;
             }
             catch
             {

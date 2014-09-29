@@ -19,6 +19,11 @@ namespace Blog.Services.Implementation
             _albumLogic = albumLogic;
         }
 
+        public Album Get(int id)
+        {
+            return _albumLogic.Get(id);
+        }
+
         public List<Album> GetByUser(int userId)
         {
             return _albumLogic.GetByUser(userId);

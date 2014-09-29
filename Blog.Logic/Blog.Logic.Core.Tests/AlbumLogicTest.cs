@@ -69,6 +69,51 @@ namespace Blog.Logic.Core.Tests
 
             #endregion
         }
+
+        [Test]
+        public void ShouldGetAlbumById()
+        {
+            var album = _albums.Where(a => a.UserId == 1).ToList();
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), true))
+                .Returns(album);
+
+            _albumLogic = new AlbumLogic(_albumRepository.Object);
+
+            var result = _albumLogic.Get(1);
+
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.Error);
+        }
+
+        [Test]
+        public void ShouldReturnErrorWhenAlbumNotFoundById()
+        {
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), true))
+                .Returns((List<Album>)null);
+
+            _albumLogic = new AlbumLogic(_albumRepository.Object);
+
+            var result = _albumLogic.Get(1);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int) Constants.Error.RecordNotFound, result.Error.Id);
+            Assert.AreEqual("Cannot find album with Id 1", result.Error.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetAlbumByIdFails()
+        {
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), true))
+                .Throws(new Exception());
+
+            _albumLogic = new AlbumLogic(_albumRepository.Object);
+
+            Assert.Throws<BlogException>(() => _albumLogic.Get(1));
+        }
         
         [Test]
         public void ShouldGetAlbumsByUser()
@@ -195,6 +240,33 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldReturnErrorWhenAlbumNameAlreadyInUseWhenAddingAlbum()
+        {
+            var userAlbums = _albums.Where(a => a.UserId == 1).ToList();
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), null, null))
+                .Returns(userAlbums);
+
+            _albumLogic = new AlbumLogic(_albumRepository.Object);
+
+            var result = _albumLogic.Add(new Common.Contracts.Album
+            {
+                AlbumId = 1,
+                AlbumName = "Wiggle",
+                IsUserDefault = true,
+                User = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                }
+            });
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int) Constants.Error.ValidationError, result.Error.Id);
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenAddAlbumFails()
         {
             _albumRepository = new Mock<IAlbumRepository>();
@@ -239,6 +311,33 @@ namespace Blog.Logic.Core.Tests
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.User.Id);
+        }
+
+        [Test]
+        public void ShouldReturnErrorWhenAlbumNameAlreadyInUseWhenUpdatingAlbum()
+        {
+            var userAlbums = _albums.Where(a => a.UserId == 1).ToList();
+            _albumRepository = new Mock<IAlbumRepository>();
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), null, null))
+                .Returns(userAlbums);
+
+            _albumLogic = new AlbumLogic(_albumRepository.Object);
+
+            var result = _albumLogic.Update(new Common.Contracts.Album
+            {
+                AlbumId = 1,
+                AlbumName = "Wiggle",
+                IsUserDefault = true,
+                User = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                }
+            });
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int)Constants.Error.ValidationError, result.Error.Id);
         }
 
         [Test]

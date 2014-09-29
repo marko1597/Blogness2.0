@@ -47,7 +47,6 @@
         };
 
         $scope.confirmDelete = function () {
-            mediaDeleteDialog.hide();
             mediaService.deleteMedia($scope.media.Id).then(function (response) {
                 mediaDeleteDialog.hide();
 
