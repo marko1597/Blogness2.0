@@ -48,7 +48,7 @@ namespace Blog.Logic.ObjectMapper
                     AlbumId = album.AlbumId,
                     AlbumName = album.AlbumName,
                     Media = media,
-                    User = UserMapper.ToEntity(album.User),
+                    UserId = album.User.Id,
                     IsUserDefault = album.IsUserDefault,
                     CreatedBy = album.CreatedBy,
                     CreatedDate = album.CreatedDate,

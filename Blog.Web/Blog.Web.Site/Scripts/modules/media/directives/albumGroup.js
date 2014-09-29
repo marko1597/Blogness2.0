@@ -38,7 +38,8 @@
         $scope.saveAlbum = function () {
             var album = {
                 IsUserDefault: false,
-                AlbumName: $scope.newAlbumName
+                AlbumName: $scope.album.AlbumName,
+                AlbumId: !$scope.album.AlbumId ? 0 : $scope.album.AlbumId
             };
 
             if ($rootScope.authData) {
@@ -46,9 +47,9 @@
             }
 
             if ($scope.album.IsNew) {
-                addAlbum();
+                addAlbum(album);
             } else {
-                updateAlbum();
+                updateAlbum(album);
             }
         };
 
@@ -72,8 +73,8 @@
             });
         };
 
-        var addAlbum = function () {
-            albumService.addAlbum($scope.album).then(function (response) {
+        var addAlbum = function (album) {
+            albumService.addAlbum(album).then(function (response) {
                 if (response.Error != null) {
                     errorService.displayError(response.Error);
                     return;
@@ -86,8 +87,8 @@
             });
         };
 
-        var updateAlbum = function () {
-            albumService.updateAlbum($scope.album).then(function (response) {
+        var updateAlbum = function (album) {
+            albumService.updateAlbum(album).then(function (response) {
                 if (response.Error != null) {
                     errorService.displayError(response.Error);
                     return;

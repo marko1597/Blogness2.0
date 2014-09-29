@@ -5,7 +5,7 @@
         </div>
 
         <h5 ng-show="!album.IsEditing">{{album.AlbumName}}</h5>
-        <input type="text" ng-model="newAlbumName" ng-show="album.IsEditing"
+        <input type="text" ng-model="album.AlbumName" ng-show="album.IsEditing"
                placeholder="Enter new album name here..." />
 
         <label class="label label-primary hidden-xs">{{album.CreatedDateDisplay}}</label>
