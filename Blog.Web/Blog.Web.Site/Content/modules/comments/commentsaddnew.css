@@ -1,7 +1,7 @@
 ﻿.comment-item-new {
     position: relative;
     background: #f8f8f8;
-    margin: 10px 10px 0 10px;
+    margin: 15px 15px 0 15px;
     height: 90px;
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
@@ -16,14 +16,19 @@
         max-width: 80%;
         width: 80%;
         height: 100%;
+        border: 1px solid #aaa;
     }
 
     .comment-item-new > div {
         position: absolute;
         top: 0;
         right: 0;
-        padding: 10px;
+        padding: 8px;
         width: 20%;
+        height: 100%;
+        border-top: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
     }
 
         .comment-item-new > div > button {

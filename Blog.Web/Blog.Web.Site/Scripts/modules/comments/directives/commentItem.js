@@ -1,6 +1,9 @@
 ﻿ngComments.directive('commentItem', [function () {
     var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
+            if (!$scope.allowExpand) {
+                return false;
+            }
             if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
             }
@@ -24,9 +27,13 @@
         };
 
         $scope.canReplyToComment = function () {
-            if ($scope.comment.PostId == undefined || $scope.comment.PostId === null) {
+            if (!$scope.allowReply) {
                 return "hidden";
             }
+            if ($scope.comment.PostId === null || $scope.comment.PostId == 0) {
+                return "hidden";
+            }
+
             return "";
         };
 
@@ -51,7 +58,7 @@
         };
 
         $scope.isFromPostOwner = function () {
-            if ($scope.comment.User != null && $scope.comment.User.UserName == $scope.poster) {
+            if ($scope.comment.User && $scope.poster && $scope.comment.User.UserName == $scope.poster) {
                 return "";
             }
             return "hidden";
@@ -79,6 +86,11 @@
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
 
+    var linkFn = function(scope, elem, attrs) {
+        scope.allowReply = attrs.allowReply === 'true' ? true : false;
+        scope.allowExpand = attrs.allowExpand === 'true' ? true : false;
+    };
+
     return {
         restrict: 'EA',
         scope: {
@@ -88,6 +100,7 @@
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentItem.html",
-        controller: ctrlFn
+        controller: ctrlFn,
+        link: linkFn
     };
 }]);

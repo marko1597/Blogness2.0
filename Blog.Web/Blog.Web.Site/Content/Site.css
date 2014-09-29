@@ -64,6 +64,20 @@
     animation-fill-mode: both;
 }
 
+    .animate.fade-in {
+        -moz-animation-name: fadeIn;
+        -o-animation-name: fadeIn;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+
+        .animate.fade-in.ng-hide {
+            -moz-animation-name: fadeOut;
+            -o-animation-name: fadeOut;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+
     .animate.fade-up {
         -moz-animation-name: fadeInDown;
         -o-animation-name: fadeInDown;
@@ -76,6 +90,20 @@
             -o-animation-name: fadeOutUp;
             -webkit-animation-name: fadeOutUp;
             animation-name: fadeOutUp;
+        }
+
+    .animate.fade-left {
+        -moz-animation-name: fadeInLeft;
+        -o-animation-name: fadeInLeft;
+        -webkit-animation-name: fadeInLeft;
+        animation-name: fadeInLeft;
+    }
+
+        .animate.fade-left.ng-hide {
+            -moz-animation-name: fadeOutRight;
+            -o-animation-name: fadeOutRight;
+            -webkit-animation-name: fadeOutRight;
+            animation-name: fadeOutRight;
         }
 
     .animate.fade-right {
@@ -411,7 +439,7 @@ videogular vg-video {
 }
 
     .header > h5 {
-        padding: 10px;
+        padding: 12px 15px;
         margin: 0;
         display: inline-block;
     }

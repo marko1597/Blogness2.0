@@ -8,7 +8,7 @@
         </p>
     </div>
     <div ng-repeat="comment in comments">
-        <div comment-item comment="comment" user="user" poster="poster"></div>
+        <div comment-item comment="comment" user="user" poster="poster" data-allow-reply="true" data-allow-expand="true"></div>
         <div ng-show="comment.ShowAddReply" class="comment-reply-new" comments-add-new commentid="comment.Id" postid="null" user="user" parentpostid="postid"></div>
         <div ng-repeat="reply in comment.Comments" class="comment-replies" ng-show="comment.ShowReplies">
             <div comment-item comment="reply" user="user" poster="poster"></div>

@@ -64,6 +64,20 @@
     animation-fill-mode: both;
 }
 
+    .animate.fade-in {
+        -moz-animation-name: fadeIn;
+        -o-animation-name: fadeIn;
+        -webkit-animation-name: fadeIn;
+        animation-name: fadeIn;
+    }
+
+        .animate.fade-in.ng-hide {
+            -moz-animation-name: fadeOut;
+            -o-animation-name: fadeOut;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+
     .animate.fade-up {
         -moz-animation-name: fadeInDown;
         -o-animation-name: fadeInDown;
@@ -76,6 +90,20 @@
             -o-animation-name: fadeOutUp;
             -webkit-animation-name: fadeOutUp;
             animation-name: fadeOutUp;
+        }
+
+    .animate.fade-left {
+        -moz-animation-name: fadeInLeft;
+        -o-animation-name: fadeInLeft;
+        -webkit-animation-name: fadeInLeft;
+        animation-name: fadeInLeft;
+    }
+
+        .animate.fade-left.ng-hide {
+            -moz-animation-name: fadeOutRight;
+            -o-animation-name: fadeOutRight;
+            -webkit-animation-name: fadeOutRight;
+            animation-name: fadeOutRight;
         }
 
     .animate.fade-right {
@@ -411,7 +439,7 @@ videogular vg-video {
 }
 
     .header > h5 {
-        padding: 10px;
+        padding: 12px 15px;
         margin: 0;
         display: inline-block;
     }
@@ -1022,7 +1050,7 @@ div.login-alert {
 }
 
     .post-board.contents {
-        padding: 5px;
+        padding: 10px;
         background: #eee;
     }
 
@@ -1041,7 +1069,7 @@ div.login-alert {
                     border-left: 1px solid #ddd;
                     border-right: 1px solid #ddd;
                     border-bottom: 1px solid #ddd;
-                    padding: 10px;
+                    padding: 15px;
                 }
 
                     .post-board.contents > ul > li > div.captions > p {
@@ -1065,20 +1093,14 @@ div.login-alert {
         .board-item > .board-item-header > h4 {
             background: #4c4c4c;
             color: #fff;
-            padding: 10px;
+            padding: 15px;
             margin: 0;
         }
 
 .comment-item {
     position: relative;
     background: #f8f8f8;
-    margin: 5px;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    box-shadow: 0 2px 4px #000000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 15px
 }
 
     .comment-item > p {
@@ -1156,7 +1178,7 @@ div.login-alert {
 .comment-item-new {
     position: relative;
     background: #f8f8f8;
-    margin: 10px 10px 0 10px;
+    margin: 15px 15px 0 15px;
     height: 90px;
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
@@ -1171,14 +1193,19 @@ div.login-alert {
         max-width: 80%;
         width: 80%;
         height: 100%;
+        border: 1px solid #aaa;
     }
 
     .comment-item-new > div {
         position: absolute;
         top: 0;
         right: 0;
-        padding: 10px;
+        padding: 8px;
         width: 20%;
+        height: 100%;
+        border-top: 1px solid #aaa;
+        border-right: 1px solid #aaa;
+        border-bottom: 1px solid #aaa;
     }
 
         .comment-item-new > div > button {
@@ -1197,7 +1224,7 @@ div.login-alert {
 }
 .comment-items-list {
     background: #eee;
-    padding: 5px;
+    padding: 15px;
 }
 
     .comment-items-list > .comments-empty-message {
@@ -1206,15 +1233,15 @@ div.login-alert {
     }
 
         .comment-items-list > .comments-empty-message > p {
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
 .comment-reply-new {
-    margin: 10px 5px 0 25px;
+    margin: 15px 0 15px 15px;
 }
 
 .comment-replies {
-    padding-left: 20px;
+    padding-left: 15px;
 }
 
 #blog-error-global {
@@ -1778,7 +1805,7 @@ nav.navigation-menu {
 
     .post-list-item > .comments {
         border-bottom: 1px solid #ddd;
-        padding: 10px;
+        padding: 15px;
     }
 
         .post-list-item > .comments ul {
@@ -1794,7 +1821,7 @@ nav.navigation-menu {
     .post-list-item > .header {
         background: #4c4c4c;
         color: #fff;
-        padding: 10px 10px;
+        padding: 15px;
         -webkit-box-shadow: 0 6px 12px #000000;
         -webkit-box-shadow: 0 6px 12px #000000;
         -ms-box-shadow: 0 6px 12px #000000;
@@ -1886,7 +1913,7 @@ nav.navigation-menu {
 
     .post-board.content-item > .body,
     .post-list-item > .body {
-        padding: 10px 10px;
+        padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
@@ -1897,13 +1924,13 @@ nav.navigation-menu {
 
     .post-board.content-item > .details,
     .post-list-item > .details {
-        padding: 10px;
+        padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
     .post-board.content-item > .tags,
     .post-list-item > .tags {
-        padding: 10px 10px 0 10px;
+        padding: 15px 15px 0 15px;
     }
 
 @media (max-width: 360px) {
@@ -1940,7 +1967,7 @@ nav.navigation-menu {
 
 .post-related-item {
     background: #f8f8f8;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 
     .post-related-item > div {
@@ -1986,11 +2013,11 @@ nav.navigation-menu {
             }
 
 .post-related-items-container > .post-related-list {
-    padding: 10px;
+    padding: 15px;
 }
 
 .post-related-items-container > .post-related-category {
-    padding: 10px;
+    padding: 15px;
     border-bottom: 1px solid #ddd;
     background: #f8f8f8;
 }
@@ -2362,20 +2389,6 @@ div.file-upload div.dropzone ul.upload-items {
             position: relative;
         }
 
-            .user-profile-details .content-item .user-hobby-item .fa-edit,
-            .user-profile-details .content-item .user-hobby-item .fa-save {
-                position: absolute;
-                top: 8px;
-                right: 30px;
-            }
-
-            .user-profile-details .content-item .user-hobby-item .fa-trash,
-            .user-profile-details .content-item .user-hobby-item .fa-times {
-                position: absolute;
-                top: 7px;
-                right: 50px;
-            }
-
         .user-profile-details .content-item .error-message {
             color: #d9534f;
             font-size: 1em;
@@ -2383,11 +2396,11 @@ div.file-upload div.dropzone ul.upload-items {
         }
 
     .user-profile-details .body {
-        padding: 10px;
+        padding: 15px;
     }
 
         .user-profile-details .body .panel {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             background: #f0f0f0;
             border-color: #ccc;
         }
@@ -2399,8 +2412,22 @@ div.file-upload div.dropzone ul.upload-items {
             }
 
     .user-profile-details .user-form {
-        padding: 0 10px 10px;
+        padding: 0 15px 15px;
     }
+
+        .user-profile-details .user-form .buttons {
+            position: absolute;
+            top: 2px;
+            right: 25px;
+        }
+
+            .user-profile-details .user-form .buttons > .fa {
+                color: #666;
+                font-size: 1.2em;
+                margin-top: 7px;
+                margin-right: 7px;
+                cursor: pointer;
+            }
 
         .user-profile-details .user-form .form-group {
             position: relative;
@@ -2434,22 +2461,13 @@ div.file-upload div.dropzone ul.upload-items {
     .user-profile-details .body .user-education-item {
         background: #f8f8f8;
         border: 1px solid #ccc;
-        padding-top: 10px;
-        margin-bottom: 10px;
+        padding-top: 15px;
+        margin-bottom: 15px;
     }
 
         .user-profile-details .body .user-education-item label[data-display] {
             font-weight: normal;
             width: auto;
-        }
-
-        .user-profile-details .body .user-education-item .fa,
-        .user-profile-details .body .user-education-item .fa {
-            color: #666;
-            font-size: 1.2em;
-            margin-top: 7px;
-            margin-right: 3px;
-            cursor: pointer;
         }
 
         .user-profile-details .body .user-education-item input[type='text'] {

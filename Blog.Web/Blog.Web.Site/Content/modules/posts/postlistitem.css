@@ -43,7 +43,7 @@
 
     .post-list-item > .comments {
         border-bottom: 1px solid #ddd;
-        padding: 10px;
+        padding: 15px;
     }
 
         .post-list-item > .comments ul {
@@ -59,7 +59,7 @@
     .post-list-item > .header {
         background: #4c4c4c;
         color: #fff;
-        padding: 10px 10px;
+        padding: 15px;
         -webkit-box-shadow: 0 6px 12px #000000;
         -webkit-box-shadow: 0 6px 12px #000000;
         -ms-box-shadow: 0 6px 12px #000000;
@@ -151,7 +151,7 @@
 
     .post-board.content-item > .body,
     .post-list-item > .body {
-        padding: 10px 10px;
+        padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
@@ -162,13 +162,13 @@
 
     .post-board.content-item > .details,
     .post-list-item > .details {
-        padding: 10px;
+        padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
     .post-board.content-item > .tags,
     .post-list-item > .tags {
-        padding: 10px 10px 0 10px;
+        padding: 15px 15px 0 15px;
     }
 
 @media (max-width: 360px) {

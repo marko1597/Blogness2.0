@@ -99,7 +99,6 @@
     <file>/Scripts/modules/user/controllers/userProfileFavoritesController.js</file>
     <file>/Scripts/modules/user/controllers/userProfileMediaController.js</file>
     <file>/Scripts/modules/user/controllers/userProfilePostsController.js</file>
-    <file>/Scripts/modules/user/directives/userCommentItem.js</file>
     <file>/Scripts/modules/user/directives/userImage.js</file>
     <file>/Scripts/modules/user/directives/userProfileDetails.js</file>
     <file>/Scripts/modules/user/directives/userProfileDetailsAddress.js</file>

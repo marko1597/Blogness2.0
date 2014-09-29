@@ -20,8 +20,10 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 user-hobby-item">
                 <input name="new-hobby" type="text" class="input form-control"
                        ng-class="hasError()" placeholder="Enter hobby" ng-model="newHobby.HobbyName" />
-                <i class="fa fa-save" ng-show="isAdding" ng-click="saveHobby()"></i>
-                <i class="fa fa-times" ng-show="isAdding" ng-click="cancelAdding()"></i>
+                <div class="buttons">
+                    <i class="fa fa-save" ng-show="isAdding" ng-click="saveHobby()"></i>
+                    <i class="fa fa-times" ng-show="isAdding" ng-click="cancelAdding()"></i>
+                </div>
             </div>
         </div>
     </form>

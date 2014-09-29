@@ -43,6 +43,9 @@ var ngComments = angular.module("ngComments",
 ngComments.directive('commentItem', [function () {
     var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
+            if (!$scope.allowExpand) {
+                return false;
+            }
             if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
                 return false;
             }
@@ -66,9 +69,13 @@ ngComments.directive('commentItem', [function () {
         };
 
         $scope.canReplyToComment = function () {
-            if ($scope.comment.PostId == undefined || $scope.comment.PostId === null) {
+            if (!$scope.allowReply) {
                 return "hidden";
             }
+            if ($scope.comment.PostId === null || $scope.comment.PostId == 0) {
+                return "hidden";
+            }
+
             return "";
         };
 
@@ -93,7 +100,7 @@ ngComments.directive('commentItem', [function () {
         };
 
         $scope.isFromPostOwner = function () {
-            if ($scope.comment.User != null && $scope.comment.User.UserName == $scope.poster) {
+            if ($scope.comment.User && $scope.poster && $scope.comment.User.UserName == $scope.poster) {
                 return "";
             }
             return "hidden";
@@ -121,6 +128,11 @@ ngComments.directive('commentItem', [function () {
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
 
+    var linkFn = function(scope, elem, attrs) {
+        scope.allowReply = attrs.allowReply === 'true' ? true : false;
+        scope.allowExpand = attrs.allowExpand === 'true' ? true : false;
+    };
+
     return {
         restrict: 'EA',
         scope: {
@@ -130,7 +142,8 @@ ngComments.directive('commentItem', [function () {
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentItem.html",
-        controller: ctrlFn
+        controller: ctrlFn,
+        link: linkFn
     };
 }]);
 
@@ -3362,6 +3375,8 @@ var ngUser = angular.module("ngUser",
 ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, commentsService, userService, errorService, localStorageService) {
         $scope.user = null;
+        
+        $scope.loggedUser = null;
 
         $scope.comments = [];
 
@@ -3401,20 +3416,17 @@ ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$st
             $scope.isBusy = true;
 
             commentsService.getCommentsByUser($scope.user.Id).then(function (resp) {
+                _.each(resp, function(c) {
+                    c.User = $scope.user;
+                    c.NameDisplay = $scope.user.FirstName + " " + $scope.user.LastName;
+                });
                 $scope.comments = resp;
                 $scope.isBusy = false;
             }, function (e) {
                 errorService.displayError(e);
             });
         };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.getCommentsByUser();
-            }
-        });
-
+        
         $scope.init();
     }
 ]);
@@ -3635,21 +3647,6 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
         $scope.init();
     }
 ]);
-///#source 1 1 /Scripts/modules/user/directives/userCommentItem.js
-ngUser.directive('userCommentItem', [function () {
-    var ctrlFn = function ($scope) {
-    };
-    ctrlFn.$inject = ["$scope"];
-
-    return {
-        restrict: 'EA',
-        scope: { comment: '=' },
-        replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userCommentItem.html",
-        controller: ctrlFn
-    };
-}]);
-
 ///#source 1 1 /Scripts/modules/user/directives/userImage.js
 ngUser.directive('userImage', [function () {
     var ctrlFn = function ($scope, $rootScope, userService, configProvider, FileUploader, localStorageService) {

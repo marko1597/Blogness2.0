@@ -1,6 +1,8 @@
 ﻿ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",
     function ($scope, $rootScope, $stateParams, commentsService, userService, errorService, localStorageService) {
         $scope.user = null;
+        
+        $scope.loggedUser = null;
 
         $scope.comments = [];
 
@@ -40,20 +42,17 @@
             $scope.isBusy = true;
 
             commentsService.getCommentsByUser($scope.user.Id).then(function (resp) {
+                _.each(resp, function(c) {
+                    c.User = $scope.user;
+                    c.NameDisplay = $scope.user.FirstName + " " + $scope.user.LastName;
+                });
                 $scope.comments = resp;
                 $scope.isBusy = false;
             }, function (e) {
                 errorService.displayError(e);
             });
         };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.getCommentsByUser();
-            }
-        });
-
+        
         $scope.init();
     }
 ]);

@@ -7,7 +7,7 @@
 }
 
     .post-board.contents {
-        padding: 5px;
+        padding: 10px;
         background: #eee;
     }
 
@@ -26,7 +26,7 @@
                     border-left: 1px solid #ddd;
                     border-right: 1px solid #ddd;
                     border-bottom: 1px solid #ddd;
-                    padding: 10px;
+                    padding: 15px;
                 }
 
                     .post-board.contents > ul > li > div.captions > p {
@@ -50,6 +50,6 @@
         .board-item > .board-item-header > h4 {
             background: #4c4c4c;
             color: #fff;
-            padding: 10px;
+            padding: 15px;
             margin: 0;
         }
