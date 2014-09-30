@@ -398,9 +398,6 @@ namespace Blog.Logic.Core.Tests
                 .Returns(media);
 
             _fileHelper = new Mock<IFileHelper>();
-            _fileHelper.Setup(a => a.DeleteDirectory(It.IsAny<string>())).Returns(true);
-            _fileHelper.Setup(a => a.DeleteFile(It.IsAny<string>())).Returns(true);
-
             _albumRepository = new Mock<IAlbumRepository>();
             _imageHelper = new Mock<IImageHelper>();
             _configurationHelper = new Mock<IConfigurationHelper>();
@@ -450,48 +447,7 @@ namespace Blog.Logic.Core.Tests
 
             Assert.Throws<BlogException>(() => _mediaLogic.Delete(1));
         }
-
-        [Test]
-        public void ShouldThrowExceptionWhenDeleteMediaFailsOnFileHelperDeleteFile()
-        {
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-                .Throws(new Exception());
-
-            _fileHelper = new Mock<IFileHelper>();
-            _fileHelper.Setup(a => a.DeleteFile(It.IsAny<string>())).Throws(new Exception());
-
-            _albumRepository = new Mock<IAlbumRepository>();
-            _imageHelper = new Mock<IImageHelper>();
-            _configurationHelper = new Mock<IConfigurationHelper>();
-            
-            _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
-
-            Assert.Throws<BlogException>(() => _mediaLogic.Delete(1));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenDeleteMediaFailsOnFileHelperDeleteDirectory()
-        {
-            _mediaRepository = new Mock<IMediaRepository>();
-            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
-                .Throws(new Exception());
-
-            _fileHelper = new Mock<IFileHelper>();
-            _fileHelper.Setup(a => a.DeleteFile(It.IsAny<string>())).Returns(true);
-            _fileHelper.Setup(a => a.DeleteDirectory(It.IsAny<string>())).Throws(new Exception());
-
-            _albumRepository = new Mock<IAlbumRepository>();
-            _imageHelper = new Mock<IImageHelper>();
-            _configurationHelper = new Mock<IConfigurationHelper>();
-
-            _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
-                _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
-
-            Assert.Throws<BlogException>(() => _mediaLogic.Delete(1));
-        }
-
+        
         [Test]
         public void ShouldAddVideoMediaWithDefaultAlbum()
         {
@@ -525,7 +481,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateVideoThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
 
@@ -574,7 +530,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateGifThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
 
@@ -623,7 +579,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateGifThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
 
@@ -673,7 +629,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateGifThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
 
@@ -744,7 +700,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns((string)null);
+                It.IsAny<string>())).Returns((string)null);
 
             _fileHelper = new Mock<IFileHelper>();
             _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(true);
@@ -771,7 +727,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\");
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\");
 
             _fileHelper = new Mock<IFileHelper>();
             _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(false);
@@ -798,7 +754,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\");
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\");
 
             _fileHelper = new Mock<IFileHelper>();
             _fileHelper.Setup(a => a.MoveFile(It.IsAny<string>(), It.IsAny<string>())).Returns(false);
@@ -827,7 +783,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             
             _configurationHelper = new Mock<IConfigurationHelper>();
             _configurationHelper.Setup(a => a.GetAppSettings(It.IsAny<string>())).Throws(new Exception());
@@ -858,7 +814,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Throws(new Exception());
 
@@ -895,7 +851,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateGifThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
 
@@ -951,7 +907,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
             _imageHelper.Setup(a => a.SaveImage(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>()))
@@ -1009,7 +965,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
             _imageHelper.Setup(a => a.SaveImage(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>()))
@@ -1068,7 +1024,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.CreateThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
             _imageHelper.Setup(a => a.SaveImage(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>()))
@@ -1150,7 +1106,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(string.Empty);
+                It.IsAny<string>())).Returns(string.Empty);
 
             _mediaLogic = new MediaLogic(_mediaRepository.Object, _albumRepository.Object,
                 _imageHelper.Object, _configurationHelper.Object, _fileHelper.Object);
@@ -1179,7 +1135,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
 
             _fileHelper = new Mock<IFileHelper>();
             _fileHelper.Setup(a => a.CreateDirectory(It.IsAny<string>())).Returns(false);
@@ -1211,7 +1167,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.SaveImage(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(false);
 
@@ -1248,7 +1204,7 @@ namespace Blog.Logic.Core.Tests
 
             _imageHelper = new Mock<IImageHelper>();
             _imageHelper.Setup(a => a.GenerateImagePath(It.IsAny<int>(), It.IsAny<string>(),
-                It.IsAny<string>(), It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\foo\" + guid);
+                It.IsAny<string>())).Returns(_rootPath + @"\AddedImages\1\" + guid);
             _imageHelper.Setup(a => a.SaveImage(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Returns(true);
             _imageHelper.Setup(a => a.CreateThumbnail(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))

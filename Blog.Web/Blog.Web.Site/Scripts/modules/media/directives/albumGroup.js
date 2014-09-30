@@ -1,12 +1,15 @@
 ﻿// ReSharper disable InconsistentNaming
 
 ngMedia.directive('albumGroup', function () {
-    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider, $modal, FileUploader) {
+    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider,
+        $modal, FileUploader, localStorageService) {
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
            configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
 
         $scope.isExpanded = true;
+
+        $scope.authData = localStorageService.get("authorizationData");
 
         $scope.toggleExpandClass = function () {
             if ($scope.isExpanded) {
@@ -69,6 +72,11 @@ ngMedia.directive('albumGroup', function () {
             });
         };
 
+        $scope.$on("successDeletingMedia", function(ev, data) {
+            var index = $scope.album.Media.indexOf(data);
+            $scope.album.Media.splice(index, 1);
+        });
+
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
@@ -111,7 +119,7 @@ ngMedia.directive('albumGroup', function () {
             scope: $rootScope,
             url: $scope.uploadUrl,
             autoUpload: true,
-            headers: { Authorization: 'Bearer ' + ($rootScope.authData ? $rootScope.authData.token : "") }
+            headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
         });
 
         uploader.filters.push({
@@ -126,11 +134,13 @@ ngMedia.directive('albumGroup', function () {
         uploader.onSuccessItem = function (fileItem, response) {
             response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
             $scope.album.Media.push(response);
+            $rootScope.$broadcast("resizeIsotopeItems", {});
         };
 
         // #endregion
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper", "configProvider", "$modal", "FileUploader"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper",
+        "configProvider", "$modal", "FileUploader", "localStorageService"];
 
     return {
         restrict: 'EA',

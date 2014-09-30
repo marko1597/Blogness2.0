@@ -86,15 +86,15 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
-        public string GenerateImagePath(int id, string name, string guid, string storageRoot)
+        public string GenerateImagePath(int id, string guid, string storageRoot)
         {
             try
             {
-                if (string.IsNullOrEmpty(storageRoot) || string.IsNullOrEmpty(guid) || string.IsNullOrEmpty(name))
+                if (string.IsNullOrEmpty(storageRoot) || string.IsNullOrEmpty(guid))
                 {
                     throw new BlogException("Empty string in parameters. Provide non-empty strings.");
                 }
-                return storageRoot.TrimEnd('\\') + @"\" + id + @"\" + name.TrimEnd('\\') + @"\" + guid.TrimEnd('\\') + @"\";
+                return storageRoot.TrimEnd('\\') + @"\" + id + @"\" + guid.TrimEnd('\\') + @"\";
             }
             catch (Exception ex)
             {

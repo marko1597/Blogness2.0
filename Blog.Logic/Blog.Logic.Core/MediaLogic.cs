@@ -116,7 +116,7 @@ namespace Blog.Logic.Core
                     if (album == null) throw new Exception("Error creating or finding album");
                 }
 
-                var mediaPath = _imageHelper.GenerateImagePath(album.UserId, album.AlbumName, guid, Constants.FileMediaLocation);
+                var mediaPath = _imageHelper.GenerateImagePath(album.UserId, guid, Constants.FileMediaLocation);
                 if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
 
                 var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
@@ -145,7 +145,7 @@ namespace Blog.Logic.Core
                 var album = GetAlbumByName(albumName, user.Id);
                 if (album == null) throw new Exception("Error creating or finding album");
 
-                var mediaPath = _imageHelper.GenerateImagePath(user.Id, album.AlbumName, guid, Constants.FileMediaLocation);
+                var mediaPath = _imageHelper.GenerateImagePath(user.Id, guid, Constants.FileMediaLocation);
                 if (string.IsNullOrEmpty(mediaPath)) throw new Exception("Error generating media directory path");
 
                 var hasCreatedDir = _fileHelper.CreateDirectory(mediaPath);
@@ -172,10 +172,11 @@ namespace Blog.Logic.Core
                 var db = _mediaRepository.Find(a => a.MediaId == mediaId, false).FirstOrDefault();
                 if (db == null) return false;
 
-                _fileHelper.DeleteFile(db.ThumbnailPath);
-                _fileHelper.DeleteFile(db.MediaPath);
-                _fileHelper.DeleteDirectory(db.ThumbnailPath);
-                _fileHelper.DeleteDirectory(db.MediaPath);
+                // TODO: Removed for now as it causes privilege issues
+                //_fileHelper.DeleteFile(db.ThumbnailPath);
+                //_fileHelper.DeleteFile(db.MediaPath);
+                //_fileHelper.DeleteDirectory(db.ThumbnailPath);
+                //_fileHelper.DeleteDirectory(db.MediaPath);
                 _mediaRepository.Delete(db);
 
                 return true;

@@ -55,7 +55,11 @@
                     return;
                 }
 
-                $scope.$emit("successDeletingMedia", $scope.media);
+                if (response === 'true') {
+                    $scope.$emit("successDeletingMedia", $scope.media);
+                } else {
+                    errorService.displayError(response);
+                }
             }, function (err) {
                 $scope.setModelStateErrors(err.ModelState);
                 mediaDeleteDialog.hide();

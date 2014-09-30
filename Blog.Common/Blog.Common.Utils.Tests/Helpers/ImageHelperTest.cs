@@ -147,21 +147,21 @@ namespace Blog.Common.Utils.Tests.Helpers
         [Test]
         public void ShouldGenerateImagePath()
         {
-            var result = _imageHelper.GenerateImagePath(1, "foo", "bar", _rootPath);
-            Assert.AreEqual(_rootPath + @"\" + 1 + @"\foo\bar\", result);
+            var result = _imageHelper.GenerateImagePath(1, "foo", _rootPath);
+            Assert.AreEqual(_rootPath + @"\" + 1 + @"\foo\", result);
         }
 
         [Test]
         public void ShouldGenerateImagePathCorrectlyEvenWithTrailingBackslashes()
         {
-            var result = _imageHelper.GenerateImagePath(1, @"foo\", @"bar\", _rootPath + @"\");
-            Assert.AreEqual(_rootPath + @"\" + 1 + @"\foo\bar\", result);
+            var result = _imageHelper.GenerateImagePath(1, @"foo\", _rootPath + @"\");
+            Assert.AreEqual(_rootPath + @"\" + 1 + @"\foo\", result);
         }
 
         [Test]
         public void ShouldThrowExceptionSomeStringParamsAreEmptyOnGenerateImagePath()
         {
-            Assert.Throws<BlogException>(() => _imageHelper.GenerateImagePath(1, "foo", "bar", string.Empty));
+            Assert.Throws<BlogException>(() => _imageHelper.GenerateImagePath(1, "foo", string.Empty));
         }
 
         [Test]
