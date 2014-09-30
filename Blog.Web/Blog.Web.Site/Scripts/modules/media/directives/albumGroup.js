@@ -1,16 +1,12 @@
-﻿ngMedia.directive('albumGroup', function () {
-    var ctrlFn = function ($scope, $rootScope, albumService, errorService, $modal) {
-        var mediaDeleteDialog = $modal({
-            title: 'Delete?',
-            content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
-            scope: $scope,
-            template: window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
-            show: false
-        });
+﻿// ReSharper disable InconsistentNaming
+
+ngMedia.directive('albumGroup', function () {
+    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider, $modal, FileUploader) {
+        $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
+           $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
+           configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
 
         $scope.isExpanded = true;
-
-        $scope.newAlbumName = '';
 
         $scope.toggleExpandClass = function () {
             if ($scope.isExpanded) {
@@ -73,6 +69,14 @@
             });
         };
 
+        var mediaDeleteDialog = $modal({
+            title: 'Delete?',
+            content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
+            scope: $scope,
+            template: $window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
+            show: false
+        });
+
         var addAlbum = function (album) {
             albumService.addAlbum(album).then(function (response) {
                 if (response.Error != null) {
@@ -100,8 +104,33 @@
                 errorService.displayError(err);
             });
         };
+
+        // #region angular-file-upload
+        
+        var uploader = $scope.uploader = new FileUploader({
+            scope: $rootScope,
+            url: $scope.uploadUrl,
+            autoUpload: true,
+            headers: { Authorization: 'Bearer ' + ($rootScope.authData ? $rootScope.authData.token : "") }
+        });
+
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item) {
+                var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
+                type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
+            }
+        });
+
+        uploader.onSuccessItem = function (fileItem, response) {
+            response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+            $scope.album.Media.push(response);
+        };
+
+        // #endregion
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "errorService", "$modal"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper", "configProvider", "$modal", "FileUploader"];
 
     return {
         restrict: 'EA',
@@ -114,3 +143,5 @@
         controller: ctrlFn
     };
 });
+
+// ReSharper restore InconsistentNaming

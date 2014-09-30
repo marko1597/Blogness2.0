@@ -83,7 +83,11 @@
                     url: albumApi + "album/" + albumId,
                     method: "DELETE",
                 }).success(function (response) {
-                    deferred.resolve(response);
+                    if (response) {
+                        deferred.resolve(response);
+                    } else {
+                        deferred.reject(response);
+                    }
                 }).error(function (error) {
                     deferred.reject(error);
                 });

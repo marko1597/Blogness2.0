@@ -5,7 +5,7 @@
             scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
 
             scope.applyLayout = function () {
-                $timeout(function () {
+                $interval(function () {
                     resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
 
@@ -15,7 +15,7 @@
                             $(isotopeElements[i]).css({ "margin-right": "0"});
                         }
                     }
-                }, 1500);
+                }, 500, 5);
             };
 
             scope.$on("windowSizeChanged", function (e, d) {

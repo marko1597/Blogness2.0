@@ -10,9 +10,15 @@
         margin-right: 10px;
     }
 
-    .album-group > .header > .btn-header.right > i {
+    .album-group > .header > .btn-header.right > label {
         margin-right: 0;
+        cursor: pointer;
     }
+
+        .album-group > .header > .btn-header.right > label > input[type='file'] {
+            position: fixed;
+            top: -1000px;
+        }
 
     .album-group > .body {
         background: rgb(238, 238, 238);

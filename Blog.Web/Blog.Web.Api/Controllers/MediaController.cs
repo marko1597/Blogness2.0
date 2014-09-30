@@ -6,12 +6,12 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Common.Web.Attributes;
 using Blog.Services.Helpers.Wcf.Interfaces;
 using WebApi.OutputCache.V2;
 
@@ -19,15 +19,18 @@ namespace Blog.Web.Api.Controllers
 {
     public class MediaController : ApiController
     {
+        private readonly IAlbumResource _album;
         private readonly IMediaResource _media;
         private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IConfigurationHelper _configurationHelper;
         private readonly string _mediaPath = string.Empty;
 
-        public MediaController(IMediaResource media, IUsersResource user, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
+        public MediaController(IMediaResource media, IUsersResource user, IAlbumResource album,
+            IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _media = media;
+            _album = album;
             _user = user;
             _errorSignaler = errorSignaler;
             _configurationHelper = configurationHelper;
@@ -131,11 +134,11 @@ namespace Blog.Web.Api.Controllers
         {
             try
             {
-                if (username != RequestContext.Principal.Identity.Name) 
+                if (username != RequestContext.Principal.Identity.Name)
                     throw new HttpResponseException(HttpStatusCode.Forbidden);
 
                 var user = _user.GetByUserName(username);
-                if (user == null || user.Error != null) throw new Exception("User not specified"); 
+                if (user == null || user.Error != null) throw new Exception("User not specified");
 
                 var filename = string.Empty;
                 var chunkName = string.Empty;
@@ -166,7 +169,7 @@ namespace Blog.Web.Api.Controllers
                 {
                     user.Background = resultMedia;
                 }
-                    
+
                 var userResult = _user.Update(user);
                 if (userResult.Error != null)
                 {
@@ -182,12 +185,27 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        [HttpPost, PreventCrossUserManipulation, Authorize]
-        [Route("api/media/{id}")]
+        [HttpDelete, Authorize]
+        [Route("api/media/{mediaId}")]
         public bool Delete(int mediaId)
         {
             try
             {
+                var media = _media.Get(mediaId);
+
+                if (media == null) return false;
+                if (media.Error != null)
+                {
+                    _errorSignaler.SignalFromCurrentContext(new Exception(media.Error.Message));
+                    return false;
+                }
+
+                var album = _album.Get(media.AlbumId);
+                if (album == null || album.User == null) return false;
+
+                var username = HttpContext.Current.User.Identity.Name;
+                if (album.User.UserName != username) return false;
+
                 _media.Delete(mediaId);
                 return true;
             }
@@ -257,7 +275,7 @@ namespace Blog.Web.Api.Controllers
 
                 if (isThumb)
                 {
-                    mediaPath = media.ThumbnailPath + _configurationHelper.GetAppSettings("ThumbnailPrefix") + 
+                    mediaPath = media.ThumbnailPath + _configurationHelper.GetAppSettings("ThumbnailPrefix") +
                         Path.GetFileNameWithoutExtension(media.FileName) + ".jpg";
                     mediaType = new MediaTypeHeaderValue("image/jpg");
                 }
@@ -306,7 +324,7 @@ namespace Blog.Web.Api.Controllers
                 return Request.CreateErrorResponse(invalidByteRangeException);
             }
         }
-        
+
         private static bool IsVideo(string mimeType)
         {
             var supportedMedia = new List<string>

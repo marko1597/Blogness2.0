@@ -1,4 +1,6 @@
-﻿ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
+﻿// ReSharper disable InconsistentNaming
+
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
     "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService",
     "dateHelper", "configProvider", "authenticationService",
     function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService,
@@ -157,6 +159,8 @@
             configProvider.setDimensions(d.width, d.height);
         });
 
+        // #region angular-file-upload
+
         var uploader = $scope.uploader = new FileUploader({
             scope: $rootScope,
             url: $scope.uploadUrl,
@@ -192,6 +196,10 @@
         uploader.onAfterAddingAll = function () {
         };
 
+        // #endregion
+
         $scope.init();
     }
 ]);
+
+// ReSharper restore InconsistentNaming

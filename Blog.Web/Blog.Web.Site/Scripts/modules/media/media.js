@@ -1,5 +1,6 @@
 ﻿var ngMedia = angular.module("ngMedia",
     [
         "ngShared",
-        "iso.directives"
+        "iso.directives",
+        "angularFileUpload"
     ]);

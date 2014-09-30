@@ -1486,22 +1486,19 @@ blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($
 var ngMedia = angular.module("ngMedia",
     [
         "ngShared",
-        "iso.directives"
+        "iso.directives",
+        "angularFileUpload"
     ]);
 ///#source 1 1 /Scripts/modules/media/directives/albumGroup.js
+// ReSharper disable InconsistentNaming
+
 ngMedia.directive('albumGroup', function () {
-    var ctrlFn = function ($scope, $rootScope, albumService, errorService, $modal) {
-        var mediaDeleteDialog = $modal({
-            title: 'Delete?',
-            content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
-            scope: $scope,
-            template: window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
-            show: false
-        });
+    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider, $modal, FileUploader) {
+        $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
+           $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
+           configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
 
         $scope.isExpanded = true;
-
-        $scope.newAlbumName = '';
 
         $scope.toggleExpandClass = function () {
             if ($scope.isExpanded) {
@@ -1564,6 +1561,14 @@ ngMedia.directive('albumGroup', function () {
             });
         };
 
+        var mediaDeleteDialog = $modal({
+            title: 'Delete?',
+            content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
+            scope: $scope,
+            template: $window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
+            show: false
+        });
+
         var addAlbum = function (album) {
             albumService.addAlbum(album).then(function (response) {
                 if (response.Error != null) {
@@ -1591,8 +1596,33 @@ ngMedia.directive('albumGroup', function () {
                 errorService.displayError(err);
             });
         };
+
+        // #region angular-file-upload
+        
+        var uploader = $scope.uploader = new FileUploader({
+            scope: $rootScope,
+            url: $scope.uploadUrl,
+            autoUpload: true,
+            headers: { Authorization: 'Bearer ' + ($rootScope.authData ? $rootScope.authData.token : "") }
+        });
+
+        uploader.filters.push({
+            name: 'imageFilter',
+            fn: function (item) {
+                var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
+                type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
+            }
+        });
+
+        uploader.onSuccessItem = function (fileItem, response) {
+            response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+            $scope.album.Media.push(response);
+        };
+
+        // #endregion
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "errorService", "$modal"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper", "configProvider", "$modal", "FileUploader"];
 
     return {
         restrict: 'EA',
@@ -1606,6 +1636,7 @@ ngMedia.directive('albumGroup', function () {
     };
 });
 
+// ReSharper restore InconsistentNaming
 ///#source 1 1 /Scripts/modules/media/directives/mediaGroupedList.js
 ngMedia.directive('mediaGroupedList', function () {
     var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
@@ -1838,7 +1869,11 @@ ngMedia.factory('albumService', ["$http", "$q", "configProvider", "dateHelper",
                     url: albumApi + "album/" + albumId,
                     method: "DELETE",
                 }).success(function (response) {
-                    deferred.resolve(response);
+                    if (response) {
+                        deferred.resolve(response);
+                    } else {
+                        deferred.reject(response);
+                    }
                 }).error(function (error) {
                     deferred.reject(error);
                 });
@@ -2048,6 +2083,8 @@ ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$ti
     }
 ]);
 ///#source 1 1 /Scripts/modules/posts/controllers/postsModifyController.js
+// ReSharper disable InconsistentNaming
+
 ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
     "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService",
     "dateHelper", "configProvider", "authenticationService",
@@ -2207,6 +2244,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             configProvider.setDimensions(d.width, d.height);
         });
 
+        // #region angular-file-upload
+
         var uploader = $scope.uploader = new FileUploader({
             scope: $rootScope,
             url: $scope.uploadUrl,
@@ -2242,9 +2281,13 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         uploader.onAfterAddingAll = function () {
         };
 
+        // #endregion
+
         $scope.init();
     }
 ]);
+
+// ReSharper restore InconsistentNaming
 ///#source 1 1 /Scripts/modules/posts/controllers/postsViewController.js
 ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
     "userService", "configProvider", "errorService", "localStorageService",
@@ -2940,7 +2983,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
             scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
 
             scope.applyLayout = function () {
-                $timeout(function () {
+                $interval(function () {
                     resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
 
@@ -2950,7 +2993,7 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
                             $(isotopeElements[i]).css({ "margin-right": "0"});
                         }
                     }
-                }, 1500);
+                }, 500, 5);
             };
 
             scope.$on("windowSizeChanged", function (e, d) {

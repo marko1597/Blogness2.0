@@ -29,7 +29,9 @@
         </div>
         <div class="btn-header right pull-right" ng-show="!album.IsEditing"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Add new media to this album" bs-tooltip="tooltip">
-            <i class="fa fa-picture-o"></i>
+            <label class="fa fa-picture-o">
+                <input nv-file-select type="file" uploader="uploader" />
+            </label>
         </div>
     </div>
     <div class="body animate fade-up" ng-show="isExpanded">
