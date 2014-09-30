@@ -58,7 +58,7 @@
         };
 
         $scope.confirmDelete = function () {
-            albumService.deleteAlbum($scope.album.Id).then(function (response) {
+            albumService.deleteAlbum($scope.album.AlbumId).then(function (response) {
                 mediaDeleteDialog.hide();
 
                 if (response.Error != null) {
