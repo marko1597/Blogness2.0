@@ -98,10 +98,6 @@ namespace Blog.Logic.Core
         {
             try
             {
-                comment.CreatedBy = comment.User.Id;
-                comment.CreatedDate = DateTime.Now;
-                comment.ModifiedBy = comment.User.Id;
-                comment.ModifiedDate = DateTime.Now;
                 var dbComment = CommentMapper.ToEntity(comment);
                 dbComment.User = null;
 

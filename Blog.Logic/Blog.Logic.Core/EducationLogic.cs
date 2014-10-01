@@ -37,10 +37,6 @@ namespace Blog.Logic.Core
         {
             try
             {
-                education.CreatedBy = education.UserId;
-                education.CreatedDate = DateTime.Now;
-                education.ModifiedBy = education.UserId;
-                education.ModifiedDate = DateTime.Now;
                 return EducationMapper.ToDto(_educationRepository.Add(EducationMapper.ToEntity(education)));
             }
             catch (Exception ex)
@@ -53,8 +49,6 @@ namespace Blog.Logic.Core
         {
             try
             {
-                education.ModifiedBy = education.UserId;
-                education.ModifiedDate = DateTime.Now;
                 return EducationMapper.ToDto(_educationRepository.Edit(EducationMapper.ToEntity(education)));
             }
             catch (Exception ex)

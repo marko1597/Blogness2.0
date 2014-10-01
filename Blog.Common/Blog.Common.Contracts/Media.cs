@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Blog.Common.Contracts
 {
@@ -14,19 +15,19 @@ namespace Blog.Common.Contracts
         [DataMember]
         public int AlbumId { get; set; }
 
-        [DataMember]
+        [DataMember, JsonIgnore]
         public string FileName { get; set; }
 
-        [DataMember]
+        [DataMember, JsonIgnore]
         public string CustomName { get; set; }
 
         [DataMember]
         public string MediaUrl { get; set; }
 
-        [DataMember]
+        [DataMember, JsonIgnore]
         public string MediaPath { get; set; }
 
-        [DataMember]
+        [DataMember, JsonIgnore]
         public byte[] MediaContent { get; set; }
 
         [DataMember]

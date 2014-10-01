@@ -85,8 +85,10 @@
     <Compile Include="Helpers\Interfaces\IFileHelper.cs" />
     <Compile Include="Helpers\Interfaces\IImageHelper.cs" />
     <Compile Include="Helpers\Interfaces\IHttpClientHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IPropertyReflection.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
     <Compile Include="Helpers\PasswordManager.cs" />
+    <Compile Include="Helpers\PropertyReflection.cs" />
     <Compile Include="Helpers\ServiceProxyHelper.cs" />
     <Compile Include="Helpers\MediaStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

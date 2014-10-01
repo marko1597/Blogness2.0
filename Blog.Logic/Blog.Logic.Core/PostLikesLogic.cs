@@ -44,10 +44,6 @@ namespace Blog.Logic.Core
                     return null;
                 }
 
-                postLike.CreatedDate = DateTime.Now;
-                postLike.CreatedBy = postLike.UserId;
-                postLike.ModifiedDate = DateTime.Now;
-                postLike.ModifiedBy = postLike.UserId;
                 return PostLikeMapper.ToDto(_postLikeRepository.Add(PostLikeMapper.ToEntity(postLike)));
             }
             catch (Exception ex)

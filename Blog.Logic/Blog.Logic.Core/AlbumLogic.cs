@@ -100,12 +100,7 @@ namespace Blog.Logic.Core
                     return new Album().GenerateError<Album>((int)Constants.Error.ValidationError,
                         string.Format("Album name {0} is already in use.", album.AlbumName));
                 }
-
-                album.CreatedDate = DateTime.Now;
-                album.CreatedBy = album.User.Id;
-                album.ModifiedDate = DateTime.Now;
-                album.ModifiedBy = album.User.Id;
-
+                
                 return AlbumMapper.ToDto(_albumRepository.Add(AlbumMapper.ToEntity(album)));
             }
             catch (Exception ex)
@@ -124,9 +119,6 @@ namespace Blog.Logic.Core
                     return new Album().GenerateError<Album>((int) Constants.Error.ValidationError,
                         string.Format("Album name {0} is already in use.", album.AlbumName));
                 }
-
-                album.ModifiedDate = DateTime.Now;
-                album.ModifiedBy = album.User.Id;
 
                 return AlbumMapper.ToDto(_albumRepository.Edit(AlbumMapper.ToEntity(album)));
             }

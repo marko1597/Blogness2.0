@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Net.Http;
 using System.Security.Principal;
 using System.Web.Http;
@@ -8,14 +9,14 @@ using System.Web.Http.Routing;
 using Blog.Common.Contracts;
 using Blog.Common.Web.Attributes;
 using Blog.Services.Helpers.Wcf.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
 
 namespace Blog.Common.Web.Tests.Attributes
 {
-    [TestClass]
+    [TestFixture]
+    [ExcludeFromCodeCoverage]
     public class PreventCrossUserManipulationTest
     {
         private TestController _controller;

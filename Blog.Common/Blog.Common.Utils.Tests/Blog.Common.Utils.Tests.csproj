@@ -84,6 +84,7 @@
     <Compile Include="Helpers\JsonHelperTest.cs" />
     <Compile Include="Helpers\PasswordManagerTest.cs" />
     <Compile Include="Helpers\FileHelperTest.cs" />
+    <Compile Include="Helpers\PropertyReflectionTest.cs" />
     <Compile Include="Helpers\UserHelperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

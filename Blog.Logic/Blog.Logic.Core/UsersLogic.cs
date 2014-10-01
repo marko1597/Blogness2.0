@@ -123,11 +123,6 @@ namespace Blog.Logic.Core
         {
             try
             {
-                user.CreatedBy = user.Id;
-                user.CreatedDate = DateTime.Now;
-                user.ModifiedBy = user.Id;
-                user.ModifiedDate = DateTime.Now;
-
                 var tUser = _userRepository.Edit(UserMapper.ToEntity(user));
                 return UserMapper.ToDto(tUser);
             }
@@ -218,29 +213,17 @@ namespace Blog.Logic.Core
                 new Db.Album
                 {
                     AlbumName = "Miscellaneous",
-                    IsUserDefault = true,
-                    CreatedBy = dbUser.UserId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedBy = dbUser.UserId,
-                    ModifiedDate = DateTime.Now
+                    IsUserDefault = true
                 },
                 new Db.Album
                 {
                     AlbumName = "Profile",
-                    IsUserDefault = false,
-                    CreatedBy = dbUser.UserId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedBy = dbUser.UserId,
-                    ModifiedDate = DateTime.Now
+                    IsUserDefault = false
                 },
                 new Db.Album
                 {
                     AlbumName = "Background",
-                    IsUserDefault = false,
-                    CreatedBy = dbUser.UserId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedBy = dbUser.UserId,
-                    ModifiedDate = DateTime.Now
+                    IsUserDefault = false
                 }
             };
 

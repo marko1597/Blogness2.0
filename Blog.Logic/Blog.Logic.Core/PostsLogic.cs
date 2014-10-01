@@ -233,10 +233,6 @@ namespace Blog.Logic.Core
             {
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
-                post.CreatedBy = post.User.Id;
-                post.CreatedDate = DateTime.Now;
-                post.ModifiedBy = post.User.Id;
-                post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -253,7 +249,6 @@ namespace Blog.Logic.Core
             {
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
-                post.ModifiedDate = DateTime.Now;
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -285,10 +280,6 @@ namespace Blog.Logic.Core
             var enumerable = tags as Tag[] ?? tags.ToArray();
             foreach (var tag in enumerable)
             {
-                tag.CreatedBy = userId;
-                tag.CreatedDate = DateTime.Now;
-                tag.ModifiedBy = userId;
-                tag.ModifiedDate = DateTime.Now;
                 tag.TagName = tag.TagName.ToLower();
             }
 
@@ -300,10 +291,6 @@ namespace Blog.Logic.Core
             var postContents = contents as PostContent[] ?? contents.ToArray();
             foreach (var postContent in postContents)
             {
-                postContent.CreatedBy = userId;
-                postContent.CreatedDate = DateTime.Now;
-                postContent.ModifiedBy = userId;
-                postContent.ModifiedDate = DateTime.Now;
                 postContent.PostId = postId;
             }
 

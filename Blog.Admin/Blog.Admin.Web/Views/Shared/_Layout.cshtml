@@ -12,6 +12,17 @@
     <!-- #region bootstrap css -->
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/blog-bootstrap.css" rel="stylesheet" />
+
+    @if (UseMaterialDesign())
+    {
+        <link href="~/Scripts/bower_components/bootstrap-material-design/css-compiled/material.css" rel="stylesheet" />
+    }
+    else
+    {
+        <link href="~/Content/blog-bootstrap.css" rel="stylesheet" />
+    }
+
+    <link href="~/Scripts/bower_components/bootstrap-material-design/css-compiled/ripples.css" rel="stylesheet" />
     <link href="~/Content/font.css" rel="stylesheet" />
     <link href="~/Content/site.css" rel="stylesheet" />
     <!-- #endregion -->
@@ -143,6 +154,8 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/bower_components/bootstrap-material-design/scripts/ripples.js"></script>
+    <script src="~/Scripts/bower_components/bootstrap-material-design/scripts/material.js"></script>
     <script src="~/Scripts/moment-with-locales.js"></script>
     <script src="~/Scripts/respond.js"></script>
     <script src="~/Scripts/blogajax.js"></script>
@@ -154,6 +167,19 @@
 
 @functions
 {
+    /// <summary>
+    /// Check web.config whether to use material design
+    /// </summary>
+    /// <returns>Boolean value</returns>
+    public bool UseMaterialDesign()
+    {
+        return Convert.ToBoolean(ConfigurationManager.AppSettings.Get("UseMaterialDesign"));
+    }
+    
+    /// <summary>
+    /// Get node js app url path
+    /// </summary>
+    /// <returns>Node JS application url</returns>
     public string GetBlogSockets()
     {
         var sb = new StringBuilder();
@@ -162,6 +188,10 @@
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Get node js app script
+    /// </summary>
+    /// <returns>Node JS script url</returns>
     public string GetBlogSocketsJs()
     {
         var sb = new StringBuilder();

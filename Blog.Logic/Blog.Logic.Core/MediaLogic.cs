@@ -195,11 +195,7 @@ namespace Blog.Logic.Core
                 AlbumId = albumId,
                 MediaPath = mediaPath,
                 ThumbnailPath = mediaPath + "tn\\",
-                CustomName = customName,
-                CreatedBy = userId,
-                CreatedDate = DateTime.Now,
-                ModifiedBy = userId,
-                ModifiedDate = DateTime.Now
+                CustomName = customName
             };
             media.ThumbnailUrl = Constants.FileMediaUrl + media.CustomName + @"/thumb";
             media.MediaUrl = Constants.FileMediaUrl + media.CustomName;
@@ -221,10 +217,6 @@ namespace Blog.Logic.Core
                 var tAlbum = _albumRepository.Add(new Album
                 {
                     AlbumName = albumName,
-                    CreatedBy = userId,
-                    CreatedDate = DateTime.Now,
-                    ModifiedBy = userId,
-                    ModifiedDate = DateTime.Now,
                     UserId = userId,
                     IsUserDefault = false
                 });
