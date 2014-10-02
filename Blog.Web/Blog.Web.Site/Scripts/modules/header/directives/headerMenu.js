@@ -64,7 +64,7 @@
     };
     ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "$window", "configProvider", "authenticationService"];
 
-    var linkFn = function() {
+    var linkFn = function () {
     };
 
     return {

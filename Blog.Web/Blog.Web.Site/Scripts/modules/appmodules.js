@@ -716,7 +716,7 @@ ngHeader.directive('headerMenu', function () {
     };
     ctrlFn.$inject = ["$scope", "$location", "$rootScope", "snapRemote", "$http", "$window", "configProvider", "authenticationService"];
 
-    var linkFn = function() {
+    var linkFn = function () {
     };
 
     return {
@@ -728,7 +728,6 @@ ngHeader.directive('headerMenu', function () {
         controller: ctrlFn
     };
 });
-
 ///#source 1 1 /Scripts/modules/logger/logger.js
 var ngLogger = angular.module("ngLogger", ["ngConfig"]);
 ///#source 1 1 /Scripts/modules/logger/services/errorLogService.js
