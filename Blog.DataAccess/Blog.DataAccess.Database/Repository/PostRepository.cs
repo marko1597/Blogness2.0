@@ -94,6 +94,7 @@ namespace Blog.DataAccess.Database.Repository
 
         public override Post Add(Post post)
         {
+            // Add tags included in this entity to DB
             if (post.Tags != null)
             {
                 var tags = post.Tags;
@@ -105,6 +106,11 @@ namespace Blog.DataAccess.Database.Repository
 
                     if (q.Count == 0)
                     {
+                        t.CreatedDate = DateTime.Now;
+                        t.CreatedBy = post.UserId;
+                        t.ModifiedDate = DateTime.Now;
+                        t.ModifiedBy = post.UserId;
+
                         Context.Tags.Attach(t);
                         Context.Entry(t).State = EntityState.Added;
                         post.Tags.Add(t);
@@ -118,6 +124,7 @@ namespace Blog.DataAccess.Database.Repository
                 }
             }
 
+            // Add post contents included in this entity to DB
             if (post.PostContents != null)
             {
                 var contents = post.PostContents;
@@ -125,6 +132,11 @@ namespace Blog.DataAccess.Database.Repository
 
                 foreach (var postContent in contents)
                 {
+                    postContent.CreatedDate = DateTime.Now;
+                    postContent.CreatedBy = post.UserId;
+                    postContent.ModifiedDate = DateTime.Now;
+                    postContent.ModifiedBy = post.UserId;
+
                     post.PostContents.Add(postContent);
                 }
             }
@@ -201,6 +213,14 @@ namespace Blog.DataAccess.Database.Repository
                            where dbTagNames.All(a => a != t.TagName)
                            select t).ToList();
 
+            foreach(var t in newTags)
+            {
+                t.CreatedDate = DateTime.Now;
+                t.CreatedBy = post.UserId;
+                t.ModifiedDate = DateTime.Now;
+                t.ModifiedBy = post.UserId;
+            }
+
             return newTags;
         }
 
@@ -215,6 +235,14 @@ namespace Blog.DataAccess.Database.Repository
             var newContents = (from c in clientContents
                                where dbContents.All(a => a.MediaId != c.MediaId)
                                select c).ToList();
+
+            foreach (var pc in newContents)
+            {
+                pc.CreatedDate = DateTime.Now;
+                pc.CreatedBy = post.UserId;
+                pc.ModifiedDate = DateTime.Now;
+                pc.ModifiedBy = post.UserId;
+            }
 
             return newContents;
         }
