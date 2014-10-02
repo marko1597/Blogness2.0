@@ -141,6 +141,11 @@ namespace Blog.DataAccess.Database.Repository
                 }
             }
 
+            post.CreatedDate = DateTime.Now;
+            post.CreatedBy = post.UserId;
+            post.ModifiedDate = DateTime.Now;
+            post.ModifiedBy = post.UserId;
+
             Context.Entry(post).State = EntityState.Added;
             Context.SaveChanges();
 
@@ -167,7 +172,7 @@ namespace Blog.DataAccess.Database.Repository
                     Context.Entry(t).State = GetTagState(t, post.Tags);
                 }
 
-                var newtags = GetNewTags(db.Tags, post.Tags);
+                var newtags = GetNewTags(db.Tags, post.Tags, post.UserId);
                 newtags.ForEach(a =>
                                 {
                                     Context.Tags.Attach(a);
@@ -181,7 +186,7 @@ namespace Blog.DataAccess.Database.Repository
                     Context.Entry(c).State = GetContentState(c, post.PostContents);
                 }
 
-                var newcontents = GetNewContents(db.PostContents, post.PostContents);
+                var newcontents = GetNewContents(db.PostContents, post.PostContents, post.UserId);
                 newcontents.ForEach(a =>
                 {
                     Context.PostContents.Attach(a);
@@ -189,6 +194,9 @@ namespace Blog.DataAccess.Database.Repository
                     db.PostContents.Add(a);
                 });
             }
+
+            db.ModifiedDate = DateTime.Now;
+            db.ModifiedBy = post.UserId;
 
             Context.Entry(db).State = EntityState.Modified;
             Context.SaveChanges();
@@ -206,7 +214,7 @@ namespace Blog.DataAccess.Database.Repository
                 EntityState.Unchanged : EntityState.Deleted;
         }
 
-        private List<Tag> GetNewTags(IEnumerable<Tag> dbTags, IEnumerable<Tag> clientTags)
+        private List<Tag> GetNewTags(IEnumerable<Tag> dbTags, IEnumerable<Tag> clientTags, int userId)
         {
             var dbTagNames = dbTags.Select(a => a.TagName.ToLower()).ToList();
             var newTags = (from t in clientTags
@@ -216,9 +224,9 @@ namespace Blog.DataAccess.Database.Repository
             foreach(var t in newTags)
             {
                 t.CreatedDate = DateTime.Now;
-                t.CreatedBy = post.UserId;
+                t.CreatedBy = userId;
                 t.ModifiedDate = DateTime.Now;
-                t.ModifiedBy = post.UserId;
+                t.ModifiedBy = userId;
             }
 
             return newTags;
@@ -230,7 +238,7 @@ namespace Blog.DataAccess.Database.Repository
             return tContent.Count > 0 ? EntityState.Unchanged : EntityState.Deleted;
         }
 
-        private List<PostContent> GetNewContents(IEnumerable<PostContent> dbContents, IEnumerable<PostContent> clientContents)
+        private List<PostContent> GetNewContents(IEnumerable<PostContent> dbContents, IEnumerable<PostContent> clientContents, int userId)
         {
             var newContents = (from c in clientContents
                                where dbContents.All(a => a.MediaId != c.MediaId)
@@ -239,9 +247,9 @@ namespace Blog.DataAccess.Database.Repository
             foreach (var pc in newContents)
             {
                 pc.CreatedDate = DateTime.Now;
-                pc.CreatedBy = post.UserId;
+                pc.CreatedBy = userId;
                 pc.ModifiedDate = DateTime.Now;
-                pc.ModifiedBy = post.UserId;
+                pc.ModifiedBy = userId;
             }
 
             return newContents;

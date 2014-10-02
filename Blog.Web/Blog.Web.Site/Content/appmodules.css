@@ -699,6 +699,7 @@ input[type="checkbox"].input-validation-error {
 
 s
 /* #endregion */
+
 /* #region angular tags-input styles */
 tags-input *, *:before, *:after {
     -moz-box-sizing: border-box;
@@ -708,8 +709,6 @@ tags-input *, *:before, *:after {
 
 tags-input .host {
     position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
     tags-input .host:active {
@@ -994,17 +993,17 @@ div.login-alert {
 }
 
     #modify-post-main > div {
-        padding: 10px;
+        padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
         #modify-post-main > div > h5 {
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
         }
 
         #modify-post-main > div.modify-post-title > span {
             width: 5%;
-            margin-right: 10px;
+            margin-right: 15px;
         }
 
         #modify-post-main > div.modify-post-title > input {
@@ -1013,7 +1012,7 @@ div.login-alert {
         }
 
         #modify-post-main > div.modify-post-message {
-            padding: 10px;
+            padding: 15px;
         }
 
             #modify-post-main > div.modify-post-message > div {
@@ -1033,7 +1032,7 @@ div.login-alert {
             
 @media (max-width: 767px) {
     #modify-post-main > div.modify-post-message {
-        padding: 10px;
+        padding: 15px;
     }
 }
 
@@ -2033,7 +2032,7 @@ div.file-upload div.dropzone {
 }
 
 div.file-upload input[type=file] {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     display: inline-block;
 }
 

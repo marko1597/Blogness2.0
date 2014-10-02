@@ -149,15 +149,10 @@ namespace Blog.DataAccess.Database.Repository
 
         public int GetUserId(T entity)
         {
-            var hasUserId = PropertyReflection.HasProperty(entity, "UserId");
-            if (hasUserId) return Convert.ToInt32(PropertyReflection.GetPropertyValue(entity, "UserId"));
+            var userId = PropertyReflection.GetPropertyValue(entity, "UserId", true);
+            if (userId != null) return Convert.ToInt32(userId);
 
-            var hasUserObject = PropertyReflection.HasProperty(entity, "User");
-            if (!hasUserObject) return 0;
-
-            var user = (User)PropertyReflection.GetPropertyValue(entity, "User");
-            var userId = Convert.ToInt32(PropertyReflection.GetPropertyValue(user, "Id"));
-            return userId;
+            return 0;
         }
 
         #endregion

@@ -54,6 +54,48 @@ namespace Blog.Common.Utils.Tests.Helpers
         }
 
         [Test]
+        public void ShouldGetPropertyValueSuccessfullyByRecursion()
+        {
+            var dummyObject = new DummyObjectComplex { Dummy = new DummyObject { Name = "Stars" } };
+            var propertyReflection = new PropertyReflection();
+            var result = propertyReflection.GetPropertyValue(dummyObject, "Name", true);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Stars", result.ToString());
+        }
+        
+        [Test]
+        public void ShouldGetPropertyValueSuccessfullyByRecursionOnParentObject()
+        {
+            var dummyObject = new DummyObject { Id = 5 };
+            var propertyReflection = new PropertyReflection();
+            var result = propertyReflection.GetPropertyValue(dummyObject, "Id", true);
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, Convert.ToInt32(result));
+        }
+
+        [Test]
+        public void ShouldReturnNullWhenGetPropertyValueByRecursionFoundNoProperty()
+        {
+            var dummyObject = new EmptyDummy();
+            var propertyReflection = new PropertyReflection();
+            var result = propertyReflection.GetPropertyValue(dummyObject, "Doughnut", true);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
+        public void ShouldReturnNullWhenGetPropertyValueByRecursionCannotFindProperty()
+        {
+            var dummyObject = new EmptyDummy();
+            var propertyReflection = new PropertyReflection();
+            var result = propertyReflection.GetPropertyValue(dummyObject, "Doughnut", true);
+
+            Assert.IsNull(result);
+        }
+
+        [Test]
         public void ShouldSetPropertySuccessfully()
         {
             var dummyObject = new DummyObject();
@@ -82,5 +124,13 @@ namespace Blog.Common.Utils.Tests.Helpers
             public string Name { get; set; }
             public DateTime DateTime { get; set; }
         }
+
+        protected class DummyObjectComplex
+        {
+            public int SomeId { get; set; }
+            public DummyObject Dummy { get; set; }
+        }
+
+        protected class EmptyDummy {}
     }
 }

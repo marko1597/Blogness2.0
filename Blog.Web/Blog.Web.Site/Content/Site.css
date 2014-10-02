@@ -699,6 +699,7 @@ input[type="checkbox"].input-validation-error {
 
 s
 /* #endregion */
+
 /* #region angular tags-input styles */
 tags-input *, *:before, *:after {
     -moz-box-sizing: border-box;
@@ -708,8 +709,6 @@ tags-input *, *:before, *:after {
 
 tags-input .host {
     position: relative;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
     tags-input .host:active {

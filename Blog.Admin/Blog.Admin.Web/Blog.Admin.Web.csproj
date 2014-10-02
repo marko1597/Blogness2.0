@@ -327,6 +327,9 @@
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\lists.less" />
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\material-wfont.less" />
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\material.less" />
+    <Content Include="Scripts\bower_components\bootstrap-material-design\less\material.min.css">
+      <DependentUpon>material.css</DependentUpon>
+    </Content>
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\mixins.less" />
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\navbar.less" />
     <Content Include="Scripts\bower_components\bootstrap-material-design\less\plugin-nouislider.less" />
