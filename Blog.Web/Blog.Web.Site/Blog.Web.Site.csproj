@@ -323,6 +323,7 @@
     <Content Include="Content\modules\media\albumgroup.css" />
     <Content Include="Content\modules\media\mediagroupedlist.css" />
     <Content Include="Content\modules\media\mediaitem.css" />
+    <Content Include="Content\modules\media\mediaselectiondialog.css" />
     <Content Include="Content\modules\modifypost.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
     <Content Include="Content\modules\posts\postcontents.css" />
@@ -3058,6 +3059,7 @@
     <Content Include="Scripts\templates\modules\media\mediaDeleteDialog.html" />
     <Content Include="Scripts\templates\modules\media\mediaGroupedList.html" />
     <Content Include="Scripts\templates\modules\media\mediaItem.html" />
+    <Content Include="Scripts\templates\modules\media\mediaSelectionDialog.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />

@@ -1,15 +1,24 @@
 ﻿// ReSharper disable InconsistentNaming
 
-ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
-    "FileUploader", "localStorageService", "postsService", "userService", "tagsService", "errorService",
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "$modal",
+    "FileUploader", "localStorageService", "postsService", "userService", "albumService", "tagsService", "errorService",
     "dateHelper", "configProvider", "authenticationService",
-    function ($scope, $rootScope, $location, $timeout, $window, FileUploader, localStorageService,
-        postsService, userService, tagsService, errorService, dateHelper, configProvider,
+    function ($scope, $rootScope, $location, $timeout, $window, $modal, FileUploader, localStorageService,
+        postsService, userService, albumService, tagsService, errorService, dateHelper, configProvider,
         authenticationService) {
+
+        var mediaSelectionDialog = $modal({
+            title: 'Select media to add',
+            scope: $scope,
+            template: window.blogConfiguration.templatesModulesUrl + "media/mediaSelectionDialog.html",
+            show: false
+        });
 
         $scope.isAdding = true;
 
         $scope.existingContents = [];
+
+        $scope.albums = [];
 
         $scope.username = localStorageService.get("username");
 
@@ -130,6 +139,65 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.cancelPost = function() {
             $location.path("/");
+        };
+
+        $scope.launchMediaSelectionDialog = function () {
+            albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
+                _.each(resp, function (a) {
+                    _.each(a.Media, function (m) {
+                        m.IsSelected = false;
+                    });
+                });
+
+                $scope.albums = resp;
+                mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.getThumbnailUrl = function (media) {
+            return {
+                "background-image": "url(" + media.ThumbnailUrl + ")"
+            };
+        };
+
+        $scope.addMediaToExistingContents = function (media) {
+            var item = {
+                file: {
+                    name: media.FileName,
+                    size: 1e6
+                },
+                mediaId: media.MediaId,
+                progress: 100,
+                isUploaded: true,
+                isSuccess: true,
+                isExisting: true,
+                url: media.ThumbnailUrl,
+                base: t,
+                remove: function () {
+                    var index = $scope.post.PostContents.indexOf(this.base);
+                    $scope.post.PostContents.splice(index);
+                    uploader.removeFromQueue(this);
+                }
+            };
+            $scope.existingContents.push(item);
+            
+            $timeout(function () {
+                uploader.queue.push(item);
+                $scope.$broadcast("resizeIsotopeItems");
+            }, 500);
+        };
+
+        $scope.removeMediaToExistingContents = function (media) {
+            var index = $scope.existingContents.indexOf(media);
+            $scope.existingContents.splice(index, 1);
+
+            $timeout(function () {
+                var uploaderIndex = $scope.existingContents.indexOf(media);
+                uploader.queue.splice(uploaderIndex, 1);
+                $scope.$broadcast("resizeIsotopeItems");
+            }, 500);
         };
 
         $scope.init = function () {

@@ -1,0 +1,28 @@
+﻿<div id="logged-user-info">
+    <div ng-show="isLoggedIn()">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-user"></i>
+                {{user.FullName}}
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="/#/user" ng-click="toggleNavigation()">
+                        <i class="fa fa-edit"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="" ng-click="toggleNavigation()">
+                        <i class="fa fa-lock"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div ng-show="!isLoggedIn()">
+        <button class="btn btn-primary" ng-click="launchLoginForm()">Click here to log in or register</button>
+    </div>
+</div>

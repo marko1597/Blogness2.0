@@ -1,0 +1,24 @@
+﻿#media-selection-dialog .modal-body ul {
+    padding: 0;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+    #media-selection-dialog .modal-body ul li {
+        display: inline-block;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        position: relative;
+    }
+
+        #media-selection-dialog .modal-body ul li .center-cropped {
+            width: 25%;
+            height: 150px;
+        }
+
+        #media-selection-dialog .modal-body ul li .center-cropped img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+        }

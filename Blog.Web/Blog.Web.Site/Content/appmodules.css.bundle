@@ -38,6 +38,7 @@
     <file>/Content/modules/media/mediagroupedlist.css</file>
     <file>/Content/modules/media/albumgroup.css</file>
     <file>/Content/modules/media/mediaitem.css</file>
+    <file>/Content/modules/media/mediaselectiondialog.css</file>
     
     <file>/Content/modules/posts/postcontents.css</file>
     <file>/Content/modules/posts/postlikes.css</file>
