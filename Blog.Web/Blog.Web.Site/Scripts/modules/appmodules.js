@@ -779,13 +779,66 @@ var ngLogin = angular.module("ngLogin",
         "LocalStorageModule",
         "mgcrea.ngStrap"
     ]);
+///#source 1 1 /Scripts/modules/login/directives/loggedUser.js
+ngLogin.directive('loggedUser', function () {
+    var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
+        $scope.user = {};
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.isLoggedIn = function () {
+            if ($scope.authData) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.logout = function () {
+            authenticationService.logout();
+            $window.location.href = configProvider.getSettings().BlogRoot + "/account";
+        };
+
+        $scope.launchLoginForm = function () {
+            $rootScope.$broadcast("launchLoginForm", { canClose: true });
+        };
+
+        $scope.toggleNavigation = function () {
+            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
+        };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
+        });
+
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
+
+    return {
+        restrict: 'EA',
+        scope: { data: '=' },
+        replace: true,
+        controller: ctrlFn,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "login/loggedUser.html",
+    };
+});
+
 ///#source 1 1 /Scripts/modules/login/directives/loginForm.js
 ngLogin.directive('loginForm', function () {
     var ctrlFn = function ($scope, $rootScope, $timeout, $location, $window, errorService, localStorageService, configProvider, authenticationService) {
         $scope.username = "";
+
         $scope.password = "";
+
         $scope.rememberMe = false;
+
         $scope.errorMessage = "";
+
         $scope.registerPopover = {
             title: "Don't have an account?",
             content: "Create an account with Bloggity so you bloggity-bliggity-blog away!"
@@ -2243,9 +2296,11 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         };
         
         $rootScope.$watch('user', function () {
-            $scope.user = $rootScope.user;
-            $scope.username = $scope.user.UserName;
-            $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.username = $scope.user.UserName;
+                $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+            }
         });
 
         $scope.$on("userLoggedIn", function () {

@@ -28,6 +28,7 @@
     
     <file>/Content/modules/header/headermenu.css</file>
     
+    <file>/Content/modules/loginform/loggeduser.css</file>
     <file>/Content/modules/loginform/loginform.css</file>
     <file>/Content/modules/loginform/loginformmodal.css</file>
     <file>/Content/modules/loginform/registerform.css</file>

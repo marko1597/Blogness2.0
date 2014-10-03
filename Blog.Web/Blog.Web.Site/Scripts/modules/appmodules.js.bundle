@@ -35,6 +35,7 @@
     <file>/Scripts/modules/logger/services/stacktraceService.js</file>
     
     <file>/Scripts/modules/login/login.js</file>
+    <file>/Scripts/modules/login/directives/loggedUser.js</file>
     <file>/Scripts/modules/login/directives/loginForm.js</file>
     <file>/Scripts/modules/login/directives/loginFormModal.js</file>
     <file>/Scripts/modules/login/directives/registerForm.js</file>

@@ -1,19 +1,20 @@
 ﻿<nav class="navigation-menu" id="navigation-menu">
-    <div class="user-info">
-        <div ng-show="isLoggedIn()">
-            <h4 class="icon" ng-show="isLoggedIn()">
-                <a href="/#/user" ng-click="toggleNavigation()">{{user.FullName}}</a>
-            </h4>
-            <a ng-click="logout()">
-                <i class="fa fa-lock"></i>Logout
-            </a>
-        </div>
-        <div ng-show="!isLoggedIn()">
-            <p>You are not logged in.</p>
-            <button class="btn btn-primary" ng-click="launchLoginForm()">Click here to log in or register</button>
-        </div>
-    </div>
     <ul>
+        <li class="visible-xs">
+            <a>
+                <div logged-user></div>
+            </a>
+        </li>
+        <li>
+            <a>
+                <form role="search">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <i class="fa fa-search">
+                        <input type="submit" class="hidden" />
+                    </i>
+                </form>
+            </a>
+        </li>
         <li ng-repeat="navigationItem in navigationItems">
             <a class="icon" href="{{navigationItem.href}}" ng-click="toggleNavigation()">
                 <i class="fa" ng-class="navigationItem.icon"></i>

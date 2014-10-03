@@ -145,9 +145,11 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         };
         
         $rootScope.$watch('user', function () {
-            $scope.user = $rootScope.user;
-            $scope.username = $scope.user.UserName;
-            $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.username = $scope.user.UserName;
+                $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+            }
         });
 
         $scope.$on("userLoggedIn", function () {

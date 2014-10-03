@@ -1,0 +1,15 @@
+﻿#logged-user-info {
+    margin: 8px 30px;
+}
+
+@media(max-width: 767px) {
+    #logged-user-info {
+        margin: 0;
+    }
+}
+
+#logged-user-info .btn-group,
+#logged-user-info button,
+#logged-user-info .btn-group > ul {
+    width: 100%;
+}

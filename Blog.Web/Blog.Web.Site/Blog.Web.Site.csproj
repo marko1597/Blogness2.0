@@ -316,6 +316,7 @@
     <Content Include="Content\modules\errorpage.css" />
     <Content Include="Content\modules\error\errorDisplay.css" />
     <Content Include="Content\modules\header\headermenu.css" />
+    <Content Include="Content\modules\loginform\loggeduser.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\loginform\loginformmodal.css" />
     <Content Include="Content\modules\loginform\registerform.css" />
@@ -2170,6 +2171,7 @@
     <Content Include="Scripts\modules\comments\directives\commentsList.js" />
     <Content Include="Scripts\modules\comments\services\commentsService.js" />
     <Content Include="Scripts\modules\init.js" />
+    <Content Include="Scripts\modules\login\directives\loggedUser.js" />
     <Content Include="Scripts\modules\login\directives\loginFormModal.js" />
     <Content Include="Scripts\modules\login\directives\registerForm.js" />
     <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
@@ -3048,6 +3050,7 @@
     <Content Include="Scripts\templates\modules\comments\commentsList.html" />
     <Content Include="Scripts\templates\modules\error\errorDisplay.html" />
     <Content Include="Scripts\templates\modules\header\headerMenu.html" />
+    <Content Include="Scripts\templates\modules\login\loggedUser.html" />
     <Content Include="Scripts\templates\modules\login\loginForm.html" />
     <Content Include="Scripts\templates\modules\login\loginFormModal.html" />
     <Content Include="Scripts\templates\modules\login\registerForm.html" />

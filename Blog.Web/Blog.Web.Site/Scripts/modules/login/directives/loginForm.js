@@ -1,9 +1,13 @@
 ﻿ngLogin.directive('loginForm', function () {
     var ctrlFn = function ($scope, $rootScope, $timeout, $location, $window, errorService, localStorageService, configProvider, authenticationService) {
         $scope.username = "";
+
         $scope.password = "";
+
         $scope.rememberMe = false;
+
         $scope.errorMessage = "";
+
         $scope.registerPopover = {
             title: "Don't have an account?",
             content: "Create an account with Bloggity so you bloggity-bliggity-blog away!"
