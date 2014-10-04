@@ -12,12 +12,10 @@
         };
 
         $scope.goToProfile = function() {
-            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
             $location.path("/user");
         };
 
         $scope.logout = function () {
-            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
             authenticationService.logout();
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
         };

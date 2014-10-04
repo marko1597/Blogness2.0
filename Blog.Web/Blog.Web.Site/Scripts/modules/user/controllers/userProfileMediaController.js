@@ -46,14 +46,7 @@
                 errorService.displayError(e);
             });
         };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.getMediaByUser();
-            }
-        });
-
+        
         $scope.init();
     }
 ]);

@@ -43,14 +43,6 @@
                 errorService.displayErrorRedirect(err);
             });
         };
-        
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                $scope.$broadcast("viewedUserLoaded", $scope.user);
-            }
-        });
 
         $scope.init();
     }

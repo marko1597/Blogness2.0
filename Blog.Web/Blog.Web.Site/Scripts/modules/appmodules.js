@@ -794,7 +794,6 @@ ngLogin.directive('loggedUser', function () {
         };
 
         $scope.goToProfile = function() {
-            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
             $location.path("/user");
         };
 
@@ -3784,14 +3783,6 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
                 errorService.displayErrorRedirect(err);
             });
         };
-        
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.userFullName = $scope.user.FirstName + " " + $scope.user.LastName;
-                $scope.$broadcast("viewedUserLoaded", $scope.user);
-            }
-        });
 
         $scope.init();
     }
@@ -3850,14 +3841,7 @@ ngUser.controller('userProfileMediaController', ["$scope", "$rootScope", "$state
                 errorService.displayError(e);
             });
         };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.getMediaByUser();
-            }
-        });
-
+        
         $scope.init();
     }
 ]);
@@ -3882,13 +3866,6 @@ ngUser.controller('userProfilePostsController', ["$scope", "$rootScope", "$state
             $rootScope.$broadcast("updateScrollTriggerWatch", "user-profile-posts-list");
         };
 
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.getPostsByUser();
-            }
-        });
-        
         $scope.getUserInfo = function () {
             if ($scope.isBusy) {
                 return;
