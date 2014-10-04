@@ -13,5 +13,5 @@
         "ngConfig",
         "LocalStorageModule",
         "angularFileUpload",
-        "angular-carousel"
+        "slick"
     ]);

@@ -1,6 +1,6 @@
 ﻿ngPosts.directive('postListItem', [function () {
-    var ctrlFn = function ($scope, $location, localStorageService) {
-        
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+
         $scope.post = $scope.data.Post;
 
         $scope.user = $scope.data.Post.User;
@@ -10,6 +10,8 @@
         $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
 
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
+
+        $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
         
         $scope.getCommentPopover = function(commentId) {
             var comment = _.where($scope.comments, { CommentId: commentId });
@@ -21,18 +23,32 @@
             return $scope.data.Width;
         };
 
-        $scope.isEditable = function () {
-            if ($scope.user.UserName === $scope.username) {
-                return true;
+        $scope.toggleIsEditable = function () {
+            if ($scope.user && $scope.user.UserName === $scope.username) {
+                $scope.isEditable = true;
             }
-            return false;
+            $scope.isEditable = false;
         };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
 
         $scope.editPost = function() {
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
 
     return {
         restrict: 'EA',

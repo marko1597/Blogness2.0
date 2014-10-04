@@ -699,7 +699,6 @@ input[type="checkbox"].input-validation-error {
 
 s
 /* #endregion */
-
 /* #region angular tags-input styles */
 tags-input *, *:before, *:after {
     -moz-box-sizing: border-box;
@@ -840,13 +839,29 @@ tags-input .autocomplete {
 
 /* #region angular carousel styles */
 
-.rn-carousel-control {
-    background: #56c2e1;
-    border: 1px solid #46b3d3;
-    border-radius: 20px;
-    width: 40px;
-    padding: 0 12px;
-    color: #fff;
+.slick-prev {
+    left: 15px;
 }
+
+.slick-next {
+    right: 15px;
+}
+
+.slick-prev, .slick-next {
+    height: 40px;
+    width: 40px;
+    text-shadow: 2px 0 0 #333, 
+        -2px 0 0 #333, 
+        0 2px 0 #333, 
+        0 -2px 0 #333, 
+        1px 1px #666, 
+        -1px -1px 0 #333, 
+        1px -1px 0 #333, 
+        -1px 1px 0 #333;
+}
+
+    .slick-prev:before, .slick-next:before {
+        font-size: 40px;
+    }
 
 /* #endregion */

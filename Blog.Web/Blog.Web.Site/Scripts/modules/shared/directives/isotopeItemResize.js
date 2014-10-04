@@ -9,12 +9,13 @@
                     resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
 
-                    var isotopeElements = elem.children(".isotope-item");
-                    for (var i = 0; i < isotopeElements.length; i++) {
-                        if ((i + 1) % scope.columnCount == 0) {
-                            $(isotopeElements[i]).css({ "margin-right": "0"});
-                        }
-                    }
+                    // TODO: temporarily removed and to be verified if it works!
+                    //var isotopeElements = elem.children(".isotope-item");
+                    //for (var i = 0; i < isotopeElements.length; i++) {
+                    //    if ((i + 1) % scope.columnCount == 0) {
+                    //        $(isotopeElements[i]).css({ "margin-right": "0"});
+                    //    }
+                    //}
                 }, 500, 5);
             };
 
@@ -71,9 +72,9 @@
                         if (attrs.resizeBroadcast != undefined)
                             scope.$emit(attrs.resizeBroadcast, "xlarge");
                     } else if (containerWidth > 992) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "24%");
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "23.5%");
                         _.each($(elem).children(".isotope-item"), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "24%" : attrs.resizeLarge;
+                            var large = attrs.resizeLarge == undefined ? "23.5%" : attrs.resizeLarge;
                             $(a).width(large);
                         });
                         if (attrs.resizeBroadcast != undefined)

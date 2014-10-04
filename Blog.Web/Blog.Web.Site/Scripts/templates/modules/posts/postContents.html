@@ -1,9 +1,7 @@
 ﻿<div>
-    <ul rn-carousel rn-carousel-buffered rn-carousel-indicator rn-carousel-control class="my-slider standard ng-cloak">
-        <li class="post-item-content" ng-repeat="content in contents">
-            <p>{{content.PostContentTitle}}</p>
+    <slick dots="true" infinite="true" speed="300" slides-to-show="1" slides-to-scroll="1" arrows="true">
+        <div class="post-item-content" ng-repeat="content in contents">
             <div media-item media="content.Media" data-mode="thumbnail"></div>
-            <p>{{content.PostContentText}}</p>
-        </li>
-    </ul>
+        </div>
+    </slick>
 </div>

@@ -11,7 +11,7 @@
                 <a href="/#/user/{{post.User.UserName}}">@{{post.User.UserName}}</a>
                 <span>{{post.DateDisplay}}</span>
             </p>
-            <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
+            <div class="edit-post" ng-show="{{isEditable}}" ng-click="editPost()"></div>
         </div>
     </div>
     <div class="body">

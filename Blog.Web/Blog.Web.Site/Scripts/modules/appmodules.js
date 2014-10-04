@@ -2091,7 +2091,7 @@ var ngPosts = angular.module("ngPosts",
         "ngConfig",
         "LocalStorageModule",
         "angularFileUpload",
-        "angular-carousel"
+        "slick"
     ]);
 ///#source 1 1 /Scripts/modules/posts/controllers/postsController.js
 ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
@@ -2633,8 +2633,8 @@ ngPosts.directive('postLikes', [function () {
 
 ///#source 1 1 /Scripts/modules/posts/directives/postListItem.js
 ngPosts.directive('postListItem', [function () {
-    var ctrlFn = function ($scope, $location, localStorageService) {
-        
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+
         $scope.post = $scope.data.Post;
 
         $scope.user = $scope.data.Post.User;
@@ -2644,6 +2644,8 @@ ngPosts.directive('postListItem', [function () {
         $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
 
         $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
+
+        $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
         
         $scope.getCommentPopover = function(commentId) {
             var comment = _.where($scope.comments, { CommentId: commentId });
@@ -2655,18 +2657,32 @@ ngPosts.directive('postListItem', [function () {
             return $scope.data.Width;
         };
 
-        $scope.isEditable = function () {
-            if ($scope.user.UserName === $scope.username) {
-                return true;
+        $scope.toggleIsEditable = function () {
+            if ($scope.user && $scope.user.UserName === $scope.username) {
+                $scope.isEditable = true;
             }
-            return false;
+            $scope.isEditable = false;
         };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
 
         $scope.editPost = function() {
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
 
     return {
         restrict: 'EA',
@@ -3155,12 +3171,13 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
                     resizeItems($window.innerWidth);
                     scope.$broadcast('iso-method', { name: null, params: null });
 
-                    var isotopeElements = elem.children(".isotope-item");
-                    for (var i = 0; i < isotopeElements.length; i++) {
-                        if ((i + 1) % scope.columnCount == 0) {
-                            $(isotopeElements[i]).css({ "margin-right": "0"});
-                        }
-                    }
+                    // TODO: temporarily removed and to be verified if it works!
+                    //var isotopeElements = elem.children(".isotope-item");
+                    //for (var i = 0; i < isotopeElements.length; i++) {
+                    //    if ((i + 1) % scope.columnCount == 0) {
+                    //        $(isotopeElements[i]).css({ "margin-right": "0"});
+                    //    }
+                    //}
                 }, 500, 5);
             };
 
@@ -3217,9 +3234,9 @@ ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
                         if (attrs.resizeBroadcast != undefined)
                             scope.$emit(attrs.resizeBroadcast, "xlarge");
                     } else if (containerWidth > 992) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "24%");
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "23.5%");
                         _.each($(elem).children(".isotope-item"), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "24%" : attrs.resizeLarge;
+                            var large = attrs.resizeLarge == undefined ? "23.5%" : attrs.resizeLarge;
                             $(a).width(large);
                         });
                         if (attrs.resizeBroadcast != undefined)
