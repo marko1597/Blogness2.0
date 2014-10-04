@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Newtonsoft.Json;
 using ServiceStack.Redis;
@@ -21,8 +23,31 @@ namespace Blog.Logic.Caching.DataSource.Redis
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                var entities = client.GetAll<T>();
-                return entities.ToList();
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                return list.ToList();
+            }
+        }
+
+        public List<T> GetList(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        {
+            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            {
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                IQueryable<T> query = new EnumerableQuery<T>(list);
+
+                if (filter != null)
+                {
+                    query = list.ToList().AsQueryable().Where(filter);
+                }
+
+                if (orderBy != null)
+                {
+                    query = orderBy(query);
+                }
+
+                return query.ToList();
             }
         }
 
@@ -75,7 +100,13 @@ namespace Blog.Logic.Caching.DataSource.Redis
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                client.StoreAll(entities);
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+
+                foreach (var e in entities)
+                {
+                    list.Add(e);
+                }
             }
         }
 
@@ -117,6 +148,11 @@ namespace Blog.Logic.Caching.DataSource.Redis
             {
                 client.Replace(key, entity);
             }
+        }
+
+        private static string GetListKeyName(Type src)
+        {
+            return string.Format("{0}s", src.Name.ToLower());
         }
     }
 }

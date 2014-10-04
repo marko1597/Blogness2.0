@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Blog.Common.Utils.Extensions;
 using Blog.Logic.Caching.DataSource;
 
@@ -20,6 +21,18 @@ namespace Blog.Logic.Caching
             try
             {
                 return _cacheDataSource.GetList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public List<T> GetList(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        {
+            try
+            {
+                return _cacheDataSource.GetList(filter, orderBy);
             }
             catch (Exception ex)
             {

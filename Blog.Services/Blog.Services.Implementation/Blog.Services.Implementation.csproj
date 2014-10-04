@@ -116,6 +116,10 @@
       <Project>{3446ac30-fe40-4630-858e-03f3d08356d3}</Project>
       <Name>Blog.Common.Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Blog.Logic\Blog.Logic.Caching\Blog.Logic.Caching.csproj">
+      <Project>{f5933282-3d10-4b62-8ca7-5be3f4ba1dad}</Project>
+      <Name>Blog.Logic.Caching</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Blog.Logic\Blog.Logic.Core\Blog.Logic.Core.csproj">
       <Project>{388f088c-90f5-46e7-b7d1-422e0f577513}</Project>
       <Name>Blog.Logic.Core</Name>

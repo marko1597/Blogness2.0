@@ -40237,7 +40237,7 @@ if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
 
 ///#source 1 1 /Scripts/bower_components/angular/angular.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -40306,7 +40306,7 @@ function minErr(module) {
       return match;
     });
 
-    message = message + '\nhttp://errors.angularjs.org/1.2.25/' +
+    message = message + '\nhttp://errors.angularjs.org/1.2.26/' +
       (module ? module + '/' : '') + code;
     for (i = 2; i < arguments.length; i++) {
       message = message + (i == 2 ? '?' : '&') + 'p' + (i-2) + '=' +
@@ -40655,7 +40655,7 @@ function setHashKey(obj, h) {
  * @kind function
  *
  * @description
- * Extends the destination object `dst` by copying all of the properties from the `src` object(s)
+ * Extends the destination object `dst` by copying own enumerable properties from the `src` object(s)
  * to `dst`. You can specify multiple `src` objects.
  *
  * @param {Object} dst Destination object.
@@ -42225,11 +42225,11 @@ function setupModuleLoader(window) {
  * - `codeName` – `{string}` – Code name of the release, such as "jiggling-armfat".
  */
 var version = {
-  full: '1.2.25',    // all of these placeholder strings will be replaced by grunt's
+  full: '1.2.26',    // all of these placeholder strings will be replaced by grunt's
   major: 1,    // package task
   minor: 2,
-  dot: 25,
-  codeName: 'hypnotic-gesticulation'
+  dot: 26,
+  codeName: 'captivating-disinterest'
 };
 
 
@@ -45767,7 +45767,7 @@ function $TemplateCacheProvider() {
  * }
  * ```
  *
- * Below is an example using `$compileProvider`.
+ * ## Example
  *
  * <div class="alert alert-warning">
  * **Note**: Typically directives are registered with `module.directive`. The example below is
@@ -48275,12 +48275,13 @@ function $HttpProvider() {
     expect(data.getText()).toMatch(/Hello, \$http!/);
   });
 
-  it('should make a JSONP request to angularjs.org', function() {
-    sampleJsonpBtn.click();
-    fetchBtn.click();
-    expect(status.getText()).toMatch('200');
-    expect(data.getText()).toMatch(/Super Hero!/);
-  });
+// Commented out due to flakes. See https://github.com/angular/angular.js/issues/9185
+// it('should make a JSONP request to angularjs.org', function() {
+//   sampleJsonpBtn.click();
+//   fetchBtn.click();
+//   expect(status.getText()).toMatch('200');
+//   expect(data.getText()).toMatch(/Super Hero!/);
+// });
 
   it('should make JSONP request to invalid URL and invoke the error handler',
       function() {
@@ -55623,9 +55624,9 @@ var uppercaseFilter = valueFn(uppercase);
            }]);
        </script>
        <div ng-controller="ExampleController">
-         Limit {{numbers}} to: <input type="integer" ng-model="numLimit">
+         Limit {{numbers}} to: <input type="number" step="1" ng-model="numLimit">
          <p>Output numbers: {{ numbers | limitTo:numLimit }}</p>
-         Limit {{letters}} to: <input type="integer" ng-model="letterLimit">
+         Limit {{letters}} to: <input type="number" step="1" ng-model="letterLimit">
          <p>Output letters: {{ letters | limitTo:letterLimit }}</p>
        </div>
      </file>
@@ -55642,14 +55643,15 @@ var uppercaseFilter = valueFn(uppercase);
          expect(limitedLetters.getText()).toEqual('Output letters: abc');
        });
 
-       it('should update the output when -3 is entered', function() {
-         numLimitInput.clear();
-         numLimitInput.sendKeys('-3');
-         letterLimitInput.clear();
-         letterLimitInput.sendKeys('-3');
-         expect(limitedNumbers.getText()).toEqual('Output numbers: [7,8,9]');
-         expect(limitedLetters.getText()).toEqual('Output letters: ghi');
-       });
+       // There is a bug in safari and protractor that doesn't like the minus key
+       // it('should update the output when -3 is entered', function() {
+       //   numLimitInput.clear();
+       //   numLimitInput.sendKeys('-3');
+       //   letterLimitInput.clear();
+       //   letterLimitInput.sendKeys('-3');
+       //   expect(limitedNumbers.getText()).toEqual('Output numbers: [7,8,9]');
+       //   expect(limitedLetters.getText()).toEqual('Output letters: ghi');
+       // });
 
        it('should not exceed the maximum size of input array', function() {
          numLimitInput.clear();
@@ -59051,6 +59053,7 @@ var ngCloakDirective = ngDirective({
  *
  * @element ANY
  * @scope
+ * @priority 500
  * @param {expression} ngController Name of a globally accessible constructor function or an
  *     {@link guide/expression expression} that on the current scope evaluates to a
  *     constructor function. The controller instance can be published into a scope property
@@ -62163,6 +62166,7 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
                     id: option.id,
                     selected: option.selected
                 });
+                selectCtrl.addOption(option.label, element);
                 if (lastElement) {
                   lastElement.after(element);
                 } else {
@@ -62174,7 +62178,9 @@ var selectDirective = ['$compile', '$parse', function($compile,   $parse) {
             // remove any excessive OPTIONs in a group
             index++; // increment since the existingOptions[0] is parent element not OPTION
             while(existingOptions.length > index) {
-              existingOptions.pop().element.remove();
+              option = existingOptions.pop();
+              selectCtrl.removeOption(option.label);
+              option.element.remove();
             }
           }
           // remove any excessive OPTGROUPs from select
@@ -62262,7 +62268,7 @@ var styleDirective = valueFn({
 !window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
 ///#source 1 1 /Scripts/bower_components/angular-animate/angular-animate.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -63953,7 +63959,7 @@ angular.module('ngAnimate', ['ng'])
 
 ///#source 1 1 /Scripts/bower_components/angular-cookies/angular-cookies.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -66306,7 +66312,7 @@ angularLocalStorage.provider('localStorageService', function() {
 
 ///#source 1 1 /Scripts/bower_components/angular-route/angular-route.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -66576,9 +66582,6 @@ function $RouteProvider(){
      * @example
      * This example shows how changing the URL hash causes the `$route` to match a route against the
      * URL, and the `ngView` pulls in the partial.
-     *
-     * Note that this example is using {@link ng.directive:script inlined templates}
-     * to get it working on jsfiddle as well.
      *
      * <example name="$route-service" module="ngRouteExample"
      *          deps="angular-route.js" fixBase="true">
@@ -67232,7 +67235,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 ///#source 1 1 /Scripts/bower_components/angular-sanitize/angular-sanitize.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -68298,7 +68301,7 @@ angular.module('snap')
 ///#source 1 1 /Scripts/bower_components/angular-strap/dist/angular-strap.js
 /**
  * angular-strap
- * @version v2.1.0 - 2014-09-05
+ * @version v2.1.1 - 2014-09-26
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -68448,7 +68451,7 @@ angular.module('mgcrea.ngStrap.affix', ['mgcrea.ngStrap.helpers.dimensions', 'mg
         $affix.$debouncedOnResize = debounce($affix.$onResize, 50);
 
         $affix.$parseOffsets = function() {
-
+          var initialPosition = element.css('position');
           // Reset position to calculate correct offsetTop
           element.css('position', (options.offsetParent) ? '' : 'relative');
 
@@ -68480,6 +68483,8 @@ angular.module('mgcrea.ngStrap.affix', ['mgcrea.ngStrap.helpers.dimensions', 'mg
             }
           }
 
+          // Bring back the element's position after calculations
+          element.css('position', initialPosition);
         };
 
         // Private methods
@@ -68552,94 +68557,6 @@ angular.module('mgcrea.ngStrap.affix', ['mgcrea.ngStrap.helpers.dimensions', 'mg
     };
   });
 
-// Source: aside.js
-angular.module('mgcrea.ngStrap.aside', ['mgcrea.ngStrap.modal'])
-
-  .provider('$aside', function() {
-
-    var defaults = this.defaults = {
-      animation: 'am-fade-and-slide-right',
-      prefixClass: 'aside',
-      placement: 'right',
-      template: 'aside/aside.tpl.html',
-      contentTemplate: false,
-      container: false,
-      element: null,
-      backdrop: true,
-      keyboard: true,
-      html: false,
-      show: true
-    };
-
-    this.$get = ["$modal", function($modal) {
-
-      function AsideFactory(config) {
-
-        var $aside = {};
-
-        // Common vars
-        var options = angular.extend({}, defaults, config);
-
-        $aside = $modal(options);
-
-        return $aside;
-
-      }
-
-      return AsideFactory;
-
-    }];
-
-  })
-
-  .directive('bsAside', ["$window", "$sce", "$aside", function($window, $sce, $aside) {
-
-    var requestAnimationFrame = $window.requestAnimationFrame || $window.setTimeout;
-
-    return {
-      restrict: 'EAC',
-      scope: true,
-      link: function postLink(scope, element, attr, transclusion) {
-        // Directive options
-        var options = {scope: scope, element: element, show: false};
-        angular.forEach(['template', 'contentTemplate', 'placement', 'backdrop', 'keyboard', 'html', 'container', 'animation'], function(key) {
-          if(angular.isDefined(attr[key])) options[key] = attr[key];
-        });
-
-        // Support scope as data-attrs
-        angular.forEach(['title', 'content'], function(key) {
-          attr[key] && attr.$observe(key, function(newValue, oldValue) {
-            scope[key] = $sce.trustAsHtml(newValue);
-          });
-        });
-
-        // Support scope as an object
-        attr.bsAside && scope.$watch(attr.bsAside, function(newValue, oldValue) {
-          if(angular.isObject(newValue)) {
-            angular.extend(scope, newValue);
-          } else {
-            scope.content = newValue;
-          }
-        }, true);
-
-        // Initialize aside
-        var aside = $aside(options);
-
-        // Trigger
-        element.on(attr.trigger || 'click', aside.toggle);
-
-        // Garbage collection
-        scope.$on('$destroy', function() {
-          if (aside) aside.destroy();
-          options = null;
-          aside = null;
-        });
-
-      }
-    };
-
-  }]);
-
 // Source: alert.js
 // @BUG: following snippet won't compile correctly
 // @TODO: submit issue to core
@@ -68652,6 +68569,7 @@ angular.module('mgcrea.ngStrap.alert', ['mgcrea.ngStrap.modal'])
     var defaults = this.defaults = {
       animation: 'am-fade',
       prefixClass: 'alert',
+      prefixEvent: 'alert',
       placement: null,
       template: 'alert/alert.tpl.html',
       container: false,
@@ -68745,6 +68663,95 @@ angular.module('mgcrea.ngStrap.alert', ['mgcrea.ngStrap.modal'])
           if (alert) alert.destroy();
           options = null;
           alert = null;
+        });
+
+      }
+    };
+
+  }]);
+
+// Source: aside.js
+angular.module('mgcrea.ngStrap.aside', ['mgcrea.ngStrap.modal'])
+
+  .provider('$aside', function() {
+
+    var defaults = this.defaults = {
+      animation: 'am-fade-and-slide-right',
+      prefixClass: 'aside',
+      prefixEvent: 'aside',
+      placement: 'right',
+      template: 'aside/aside.tpl.html',
+      contentTemplate: false,
+      container: false,
+      element: null,
+      backdrop: true,
+      keyboard: true,
+      html: false,
+      show: true
+    };
+
+    this.$get = ["$modal", function($modal) {
+
+      function AsideFactory(config) {
+
+        var $aside = {};
+
+        // Common vars
+        var options = angular.extend({}, defaults, config);
+
+        $aside = $modal(options);
+
+        return $aside;
+
+      }
+
+      return AsideFactory;
+
+    }];
+
+  })
+
+  .directive('bsAside', ["$window", "$sce", "$aside", function($window, $sce, $aside) {
+
+    var requestAnimationFrame = $window.requestAnimationFrame || $window.setTimeout;
+
+    return {
+      restrict: 'EAC',
+      scope: true,
+      link: function postLink(scope, element, attr, transclusion) {
+        // Directive options
+        var options = {scope: scope, element: element, show: false};
+        angular.forEach(['template', 'contentTemplate', 'placement', 'backdrop', 'keyboard', 'html', 'container', 'animation'], function(key) {
+          if(angular.isDefined(attr[key])) options[key] = attr[key];
+        });
+
+        // Support scope as data-attrs
+        angular.forEach(['title', 'content'], function(key) {
+          attr[key] && attr.$observe(key, function(newValue, oldValue) {
+            scope[key] = $sce.trustAsHtml(newValue);
+          });
+        });
+
+        // Support scope as an object
+        attr.bsAside && scope.$watch(attr.bsAside, function(newValue, oldValue) {
+          if(angular.isObject(newValue)) {
+            angular.extend(scope, newValue);
+          } else {
+            scope.content = newValue;
+          }
+        }, true);
+
+        // Initialize aside
+        var aside = $aside(options);
+
+        // Trigger
+        element.on(attr.trigger || 'click', aside.toggle);
+
+        // Garbage collection
+        scope.$on('$destroy', function() {
+          if (aside) aside.destroy();
+          options = null;
+          aside = null;
         });
 
       }
@@ -68925,7 +68932,8 @@ angular.module('mgcrea.ngStrap.collapse', [])
     var defaults = this.defaults = {
       animation: 'am-collapse',
       disallowToggle: false,
-      activeClass: 'in'
+      activeClass: 'in',
+      startCollapsed: false
     };
 
     var controller = this.controller = function($scope, $element, $attrs) {
@@ -68933,7 +68941,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
 
       // Attributes options
       self.$options = angular.copy(defaults);
-      angular.forEach(['animation', 'disallowToggle', 'activeClass'], function(key) {
+      angular.forEach(['animation', 'disallowToggle', 'activeClass', 'startCollapsed'], function (key) {
         if(angular.isDefined($attrs[key])) self.$options[key] = $attrs[key];
       });
 
@@ -68949,7 +68957,7 @@ angular.module('mgcrea.ngStrap.collapse', [])
         self.$targets.push(element);
       };
 
-      self.$targets.$active = 0;
+      self.$targets.$active = !self.$options.startCollapsed ? 0 : -1;
       self.$setActive = $scope.$setActive = function(value) {
         if(!self.$options.disallowToggle) {
           self.$targets.$active = self.$targets.$active === value ? -1 : value;
@@ -68994,7 +69002,9 @@ angular.module('mgcrea.ngStrap.collapse', [])
           // modelValue -> $formatters -> viewValue
           ngModelCtrl.$formatters.push(function(modelValue) {
             // console.warn('$formatter("%s"): modelValue=%o (%o)', element.attr('ng-model'), modelValue, typeof modelValue);
-            bsCollapseCtrl.$setActive(modelValue * 1);
+            if (bsCollapseCtrl.$targets.$active !== modelValue * 1) {
+              bsCollapseCtrl.$setActive(modelValue * 1);
+            }
             return modelValue;
           });
 
@@ -69861,7 +69871,7 @@ angular.module('mgcrea.ngStrap.helpers.dateParser', [])
         'EEE'   : noop,
         'dd'    : proto.setDate,
         'd'     : proto.setDate,
-        'a'     : function(value) { var hours = this.getHours(); return this.setHours(value.match(/pm/i) ? hours + 12 : hours); },
+        'a'     : function(value) { var hours = this.getHours() % 12; return this.setHours(value.match(/pm/i) ? hours + 12 : hours); },
         'MMMM'  : function(value) { return this.setMonth($locale.DATETIME_FORMATS.MONTH.indexOf(value)); },
         'MMM'   : function(value) { return this.setMonth($locale.DATETIME_FORMATS.SHORTMONTH.indexOf(value)); },
         'MM'    : function(value) { return this.setMonth(1 * value - 1); },
@@ -69890,7 +69900,7 @@ angular.module('mgcrea.ngStrap.helpers.dateParser', [])
         var formatSetMap = format ? setMapForFormat(format) : setMap;
         var matches = formatRegex.exec(value);
         if(!matches) return false;
-        var date = baseDate || new Date(0, 0, 1);
+        var date = baseDate && !isNaN(baseDate.getTime()) ? baseDate : new Date(1970, 0, 1, 0);
         for(var i = 0; i < matches.length - 1; i++) {
           formatSetMap[i] && formatSetMap[i].call(date, matches[i+1]);
         }
@@ -69959,60 +69969,54 @@ angular.module('mgcrea.ngStrap.helpers.debounce', [])
 
 // @source jashkenas/underscore
 // @url https://github.com/jashkenas/underscore/blob/1.5.2/underscore.js#L693
-.constant('debounce', function(func, wait, immediate) {
-  var timeout, args, context, timestamp, result;
-  return function() {
-    context = this;
-    args = arguments;
-    timestamp = new Date();
-    var later = function() {
-      var last = (new Date()) - timestamp;
-      if (last < wait) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        if (!immediate) result = func.apply(context, args);
+.factory('debounce', ["$timeout", function($timeout) {
+  return function(func, wait, immediate) {
+    var timeout = null;
+    return function() {
+      var context = this,
+        args = arguments,
+        callNow = immediate && !timeout;
+      if(timeout) {
+        $timeout.cancel(timeout);
       }
+      timeout = $timeout(function later() {
+        timeout = null;
+        if(!immediate) {
+          func.apply(context, args);
+        }
+      }, wait, false);
+      if(callNow) {
+        func.apply(context, args);
+      }
+      return timeout;
     };
-    var callNow = immediate && !timeout;
-    if (!timeout) {
-      timeout = setTimeout(later, wait);
-    }
-    if (callNow) result = func.apply(context, args);
-    return result;
   };
-})
+}])
 
 
 // @source jashkenas/underscore
 // @url https://github.com/jashkenas/underscore/blob/1.5.2/underscore.js#L661
-.constant('throttle', function(func, wait, options) {
-  var context, args, result;
-  var timeout = null;
-  var previous = 0;
-  options || (options = {});
-  var later = function() {
-    previous = options.leading === false ? 0 : new Date();
-    timeout = null;
-    result = func.apply(context, args);
+.factory('throttle', ["$timeout", function($timeout) {
+  return function(func, wait, options) {
+    var timeout = null;
+    options || (options = {});
+    return function() {
+      var context = this,
+        args = arguments;
+      if(!timeout) {
+        if(options.leading !== false) {
+          func.apply(context, args);
+        }
+        timeout = $timeout(function later() {
+          timeout = null;
+          if(options.trailing !== false) {
+            func.apply(context, args);
+          }
+        }, wait, false);
+      }
+    };
   };
-  return function() {
-    var now = new Date();
-    if (!previous && options.leading === false) previous = now;
-    var remaining = wait - (now - previous);
-    context = this;
-    args = arguments;
-    if (remaining <= 0) {
-      clearTimeout(timeout);
-      timeout = null;
-      previous = now;
-      result = func.apply(context, args);
-    } else if (!timeout && options.trailing !== false) {
-      timeout = setTimeout(later, remaining);
-    }
-    return result;
-  };
-});
+}]);
 
 // Source: dimensions.js
 angular.module('mgcrea.ngStrap.helpers.dimensions', [])
@@ -70212,7 +70216,7 @@ angular.module('mgcrea.ngStrap.helpers.parseOptions', [])
             locals[valueName] = match;
             label = displayFn(scope, locals);
             value = valueFn(scope, locals) || index;
-            return {label: label, value: value};
+            return {label: label, value: value, index: index};
           });
         }
 
@@ -70399,7 +70403,9 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
         $modal.show = function() {
 
-          scope.$emit(options.prefixEvent + '.show.before', $modal);
+          if(scope.$emit(options.prefixEvent + '.show.before', $modal).defaultPrevented) {
+            return;
+          }
           var parent;
           if(angular.isElement(options.container)) {
             parent = options.container;
@@ -70423,11 +70429,13 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           }
 
           if(options.backdrop) {
-            $animate.enter(backdropElement, bodyElement, null, function() {});
+            $animate.enter(backdropElement, bodyElement, null);
           }
-          $animate.enter(modalElement, parent, after, function() {
-            scope.$emit(options.prefixEvent + '.show', $modal);
-          });
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          var promise = $animate.enter(modalElement, parent, after, enterAnimateCallback);
+          if(promise && promise.then) promise.then(enterAnimateCallback);
+
           scope.$isShown = true;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
           // Focus once the enter-animation has started
@@ -70452,18 +70460,22 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           }
         };
 
+        function enterAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.show', $modal);
+        }
+
         $modal.hide = function() {
 
-          scope.$emit(options.prefixEvent + '.hide.before', $modal);
-          $animate.leave(modalElement, function() {
-            scope.$emit(options.prefixEvent + '.hide', $modal);
-            bodyElement.removeClass(options.prefixClass + '-open');
-            if(options.animation) {
-              bodyElement.removeClass(options.prefixClass + '-with-' + options.animation);
-            }
-          });
+          if(scope.$emit(options.prefixEvent + '.hide.before', $modal).defaultPrevented) {
+            return;
+          }
+          var promise = $animate.leave(modalElement, leaveAnimateCallback);
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          if(promise && promise.then) promise.then(leaveAnimateCallback);
+
           if(options.backdrop) {
-            $animate.leave(backdropElement, function() {});
+            $animate.leave(backdropElement);
           }
           scope.$isShown = false;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
@@ -70477,6 +70489,14 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
             modalElement.off('keyup', $modal.$onKeyUp);
           }
         };
+
+        function leaveAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.hide', $modal);
+          bodyElement.removeClass(options.prefixClass + '-open');
+          if(options.animation) {
+            bodyElement.removeClass(options.prefixClass + '-with-' + options.animation);
+          }
+        }
 
         $modal.toggle = function() {
 
@@ -71237,7 +71257,7 @@ angular.module('mgcrea.ngStrap.select', ['mgcrea.ngStrap.tooltip', 'mgcrea.ngStr
       link: function postLink(scope, element, attr, controller) {
 
         // Directive options
-        var options = {scope: scope};
+        var options = {scope: scope, placeholder: defaults.placeholder};
         angular.forEach(['placement', 'container', 'delay', 'trigger', 'keyboard', 'html', 'animation', 'template', 'placeholder', 'multiple', 'allNoneButtons', 'maxLength', 'maxLengthHtml'], function(key) {
           if(angular.isDefined(attr[key])) options[key] = attr[key];
         });
@@ -71292,7 +71312,7 @@ angular.module('mgcrea.ngStrap.select', ['mgcrea.ngStrap.tooltip', 'mgcrea.ngStr
             index = select.$getIndex(controller.$modelValue);
             selected = angular.isDefined(index) ? select.$scope.$matches[index].label : false;
           }
-          element.html((selected ? selected : attr.placeholder || defaults.placeholder) + defaults.caretHtml);
+          element.html((selected ? selected : options.placeholder) + defaults.caretHtml);
         };
 
         // Garbage collection
@@ -71534,6 +71554,9 @@ angular.module('mgcrea.ngStrap.timepicker', ['mgcrea.ngStrap.helpers.dateParser'
         };
 
         $timepicker.switchMeridian = function(date) {
+          if (!controller.$dateValue || isNaN(controller.$dateValue.getTime())) {
+            return;
+          }
           var hours = (date || controller.$dateValue).getHours();
           controller.$dateValue.setHours(hours < 12 ? hours + 12 : hours - 12);
           controller.$setViewValue(controller.$dateValue);
@@ -71764,7 +71787,7 @@ angular.module('mgcrea.ngStrap.timepicker', ['mgcrea.ngStrap.helpers.dateParser'
 
         // Directive options
         var options = {scope: scope, controller: controller};
-        angular.forEach(['placement', 'container', 'delay', 'trigger', 'keyboard', 'html', 'animation', 'template', 'autoclose', 'timeType', 'timeFormat', 'modelTimeFormat', 'useNative', 'hourStep', 'minuteStep', 'length', 'arrowBehavior'], function(key) {
+        angular.forEach(['placement', 'container', 'delay', 'trigger', 'keyboard', 'html', 'animation', 'template', 'autoclose', 'timeType', 'timeFormat', 'modelTimeFormat', 'useNative', 'hourStep', 'minuteStep', 'length', 'arrowBehavior', 'iconUp', 'iconDown'], function(key) {
           if(angular.isDefined(attr[key])) options[key] = attr[key];
         });
 
@@ -71792,7 +71815,7 @@ angular.module('mgcrea.ngStrap.timepicker', ['mgcrea.ngStrap.helpers.dateParser'
             } else if(angular.isString(newValue) && newValue.match(/^".+"$/)) {
               timepicker.$options[key] = +new Date(newValue.substr(1, newValue.length - 2));
             } else {
-              timepicker.$options[key] = dateParser.parse(newValue, new Date(1970, 0, 1, 0));
+              timepicker.$options[key] = +dateParser.parse(newValue, new Date(1970, 0, 1, 0));
             }
             !isNaN(timepicker.$options[key]) && timepicker.$build();
           });
@@ -71815,11 +71838,19 @@ angular.module('mgcrea.ngStrap.timepicker', ['mgcrea.ngStrap.helpers.dateParser'
           var parsedTime = angular.isDate(viewValue) ? viewValue : dateParser.parse(viewValue, controller.$dateValue);
           if(!parsedTime || isNaN(parsedTime.getTime())) {
             controller.$setValidity('date', false);
+            return;
           } else {
-            var isValid = parsedTime.getTime() >= options.minTime && parsedTime.getTime() <= options.maxTime;
-            controller.$setValidity('date', isValid);
-            // Only update the model when we have a valid date
-            if(isValid) controller.$dateValue = parsedTime;
+              var isMinValid = isNaN(options.minTime) || parsedTime.getTime() >= options.minTime;
+              var isMaxValid = isNaN(options.maxTime) || parsedTime.getTime() <= options.maxTime;
+              var isValid = isMinValid && isMaxValid;
+              controller.$setValidity('date', isValid);
+              controller.$setValidity('min', isMinValid);
+              controller.$setValidity('max', isMaxValid);
+              // Only update the model when we have a valid date
+              if(!isValid) {
+                  return;
+              }
+              controller.$dateValue = parsedTime;
           }
           if(options.timeType === 'string') {
             return dateFilter(parsedTime, options.modelTimeFormat || options.timeFormat);
@@ -71909,7 +71940,8 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
         $tooltip.$promise = fetchTemplate(options.template);
         var scope = $tooltip.$scope = options.scope && options.scope.$new() || $rootScope.$new();
         if(options.delay && angular.isString(options.delay)) {
-          options.delay = parseFloat(options.delay);
+          var split = options.delay.split(',').map(parseFloat);
+          options.delay = split.length > 1 ? {show: split[0], hide: split[1]} : split[0];
         }
 
         // Support scope as string options
@@ -72078,9 +72110,11 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
           // Options: custom classes
           if(options.customClass) tipElement.addClass(options.customClass);
 
-          $animate.enter(tipElement, parent, after, function() {
-            scope.$emit(options.prefixEvent + '.show', $tooltip);
-          });
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          var promise = $animate.enter(tipElement, parent, after, enterAnimateCallback);
+          if(promise && promise.then) promise.then(enterAnimateCallback);
+
           $tooltip.$isShown = scope.$isShown = true;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
           $$rAF(function () {
@@ -72102,6 +72136,10 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
 
         };
 
+        function enterAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.show', $tooltip);
+        }
+
         $tooltip.leave = function() {
 
           clearTimeout(timeout);
@@ -72122,14 +72160,10 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
           if(!$tooltip.$isShown) return;
           scope.$emit(options.prefixEvent + '.hide.before', $tooltip);
 
-          $animate.leave(tipElement, function() {
-            scope.$emit(options.prefixEvent + '.hide', $tooltip);
-
-            // Allow to blur the input when hidden, like when pressing enter key
-            if(blur && options.trigger === 'focus') {
-              return element[0].blur();
-            }
-          });
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          var promise = $animate.leave(tipElement, leaveAnimateCallback);
+          if(promise && promise.then) promise.then(leaveAnimateCallback);
 
           $tooltip.$isShown = scope.$isShown = false;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
@@ -72140,6 +72174,14 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
           }
 
         };
+
+        function leaveAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.hide', $tooltip);
+          // Allow to blur the input when hidden, like when pressing enter key
+          if(blur && options.trigger === 'focus') {
+            return element[0].blur();
+          }
+        }
 
         $tooltip.toggle = function() {
           $tooltip.$isShown ? $tooltip.leave() : $tooltip.enter();
@@ -72300,12 +72342,10 @@ angular.module('mgcrea.ngStrap.tooltip', ['mgcrea.ngStrap.helpers.dimensions'])
         });
 
         // Observe scope attributes for change
-        angular.forEach(['title'], function(key) {
-          attr.$observe(key, function(newValue, oldValue) {
-            scope[key] = $sce.trustAsHtml(newValue);
-            angular.isDefined(oldValue) && $$rAF(function() {
-              tooltip && tooltip.$applyPlacement();
-            });
+        attr.$observe('title', function(newValue, oldValue) {
+          scope.title = $sce.trustAsHtml(newValue);
+          angular.isDefined(oldValue) && $$rAF(function() {
+            tooltip && tooltip.$applyPlacement();
           });
         });
 
@@ -72573,7 +72613,7 @@ angular.module('mgcrea.ngStrap.typeahead', ['mgcrea.ngStrap.tooltip', 'mgcrea.ng
           var index = typeahead.$getIndex(controller.$modelValue);
           var selected = angular.isDefined(index) ? typeahead.$scope.$matches[index].label : controller.$viewValue;
           selected = angular.isObject(selected) ? selected.label : selected;
-          element.val(selected.replace(/<(?:.|\n)*?>/gm, '').trim());
+          element.val(selected ? selected.replace(/<(?:.|\n)*?>/gm, '').trim() : '');
         };
 
         // Garbage collection
@@ -72593,7 +72633,7 @@ angular.module('mgcrea.ngStrap.typeahead', ['mgcrea.ngStrap.tooltip', 'mgcrea.ng
 ///#source 1 1 /Scripts/bower_components/angular-strap/dist/angular-strap.tpl.js
 /**
  * angular-strap
- * @version v2.1.0 - 2014-09-05
+ * @version v2.1.1 - 2014-09-26
  * @link http://mgcrea.github.io/angular-strap
  * @author Olivier Louvignes (olivier@mg-crea.com)
  * @license MIT License, http://www.opensource.org/licenses/MIT
@@ -72601,17 +72641,17 @@ angular.module('mgcrea.ngStrap.typeahead', ['mgcrea.ngStrap.tooltip', 'mgcrea.ng
 (function(window, document, undefined) {
 'use strict';
 
-// Source: alert.tpl.js
-angular.module('mgcrea.ngStrap.alert').run(['$templateCache', function($templateCache) {
-
-  $templateCache.put('alert/alert.tpl.html', '<div class="alert" tabindex="-1" ng-class="[type ? \'alert-\' + type : null]"><button type="button" class="close" ng-if="dismissable" ng-click="$hide()">&times;</button> <strong ng-bind="title"></strong>&nbsp;<span ng-bind-html="content"></span></div>');
-
-}]);
-
 // Source: aside.tpl.js
 angular.module('mgcrea.ngStrap.aside').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('aside/aside.tpl.html', '<div class="aside" tabindex="-1" role="dialog"><div class="aside-dialog"><div class="aside-content"><div class="aside-header" ng-show="title"><button type="button" class="close" ng-click="$hide()">&times;</button><h4 class="aside-title" ng-bind="title"></h4></div><div class="aside-body" ng-bind="content"></div><div class="aside-footer"><button type="button" class="btn btn-default" ng-click="$hide()">Close</button></div></div></div></div>');
+
+}]);
+
+// Source: alert.tpl.js
+angular.module('mgcrea.ngStrap.alert').run(['$templateCache', function($templateCache) {
+
+  $templateCache.put('alert/alert.tpl.html', '<div class="alert" ng-class="[type ? \'alert-\' + type : null]"><button type="button" class="close" ng-if="dismissable" ng-click="$hide()">&times;</button> <strong ng-bind="title"></strong>&nbsp;<span ng-bind-html="content"></span></div>');
 
 }]);
 
@@ -72664,17 +72704,17 @@ angular.module('mgcrea.ngStrap.timepicker').run(['$templateCache', function($tem
 
 }]);
 
-// Source: typeahead.tpl.js
-angular.module('mgcrea.ngStrap.typeahead').run(['$templateCache', function($templateCache) {
-
-  $templateCache.put('typeahead/typeahead.tpl.html', '<ul tabindex="-1" class="typeahead dropdown-menu" ng-show="$isVisible()" role="select"><li role="presentation" ng-repeat="match in $matches" ng-class="{active: $index == $activeIndex}"><a role="menuitem" tabindex="-1" ng-click="$select($index, $event)" ng-bind="match.label"></a></li></ul>');
-
-}]);
-
 // Source: tooltip.tpl.js
 angular.module('mgcrea.ngStrap.tooltip').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('tooltip/tooltip.tpl.html', '<div class="tooltip in" ng-show="title"><div class="tooltip-arrow"></div><div class="tooltip-inner" ng-bind="title"></div></div>');
+
+}]);
+
+// Source: typeahead.tpl.js
+angular.module('mgcrea.ngStrap.typeahead').run(['$templateCache', function($templateCache) {
+
+  $templateCache.put('typeahead/typeahead.tpl.html', '<ul tabindex="-1" class="typeahead dropdown-menu" ng-show="$isVisible()" role="select"><li role="presentation" ng-repeat="match in $matches" ng-class="{active: $index == $activeIndex}"><a role="menuitem" tabindex="-1" ng-click="$select($index, $event)" ng-bind="match.label"></a></li></ul>');
 
 }]);
 
@@ -72683,7 +72723,7 @@ angular.module('mgcrea.ngStrap.tooltip').run(['$templateCache', function($templa
 
 ///#source 1 1 /Scripts/bower_components/angular-touch/angular-touch.js
 /**
- * @license AngularJS v1.2.25
+ * @license AngularJS v1.2.26
  * (c) 2010-2014 Google, Inc. http://angularjs.org
  * License: MIT
  */
