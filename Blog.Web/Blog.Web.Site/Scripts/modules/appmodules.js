@@ -781,7 +781,7 @@ var ngLogin = angular.module("ngLogin",
     ]);
 ///#source 1 1 /Scripts/modules/login/directives/loggedUser.js
 ngLogin.directive('loggedUser', function () {
-    var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
+    var ctrlFn = function ($scope, $rootScope, $location, $window, userService, configProvider, localStorageService, authenticationService) {
         $scope.user = {};
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -793,17 +793,19 @@ ngLogin.directive('loggedUser', function () {
             return false;
         };
 
+        $scope.goToProfile = function() {
+            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
+            $location.path("/user");
+        };
+
         $scope.logout = function () {
+            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
             authenticationService.logout();
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
         };
 
         $scope.launchLoginForm = function () {
             $rootScope.$broadcast("launchLoginForm", { canClose: true });
-        };
-
-        $scope.toggleNavigation = function () {
-            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
         };
 
         $rootScope.$watch('user', function () {
@@ -817,7 +819,7 @@ ngLogin.directive('loggedUser', function () {
             $scope.authData = localStorageService.get("authorizationData");
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
 
     return {
         restrict: 'EA',

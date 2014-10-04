@@ -117,7 +117,9 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
 
         $modal.show = function() {
 
-          scope.$emit(options.prefixEvent + '.show.before', $modal);
+          if(scope.$emit(options.prefixEvent + '.show.before', $modal).defaultPrevented) {
+            return;
+          }
           var parent;
           if(angular.isElement(options.container)) {
             parent = options.container;
@@ -141,11 +143,13 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           }
 
           if(options.backdrop) {
-            $animate.enter(backdropElement, bodyElement, null, function() {});
+            $animate.enter(backdropElement, bodyElement, null);
           }
-          $animate.enter(modalElement, parent, after, function() {
-            scope.$emit(options.prefixEvent + '.show', $modal);
-          });
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          var promise = $animate.enter(modalElement, parent, after, enterAnimateCallback);
+          if(promise && promise.then) promise.then(enterAnimateCallback);
+
           scope.$isShown = true;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
           // Focus once the enter-animation has started
@@ -170,18 +174,22 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
           }
         };
 
+        function enterAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.show', $modal);
+        }
+
         $modal.hide = function() {
 
-          scope.$emit(options.prefixEvent + '.hide.before', $modal);
-          $animate.leave(modalElement, function() {
-            scope.$emit(options.prefixEvent + '.hide', $modal);
-            bodyElement.removeClass(options.prefixClass + '-open');
-            if(options.animation) {
-              bodyElement.removeClass(options.prefixClass + '-with-' + options.animation);
-            }
-          });
+          if(scope.$emit(options.prefixEvent + '.hide.before', $modal).defaultPrevented) {
+            return;
+          }
+          var promise = $animate.leave(modalElement, leaveAnimateCallback);
+          // Support v1.3+ $animate
+          // https://github.com/angular/angular.js/commit/bf0f5502b1bbfddc5cdd2f138efd9188b8c652a9
+          if(promise && promise.then) promise.then(leaveAnimateCallback);
+
           if(options.backdrop) {
-            $animate.leave(backdropElement, function() {});
+            $animate.leave(backdropElement);
           }
           scope.$isShown = false;
           scope.$$phase || (scope.$root && scope.$root.$$phase) || scope.$digest();
@@ -195,6 +203,14 @@ angular.module('mgcrea.ngStrap.modal', ['mgcrea.ngStrap.helpers.dimensions'])
             modalElement.off('keyup', $modal.$onKeyUp);
           }
         };
+
+        function leaveAnimateCallback() {
+          scope.$emit(options.prefixEvent + '.hide', $modal);
+          bodyElement.removeClass(options.prefixClass + '-open');
+          if(options.animation) {
+            bodyElement.removeClass(options.prefixClass + '-with-' + options.animation);
+          }
+        }
 
         $modal.toggle = function() {
 
