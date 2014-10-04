@@ -1,6 +1,9 @@
 ﻿<div>
     <div class="file-upload" ng-file-drop>
-        <input nv-file-select type="file" uploader="uploader" multiple />
+        <label class="btn btn-primary">
+            Choose from your computer..
+            <input nv-file-select type="file" uploader="uploader" multiple />
+        </label>
         <div class="well dropzone" nv-file-over="" uploader="uploader">
             <h4>Drag files here...</h4>
             <p>You have {{ uploader.queue.length }} items</p>

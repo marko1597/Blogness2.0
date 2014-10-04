@@ -183,7 +183,25 @@ namespace Blog.DataAccess.Database.Repository
                 var tempContents = db.PostContents.ToList();
                 foreach (var c in tempContents)
                 {
-                    Context.Entry(c).State = GetContentState(c, post.PostContents);
+                    var tContent = post.PostContents
+                        .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
+
+                    if (tContent != null)
+                    {
+                        var tmpContent = post.PostContents
+                            .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
+                        if (tmpContent != null)
+                        {
+                            c.PostContentTitle = tmpContent.PostContentTitle;
+                            c.PostContentText = tmpContent.PostContentText;
+                        }
+
+                        Context.Entry(c).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        Context.Entry(c).State = EntityState.Deleted;
+                    }
                 }
 
                 var newcontents = GetNewContents(db.PostContents, post.PostContents, post.UserId);
@@ -193,15 +211,17 @@ namespace Blog.DataAccess.Database.Repository
                     Context.Entry(a).State = EntityState.Added;
                     db.PostContents.Add(a);
                 });
+
+                db.ModifiedDate = DateTime.Now;
+                db.ModifiedBy = post.UserId;
+
+                Context.Entry(db).State = EntityState.Modified;
+                Context.SaveChanges();
+
+                return post;
             }
 
-            db.ModifiedDate = DateTime.Now;
-            db.ModifiedBy = post.UserId;
-
-            Context.Entry(db).State = EntityState.Modified;
-            Context.SaveChanges();
-
-            return post;
+            throw new Exception("Record not found!");
         }
 
         #region Private methods
@@ -230,12 +250,6 @@ namespace Blog.DataAccess.Database.Repository
             }
 
             return newTags;
-        }
-
-        private EntityState GetContentState(PostContent content, IEnumerable<PostContent> contents)
-        {
-            var tContent = contents.Where(a => a.PostId == content.PostId && a.MediaId == content.MediaId).ToList();
-            return tContent.Count > 0 ? EntityState.Unchanged : EntityState.Deleted;
         }
 
         private List<PostContent> GetNewContents(IEnumerable<PostContent> dbContents, IEnumerable<PostContent> clientContents, int userId)

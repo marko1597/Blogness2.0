@@ -14,35 +14,40 @@
             margin: 0 0 15px 0;
         }
 
-        #modify-post-main > div.modify-post-title > span {
-            width: 5%;
-            margin-right: 15px;
+    #modify-post-main > .modify-post-title > span {
+        width: 5%;
+        margin-right: 15px;
+    }
+
+    #modify-post-main > .modify-post-title > input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #modify-post-main > .modify-post-message {
+        padding: 15px;
+    }
+
+        #modify-post-main > .modify-post-message > div {
+            overflow: hidden;
         }
 
-        #modify-post-main > div.modify-post-title > input {
+        #modify-post-main > .modify-post-message textarea {
+            min-height: 150px;
+            resize: none;
             width: 100%;
             max-width: 100%;
         }
 
-        #modify-post-main > div.modify-post-message {
-            padding: 15px;
-        }
+    #modify-post-main > div.modify-post-message .cke_contents {
+        min-height: 200px !important;
+    }
 
-            #modify-post-main > div.modify-post-message > div {
-                overflow: hidden;
-            }
 
-            #modify-post-main > div.modify-post-message textarea {
-                min-height: 150px;
-                resize: none;
-                width: 100%;
-                max-width: 100%;
-            }
+    #modify-post-main > .modify-post-contents > .btn {
+        margin-bottom: 15px;
+    }
 
-            #modify-post-main > div.modify-post-message .cke_contents {
-                min-height: 200px !important;
-            }
-            
 @media (max-width: 767px) {
     #modify-post-main > div.modify-post-message {
         padding: 15px;

@@ -65,33 +65,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                         });
 
                         _.each(resp.PostContents, function (t) {
-                            var item = {
-                                file: {
-                                    name: t.Media.FileName,
-                                    size: 1e6
-                                },
-                                mediaId: t.Media.MediaId,
-                                progress: 100,
-                                isUploaded: true,
-                                isSuccess: true,
-                                isExisting: true,
-                                url: t.Media.ThumbnailUrl,
-                                base: t,
-                                remove: function () {
-                                    var index = $scope.post.PostContents.indexOf(this.base);
-                                    $scope.post.PostContents.splice(index);
-                                    uploader.removeFromQueue(this);
-                                }
-                            };
-                            $scope.existingContents.push(item);
+                            addMediaToUploaderQueue(t.Media, t.PostContentTitle, t.PostContentText);
                         });
-
-                        $timeout(function () {
-                            _.each($scope.existingContents, function (c) {
-                                uploader.queue.push(c);
-                            });
-                            $scope.$broadcast("resizeIsotopeItems");
-                        }, 500);
                     } else {
                         errorService.displayError(resp.Error);
                     }
@@ -107,6 +82,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             if ($scope.authData) {
                 userService.getUserInfo($scope.username).then(function (userinfo) {
                     $scope.post.User = userinfo;
+                    setPostContentsFromUploader();
 
                     if ($scope.isAdding) {
                         postsService.addPost($scope.post).then(function (resp) {
@@ -141,65 +117,6 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             $location.path("/");
         };
 
-        $scope.launchMediaSelectionDialog = function () {
-            albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
-                _.each(resp, function (a) {
-                    _.each(a.Media, function (m) {
-                        m.IsSelected = false;
-                    });
-                });
-
-                $scope.albums = resp;
-                mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
-            }, function (e) {
-                errorService.displayError(e);
-            });
-        };
-
-        $scope.getThumbnailUrl = function (media) {
-            return {
-                "background-image": "url(" + media.ThumbnailUrl + ")"
-            };
-        };
-
-        $scope.addMediaToExistingContents = function (media) {
-            var item = {
-                file: {
-                    name: media.FileName,
-                    size: 1e6
-                },
-                mediaId: media.MediaId,
-                progress: 100,
-                isUploaded: true,
-                isSuccess: true,
-                isExisting: true,
-                url: media.ThumbnailUrl,
-                base: t,
-                remove: function () {
-                    var index = $scope.post.PostContents.indexOf(this.base);
-                    $scope.post.PostContents.splice(index);
-                    uploader.removeFromQueue(this);
-                }
-            };
-            $scope.existingContents.push(item);
-            
-            $timeout(function () {
-                uploader.queue.push(item);
-                $scope.$broadcast("resizeIsotopeItems");
-            }, 500);
-        };
-
-        $scope.removeMediaToExistingContents = function (media) {
-            var index = $scope.existingContents.indexOf(media);
-            $scope.existingContents.splice(index, 1);
-
-            $timeout(function () {
-                var uploaderIndex = $scope.existingContents.indexOf(media);
-                uploader.queue.splice(uploaderIndex, 1);
-                $scope.$broadcast("resizeIsotopeItems");
-            }, 500);
-        };
-
         $scope.init = function () {
             authenticationService.getUserInfo().then(function (response) {
                 if (response.Message == undefined || response.Message == null) {
@@ -211,6 +128,53 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 }
             });
         };
+
+        // #region media selection dialog
+
+        $scope.launchMediaSelectionDialog = function () {
+            if ($scope.albums.length == 0) {
+                albumService.getAlbumsByUser($scope.user.Id).then(function(resp) {
+                    _.each(resp, function(a) {
+                        _.each(a.Media, function(m) {
+                            m.IsSelected = false;
+                        });
+                    });
+
+                    $scope.albums = resp;
+                    mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+                }, function(e) {
+                    errorService.displayError(e);
+                });
+            } else {
+                mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+            }
+        };
+
+        $scope.getThumbnailUrl = function (media) {
+            return {
+                "background-image": "url(" + media.ThumbnailUrl + ")"
+            };
+        };
+
+        $scope.toggleMediaSelectionToExistingContents = function (media) {
+            media.IsSelected = !media.IsSelected;
+
+            if (media.IsSelected) {
+                addMediaToUploaderQueue(media, '', '');
+            } else {
+                removeMediaFromUploaderQueue(media);
+            }
+        };
+
+        $scope.getMediaToggleButtonStyle = function(media) {
+            return media.IsSelected ? 'btn-danger' : 'btn-success';
+        };
+
+        $scope.getMediaToggleButtonIcon = function (media) {
+            return media.IsSelected ? 'fa-times' : 'fa-check';
+        };
+
+        // #endregion
         
         $rootScope.$watch('user', function () {
             if ($rootScope.user) {
@@ -231,9 +195,75 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         // #region angular-file-upload
 
+        var addMediaToUploaderQueue = function(media, title, text) {
+            var item = getUploaderItem(media, title, text);
+
+            $timeout(function () {
+                uploader.queue.push(item);
+                $scope.$broadcast("resizeIsotopeItems");
+            }, 500);
+        };
+
+        var removeMediaFromUploaderQueue = function(media) {
+            var item = _.where(uploader.queue, { media: media, mediaId: media.Id })[0];
+
+            $timeout(function () {
+                var index = uploader.queue.indexOf(item);
+                uploader.queue.splice(index, 1);
+                $scope.$broadcast("resizeIsotopeItems");
+            }, 500);
+        };
+
+        var setPostContentsFromUploader = function () {
+            $scope.post.PostContents = [];
+
+            _.each(uploader.queue, function(item) {
+                var postContent = {
+                    PostId: 0,
+                    Media: item.media,
+                    PostContentTitle: item.postContentTitle,
+                    PostContentText: item.postContentText
+                };
+                $scope.post.PostContents.push(postContent);
+            });
+        };
+
+        var getUploaderItem = function (media, title, text) {
+            var item = {
+                file: {
+                    name: media.FileName,
+                    size: 1e6
+                },
+                mediaId: media.Id,
+                media: media,
+                progress: 100,
+                isUploaded: true,
+                isSuccess: true,
+                isExisting: true,
+                url: media.ThumbnailUrl,
+                base: media,
+                allowCaptions: true,
+                postContentTitle: title,
+                postContentText: text,
+                remove: function() {
+                    var index = uploader.queue.indexOf(item);
+                    uploader.queue.splice(index, 1);
+
+                    if ($scope.albums.length > 0) {
+                        var album = _.where($scope.albums, { AlbumId: item.media.AlbumId })[0];
+                        var albumMedia = _.where(album.Media, { Id: item.media.Id })[0];
+                        albumMedia.IsSelected = false;
+                    }
+                }
+            };
+
+            return item;
+        };
+
         var uploader = $scope.uploader = new FileUploader({
             scope: $rootScope,
             url: $scope.uploadUrl,
+            autoUpload: true,
             headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
         });
 
@@ -247,14 +277,16 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         });
         
         uploader.onSuccessItem = function (fileItem, response) {
-            fileItem.mediaId = response.MediaId;
-            var media = {
-                PostId: 0,
-                Media: response,
-                PostContentTitle: fileItem.postContentTitle,
-                PostContentText: fileItem.postContentText
-            };
-            $scope.post.PostContents.push(media);
+            response.IsSelected = true;
+
+            if ($scope.albums.length > 0) {
+                var album = _.where($scope.albums, { IsUserDefault: true })[0];
+                album.Media.push(response);
+            }
+
+            fileItem.media = response;
+            fileItem.mediaId = response.Id;
+            fileItem.mediaId = response;
         };
 
         uploader.onAfterAddingFile = function (fileItem) {

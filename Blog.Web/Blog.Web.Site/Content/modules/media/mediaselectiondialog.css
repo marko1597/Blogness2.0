@@ -5,20 +5,34 @@
 }
 
     #media-selection-dialog .modal-body ul li {
-        display: inline-block;
+        display: block;
         margin-bottom: 15px;
-        border: 1px solid #ccc;
+        border: 1px solid rgb(204, 204, 204);
         position: relative;
+        overflow: hidden;
     }
 
         #media-selection-dialog .modal-body ul li .center-cropped {
-            width: 25%;
+            width: 22.4%;
             height: 150px;
+            margin: 7px;
+            border: 1px solid rgb(204, 204, 204);
         }
 
-        #media-selection-dialog .modal-body ul li .center-cropped img {
-            max-width: 100%;
-            width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-        }
+            #media-selection-dialog .modal-body ul li .center-cropped button {
+                margin: 10px;
+            }
+
+            #media-selection-dialog .modal-body ul li .center-cropped img {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                border: 1px solid #ddd;
+            }
+
+@media (max-width: 767px) {
+    #media-selection-dialog .modal-body ul li .center-cropped {
+        width: 47%;
+        height: 150px;
+    }
+}

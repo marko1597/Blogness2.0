@@ -15,7 +15,7 @@ namespace Blog.Common.Contracts
         [DataMember]
         public int AlbumId { get; set; }
 
-        [DataMember, JsonIgnore]
+        [DataMember]
         public string FileName { get; set; }
 
         [DataMember, JsonIgnore]
@@ -33,7 +33,7 @@ namespace Blog.Common.Contracts
         [DataMember]
         public string ThumbnailUrl { get; set; }
 
-        [DataMember]
+        [DataMember, JsonIgnore]
         public string ThumbnailPath { get; set; }
     }
 }

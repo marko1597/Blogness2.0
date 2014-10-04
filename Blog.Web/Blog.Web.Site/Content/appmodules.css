@@ -1001,35 +1001,40 @@ div.login-alert {
             margin: 0 0 15px 0;
         }
 
-        #modify-post-main > div.modify-post-title > span {
-            width: 5%;
-            margin-right: 15px;
+    #modify-post-main > .modify-post-title > span {
+        width: 5%;
+        margin-right: 15px;
+    }
+
+    #modify-post-main > .modify-post-title > input {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #modify-post-main > .modify-post-message {
+        padding: 15px;
+    }
+
+        #modify-post-main > .modify-post-message > div {
+            overflow: hidden;
         }
 
-        #modify-post-main > div.modify-post-title > input {
+        #modify-post-main > .modify-post-message textarea {
+            min-height: 150px;
+            resize: none;
             width: 100%;
             max-width: 100%;
         }
 
-        #modify-post-main > div.modify-post-message {
-            padding: 15px;
-        }
+    #modify-post-main > div.modify-post-message .cke_contents {
+        min-height: 200px !important;
+    }
 
-            #modify-post-main > div.modify-post-message > div {
-                overflow: hidden;
-            }
 
-            #modify-post-main > div.modify-post-message textarea {
-                min-height: 150px;
-                resize: none;
-                width: 100%;
-                max-width: 100%;
-            }
+    #modify-post-main > .modify-post-contents > .btn {
+        margin-bottom: 15px;
+    }
 
-            #modify-post-main > div.modify-post-message .cke_contents {
-                min-height: 200px !important;
-            }
-            
 @media (max-width: 767px) {
     #modify-post-main > div.modify-post-message {
         padding: 15px;
@@ -1735,23 +1740,37 @@ div.login-alert {
 }
 
     #media-selection-dialog .modal-body ul li {
-        display: inline-block;
+        display: block;
         margin-bottom: 15px;
-        border: 1px solid #ccc;
+        border: 1px solid rgb(204, 204, 204);
         position: relative;
+        overflow: hidden;
     }
 
         #media-selection-dialog .modal-body ul li .center-cropped {
-            width: 25%;
+            width: 22.4%;
             height: 150px;
+            margin: 7px;
+            border: 1px solid rgb(204, 204, 204);
         }
 
-        #media-selection-dialog .modal-body ul li .center-cropped img {
-            max-width: 100%;
-            width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-        }
+            #media-selection-dialog .modal-body ul li .center-cropped button {
+                margin: 10px;
+            }
+
+            #media-selection-dialog .modal-body ul li .center-cropped img {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                border: 1px solid #ddd;
+            }
+
+@media (max-width: 767px) {
+    #media-selection-dialog .modal-body ul li .center-cropped {
+        width: 47%;
+        height: 150px;
+    }
+}
 
 .post-item-content p {
     text-align: left;
@@ -2064,80 +2083,84 @@ div.login-alert {
     background: #f8f8f8;
 }
 
-div.file-upload div.dropzone {
+.file-upload .dropzone {
     border: dotted 3px #666;
 }
 
-div.file-upload input[type=file] {
+.file-upload > .btn {
     margin-bottom: 15px;
-    display: inline-block;
 }
 
-div.file-upload div.dropzone > h4 {
+    .file-upload > .btn > input[type=file] {
+        position: fixed;
+        top: -1000px;
+    }
+
+.file-upload .dropzone > h4 {
     margin-left: 5px;
 }
 
-div.file-upload div.dropzone > p {
+.file-upload .dropzone > p {
     margin-left: 5px;
 }
 
-div.file-upload div.dropzone > .upload-all {
+.file-upload .dropzone > .upload-all {
     margin-left: 5px;
 }
 
-    div.file-upload div.dropzone > .upload-all > i {
+    .file-upload .dropzone > .upload-all > i {
         padding-right: 5px;
     }
 
-div.file-upload div.dropzone ul.upload-items {
+.file-upload .dropzone ul.upload-items {
     list-style-type: none;
     padding: 0;
 }
 
-    div.file-upload div.dropzone ul.upload-items > li {
+    .file-upload .dropzone ul.upload-items > li {
         background: #fff;
         margin: 5px;
         width: 100%;
     }
 
-    div.file-upload div.dropzone ul.upload-items div.thumbnail {
+    .file-upload .dropzone ul.upload-items .thumbnail {
         border: 0;
         padding: 0;
         border-radius: 0;
         margin: 0;
     }
 
-        div.file-upload div.dropzone ul.upload-items div.thumbnail img {
+        .file-upload .dropzone ul.upload-items .thumbnail img {
             height: auto;
             width: 100%;
         }
 
-        div.file-upload div.dropzone ul.upload-items div.thumbnail canvas {
+        .file-upload .dropzone ul.upload-items .thumbnail canvas {
             width: 100%;
             height: auto;
         }
 
-    div.file-upload div.dropzone ul.upload-items div.captions {
+    .file-upload .dropzone ul.upload-items .captions {
         padding: 0 10px 10px 10px;
         color: #999;
     }
 
-        div.file-upload div.dropzone ul.upload-items div.captions h5 {
+        .file-upload .dropzone ul.upload-items .captions h5 {
             color: #666;
         }
 
-        div.file-upload div.dropzone ul.upload-items div.captions input {
+        .file-upload .dropzone ul.upload-items .captions input {
             width: 100%;
             max-width: 100%;
         }
 
-        div.file-upload div.dropzone ul.upload-items div.captions textarea {
+        .file-upload .dropzone ul.upload-items .captions textarea {
             width: 100%;
             max-width: 100%;
             resize: none;
         }
 
-    div.file-upload div.dropzone ul.upload-items div.progress {
+    .file-upload .dropzone ul.upload-items .progress {
         border-radius: 0;
         height: 10px;
         border-left: 1px solid #ccc;
