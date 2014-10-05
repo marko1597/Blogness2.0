@@ -27,188 +27,178 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/posts/{postId:int}")]
-        public Post Get(int postId)
+        public IHttpActionResult Get(int postId)
         {
-            var post = new Post();
-
             try
             {
-                post = _postsSvc.GetPost(postId) ?? new Post();
+                var post = _postsSvc.GetPost(postId) ?? new Post();
+                return Ok(post);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return post;
         }
 
         [HttpGet]
         [Route("api/posts/{postId:int}/related")]
-        public RelatedPosts GetRelated(int postId)
+        public IHttpActionResult GetRelated(int postId)
         {
-            var posts = new RelatedPosts();
-
             try
             {
-                posts = _postsSvc.GetRelatedPosts(postId) ?? new RelatedPosts();
+                var posts = _postsSvc.GetRelatedPosts(postId) ?? new RelatedPosts();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/tag/{tagName}")]
-        public List<Post> Get(string tagName)
+        public IHttpActionResult Get(string tagName)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetPostsByTag(tagName) ?? new List<Post>();
+                var posts = _postsSvc.GetPostsByTag(tagName) ?? new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/tag/{tagName}/more/{skip}")]
-        public List<Post> GetMoreByTag(string tagName, int skip)
+        public IHttpActionResult GetMoreByTag(string tagName, int skip)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetMorePostsByTag(tagName, skip) ?? new List<Post>();
+                var posts = _postsSvc.GetMorePostsByTag(tagName, skip) ?? new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/popular")]
-        public List<Post> GetPopular()
+        public IHttpActionResult GetPopular()
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetPopularPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
+                var posts = _postsSvc.GetPopularPosts(
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ??
+                    new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/popular/more/{skip:int?}")]
-        public List<Post> GetMorePopular(int skip = 10)
+        public IHttpActionResult GetMorePopular(int skip = 10)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetMorePopularPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
+                var posts = _postsSvc.GetMorePopularPosts(
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ??
+                    new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/recent")]
-        public List<Post> GetRecent()
+        public IHttpActionResult GetRecent()
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetRecentPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ?? new List<Post>();
+                var posts = _postsSvc.GetRecentPosts(
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("DefaultPostsThreshold"))) ??
+                    new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/posts/recent/more/{skip:int?}")]
-        public List<Post> GetMoreRecent(int skip = 10)
+        public IHttpActionResult GetMoreRecent(int skip = 10)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetMoreRecentPosts(Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ?? new List<Post>();
+                var posts = _postsSvc.GetMoreRecentPosts(
+                    Convert.ToInt32(_configurationHelper.GetAppSettings("MorePostsTakeValue")), skip) ??
+                    new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/user/{userId}/posts")]
-        public List<Post> GetUserPosts(int userId)
+        public IHttpActionResult GetUserPosts(int userId)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetPostsByUser(userId) ?? new List<Post>();
+                var posts = _postsSvc.GetPostsByUser(userId) ?? new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
         [Route("api/user/{userId}/posts/more/{skip}")]
-        public List<Post> GetMoreUserPosts(int userId, int skip)
+        public IHttpActionResult GetMoreUserPosts(int userId, int skip)
         {
-            var posts = new List<Post>();
-
             try
             {
-                posts = _postsSvc.GetMorePostsByUser(userId, skip) ?? new List<Post>();
+                var posts = _postsSvc.GetMorePostsByUser(userId, skip) ?? new List<Post>();
+                return Ok(posts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-
-            return posts;
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]

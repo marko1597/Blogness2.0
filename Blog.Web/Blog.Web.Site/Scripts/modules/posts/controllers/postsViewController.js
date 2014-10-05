@@ -11,6 +11,8 @@
 
         $scope.postsList = [];
 
+        $scope.postLikes = [];
+
         $scope.isBusy = false;
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -72,8 +74,17 @@
             }
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function() {
-            postsService.subscribeToPost($scope.post.Id);
+        $scope.hasContents = function() {
+            if ($scope.post && $scope.post.PostContents && $scope.post.PostContents.length > 0) {
+                return true;
+            }
+            return false;
+        };
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.postLikes = d.postLikes;
+            }
         });
 
         $scope.init();

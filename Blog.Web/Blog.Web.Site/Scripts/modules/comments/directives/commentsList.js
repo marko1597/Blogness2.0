@@ -46,13 +46,11 @@
                 if (comment.Comments === null) comment.Comments = [];
 
                 comment.Comments.unshift(d.comment);
-                $scope.$apply();
 
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
                 $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
             } else {
                 $scope.comments.unshift(d.comment);
-                $scope.$apply();
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
             }
         });

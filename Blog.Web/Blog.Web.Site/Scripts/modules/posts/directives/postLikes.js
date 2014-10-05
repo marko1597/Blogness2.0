@@ -6,9 +6,7 @@
     };
 
     var ctrlFn = function ($scope, $rootScope, postsService, userService, errorService, localStorageService, configProvider) {
-        $scope.postId = $scope.data.PostId;
-
-        $scope.postLikes = $scope.data.PostLikes;
+        $scope.postLikes = $scope.list;
 
         $scope.user = null;
 
@@ -19,9 +17,8 @@
         $scope.tooltip = { "title": "Click to favorite this post." };
 
         $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
-            if (d.postId == $scope.data.PostId) {
+            if (d.postId == $scope.postId) {
                 $scope.postLikes = d.postLikes;
-                $scope.$apply();
                 $scope.highlight();
                 $scope.isUserLiked();
             }
@@ -43,8 +40,12 @@
             $scope.isUserLiked();
         });
 
+        $scope.$watch('list', function() {
+            $scope.postLikes = $scope.list;
+        });
+
         $scope.likePost = function () {
-            postsService.likePost($scope.data.PostId, $scope.username).then(function () { },
+            postsService.likePost($scope.postId, $scope.username).then(function () { },
             function (err) {
                 errorService.displayError(err);
             });
@@ -67,7 +68,10 @@
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: {
+            list: '=',
+            postId: '='
+        },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postlikes.html",
         controller: ctrlFn,

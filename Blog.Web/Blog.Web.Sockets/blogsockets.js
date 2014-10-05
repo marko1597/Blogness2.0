@@ -5,19 +5,21 @@
     , redisSubscriber = redis.createClient('6379', process.env.redisServer)
     , redisPublisher = redis.createClient('6379', process.env.redisServer)
     , blogChannels = {
-            viewPost: "post_",
-            userLoggedIn: "user_",
-            adminApp: "adminApp"
-        }
+        viewPost: "post_",
+        userLoggedIn: "user_",
+        adminApp: "adminApp"
+    }
     , clientFunctions = {
-            publishMessage: "PublishMessage",
-            commentAdded: "CommentAdded",
-            commentLikesUpdate: "CommentLikesUpdate",
-            postLikesUpdate: "PostLikesUpdate",
-            subscribeViewPost: "SubscribeViewPost",
-            unsubscribeViewPost: "UnsubscribeViewPost",
-            subscribeAdmin: "SubscribeAdmin"
-        };
+        publishMessage: "PublishMessage",
+        getPostTopComments: "GetPostTopComments",
+        getPostLikes: "GetPostLikes",
+        commentAdded: "CommentAdded",
+        commentLikesUpdate: "CommentLikesUpdate",
+        postLikesUpdate: "PostLikesUpdate",
+        subscribeViewPost: "SubscribeViewPost",
+        unsubscribeViewPost: "UnsubscribeViewPost",
+        subscribeAdmin: "SubscribeAdmin"
+    };
 
 var serverFunctions = {
     init: function (data) {
@@ -29,6 +31,29 @@ var serverFunctions = {
     PublishMessage: function (d) {
         io.sockets.emit(clientFunctions.publishMessage, d.data);
         io.sockets.in(blogChannels.adminApp).emit(clientFunctions.publishMessage, d.data);
+    },
+    
+    GetPostTopComments: function (d) {
+        if (d != null) {
+            var data = {
+                postId: d.PostId,
+                comments: d.Comments
+            };
+            io.sockets.emit(clientFunctions.getPostTopComments, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.getPostTopComments, data);
+        }
+    },
+    
+    GetPostLikes: function (d) {
+        if (d != null) {
+            var data = {
+                postId: d.PostId,
+                postLikes: d.PostLikes
+            };
+            io.sockets.emit(clientFunctions.getPostLikes, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.getPostLikes, data);
+        }
+        
     },
     
     PostLikesUpdate: function (d) {

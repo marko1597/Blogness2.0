@@ -17,12 +17,10 @@ namespace Blog.Logic.Core.Tests
     public class PostsLogicTest
     {
         private Mock<IPostRepository> _postRepository;
-        private Mock<ICommentRepository> _commentsRepository;
         private Mock<IPostContentRepository> _postContentRepository;
         private Mock<IMediaRepository> _mediaRepository;
 
         private List<Post> _posts;
-        private List<Comment> _comments;
         private List<PostContent> _postContents;
         private List<PostLike> _postLikes;
         private List<Tag> _tags;
@@ -180,66 +178,6 @@ namespace Blog.Logic.Core.Tests
 
             #endregion
 
-            #region Comments
-
-            _comments = new List<Comment>
-                     {
-                         new Comment
-                         {
-                             CommentId = 1,
-                             PostId = 1,
-                             ParentCommentId = null,
-                             CommentMessage = "Lorem ipsum dolor",
-                             UserId = 1,
-                             User = new User
-                                    {
-                                        UserId = 1,
-                                        UserName = "Lorem"
-                                    }
-                         },
-                         new Comment
-                         {
-                             CommentId = 2,
-                             PostId = 1,
-                             ParentCommentId = null,
-                             CommentMessage = "Lorem ipsum dolor",
-                             UserId = 2,
-                             User = new User
-                                    {
-                                        UserId = 2,
-                                        UserName = "Ipsum"
-                                    }
-                         },
-                         new Comment
-                         {
-                             CommentId = 3,
-                             PostId = 2,
-                             ParentCommentId = null,
-                             CommentMessage = "Lorem ipsum dolor",
-                             UserId = 1,
-                             User = new User
-                                    {
-                                        UserId = 1,
-                                        UserName = "Lorem"
-                                    }
-                         },
-                         new Comment
-                         {
-                             CommentId = 4,
-                             PostId = 2,
-                             ParentCommentId = null,
-                             CommentMessage = "Lorem ipsum dolor",
-                             UserId = 2,
-                             User = new User
-                                    {
-                                        UserId = 2,
-                                        UserName = "Ipsum"
-                                    }
-                         }
-                     };
-
-            #endregion
-
             #region Posts
 
             _posts = new List<Post>
@@ -249,7 +187,6 @@ namespace Blog.Logic.Core.Tests
                     PostId = 1,
                     PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                     PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                    Comments = _comments.Where(a => a.PostId == 1).ToList(),
                     Tags = _tags.Where(a => a.TagId != 3).ToList(),
                     PostTitle = "Foo",
                     PostMessage = "Lorem Ipsum Dolor",
@@ -261,7 +198,6 @@ namespace Blog.Logic.Core.Tests
                     PostId = 2,
                     PostLikes = _postLikes.Where(a => a.PostId == 2).ToList(),
                     PostContents = _postContents.Where(a => a.PostId == 2).ToList(),
-                    Comments = _comments.Where(a => a.PostId == 2).ToList(),
                     Tags = _tags.Where(a => a.TagId == 3).ToList(),
                     PostTitle = "Foo",
                     PostMessage = "Lorem Ipsum Dolor",
@@ -291,12 +227,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
 
@@ -312,7 +244,6 @@ namespace Blog.Logic.Core.Tests
                            PostId = 1,
                            PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                            PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                           Comments = _comments.Where(a => a.PostId == 1).ToList(),
                            Tags = _tags.Where(a => a.TagId != 3).ToList(),
                            PostTitle = "Foo",
                            PostMessage = "Lorem Ipsum Dolor",
@@ -334,12 +265,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
 
@@ -356,7 +283,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -378,12 +304,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
 
@@ -406,10 +328,9 @@ namespace Blog.Logic.Core.Tests
                 .Returns(postContents);
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPost(1);
 
@@ -432,11 +353,9 @@ namespace Blog.Logic.Core.Tests
                 .Returns(postContents);
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
-            
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPost(1));
         }
@@ -458,12 +377,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> {new Media {MediaId = 1 }});
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-            
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByUser(1);
 
@@ -480,10 +395,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
             
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByUser(1);
 
@@ -499,11 +413,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
             
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPostsByUser(1));
         }
@@ -516,7 +428,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -541,12 +452,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePostsByUser(1, 10);
 
@@ -562,10 +469,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePostsByUser(1, 10);
 
@@ -581,10 +487,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByUser(1, 10));
         }
@@ -606,12 +511,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByTag("lorem");
 
@@ -628,10 +529,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPostsByTag("lorem");
 
@@ -647,10 +547,9 @@ namespace Blog.Logic.Core.Tests
                 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPostsByTag("lorem"));
         }
@@ -663,7 +562,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -688,12 +586,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePostsByTag("foo", 10);
 
@@ -708,12 +602,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePostsByTag("foo", 10);
 
@@ -730,10 +622,9 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository = new Mock<IPostContentRepository>();
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetMorePostsByTag("foo", 10));
         }
@@ -746,7 +637,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -771,12 +661,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
 
@@ -792,10 +678,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
 
@@ -811,10 +696,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
         }
@@ -827,7 +711,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -852,12 +735,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMoreRecentPosts(5, 5);
 
@@ -872,12 +751,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMoreRecentPosts(5, 5);
 
@@ -892,12 +769,10 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetMoreRecentPosts(5, 5));
         }
@@ -910,7 +785,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -935,12 +809,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPopularPosts(5);
 
@@ -956,10 +826,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetPopularPosts(5);
 
@@ -975,10 +844,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetPopularPosts(5));
         }
@@ -991,7 +859,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1015,13 +882,9 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository = new Mock<IMediaRepository>();
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
-
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
             
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePopularPosts(5, 5);
 
@@ -1036,12 +899,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetMorePopularPosts(5, 5);
 
@@ -1056,12 +917,10 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetMorePopularPosts(5, 5));
         }
@@ -1074,7 +933,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1106,12 +964,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRelatedPosts(1);
 
@@ -1128,7 +982,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = null,
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1160,12 +1013,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRelatedPosts(1);
 
@@ -1182,7 +1031,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = new List<Tag>(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1214,12 +1062,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRelatedPosts(1);
 
@@ -1236,7 +1080,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = new List<Tag>(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1268,12 +1111,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRelatedPosts(1);
 
@@ -1292,10 +1131,9 @@ namespace Blog.Logic.Core.Tests
 
             _postContentRepository = new Mock<IPostContentRepository>();
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetRelatedPosts(1));
         }
@@ -1371,10 +1209,9 @@ namespace Blog.Logic.Core.Tests
 
             
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
 
@@ -1439,12 +1276,10 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
 
@@ -1505,10 +1340,9 @@ namespace Blog.Logic.Core.Tests
 
             
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.AddPost(param);
 
@@ -1538,10 +1372,9 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository = new Mock<IPostContentRepository>();
             
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.AddPost(param));
         }
@@ -1617,10 +1450,9 @@ namespace Blog.Logic.Core.Tests
 
             
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
 
@@ -1687,10 +1519,9 @@ namespace Blog.Logic.Core.Tests
 
             
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
 
@@ -1749,12 +1580,10 @@ namespace Blog.Logic.Core.Tests
             _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
                 .Returns(postContents);
 
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.UpdatePost(param);
 
@@ -1782,12 +1611,10 @@ namespace Blog.Logic.Core.Tests
             _postRepository.Setup(a => a.Edit(It.IsAny<Post>())).Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.UpdatePost(param));
         }
@@ -1814,12 +1641,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post> { post });
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.DeletePost(1);
 
@@ -1834,12 +1659,10 @@ namespace Blog.Logic.Core.Tests
                 .Returns(new List<Post>());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.DeletePost(1);
 
@@ -1854,12 +1677,10 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _postContentRepository = new Mock<IPostContentRepository>();
-            
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.DeletePost(1));
         }
@@ -1872,7 +1693,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1899,12 +1719,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
 
@@ -1920,7 +1736,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -1947,12 +1762,8 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Returns(new List<Media> { new Media { MediaId = 1 } });
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             var result = _postsLogic.GetRecentPosts(5);
 
@@ -1973,35 +1784,9 @@ namespace Blog.Logic.Core.Tests
                 .Throws(new Exception());
 
             _mediaRepository = new Mock<IMediaRepository>();
-            _commentsRepository = new Mock<ICommentRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
-
-            Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
-        }
-
-        [Test]
-        public void ShouldThrowExceptionWhenGetPostsFailsOnCommentsLookup()
-        {
-            var post = _posts.FirstOrDefault(a => a.PostId == 1);
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.GetRecent(It.IsAny<Expression<Func<Post, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Post> { post });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Throws(new Exception());
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
         }
@@ -2014,7 +1799,6 @@ namespace Blog.Logic.Core.Tests
                 PostId = 1,
                 PostLikes = _postLikes.Where(a => a.PostId == 1).ToList(),
                 PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = _comments.Where(a => a.PostId == 1).ToList(),
                 Tags = _tags.Where(a => a.TagId != 3).ToList(),
                 PostTitle = "Foo",
                 PostMessage = "Lorem Ipsum Dolor",
@@ -2040,15 +1824,10 @@ namespace Blog.Logic.Core.Tests
             _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
                 .Throws(new Exception());
 
-            _commentsRepository = new Mock<ICommentRepository>();
-            _commentsRepository.Setup(a => a.GetTop(It.IsAny<Expression<Func<Comment, bool>>>(), It.IsAny<int>()))
-                .Returns(new List<Comment> { new Comment { CommentId = 1 } });
-
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _commentsRepository.Object, _mediaRepository.Object);
+                _mediaRepository.Object);
 
             Assert.Throws<BlogException>(() => _postsLogic.GetRecentPosts(5));
         }
-
     }
 }

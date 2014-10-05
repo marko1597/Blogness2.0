@@ -1,15 +1,21 @@
 ﻿ngPosts.directive('postListItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, configProvider) {
 
         $scope.post = $scope.data.Post;
 
         $scope.user = $scope.data.Post.User;
 
+        $scope.comments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? 
+            $scope.data.Post.Comments : [];
+
+        $scope.postLikes = $scope.data.Post.PostLikes && $scope.data.Post.PostLikes.length > 0 ?
+            $scope.data.Post.PostLikes : [];
+
         $scope.username = localStorageService.get("username");
 
-        $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
+        $scope.hasComments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? true : false;
 
-        $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
+        $scope.hasTags = $scope.data.Post.Tags && $scope.data.Post.Tags.length > 0 ? true : false;
 
         $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
         
@@ -30,6 +36,19 @@
             $scope.isEditable = false;
         };
 
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.comments = d.comments;
+                $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
+            }
+        });
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.postLikes = d.postLikes;
+            }
+        });
+
         $scope.$on("loggedInUserInfo", function (ev, data) {
             if (data) {
                 $scope.username = data.UserName;
@@ -48,7 +67,7 @@
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',

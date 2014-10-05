@@ -37,6 +37,10 @@
                 $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
             });
 
+            $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
+            });
+
             $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
                 $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
             });
@@ -51,7 +55,6 @@
                     data: JSON.stringify(data)
                 };
                 $scope.messages.push(message);
-                console.log(message);
             };
         };
         ctrlFn.$inject = ["$scope", "$rootScope", "blogSocketsService", "configProvider"];

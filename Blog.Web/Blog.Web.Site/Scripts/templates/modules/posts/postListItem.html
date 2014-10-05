@@ -21,22 +21,16 @@
         <div post-contents contents="post.PostContents"></div>
     </div>
     <div class="details">
-        <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
+        <div post-likes list="postLikes" post-id="post.Id"></div>
     </div>
-    <div class="comments">
-        <div class="empty-message" ng-show="!hasComments">
-            <p>There are no comments yet.</p>
-        </div>
-        <ul ticker data-enable-pause="true" data-pause-element="popover" ng-show="hasComments">
-            <li ng-repeat="comment in post.Comments">
+    <div class="comments" ng-show="hasComments">
+        <ul ticker data-enable-pause="true" data-pause-element="popover">
+            <li ng-repeat="comment in comments">
                 <div post-list-item-comment comment="comment"></div>
             </li>
         </ul>
     </div>
-    <div class="tags">
-        <div class="empty-message" ng-show="!hasTags">
-            <p>There are no tags.</p>
-        </div>
-        <div tag-item tag="tag" ng-repeat="tag in post.Tags" ng-show="hasTags"></div>
+    <div class="tags" ng-show="hasTags">
+        <div tag-item tag="tag" ng-repeat="tag in post.Tags" ></div>
     </div>
 </div>

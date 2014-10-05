@@ -36,6 +36,8 @@ namespace Blog.Common.Utils
             PublishMessage,
             PostLikesUpdate,
             CommentLikesUpdate,
+            GetPostTopComments,
+            GetPostLikes,
             CommentAdded,
             SubscribeViewPost,
             UnsubscribeViewPost,

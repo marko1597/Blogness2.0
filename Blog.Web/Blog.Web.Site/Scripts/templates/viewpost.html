@@ -20,14 +20,14 @@
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
             </div>
             <div class="details">
-                <div post-likes data="{ PostLikes: post.PostLikes, PostId: post.Id }"></div>
+                <div post-likes list="postLikes" post-id="post.Id"></div>
             </div>
             <div class="tags">
                 <div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>
             </div>
         </div>
 
-        <div id="post-contents-{{post.Id}}" class="contents post-board content-item">
+        <div id="post-contents-{{post.Id}}" class="contents post-board content-item" ng-show="hasContents()">
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">

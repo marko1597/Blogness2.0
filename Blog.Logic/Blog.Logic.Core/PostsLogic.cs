@@ -15,14 +15,12 @@ namespace Blog.Logic.Core
     {
         private readonly IPostRepository _postRepository;
         private readonly IPostContentRepository _postContentRepository;
-        private readonly ICommentRepository _commentRepository;
         private readonly IMediaRepository _mediaRepository;
 
-        public PostsLogic(IPostRepository postRepository, IPostContentRepository postContentRepository, ICommentRepository commentRepository, IMediaRepository mediaRepository)
+        public PostsLogic(IPostRepository postRepository, IPostContentRepository postContentRepository, IMediaRepository mediaRepository)
         {
             _postRepository = postRepository;
             _postContentRepository = postContentRepository;
-            _commentRepository = commentRepository;
             _mediaRepository = mediaRepository;
         }
 
@@ -30,7 +28,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,PostLikes").FirstOrDefault();
+                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User").FirstOrDefault();
 
                 if (db == null)
                 {
@@ -308,11 +306,6 @@ namespace Blog.Logic.Core
                 contents.Add(PostContentMapper.ToDto(b));
             });
             post.PostContents = contents;
-
-            var comments = new List<Comment>();
-            var dbComments = _commentRepository.GetTop(b => b.PostId == post.Id, 5).ToList();
-            dbComments.ForEach(b => comments.Add(CommentMapper.ToDto(b)));
-            post.Comments = comments;
 
             if (post.User.PictureId != null)
                 post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());

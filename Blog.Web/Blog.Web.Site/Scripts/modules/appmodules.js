@@ -116,7 +116,6 @@ ngComments.directive('commentItem', [function () {
         $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
             if ($scope.comment.Id == d.commentId) {
                 $scope.comment.CommentLikes = d.commentLikes;
-                $scope.$apply();
                 $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
                 $scope.isUserLiked();
             }
@@ -304,13 +303,11 @@ ngComments.directive('commentsList', [function () {
                 if (comment.Comments === null) comment.Comments = [];
 
                 comment.Comments.unshift(d.comment);
-                $scope.$apply();
 
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
                 $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
             } else {
                 $scope.comments.unshift(d.comment);
-                $scope.$apply();
                 $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
             }
         });
@@ -2470,6 +2467,8 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
 
         $scope.postsList = [];
 
+        $scope.postLikes = [];
+
         $scope.isBusy = false;
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -2531,8 +2530,17 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
             }
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function() {
-            postsService.subscribeToPost($scope.post.Id);
+        $scope.hasContents = function() {
+            if ($scope.post && $scope.post.PostContents && $scope.post.PostContents.length > 0) {
+                return true;
+            }
+            return false;
+        };
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.postLikes = d.postLikes;
+            }
         });
 
         $scope.init();
@@ -2562,9 +2570,7 @@ ngPosts.directive('postLikes', [function () {
     };
 
     var ctrlFn = function ($scope, $rootScope, postsService, userService, errorService, localStorageService, configProvider) {
-        $scope.postId = $scope.data.PostId;
-
-        $scope.postLikes = $scope.data.PostLikes;
+        $scope.postLikes = $scope.list;
 
         $scope.user = null;
 
@@ -2575,9 +2581,8 @@ ngPosts.directive('postLikes', [function () {
         $scope.tooltip = { "title": "Click to favorite this post." };
 
         $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
-            if (d.postId == $scope.data.PostId) {
+            if (d.postId == $scope.postId) {
                 $scope.postLikes = d.postLikes;
-                $scope.$apply();
                 $scope.highlight();
                 $scope.isUserLiked();
             }
@@ -2599,8 +2604,12 @@ ngPosts.directive('postLikes', [function () {
             $scope.isUserLiked();
         });
 
+        $scope.$watch('list', function() {
+            $scope.postLikes = $scope.list;
+        });
+
         $scope.likePost = function () {
-            postsService.likePost($scope.data.PostId, $scope.username).then(function () { },
+            postsService.likePost($scope.postId, $scope.username).then(function () { },
             function (err) {
                 errorService.displayError(err);
             });
@@ -2623,7 +2632,10 @@ ngPosts.directive('postLikes', [function () {
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: {
+            list: '=',
+            postId: '='
+        },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postlikes.html",
         controller: ctrlFn,
@@ -2633,17 +2645,23 @@ ngPosts.directive('postLikes', [function () {
 
 ///#source 1 1 /Scripts/modules/posts/directives/postListItem.js
 ngPosts.directive('postListItem', [function () {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, configProvider) {
 
         $scope.post = $scope.data.Post;
 
         $scope.user = $scope.data.Post.User;
 
+        $scope.comments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? 
+            $scope.data.Post.Comments : [];
+
+        $scope.postLikes = $scope.data.Post.PostLikes && $scope.data.Post.PostLikes.length > 0 ?
+            $scope.data.Post.PostLikes : [];
+
         $scope.username = localStorageService.get("username");
 
-        $scope.hasComments = $scope.data.Post.Comments.length > 0 ? true : false;
+        $scope.hasComments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? true : false;
 
-        $scope.hasTags = $scope.data.Post.Tags.length > 0 ? true : false;
+        $scope.hasTags = $scope.data.Post.Tags && $scope.data.Post.Tags.length > 0 ? true : false;
 
         $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
         
@@ -2664,6 +2682,19 @@ ngPosts.directive('postListItem', [function () {
             $scope.isEditable = false;
         };
 
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.comments = d.comments;
+                $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
+            }
+        });
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.postLikes = d.postLikes;
+            }
+        });
+
         $scope.$on("loggedInUserInfo", function (ev, data) {
             if (data) {
                 $scope.username = data.UserName;
@@ -2682,7 +2713,7 @@ ngPosts.directive('postListItem', [function () {
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -3534,6 +3565,10 @@ ngBlogSockets.directive("socketDebugger", [
                 $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
             });
 
+            $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
+                $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
+            });
+
             $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
                 $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
             });
@@ -3548,7 +3583,6 @@ ngBlogSockets.directive("socketDebugger", [
                     data: JSON.stringify(data)
                 };
                 $scope.messages.push(message);
-                console.log(message);
             };
         };
         ctrlFn.$inject = ["$scope", "$rootScope", "blogSocketsService", "configProvider"];
@@ -3563,63 +3597,91 @@ ngBlogSockets.directive("socketDebugger", [
 ]);
 ///#source 1 1 /Scripts/modules/sockets/services/socketsService.js
 // ReSharper disable UseOfImplicitGlobalInFunctionScope
-ngBlogSockets.factory('blogSocketsService', ["$rootScope", "configProvider", function ($rootScope, configProvider) {
-    var address = configProvider.getSettings().BlogSockets;
-    
-    var details = {
-        resource: address + "socket.io"
-    };
+ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interval", "configProvider",
+    function ($rootScope, $timeout, $interval, configProvider) {
+        var address = configProvider.getSettings().BlogSockets;
 
-    var socket = {};
-    if (typeof io !== "undefined") {
-        socket = io.connect(address, details);
-    }
+        var details = {
+            resource: address + "socket.io"
+        };
 
-    if (configProvider.getSettings().BlogSocketsAvailable === "true") {
-        socket.on('connect', function () {
-            $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
-        });
-
-        socket.on('echo', function (data) {
-            console.log(data);
-        });
-
-        socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
-            $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
-        });
-
-        socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
-            $rootScope.$broadcast(configProvider.getSocketClientFunctions().postLikesUpdate, data);
-        });
-
-        socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
-            $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
-        });
-
-        socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
-            $rootScope.$broadcast(configProvider.getSocketClientFunctions().commentAdded, data);
-        });
-    }
-    
-    return {
-        emit: function (eventName, data, callback) {
-            if (socket.connected) {
-                if (typeof io !== "undefined") {
-                    socket.emit(eventName, data, function () {
-                        var args = arguments;
-                        $rootScope.$apply(function () {
-                            if (callback) {
-                                callback.apply(socket, args);
-                            }
-                        });
-                        return true;
-                    });
-                }
-            }
-            return false;
+        var socket = {};
+        if (typeof io !== "undefined") {
+            socket = io.connect(address, details);
         }
-    };
-}]);
+
+        var broadcastMessage = function(topic, data) {
+            var stop;
+
+            stop = $interval(function () {
+                if ($rootScope.$$listeners[topic] && $rootScope.$$listeners[topic].length > 0) {
+                    $rootScope.$broadcast(topic, data);
+                    $interval.cancel(stop);
+                    stop = undefined;
+                }
+            }, 250);
+        };
+
+        if (configProvider.getSettings().BlogSocketsAvailable === "true") {
+            socket.on('connect', function () {
+                $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
+            });
+
+            socket.on('echo', function (data) {
+                console.log(data);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
+                $timeout(function () {
+                    $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
+                }, 250);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
+                var topic = configProvider.getSocketClientFunctions().getPostLikes;
+                broadcastMessage(topic, data);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
+                var topic = configProvider.getSocketClientFunctions().getPostTopComments;
+                broadcastMessage(topic, data);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
+                var topic = configProvider.getSocketClientFunctions().postLikesUpdate;
+                broadcastMessage(topic, data);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
+                var topic = configProvider.getSocketClientFunctions().commentLikesUpdate;
+                broadcastMessage(topic, data);
+            });
+
+            socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
+                var topic = configProvider.getSocketClientFunctions().commentAdded;
+                broadcastMessage(topic, data);
+            });
+        }
+
+        return {
+            emit: function (eventName, data, callback) {
+                if (socket.connected) {
+                    if (typeof io !== "undefined") {
+                        socket.emit(eventName, data, function () {
+                            var args = arguments;
+                            $rootScope.$apply(function () {
+                                if (callback) {
+                                    callback.apply(socket, args);
+                                }
+                            });
+                            return true;
+                        });
+                    }
+                }
+                return false;
+            }
+        };
+    }]);
 
 // ReSharper restore UseOfImplicitGlobalInFunctionScope
 ///#source 1 1 /Scripts/modules/tags/tags.js
