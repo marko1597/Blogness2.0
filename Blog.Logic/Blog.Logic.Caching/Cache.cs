@@ -28,6 +28,30 @@ namespace Blog.Logic.Caching
             }
         }
 
+        public List<T> GetList(Expression<Func<T, bool>> filter)
+        {
+            try
+            {
+                return _cacheDataSource.GetList(filter);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public List<T> GetList(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        {
+            try
+            {
+                return _cacheDataSource.GetList(orderBy);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public List<T> GetList(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
         {
             try
@@ -40,11 +64,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public List<T> GetListByKey(string key)
+        public List<T> GetList(Expression<Func<T, bool>> filter, int threshold, int skip)
         {
             try
             {
-                return _cacheDataSource.GetListByKey(key);
+                return _cacheDataSource.GetList(filter, threshold, skip);
             }
             catch (Exception ex)
             {
@@ -52,24 +76,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public T Get(int id, string key)
+        public List<T> GetList(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int threshold, int skip)
         {
             try
             {
-                return _cacheDataSource.Get(id, key);
-
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public T Get(string name, string key)
-        {
-            try
-            {
-                return _cacheDataSource.Get(name, key);
+                return _cacheDataSource.GetList(filter, orderBy, threshold, skip);
             }
             catch (Exception ex)
             {
@@ -89,11 +100,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public void SetAll(List<T> entities)
+        public void SetList(List<T> entities)
         {
             try
             {
-                _cacheDataSource.SetAll(entities);
+                _cacheDataSource.SetList(entities);
             }
             catch (Exception ex)
             {
@@ -101,11 +112,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public void Set(T entity)
+        public void AddToList(T entity)
         {
             try
             {
-                _cacheDataSource.Set(entity);
+                _cacheDataSource.AddToList(entity);
             }
             catch (Exception ex)
             {
@@ -113,38 +124,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public void SetListByKey(string key, List<T> value)
+        public void Replace(Expression<Func<T, bool>> filter, T entity)
         {
             try
             {
-                _cacheDataSource.SetListByKey(key, value);
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public List<T> SetItemAndUpdateList(string key, T entity, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null)
-        {
-            try
-            {
-                var list = _cacheDataSource.GetListByKey(key);
-
-                if (list == null || list.Count == 0)
-                {
-                    return null;
-                }
-
-                list.Add(entity);
-
-                if (orderBy != null)
-                {
-                    list = orderBy(list.AsQueryable()).ToList();
-                }
-                _cacheDataSource.SetListByKey(key, list);
-
-                return _cacheDataSource.GetListByKey(key);
+                _cacheDataSource.Replace(filter, entity);
             }
             catch (Exception ex)
             {
@@ -164,35 +148,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public void Remove(int id, string key)
+        public void Remove(Expression<Func<T, bool>> filter, T entity)
         {
             try
             {
-                _cacheDataSource.Remove(id, key);
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public void Remove(string name, string key)
-        {
-            try
-            {
-                _cacheDataSource.Remove(name, key);
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public void Replace(string key, T entity)
-        {
-            try
-            {
-                _cacheDataSource.Replace(key, entity);
+                _cacheDataSource.Remove(filter, entity);
             }
             catch (Exception ex)
             {

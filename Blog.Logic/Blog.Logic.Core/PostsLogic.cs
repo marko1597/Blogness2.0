@@ -231,8 +231,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
+                post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
+                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -247,8 +247,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags, post.User.Id) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.User.Id, post.Id) : null;
+                post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
+                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -275,7 +275,7 @@ namespace Blog.Logic.Core
             }
         }
 
-        private List<Tag> PrepareTags(IEnumerable<Tag> tags, int userId)
+        private static List<Tag> PrepareTags(IEnumerable<Tag> tags)
         {
             var enumerable = tags as Tag[] ?? tags.ToArray();
             foreach (var tag in enumerable)
@@ -286,7 +286,7 @@ namespace Blog.Logic.Core
             return enumerable.ToList();
         }
 
-        private List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int userId, int postId)
+        private static List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int postId)
         {
             var postContents = contents as PostContent[] ?? contents.ToArray();
             foreach (var postContent in postContents)

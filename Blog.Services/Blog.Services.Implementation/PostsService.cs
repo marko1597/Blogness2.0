@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
@@ -46,7 +47,13 @@ namespace Blog.Services.Implementation
 
         public Post GetPost(int postId)
         {
-            return _postsLogic.GetPost(postId);
+            var cache = _cache.GetList(a => a.Id == postId).FirstOrDefault();
+            if (cache != null) return cache;
+
+            var post = _postsLogic.GetPost(postId);
+            _cache.AddToList(post);
+
+            return post;
         }
 
         public RelatedPosts GetRelatedPosts(int postId)

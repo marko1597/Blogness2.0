@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Newtonsoft.Json;
 using ServiceStack.Redis;
 
 namespace Blog.Logic.Caching.DataSource.Redis
@@ -26,6 +25,35 @@ namespace Blog.Logic.Caching.DataSource.Redis
                 var redis = client.As<T>();
                 var list = redis.Lists[GetListKeyName(typeof(T))];
                 return list.ToList();
+            }
+        }
+
+        public List<T> GetList(Expression<Func<T, bool>> filter)
+        {
+            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            {
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+
+                if (filter == null) return list.ToList();
+
+                var query = list.ToList().AsQueryable().Where(filter);
+                return query.ToList();
+            }
+        }
+
+        public List<T> GetList(Func<IQueryable<T>, IOrderedQueryable<T>> orderBy)
+        {
+            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            {
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+
+                if (orderBy == null) return list.ToList();
+
+                IQueryable<T> query = new EnumerableQuery<T>(list);
+                query = orderBy(query);
+                return query.ToList();
             }
         }
 
@@ -51,39 +79,46 @@ namespace Blog.Logic.Caching.DataSource.Redis
             }
         }
 
-        public T Get(int id, string key)
+        public List<T> GetList(Expression<Func<T, bool>> filter, int threshold, int skip)
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                var entity = client.Get<T>(string.Format("{0}:{1}", key, id));
-                return entity;
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                IQueryable<T> query = new EnumerableQuery<T>(list);
+
+                if (filter != null)
+                {
+                    query = list.ToList().AsQueryable()
+                        .Where(filter)
+                        .Take(threshold)
+                        .Skip(skip);
+                }
+
+                return query.ToList();
             }
         }
 
-        public T Get(string name, string key)
+        public List<T> GetList(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy, int threshold, int skip)
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                var entity = client.Get<T>(string.Format("{0}:{1}", key, name));
-                return entity;
-            }
-        }
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                IQueryable<T> query = new EnumerableQuery<T>(list);
 
-        public List<T> GetListByKey(string key)
-        {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
-            {
-                var entities = client.GetEntry(key);
-                return JsonConvert.DeserializeObject<List<T>>(entities);
-            }
-        }
+                if (filter != null)
+                {
+                    query = list.ToList().AsQueryable()
+                        .Where(filter).Take(threshold).Skip(skip);
+                }
 
-        public void SetListByKey(string key, List<T> value)
-        {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
-            {
-                var entities = JsonConvert.SerializeObject(value);
-                client.SetEntry(key, entities);
+                if (orderBy != null)
+                {
+                    query = orderBy(query);
+                }
+                
+                return query.ToList();
             }
         }
 
@@ -96,7 +131,7 @@ namespace Blog.Logic.Caching.DataSource.Redis
             }
         }
 
-        public void SetAll(List<T> entities)
+        public void SetList(List<T> entities)
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
@@ -110,14 +145,32 @@ namespace Blog.Logic.Caching.DataSource.Redis
             }
         }
 
-        public void Set(T entity)
+        public void AddToList(T entity)
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                client.Store(entity);
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+
+                list.Add(entity);
             }
         }
 
+        public void Replace(Expression<Func<T, bool>> filter, T entity)
+        {
+            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            {
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                var query = list.ToList().AsQueryable().Where(filter).FirstOrDefault();
+
+                if (query == null) return;
+
+                list.Remove(query);
+                list.Add(entity);
+            }
+        }
+        
         public void RemoveAll()
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
@@ -126,30 +179,20 @@ namespace Blog.Logic.Caching.DataSource.Redis
             }
         }
 
-        public void Remove(int id, string key)
+        public void Remove(Expression<Func<T, bool>> filter, T entity)
         {
             using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
             {
-                client.Remove(string.Format("{0}:{1}", key, id));
+                var redis = client.As<T>();
+                var list = redis.Lists[GetListKeyName(typeof(T))];
+                var query = list.ToList().AsQueryable().Where(filter).FirstOrDefault();
+
+                if (query == null) return;
+
+                list.Remove(query);
             }
         }
-
-        public void Remove(string name, string key)
-        {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
-            {
-                client.Remove(string.Format("{0}:{1}", key, name));
-            }
-        }
-
-        public void Replace(string key, T entity)
-        {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
-            {
-                client.Replace(key, entity);
-            }
-        }
-
+        
         private static string GetListKeyName(Type src)
         {
             return string.Format("{0}s", src.Name.ToLower());
