@@ -16,6 +16,114 @@ namespace Blog.Logic.Caching
             _cacheDataSource = cacheDataSource;
         }
 
+        public T GetEntry(string key)
+        {
+            try
+            {
+                return _cacheDataSource.GetEntry(key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public T GetEntry(int id)
+        {
+            try
+            {
+                return _cacheDataSource.GetEntry(id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public List<T> GetEntriesAsList()
+        {
+            try
+            {
+                return _cacheDataSource.GetEntriesAsList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void SetEntry(T entity, string key)
+        {
+            try
+            {
+                _cacheDataSource.SetEntry(entity, key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void SetEntry(T entity, int id)
+        {
+            try
+            {
+                _cacheDataSource.SetEntry(entity, id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void ReplaceEntry(T entity, string key)
+        {
+            try
+            {
+                _cacheDataSource.ReplaceEntry(entity, key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void ReplaceEntry(T entity, int id)
+        {
+            try
+            {
+                _cacheDataSource.ReplaceEntry(entity, id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void RemoveEntry(string key)
+        {
+            try
+            {
+                _cacheDataSource.RemoveEntry(key);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public void RemoveEntry(int id)
+        {
+            try
+            {
+                _cacheDataSource.RemoveEntry(id);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public List<T> GetList()
         {
             try
@@ -124,11 +232,11 @@ namespace Blog.Logic.Caching
             }
         }
 
-        public void Replace(Expression<Func<T, bool>> filter, T entity)
+        public void ClearList()
         {
             try
             {
-                _cacheDataSource.Replace(filter, entity);
+                _cacheDataSource.ClearList();
             }
             catch (Exception ex)
             {
@@ -141,18 +249,6 @@ namespace Blog.Logic.Caching
             try
             {
                 _cacheDataSource.RemoveAll();
-            }
-            catch (Exception ex)
-            {
-                throw new BlogException(ex.Message, ex.InnerException);
-            }
-        }
-
-        public void Remove(Expression<Func<T, bool>> filter, T entity)
-        {
-            try
-            {
-                _cacheDataSource.Remove(filter, entity);
             }
             catch (Exception ex)
             {

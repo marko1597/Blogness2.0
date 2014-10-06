@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-        <div id="post-{{post.Id}}" class="post-board content-item">
+        <div id="post-{{post.Id}}" class="post-board content-item ng-cloak">
             <div class="header row" data-user-id="{{post.CreatedBy}}">
                 <div>
                     <img ng-src="{{post.User.Picture.MediaUrl}}" />
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div id="post-contents-{{post.Id}}" class="contents post-board content-item" ng-show="hasContents()">
+        <div id="post-contents-{{post.Id}}" class="contents post-board content-item ng-cloak" ng-show="hasContents()">
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">

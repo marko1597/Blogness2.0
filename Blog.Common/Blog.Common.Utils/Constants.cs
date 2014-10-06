@@ -30,7 +30,7 @@ namespace Blog.Common.Utils
             InvalidCredentials = 6,
             ValidationError = 7
         }
-
+        
         public enum SocketClientFunctions
         {
             PublishMessage,

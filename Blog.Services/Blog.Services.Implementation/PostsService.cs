@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
@@ -52,10 +51,17 @@ namespace Blog.Services.Implementation
 
         public Post GetPost(int postId)
         {
-            var post = Cache.GetList(a => a.Id == postId).FirstOrDefault() ?? _postsLogic.GetPost(postId);
-            post.PostLikes = _postLikesLogic.Get(post.Id);
+            var cache = Cache.GetEntry(postId);
 
-            Cache.AddToList(post);
+            if (cache != null)
+            {
+                cache.PostLikes = _postLikesLogic.Get(cache.Id);
+                return cache;
+            }
+
+            var post = _postsLogic.GetPost(postId);
+            post.PostLikes = _postLikesLogic.Get(post.Id);
+            Cache.SetEntry(post, postId);
 
             return post;
         }
@@ -132,17 +138,26 @@ namespace Blog.Services.Implementation
 
         public Post AddPost(Post post)
         {
-            return _postsLogic.AddPost(post);
+            var result = _postsLogic.AddPost(post);
+            Cache.SetEntry(result, result.Id);
+
+            return result;
         }
 
         public Post UpdatePost(Post post)
         {
-            return _postsLogic.UpdatePost(post);
+            var result = _postsLogic.UpdatePost(post);
+            Cache.ReplaceEntry(result, result.Id);
+
+            return result;
         }
 
         public bool DeletePost(int postId)
         {
-            return _postsLogic.DeletePost(postId);
+            var result = _postsLogic.DeletePost(postId);
+            Cache.RemoveEntry(postId);
+
+            return result;
         }
 
         private List<Post> SetPostProperties(IEnumerable<Post> posts)
