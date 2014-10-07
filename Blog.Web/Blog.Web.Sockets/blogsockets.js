@@ -21,6 +21,8 @@
         subscribeAdmin: "SubscribeAdmin"
     };
 
+io.set('transports', ['polling']);
+		
 var serverFunctions = {
     init: function (data) {
         if (data.fn !== undefined) {
