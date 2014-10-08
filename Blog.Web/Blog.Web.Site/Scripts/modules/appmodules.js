@@ -3623,44 +3623,53 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
         };
 
         if (configProvider.getSettings().BlogSocketsAvailable === "true") {
-            socket.on('connect', function () {
-                $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
-            });
+            var socketReady;
 
-            socket.on('echo', function (data) {
-                console.log(data);
-            });
+            socketReady = $interval(function() {
+                if (socket && socket.on) {
+                    $interval.cancel(socketReady);
+                    socketReady = undefined;
 
-            socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
-                $timeout(function () {
-                    $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
-                }, 250);
-            });
+                    socket.on('connect', function () {
+                        $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
+                    });
 
-            socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
-                var topic = configProvider.getSocketClientFunctions().getPostLikes;
-                broadcastMessage(topic, data);
-            });
+                    socket.on('echo', function (data) {
+                        console.log(data);
+                    });
 
-            socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
-                var topic = configProvider.getSocketClientFunctions().getPostTopComments;
-                broadcastMessage(topic, data);
-            });
+                    socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
+                        $timeout(function () {
+                            $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
+                        }, 250);
+                    });
 
-            socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
-                var topic = configProvider.getSocketClientFunctions().postLikesUpdate;
-                broadcastMessage(topic, data);
-            });
+                    socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().getPostLikes;
+                        broadcastMessage(topic, data);
+                    });
 
-            socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
-                var topic = configProvider.getSocketClientFunctions().commentLikesUpdate;
-                broadcastMessage(topic, data);
-            });
+                    socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().getPostTopComments;
+                        broadcastMessage(topic, data);
+                    });
 
-            socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
-                var topic = configProvider.getSocketClientFunctions().commentAdded;
-                broadcastMessage(topic, data);
-            });
+                    socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().postLikesUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().commentLikesUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().commentAdded;
+                        broadcastMessage(topic, data);
+                    });
+                }
+            }, 250);
         }
 
         return {

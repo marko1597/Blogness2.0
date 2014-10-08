@@ -133,6 +133,13 @@
         };
     </script>
     <!-- #endregion -->
+    
+    <!-- #region socket.io js script -->
+    @if (CheckBlogSocketsAvailability())
+    {
+        <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
+    }
+    <!-- #endregion -->
 </head>
 <body ng-controller="blogMainController" window-resize>
     @RenderBody()
@@ -146,12 +153,7 @@
     }
 
     <!-- #endregion -->
-    <!-- #region socket.io js script -->
-    @if (CheckBlogSocketsAvailability())
-    {
-        <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
-    }
-    <!-- #endregion -->
+    
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
     {
