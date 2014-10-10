@@ -39,6 +39,19 @@ namespace Blog.Common.Utils.Helpers
             }
         }
 
+        public HttpResponseMessage HttpGet(string baseUri, string url)
+        {
+            try
+            {
+                BaseUri = baseUri;
+                return HttpClientObj.GetAsync(url).Result;
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public string Post<T>(string baseUri, string url, T obj) where T : class
         {
             try

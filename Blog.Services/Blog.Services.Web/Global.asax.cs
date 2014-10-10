@@ -2,6 +2,7 @@
 using System.Net;
 using System.Web;
 using Blog.Common.Utils.Helpers;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.DataAccess.Database.Repository;
 using Blog.DataAccess.Database.Repository.Interfaces;
@@ -58,6 +59,7 @@ namespace Blog.Services.Web
             // Helpers registry. All utility classes are registered here.
             container.Register<IImageHelper, ImageHelper>();
             container.Register<IConfigurationHelper, ConfigurationHelper>();
+            container.Register<IErrorSignaler, ErrorSignaler>();
             container.Register<IFileHelper, FileHelper>();
 
             // Register the container to the SimpleInjectorServiceHostFactory.

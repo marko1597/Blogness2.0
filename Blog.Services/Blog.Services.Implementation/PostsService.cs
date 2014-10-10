@@ -2,6 +2,7 @@
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Logic.Caching;
 using Blog.Logic.Caching.DataSource;
@@ -21,13 +22,14 @@ namespace Blog.Services.Implementation
         private readonly ICommentsLogic _commentsLogic;
         private readonly IPostLikesLogic _postLikesLogic;
         private readonly IConfigurationHelper _configurationHelper;
+        private readonly IErrorSignaler _errorSignaler;
 
         #region Caching variables
 
         private ICacheDataSource<Post> _cacheDataSource;
         public ICacheDataSource<Post> CacheDataSource
         {
-            get { return _cacheDataSource ?? new RedisCache<Post>(_configurationHelper); }
+            get { return _cacheDataSource ?? new RedisCache<Post>(_configurationHelper, _errorSignaler); }
             set { _cacheDataSource = value; }
         }
 
@@ -41,12 +43,13 @@ namespace Blog.Services.Implementation
         #endregion
 
         public PostsService(IPostsLogic postsLogic, ICommentsLogic commentsLogic, IPostLikesLogic postLikesLogic,
-            IConfigurationHelper configurationHelper)
+            IConfigurationHelper configurationHelper, IErrorSignaler errorSignaler)
         {
             _postsLogic = postsLogic;
             _commentsLogic = commentsLogic;
             _postLikesLogic = postLikesLogic;
             _configurationHelper = configurationHelper;
+            _errorSignaler = errorSignaler;
         }
 
         public Post GetPost(int postId)

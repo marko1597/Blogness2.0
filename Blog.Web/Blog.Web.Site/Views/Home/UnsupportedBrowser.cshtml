@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Unsupported Browser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        padding-top: 100px;
+        color: #4c4c4c;
+        text-align: center;
+        background-color: rgba(74,121,147,0.89);
+        background: radial-gradient(farthest-side ellipse at 10% 0, rgba(74,121,147,0.89),rgba(204,204,204,0.85) 60%,rgba(185,135,131,0.87) 120%),url("images/bg-noise.png");
+        background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(74,121,147,0.89), rgba(204,204,204,0.85) 60%, rgba(185,135,131,0.87) 120%),url("images/bg-noise.png");
+        background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(74,121,147,0.89), rgba(204,204,204,0.85) 60%, rgba(185,135,131,0.87) 120%),url("images/bg-noise.png");
+    }
+
+    h1 {
+        font-size: 7em;
+        margin-bottom: 40px;
+        opacity: 0.8;
+    }
+
+    p {
+        font-size: 1.2em;
+        opacity: 0.8;
+        margin-bottom: 80px;
+    }
+
+    .content {
+        width: 100%;
+        background: #666;
+        background: rgba(51,51,51,0.4);
+        padding: 20px;
+        color: #f8f8f8;
+        border-radius: 1px;
+    }
+
+        .content > h3,
+        .content > input {
+            opacity: 1;
+        }
+
+        .content > h3 {
+            text-align: left;
+        }
+</style>
+
+<div class="container">
+    <div class="content">
+        <h1>Your browser is unsupported!</h1>
+        <p>
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+            It seems that you've got yourself a time machine and travelled a
+            decade back because your browser sucks ass! Go get a modern one like Chrome, Safari, Firefox or Ultron.
+        </p>
+
+        <div class="content form-group">
+            <h3>Go to <a href="/">home page</a> or do a search</h3>
+            <input type="text" class="form-control" placeholder="Search here..." />
+        </div>
+    </div>
+</div>

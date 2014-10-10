@@ -1,6 +1,5 @@
 ﻿@using System.Configuration
 @using System.Text
-@using ServiceStack.Redis
 <!DOCTYPE html>
 <html ng-app="blog">
 <head>
@@ -114,7 +113,7 @@
             blogApi: "@GetBlogApi()",
             blogRoot: "@GetBlogRoot()",
             blogSockets: "@GetBlogSockets()",
-            blogSocketsAvailable: ("@CheckBlogSocketsAvailability()").toLowerCase(),
+            blogSocketsAvailable: ("@ViewBag.IsBlogSocketsAvailable").toLowerCase(),
             templatesUrl: "@GetTemplatesPath()",
             templatesModulesUrl: "@GetTemplatesPath()modules/",
             displayMode: "desktop"
@@ -135,7 +134,7 @@
     <!-- #endregion -->
     
     <!-- #region socket.io js script -->
-    @if (CheckBlogSocketsAvailability())
+    @if (ViewBag.IsBlogSocketsAvailable)
     {
         <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
     }
@@ -143,16 +142,6 @@
 </head>
 <body ng-controller="blogMainController" window-resize>
     @RenderBody()
-
-    <!-- #region offline simulator -->
-    @if (IsDebug())
-    {
-        <div class="offline-simulate-ui">
-            <input type="checkbox" id="offline-simulate-check" title="Simulate online/offline states">
-        </div>
-    }
-
-    <!-- #endregion -->
     
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
@@ -431,27 +420,5 @@
         sb.Append(Request.Headers["Host"]);
 
         return sb.ToString();
-    }
-
-    /// <summary>
-    /// Checks if Redis service is running
-    /// </summary>
-    /// <returns>Boolean return that tells if Redis service is running</returns>
-    public bool CheckBlogSocketsAvailability()
-    {
-        try
-        {
-            using (var redisClient = new RedisClient(
-                ConfigurationManager.AppSettings.Get("RedisServer"),
-                Convert.ToInt32(ConfigurationManager.AppSettings.Get("RedisPort"))))
-            {
-                redisClient.Echo(string.Empty);
-                return true;
-            }
-        }
-        catch
-        {
-            return false;
-        }
     }
 }

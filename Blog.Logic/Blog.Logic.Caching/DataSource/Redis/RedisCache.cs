@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
 using ServiceStack.Redis;
 
@@ -12,101 +13,166 @@ namespace Blog.Logic.Caching.DataSource.Redis
     public class RedisCache<T> : IRedisCache<T> where T : class
     {
         private readonly IConfigurationHelper _configurationHelper;
+        private readonly IErrorSignaler _errorSignaler;
 
-        public RedisCache(IConfigurationHelper configurationHelper)
+        public RedisCache(IConfigurationHelper configurationHelper, IErrorSignaler errorSignaler)
         {
             _configurationHelper = configurationHelper;
+            _errorSignaler = errorSignaler;
         }
 
         public T GetEntry(string key)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var redis = client.As<T>();
-                var result = redis.GetValue(key);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var redis = client.As<T>();
+                    var result = redis.GetValue(key);
 
-                return result;
+                    return result;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
 
         public T GetEntry(int id)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
-                var redis = client.As<T>();
-                var result = redis.GetValue(key);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
+                    var redis = client.As<T>();
+                    var result = redis.GetValue(key);
 
-                return result;
+                    return result;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
 
         public List<T> GetEntriesAsList()
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var stringKey = string.Format("{0}:*", GetTypeName(typeof(T)));
-                var keys = client.ScanAllKeys(stringKey).ToList();
-                var list = client.GetValues<T>(keys);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var stringKey = string.Format("{0}:*", GetTypeName(typeof(T)));
+                    var keys = client.ScanAllKeys(stringKey).ToList();
+                    var list = client.GetValues<T>(keys);
 
-                return list;
+                    return list;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
 
         public void SetEntry(T entity, string key)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var redis = client.As<T>();
-                redis.SetEntry(key, entity);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var redis = client.As<T>();
+                    redis.SetEntry(key, entity);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
         public void SetEntry(T entity, int id)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
-                var redis = client.As<T>();
-                redis.SetEntry(key, entity);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
+                    var redis = client.As<T>();
+                    redis.SetEntry(key, entity);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
         public void ReplaceEntry(T entity, string key)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var redis = client.As<T>();
-                redis.SetEntry(key, entity);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var redis = client.As<T>();
+                    redis.SetEntry(key, entity);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
         public void ReplaceEntry(T entity, int id)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
-                var redis = client.As<T>();
-                redis.SetEntry(key, entity);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var key = string.Format("{0}:{1}", GetTypeName(typeof (T)), id);
+                    var redis = client.As<T>();
+                    redis.SetEntry(key, entity);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
         public void RemoveEntry(string key)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var redis = client.As<T>();
-                redis.RemoveEntry(key);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var redis = client.As<T>();
+                    redis.RemoveEntry(key);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
         public void RemoveEntry(int id)
         {
-            using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+            try
             {
-                var key = string.Format("{0}:{1}", GetTypeName(typeof(T)), id);
-                var redis = client.As<T>();
-                redis.RemoveEntry(key);
+                using (var client = new RedisClient(_configurationHelper.GetAppSettings("RedisServer")))
+                {
+                    var key = string.Format("{0}:{1}", GetTypeName(typeof (T)), id);
+                    var redis = client.As<T>();
+                    redis.RemoveEntry(key);
+                }
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
             }
         }
 
