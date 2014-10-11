@@ -12,6 +12,7 @@
     , clientFunctions = {
         publishMessage: "PublishMessage",
         getPostTopComments: "GetPostTopComments",
+        viewCountUpdate: "ViewCountUpdate",
         getPostLikes: "GetPostLikes",
         commentAdded: "CommentAdded",
         commentLikesUpdate: "CommentLikesUpdate",
@@ -66,6 +67,17 @@ var serverFunctions = {
             };
             io.sockets.emit(clientFunctions.postLikesUpdate, data);
             io.sockets.in(blogChannels.adminApp).emit(clientFunctions.postLikesUpdate, data);
+        }
+    },
+    
+    ViewCountUpdate: function (d) {
+        if (d != null) {
+            var data = {
+                postId: d.PostId,
+                viewCounts: d.ViewCounts
+            };
+            io.sockets.emit(clientFunctions.viewCountUpdate, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.viewCountUpdate, data);
         }
     },
     

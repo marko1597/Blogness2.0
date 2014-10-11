@@ -74,6 +74,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="ViewCount.cs" />
     <Compile Include="ViewModels\SocketViewModels\PostComments.cs" />
     <Compile Include="ViewModels\SocketViewModels\BaseSocketViewModel.cs" />
     <Compile Include="ViewModels\SocketViewModels\CommentAdded.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="ViewModels\SocketViewModels\GlobalMessage.cs" />
     <Compile Include="ViewModels\SocketViewModels\PostLikesUpdate.cs" />
     <Compile Include="ViewModels\RelatedPosts.cs" />
+    <Compile Include="ViewModels\SocketViewModels\ViewCountUpdate.cs" />
     <Compile Include="ViewModels\UserPost.cs" />
   </ItemGroup>
   <ItemGroup>

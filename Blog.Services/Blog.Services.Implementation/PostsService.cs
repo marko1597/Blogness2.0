@@ -63,6 +63,7 @@ namespace Blog.Services.Implementation
             }
 
             var post = _postsLogic.GetPost(postId);
+
             post.PostLikes = _postLikesLogic.Get(post.Id);
             Cache.SetEntry(post, postId);
 

@@ -88,6 +88,10 @@ namespace Blog.DataAccess.Database.Entities
                 .WithRequired(a => a.Post)
                 .HasForeignKey(a => a.PostId);
             mb.Entity<Post>()
+                .HasMany<ViewCount>(a => a.ViewCounts)
+                .WithRequired(a => a.Post)
+                .HasForeignKey(a => a.PostId);
+            mb.Entity<Post>()
                 .HasMany<PostLike>(a => a.PostLikes)
                 .WithRequired(a => a.Post)
                 .HasForeignKey(a => a.PostId);
@@ -115,6 +119,7 @@ namespace Blog.DataAccess.Database.Entities
         public DbSet<Education> Education { get; set; }
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<ViewCount> ViewCounts { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Media> Media { get; set; }

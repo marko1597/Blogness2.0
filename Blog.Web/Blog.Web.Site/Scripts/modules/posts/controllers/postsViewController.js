@@ -9,6 +9,8 @@
 
         $scope.user = {};
 
+        $scope.viewCount = [];
+
         $scope.postsList = [];
 
         $scope.postLikes = [];
@@ -84,6 +86,12 @@
         $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
             if (d.postId == $scope.post.Id) {
                 $scope.postLikes = d.postLikes;
+            }
+        });
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.viewCount = d.viewCount;
             }
         });
 

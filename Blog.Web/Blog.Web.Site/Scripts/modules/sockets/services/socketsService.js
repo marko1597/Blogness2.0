@@ -51,6 +51,11 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
                         broadcastMessage(topic, data);
                     });
 
+                    socket.on(configProvider.getSocketClientFunctions().viewCountUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().viewCountUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
                     socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
                         var topic = configProvider.getSocketClientFunctions().getPostTopComments;
                         broadcastMessage(topic, data);

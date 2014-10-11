@@ -96,6 +96,7 @@
     <Compile Include="Interfaces\IRedisService.cs" />
     <Compile Include="Interfaces\ITagsService.cs" />
     <Compile Include="Interfaces\IUsersService.cs" />
+    <Compile Include="Interfaces\IViewCountService.cs" />
     <Compile Include="MediaService.cs" />
     <Compile Include="AlbumService.cs" />
     <Compile Include="NotificationService.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="RedisService.cs" />
     <Compile Include="TagsService.cs" />
     <Compile Include="UsersService.cs" />
+    <Compile Include="ViewCountService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">

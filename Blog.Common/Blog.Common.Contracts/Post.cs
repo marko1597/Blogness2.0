@@ -25,6 +25,9 @@ namespace Blog.Common.Contracts
         public string PostMessage { get; set; }
 
         [DataMember]
+        public List<ViewCount> ViewCounts { get; set; }
+
+        [DataMember]
         public List<PostContent> PostContents { get; set; }
 
         [DataMember]

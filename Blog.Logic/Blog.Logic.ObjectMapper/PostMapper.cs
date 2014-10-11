@@ -22,6 +22,9 @@ namespace Blog.Logic.ObjectMapper
                 var tags = post.Tags != null
                     ? post.Tags.Select(TagMapper.ToDto).ToList()
                     : null;
+                var viewCounts = post.ViewCounts != null
+                    ? post.ViewCounts.Select(ViewCountMapper.ToDto).ToList()
+                    : null;
 
                 return new Post
                 {
@@ -31,6 +34,7 @@ namespace Blog.Logic.ObjectMapper
                     PostLikes = postLikes,
                     PostContents = contents,
                     Comments = comments,
+                    ViewCounts = viewCounts,
                     User = post.User != null ? UserMapper.ToDto(post.User) : null,
                     Tags = tags,
                     CreatedBy = post.CreatedBy,
@@ -58,6 +62,9 @@ namespace Blog.Logic.ObjectMapper
                 var tags = post.Tags != null
                     ? post.Tags.Select(TagMapper.ToEntity).ToList()
                     : null;
+                var viewCounts = post.ViewCounts != null
+                    ? post.ViewCounts.Select(ViewCountMapper.ToEntity).ToList()
+                    : null;
 
                 return new Db.Post
                 {
@@ -67,6 +74,7 @@ namespace Blog.Logic.ObjectMapper
                     PostLikes = postLikes,
                     PostContents = contents,
                     Comments = comments,
+                    ViewCounts = viewCounts,
                     User = null,
                     UserId = post.User != null ? post.User.Id : 0,
                     Tags = tags,

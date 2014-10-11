@@ -98,6 +98,7 @@
     <Content Include="PostsService.svc" />
     <Content Include="TagsService.svc" />
     <Content Include="UsersService.svc" />
+    <Content Include="ViewCountService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -2465,6 +2465,8 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
 
         $scope.user = {};
 
+        $scope.viewCount = [];
+
         $scope.postsList = [];
 
         $scope.postLikes = [];
@@ -2540,6 +2542,12 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
         $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
             if (d.postId == $scope.post.Id) {
                 $scope.postLikes = d.postLikes;
+            }
+        });
+
+        $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+            if (d.postId == $scope.post.Id) {
+                $scope.viewCount = d.viewCount;
             }
         });
 
@@ -3646,6 +3654,11 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
 
                     socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
                         var topic = configProvider.getSocketClientFunctions().getPostLikes;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().viewCountUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().viewCountUpdate;
                         broadcastMessage(topic, data);
                     });
 

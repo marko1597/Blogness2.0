@@ -88,8 +88,10 @@
     <Compile Include="Entities\Objects\PostLike.cs" />
     <Compile Include="Entities\Objects\Tag.cs" />
     <Compile Include="Entities\Objects\User.cs" />
+    <Compile Include="Entities\Objects\ViewCount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AddressRepository.cs" />
+    <Compile Include="Repository\ViewCountRepository.cs" />
     <Compile Include="Repository\CommentLikeRepository.cs" />
     <Compile Include="Repository\CommentRepository.cs" />
     <Compile Include="Repository\EducationRepository.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Repository\Interfaces\ITagRepository.cs" />
     <Compile Include="Repository\Interfaces\IUserRepository.cs" />
     <Compile Include="Repository\AlbumRepository.cs" />
+    <Compile Include="Repository\Interfaces\IViewCount.cs" />
     <Compile Include="Repository\MediaRepository.cs" />
     <Compile Include="Repository\PostContentRepository.cs" />
     <Compile Include="Repository\PostLikeRepository.cs" />

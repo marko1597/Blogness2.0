@@ -39,6 +39,7 @@ namespace Blog.Services.Web
             container.Register<IPostsLogic, PostsLogic>();
             container.Register<ITagsLogic, TagsLogic>();
             container.Register<IUsersLogic, UsersLogic>();
+            container.Register<IViewCountLogic, ViewCountLogic>();
             container.Register<IRedisService, RedisService>();
 
             // Db repository registry. All entity framework repositories are registered here.
@@ -55,6 +56,7 @@ namespace Blog.Services.Web
             container.Register<IPostRepository, PostRepository>();
             container.Register<ITagRepository, TagRepository>();
             container.Register<IUserRepository, UserRepository>();
+            container.Register<IViewCountRepository, ViewCountRepository>();
 
             // Helpers registry. All utility classes are registered here.
             container.Register<IImageHelper, ImageHelper>();
