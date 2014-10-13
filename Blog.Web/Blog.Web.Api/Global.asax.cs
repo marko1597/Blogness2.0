@@ -56,6 +56,7 @@ namespace Blog.Web.Api
             container.Register<IAddressResource, AddressResource>(Lifestyle.Singleton);
             container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<ITagsResource, TagsResource>(Lifestyle.Singleton);
+            container.Register<IViewCountResource, ViewCountResource>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);

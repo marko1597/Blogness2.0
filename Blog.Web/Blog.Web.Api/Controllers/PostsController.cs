@@ -15,12 +15,16 @@ namespace Blog.Web.Api.Controllers
     public class PostsController : ApiController
     {
         private readonly IPostsResource _postsSvc;
+        private readonly IViewCountResource _viewCountSvc;
+        private readonly IUsersResource _usersSvc;
         private readonly IErrorSignaler _errorSignaler;
         private readonly IConfigurationHelper _configurationHelper;
 
-        public PostsController(IPostsResource postsSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
+        public PostsController(IPostsResource postsSvc, IUsersResource usersSvc, IViewCountResource viewCountSvc, IErrorSignaler errorSignaler, IConfigurationHelper configurationHelper)
         {
             _postsSvc = postsSvc;
+            _usersSvc = usersSvc;
+            _viewCountSvc = viewCountSvc;
             _errorSignaler = errorSignaler;
             _configurationHelper = configurationHelper;
         }
@@ -32,6 +36,8 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 var post = _postsSvc.GetPost(postId) ?? new Post();
+                UpdateViewCount(postId);
+                
                 return Ok(post);
             }
             catch (Exception ex)
@@ -280,6 +286,35 @@ namespace Blog.Web.Api.Controllers
             try
             {
                 _postsSvc.DeletePost(id);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+            }
+        }
+
+        private void UpdateViewCount(int postId)
+        {
+            try
+            {
+                int? userId = null;
+
+                var username = User.Identity.IsAuthenticated ? User.Identity.Name : string.Empty;
+                if (!string.IsNullOrEmpty(username))
+                {
+                    var user = _usersSvc.GetByUserName(username);
+                    if (user != null && user.Error == null)
+                    {
+                        userId = user.Id;
+                    }
+                }
+
+                var viewCount = new ViewCount
+                {
+                    PostId = postId,
+                    UserId = userId
+                };
+                _viewCountSvc.Add(viewCount);
             }
             catch (Exception ex)
             {

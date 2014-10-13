@@ -177,41 +177,5 @@ namespace Blog.Services.Implementation
 
             return tmpPosts;
         }
-
-        //private void PushPostProperties(IEnumerable<Post> posts)
-        //{
-        //    foreach (var post in posts)
-        //    {
-        //        PushTopComments(post);
-        //        PushPostLikes(post);
-        //    }
-        //}
-
-        //private void PushTopComments(Post post)
-        //{
-        //    // Push top comments for the post to clients
-        //    var topComments = _commentsLogic.GetTopComments(post.Id, 5);
-        //    var commentLikesUpdate = new PostComments
-        //    {
-        //        PostId = post.Id,
-        //        Comments = topComments,
-        //        ClientFunction = Constants.SocketClientFunctions.GetPostTopComments.ToString()
-        //    };
-        //    _redisService.Publish(commentLikesUpdate);
-        //}
-
-        //private void PushPostLikes(Post post)
-        //{
-        //    // Push post likes to clients
-        //    var postLikes = _postLikesLogic.Get(post.Id);
-        //    var postLikesUpdate = new PostLikesUpdate
-        //    {
-        //        PostId = post.Id,
-        //        PostLikes = postLikes,
-        //        ClientFunction = Constants.SocketClientFunctions.GetPostLikes.ToString()
-        //    };
-
-        //    _redisService.Publish(postLikesUpdate);
-        //}
     }
 }

@@ -36,7 +36,7 @@ namespace Blog.Web.Site.Controllers
                 var result = _httpClientHelper.HttpGet(_configurationHelper.GetAppSettings("BlogSockets"),
                     "favicon.ico");
 
-                return result.StatusCode == HttpStatusCode.OK;
+                return result.StatusCode != HttpStatusCode.ServiceUnavailable;
             }
             catch
             {

@@ -69,6 +69,7 @@
     <Compile Include="Wcf\Interfaces\IPostsResource.cs" />
     <Compile Include="Wcf\Interfaces\ITagsResource.cs" />
     <Compile Include="Wcf\Interfaces\IUsersResource.cs" />
+    <Compile Include="Wcf\Interfaces\IViewCountResource.cs" />
     <Compile Include="Wcf\MediaResource.cs" />
     <Compile Include="Wcf\NotificationResource.cs" />
     <Compile Include="Wcf\PostContentsResource.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Wcf\PostsResource.cs" />
     <Compile Include="Wcf\TagsResource.cs" />
     <Compile Include="Wcf\UsersResource.cs" />
+    <Compile Include="Wcf\ViewCountResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj">
