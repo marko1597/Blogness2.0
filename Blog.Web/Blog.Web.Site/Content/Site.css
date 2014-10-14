@@ -409,127 +409,6 @@ videogular vg-video {
 
 /* #endregion */
 
-/* #region bloggity specific styles */
-
-.blog-brand-icon {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-    float: left;
-    position: relative;
-    top: -5px;
-    margin-right: 5px;
-}
-
-.content-item {
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    box-shadow: 0 2px 4px #000000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.header {
-    background: rgb(76, 76, 76);
-    color: rgb(248, 248, 248);
-    position: relative;
-    height: 38px;
-}
-
-    .header > h5 {
-        padding: 12px 15px;
-        margin: 0;
-        display: inline-block;
-    }
-
-    .header > .btn-header {
-        height: 100%;
-        cursor: pointer;
-        padding: 10px;
-        color: #fff;
-        top: 0;
-        right: 0;
-        text-align: center;
-    }
-
-        .header > .btn-header:hover {
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .header > .btn-header.left {
-            border-right: 1px solid #ddd;
-            margin-right: 5px;
-            display: inline-block;
-        }
-
-        .header > .btn-header.right {
-            border-left: 1px solid #ddd;
-        }
-
-            .header > .btn-header.right > i {
-                margin-right: 5px;
-            }
-
-.center-cropped {
-    float: left;
-    width: 70px;
-    height: 70px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-    .center-cropped > img {
-        min-height: 100%;
-        min-width: 100%;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-        filter: alpha(opacity=0);
-        opacity: 0;
-    }
-
-.page-content {
-    padding: 0 15px;
-}
-
-.body-content {
-    margin: 51px 0 0 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.max-height {
-    height: 100%;
-}
-
-.wrap-text {
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
-
-.no-margin {
-    margin: 0 !important;
-}
-
-.no-pad {
-    padding: 0 !important;
-}
-
-.shadow-box {
-    background: #f8f8f8;
-    border: 2px dashed #cecece;
-}
-
-.hide-me {
-    visibility: hidden !important;
-}
-
-/* #endregion */
-
 /* #region base styles */
 
 html,
@@ -697,7 +576,6 @@ input[type="checkbox"].input-validation-error {
     left: -10px;
 }
 
-s
 /* #endregion */
 /* #region angular tags-input styles */
 tags-input *, *:before, *:after {

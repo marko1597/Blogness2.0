@@ -1,0 +1,169 @@
+@import 'variables';
+
+.blog-brand-icon {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
+    background-size: cover;
+    float: left;
+    @include position(relative, -5px, null, null, null);
+    @include margin(null, 5px, null, null);
+    @include size(30px, 30px);
+}
+
+.content-item {
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -webkit-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px #000000;
+    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px #000000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    vertical-align: top;
+    font-size: 1em;
+    color: darken($dark-border-color, 20%);
+    margin-bottom: unquote(($base-margin) + 'px');
+
+    .body {
+        $padding-value: unquote(($base-padding) + 'px');
+        @include padding($padding-value, $padding-value, $padding-value, $padding-value);
+        border-bottom: 1px solid $light-border-color;
+    }
+}
+
+.success {
+    @extend .content-item;
+    color: $default-color;
+    background: $success-color;
+}
+
+.warning {
+    @extend .content-item;
+    color: $default-color;
+    background: $warning-color;
+}
+
+.danger {
+    @extend .content-item;
+    color: $default-color;
+    background: $danger-color;
+}
+
+.info {
+    @extend .content-item;
+    color: $default-color;
+    background: $info-color;
+}
+
+.default {
+    @extend .content-item;
+    background: $default-color;
+}
+
+.header {
+    background: $dark-color;
+    color: $default-color;
+    @include position(relative, null, null, null, null);
+    @include size(100%, 38px);
+
+    &.big {
+        @include padding(15px, 15px, 15px, 15px);
+        @include margin(0, 0, 0, 0);
+        @include size(100%, auto);
+
+        div:first-child {
+            @include size(80px, auto);
+            @include margin(0, 10px, 0, 0);
+            float: left;
+
+            img {
+                @include size(80px, 80px);
+                border-radius: 40px;
+                border: 3px solid $default-color;
+            }
+        }
+
+        div:last-child {
+            @include size(100%, auto);
+
+            h4 {
+                @include padding(null, null, null, 90px);
+                @include margin(0, 0, 5px, 0);
+                font-weight: bold;
+            }
+
+            p {
+                @include padding(null, null, null, 90px);
+
+                a {
+                    @include margin(0, 0, 5px, 0);
+                    color: $default-color;
+                }
+            }
+        }
+    }
+
+    h5 {
+        $x-padding: unquote(($base-padding) + 'px');
+        @include padding(12px, $x-padding, 12px, $x-padding);
+        margin: 0;
+        display: inline-block;
+    }
+
+    .btn-header {
+        @include size(auto, 100%);
+        @include padding(10px, 10px, 10px, 10px);
+        @include position(inherit, 0, 0, null, null);
+        cursor: pointer;
+        color: inherit;
+        text-align: center;
+
+        &:hover {
+            box-shadow: $box-shadow-inset;
+        }
+
+        &.left {
+            border-right: 1px solid $light-border-color;
+            display: inline-block;
+            @include margin(null, 5px, null, null);
+        }
+
+        &.right {
+            border-left: 1px solid $light-border-color;
+
+            i {
+                @include margin(null, 5px, null, null);
+            }
+        }
+    }
+}
+
+.center-cropped {
+    float: left;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    @include size(70px, 70px);
+
+    img {
+        min-height: 100%;
+        min-width: 100%;
+        @include opacity(0);
+    }
+}
+
+.page-content {
+    $x-padding: unquote(($base-padding) + 'px');
+    @include padding(0, $x-padding, 0, $x-padding);
+}
+
+.body-content {
+    $y-padding: unquote(($base-padding) + 'px');
+    @include padding($y-padding, 0, $y-padding, 0);
+    @include margin(51px, 0, 0, 0);
+}
+
+.wrap-text {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

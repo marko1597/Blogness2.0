@@ -1,0 +1,114 @@
+// base styles
+$fonts: 'Open Sans', sans-serif;
+$box-shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
+$base-padding: 15;
+$base-margin: 15;
+
+// base colors
+$primary-color: #56c2e1;
+$dark-color: #4c4c4c; // used in headers and navigation
+$light-border-color: #ddd; // used as border colors
+$dark-border-color: #666; // used as border colors
+$success-color: #5cb85c;
+$danger-color: #d9534f;
+$warning-color: #f0ad4e;
+$info-color: #428bca;
+$default-color: #fff;
+
+// mixin size: width; height;
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// mixin padding: top, right, bottom, left;
+@mixin position($value, $top, $right, $bottom, $left) {
+    @if ($value != null) {
+        position: $value;
+    }
+
+    @if ($top != null) {
+        top: $top;
+    }
+
+    @if ($right != null) {
+        right: $right;
+    }
+
+    @if ($bottom != null) {
+        bottom: $bottom;
+    }
+
+    @if ($left != null) {
+        left: $left;
+    }
+}
+
+// mixin padding: top, right, bottom, left;
+@mixin padding($top, $right, $bottom, $left) {
+    @if ($top != null) {
+        padding-top: $top;
+    }
+
+    @if ($right != null) {
+        padding-right: $right;
+    }
+
+    @if ($bottom != null) {
+        padding-bottom: $bottom;
+    }
+
+    @if ($left != null) {
+        padding-left: $left;
+    }
+}
+
+// mixin margin: top, right, bottom, left;
+@mixin margin($top, $right, $bottom, $left) {
+    @if ($top != null) {
+        margin-top: $top;
+    }
+
+    @if ($right != null) {
+        margin-right: $right;
+    }
+
+    @if ($bottom != null) {
+        margin-bottom: $bottom;
+    }
+
+    @if ($left != null) {
+        margin-left: $left;
+    }
+}
+
+// mixin opacity: value;
+@mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// mixin mediaqueries: breakpoint value;
+@mixin media($point) {
+    @if $point == lg {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    }
+    @else if $point == md {
+        @media (min-width: 992px) {
+            @content;
+        }
+    }
+    @else if $point == sm {
+        @media (min-width: 768px) {
+            @content;
+        }
+    }
+    @else if $point == xs {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+}
