@@ -13,6 +13,7 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/Content/site.css</file>
+    <file>/Content/modules/main.css</file>
     <file>/Content/modules/accountpage.css</file>
     <file>/Content/modules/errorpage.css</file>
     <file>/Content/modules/modifypost.css</file>

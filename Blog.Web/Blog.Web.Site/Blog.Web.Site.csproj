@@ -320,6 +320,7 @@
     <Content Include="Content\modules\loginform\loginform.css" />
     <Content Include="Content\modules\loginform\loginformmodal.css" />
     <Content Include="Content\modules\loginform\registerform.css" />
+    <Content Include="Content\modules\main.css" />
     <Content Include="Content\modules\media\albumgroup.css" />
     <Content Include="Content\modules\media\mediagroupedlist.css" />
     <Content Include="Content\modules\media\mediaitem.css" />
@@ -346,41 +347,24 @@
     <Content Include="Content\modules\user\userprofilemedia.css" />
     <Content Include="Content\modules\user\userprofilenavigation.css" />
     <Content Include="Content\modules\user\userprofileposts.css" />
+    <Content Include="Content\modules\variables.css" />
     <Content Include="Content\modules\viewpost.css" />
-    <Content Include="Content\scss\compiled\main.css" />
-    <Content Include="Content\scss\compiled\variables.css" />
-    <Content Include="Content\scss\compiled\viewpost.css" />
-    <Content Include="Content\scss\files\images\bg-noise.png" />
-    <Content Include="Content\scss\files\images\bg.jpg" />
-    <Content Include="Content\scss\files\images\brand-logo.png" />
-    <Content Include="Content\scss\files\images\edit-post.png" />
-    <Content Include="Content\scss\files\images\error-pages\pagenotfound_bg.png" />
-    <Content Include="Content\scss\files\images\error-pages\servererror_bg.png" />
-    <Content Include="Content\scss\files\images\error-pages\servererror_bg2.png" />
-    <Content Include="Content\scss\files\images\error-pages\serviceunavailable_bg.png" />
-    <Content Include="Content\scss\files\images\img-next.png" />
-    <Content Include="Content\scss\files\images\img-prev.png" />
-    <Content Include="Content\scss\files\images\loader-girl.gif" />
-    <Content Include="Content\scss\files\images\login-main.jpg" />
-    <Content Include="Content\scss\files\images\login-pass-icon.png" />
-    <Content Include="Content\scss\files\images\login-pattern.png" />
-    <Content Include="Content\scss\files\images\login-user-icon.png" />
-    <Content Include="Content\scss\files\images\nav-events.png" />
-    <Content Include="Content\scss\files\images\nav-friends.png" />
-    <Content Include="Content\scss\files\images\nav-groups.png" />
-    <Content Include="Content\scss\files\images\nav-home.png" />
-    <Content Include="Content\scss\files\images\nav-profile.png" />
-    <Content Include="Content\scss\files\images\warning.png" />
-    <Content Include="Content\scss\files\main.css">
+    <Content Include="Content\scss\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\files\main.min.css">
+    <Content Include="Content\scss\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\files\variables.css">
+    <Content Include="Content\scss\posts\postlistitem.css">
+      <DependentUpon>postlistitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlistitem.min.css">
+      <DependentUpon>postlistitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\variables.css">
       <DependentUpon>variables.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\files\variables.min.css">
+    <Content Include="Content\scss\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
     <Content Include="Content\theme\default\blog-bootstrap.css" />
@@ -3251,14 +3235,18 @@
     <Content Include="Scripts\bower_components\angular-route\bower.json" />
     <Content Include="Scripts\bower_components\angular-route\README.md" />
     <Content Include="Views\Home\UnsupportedBrowser.cshtml" />
-    <Content Include="Content\scss\files\main.scss" />
-    <Content Include="Content\scss\files\variables.scss" />
-    <Content Include="Content\scss\files\viewpost.scss" />
-    <Content Include="Content\scss\files\main.css.map">
+    <Content Include="Content\scss\main.scss" />
+    <Content Include="Content\scss\variables.scss" />
+    <Content Include="Content\scss\viewpost.scss" />
+    <Content Include="Content\scss\main.css.map">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\files\variables.css.map">
+    <Content Include="Content\scss\variables.css.map">
       <DependentUpon>variables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlistitem.scss" />
+    <Content Include="Content\scss\posts\postlistitem.css.map">
+      <DependentUpon>postlistitem.css</DependentUpon>
     </Content>
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3272,17 +3260,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\scss\files\comments\" />
-    <Folder Include="Content\scss\files\error\" />
-    <Folder Include="Content\scss\files\header\" />
-    <Folder Include="Content\scss\files\loginform\" />
-    <Folder Include="Content\scss\files\media\" />
-    <Folder Include="Content\scss\files\navigation\" />
-    <Folder Include="Content\scss\files\posts\" />
-    <Folder Include="Content\scss\files\shared\" />
-    <Folder Include="Content\scss\files\sockets\" />
-    <Folder Include="Content\scss\files\tags\" />
-    <Folder Include="Content\scss\files\user\" />
+    <Folder Include="Content\scss\comments\" />
+    <Folder Include="Content\scss\error\" />
+    <Folder Include="Content\scss\header\" />
+    <Folder Include="Content\scss\loginform\" />
+    <Folder Include="Content\scss\media\" />
+    <Folder Include="Content\scss\navigation\" />
+    <Folder Include="Content\scss\shared\" />
+    <Folder Include="Content\scss\sockets\" />
+    <Folder Include="Content\scss\tags\" />
+    <Folder Include="Content\scss\user\" />
     <Folder Include="Scripts\modules\comments\controllers\" />
     <Folder Include="Scripts\modules\messaging\directives\" />
   </ItemGroup>

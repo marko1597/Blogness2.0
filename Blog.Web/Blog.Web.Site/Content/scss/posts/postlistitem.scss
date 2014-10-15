@@ -1,0 +1,59 @@
+﻿@import '../variables.scss';
+
+.post-list-item {
+    @include margin(5px, 5px, 5px, 5px);
+    @include size(340px, auto);
+    @include position(relative, null, null, null, null);
+
+    &.large {
+        width: 24%;
+    }
+
+    &.xlarge {
+        width: 19%;
+    }
+
+    &.medium {
+        width: 31.5%;
+    }
+
+    &.small {
+        width: 48%;
+    }
+
+    &.xsmall {
+        width: 98%;
+    }
+
+    .comments {
+        ul {
+            @include size(100%, 40px);
+            @include clean-list;
+            overflow: hidden;
+        }
+    }
+
+    .content {
+        [post-contents] {
+            @include margin(-15px, -15px, 0, -15px);
+        }
+    }
+
+    .header {
+        h4 {
+            .edit {
+                @include opacity(1);
+                display: inline-block;
+                cursor: pointer;
+                -moz-transition: opacity .25s ease-in-out;
+                -webkit-transition: opacity .25s ease-in-out;
+                -o-transition: opacity .25s ease-in-out;
+                transition: opacity .25s ease-in-out;
+
+                &:hover {
+                    @include opacity(0.5);
+                }
+            }
+        }
+    }
+}

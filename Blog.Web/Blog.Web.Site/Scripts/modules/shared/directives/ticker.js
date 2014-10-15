@@ -2,7 +2,7 @@
     var filterFn;
     filterFn = function (scope, element, attrs) {
         var ticker = $(element).newsTicker({
-            row_height: 80,
+            row_height: 40,
             max_rows: 1,
             duration: 5000
         });

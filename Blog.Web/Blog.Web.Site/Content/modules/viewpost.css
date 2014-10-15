@@ -1,43 +1,8 @@
-﻿.post-board {
-    background: #fff;
-    vertical-align: top;
-    font-size: 1em;
-    color: #333;
-    margin-bottom: 15px;
+﻿.card.masonry > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
-
-    .post-board.contents {
-        padding: 10px;
-        background: #eee;
-    }
-
-        .post-board.contents > ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-            .post-board.contents > ul > li {
-                background: #fff;
-                margin: 5px;
-            }
-
-                .post-board.contents > ul > li > div.captions {
-                    border-left: 1px solid #ddd;
-                    border-right: 1px solid #ddd;
-                    border-bottom: 1px solid #ddd;
-                    padding: 15px;
-                }
-
-                    .post-board.contents > ul > li > div.captions > p {
-                        margin: 0;
-                        padding: 0;
-                    }
-
-                        .post-board.contents > ul > li > div.captions > p:first-of-type {
-                            font-weight: bold;
-                            margin-bottom: 5px;
-                        }
 
 .board-item {
     background: #eee;

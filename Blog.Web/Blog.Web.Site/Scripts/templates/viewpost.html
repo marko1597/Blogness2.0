@@ -28,8 +28,7 @@
             </div>
         </div>
 
-        <!-- TODO: Do something about post-board.contents styles -->
-        <div id="post-contents-{{post.Id}}" class="post-board contents card ng-cloak" ng-show="hasContents()">
+        <div id="post-contents-{{post.Id}}" class="card masonry ng-cloak" ng-show="hasContents()">
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">
@@ -42,7 +41,7 @@
             </ul>
         </div>
         
-        <div id="post-comments-{{post.Id}}" class="comments card">
+        <div id="post-comments-{{post.Id}}" class="comments">
             <div comments-container user="user" postid="postId" poster="post.User.UserName"></div>
         </div>
     </div>

@@ -55,7 +55,45 @@
 .default {
     @extend .card;
     background: $default-color;
+
+    &.darken {
+        background: $default-color-darken;
+    }
 }
+
+.masonry {
+    @extend .card;
+    @include padding(10px, 10px, 10px, 10px);
+    background: $default-color-darken;
+
+    ul.isotope {
+        @include clean-list;
+
+        li.isotope-item {
+            background: $default-color;
+            @include margin(5px, 5px, 5px, 5px);
+
+            .captions {
+                border-left: 1px solid $light-border-color;
+                border-right: 1px solid $light-border-color;
+                border-bottom: 1px solid $light-border-color;
+                @include padding(15px, 15px, 15px, 15px);
+
+                p {
+                    @include padding(0, 0, 0, 0);
+                    @include margin(0, 0, 0, 0);
+
+                    &:first-of-type {
+                        font-weight: bold;
+                        @include margin(0, 0, 5px, 0);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 
 .header {
     background: $dark-color;
@@ -87,6 +125,10 @@
                 @include padding(null, null, null, 90px);
                 @include margin(0, 0, 5px, 0);
                 font-weight: bold;
+
+                a {
+                    color: $default-color;
+                }
             }
 
             p {
