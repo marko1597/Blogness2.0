@@ -2518,8 +2518,14 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
                     if (post.Error == undefined) {
                         $scope.post = post;
                         $scope.isBusy = false;
-                        $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
+
                         $scope.$broadcast("resizeIsotopeItems");
+
+                        // update post likes and view counts directive
+                        $scope.postLikes = $scope.post.PostLikes;
+                        $scope.viewCount = $scope.post.ViewCounts;
+
+                        // subscribe to post socket.io events
                         postsService.subscribeToPost($scope.post.Id);
                     } else {
                         errorService.displayError({ Message: e });
@@ -2538,18 +2544,6 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
             }
             return false;
         };
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.postLikes = d.postLikes;
-            }
-        });
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.viewCount = d.viewCount;
-            }
-        });
 
         $scope.init();
     }
@@ -2606,9 +2600,9 @@ ngPosts.directive('postLikes', [function () {
             $scope.isUserLiked();
         });
 
-        $scope.$on("viewedPostLoaded", function (e, d) {
-            $scope.postId = d.PostId;
-            $scope.postLikes = d.PostLikes;
+        $scope.$on("viewPostLoadedLikes", function (e, d) {
+            $scope.postId = d.postId;
+            $scope.postLikes = d.postLikes;
             $scope.isUserLiked();
         });
 
@@ -2648,6 +2642,35 @@ ngPosts.directive('postLikes', [function () {
         templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postlikes.html",
         controller: ctrlFn,
         link: linkFn
+    };
+}]);
+
+///#source 1 1 /Scripts/modules/posts/directives/postViewCount.js
+ngPosts.directive('postViewCount', [function () {
+    var ctrlFn = function ($scope, $rootScope, configProvider) {
+        $scope.viewCount = $scope.list;
+
+        $scope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+            if (d.postId == $scope.postId) {
+                $scope.viewCount = d.viewCount;
+            }
+        });
+        
+        $scope.$watch('list', function () {
+            $scope.viewCount = $scope.list;
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            list: '=',
+            postId: '='
+        },
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postViewCount.html",
+        controller: ctrlFn
     };
 }]);
 

@@ -62,8 +62,14 @@
                     if (post.Error == undefined) {
                         $scope.post = post;
                         $scope.isBusy = false;
-                        $scope.$broadcast("viewedPostLoaded", { PostId: $scope.post.Id, PostLikes: $scope.post.PostLikes });
+
                         $scope.$broadcast("resizeIsotopeItems");
+
+                        // update post likes and view counts directive
+                        $scope.postLikes = $scope.post.PostLikes;
+                        $scope.viewCount = $scope.post.ViewCounts;
+
+                        // subscribe to post socket.io events
                         postsService.subscribeToPost($scope.post.Id);
                     } else {
                         errorService.displayError({ Message: e });
@@ -82,18 +88,6 @@
             }
             return false;
         };
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.postLikes = d.postLikes;
-            }
-        });
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.viewCount = d.viewCount;
-            }
-        });
 
         $scope.init();
     }

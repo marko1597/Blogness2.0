@@ -9,7 +9,7 @@
     @include size(30px, 30px);
 }
 
-.content-item {
+.card {
     -webkit-box-shadow: 0 2px 4px #000000;
     -webkit-box-shadow: 0 2px 4px #000000;
     -ms-box-shadow: 0 2px 4px #000000;
@@ -21,7 +21,7 @@
     color: darken($dark-border-color, 20%);
     margin-bottom: unquote(($base-margin) + 'px');
 
-    .body {
+    .content {
         $padding-value: unquote(($base-padding) + 'px');
         @include padding($padding-value, $padding-value, $padding-value, $padding-value);
         border-bottom: 1px solid $light-border-color;
@@ -29,31 +29,31 @@
 }
 
 .success {
-    @extend .content-item;
+    @extend .card;
     color: $default-color;
     background: $success-color;
 }
 
 .warning {
-    @extend .content-item;
+    @extend .card;
     color: $default-color;
     background: $warning-color;
 }
 
 .danger {
-    @extend .content-item;
+    @extend .card;
     color: $default-color;
     background: $danger-color;
 }
 
 .info {
-    @extend .content-item;
+    @extend .card;
     color: $default-color;
     background: $info-color;
 }
 
 .default {
-    @extend .content-item;
+    @extend .card;
     background: $default-color;
 }
 

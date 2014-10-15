@@ -11,7 +11,7 @@
 }
 
 /* line 12, ../files/main.scss */
-.content-item, .success, .warning, .danger, .info, .default {
+.card, .success, .warning, .danger, .info, .default {
   -webkit-box-shadow: 0 2px 4px #000000;
   -webkit-box-shadow: 0 2px 4px #000000;
   -ms-box-shadow: 0 2px 4px #000000;
@@ -24,7 +24,7 @@
   margin-bottom: 15px;
 }
 /* line 24, ../files/main.scss */
-.content-item .body, .success .body, .warning .body, .danger .body, .info .body, .default .body {
+.card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content {
   padding-top: 15px;
   padding-right: 15px;
   padding-bottom: 15px;

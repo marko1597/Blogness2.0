@@ -21,6 +21,7 @@ namespace Blog.Services.Implementation
         private readonly IPostsLogic _postsLogic;
         private readonly ICommentsLogic _commentsLogic;
         private readonly IPostLikesLogic _postLikesLogic;
+        private readonly IViewCountLogic _viewCountLogic;
         private readonly IConfigurationHelper _configurationHelper;
         private readonly IErrorSignaler _errorSignaler;
 
@@ -43,11 +44,12 @@ namespace Blog.Services.Implementation
         #endregion
 
         public PostsService(IPostsLogic postsLogic, ICommentsLogic commentsLogic, IPostLikesLogic postLikesLogic,
-            IConfigurationHelper configurationHelper, IErrorSignaler errorSignaler)
+            IViewCountLogic viewCountLogic, IConfigurationHelper configurationHelper, IErrorSignaler errorSignaler)
         {
             _postsLogic = postsLogic;
             _commentsLogic = commentsLogic;
             _postLikesLogic = postLikesLogic;
+            _viewCountLogic = viewCountLogic;
             _configurationHelper = configurationHelper;
             _errorSignaler = errorSignaler;
         }
@@ -64,8 +66,10 @@ namespace Blog.Services.Implementation
 
             var post = _postsLogic.GetPost(postId);
 
-            post.PostLikes = _postLikesLogic.Get(post.Id);
             Cache.SetEntry(post, postId);
+
+            post.PostLikes = _postLikesLogic.Get(post.Id);
+            post.ViewCounts = _viewCountLogic.Get(post.Id);
 
             return post;
         }

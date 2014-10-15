@@ -79,6 +79,7 @@
     <Compile Include="PostsLogicTest.cs" />
     <Compile Include="TagsLogicTest.cs" />
     <Compile Include="HobbyLogicTest.cs" />
+    <Compile Include="ViewCountLogicTest.cs" />
     <Compile Include="UsersLogicTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

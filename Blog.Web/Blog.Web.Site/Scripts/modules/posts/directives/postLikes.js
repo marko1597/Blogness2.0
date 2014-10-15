@@ -34,9 +34,9 @@
             $scope.isUserLiked();
         });
 
-        $scope.$on("viewedPostLoaded", function (e, d) {
-            $scope.postId = d.PostId;
-            $scope.postLikes = d.PostLikes;
+        $scope.$on("viewPostLoadedLikes", function (e, d) {
+            $scope.postId = d.postId;
+            $scope.postLikes = d.postLikes;
             $scope.isUserLiked();
         });
 

@@ -2225,6 +2225,7 @@
     <Content Include="Scripts\modules\media\services\mediaService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
+    <Content Include="Scripts\modules\posts\directives\postViewCount.js" />
     <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
     <Content Include="Scripts\modules\sockets\services\socketsService.js" />
@@ -3077,6 +3078,7 @@
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
+    <Content Include="Scripts\templates\modules\posts\postViewCount.html" />
     <Content Include="Scripts\templates\modules\shared\emptyRecordMessage.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItem.html" />

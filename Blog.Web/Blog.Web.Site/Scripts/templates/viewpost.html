@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-        <div id="post-{{post.Id}}" class="content-item default ng-cloak">
+        <div id="post-{{post.Id}}" class="card default ng-cloak">
             <div class="header big row" data-user-id="{{post.CreatedBy}}">
                 <div>
                     <img ng-src="{{post.User.Picture.MediaUrl}}" />
@@ -16,19 +16,20 @@
                     <div class="edit-post" ng-show="isEditable()" ng-click="editPost()"></div>
                 </div>
             </div>
-            <div class="body">
+            <div class="content">
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
             </div>
-            <div class="body">
-                <div post-likes list="postLikes" post-id="post.Id"></div>
+            <div class="content">
+                <div post-likes list="postLikes" post-id="postId"></div>
+                <div post-view-count list="viewCount" post-id="postId"></div>
             </div>
-            <div class="body">
+            <div class="content">
                 <div tag-item tag="tag" ng-repeat="tag in post.Tags"></div>
             </div>
         </div>
 
         <!-- TODO: Do something about post-board.contents styles -->
-        <div id="post-contents-{{post.Id}}" class="post-board contents content-item ng-cloak" ng-show="hasContents()">
+        <div id="post-contents-{{post.Id}}" class="post-board contents card ng-cloak" ng-show="hasContents()">
             <ul isotope-container isotope-item-resize reapply-layout-only="false" 
                 resize-large="48%" resize-medium="96%" resize-small="96%">
                 <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content">
@@ -41,7 +42,7 @@
             </ul>
         </div>
         
-        <div id="post-comments-{{post.Id}}" class="comments content-item">
+        <div id="post-comments-{{post.Id}}" class="comments card">
             <div comments-container user="user" postid="postId" poster="post.User.UserName"></div>
         </div>
     </div>

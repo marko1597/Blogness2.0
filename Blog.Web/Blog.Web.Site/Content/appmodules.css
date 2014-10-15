@@ -1763,7 +1763,7 @@ div.login-alert {
             padding: 0;
         }
 
-    .post-board.content-item > .header,
+    .post-board.card > .header,
     .post-list-item > .header {
         background: #4c4c4c;
         color: #fff;
@@ -1781,14 +1781,14 @@ div.login-alert {
         height: auto;
     }
 
-        .post-board.content-item > .header > div:first-child,
+        .post-board.card > .header > div:first-child,
         .post-list-item > .header > div:first-child {
             width: 80px;
             float: left;
             margin: 0 10px 0 0;
         }
 
-        .post-board.content-item > .header img,
+        .post-board.card > .header img,
         .post-list-item > .header img {
             width: 80px;
             height: 80px;
@@ -1802,7 +1802,7 @@ div.login-alert {
             border: 3px solid #fff;
         }
 
-        .post-board.content-item > .header .edit-post,
+        .post-board.card > .header .edit-post,
         .post-list-item > .header .edit-post {
             display: inline-block;
             background: url(images/edit-post.png) no-repeat;
@@ -1823,17 +1823,17 @@ div.login-alert {
             transition: opacity .25s ease-in-out;
         }
 
-            .post-board.content-item > .header .edit-post:hover,
+            .post-board.card > .header .edit-post:hover,
             .post-list-item > .header .edit-post:hover {
                 opacity: 0.5;
             }
 
-        .post-board.content-item > .header > div,
+        .post-board.card > .header > div,
         .post-list-item > .header > div {
             width: 100%;
         }
 
-            .post-board.content-item > .header > div > h4,
+            .post-board.card > .header > div > h4,
             .post-list-item > .header > div > h4 {
                 margin: 0 0 5px;
                 font-weight: bold;
@@ -1841,40 +1841,40 @@ div.login-alert {
                 padding-right: 25px;
             }
 
-                .post-board.content-item > .header > div > h4 > a,
+                .post-board.card > .header > div > h4 > a,
                 .post-list-item > .header > div > h4 > a {
                     color: #fff;
                 }
 
-            .post-board.content-item > .header > div > p,
+            .post-board.card > .header > div > p,
             .post-list-item > .header > div > p {
                 padding-left: 90px;
             }
 
-                .post-board.content-item > .header > div > p > a,
+                .post-board.card > .header > div > p > a,
                 .post-list-item > .header > div > p > a {
                     margin: 0 5px 0 0;
                     color: #fff;
                 }
 
-    .post-board.content-item > .body,
+    .post-board.card > .body,
     .post-list-item > .body {
         padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
-        .post-board.content-item > .body > p blockquote,
+        .post-board.card > .body > p blockquote,
         .post-list-item > .body > p blockquote {
             font-size: 1em;
         }
 
-    .post-board.content-item > .details,
+    .post-board.card > .details,
     .post-list-item > .details {
         padding: 15px;
         border-bottom: 1px solid #ddd;
     }
 
-    .post-board.content-item > .tags,
+    .post-board.card > .tags,
     .post-list-item > .tags {
         padding: 15px 15px 0 15px;
     }
@@ -2326,20 +2326,20 @@ div.login-alert {
             opacity: 0.5;
         }
 
-    .user-profile-details .content-item {
+    .user-profile-details .card {
         background: #f8f8f8;
         margin-bottom: 15px;
     }
 
-        .user-profile-details .content-item.hobbies .empty-record-message {
+        .user-profile-details .card.hobbies .empty-record-message {
             margin-top: 15px;
         }
 
-        .user-profile-details .content-item .user-hobby-item {
+        .user-profile-details .card .user-hobby-item {
             position: relative;
         }
 
-        .user-profile-details .content-item .error-message {
+        .user-profile-details .card .error-message {
             color: #d9534f;
             font-size: 1em;
             margin: 10px 0 0;
@@ -2402,7 +2402,7 @@ div.login-alert {
                 font-weight: normal;
             }
 
-            .user-profile-details .content-item.hobbies input[type='text'],
+            .user-profile-details .card.hobbies input[type='text'],
             .user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {
                 margin-bottom: 10px;
             }
@@ -2433,7 +2433,7 @@ div.login-alert {
             margin-right: 0;
         }
 
-    .user-profile-details .content-item {
+    .user-profile-details .card {
         margin: 0 0 15px 0;
     }
 
