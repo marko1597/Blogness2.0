@@ -1,0 +1,21 @@
+﻿@import '../variables';
+
+.comment-items-list {
+    @include padding($default-padding);
+}
+
+    .comment-items-list > .comments-empty-message {
+        @include center;
+    }
+
+        .comment-items-list > .comments-empty-message > p {
+            @include margin($default-margin, 0, $default-margin, 0);
+        }
+
+.comment-reply-new {
+    @include margin($default-margin, 0, $default-margin, $default-margin);
+}
+
+.comment-replies {
+    padding-left: $default-padding;
+}

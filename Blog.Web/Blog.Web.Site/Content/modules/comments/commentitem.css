@@ -1,77 +1,91 @@
-﻿.comment-item {
-    position: relative;
-    background: #f8f8f8;
-    margin-bottom: 15px
+/* line 3, ../../scss/comments/commentitem.scss */
+.comment-item {
+  position: relative;
+  margin-bottom: 15px;
+  background: white;
 }
-
-    .comment-item > p {
-        margin: 0;
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-    }
-
-    .comment-item > div.comment-header {
-        background: #56c2e1;
-        color: #fff;
-        margin: 0;
-        height: 25px;
-        position: relative;
-    }
-
-        .comment-item > div.comment-header > .btn-header {
-            display: inline-block;
-            position: static;
-        }
-        
-            .comment-item > div.comment-header > .btn-header.left {
-                padding-left: 6px;
-                padding-top: 4px;
-                margin-right: 5px;
-            }
-
-            .comment-item > div.comment-header > .btn-header.right {
-                padding: 3px 6px;
-                float: right;
-            }
-
-
-        .comment-item > div.comment-header > div.comment-details {
-            color: #fff;
-            display: inline-block;
-            position: absolute;
-            top: 3px;
-        }
-
-            .comment-item > div.comment-header > div.comment-details > a {
-                color: #fff;
-            }
-
-            .comment-item > div.comment-header > div.comment-details > span {
-                font-size: .7em;
-            }
-
-        .comment-item > div.comment-header > div.comment-expand {
-            width: 25px;
-            height: 25px;
-        }
-
-            .comment-item > div.comment-header > div.comment-expand > div.fa {
-                font-size: .8em;
-                cursor: pointer;
-            }
-
-        .comment-item > div.comment-header > div.comment-likes-count {
-            width: 50px;
-            height: 25px;
-        }
-
-            .comment-item > div.comment-header > div.comment-likes-count > i {
-                padding-right: 3px;
-            }
-
-        .comment-item > div.comment-header > div.comment-reply {
-            width: 51px;
-            height: 25px;
-        }
+/* line 9, ../../scss/comments/commentitem.scss */
+.comment-item p {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+/* line 17, ../../scss/comments/commentitem.scss */
+.comment-item .header {
+  position: relative;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: auto;
+  height: 25px;
+  background: #56c2e1;
+  color: white;
+}
+/* line 24, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header {
+  position: static;
+  display: inline-block;
+  position: static;
+}
+/* line 33, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.left {
+  padding-top: 3px;
+  padding-left: 6px;
+  margin-right: 5px;
+}
+/* line 38, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.right {
+  padding-top: 3px;
+  padding-right: 6px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  float: right;
+}
+/* line 44, ../../scss/comments/commentitem.scss */
+.comment-item .header .details {
+  position: absolute;
+  top: 3px;
+  display: inline-block;
+  color: white;
+}
+/* line 51, ../../scss/comments/commentitem.scss */
+.comment-item .header .details a {
+  color: white;
+}
+/* line 55, ../../scss/comments/commentitem.scss */
+.comment-item .header .details span {
+  font-size: .7em;
+}
+/* line 60, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand {
+  width: 25px;
+  height: 25px;
+}
+/* line 63, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand .fa {
+  font-size: .8em;
+  cursor: pointer;
+}
+/* line 69, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes {
+  width: 50px;
+  height: 25px;
+}
+/* line 72, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes i {
+  padding-right: 3px;
+}
+/* line 78, ../../scss/comments/commentitem.scss */
+.comment-item .header .reply {
+  width: 51px;
+  height: 25px;
+}

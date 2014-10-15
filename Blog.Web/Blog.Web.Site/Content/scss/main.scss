@@ -5,7 +5,7 @@
     background-size: cover;
     float: left;
     @include position(relative, -5px, null, null, null);
-    @include margin(null, 5px, null, null);
+    @include margin(null, 5px);
     @include size(30px, 30px);
 }
 
@@ -19,11 +19,10 @@
     vertical-align: top;
     font-size: 1em;
     color: darken($dark-border-color, 20%);
-    margin-bottom: unquote(($base-margin) + 'px');
+    margin-bottom: $default-margin;
 
     .content {
-        $padding-value: unquote(($base-padding) + 'px');
-        @include padding($padding-value, $padding-value, $padding-value, $padding-value);
+        @include padding($default-padding);
         border-bottom: 1px solid $light-border-color;
     }
 }
@@ -63,7 +62,7 @@
 
 .masonry {
     @extend .card;
-    @include padding(10px, 10px, 10px, 10px);
+    @include padding(10px);
     background: $default-color-darken;
 
     ul.isotope {
@@ -71,21 +70,21 @@
 
         li.isotope-item {
             background: $default-color;
-            @include margin(5px, 5px, 5px, 5px);
+            @include margin(5px);
 
             .captions {
                 border-left: 1px solid $light-border-color;
                 border-right: 1px solid $light-border-color;
                 border-bottom: 1px solid $light-border-color;
-                @include padding(15px, 15px, 15px, 15px);
+                @include padding($default-padding);
 
                 p {
-                    @include padding(0, 0, 0, 0);
-                    @include margin(0, 0, 0, 0);
+                    @include padding(0);
+                    @include margin(0);
 
                     &:first-of-type {
                         font-weight: bold;
-                        @include margin(0, 0, 5px, 0);
+                        @include margin(0, 0, 5px);
                     }
                 }
             }
@@ -98,17 +97,17 @@
 .header {
     background: $dark-color;
     color: $default-color;
-    @include position(relative, null, null, null, null);
+    @include position(relative, null);
     @include size(100%, 38px);
 
     &.big {
-        @include padding(15px, 15px, 15px, 15px);
-        @include margin(0, 0, 0, 0);
+        @include padding($default-padding);
+        @include margin(0);
         @include size(100%, auto);
 
         div:first-child {
             @include size(80px, auto);
-            @include margin(0, 10px, 0, 0);
+            @include margin(0, 10px);
             float: left;
 
             img {
@@ -123,7 +122,7 @@
 
             h4 {
                 @include padding(null, null, null, 90px);
-                @include margin(0, 0, 5px, 0);
+                @include margin(0, 0, 5px);
                 font-weight: bold;
 
                 a {
@@ -135,7 +134,7 @@
                 @include padding(null, null, null, 90px);
 
                 a {
-                    @include margin(0, 0, 5px, 0);
+                    @include margin(0, 0, 5px);
                     color: $default-color;
                 }
             }
@@ -143,15 +142,14 @@
     }
 
     h5 {
-        $x-padding: unquote(($base-padding) + 'px');
-        @include padding(12px, $x-padding, 12px, $x-padding);
+        @include padding(12px, $default-padding, 12px, $default-padding);
         margin: 0;
         display: inline-block;
     }
 
     .btn-header {
         @include size(auto, 100%);
-        @include padding(10px, 10px, 10px, 10px);
+        @include padding(10px);
         @include position(inherit, 0, 0, null, null);
         cursor: pointer;
         color: inherit;
@@ -164,14 +162,14 @@
         &.left {
             border-right: 1px solid $light-border-color;
             display: inline-block;
-            @include margin(null, 5px, null, null);
+            @include margin(null, 5px);
         }
 
         &.right {
             border-left: 1px solid $light-border-color;
 
             i {
-                @include margin(null, 5px, null, null);
+                @include margin(null, 5px);
             }
         }
     }
@@ -192,13 +190,11 @@
 }
 
 .page-content {
-    $x-padding: unquote(($base-padding) + 'px');
-    @include padding(0, $x-padding, 0, $x-padding);
+    @include padding(0, $default-padding, 0, $default-padding);
 }
 
 .body-content {
-    $y-padding: unquote(($base-padding) + 'px');
-    @include padding($y-padding, 0, $y-padding, 0);
+    @include padding($default-padding, 0, $default-padding, 0);
     @include margin(51px, 0, 0, 0);
 }
 

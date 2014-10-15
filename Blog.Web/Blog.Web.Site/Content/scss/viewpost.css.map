@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "viewpost.css",
+  "sources": [
+    "viewpost.scss",
+    "variables.scss"
+  ],
+  "names": [],
+  "mappings": "AC0IA,WAAW,QAAQ,GAAG;EAjDlB,SAmD6B;EAjD7B,QAAQ;EAkDI,SAAS;EACT,QAAQ;EACR,iBAAiB;EACjB,oBAAoB;EACpB,eAAe;EACf,YAAY;EAA5B,WAAW,QAAQ,GAAG,KAAK;IAzDvB,SA4DiC;IA1DjC,QAAQ;;ADrFZ,KAAK,WAAW;EC0FZ,iBAAiB;EACjB,SAAS;EACT,QAAQ"
+}

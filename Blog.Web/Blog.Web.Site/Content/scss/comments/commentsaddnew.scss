@@ -1,0 +1,41 @@
+﻿@import '../variables';
+
+.comment-item-new {
+    @include size(inherit, 90px);
+    @include position(relative, null);
+    @include margin($default-margin, $default-margin, 0);
+    background: $default-color;
+    box-shadow: 0 2px 4px #000000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    textarea {
+        @include size(80%, 100%);
+        max-width: 80%;
+        resize: none;
+        border: 1px solid $light-border-color;
+    }
+
+    div {
+        @include position(absolute, 0, 0, null, null);
+        @include padding(8px);
+        @include size(20%, 100%);
+        border-top: 1px solid $light-border-color;
+        border-right: 1px solid $light-border-color;
+        border-bottom: 1px solid $light-border-color;
+
+        @include media(xs) {
+            @include padding(0);
+        }
+
+        button {
+            @include size(100%, auto);
+            @include margin(0, 0, 5px);
+
+            @include media(xs) {
+                @include size(100%, 50%);
+                @include padding(7px);
+                @include margin(0);
+            }
+        }
+    }
+}

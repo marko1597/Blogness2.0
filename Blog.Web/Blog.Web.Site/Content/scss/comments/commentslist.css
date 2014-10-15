@@ -1,0 +1,26 @@
+﻿.comment-items-list {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px; }
+
+.comment-items-list > .comments-empty-message {
+  margin: 0 auto;
+  text-align: center; }
+
+.comment-items-list > .comments-empty-message > p {
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0; }
+
+.comment-reply-new {
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 15px; }
+
+.comment-replies {
+  padding-left: 15px; }
+
+/*# sourceMappingURL=commentslist.css.map */

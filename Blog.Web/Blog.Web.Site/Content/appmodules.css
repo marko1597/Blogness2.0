@@ -778,40 +778,40 @@ tags-input .autocomplete {
   border-bottom: 1px solid #dddddd;
 }
 
-/* line 31, ../scss/main.scss */
+/* line 30, ../scss/main.scss */
 .success {
   color: white;
   background: #5cb85c;
 }
 
-/* line 37, ../scss/main.scss */
+/* line 36, ../scss/main.scss */
 .warning {
   color: white;
   background: #f0ad4e;
 }
 
-/* line 43, ../scss/main.scss */
+/* line 42, ../scss/main.scss */
 .danger {
   color: white;
   background: #d9534f;
 }
 
-/* line 49, ../scss/main.scss */
+/* line 48, ../scss/main.scss */
 .info {
   color: white;
   background: #428bca;
 }
 
-/* line 55, ../scss/main.scss */
+/* line 54, ../scss/main.scss */
 .default {
   background: white;
 }
-/* line 59, ../scss/main.scss */
+/* line 58, ../scss/main.scss */
 .default.darken {
   background: #eeeeee;
 }
 
-/* line 64, ../scss/main.scss */
+/* line 63, ../scss/main.scss */
 .masonry {
   padding-top: 10px;
   padding-right: 10px;
@@ -819,13 +819,13 @@ tags-input .autocomplete {
   padding-left: 10px;
   background: #eeeeee;
 }
-/* line 69, ../scss/main.scss */
+/* line 68, ../scss/main.scss */
 .masonry ul.isotope {
   list-style-type: none;
   padding: 0 !important;
   margin: 0 !important;
 }
-/* line 72, ../scss/main.scss */
+/* line 71, ../scss/main.scss */
 .masonry ul.isotope li.isotope-item {
   background: white;
   margin-top: 5px;
@@ -833,7 +833,7 @@ tags-input .autocomplete {
   margin-bottom: 5px;
   margin-left: 5px;
 }
-/* line 76, ../scss/main.scss */
+/* line 75, ../scss/main.scss */
 .masonry ul.isotope li.isotope-item .captions {
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
@@ -843,7 +843,7 @@ tags-input .autocomplete {
   padding-bottom: 15px;
   padding-left: 15px;
 }
-/* line 82, ../scss/main.scss */
+/* line 81, ../scss/main.scss */
 .masonry ul.isotope li.isotope-item .captions p {
   padding-top: 0;
   padding-right: 0;
@@ -854,7 +854,7 @@ tags-input .autocomplete {
   margin-bottom: 0;
   margin-left: 0;
 }
-/* line 86, ../scss/main.scss */
+/* line 85, ../scss/main.scss */
 .masonry ul.isotope li.isotope-item .captions p:first-of-type {
   font-weight: bold;
   margin-top: 0;
@@ -863,7 +863,7 @@ tags-input .autocomplete {
   margin-left: 0;
 }
 
-/* line 98, ../scss/main.scss */
+/* line 97, ../scss/main.scss */
 .header {
   background: #4c4c4c;
   color: white;
@@ -871,7 +871,7 @@ tags-input .autocomplete {
   width: 100%;
   height: 38px;
 }
-/* line 104, ../scss/main.scss */
+/* line 103, ../scss/main.scss */
 .header.big {
   padding-top: 15px;
   padding-right: 15px;
@@ -884,7 +884,7 @@ tags-input .autocomplete {
   width: 100%;
   height: auto;
 }
-/* line 109, ../scss/main.scss */
+/* line 108, ../scss/main.scss */
 .header.big div:first-child {
   width: 80px;
   height: auto;
@@ -894,19 +894,19 @@ tags-input .autocomplete {
   margin-left: 0;
   float: left;
 }
-/* line 114, ../scss/main.scss */
+/* line 113, ../scss/main.scss */
 .header.big div:first-child img {
   width: 80px;
   height: 80px;
   border-radius: 40px;
   border: 3px solid white;
 }
-/* line 121, ../scss/main.scss */
+/* line 120, ../scss/main.scss */
 .header.big div:last-child {
   width: 100%;
   height: auto;
 }
-/* line 124, ../scss/main.scss */
+/* line 123, ../scss/main.scss */
 .header.big div:last-child h4 {
   padding-left: 90px;
   margin-top: 0;
@@ -915,15 +915,15 @@ tags-input .autocomplete {
   margin-left: 0;
   font-weight: bold;
 }
-/* line 129, ../scss/main.scss */
+/* line 128, ../scss/main.scss */
 .header.big div:last-child h4 a {
   color: white;
 }
-/* line 134, ../scss/main.scss */
+/* line 133, ../scss/main.scss */
 .header.big div:last-child p {
   padding-left: 90px;
 }
-/* line 137, ../scss/main.scss */
+/* line 136, ../scss/main.scss */
 .header.big div:last-child p a {
   margin-top: 0;
   margin-right: 0;
@@ -931,7 +931,7 @@ tags-input .autocomplete {
   margin-left: 0;
   color: white;
 }
-/* line 145, ../scss/main.scss */
+/* line 144, ../scss/main.scss */
 .header h5 {
   padding-top: 12px;
   padding-right: 15px;
@@ -940,7 +940,7 @@ tags-input .autocomplete {
   margin: 0;
   display: inline-block;
 }
-/* line 152, ../scss/main.scss */
+/* line 150, ../scss/main.scss */
 .header .btn-header {
   width: auto;
   height: 100%;
@@ -955,26 +955,26 @@ tags-input .autocomplete {
   color: inherit;
   text-align: center;
 }
-/* line 160, ../scss/main.scss */
+/* line 158, ../scss/main.scss */
 .header .btn-header:hover {
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
-/* line 164, ../scss/main.scss */
+/* line 162, ../scss/main.scss */
 .header .btn-header.left {
   border-right: 1px solid #dddddd;
   display: inline-block;
   margin-right: 5px;
 }
-/* line 170, ../scss/main.scss */
+/* line 168, ../scss/main.scss */
 .header .btn-header.right {
   border-left: 1px solid #dddddd;
 }
-/* line 173, ../scss/main.scss */
+/* line 171, ../scss/main.scss */
 .header .btn-header.right i {
   margin-right: 5px;
 }
 
-/* line 180, ../scss/main.scss */
+/* line 178, ../scss/main.scss */
 .center-cropped {
   float: left;
   background-position: center center;
@@ -983,7 +983,7 @@ tags-input .autocomplete {
   width: 70px;
   height: 70px;
 }
-/* line 187, ../scss/main.scss */
+/* line 185, ../scss/main.scss */
 .center-cropped img {
   min-height: 100%;
   min-width: 100%;
@@ -991,7 +991,7 @@ tags-input .autocomplete {
   filter: alpha(opacity=0);
 }
 
-/* line 194, ../scss/main.scss */
+/* line 192, ../scss/main.scss */
 .page-content {
   padding-top: 0;
   padding-right: 15px;
@@ -999,7 +999,7 @@ tags-input .autocomplete {
   padding-left: 15px;
 }
 
-/* line 199, ../scss/main.scss */
+/* line 196, ../scss/main.scss */
 .body-content {
   padding-top: 15px;
   padding-right: 0;
@@ -1011,7 +1011,7 @@ tags-input .autocomplete {
   margin-left: 0;
 }
 
-/* line 205, ../scss/main.scss */
+/* line 201, ../scss/main.scss */
 .wrap-text {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -1213,152 +1213,226 @@ div.login-alert {
     width: 100%;
     z-index: 500;
 } 
+/* line 140, ../scss/variables.scss */
+.view-post .header h4 .edit {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  display: inline-block;
+  cursor: pointer;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+  -o-transition: opacity .25s ease-in-out;
+  transition: opacity .25s ease-in-out;
+}
+/* line 149, ../scss/variables.scss */
+.view-post .header h4 .edit:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
 
+/* line 7, ../scss/viewpost.scss */
+.card.masonry > ul {
+  list-style-type: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* line 3, ../../scss/comments/commentitem.scss */
 .comment-item {
-    position: relative;
-    background: #f8f8f8;
-    margin-bottom: 15px
+  position: relative;
+  margin-bottom: 15px;
+  background: white;
+}
+/* line 9, ../../scss/comments/commentitem.scss */
+.comment-item p {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+/* line 17, ../../scss/comments/commentitem.scss */
+.comment-item .header {
+  position: relative;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: auto;
+  height: 25px;
+  background: #56c2e1;
+  color: white;
+}
+/* line 24, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header {
+  position: static;
+  display: inline-block;
+  position: static;
+}
+/* line 33, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.left {
+  padding-top: 3px;
+  padding-left: 6px;
+  margin-right: 5px;
+}
+/* line 38, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.right {
+  padding-top: 3px;
+  padding-right: 6px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  float: right;
+}
+/* line 44, ../../scss/comments/commentitem.scss */
+.comment-item .header .details {
+  position: absolute;
+  top: 3px;
+  display: inline-block;
+  color: white;
+}
+/* line 51, ../../scss/comments/commentitem.scss */
+.comment-item .header .details a {
+  color: white;
+}
+/* line 55, ../../scss/comments/commentitem.scss */
+.comment-item .header .details span {
+  font-size: .7em;
+}
+/* line 60, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand {
+  width: 25px;
+  height: 25px;
+}
+/* line 63, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand .fa {
+  font-size: .8em;
+  cursor: pointer;
+}
+/* line 69, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes {
+  width: 50px;
+  height: 25px;
+}
+/* line 72, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes i {
+  padding-right: 3px;
+}
+/* line 78, ../../scss/comments/commentitem.scss */
+.comment-item .header .reply {
+  width: 51px;
+  height: 25px;
 }
 
-    .comment-item > p {
-        margin: 0;
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-    }
-
-    .comment-item > div.comment-header {
-        background: #56c2e1;
-        color: #fff;
-        margin: 0;
-        height: 25px;
-        position: relative;
-    }
-
-        .comment-item > div.comment-header > .btn-header {
-            display: inline-block;
-            position: static;
-        }
-        
-            .comment-item > div.comment-header > .btn-header.left {
-                padding-left: 6px;
-                padding-top: 4px;
-                margin-right: 5px;
-            }
-
-            .comment-item > div.comment-header > .btn-header.right {
-                padding: 3px 6px;
-                float: right;
-            }
-
-
-        .comment-item > div.comment-header > div.comment-details {
-            color: #fff;
-            display: inline-block;
-            position: absolute;
-            top: 3px;
-        }
-
-            .comment-item > div.comment-header > div.comment-details > a {
-                color: #fff;
-            }
-
-            .comment-item > div.comment-header > div.comment-details > span {
-                font-size: .7em;
-            }
-
-        .comment-item > div.comment-header > div.comment-expand {
-            width: 25px;
-            height: 25px;
-        }
-
-            .comment-item > div.comment-header > div.comment-expand > div.fa {
-                font-size: .8em;
-                cursor: pointer;
-            }
-
-        .comment-item > div.comment-header > div.comment-likes-count {
-            width: 50px;
-            height: 25px;
-        }
-
-            .comment-item > div.comment-header > div.comment-likes-count > i {
-                padding-right: 3px;
-            }
-
-        .comment-item > div.comment-header > div.comment-reply {
-            width: 51px;
-            height: 25px;
-        }
-
+/* line 3, ../../scss/comments/commentsaddnew.scss */
 .comment-item-new {
-    position: relative;
-    background: #f8f8f8;
-    margin: 15px 15px 0 15px;
-    height: 90px;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    box-shadow: 0 2px 4px #000000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: inherit;
+  height: 90px;
+  position: relative;
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 0;
+  margin-left: 15px;
+  background: white;
+  box-shadow: 0 2px 4px #000000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* line 11, ../../scss/comments/commentsaddnew.scss */
+.comment-item-new textarea {
+  width: 80%;
+  height: 100%;
+  max-width: 80%;
+  resize: none;
+  border: 1px solid #dddddd;
+}
+/* line 18, ../../scss/comments/commentsaddnew.scss */
+.comment-item-new div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-top: 8px;
+  padding-right: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  width: 20%;
+  height: 100%;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+}
+@media (max-width: 767px) {
+  /* line 18, ../../scss/comments/commentsaddnew.scss */
+  .comment-item-new div {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+}
+/* line 30, ../../scss/comments/commentsaddnew.scss */
+.comment-item-new div button {
+  width: 100%;
+  height: auto;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+  margin-left: 0;
+}
+@media (max-width: 767px) {
+  /* line 30, ../../scss/comments/commentsaddnew.scss */
+  .comment-item-new div button {
+    width: 100%;
+    height: 50%;
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    padding-left: 7px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
 }
 
-    .comment-item-new > textarea {
-        resize: none;
-        max-width: 80%;
-        width: 80%;
-        height: 100%;
-        border: 1px solid #aaa;
-    }
 
-    .comment-item-new > div {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 8px;
-        width: 20%;
-        height: 100%;
-        border-top: 1px solid #aaa;
-        border-right: 1px solid #aaa;
-        border-bottom: 1px solid #aaa;
-    }
-
-        .comment-item-new > div > button {
-            width: 100%;
-            margin-bottom: 5px;
-        }
-
-@media (max-width: 320px) {
-    .comment-item-new > div > button.fa {
-        padding: 7px;
-    }
-}
-
-.comments-container {
-    background: #eee;
-}
+/* line 3, ../../scss/comments/commentslist.scss */
 .comment-items-list {
-    background: #eee;
-    padding: 15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
 
-    .comment-items-list > .comments-empty-message {
-        margin: 0 auto;
-        text-align: center;
-    }
+/* line 7, ../../scss/comments/commentslist.scss */
+.comment-items-list > .comments-empty-message {
+  margin: 0 auto;
+  text-align: center;
+}
 
-        .comment-items-list > .comments-empty-message > p {
-            margin: 15px 0;
-        }
+/* line 11, ../../scss/comments/commentslist.scss */
+.comment-items-list > .comments-empty-message > p {
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+}
 
+/* line 15, ../../scss/comments/commentslist.scss */
 .comment-reply-new {
-    margin: 15px 0 15px 15px;
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 15px;
 }
 
+/* line 19, ../../scss/comments/commentslist.scss */
 .comment-replies {
-    padding-left: 15px;
+  padding-left: 15px;
 }
 
 #blog-error-global {
@@ -1936,43 +2010,7 @@ div.login-alert {
   height: auto;
   position: relative;
 }
-/* line 8, ../../scss/posts/postlistitem.scss */
-.post-list-item.large {
-  width: 24%;
-}
-/* line 12, ../../scss/posts/postlistitem.scss */
-.post-list-item.xlarge {
-  width: 19%;
-}
-/* line 16, ../../scss/posts/postlistitem.scss */
-.post-list-item.medium {
-  width: 31.5%;
-}
-/* line 20, ../../scss/posts/postlistitem.scss */
-.post-list-item.small {
-  width: 48%;
-}
-/* line 24, ../../scss/posts/postlistitem.scss */
-.post-list-item.xsmall {
-  width: 98%;
-}
-/* line 29, ../../scss/posts/postlistitem.scss */
-.post-list-item .comments ul {
-  width: 100%;
-  height: 40px;
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-  overflow: hidden;
-}
-/* line 37, ../../scss/posts/postlistitem.scss */
-.post-list-item .content [post-contents] {
-  margin-top: -15px;
-  margin-right: -15px;
-  margin-bottom: 0;
-  margin-left: -15px;
-}
-/* line 44, ../../scss/posts/postlistitem.scss */
+/* line 140, ../../scss/variables.scss */
 .post-list-item .header h4 .edit {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -1983,10 +2021,46 @@ div.login-alert {
   -o-transition: opacity .25s ease-in-out;
   transition: opacity .25s ease-in-out;
 }
-/* line 53, ../../scss/posts/postlistitem.scss */
+/* line 149, ../../scss/variables.scss */
 .post-list-item .header h4 .edit:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);
+}
+/* line 9, ../../scss/posts/postlistitem.scss */
+.post-list-item.large {
+  width: 24%;
+}
+/* line 13, ../../scss/posts/postlistitem.scss */
+.post-list-item.xlarge {
+  width: 19%;
+}
+/* line 17, ../../scss/posts/postlistitem.scss */
+.post-list-item.medium {
+  width: 31.5%;
+}
+/* line 21, ../../scss/posts/postlistitem.scss */
+.post-list-item.small {
+  width: 48%;
+}
+/* line 25, ../../scss/posts/postlistitem.scss */
+.post-list-item.xsmall {
+  width: 98%;
+}
+/* line 30, ../../scss/posts/postlistitem.scss */
+.post-list-item .comments ul {
+  width: 100%;
+  height: 40px;
+  list-style-type: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+}
+/* line 38, ../../scss/posts/postlistitem.scss */
+.post-list-item .content [post-contents] {
+  margin-top: -15px;
+  margin-right: -15px;
+  margin-bottom: 0;
+  margin-left: -15px;
 }
 
 .post-item-comment {

@@ -348,7 +348,18 @@
     <Content Include="Content\modules\user\userprofilenavigation.css" />
     <Content Include="Content\modules\user\userprofileposts.css" />
     <Content Include="Content\modules\variables.css" />
-    <Content Include="Content\modules\viewpost.css" />
+    <Content Include="Content\scss\comments\commentitem.css">
+      <DependentUpon>commentitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentsaddnew.css">
+      <DependentUpon>commentsaddnew.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentscontainer.css">
+      <DependentUpon>commentscontainer.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentslist.css">
+      <DependentUpon>commentslist.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
@@ -366,6 +377,9 @@
     </Content>
     <Content Include="Content\scss\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\viewpost.css">
+      <DependentUpon>viewpost.scss</DependentUpon>
     </Content>
     <Content Include="Content\theme\default\blog-bootstrap.css" />
     <Content Include="Content\theme\default\fonts\fontawesome-webfont.svg" />
@@ -3237,7 +3251,6 @@
     <Content Include="Views\Home\UnsupportedBrowser.cshtml" />
     <Content Include="Content\scss\main.scss" />
     <Content Include="Content\scss\variables.scss" />
-    <Content Include="Content\scss\viewpost.scss" />
     <Content Include="Content\scss\main.css.map">
       <DependentUpon>main.css</DependentUpon>
     </Content>
@@ -3247,6 +3260,26 @@
     <Content Include="Content\scss\posts\postlistitem.scss" />
     <Content Include="Content\scss\posts\postlistitem.css.map">
       <DependentUpon>postlistitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentscontainer.scss" />
+    <Content Include="Content\scss\comments\commentscontainer.css.map">
+      <DependentUpon>commentscontainer.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentslist.scss" />
+    <Content Include="Content\scss\comments\commentslist.css.map">
+      <DependentUpon>commentslist.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\viewpost.scss" />
+    <Content Include="Content\scss\viewpost.css.map">
+      <DependentUpon>viewpost.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentsaddnew.scss" />
+    <Content Include="Content\scss\comments\commentsaddnew.css.map">
+      <DependentUpon>commentsaddnew.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentitem.scss" />
+    <Content Include="Content\scss\comments\commentitem.css.map">
+      <DependentUpon>commentitem.css</DependentUpon>
     </Content>
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -3260,7 +3293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\scss\comments\" />
     <Folder Include="Content\scss\error\" />
     <Folder Include="Content\scss\header\" />
     <Folder Include="Content\scss\loginform\" />

@@ -14,6 +14,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             show: false
         });
 
+        $scope.user = $rootScope.user;
+
         $scope.isAdding = true;
 
         $scope.existingContents = [];
@@ -79,41 +81,37 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         };
 
         $scope.savePost = function () {
-            if ($scope.authData) {
-                userService.getUserInfo($scope.username).then(function (userinfo) {
-                    $scope.post.User = userinfo;
-                    setPostContentsFromUploader();
+            if ($scope.authData && $scope.user) {
+                $scope.post.User = $scope.user;
+                setPostContentsFromUploader();
 
-                    if ($scope.isAdding) {
-                        postsService.addPost($scope.post).then(function (resp) {
-                            if (resp.Error == undefined) {
-                                $location.path("/");
-                            } else {
-                                errorService.displayError(resp.Error);
-                            }
-                        }, function (e) {
-                            errorService.displayError(e);
-                        });
-                    } else {
-                        postsService.updatePost($scope.post).then(function (resp) {
-                            if (resp.Error == undefined) {
-                                $location.path("/");
-                            } else {
-                                errorService.displayError(resp.Error);
-                            }
-                        }, function (e) {
-                            errorService.displayError(e);
-                        });
-                    }
-                }, function (e) {
-                    errorService.displayError(e);
-                });
+                if ($scope.isAdding) {
+                    postsService.addPost($scope.post).then(function (resp) {
+                        if (resp.Error == undefined) {
+                            $location.path("/");
+                        } else {
+                            errorService.displayError(resp.Error);
+                        }
+                    }, function (e) {
+                        errorService.displayError(e);
+                    });
+                } else {
+                    postsService.updatePost($scope.post).then(function (resp) {
+                        if (resp.Error == undefined) {
+                            $location.path("/");
+                        } else {
+                            errorService.displayError(resp.Error);
+                        }
+                    }, function (e) {
+                        errorService.displayError(e);
+                    });
+                }
             } else {
                 $rootScope.$broadcast("launchLoginForm");
             }
         };
 
-        $scope.cancelPost = function() {
+        $scope.cancelPost = function () {
             $location.path("/");
         };
 
@@ -133,16 +131,16 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.launchMediaSelectionDialog = function () {
             if ($scope.albums.length == 0) {
-                albumService.getAlbumsByUser($scope.user.Id).then(function(resp) {
-                    _.each(resp, function(a) {
-                        _.each(a.Media, function(m) {
+                albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
+                    _.each(resp, function (a) {
+                        _.each(a.Media, function (m) {
                             m.IsSelected = false;
                         });
                     });
 
                     $scope.albums = resp;
                     mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
-                }, function(e) {
+                }, function (e) {
                     errorService.displayError(e);
                 });
             } else {
@@ -166,7 +164,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             }
         };
 
-        $scope.getMediaToggleButtonStyle = function(media) {
+        $scope.getMediaToggleButtonStyle = function (media) {
             return media.IsSelected ? 'btn-danger' : 'btn-success';
         };
 
@@ -175,7 +173,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         };
 
         // #endregion
-        
+
         $rootScope.$watch('user', function () {
             if ($rootScope.user) {
                 $scope.user = $rootScope.user;
@@ -195,7 +193,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         // #region angular-file-upload
 
-        var addMediaToUploaderQueue = function(media, title, text) {
+        var addMediaToUploaderQueue = function (media, title, text) {
             var item = getUploaderItem(media, title, text);
 
             $timeout(function () {
@@ -204,7 +202,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             }, 500);
         };
 
-        var removeMediaFromUploaderQueue = function(media) {
+        var removeMediaFromUploaderQueue = function (media) {
             var item = _.where(uploader.queue, { media: media, mediaId: media.Id })[0];
 
             $timeout(function () {
@@ -217,7 +215,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         var setPostContentsFromUploader = function () {
             $scope.post.PostContents = [];
 
-            _.each(uploader.queue, function(item) {
+            _.each(uploader.queue, function (item) {
                 var postContent = {
                     PostId: 0,
                     Media: item.media,
@@ -245,7 +243,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 allowCaptions: true,
                 postContentTitle: title,
                 postContentText: text,
-                remove: function() {
+                remove: function () {
                     var index = uploader.queue.indexOf(item);
                     uploader.queue.splice(index, 1);
 
@@ -275,7 +273,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
             }
         });
-        
+
         uploader.onSuccessItem = function (fileItem, response) {
             response.IsSelected = true;
 

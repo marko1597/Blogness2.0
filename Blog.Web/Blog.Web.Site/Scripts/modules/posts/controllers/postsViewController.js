@@ -5,9 +5,9 @@
 
         $scope.postId = parseInt($rootScope.$stateParams.postId);
 
-        $scope.post = {};
+        $scope.post = null;
 
-        $scope.user = {};
+        $scope.user = null;
 
         $scope.viewCount = [];
 
@@ -17,24 +17,37 @@
 
         $scope.isBusy = false;
 
+        $scope.isEditable = false;
+
         $scope.authData = localStorageService.get("authorizationData");
 
-        $scope.init = function () {
-            if ($scope.isBusy) {
+        $scope.username = localStorageService.get("username");
+
+        $scope.toggleIsEditable = function () {
+            if ($scope.user && $scope.post && $scope.post.User.UserName === $scope.username) {
+                $scope.isEditable = true;
                 return;
             }
-            $scope.isBusy = true;
+            $scope.isEditable = false;
+        };
 
-            if ($scope.authData) {
-                var username = localStorageService.get("username");
-                userService.getUserInfo(username).then(function (user) {
-                    $scope.user = user;
-                }, function (e) {
-                    errorService.displayError({ Message: e });
-                });
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
             }
+        });
 
-            $scope.getViewedPost();
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $scope.editPost = function () {
+            $location.path("/post/edit/" + $scope.post.Id);
         };
 
         $scope.getContentType = function (content) {
@@ -62,6 +75,7 @@
                     if (post.Error == undefined) {
                         $scope.post = post;
                         $scope.isBusy = false;
+                        $scope.toggleIsEditable();
 
                         $scope.$broadcast("resizeIsotopeItems");
 
@@ -82,11 +96,26 @@
             }
         };
 
-        $scope.hasContents = function() {
+        $scope.hasContents = function () {
             if ($scope.post && $scope.post.PostContents && $scope.post.PostContents.length > 0) {
                 return true;
             }
             return false;
+        };
+
+        $scope.init = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            if ($scope.authData) {
+                if ($rootScope.user) {
+                    $scope.user = $rootScope.user;
+                }
+            }
+
+            $scope.getViewedPost();
         };
 
         $scope.init();

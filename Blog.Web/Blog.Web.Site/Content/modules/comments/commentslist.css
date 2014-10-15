@@ -1,21 +1,34 @@
-﻿.comment-items-list {
-    background: #eee;
-    padding: 15px;
+/* line 3, ../../scss/comments/commentslist.scss */
+.comment-items-list {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
 
-    .comment-items-list > .comments-empty-message {
-        margin: 0 auto;
-        text-align: center;
-    }
+/* line 7, ../../scss/comments/commentslist.scss */
+.comment-items-list > .comments-empty-message {
+  margin: 0 auto;
+  text-align: center;
+}
 
-        .comment-items-list > .comments-empty-message > p {
-            margin: 15px 0;
-        }
+/* line 11, ../../scss/comments/commentslist.scss */
+.comment-items-list > .comments-empty-message > p {
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+}
 
+/* line 15, ../../scss/comments/commentslist.scss */
 .comment-reply-new {
-    margin: 15px 0 15px 15px;
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 15px;
 }
 
+/* line 19, ../../scss/comments/commentslist.scss */
 .comment-replies {
-    padding-left: 15px;
+  padding-left: 15px;
 }

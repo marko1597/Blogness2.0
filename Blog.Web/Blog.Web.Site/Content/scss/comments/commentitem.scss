@@ -1,0 +1,82 @@
+﻿@import '../variables';
+
+.comment-item {
+    @include position(relative, null);
+    @include margin(null, null, $default-margin);
+    background: $default-color;
+
+
+    p {
+        @include margin(0);
+        @include padding(10px);
+        border-left: 1px solid $light-border-color;
+        border-right: 1px solid $light-border-color;
+        border-bottom: 1px solid $light-border-color;
+    }
+
+    .header {
+        @include position(relative, null);
+        @include margin(0);
+        @include size(auto, 25px);
+        background: $primary-color;
+        color: $default-color;
+
+        .btn-header {
+            $computed-x-padding: unquote((($base-padding / 5) * 2) + 'px');
+            $computed-y-padding: unquote(($base-padding / 5) + 'px');
+            $computed-x-margin: unquote(($base-margin / 3) + 'px');
+
+            @include position(static, null);
+            display: inline-block;
+            position: static;
+
+            &.left {
+                @include padding($computed-y-padding, null, null, $computed-x-padding);
+                @include margin(null, $computed-x-margin);
+            }
+
+            &.right {
+                @include padding($computed-y-padding, $computed-x-padding, $computed-y-padding, $computed-x-padding);
+                float: right;
+            }
+        }
+
+        .details {
+            $computed-top: unquote(($base-margin / 5) + 'px');
+
+            @include position(absolute, $computed-top, null, null, null);
+            display: inline-block;
+            color: $default-color;
+
+            a {
+                color: $default-color;
+            }
+
+            span {
+                font-size: .7em;
+            }
+        }
+
+        .expand {
+            @include size(25px, 25px);
+
+            .fa {
+                font-size: .8em;
+                cursor: pointer;
+            }
+        }
+
+        .likes {
+            @include size(50px, 25px);
+
+            i {
+                $computed-x-padding: unquote(($base-padding / 5) + 'px');
+                @include padding(null, $computed-x-padding);
+            }
+        }
+
+        .reply {
+            @include size(51px, 25px);
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "commentslist.css",
+  "sources": [
+    "commentslist.scss",
+    "../variables.scss"
+  ],
+  "names": [],
+  "mappings": "AAEA;ECkDQ,aA/CU;EAmDV,eAnDU;EAuDV,gBAvDU;EA2DV,cA3DU;;ADClB,sBAAsB;ECyHlB,QAAQ;EACR,YAAY;;ADtHhB,sBAAsB,0BAA0B;EC6DxC,YAjES;EAqET,cDhEqC;ECoErC,eAzES;EA6ET,aDxEyD;;AAGjE;ECyDQ,YAjES;EAqET,cD5D6B;ECgE7B,eAzES;EA6ET,aA7ES;;ADYjB;EACI,cCdc"
+}

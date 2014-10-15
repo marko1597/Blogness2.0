@@ -3,6 +3,8 @@ $fonts: 'Open Sans', sans-serif;
 $box-shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
 $base-padding: 15;
 $base-margin: 15;
+$default-padding: 15px;
+$default-margin: 15px;
 
 // base colors
 $primary-color: #56c2e1;
@@ -23,7 +25,7 @@ $default-color-darken: #eee;
 }
 
 // mixin padding: top, right, bottom, left;
-@mixin position($value, $top, $right, $bottom, $left) {
+@mixin position($value, $top, $right: $top, $bottom: $top, $left: $top) {
     @if ($value != null) {
         position: $value;
     }
@@ -46,7 +48,7 @@ $default-color-darken: #eee;
 }
 
 // mixin padding: top, right, bottom, left;
-@mixin padding($top, $right, $bottom, $left) {
+@mixin padding($top, $right: $top, $bottom: $top, $left: $top) {
     @if ($top != null) {
         padding-top: $top;
     }
@@ -65,7 +67,7 @@ $default-color-darken: #eee;
 }
 
 // mixin margin: top, right, bottom, left;
-@mixin margin($top, $right, $bottom, $left) {
+@mixin margin($top, $right: $top, $bottom: $top, $left: $top) {
     @if ($top != null) {
         margin-top: $top;
     }
@@ -117,6 +119,37 @@ $default-color-darken: #eee;
     @else if $point == xs {
         @media (max-width: 767px) {
             @content;
+        }
+    }
+}
+
+// mixin center
+@mixin center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+// mixin background
+@mixin background($args) {
+    background: $args;
+}
+
+@mixin header-edit-icon {
+    .header {
+        h4 {
+            .edit {
+                @include opacity(1);
+                display: inline-block;
+                cursor: pointer;
+                -moz-transition: opacity .25s ease-in-out;
+                -webkit-transition: opacity .25s ease-in-out;
+                -o-transition: opacity .25s ease-in-out;
+                transition: opacity .25s ease-in-out;
+
+                &:hover {
+                    @include opacity(0.5);
+                }
+            }
         }
     }
 }

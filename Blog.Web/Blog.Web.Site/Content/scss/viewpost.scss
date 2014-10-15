@@ -1,0 +1,9 @@
+﻿@import 'variables';
+
+.view-post {
+    @include header-edit-icon;
+}
+
+.card.masonry > ul {
+    @include clean-list;
+}
