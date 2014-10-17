@@ -1,0 +1,17 @@
+﻿@import '../variables';
+
+.media-item {
+    @include position(relative, null);
+    text-align: center;
+
+    img {
+        @include size(100%, auto);
+        @include borders(1px, solid, $light-border-color, null);
+        max-width: 100%;
+    }
+
+    .btn-danger {
+        @include position(absolute, $default-margin, $default-margin, null, null);
+        @include margin(0);
+    }
+}

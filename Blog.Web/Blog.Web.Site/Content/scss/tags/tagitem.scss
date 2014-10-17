@@ -1,0 +1,27 @@
+﻿@import '../variables';
+
+.tag-item {
+    $tag-margin: unquote((($base-margin / 3) * 2) + 'px');
+    $tag-padding: unquote(($base-padding / 3) + 'px');
+    @include margin(0, $tag-margin, $tag-margin);
+    @include padding($tag-padding);
+    @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
+    color: $default-color;
+    background: $primary-color;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: inset 0 0 1px hsla(0, 0%, 100%, 0.1);
+    -webkit-text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+
+    &:hover {
+        background: darken($primary-color, $hover-darken-value);
+        border-color: darken(darken($primary-color, $border-darken-value), $hover-darken-value);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    > i {
+        $icon-margin: unquote(($base-margin / 3) + 'px');
+        @include margin(null, $icon-margin);
+    }
+}

@@ -1,0 +1,35 @@
+﻿#blog-error-global {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1020;
+  color: #fff; }
+  #blog-error-global .close-error {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: pointer;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out; }
+    #blog-error-global .close-error:hover {
+      opacity: 0.5;
+      filter: alpha(opacity=50); }
+  #blog-error-global .message {
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    background: #d9534f;
+    border-top: 1px solid #d43d3a;
+    border-right: 1px solid #d43d3a;
+    border-bottom: 1px solid #d43d3a;
+    border-left: 1px solid #d43d3a; }
+    #blog-error-global .message span {
+      padding-left: 5px; }
+
+/*# sourceMappingURL=errordisplay.css.map */

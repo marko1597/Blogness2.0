@@ -1,52 +1,51 @@
-﻿.upload-details {
-    background: #4c4c4c;
-    color: #f2f2f2;
-    padding: 10px;
-}
-
-    .upload-details > div.popover {
-        color: #666;
-    }
-
-        .upload-details > div.popover > div.popover-content {
-            -ms-word-wrap: break-word;
-            word-wrap: break-word;
-        }
-
-    .upload-details > p {
-        margin: 0 0 5px 0;
-    }
-
-        .upload-details > p:first-child {
-            cursor: pointer;
-            font-weight: bold;
-            -ms-text-overflow: ellipsis;
-            -o-text-overflow: ellipsis;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            opacity: 1;
-            -moz-transition: opacity .25s ease-in-out;
-            -webkit-transition: opacity .25s ease-in-out;
-            -o-transition: opacity .25s ease-in-out;
-            transition: opacity .25s ease-in-out;
-        }
-
-            .upload-details > p:first-child:hover,
-            .upload-details > p:first-child:focus {
-                text-decoration: underline;
-                opacity: 0.5;
-            }
-
-    .upload-details > div.buttons > button {
-        border-radius: 0;
-        width: 25px;
-        height: 25px;
-    }
-
-    .upload-details > div.status {
-        display: inline-block;
-        position: absolute;
-        left: 100px;
-        top: 63px;
-    }
+/* line 3, ../../scss/shared/fileuploaditem.scss */
+.upload-details {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  background: #4c4c4c;
+  color: white; }
+  /* line 8, ../../scss/shared/fileuploaditem.scss */
+  .upload-details .popover {
+    color: #4c4c4c; }
+    /* line 11, ../../scss/shared/fileuploaditem.scss */
+    .upload-details .popover .popover-content {
+      -ms-word-wrap: break-word;
+      word-wrap: break-word; }
+  /* line 17, ../../scss/shared/fileuploaditem.scss */
+  .upload-details p {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 5px;
+    margin-left: 0; }
+    /* line 21, ../../scss/shared/fileuploaditem.scss */
+    .upload-details p:first-child {
+      font-weight: bold;
+      cursor: pointer;
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      opacity: 1;
+      -moz-transition: opacity .25s ease-in-out;
+      -webkit-transition: opacity .25s ease-in-out;
+      -o-transition: opacity .25s ease-in-out;
+      transition: opacity .25s ease-in-out; }
+      /* line 35, ../../scss/shared/fileuploaditem.scss */
+      .upload-details p:first-child:hover, .upload-details p:first-child:focus {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+        text-decoration: underline; }
+  /* line 43, ../../scss/shared/fileuploaditem.scss */
+  .upload-details > .buttons > button {
+    width: 25px;
+    height: 25px;
+    border-radius: 0; }
+  /* line 49, ../../scss/shared/fileuploaditem.scss */
+  .upload-details > .status {
+    position: absolute;
+    top: 69px;
+    left: 105px;
+    display: inline-block; }

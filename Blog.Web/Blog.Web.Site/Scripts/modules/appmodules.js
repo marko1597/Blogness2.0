@@ -91,7 +91,7 @@ ngComments.directive('commentItem', [function () {
         $scope.isUserLiked = function () {
             var isLiked = false;
             _.each($scope.comment.CommentLikes, function (c) {
-                if (c.UserId == $scope.user.Id) {
+                if ($scope.user && c.UserId == $scope.user.Id) {
                     isLiked = true;
                 }
             });
@@ -1794,7 +1794,7 @@ ngMedia.directive('mediaItem', function () {
                     return;
                 }
 
-                if (response === 'true') {
+                if (response) {
                     $scope.$emit("successDeletingMedia", $scope.media);
                 } else {
                     errorService.displayError(response);

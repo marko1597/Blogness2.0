@@ -1,54 +1,60 @@
-﻿.album-group {
-    margin-bottom: 15px;
-}
-
-    .album-group > .header > input[type=text] {
-        min-width: 250px;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #ccc;
-        margin-right: 10px;
-    }
-
-    .album-group > .header > .btn-header.right > label {
-        margin-right: 0;
-        cursor: pointer;
-    }
-
-        .album-group > .header > .btn-header.right > label > input[type='file'] {
-            position: fixed;
-            top: -1000px;
-        }
-
-    .album-group > .body {
-        background: rgb(238, 238, 238);
-    }
-
-        .album-group > .body > ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-            .album-group > .body > ul > .media-item-container {
-                margin: 5px;
-            }
-
-                .album-group > .body > ul > .media-item-container > .details {
-                    background: #fff;
-                    border-left: 1px solid rgb(221, 221, 221);
-                    border-right: 1px solid rgb(221, 221, 221);
-                    border-bottom: 1px solid rgb(221, 221, 221);
-                    padding: 10px;
-                    overflow: hidden;
-                }
-
-@media(max-width: 767px) {
-    .album-group > .body > ul > .media-item-container > .details > .btn {
-        width: 100%;
-    }
-
-        .album-group > .body > ul > .media-item-container > .details > .btn > span > i {
-            margin-right: 5px;
-        }
-}
+/* line 3, ../../scss/media/albumgroup.scss */
+.album-group {
+  margin-bottom: 15px; }
+  /* line 7, ../../scss/media/albumgroup.scss */
+  .album-group .header > input[type=text] {
+    margin-right: 15;
+    border: none;
+    border-bottom: 1px solid #dddddd;
+    background: transparent;
+    min-width: 250px; }
+  /* line 153, ../../scss/variables.scss */
+  .album-group .header > .btn-header.right label {
+    margin-right: 0;
+    cursor: pointer; }
+    /* line 157, ../../scss/variables.scss */
+    .album-group .header > .btn-header.right label > input[type='file'] {
+      position: fixed;
+      top: -1000px; }
+  /* line 22, ../../scss/media/albumgroup.scss */
+  .album-group .body {
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    background: #eeeeee; }
+    /* line 28, ../../scss/media/albumgroup.scss */
+    .album-group .body > ul {
+      list-style-type: none;
+      padding: 0 !important;
+      margin: 0 !important; }
+      /* line 31, ../../scss/media/albumgroup.scss */
+      .album-group .body > ul .media-item-container {
+        margin-top: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        margin-left: 5px; }
+        /* line 34, ../../scss/media/albumgroup.scss */
+        .album-group .body > ul .media-item-container .details {
+          padding-top: 10px;
+          padding-right: 10px;
+          padding-bottom: 10px;
+          padding-left: 10px;
+          border-right: 1px solid #dddddd;
+          border-bottom: 1px solid #dddddd;
+          border-left: 1px solid #dddddd;
+          padding-top: 15px;
+          padding-right: 15px;
+          padding-bottom: 15px;
+          padding-left: 15px;
+          overflow: hidden; }
+          @media (max-width: 767px) {
+            /* line 41, ../../scss/media/albumgroup.scss */
+            .album-group .body > ul .media-item-container .details .btn {
+              width: 100%; }
+              /* line 45, ../../scss/media/albumgroup.scss */
+              .album-group .body > ul .media-item-container .details .btn > span > i {
+                margin-right: 5px; } }

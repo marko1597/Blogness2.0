@@ -49,7 +49,7 @@
         $scope.isUserLiked = function () {
             var isLiked = false;
             _.each($scope.comment.CommentLikes, function (c) {
-                if (c.UserId == $scope.user.Id) {
+                if ($scope.user && c.UserId == $scope.user.Id) {
                     isLiked = true;
                 }
             });

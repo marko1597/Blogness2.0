@@ -23,7 +23,7 @@
 
     .content {
         @include padding($default-padding);
-        border-bottom: 1px solid $light-border-color;
+        @include borders(1px, solid, $light-border-color, false, false, true, false);
     }
 }
 
@@ -31,24 +31,40 @@
     @extend .card;
     color: $default-color;
     background: $success-color;
+
+    .content {
+        @include borders(1px, solid, darken($success-color, $border-darken-value), false, false, true, false);
+    }
 }
 
 .warning {
     @extend .card;
     color: $default-color;
     background: $warning-color;
+
+    .content {
+        @include borders(1px, solid, darken($warning-color, $border-darken-value), false, false, true, false);
+    }
 }
 
 .danger {
     @extend .card;
     color: $default-color;
     background: $danger-color;
+
+    .content {
+        @include borders(1px, solid, darken($danger-color, $border-darken-value), false, false, true, false);
+    }
 }
 
 .info {
     @extend .card;
     color: $default-color;
     background: $info-color;
+
+    .content {
+        @include borders(1px, solid, darken($info-color, $border-darken-value), false, false, true, false);
+    }
 }
 
 .default {
@@ -73,9 +89,7 @@
             @include margin(5px);
 
             .captions {
-                border-left: 1px solid $light-border-color;
-                border-right: 1px solid $light-border-color;
-                border-bottom: 1px solid $light-border-color;
+                @include borders(1px, solid, $light-border-color, false, true, true, true);
                 @include padding($default-padding);
 
                 p {

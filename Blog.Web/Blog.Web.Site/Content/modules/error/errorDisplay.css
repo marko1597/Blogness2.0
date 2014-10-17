@@ -1,36 +1,38 @@
-﻿#blog-error-global {
+/* line 3, ../../scss/error/errordisplay.scss */
+#blog-error-global {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  z-index: 1020;
+  color: white; }
+  /* line 9, ../../scss/error/errordisplay.scss */
+  #blog-error-global .close-error {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: auto;
-    z-index: 1020;
-    color: #f2f2f2;
-}
-
-    #blog-error-global > .close-error {
-        position: absolute;
-        top: 7px;
-        right: 10px;
-        cursor: pointer;
-        opacity: 1;
-        -moz-transition: opacity .25s ease-in-out;
-        -webkit-transition: opacity .25s ease-in-out;
-        -o-transition: opacity .25s ease-in-out;
-        transition: opacity .25s ease-in-out;
-    }
-
-        #blog-error-global > .close-error:hover {
-            opacity: 0.5;
-        }
-
-    #blog-error-global > div.message {
-        background: #d9534f;
-        border: 1px solid #d43f3a;
-        height: 100%;
-        padding: 0 30px 5px 10px;
-        line-height: 2;
-    }
-
-        #blog-error-global > div.message > span {
-            padding-left: 4px;
-        }
+    top: 15px;
+    right: 15px;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    cursor: pointer;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+    -o-transition: opacity .25s ease-in-out;
+    transition: opacity .25s ease-in-out; }
+    /* line 18, ../../scss/error/errordisplay.scss */
+    #blog-error-global .close-error:hover {
+      opacity: 0.5;
+      filter: alpha(opacity=50); }
+  /* line 23, ../../scss/error/errordisplay.scss */
+  #blog-error-global .message {
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    background: #d9534f;
+    border-top: 1px solid #d43f3a;
+    border-right: 1px solid #d43f3a;
+    border-bottom: 1px solid #d43f3a;
+    border-left: 1px solid #d43f3a; }
+    /* line 28, ../../scss/error/errordisplay.scss */
+    #blog-error-global .message span {
+      padding-left: 5px; }

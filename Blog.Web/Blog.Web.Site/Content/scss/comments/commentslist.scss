@@ -2,15 +2,21 @@
 
 .comment-items-list {
     @include padding($default-padding);
-}
 
-    .comment-items-list > .comments-empty-message {
+    .comments-empty-message {
         @include center;
-    }
 
-        .comment-items-list > .comments-empty-message > p {
+        p {
             @include margin($default-margin, 0, $default-margin, 0);
         }
+    }
+
+    div:last-child {
+        .comment-item {
+            @include margin(0);
+        }
+    }
+}
 
 .comment-reply-new {
     @include margin($default-margin, 0, $default-margin, $default-margin);

@@ -1,0 +1,55 @@
+﻿@import '../variables';
+
+#login-form-modal {
+    .modal-dialog {
+        @include media(md) {
+            width: 35%;
+        }
+
+        .modal-content {
+            .modal-body {
+                @include padding(0);
+                -moz-perspective: 1000;
+                -ms-perspective: 1000;
+                -webkit-perspective: 1000;
+                perspective: 1000;
+
+                > .flipper {
+                    @include transition(0.6s);
+                    @include position(relative, null);
+                    -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+
+                    > .login-form, > .register {
+                        @include position(absolute, 0, null, null, 0);
+                        -moz-backface-visibility: hidden;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+                    }
+
+                    > .login-form {
+                        z-index: 1020;
+                    }
+
+                    > .register {
+                        -moz-transform: rotateY(180deg);
+                        -ms-transform: rotateY(180deg);
+                        -o-transform: rotateY(180deg);
+                        -webkit-transform: rotateY(180deg);
+                        transform: rotateY(180deg);
+                    }
+                }
+
+                &.hover {
+                    > .flipper {
+                        -moz-transform: rotateY(180deg);
+                        -ms-transform: rotateY(180deg);
+                        -o-transform: rotateY(180deg);
+                        -webkit-transform: rotateY(180deg);
+                        transform: rotateY(180deg);
+                    }
+                }
+            }
+        }
+    }
+}

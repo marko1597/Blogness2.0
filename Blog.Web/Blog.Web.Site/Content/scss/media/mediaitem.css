@@ -1,0 +1,17 @@
+﻿.media-item {
+  position: relative;
+  text-align: center; }
+  .media-item img {
+    width: 100%;
+    height: auto;
+    max-width: 100%; }
+  .media-item .btn-danger {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }
+
+/*# sourceMappingURL=mediaitem.css.map */

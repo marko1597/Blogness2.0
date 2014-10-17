@@ -1,0 +1,39 @@
+﻿@import '../variables';
+
+#media-selection-dialog {
+    .modal-body {
+        ul {
+            @include clean-list;
+            overflow: hidden;
+
+            > li {
+                @include position(relative, null);
+                @include margin(null, null, $default-margin);
+                @include borders(1px, solid, $light-border-color, true);
+                display: block;
+                overflow: hidden;
+
+                .center-cropped {
+                    @include size(22.4%, 150px);
+                    @include margin(7px);
+                    @include borders(1px, solid, $light-border-color, true);
+
+                    @include media(xs) {
+                        @include size(47%, 150px);
+                    }
+
+                    button {
+                        $button-margin: unquote((($base-margin / 3) * 2) + 'px');
+                        @include margin($button-margin);
+                    }
+
+                    img {
+                        @include size(100%, auto);
+                        @include borders(1px, solid, $light-border-color, true);
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

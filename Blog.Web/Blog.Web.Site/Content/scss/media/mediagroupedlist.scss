@@ -1,0 +1,17 @@
+﻿@import '../variables';
+
+#media-grouped-list {
+    .album-group {
+        &.new {
+            i {
+                $icon-margin: unquote(($base-margin / 3) + 'px');
+                @include margin(null, $icon-margin, null, null);
+            }
+
+            &:hover {
+                @include opacity(0.7);
+                cursor: pointer;
+            }
+        }
+    }
+}

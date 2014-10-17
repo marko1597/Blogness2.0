@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "registerform.css",
+  "sources": [
+    "registerform.scss",
+    "../variables.scss"
+  ],
+  "names": [],
+  "mappings": "AAEA,WAAW,UAAU;ECwDb,aDtDiB;EC0DjB,eD1DiB;EC8DjB,gBD9DiB;ECkEjB,cDlEiB;AACzB,WAAW,UAAU;EAGb,QAAQ;EAAhB,WAAW,UAAU,OAAO;IAGhB,OCYI;IDXJ,YCIC;IDHD,cAAc;IACd,eCNY"
+}

@@ -1,0 +1,62 @@
+﻿@import '../variables';
+
+.navigation-menu {
+    @include size(100%, 100%);
+    @include borders(1px, solid, $dark-border-color, false, true, false, false);
+    @include padding(50px, null, null, null);
+    background: $dark-color;
+    color: $default-color-darken;
+
+    &:after {
+        @include size(100%, auto);
+        @include borders(1px, solid, $dark-border-color, false, true, false, false);
+        background: $dark-color;
+        color: $default-color-darken;
+    }
+
+    ul {
+        @include clean-list;
+
+        > li {
+            > a {
+                @include padding($default-padding);
+                color: $default-color-darken;
+                outline: none;
+                display: block;
+                -webkit-box-shadow: inset 0 -1px #000000;
+                -webkit-box-shadow: inset 0 -1px #000000;
+                -ms-box-shadow: inset 0 -1px #000000;
+                -ms-box-shadow: inset 0 -1px rgba(0,0,0,0.2);
+                box-shadow: inset 0 -1px #000000;
+                box-shadow: inset 0 -1px rgba(0,0,0,0.2);
+                text-transform: uppercase;
+                -webkit-text-shadow: 0 0 1px #ffffff;
+                -ms-text-shadow: 0 0 1px #ffffff;
+                -ms-text-shadow: 0 0 1px rgba(255,255,255,0.1);
+                text-shadow: 0 0 1px #ffffff;
+                text-shadow: 0 0 1px rgba(255,255,255,0.1);
+                letter-spacing: 1px;
+                font-weight: 400;
+                -webkit-transition: background 0.3s, box-shadow 0.3s;
+                -moz-transition: background 0.3s, box-shadow 0.3s;
+                -o-transition: background 0.3s, box-shadow 0.3s;
+                transition: background 0.3s, box-shadow 0.3s;
+
+                > i {
+                    $icon-position: unquote((($base-margin / 3) * 2) + 'px');
+                    @include margin(null, $icon-position);
+                    font-size: 1.5em;
+                }
+
+                form {
+                    @include position(relative, null);
+
+                    .fa-search {
+                        $icon-position: unquote((($base-margin / 3) * 2) + 'px');
+                        @include position(absolute, $icon-position, $icon-position, null, null);
+                    }
+                }
+            }
+        }
+    }
+}

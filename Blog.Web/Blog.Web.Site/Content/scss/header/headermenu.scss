@@ -1,0 +1,48 @@
+﻿@import '../variables';
+
+#blog-header {
+    overflow: hidden;
+
+    i {
+        @include margin(null, 7px);
+    }
+
+    .header-dropdown-item {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .add-post {
+        @include size(50px);
+        @include position(absolute, null, 15px, 15px);
+        @include center;
+        background: $primary-color;
+
+        @include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
+        border-radius: 50%;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+        i, a {
+            color: $primary-color;
+        }
+
+        i {
+            @include margin(0);
+            font-size: 1.2em;
+        }
+
+        a {
+            @extend i;
+            @include position(relative, 13px, null, null, 15px);
+        }
+    }
+}

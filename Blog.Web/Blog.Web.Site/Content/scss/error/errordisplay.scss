@@ -1,0 +1,32 @@
+﻿@import '../variables';
+
+#blog-error-global {
+    @include position(absolute, null, null, 0);
+    @include size(100%, auto);
+    z-index: 1020;
+    color: $default-color;
+
+    .close-error {
+        @include position(absolute, 15px, 15px, null, null);
+        @include opacity(1);
+        cursor: pointer;
+        -moz-transition: opacity .25s ease-in-out;
+        -webkit-transition: opacity .25s ease-in-out;
+        -o-transition: opacity .25s ease-in-out;
+        transition: opacity .25s ease-in-out;
+
+        &:hover {
+            @include opacity(0.5);
+        }
+    }
+
+    .message {
+        @include padding(15px, 30px);
+        background: $danger-color;
+        @include borders(1px, solid, darken($danger-color, $border-darken-value), true);
+
+        span {
+            @include padding(null, null, null, 5px);
+        }
+    }
+}

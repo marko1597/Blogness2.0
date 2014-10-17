@@ -55,7 +55,7 @@
                     return;
                 }
 
-                if (response === 'true') {
+                if (response) {
                     $scope.$emit("successDeletingMedia", $scope.media);
                 } else {
                     errorService.displayError(response);

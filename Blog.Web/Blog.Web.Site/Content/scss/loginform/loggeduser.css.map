@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "loggeduser.css",
+  "sources": [
+    "loggeduser.scss",
+    "../variables.scss"
+  ],
+  "names": [],
+  "mappings": "AAEA;EC2EQ,YD1EY;EC8EZ,cD9EiB;ECkFjB,eDlFuB;ECsFvB,aDtF4B;EC0H5B;ID3HR;MC2EQ,YDxEgB;MC4EhB,cD5EgB;MCgFhB,eDhFgB;MCoFhB,aDpFgB;EACxB,kBAAkB,YAAY,kBAAkB,QAAQ,kBAAkB;ICsBtE,ODnBkB;ICoBlB,QDpBwB"
+}

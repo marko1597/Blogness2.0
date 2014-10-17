@@ -1,0 +1,55 @@
+﻿@import '../variables';
+
+.album-group {
+    @include margin(null, null, $default-margin, null);
+
+    .header {
+        > input[type=text] {
+            @include margin(null, $base-margin);
+            border: none;
+            @include borders(1px, solid, $light-border-color, false, false, true, false);
+            background: transparent;
+            min-width: 250px;
+        }
+
+        > .btn-header {
+            &.right {
+                @include hidden-file-input;
+            }
+        }
+    }
+
+    .body {
+        $body-padding: unquote(($base-padding / 3) + 'px');
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
+        @include padding($body-padding);
+        background: $default-color-darken;
+
+        > ul {
+            @include clean-list;
+
+            .media-item-container {
+                @include margin(5px);
+
+                .details {
+                    $details-padding: unquote((($base-padding / 3) * 2) + 'px');
+                    @include padding($details-padding);
+                    @include borders(1px, solid, $light-border-color, false, true, true, true);
+                    @include padding($default-padding);
+                    overflow: hidden;
+
+                    .btn {
+                        @include media(xs) {
+                            width: 100%;
+
+                            > span > i {
+                                $icon-margin: unquote(($base-margin / 3) + 'px');
+                                @include margin(null, $icon-margin, null, null);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

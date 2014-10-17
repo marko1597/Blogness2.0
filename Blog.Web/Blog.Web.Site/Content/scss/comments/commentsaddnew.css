@@ -14,7 +14,9 @@
     height: 100%;
     max-width: 80%;
     resize: none;
-    border: 1px solid #ddd; }
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
   .comment-item-new div {
     position: absolute;
     top: 0;
@@ -26,8 +28,8 @@
     width: 20%;
     height: 100%;
     border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd; }
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd; }
     @media (max-width: 767px) {
       .comment-item-new div {
         padding-top: 0;

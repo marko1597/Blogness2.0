@@ -4,14 +4,11 @@
     @include position(relative, null);
     @include margin(null, null, $default-margin);
     background: $default-color;
-
-
+    
     p {
         @include margin(0);
         @include padding(10px);
-        border-left: 1px solid $light-border-color;
-        border-right: 1px solid $light-border-color;
-        border-bottom: 1px solid $light-border-color;
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
     }
 
     .header {

@@ -1,18 +1,18 @@
-﻿.media-item {
-    text-align: center;
-    position: relative;
-}
-
-    .media-item img {
-        max-width: 100%;
-        width: 100%;
-        height: auto;
-        border: 1px solid #ddd;
-    }
-
-    .media-item .btn-danger {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        margin: 0;
-    }
+/* line 3, ../../scss/media/mediaitem.scss */
+.media-item {
+  position: relative;
+  text-align: center; }
+  /* line 7, ../../scss/media/mediaitem.scss */
+  .media-item img {
+    width: 100%;
+    height: auto;
+    max-width: 100%; }
+  /* line 13, ../../scss/media/mediaitem.scss */
+  .media-item .btn-danger {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }

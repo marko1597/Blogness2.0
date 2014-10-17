@@ -30,18 +30,26 @@
 .success {
   color: #fff;
   background: #5cb85c; }
+  .success .content {
+    border-bottom: 1px solid #4eae4c; }
 
 .warning {
   color: #fff;
   background: #f0ad4e; }
+  .warning .content {
+    border-bottom: 1px solid #eea236; }
 
 .danger {
   color: #fff;
   background: #d9534f; }
+  .danger .content {
+    border-bottom: 1px solid #d43d3a; }
 
 .info {
   color: #fff;
   background: #428bca; }
+  .info .content {
+    border-bottom: 1px solid #3580bd; }
 
 .default {
   background: #fff; }
@@ -65,9 +73,9 @@
       margin-bottom: 5px;
       margin-left: 5px; }
       .masonry ul.isotope li.isotope-item .captions {
-        border-left: 1px solid #ddd;
         border-right: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
+        border-left: 1px solid #ddd;
         padding-top: 15px;
         padding-right: 15px;
         padding-bottom: 15px;

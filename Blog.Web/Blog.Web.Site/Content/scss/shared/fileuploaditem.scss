@@ -1,0 +1,53 @@
+﻿@import '../variables';
+
+.upload-details {
+    @include padding($default-padding);
+    background: $dark-color;
+    color: $default-color;
+
+    .popover {
+        color: $dark-color;
+
+        .popover-content {
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+        }
+    }
+
+    p {
+        $details-margin: unquote(($base-margin / 3) + 'px');
+        @include margin(0, 0, $details-margin);
+
+        &:first-child {
+            font-weight: bold;
+            cursor: pointer;
+            -ms-text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 1;
+            -moz-transition: opacity .25s ease-in-out;
+            -webkit-transition: opacity .25s ease-in-out;
+            -o-transition: opacity .25s ease-in-out;
+            transition: opacity .25s ease-in-out;
+
+            &:hover, &:focus {
+                @include opacity(0.5);
+                text-decoration: underline;
+            }
+        }
+    }
+
+    > .buttons {
+        > button {
+            @include size(25px);
+            border-radius: $default-border-radius;
+        }
+    }
+
+    > .status {
+        @include position(absolute, 69px, null, null, 105px);
+        display: inline-block;
+    }
+}

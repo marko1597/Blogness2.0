@@ -1,10 +1,16 @@
 // base styles
 $fonts: 'Open Sans', sans-serif;
+$fancy-font-3d: 'Canter-Bold-3d';
+$fancy-font: 'Canter-Bold';
 $box-shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
 $base-padding: 15;
 $base-margin: 15;
+$base-border-radius: 0;
+$default-border-radius: 0;
 $default-padding: 15px;
 $default-margin: 15px;
+$hover-darken-value: 5%;
+$border-darken-value: 5%;
 
 // base colors
 $primary-color: #56c2e1;
@@ -134,6 +140,59 @@ $default-color-darken: #eee;
     background: $args;
 }
 
+// mixin transition
+@mixin transition($args) {
+    -moz-transition: $args !important;
+    -o-transition: $args !important;
+    -webkit-transition: $args !important;
+    transition: $args !important;
+}
+
+// mixin hidden file input
+@mixin hidden-file-input {
+    label {
+        @include margin(null, 0);
+        cursor: pointer;
+
+        > input[type='file'] {
+            position: fixed;
+            top: -1000px;
+        }
+    }
+}
+
+// mixin borders: size, type, color, top, left, bottom, right;
+@mixin borders ($size, $type, $color, $top, $left: $top, $bottom: $top, $right: $top) {
+    @if ($size == null) {
+        $size: 1px;
+    }
+
+    @if ($type == null) {
+        $type: solid;
+    }
+
+    @if ($color == null) {
+        $color: $light-border-color;
+    }
+
+    @if ($top != null and $top) {
+        border-top: $size $type $color;
+    }
+
+    @if ($right != null and $right) {
+        border-right: $size $type $color;
+    }
+
+    @if ($bottom != null and $bottom) {
+        border-bottom: $size $type $color;
+    }
+
+    @if ($left != null and $left) {
+        border-left: $size $type $color;
+    }
+}
+
+// mixin header icon
 @mixin header-edit-icon {
     .header {
         h4 {

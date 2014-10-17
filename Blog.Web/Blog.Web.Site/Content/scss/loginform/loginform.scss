@@ -1,0 +1,164 @@
+﻿@import '../variables.scss';
+
+$double-padding: unquote(($base-padding * 2) + 'px');
+
+.login-form {
+    @include position(relative, null);
+    @include size(100%, auto);
+    @include margin(0, auto, 0, auto);
+    background: $default-color-darken;
+    font-family: $fonts;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 20;
+
+    .header {
+        @include padding($double-padding, $double-padding, $default-padding);
+        @include size(100%, auto);
+        background: transparent;
+
+        h1 {
+            @include margin(0, 0, 10px, -5px);
+            color: $dark-border-color;
+            font-family: $fancy-font-3d;
+            line-height: 1em;
+            text-shadow: 1px 1px 0 hsl(0, 0%, 100%);
+            font-size: 5em;
+        }
+
+        span {
+            font-size: .827em;
+            line-height: 16px;
+            color: $dark-border-color;
+        }
+    }
+
+    .content {
+        @include padding($default-padding, $double-padding, $double-padding, $double-padding);
+
+        @include media(sm) {
+            .input:focus + div {
+                left: -47px !important;
+            }
+        }
+
+        .error-message {
+            @include margin($default-margin, 0, $default-margin, 0);
+            color: $danger-color;
+        }
+
+        > div {
+            @include position(relative, null);
+
+            .input {
+                @include size(100%, auto);
+                @include margin(2px, 0, 2px, 0);
+                @include padding($default-padding);
+                @include transition(all 0.5s ease);
+                background: $default-color;
+                color: $dark-color;
+                border: 1px solid $default-color;
+                font-weight: 400;
+                min-width: 100%;
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.50);
+
+                &:hover, &:focus {
+                    background: $light-border-color;
+                    color: darken($dark-border-color, $hover-darken-value);
+                }
+
+                &:focus {
+                    box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+                }
+            }
+
+            .user-icon, .pass-icon {
+                @include position(absolute, null, null, null, 0);
+                @include size(46px, 47px);
+                @include padding(null, 2px);
+                @include transition(all 0.5s ease);
+                display: block;
+                z-index: -1;
+            }
+
+            .user-icon {
+                top: 4px;
+                background: rgba(65,72,72,1) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAUCAYAAABroNZJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1MDVGNkI4M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1MDVGNkI5M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTUwNUY2QjYzQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTUwNUY2QjczQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz69r5mNAAAA60lEQVR42mL8//8/Aw7ABsSuQCwNxB+BeB8Qv8aqEmQIFpwDxB/+o4I/QDwTiHnQ1WMzYPJ//OA8EHPiM8TvP3FgAj5DDhNpyDdk16Ab8vM/8cAGpo8JKYw5oTFCLODBFTuvSHCJFi7vTCDSgEv4AhaUBh4SMACUXswIpRNLIH6Ox4A0YhIbCIsCcTs0YYHAPSBeBMS62NQz4sk7RANchvADsTcQG0DZf4H4AhBvBeKnxGTAZCyZDzlMeoGYGV+YVBAZxUuRDUI2oP0/aWA1uiEe/8kDCTBDQM66SqYhoITJDDLE9T9lwBsgwACtfd8ecvFR5gAAAABJRU5ErkJggg==') /*../../images/login-user-icon.png*/ no-repeat center;
+                *background: rgba(65,72,72,1) url("../../images/login-user-icon.png") no-repeat center; /* For IE 6 and 7 */
+            }
+
+            .pass-icon {
+                top: 4px;
+                background: hsla(180, 5.1%, 26.9%, 1) url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAYAAABPPm7SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM2MzkxRkM3M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM2MzkxRkM4M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzYzOTFGQzUzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzYzOTFGQzYzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7+i7mhAAAAvElEQVR42mL8//8/AxbABsSWQKwO5V8D4iPYFDKADEDDgUD86j8muAfE9ujq0TUX/ScMopD1MCJ5QRGIb0CdDwL3gXgBlJ8GxKJQ8XdArATEH9G9UIrmXH4kOTkgfovNFUxIwaGOxJ4FtwECHgHxJmxqkQ3gRGJ/xBLeL9BiCcMAsgDFBoACwhgaaKSCXUAsBDJg73/yQSMTUvySA0QHPhBHDaCSAQcp0H8QVKCAcmE+tEAhBewG4jUAAQYAe087ET2JtgQAAAAASUVORK5CYII=') /*../../images/login-pass-icon.png*/ no-repeat center;
+                *background: hsla(180, 5.1%, 26.9%, 1) url("../../images/login-pass-icon.png") no-repeat center; /* For IE 6 and 7 */
+            }
+
+            span {
+                @include position(relative, -3px, null, null, null);
+                font-size: .827em;
+            }
+        }
+    }
+
+    .footer {
+        @include padding($double-padding);
+        @include borders(1px, solid,  darken($light-border-color, $hover-darken-value), true, false, false, false);
+        background: darken($dark-border-color, $hover-darken-value);
+        overflow: auto;
+        box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+
+        .button {
+            $button-padding-x: unquote(($base-padding + 10) + 'px');
+            $button-padding-y: unquote(($base-padding - 10) + 'px');
+
+            @include padding(0, $button-padding-x, $button-padding-y, $button-padding-x);
+            @include transition(all 0.5s ease);
+            background: $primary-color;
+            @include borders(1px, solid,  darken($primary-color, $border-darken-value), true, false, false, false);
+            color: $default-color;
+            float: right;
+            font-weight: 300;
+            font-family: $fancy-font;
+            font-size: 2.5em;
+            text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+            cursor: pointer;
+            box-shadow: inset 0 0 2px hsla(0, 0%, 100%, 0.75);
+
+            &:hover {
+                background: darken($primary-color, $hover-darken-value);
+                border: 1px solid darken(darken($primary-color, $border-darken-value), $hover-darken-value);
+                box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+            }
+
+            &:focus {
+                @include position(relative, null, null, -1px);
+                background: $primary-color;
+                box-shadow: inset 0 1px 6px hsla(0, 0%, 100%, 0.75);
+            }
+        }
+
+        .register, .back {
+            @extend .button;
+            @include margin(0, $default-margin);
+            border: none;
+            background: none;
+            box-shadow: none;
+
+            &:hover {
+                color: darken($primary-color, $hover-darken-value);
+                background: none;
+                box-shadow: none;
+                border: none;
+            }
+
+            &:focus {
+                @include position(relative, null, null, -1px);
+                color: darken($primary-color, $hover-darken-value);
+                background: none;
+                box-shadow: none;
+                border: none;
+            }
+        }
+    }
+}

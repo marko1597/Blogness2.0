@@ -7,8 +7,7 @@
   top: -5px;
   margin-right: 5px;
   width: 30px;
-  height: 30px;
-}
+  height: 30px; }
 
 /* line 12, ../scss/main.scss */
 .card, .success, .warning, .danger, .info, .default, .masonry {
@@ -21,239 +20,219 @@
   vertical-align: top;
   font-size: 1em;
   color: #333333;
-  margin-bottom: 15px;
-}
-/* line 24, ../scss/main.scss */
-.card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content, .masonry .content {
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  border-bottom: 1px solid #dddddd;
-}
+  margin-bottom: 15px; }
+  /* line 24, ../scss/main.scss */
+  .card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content, .masonry .content {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    border-bottom: 1px solid #dddddd; }
 
 /* line 30, ../scss/main.scss */
 .success {
   color: white;
-  background: #5cb85c;
-}
+  background: #5cb85c; }
+  /* line 35, ../scss/main.scss */
+  .success .content {
+    border-bottom: 1px solid #4cae4c; }
 
-/* line 36, ../scss/main.scss */
+/* line 40, ../scss/main.scss */
 .warning {
   color: white;
-  background: #f0ad4e;
-}
+  background: #f0ad4e; }
+  /* line 45, ../scss/main.scss */
+  .warning .content {
+    border-bottom: 1px solid #eea236; }
 
-/* line 42, ../scss/main.scss */
+/* line 50, ../scss/main.scss */
 .danger {
   color: white;
-  background: #d9534f;
-}
+  background: #d9534f; }
+  /* line 55, ../scss/main.scss */
+  .danger .content {
+    border-bottom: 1px solid #d43f3a; }
 
-/* line 48, ../scss/main.scss */
+/* line 60, ../scss/main.scss */
 .info {
   color: white;
-  background: #428bca;
-}
+  background: #428bca; }
+  /* line 65, ../scss/main.scss */
+  .info .content {
+    border-bottom: 1px solid #357ebd; }
 
-/* line 54, ../scss/main.scss */
+/* line 70, ../scss/main.scss */
 .default {
-  background: white;
-}
-/* line 58, ../scss/main.scss */
-.default.darken {
-  background: #eeeeee;
-}
+  background: white; }
+  /* line 74, ../scss/main.scss */
+  .default.darken {
+    background: #eeeeee; }
 
-/* line 63, ../scss/main.scss */
+/* line 79, ../scss/main.scss */
 .masonry {
   padding-top: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  background: #eeeeee;
-}
-/* line 68, ../scss/main.scss */
-.masonry ul.isotope {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-/* line 71, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item {
-  background: white;
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-}
-/* line 75, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions {
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-}
-/* line 81, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions p {
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-}
-/* line 85, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions p:first-of-type {
-  font-weight: bold;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 5px;
-  margin-left: 0;
-}
+  background: #eeeeee; }
+  /* line 84, ../scss/main.scss */
+  .masonry ul.isotope {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 0 !important; }
+    /* line 87, ../scss/main.scss */
+    .masonry ul.isotope li.isotope-item {
+      background: white;
+      margin-top: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px; }
+      /* line 91, ../scss/main.scss */
+      .masonry ul.isotope li.isotope-item .captions {
+        border-right: 1px solid #dddddd;
+        border-bottom: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        padding-top: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px; }
+        /* line 95, ../scss/main.scss */
+        .masonry ul.isotope li.isotope-item .captions p {
+          padding-top: 0;
+          padding-right: 0;
+          padding-bottom: 0;
+          padding-left: 0;
+          margin-top: 0;
+          margin-right: 0;
+          margin-bottom: 0;
+          margin-left: 0; }
+          /* line 99, ../scss/main.scss */
+          .masonry ul.isotope li.isotope-item .captions p:first-of-type {
+            font-weight: bold;
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 5px;
+            margin-left: 0; }
 
-/* line 97, ../scss/main.scss */
+/* line 111, ../scss/main.scss */
 .header {
   background: #4c4c4c;
   color: white;
   position: relative;
   width: 100%;
-  height: 38px;
-}
-/* line 103, ../scss/main.scss */
-.header.big {
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  width: 100%;
-  height: auto;
-}
-/* line 108, ../scss/main.scss */
-.header.big div:first-child {
-  width: 80px;
-  height: auto;
-  margin-top: 0;
-  margin-right: 10px;
-  margin-bottom: 0;
-  margin-left: 0;
-  float: left;
-}
-/* line 113, ../scss/main.scss */
-.header.big div:first-child img {
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
-  border: 3px solid white;
-}
-/* line 120, ../scss/main.scss */
-.header.big div:last-child {
-  width: 100%;
-  height: auto;
-}
-/* line 123, ../scss/main.scss */
-.header.big div:last-child h4 {
-  padding-left: 90px;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 5px;
-  margin-left: 0;
-  font-weight: bold;
-}
-/* line 128, ../scss/main.scss */
-.header.big div:last-child h4 a {
-  color: white;
-}
-/* line 133, ../scss/main.scss */
-.header.big div:last-child p {
-  padding-left: 90px;
-}
-/* line 136, ../scss/main.scss */
-.header.big div:last-child p a {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 5px;
-  margin-left: 0;
-  color: white;
-}
-/* line 144, ../scss/main.scss */
-.header h5 {
-  padding-top: 12px;
-  padding-right: 15px;
-  padding-bottom: 12px;
-  padding-left: 15px;
-  margin: 0;
-  display: inline-block;
-}
-/* line 150, ../scss/main.scss */
-.header .btn-header {
-  width: auto;
-  height: 100%;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  position: inherit;
-  top: 0;
-  right: 0;
-  cursor: pointer;
-  color: inherit;
-  text-align: center;
-}
-/* line 158, ../scss/main.scss */
-.header .btn-header:hover {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-}
-/* line 162, ../scss/main.scss */
-.header .btn-header.left {
-  border-right: 1px solid #dddddd;
-  display: inline-block;
-  margin-right: 5px;
-}
-/* line 168, ../scss/main.scss */
-.header .btn-header.right {
-  border-left: 1px solid #dddddd;
-}
-/* line 171, ../scss/main.scss */
-.header .btn-header.right i {
-  margin-right: 5px;
-}
+  height: 38px; }
+  /* line 117, ../scss/main.scss */
+  .header.big {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    height: auto; }
+    /* line 122, ../scss/main.scss */
+    .header.big div:first-child {
+      width: 80px;
+      height: auto;
+      margin-top: 0;
+      margin-right: 10px;
+      margin-bottom: 0;
+      margin-left: 0;
+      float: left; }
+      /* line 127, ../scss/main.scss */
+      .header.big div:first-child img {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 3px solid white; }
+    /* line 134, ../scss/main.scss */
+    .header.big div:last-child {
+      width: 100%;
+      height: auto; }
+      /* line 137, ../scss/main.scss */
+      .header.big div:last-child h4 {
+        padding-left: 90px;
+        margin-top: 0;
+        margin-right: 0;
+        margin-bottom: 5px;
+        margin-left: 0;
+        font-weight: bold; }
+        /* line 142, ../scss/main.scss */
+        .header.big div:last-child h4 a {
+          color: white; }
+      /* line 147, ../scss/main.scss */
+      .header.big div:last-child p {
+        padding-left: 90px; }
+        /* line 150, ../scss/main.scss */
+        .header.big div:last-child p a {
+          margin-top: 0;
+          margin-right: 0;
+          margin-bottom: 5px;
+          margin-left: 0;
+          color: white; }
+  /* line 158, ../scss/main.scss */
+  .header h5 {
+    padding-top: 12px;
+    padding-right: 15px;
+    padding-bottom: 12px;
+    padding-left: 15px;
+    margin: 0;
+    display: inline-block; }
+  /* line 164, ../scss/main.scss */
+  .header .btn-header {
+    width: auto;
+    height: 100%;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    position: inherit;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: inherit;
+    text-align: center; }
+    /* line 172, ../scss/main.scss */
+    .header .btn-header:hover {
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); }
+    /* line 176, ../scss/main.scss */
+    .header .btn-header.left {
+      border-right: 1px solid #dddddd;
+      display: inline-block;
+      margin-right: 5px; }
+    /* line 182, ../scss/main.scss */
+    .header .btn-header.right {
+      border-left: 1px solid #dddddd; }
+      /* line 185, ../scss/main.scss */
+      .header .btn-header.right i {
+        margin-right: 5px; }
 
-/* line 178, ../scss/main.scss */
+/* line 192, ../scss/main.scss */
 .center-cropped {
   float: left;
   background-position: center center;
   background-repeat: no-repeat;
   overflow: hidden;
   width: 70px;
-  height: 70px;
-}
-/* line 185, ../scss/main.scss */
-.center-cropped img {
-  min-height: 100%;
-  min-width: 100%;
-  opacity: 0;
-  filter: alpha(opacity=0);
-}
+  height: 70px; }
+  /* line 199, ../scss/main.scss */
+  .center-cropped img {
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    filter: alpha(opacity=0); }
 
-/* line 192, ../scss/main.scss */
+/* line 206, ../scss/main.scss */
 .page-content {
   padding-top: 0;
   padding-right: 15px;
   padding-bottom: 0;
-  padding-left: 15px;
-}
+  padding-left: 15px; }
 
-/* line 196, ../scss/main.scss */
+/* line 210, ../scss/main.scss */
 .body-content {
   padding-top: 15px;
   padding-right: 0;
@@ -262,14 +241,12 @@
   margin-top: 51px;
   margin-right: 0;
   margin-bottom: 0;
-  margin-left: 0;
-}
+  margin-left: 0; }
 
-/* line 201, ../scss/main.scss */
+/* line 215, ../scss/main.scss */
 .wrap-text {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
-}
+  white-space: nowrap; }

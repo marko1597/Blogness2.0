@@ -463,9 +463,9 @@ input[type="checkbox"].input-validation-error {
     color: #b94a48;
 }
 
-.input.has-error {
-    background: #d9534f;
-    color: #fff;
+.has-error {
+    background: #d9534f !important;
+    color: #fff !important;
 }
 
     .input.has-error::-webkit-input-placeholder { /* WebKit browsers */

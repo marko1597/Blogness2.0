@@ -351,8 +351,14 @@
     <Content Include="Content\scss\comments\commentitem.css">
       <DependentUpon>commentitem.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\comments\commentitem.min.css">
+      <DependentUpon>commentitem.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\comments\commentsaddnew.css">
       <DependentUpon>commentsaddnew.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\comments\commentsaddnew.min.css">
+      <DependentUpon>commentsaddnew.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\comments\commentscontainer.css">
       <DependentUpon>commentscontainer.scss</DependentUpon>
@@ -360,17 +366,112 @@
     <Content Include="Content\scss\comments\commentslist.css">
       <DependentUpon>commentslist.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\comments\commentslist.min.css">
+      <DependentUpon>commentslist.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\error\errordisplay.css">
+      <DependentUpon>errordisplay.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\error\errordisplay.min.css">
+      <DependentUpon>errordisplay.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\header\headermenu.css">
+      <DependentUpon>headermenu.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\header\headermenu.min.css">
+      <DependentUpon>headermenu.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loggeduser.css">
+      <DependentUpon>loggeduser.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loggeduser.min.css">
+      <DependentUpon>loggeduser.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginform.css">
+      <DependentUpon>loginform.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginform.min.css">
+      <DependentUpon>loginform.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginformmodal.css">
+      <DependentUpon>loginformmodal.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginformmodal.min.css">
+      <DependentUpon>loginformmodal.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\registerform.css">
+      <DependentUpon>registerform.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\registerform.min.css">
+      <DependentUpon>registerform.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\media\albumgroup.css">
+      <DependentUpon>albumgroup.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\albumgroup.min.css">
+      <DependentUpon>albumgroup.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediagroupedlist.css.map">
+      <DependentUpon>mediagroupedlist.css</DependentUpon>
+    </Content>
+    <None Include="Content\scss\media\mediagroupedlist.scss" />
+    <Content Include="Content\scss\media\mediagroupedlist.css">
+      <DependentUpon>mediagroupedlist.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediagroupedlist.min.css">
+      <DependentUpon>mediagroupedlist.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaitem.css">
+      <DependentUpon>mediaitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaitem.min.css">
+      <DependentUpon>mediaitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaselectiondialog.css">
+      <DependentUpon>mediaselectiondialog.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaselectiondialog.min.css">
+      <DependentUpon>mediaselectiondialog.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\navigation\navigationmenu.css.map">
+      <DependentUpon>navigationmenu.css</DependentUpon>
+    </Content>
+    <None Include="Content\scss\navigation\navigationmenu.scss" />
+    <Content Include="Content\scss\navigation\navigationmenu.css">
+      <DependentUpon>navigationmenu.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\navigation\navigationmenu.min.css">
+      <DependentUpon>navigationmenu.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\posts\postlistitem.css">
       <DependentUpon>postlistitem.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\posts\postlistitem.min.css">
       <DependentUpon>postlistitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileupload.css">
+      <DependentUpon>fileupload.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileupload.min.css">
+      <DependentUpon>fileupload.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileuploaditem.css">
+      <DependentUpon>fileuploaditem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileuploaditem.min.css">
+      <DependentUpon>fileuploaditem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\tags\tagitem.css">
+      <DependentUpon>tagitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\tags\tagitem.min.css">
+      <DependentUpon>tagitem.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\variables.css">
       <DependentUpon>variables.scss</DependentUpon>
@@ -380,6 +481,9 @@
     </Content>
     <Content Include="Content\scss\viewpost.css">
       <DependentUpon>viewpost.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\viewpost.min.css">
+      <DependentUpon>viewpost.css</DependentUpon>
     </Content>
     <Content Include="Content\theme\default\blog-bootstrap.css" />
     <Content Include="Content\theme\default\fonts\fontawesome-webfont.svg" />
@@ -3281,6 +3385,54 @@
     <Content Include="Content\scss\comments\commentitem.css.map">
       <DependentUpon>commentitem.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\error\errordisplay.scss" />
+    <Content Include="Content\scss\error\errordisplay.css.map">
+      <DependentUpon>errordisplay.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\header\headermenu.scss" />
+    <Content Include="Content\scss\header\headermenu.css.map">
+      <DependentUpon>headermenu.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loggeduser.scss" />
+    <Content Include="Content\scss\loginform\loggeduser.css.map">
+      <DependentUpon>loggeduser.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginform.scss" />
+    <Content Include="Content\scss\loginform\loginform.css.map">
+      <DependentUpon>loginform.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\loginformmodal.scss" />
+    <Content Include="Content\scss\loginform\loginformmodal.css.map">
+      <DependentUpon>loginformmodal.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\loginform\registerform.scss" />
+    <Content Include="Content\scss\loginform\registerform.css.map">
+      <DependentUpon>registerform.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\albumgroup.scss" />
+    <Content Include="Content\scss\media\albumgroup.css.map">
+      <DependentUpon>albumgroup.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaitem.scss" />
+    <Content Include="Content\scss\media\mediaitem.css.map">
+      <DependentUpon>mediaitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediaselectiondialog.scss" />
+    <Content Include="Content\scss\media\mediaselectiondialog.css.map">
+      <DependentUpon>mediaselectiondialog.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\tags\tagitem.scss" />
+    <Content Include="Content\scss\tags\tagitem.css.map">
+      <DependentUpon>tagitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileupload.scss" />
+    <Content Include="Content\scss\shared\fileupload.css.map">
+      <DependentUpon>fileupload.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\shared\fileuploaditem.scss" />
+    <Content Include="Content\scss\shared\fileuploaditem.css.map">
+      <DependentUpon>fileuploaditem.css</DependentUpon>
+    </Content>
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3293,14 +3445,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\scss\error\" />
-    <Folder Include="Content\scss\header\" />
-    <Folder Include="Content\scss\loginform\" />
-    <Folder Include="Content\scss\media\" />
-    <Folder Include="Content\scss\navigation\" />
-    <Folder Include="Content\scss\shared\" />
     <Folder Include="Content\scss\sockets\" />
-    <Folder Include="Content\scss\tags\" />
     <Folder Include="Content\scss\user\" />
     <Folder Include="Scripts\modules\comments\controllers\" />
     <Folder Include="Scripts\modules\messaging\directives\" />

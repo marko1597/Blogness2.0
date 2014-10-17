@@ -12,16 +12,14 @@
         @include size(80%, 100%);
         max-width: 80%;
         resize: none;
-        border: 1px solid $light-border-color;
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
     }
 
     div {
         @include position(absolute, 0, 0, null, null);
         @include padding(8px);
         @include size(20%, 100%);
-        border-top: 1px solid $light-border-color;
-        border-right: 1px solid $light-border-color;
-        border-bottom: 1px solid $light-border-color;
+        @include borders(1px, solid, $light-border-color, true, true, true, false);
 
         @include media(xs) {
             @include padding(0);
