@@ -6,9 +6,9 @@
   margin-right: 15px;
   margin-bottom: 0;
   margin-left: 15px;
-  background: #fff;
-  box-shadow: 0 2px 4px #000000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 2px 4px 0 #ccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background: #fff; }
   .comment-item-new textarea {
     width: 80%;
     height: 100%;
@@ -28,8 +28,8 @@
     width: 20%;
     height: 100%;
     border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd; }
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd; }
     @media (max-width: 767px) {
       .comment-item-new div {
         padding-top: 0;

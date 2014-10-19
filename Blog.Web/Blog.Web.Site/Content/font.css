@@ -112,3 +112,38 @@
     font-weight: 300;
     font-style: italic;
 }
+
+@font-face {
+    font-family: Bazar;
+    src: url('fonts/Bazar.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Canter-Light;
+    src: url('fonts/CanterLight.otf') format('opentype');
+}
+
+@font-face {
+    font-family: Canter-Outline;
+    src: url('fonts/CanterOutline.otf') format('opentype');
+}
+
+@font-face {
+    font-family: Canter-Bold;
+    src: url('fonts/CanterBold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: Canter-Bold-Strips;
+    src: url('fonts/CanterBoldStrips.otf') format('opentype');
+}
+
+@font-face {
+    font-family: Canter-Bold-Shadow;
+    src: url('fonts/CanterBoldShadow.otf') format('opentype');
+}
+
+@font-face {
+    font-family: Canter-Bold-3D;
+    src: url('fonts/CanterBold3D.otf') format('opentype');
+}

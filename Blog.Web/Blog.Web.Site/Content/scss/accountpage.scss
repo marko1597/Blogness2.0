@@ -1,0 +1,38 @@
+﻿@import 'variables';
+
+html, body {
+    overflow: auto !important;
+}
+
+.main-wrapper {
+    > .background {
+        @include position(fixed, 0, null, null);
+        @include size(100%);
+        z-index: 0;
+        background: $accountpage-background;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+
+    > div.overlay {
+        @include position(fixed, 0, null, null);
+        @include size(100%);
+        background: $accountpage-overlay;
+        z-index: 10;
+    }
+
+    #wrapper {
+        @include size(100%, auto);
+        @include margin(30%, auto, 30%, auto);
+
+        @include media(xs) {
+            @include margin(10%, auto, 10%, auto);
+        }
+
+        @include media(md) {
+            @include margin(50%, auto, 50%, auto);
+        }
+    }
+}

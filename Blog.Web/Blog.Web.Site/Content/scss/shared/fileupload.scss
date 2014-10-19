@@ -38,7 +38,8 @@
 
             .captions {
                 $captions-margin: unquote((($base-padding / 3) * 2) + 'px');
-
+                
+                @include borders(1px, solid, $light-border-color, false, true, true, true);
                 @include padding($default-padding);
                 color: darken($dark-color, 10%);
                 

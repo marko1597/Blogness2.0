@@ -1,0 +1,26 @@
+﻿@import '../variables';
+
+.post-likes {
+    @include size(30%, 28px);
+    @include borders(1px, solid, $light-border-color, true);
+    @include margin(null, $default-margin);
+    @include box-shadow(false);
+    display: inline-block;
+    line-height: 28px;
+    max-width: 120px;
+    min-width: 100px;
+    cursor: pointer;
+
+    &:hover {
+        @include borders(1px, solid, darken($light-border-color, $border-darken-value), true);
+    }
+
+    > .wrapper {
+        @include padding(0, $default-padding, 0, $default-padding);
+
+        span {
+            $likes-padding: unquote(($base-padding / 5) + 'px');
+            @include padding($likes-padding);
+        }
+    }
+}

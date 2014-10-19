@@ -2,15 +2,37 @@
 $fonts: 'Open Sans', sans-serif;
 $fancy-font-3d: 'Canter-Bold-3d';
 $fancy-font: 'Canter-Bold';
-$box-shadow-inset: inset 0 0 10px rgba(0, 0, 0, 0.5);
+$main-background: #eee url('../../images/bg.jpg') no-repeat right top;
+$accountpage-background: url(../images/login-main.jpg);
+$accountpage-overlay: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC') /*../../images/login-pattern.png*/ repeat top left;
 $base-padding: 15;
 $base-margin: 15;
 $base-border-radius: 0;
 $default-border-radius: 0;
 $default-padding: 15px;
 $default-margin: 15px;
+$min-input-width: 280px;
+$max-input-width: 100%;
 $hover-darken-value: 5%;
 $border-darken-value: 5%;
+$lg-screen-width: 1200px;
+$md-screen-width: 992px;
+$sm-screen-width: 768px;
+$xs-screen-width: 320px;
+
+// box shadow rules
+$box-shadow-x: 0;
+$box-shadow-x-inset: 0;
+$box-shadow-y: 2px;
+$box-shadow-y-inset: 0;
+$box-shadow-blur: 4px;
+$box-shadow-blur-inset: 10px;
+$box-shadow-spread: 0;
+$box-shadow-spread-inset: 0;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$box-shadow-color-inset: rgba(0, 0, 0, 0.5);
+$box-shadow-color-default: #ccc;
+$box-shadow-color-default-inset: #aaa;
 
 // base colors
 $primary-color: #56c2e1;
@@ -98,11 +120,32 @@ $default-color-darken: #eee;
     filter: alpha(opacity=$opacity-ie); //IE8
 }
 
+// mixin box-shadow: inset
+@mixin box-shadow($inset: false) {
+    @if($inset != null and $inset == true) {
+        box-shadow: inset $box-shadow-x-inset $box-shadow-y-inset $box-shadow-blur-inset $box-shadow-spread-inset $box-shadow-color-default-inset;
+        box-shadow: inset $box-shadow-x-inset $box-shadow-y-inset $box-shadow-blur-inset $box-shadow-spread-inset $box-shadow-color-inset;
+    }
+    @else {
+        box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-spread $box-shadow-color-default;
+        box-shadow: $box-shadow-x $box-shadow-y $box-shadow-blur $box-shadow-spread $box-shadow-color;
+    }
+}
+
 // mixin clean ul
 @mixin clean-list {
     list-style-type: none;
     padding: 0 !important;
     margin: 0 !important;
+}
+
+// mixin ellipsis text
+@mixin ellipsis-text {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 // mixin mediaqueries: breakpoint value;
@@ -140,7 +183,7 @@ $default-color-darken: #eee;
     background: $args;
 }
 
-// mixin transition
+// mixin transition: args
 @mixin transition($args) {
     -moz-transition: $args !important;
     -o-transition: $args !important;
@@ -162,7 +205,7 @@ $default-color-darken: #eee;
 }
 
 // mixin borders: size, type, color, top, left, bottom, right;
-@mixin borders ($size, $type, $color, $top, $left: $top, $bottom: $top, $right: $top) {
+@mixin borders ($size, $type, $color, $top, $right: $top, $bottom: $top, $left: $top) {
     @if ($size == null) {
         $size: 1px;
     }

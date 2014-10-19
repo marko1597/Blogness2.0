@@ -1,0 +1,29 @@
+﻿@import '../variables';
+
+#socket-debugger {
+    @include position(fixed, null, $default-padding, 0, null);
+    @include padding($default-padding);
+    @include size(300px);
+    @include borders(1px, solid, $light-border-color, true);
+    background: $default-color-darken;
+    overflow: scroll;
+    z-index: 10;
+
+    > div {
+        @include padding($default-padding);
+        @include borders(1px, solid, $light-border-color, true);
+        @include margin(null, null, $default-margin);
+
+        > p {
+            font-family: inherit;
+            color: darken($dark-color, 20%);
+            -ms-word-wrap: break-word;
+            word-wrap: break-word;
+
+            > code {
+                @include size(100%, auto);
+                font-family: Consolas;
+            }
+        }
+    }
+}

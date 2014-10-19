@@ -20,27 +20,22 @@
         > li {
             > a {
                 @include padding($default-padding);
+                @include borders(1px, solid, darken($dark-color, $border-darken-value), false, false, true);
+                box-shadow: none;
                 color: $default-color-darken;
                 outline: none;
                 display: block;
-                -webkit-box-shadow: inset 0 -1px #000000;
-                -webkit-box-shadow: inset 0 -1px #000000;
-                -ms-box-shadow: inset 0 -1px #000000;
-                -ms-box-shadow: inset 0 -1px rgba(0,0,0,0.2);
-                box-shadow: inset 0 -1px #000000;
-                box-shadow: inset 0 -1px rgba(0,0,0,0.2);
                 text-transform: uppercase;
-                -webkit-text-shadow: 0 0 1px #ffffff;
-                -ms-text-shadow: 0 0 1px #ffffff;
-                -ms-text-shadow: 0 0 1px rgba(255,255,255,0.1);
-                text-shadow: 0 0 1px #ffffff;
-                text-shadow: 0 0 1px rgba(255,255,255,0.1);
                 letter-spacing: 1px;
                 font-weight: 400;
                 -webkit-transition: background 0.3s, box-shadow 0.3s;
                 -moz-transition: background 0.3s, box-shadow 0.3s;
                 -o-transition: background 0.3s, box-shadow 0.3s;
                 transition: background 0.3s, box-shadow 0.3s;
+
+                &:hover {
+                    @include box-shadow(true);
+                }
 
                 > i {
                     $icon-position: unquote((($base-margin / 3) * 2) + 'px');

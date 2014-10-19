@@ -7,7 +7,7 @@ ngMedia.directive('albumGroup', function () {
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
            configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
 
-        $scope.isExpanded = true;
+        $scope.isExpanded = !$scope.album.IsNew ? true : false;
 
         $scope.authData = localStorageService.get("authorizationData");
 
@@ -19,7 +19,7 @@ ngMedia.directive('albumGroup', function () {
         };
 
         $scope.toggleExpanded = function () {
-            $scope.isExpanded = !$scope.isExpanded;
+            if (!$scope.album.IsNew) $scope.isExpanded = !$scope.isExpanded;
         };
 
         $scope.editAlbum = function () {

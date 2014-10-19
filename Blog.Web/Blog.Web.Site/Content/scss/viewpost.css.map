@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "viewpost.css",
-  "sources": [
-    "viewpost.scss",
-    "variables.scss"
-  ],
-  "names": [],
-  "mappings": "ACqMA,WAAW,QAAQ,GAAG;EAtGlB,SAwG6B;EAtG7B,QAAQ;EAuGI,SAAS;EACT,QAAQ;EACR,iBAAiB;EACjB,oBAAoB;EACpB,eAAe;EACf,YAAY;EAA5B,WAAW,QAAQ,GAAG,KAAK;IA9GvB,SAiHiC;IA/GjC,QAAQ;;AD3FZ,KAAK,WAAW;ECgGZ,iBAAiB;EACjB,SAAS;EACT,QAAQ"
-}
+﻿{"version":3,"file":"viewpost.css","sources":["viewpost.scss","variables.scss"],"names":[],"mappings":"AC4OA,WAAW,QAAQ,GAAG;EA3HlB,SA6H6B;EA3H7B,QAAQ;EA4HI,SAAS;EACT,QAAQ;EACR,iBAAiB;EACjB,oBAAoB;EACpB,eAAe;EACf,YAAY;EAA5B,WAAW,QAAQ,GAAG,KAAK;IAnIvB,SAsIiC;IApIjC,QAAQ;;AD7GZ,KAAK,WAAW;EC8HZ,iBAAiB;EACjB,SAAS;EACT,QAAQ"}

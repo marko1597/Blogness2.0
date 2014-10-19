@@ -1,17 +1,32 @@
 ﻿.album-group {
   margin-bottom: 15px; }
+  .album-group.new {
+    cursor: pointer; }
+    .album-group.new:hover {
+      opacity: 0.5;
+      filter: alpha(opacity=50); }
+  .album-group .header h5 i {
+    margin-right: 5px; }
   .album-group .header > input[type=text] {
     margin-right: 15;
     border: none;
     border-bottom: 1px solid #ddd;
     background: transparent;
     min-width: 250px; }
-  .album-group .header > .btn-header.right label {
+  .album-group .header > .btn-header.right {
+    width: 40px;
+    height: 40px; }
+    .album-group .header > .btn-header.right label {
+      margin-right: 0;
+      cursor: pointer; }
+      .album-group .header > .btn-header.right label > input[type='file'] {
+        position: fixed;
+        top: -1000px; }
+  .album-group .header > .btn-header i {
+    margin-top: 0;
     margin-right: 0;
-    cursor: pointer; }
-    .album-group .header > .btn-header.right label > input[type='file'] {
-      position: fixed;
-      top: -1000px; }
+    margin-bottom: 0;
+    margin-left: 0; }
   .album-group .body {
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
@@ -31,10 +46,6 @@
         margin-bottom: 5px;
         margin-left: 5px; }
         .album-group .body > ul .media-item-container .details {
-          padding-top: 10px;
-          padding-right: 10px;
-          padding-bottom: 10px;
-          padding-left: 10px;
           border-right: 1px solid #ddd;
           border-bottom: 1px solid #ddd;
           border-left: 1px solid #ddd;
@@ -42,6 +53,7 @@
           padding-right: 15px;
           padding-bottom: 15px;
           padding-left: 15px;
+          background: #fff;
           overflow: hidden; }
           @media (max-width: 767px) {
             .album-group .body > ul .media-item-container .details .btn {

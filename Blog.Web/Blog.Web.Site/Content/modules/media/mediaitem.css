@@ -1,18 +1,25 @@
 /* line 3, ../../scss/media/mediaitem.scss */
 .media-item {
   position: relative;
-  text-align: center; }
-  /* line 7, ../../scss/media/mediaitem.scss */
-  .media-item img {
-    width: 100%;
-    height: auto;
-    max-width: 100%; }
-  /* line 13, ../../scss/media/mediaitem.scss */
-  .media-item .btn-danger {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0; }
+  text-align: center;
+}
+/* line 7, ../../scss/media/mediaitem.scss */
+.media-item img {
+  width: 100%;
+  height: auto;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  max-width: 100%;
+}
+/* line 13, ../../scss/media/mediaitem.scss */
+.media-item .btn-danger {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}

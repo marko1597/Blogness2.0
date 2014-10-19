@@ -1,0 +1,16 @@
+﻿.slick-prev {
+  left: 15px; }
+  .slick-prev:before {
+    font-size: 40px; }
+
+.slick-next {
+  right: 15px; }
+  .slick-next:before {
+    font-size: 40px; }
+
+.slick-prev, .slick-next {
+  width: 40px;
+  height: 40px;
+  text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #666, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333; }
+
+/*# sourceMappingURL=slick.css.map */

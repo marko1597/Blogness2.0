@@ -1,31 +1,44 @@
-﻿#socket-debugger {
-    position: fixed;
-    height: 250px;
-    width: 300px;
-    overflow: scroll;
-    padding: 10px;
-    bottom: 0;
-    right: 15px;
-    background: #eee;
-    border: 1px solid #999;
-    z-index: 10;
+/* line 3, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger {
+  position: fixed;
+  right: 15px;
+  bottom: 0;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  width: 300px;
+  height: 300px;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  background: #eeeeee;
+  overflow: scroll;
+  z-index: 10;
 }
-
-    #socket-debugger > div {
-        background: #fff;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-    }
-
-        #socket-debugger > div > p {
-            font-family: inherit;
-            color: #333;
-            -ms-word-wrap: break-word;
-            word-wrap: break-word;
-        }
-
-            #socket-debugger > div > p > code {
-                font-family: Consolas;
-                width: 100%;
-            }
+/* line 12, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  margin-bottom: 15px;
+}
+/* line 17, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div > p {
+  font-family: inherit;
+  color: #191919;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+}
+/* line 23, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div > p > code {
+  width: 100%;
+  height: auto;
+  font-family: Consolas;
+}

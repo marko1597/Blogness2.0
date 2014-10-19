@@ -1,0 +1,6 @@
+﻿@import 'variables';
+
+#posts-main {
+    @include size(100%, auto);
+    z-index: 500;
+} 

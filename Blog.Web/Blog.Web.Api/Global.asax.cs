@@ -72,7 +72,6 @@ namespace Blog.Web.Api
             container.RegisterMvcIntegratedFilterProvider();
             container.RegisterWebApiFilterProvider(GlobalConfiguration.Configuration);
 
-            container.EnableLifetimeScoping();
             container.Verify();
 
             // Register the dependency resolver.

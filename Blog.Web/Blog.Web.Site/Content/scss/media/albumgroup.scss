@@ -3,7 +3,22 @@
 .album-group {
     @include margin(null, null, $default-margin, null);
 
+    &.new {
+        cursor: pointer;
+
+        &:hover {
+            @include opacity(0.5);
+        }
+    }
+
     .header {
+        h5 {
+            i {
+                $icon-margin: unquote(($base-margin / 3) + 'px');
+                @include margin(null, $icon-margin);
+            }
+        }
+
         > input[type=text] {
             @include margin(null, $base-margin);
             border: none;
@@ -14,7 +29,12 @@
 
         > .btn-header {
             &.right {
+                @include size(40px);
                 @include hidden-file-input;
+            }
+
+            i {
+                @include margin(0);
             }
         }
     }
@@ -32,10 +52,9 @@
                 @include margin(5px);
 
                 .details {
-                    $details-padding: unquote((($base-padding / 3) * 2) + 'px');
-                    @include padding($details-padding);
                     @include borders(1px, solid, $light-border-color, false, true, true, true);
                     @include padding($default-padding);
+                    background: $default-color;
                     overflow: hidden;
 
                     .btn {

@@ -1,0 +1,13 @@
+﻿@import '../variables';
+
+.post-related-items-container {
+    > .post-related-list {
+        @include padding($default-padding);
+    }
+
+    > .post-related-category {
+        @include padding($default-padding);
+        @include borders(1px, solid, $light-border-color, false, false, true);
+        background: $default-color;
+    }
+}

@@ -1,0 +1,6 @@
+﻿@import '../variables';
+
+.user-profile-comments {
+    background: $default-color-darken;
+    @include padding($default-padding);
+}

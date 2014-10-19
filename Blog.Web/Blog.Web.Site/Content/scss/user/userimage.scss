@@ -1,0 +1,116 @@
+﻿@import '../variables';
+
+@mixin edit-hover {
+    .edit {
+        display: inline-block;
+        visibility: visible;
+        cursor: pointer;
+        z-index: 1000;
+    }
+}
+
+.user-image {
+    @include size(auto, 100%);
+    @include position(relative, null);
+
+    .user-background-image {
+        min-width: 100%;
+        min-height: 350px;
+
+        @include media(xs) {
+            @include size(auto, 100%);
+            @include position(absolute, null);
+            min-height: 0;
+        }
+
+        &:hover {
+            @include edit-hover;
+        }
+
+        .edit {
+            @include position(absolute, null, $default-margin, $default-margin);
+            @include margin(0);
+
+            @include media(xs) {
+                display: inline-block;
+                visibility: visible;
+                cursor: pointer;
+                z-index: 1000;
+            }
+        }
+
+        > img {
+            @include size(100%);
+            background-size: cover;
+            max-height: 350px;
+        }
+    }
+
+    .user-profile-image {
+        &:hover {
+            @include edit-hover;
+        }
+
+        .edit {
+            @include position(absolute, 40%, 40%, null, null);
+        }
+    }
+
+    .edit {
+        @include position(absolute, null);
+        color: $default-color;
+        visibility: hidden;
+        display: none;
+        font-size: 2em;
+        text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666;
+
+        input[type='file'] {
+            position: fixed;
+            top: -1000px;
+        }
+    }
+
+    .details {
+        $detail-padding: unquote((($base-padding * 2) + 10 ) + 'px');
+        @include position(absolute, 0, null, null);
+        @include size(30%, 100%);
+        @include padding($detail-padding);
+        background: $dark-color;
+        text-align: center;
+
+        @include media(xs) {
+            @include size(100%, auto);
+            @include position(relative, null);
+            background-color: #777;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        > .user-profile-image {
+            @include position(relative, null);
+            @include size(120px, auto);
+            @include center;
+
+            > img {
+                @include size(120px);
+                @include borders(3px, solid, $default-color, true);
+                border-radius: 60px;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -webkit-background-size: cover;
+                background-size: cover;
+            }
+        }
+
+        h4 {
+            color: $default-color;
+        }
+
+        p {
+            a {
+                color: $default-color;
+                font-size: 1em;
+                cursor: pointer;
+            }
+        }
+    }
+}

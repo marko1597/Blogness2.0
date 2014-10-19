@@ -6,7 +6,7 @@
 
     img {
         @include size(100%, auto);
-        @include borders(1px, solid, $light-border-color, null);
+        @include borders(1px, solid, $light-border-color, true);
         max-width: 100%;
     }
 

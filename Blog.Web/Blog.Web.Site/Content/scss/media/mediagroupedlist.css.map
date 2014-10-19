@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "mediagroupedlist.css",
-  "sources": [
-    "mediagroupedlist.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAIA,oBAAoB,YAAY,KAAK;EC6E7B,cD3EsB;AAE9B,oBAAoB,YAAY,IAAI;ECuFhC,SDpF6B;ECsF7B,QAAQ;EDrFI,QAAQ"
-}
+﻿{"version":3,"file":"mediagroupedlist.css","sources":["mediagroupedlist.scss","../variables.scss"],"names":[],"mappings":"AAIA,oBAAoB,YAAY,KAAK;EC+F7B,cD7FsB;AAE9B,oBAAoB,YAAY,IAAI;ECyGhC,SDtG6B;ECwG7B,QAAQ;EDvGI,QAAQ"}

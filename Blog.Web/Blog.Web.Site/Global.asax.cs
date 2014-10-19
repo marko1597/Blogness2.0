@@ -38,7 +38,7 @@ namespace Blog.Web.Site
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
-            container.RegisterMvcAttributeFilterProvider();
+            container.RegisterMvcIntegratedFilterProvider();
             container.Verify();
 
             DependencyResolver.SetResolver(new SimpleInjector.Integration.Web.Mvc.SimpleInjectorDependencyResolver(container));

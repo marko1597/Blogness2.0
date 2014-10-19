@@ -1,0 +1,21 @@
+﻿@import '../variables';
+
+.post-item-comment {
+    p {
+        @include margin(0);
+
+        &:last-child {
+            @include ellipsis-text;
+            width: auto;
+            cursor: pointer;
+
+            &:hover {
+                color: lighten($dark-border-color, 20%);
+            }
+        }
+
+        > a {
+            cursor: pointer;
+        }
+    }
+}

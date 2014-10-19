@@ -1,0 +1,38 @@
+﻿@import '../variables';
+
+.post-related-item {
+    @include margin(null, null, $default-margin);
+    background: $default-color;
+
+    > div {
+        $content-padding: unquote(($base-padding / 3) + 'px');
+        padding: $content-padding;
+    }
+
+    > .header {
+        @include size(auto);
+        @include ellipsis-text;
+        @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
+        background: $primary-color;
+        color: $default-color;
+
+        > a {
+            color: $default-color;
+        }
+    }
+
+    >.body {
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
+        clear: both;
+
+        > .details {
+            @include size(auto, 70px);
+            @include margin(null, null, null, 75px);
+
+            > p {
+                @include ellipsis-text;
+                @include margin(null, null, 0);
+            }
+        }
+    }
+}

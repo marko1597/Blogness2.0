@@ -1,9 +1,16 @@
-﻿.post-related-items-container > .post-related-list {
-    padding: 15px;
+/* line 4, ../../scss/posts/postrelateditems.scss */
+.post-related-items-container > .post-related-list {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }
-
+/* line 8, ../../scss/posts/postrelateditems.scss */
 .post-related-items-container > .post-related-category {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-    background: #f8f8f8;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid #dddddd;
+  background: white;
 }

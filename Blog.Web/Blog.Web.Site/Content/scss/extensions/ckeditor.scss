@@ -1,0 +1,32 @@
+﻿@import '../variables';
+
+$cke-border-color: darken($light-border-color, 20%);
+
+#cke_post-message-editor {
+    background: none !important;
+    padding: 3px 5px 5px 5px !important;
+    border-radius: 0 !important;
+    border: 1px solid $cke-border-color !important;
+    width: auto !important;
+
+    div {
+        border-radius: 0 !important;
+    }
+
+    span {
+        border-radius: 0 !important;
+    }
+}
+
+.cke_toolgroup {
+    border: 1px solid $cke-border-color !important;
+}
+
+.cke_contents {
+    margin-top: 5px !important;
+    border: 1px solid $cke-border-color !important;
+}
+
+.cke_inner .cke_top {
+    background: none !important;
+}

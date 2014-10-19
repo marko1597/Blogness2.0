@@ -1,0 +1,62 @@
+﻿@import 'variables';
+
+#modify-post-main {
+    $main-margin: unquote(($base-margin + 5) + 'px');
+    @include margin(null, null, $main-margin);
+    min-height: 600px;
+    background: $default-color;
+
+    > div {
+        &:first-child {
+            @include borders(1px, solid, $light-border-color, true, false, false, false);
+        }
+
+        @include padding($default-padding);
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
+
+        > h5 {
+            @include margin(0, 0, $default-margin);
+        }
+    }
+
+    .modify-post-title {
+        > span {
+            @include size(5%, auto);
+            @include margin(null, $default-margin);
+        }
+
+        input {
+            @include size(100%, auto);
+            max-width: 100%;
+        }
+    }
+
+    .modify-post-message {
+        @include padding($default-padding);
+
+        > div {
+            overflow: hidden;
+        }
+
+        textarea {
+            @include size(100%, auto);
+            min-height: 150px;
+            max-width: 100%;
+            resize: none;
+        }
+
+        .cke_contents {
+            min-height: 200px !important;
+        }
+
+        > .btn {
+            @include margin(null, null, $default-margin);
+        }
+    }
+
+    .modify-post-contents {
+        .btn-primary {
+            @include margin(null, null, $default-margin);
+        }
+    }
+}

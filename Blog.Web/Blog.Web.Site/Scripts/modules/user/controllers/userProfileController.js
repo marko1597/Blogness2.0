@@ -7,7 +7,7 @@
         $scope.username = null;
 
         $scope.init = function () {
-            if ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") {
+            if ($rootScope.$stateParams.username || $rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "") {
                 $scope.username = localStorageService.get("username");
 
                 if ($scope.username == undefined || $scope.username == null) {

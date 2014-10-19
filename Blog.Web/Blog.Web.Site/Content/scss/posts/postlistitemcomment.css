@@ -1,0 +1,19 @@
+﻿.post-item-comment p {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0; }
+  .post-item-comment p:last-child {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: auto;
+    cursor: pointer; }
+    .post-item-comment p:last-child:hover {
+      color: #999999; }
+  .post-item-comment p > a {
+    cursor: pointer; }
+
+/*# sourceMappingURL=postlistitemcomment.css.map */

@@ -1,0 +1,132 @@
+﻿@import '../variables';
+
+tags-input *, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+tags-input {
+    .host {
+        @include position(relative, null);
+
+        &:active {
+            outline: none;
+        }
+    }
+
+    .tags {
+        @include borders(1px, solid, $light-border-color, true);
+        -moz-appearance: textfield;
+        -webkit-appearance: textfield;
+        overflow: hidden;
+        -ms-word-wrap: break-word;
+        word-wrap: break-word;
+        cursor: text;
+        background-color: $default-color;
+
+        .tag-list {
+            @include clean-list;
+        }
+
+        .tag-item {
+            $tag-margin: unquote(($base-margin / 5) + 'px');
+            @include margin($tag-margin);
+            display: inline-block;
+            float: left;
+
+            &.selected {
+                background-color: $danger-color;
+                border-color: darken($danger-color, $border-darken-value);
+            }
+
+            .remove-button {
+                $remove-tag-margin: unquote(($base-margin / 3) + 'px');
+                @include margin(null, null, null, $remove-tag-margin);
+                @include padding(0);
+                border: none;
+                background: none;
+                cursor: pointer;
+                vertical-align: middle;
+                color: $default-color;
+
+                &:active {
+                    color: lighten($danger-color, $hover-darken-value);
+                }
+            }
+        }
+
+        .input {
+            border: none;
+            $input-tag-margin: unquote(($base-margin / 3) + 'px');
+            @include margin($input-tag-margin);
+            @include padding(0, 0, 0, $input-tag-margin);
+            @include size(auto, 26px);
+            @include borders(1px, solid, $light-border-color, false, false, true);
+            outline: none;
+            float: left;
+            min-width: $min-input-width;
+
+            &.invalid-tag {
+                color: lighten($danger-color, $hover-darken-value);
+                @include borders(1px, solid, $danger-color, false, false, true);
+            }
+
+            &::-ms-clear {
+                display: none;
+            }
+        }
+
+        &.focused {
+            outline: none;
+            -webkit-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+            -moz-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+            box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+        }
+    }
+
+    &.ng-invalid .tags {
+        box-shadow: 0 0 0 1px $danger-color;
+    }
+
+    &.autocomplete {
+        $autocomplete-space: unquote(($base-margin / 3) + 'px');
+        @include margin($autocomplete-space, null, null, null);
+        @include padding($autocomplete-space, 0, $autocomplete-space, 0);
+        @include position(absolute, null);
+        @include size(100%, auto);
+        @include borders(1px, solid, $light-border-color, true);
+        z-index: 999;
+        background-color: $default-color;
+        box-shadow: 0 5px 10px $light-border-color;
+
+        .suggestion-list {
+            @include clean-list;
+        }
+
+        .suggestion-item {
+            $suggestion-padding-y: unquote(($base-padding / 3) + 'px');
+            $suggestion-padding-x: unquote((($base-padding / 3) * 2) + 'px');
+            @include ellipsis-text;
+            @include padding($suggestion-padding-y, $suggestion-padding-x, $suggestion-padding-y, $suggestion-padding-x);
+            cursor: pointer;
+            color: $dark-color;
+            background-color: $default-color;
+
+            &.selected {
+                color: $default-color;
+                background-color: $primary-color;
+
+                em {
+                    color: $default-color;
+                    background-color: $primary-color;
+                }
+            }
+
+            em {
+                color: $dark-color;
+                background-color: $default-color;
+            }
+        }
+    }
+}

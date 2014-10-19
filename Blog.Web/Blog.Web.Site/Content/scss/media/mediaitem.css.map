@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "mediaitem.css",
-  "sources": [
-    "mediaitem.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAEA;ECiCQ,UDhCc;EAClB,YAAY;EAAhB,YAAY;ICwBR,ODrBkB;ICsBlB,QDtBwB;IAEpB,WAAW;EACnB,YAAY;ICyBJ,UDtBkB;IC0BlB,KA7BS;IAiCT,OAjCS;IAmET,YD/DgB;ICmEhB,cDnEgB;ICuEhB,eDvEgB;IC2EhB,aD3EgB"
-}
+﻿{"version":3,"file":"mediaitem.css","sources":["mediaitem.scss","../variables.scss"],"names":[],"mappings":"AAEA;ECmDQ,UDlDc;EAClB,YAAY;EAAhB,YAAY;IC0CR,ODvCkB;ICwClB,QDxCwB;ICkNpB,YAAY;IAIZ,cAAc;IAId,eAAe;IAIf,aAAa;ID5Nb,WAAW;EACnB,YAAY;IC2CJ,UDxCkB;IC4ClB,KA/CS;IAmDT,OAnDS;IAqFT,YDjFgB;ICqFhB,cDrFgB;ICyFhB,eDzFgB;IC6FhB,aD7FgB"}

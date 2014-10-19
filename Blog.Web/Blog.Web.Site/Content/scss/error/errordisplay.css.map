@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "errordisplay.css",
-  "sources": [
-    "errordisplay.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAEA;ECiCQ,UDhCc;EC4Cd,QD5CoC;ECyBxC,ODxBc;ECyBd,QDzBoB;EACpB,SAAS;EACT,OCiBY;EDjBhB,mBAAmB;IC6BX,UD1BkB;IC8BlB,KD9B4B;ICkC5B,ODlCkC;ICsFtC,SDrFqB;ICuFrB,QAAQ;IDtFJ,QAAQ;IACR,iBAAiB;IACjB,oBAAoB;IACpB,eAAe;IACf,YAAY;IAApB,mBAAmB,YAAY;MCgF3B,SD7EyB;MC+EzB,QAAQ;ED7EZ,mBAAmB;ICsCX,aDnCiB;ICuCjB,eDvCuB;IC2CvB,gBD3CiB;IC+CjB,cD/CiB;IACjB,YCJO;IA8JP,YAAY;IAIZ,cAAc;IAId,eAAe;IAIf,aAAa;IDrKrB,mBAAmB,SAAS;MC6CpB,cD1CuC"
-}
+﻿{"version":3,"file":"errordisplay.css","sources":["errordisplay.scss","../variables.scss"],"names":[],"mappings":"AAEA;ECmDQ,UDlDc;EC8Dd,QD9DoC;EC2CxC,OD1Cc;EC2Cd,QD3CoB;EACpB,SAAS;EACT,OCmCY;EDnChB,mBAAmB;IC+CX,UD5CkB;ICgDlB,KDhD4B;ICoD5B,ODpDkC;ICwGtC,SDvGqB;ICyGrB,QAAQ;IDxGJ,QAAQ;IACR,iBAAiB;IACjB,oBAAoB;IACpB,eAAe;IACf,YAAY;IAApB,mBAAmB,YAAY;MCkG3B,SD/FyB;MCiGzB,QAAQ;ED/FZ,mBAAmB;ICwDX,aDrDiB;ICyDjB,eDzDuB;IC6DvB,gBD7DiB;ICiEjB,cDjEiB;IACjB,YCcO;IAmLP,YAAY;IAIZ,cAAc;IAId,eAAe;IAIf,aAAa;ID5MrB,mBAAmB,SAAS;MC+DpB,cD5DuC"}

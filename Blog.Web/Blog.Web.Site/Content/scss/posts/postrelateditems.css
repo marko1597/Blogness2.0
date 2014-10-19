@@ -1,0 +1,14 @@
+﻿.post-related-items-container > .post-related-list {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px; }
+.post-related-items-container > .post-related-category {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid #ddd;
+  background: #fff; }
+
+/*# sourceMappingURL=postrelateditems.css.map */

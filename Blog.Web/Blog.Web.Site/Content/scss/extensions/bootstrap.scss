@@ -1,0 +1,60 @@
+﻿@import '../variables';
+
+@media screen and (max-width: 768px) {
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        -o-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+    }
+
+    .row-offcanvas-right {
+        &.active {
+            right: 50%;
+        }
+
+        .sidebar-offcanvas {
+            right: -50%;
+        }
+    }
+
+    .row-offcanvas-left {
+        &.active {
+            left: 50%;
+        }
+
+        .sidebar-offcanvas {
+            @include position(absolute, 0, null, null, -50%);
+            @include size(50%, auto);
+        }
+    }
+}
+
+.navbar {
+    > .navbar-header {
+        > .navmenu-toggle {
+            @include position(absolute, 27%, null, null, null);
+            display: inline-block;
+            -moz-transition: all 0.5s linear;
+            -o-transition: all 0.5s linear;
+            -webkit-transition: all 0.5s linear;
+            transition: all 0.5s linear;
+
+            > span {
+                @include size(22px, 2px);
+                background: $default-color;
+                display: block;
+                margin-top: 4px;
+            }
+        }
+
+        > .nav-open {
+            left: -15px;
+        }
+
+        > .nav-close {
+            left: -10px;
+        }
+    }
+}

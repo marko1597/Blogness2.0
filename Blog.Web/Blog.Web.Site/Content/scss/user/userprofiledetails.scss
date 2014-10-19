@@ -1,0 +1,157 @@
+﻿@import '../variables';
+
+$input-margin: unquote(($base-margin / 3) + 'px');
+
+@mixin data-display {
+    position: static;
+    display: block;
+}
+
+@mixin user-input {
+    font-weight: normal;
+    max-width: 100%;
+    width: 100%;
+}
+
+@mixin text-input-margin {
+    input[type='text'] {
+        margin-bottom: $input-margin;
+    }
+}
+
+.user-profile-details {
+    overflow: visible !important;
+
+    @include media(xs) {
+        .header {
+            > .btn-header {
+                @include size(40px, auto);
+            }
+        }
+    }
+
+    .fa {
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.5;
+        }
+    }
+
+    input[type=text] {
+        @include user-input;
+    }
+
+    .card {
+        @include media(xs) {
+            @include margin(0, 0, $default-padding);
+        }
+
+        &.hobbies {
+            @include text-input-margin;
+
+            .empty-record-message {
+                @include margin($default-margin, null, null, null);
+            }
+        }
+
+        .user-hobby-item {
+            @include position(relative, null);
+        }
+
+        .error-message {
+            @include margin($default-margin, 0, 0, null);
+            color: $danger-color;
+        }
+    }
+
+    .body {
+        @include padding($default-padding);
+
+        .panel {
+            @include margin(null, null, $default-margin);
+            border-color: $light-border-color;
+            background: $default-color;
+
+            .panel-heading {
+                background-color: transparent;
+                border-color: transparent;
+                color: $dark-color;
+            }
+        }
+
+        .education-item {
+            @include margin(null, null, $default-margin);
+            @include padding($default-padding, null, null, null);
+            @include borders(1px, solid, $light-border-color, true);
+            background: $default-color;
+
+            label[data-display] {
+                font-weight: normal;
+                width: auto;
+            }
+        }
+    }
+
+    .user-form {
+        @include padding(0, $default-padding, $default-padding, $default-padding);
+
+        &[name='user-hobbies-form'] {
+            .form-group {
+                @include text-input-margin;
+                @include margin(null, null, $input-margin);
+
+                label {
+                    font-weight: normal;
+                }
+
+                .buttons {
+                    top: -1px;
+                }
+            }
+        }
+
+        &[name='user-education-form'] {
+            .form-group {
+                input[type=text] {
+                    @include margin(null, null, $input-margin);
+                }
+            }
+        }
+
+        .buttons {
+            @include position(absolute, 2px, 25px, null, null);
+
+            > .fa {
+                $icon-margin: unquote(($base-margin / 2) + 'px');
+                @include margin($icon-margin, $icon-margin, null, null);
+                font-size: 1.2em;
+                color: $dark-color;
+                cursor: pointer;
+            }
+        }
+
+        .form-group {
+            @include position(relative, null);
+
+            label {
+                $label-margin: unquote(($base-margin / 3) + 'px');
+                @include margin($label-margin, 0, $label-margin, 0);
+
+                &[data-display] {
+                    @include user-input;
+
+                    @include media(xs) {
+                        @include data-display
+                    }
+                }
+            }
+
+            input[type='text'] {
+                @include media(xs) {
+                    @include data-display
+                }
+            }
+        }
+    }
+}

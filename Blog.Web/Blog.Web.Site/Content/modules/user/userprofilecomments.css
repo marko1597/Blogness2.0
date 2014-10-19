@@ -1,4 +1,8 @@
-﻿.user-profile-comments {
-    background: #eee;
-    padding: 15px;
+/* line 3, ../../scss/user/userprofilecomments.scss */
+.user-profile-comments {
+  background: #eeeeee;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
 }

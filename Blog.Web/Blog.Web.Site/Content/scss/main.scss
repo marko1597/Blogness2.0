@@ -1,5 +1,24 @@
 @import 'variables';
 
+html, body {
+    font-family: $fonts;
+    @include size(auto, 100%);
+}
+
+input, select, textarea {
+    max-width: $max-input-width;
+}
+
+::selection {
+    color: $default-color;
+    background: $primary-color;
+}
+
+::-moz-selection {
+    color: $default-color;
+    background: $primary-color;
+}
+
 .blog-brand-icon {
     background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
     background-size: cover;
@@ -10,12 +29,7 @@
 }
 
 .card {
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -webkit-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px #000000;
-    -ms-box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    box-shadow: 0 2px 4px #000000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    @include box-shadow(false);
     vertical-align: top;
     font-size: 1em;
     color: darken($dark-border-color, 20%);
@@ -106,8 +120,6 @@
     }
 }
 
-
-
 .header {
     background: $dark-color;
     color: $default-color;
@@ -170,7 +182,7 @@
         text-align: center;
 
         &:hover {
-            box-shadow: $box-shadow-inset;
+            @include box-shadow(true);
         }
 
         &.left {
@@ -181,10 +193,6 @@
 
         &.right {
             border-left: 1px solid $light-border-color;
-
-            i {
-                @include margin(null, 5px);
-            }
         }
     }
 }
@@ -213,9 +221,83 @@
 }
 
 .wrap-text {
-    -ms-text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    @include ellipsis-text;
 }
+
+/* #region field validation errors */
+
+.field-error {
+    border: 1px solid darken($danger-color, $border-darken-value);
+    color: $danger-color;
+}
+
+.field-validation-error {
+    color: $danger-color;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid darken($danger-color, $border-darken-value);
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: $danger-color;
+}
+
+.has-error {
+    background: $danger-color !important;
+    color: $default-color !important;
+}
+
+.input.has-error::-webkit-input-placeholder { /* WebKit browsers */
+    color: $default-color;
+}
+
+.input.has-error:hover::-webkit-input-placeholder,
+.input.has-error:focus::-webkit-input-placeholder { /* WebKit browsers */
+    color: $dark-color;
+}
+
+.input.has-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $default-color;
+    opacity: 1;
+}
+
+.input.has-error:hover:-moz-placeholder,
+.input.has-error:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $dark-color;
+    @include opacity(1);
+}
+
+.input.has-error::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $default-color;
+    opacity: 1;
+}
+
+.input.has-error:hover::-moz-placeholder,
+.input.has-error:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $dark-color;
+    opacity: 1;
+}
+
+.input.has-error:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $default-color;
+}
+
+.input.has-error:hover:-ms-input-placeholder,
+.input.has-error:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $dark-color;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* #endregion */

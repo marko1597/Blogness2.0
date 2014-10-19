@@ -17,22 +17,22 @@
 
     .add-post {
         @include size(50px);
-        @include position(absolute, null, 15px, 15px);
-        @include center;
-        background: $primary-color;
+        @include position(absolute, null, 30px, $default-margin);
+        @include center;@include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
+        @include box-shadow(false);
 
-        @include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
+        background: $primary-color;
+        z-index: 50;
         border-radius: 50%;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
         i, a {
-            color: $primary-color;
+            color: $default-color;
         }
 
         i {
@@ -42,7 +42,7 @@
 
         a {
             @extend i;
-            @include position(relative, 13px, null, null, 15px);
+            @include position(relative, 13px, null, null, null);
         }
     }
 }

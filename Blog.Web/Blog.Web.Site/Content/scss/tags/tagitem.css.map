@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "tagitem.css",
-  "sources": [
-    "tagitem.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAEA;EC2EQ,YDxEY;EC4EZ,cD9ES;ECkFT,eDlFS;ECsFT,aDpFY;ECqDZ,aDtDU;EC0DV,eD1DU;EC8DV,gBD9DU;ECkEV,cDlEU;EC8KV,YAAY;EAIZ,cAAc;EAId,eAAe;EAIf,aAAa;EDtLjB,OCeY;EDdZ,YCMY;EDLZ,SAAS;EACT,QAAQ;EACR,YAAY;EACZ,qBAAqB;EACrB,aAAa;EAAjB,SAAS;IAGD,YAAY;IACZ,cAAc;IACd,YAAY;EACpB,YAAY;IC6DJ,cD1Dc"
-}
+﻿{"version":3,"file":"tagitem.css","sources":["tagitem.scss","../variables.scss"],"names":[],"mappings":"AAEA;EC6FQ,YD1FY;EC8FZ,cDhGS;ECoGT,eDpGS;ECwGT,aDtGY;ECuEZ,aDxEU;EC4EV,eD5EU;ECgFV,gBDhFU;ECoFV,cDpFU;ECqNV,YAAY;EAIZ,cAAc;EAId,eAAe;EAIf,aAAa;ED7NjB,OCiCY;EDhCZ,YCwBY;EDvBZ,SAAS;EACT,QAAQ;EACR,qBAAqB;EACrB,aAAa;EAAjB,SAAS;IC4GD,YAAY;IACZ,YAAY;IDzGZ,YAAY;IACZ,cAAc;EACtB,YAAY;ICgFJ,cD7Ec"}

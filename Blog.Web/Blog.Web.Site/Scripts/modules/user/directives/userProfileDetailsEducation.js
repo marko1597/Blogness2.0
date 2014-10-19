@@ -10,6 +10,10 @@
                 _.each(g.Content, function (e) {
                     e.YearAttendedDisplay = dateHelper.getMonthYear(e.YearAttended);
                     e.YearGraduatedDisplay = dateHelper.getMonthYear(e.YearGraduated);
+
+                    if (!e.Course || e.Course === "") {
+                        e.Course = "No course selected";
+                    }
                 });
             });
         });

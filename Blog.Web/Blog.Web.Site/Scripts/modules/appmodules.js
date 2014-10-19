@@ -1548,7 +1548,7 @@ ngMedia.directive('albumGroup', function () {
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
            configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
 
-        $scope.isExpanded = true;
+        $scope.isExpanded = !$scope.album.IsNew ? true : false;
 
         $scope.authData = localStorageService.get("authorizationData");
 
@@ -1560,7 +1560,7 @@ ngMedia.directive('albumGroup', function () {
         };
 
         $scope.toggleExpanded = function () {
-            $scope.isExpanded = !$scope.isExpanded;
+            if (!$scope.album.IsNew) $scope.isExpanded = !$scope.isExpanded;
         };
 
         $scope.editAlbum = function () {
@@ -3880,7 +3880,7 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
         $scope.username = null;
 
         $scope.init = function () {
-            if ($rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "undefined") {
+            if ($rootScope.$stateParams.username || $rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "") {
                 $scope.username = localStorageService.get("username");
 
                 if ($scope.username == undefined || $scope.username == null) {
@@ -4272,6 +4272,10 @@ ngUser.directive('userProfileDetailsEducation', [function () {
                 _.each(g.Content, function (e) {
                     e.YearAttendedDisplay = dateHelper.getMonthYear(e.YearAttended);
                     e.YearGraduatedDisplay = dateHelper.getMonthYear(e.YearGraduated);
+
+                    if (!e.Course || e.Course === "") {
+                        e.Course = "No course selected";
+                    }
                 });
             });
         });

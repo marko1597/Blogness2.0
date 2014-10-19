@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "commentslist.css",
-  "sources": [
-    "commentslist.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAEA;ECwDQ,aAjDU;EAqDV,eArDU;EAyDV,gBAzDU;EA6DV,cA7DU;EDNlB,oBAAoB;ICkIhB,QAAQ;IACR,YAAY;IDhIhB,oBAAoB,wBAAwB;MCuEpC,YAnES;MAuET,cDxEqC;MC4ErC,eA3ES;MA+ET,aDhFyD;EAIjE,oBAAoB,GAAG,YAAY;ICgE3B,YD9DoB;ICkEpB,cDlEoB;ICsEpB,eDtEoB;IC0EpB,aD1EoB;;AAK5B;ECyDQ,YAnES;EAuET,cD5D6B;ECgE7B,eA3ES;EA+ET,aA/ES;;ADcjB;EACI,cChBc"
-}
+﻿{"version":3,"file":"commentslist.css","sources":["commentslist.scss","../variables.scss"],"names":[],"mappings":"AAEA;EC0EQ,aAnEU;EAuEV,eAvEU;EA2EV,gBA3EU;EA+EV,cA/EU;EDNlB,oBAAoB;ICyKhB,QAAQ;IACR,YAAY;IDvKhB,oBAAoB,wBAAwB;MCyFpC,YArFS;MAyFT,cD1FqC;MC8FrC,eA7FS;MAiGT,aDlGyD;EAIjE,oBAAoB,GAAG,YAAY;ICkF3B,YDhFoB;ICoFpB,cDpFoB;ICwFpB,eDxFoB;IC4FpB,aD5FoB;;AAK5B;EC2EQ,YArFS;EAyFT,cD9E6B;ECkF7B,eA7FS;EAiGT,aAjGS;;ADcjB;EACI,cChBc"}

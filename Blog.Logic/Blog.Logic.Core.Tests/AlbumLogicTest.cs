@@ -91,7 +91,7 @@ namespace Blog.Logic.Core.Tests
         {
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), true))
-                .Returns((List<Album>)null);
+                .Returns(new List<Album>());
 
             _albumLogic = new AlbumLogic(_albumRepository.Object);
 
@@ -220,6 +220,8 @@ namespace Blog.Logic.Core.Tests
             };
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Add(It.IsAny<Album>())).Returns(dbResult);
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), null, null))
+                .Returns(new List<Album>());
 
             _albumLogic = new AlbumLogic(_albumRepository.Object);
 
@@ -294,6 +296,8 @@ namespace Blog.Logic.Core.Tests
             };
             _albumRepository = new Mock<IAlbumRepository>();
             _albumRepository.Setup(a => a.Edit(It.IsAny<Album>())).Returns(dbResult);
+            _albumRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Album, bool>>>(), null, null))
+                .Returns(new List<Album>());
 
             _albumLogic = new AlbumLogic(_albumRepository.Object);
 

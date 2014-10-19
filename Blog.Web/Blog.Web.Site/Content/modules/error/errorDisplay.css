@@ -5,34 +5,39 @@
   width: 100%;
   height: auto;
   z-index: 1020;
-  color: white; }
-  /* line 9, ../../scss/error/errordisplay.scss */
-  #blog-error-global .close-error {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    opacity: 1;
-    filter: alpha(opacity=100);
-    cursor: pointer;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
-    -o-transition: opacity .25s ease-in-out;
-    transition: opacity .25s ease-in-out; }
-    /* line 18, ../../scss/error/errordisplay.scss */
-    #blog-error-global .close-error:hover {
-      opacity: 0.5;
-      filter: alpha(opacity=50); }
-  /* line 23, ../../scss/error/errordisplay.scss */
-  #blog-error-global .message {
-    padding-top: 15px;
-    padding-right: 30px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    background: #d9534f;
-    border-top: 1px solid #d43f3a;
-    border-right: 1px solid #d43f3a;
-    border-bottom: 1px solid #d43f3a;
-    border-left: 1px solid #d43f3a; }
-    /* line 28, ../../scss/error/errordisplay.scss */
-    #blog-error-global .message span {
-      padding-left: 5px; }
+  color: white;
+}
+/* line 9, ../../scss/error/errordisplay.scss */
+#blog-error-global .close-error {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  opacity: 1;
+  filter: alpha(opacity=100);
+  cursor: pointer;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
+  -o-transition: opacity .25s ease-in-out;
+  transition: opacity .25s ease-in-out;
+}
+/* line 18, ../../scss/error/errordisplay.scss */
+#blog-error-global .close-error:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+/* line 23, ../../scss/error/errordisplay.scss */
+#blog-error-global .message {
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  background: #d9534f;
+  border-top: 1px solid #d43f3a;
+  border-right: 1px solid #d43f3a;
+  border-bottom: 1px solid #d43f3a;
+  border-left: 1px solid #d43f3a;
+}
+/* line 28, ../../scss/error/errordisplay.scss */
+#blog-error-global .message span {
+  padding-left: 5px;
+}

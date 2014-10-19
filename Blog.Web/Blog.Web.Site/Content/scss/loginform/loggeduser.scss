@@ -2,11 +2,33 @@
 
 #logged-user-info {
     @include margin(8px, 30px, 8px, 30px);
+
     @include media(xs) {
         @include margin(0);
     }
 
     .btn-group, button, ul {
         @include size(100%, auto);
+    }
+
+    button {
+        @include media(xs) {
+            @include padding($default-padding);
+        }
+    }
+
+    ul {
+        li {
+            a {
+                border: none;
+                background: $default-color;
+                color: $dark-color;
+
+                &:hover {
+                    background: $primary-color;
+                    color: $default-color;
+                }
+            }
+        }
     }
 }

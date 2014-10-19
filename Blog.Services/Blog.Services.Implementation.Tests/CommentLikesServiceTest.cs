@@ -49,7 +49,7 @@ namespace Blog.Services.Implementation.Tests
             #endregion
         }
 
-        [Test]
+        [Test, Ignore]
         public void ShouldAddCommentLikeSuccessfullyEndToEnd()
         {
             _commentsLogic = new Mock<ICommentsLogic>();

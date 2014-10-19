@@ -36,9 +36,17 @@
         <!-- videogular themes -->
         <link href="~/Scripts/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
 
-        <!-- site css -->
-        <link href="~/Content/site.css" rel="stylesheet" />
+        <!-- main css and extensions -->
         <link href="~/Content/modules/main.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/angular-snap.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/animations.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/blockui.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/bootstrap.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/ckeditor.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/isotope.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/ngtagsinput.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/slick.css" rel="stylesheet" />
+        <link href="~/Content/modules/extensions/videogular.css" rel="stylesheet" />
 
         <!-- blog pages styles -->
         <link href="~/Content/modules/accountpage.css" rel="stylesheet" />
@@ -46,7 +54,7 @@
         <link href="~/Content/modules/posts.css" rel="stylesheet" />
         <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
         <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
-        
+
         <!-- blog media module styles -->
         <link href="~/Content/modules/media/mediagroupedlist.css" rel="stylesheet" />
         <link href="~/Content/modules/media/albumgroup.css" rel="stylesheet" />
@@ -109,6 +117,13 @@
 
     <!-- #region startup script to fetch global configurations -->
     <script>
+        @{
+            if (ViewBag.IsBlogSocketsAvailable == null)
+            {
+                ViewBag.IsBlogSocketsAvailable = false;
+            }
+        }
+
         var blogConfiguration =
         {
             blogApi: "@GetBlogApi()",
@@ -134,9 +149,8 @@
         };
     </script>
     <!-- #endregion -->
-    
     <!-- #region socket.io js script -->
-    @if (ViewBag.IsBlogSocketsAvailable)
+    @if (ViewBag.IsBlogSocketsAvailable != null && ViewBag.IsBlogSocketsAvailable)
     {
         <script src="@GetBlogSocketsJs()" type="text/javascript"></script>
     }
@@ -144,7 +158,7 @@
 </head>
 <body ng-controller="blogMainController" window-resize>
     @RenderBody()
-    
+
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
     {

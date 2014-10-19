@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "file": "registerform.css",
-  "sources": [
-    "registerform.scss",
-    "../variables.scss"
-  ],
-  "names": [],
-  "mappings": "AAEA,WAAW,UAAU;ECwDb,aDtDiB;EC0DjB,eD1DiB;EC8DjB,gBD9DiB;ECkEjB,cDlEiB;AACzB,WAAW,UAAU;EAGb,QAAQ;EAAhB,WAAW,UAAU,OAAO;IAGhB,OCYI;IDXJ,YCIC;IDHD,cAAc;IACd,eCNY"
-}
+﻿{"version":3,"file":"registerform.css","sources":["registerform.scss","../variables.scss"],"names":[],"mappings":"AAEA,WAAW,UAAU;EC0Eb,aDxEiB;EC4EjB,eD5EiB;ECgFjB,gBDhFiB;ECoFjB,cDpFiB;AACzB,WAAW,UAAU;EAGb,QAAQ;EAAhB,WAAW,UAAU,OAAO;IAGhB,OC8BI;ID7BJ,YCsBC;IDrBD,cAAc;IACd,eCNY"}

@@ -1,36 +1,38 @@
-﻿.post-likes {
-    -ms-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 0 #000000;
-    -ms-box-shadow: 0 1px 0 #000000;
-    -ms-box-shadow: 0 1px 0 rgba(0,0,0,.05);
-    box-shadow: 0 1px 0 #000000;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-    border: 1px solid #d9d9d9;
-    cursor: pointer;
-    height: 28px;
-    line-height: 28px;
-    width: 30%;
-    max-width: 120px;
-    min-width: 100px;
-    display: inline-block;
-    margin-right: 10px;
+/* line 3, ../../scss/posts/postlikes.scss */
+.post-likes {
+  width: 30%;
+  height: 28px;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  margin-right: 15px;
+  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  line-height: 28px;
+  max-width: 120px;
+  min-width: 100px;
+  cursor: pointer;
 }
-
-    .post-likes > .wrapper {
-        padding: 0 10px;
-    }
-
-        .post-likes > .wrapper > span {
-            padding: 3px;
-        }
-
-    .post-likes:hover {
-        -webkit-box-shadow: 0 1px 0 #000000;
-        -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.1);
-        -ms-box-shadow: 0 1px 0 #000000;
-        -ms-box-shadow: 0 1px 0 rgba(0,0,0,.1);
-        box-shadow: 0 1px 0 #000000;
-        box-shadow: 0 1px 0 rgba(0,0,0,.1);
-        border-color: #bfbfbf;
-    }
+/* line 14, ../../scss/posts/postlikes.scss */
+.post-likes:hover {
+  border-top: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
+  border-left: 1px solid #d0d0d0;
+}
+/* line 18, ../../scss/posts/postlikes.scss */
+.post-likes > .wrapper {
+  padding-top: 0;
+  padding-right: 15px;
+  padding-bottom: 0;
+  padding-left: 15px;
+}
+/* line 21, ../../scss/posts/postlikes.scss */
+.post-likes > .wrapper span {
+  padding-top: 3px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}

@@ -51,7 +51,6 @@ namespace Blog.Admin.Web
             container.RegisterMvcControllers(System.Reflection.Assembly.GetExecutingAssembly());
             container.RegisterMvcIntegratedFilterProvider();
 
-            container.EnableLifetimeScoping();
             container.Verify();
 
             // Register the dependency resolver.

@@ -1,0 +1,23 @@
+﻿@import '../variables';
+
+
+.slick-prev {
+    left: 15px;
+
+    &:before {
+        font-size: 40px;
+    }
+}
+
+.slick-next {
+    right: 15px;
+
+    &:before {
+        font-size: 40px;
+    }
+}
+
+.slick-prev, .slick-next {
+    @include size(40px);
+    text-shadow: 2px 0 0 #333, -2px 0 0 #333, 0 2px 0 #333, 0 -2px 0 #333, 1px 1px #666, -1px -1px 0 #333, 1px -1px 0 #333, -1px 1px 0 #333;
+}

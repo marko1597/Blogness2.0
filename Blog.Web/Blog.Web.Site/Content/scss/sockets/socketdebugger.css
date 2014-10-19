@@ -1,0 +1,38 @@
+﻿#socket-debugger {
+  position: fixed;
+  right: 15px;
+  bottom: 0;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  width: 300px;
+  height: 300px;
+  border-top: 1px solid #666;
+  border-right: 1px solid #666;
+  border-bottom: 1px solid #666;
+  border-left: 1px solid #666;
+  background: #eee;
+  overflow: scroll;
+  z-index: 10; }
+  #socket-debugger > div {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    border-top: 1px solid #666;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    border-left: 1px solid #666;
+    margin-bottom: 15px; }
+    #socket-debugger > div > p {
+      font-family: inherit;
+      color: #191919;
+      -ms-word-wrap: break-word;
+      word-wrap: break-word; }
+      #socket-debugger > div > p > code {
+        width: 100%;
+        height: auto;
+        font-family: Consolas; }
+
+/*# sourceMappingURL=socketdebugger.css.map */

@@ -1,83 +1,56 @@
-﻿div.main-wrapper > div.background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    background-image: url(../images/login-main.jpg);
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
+/* line 3, ../scss/accountpage.scss */
+html, body {
+  overflow: auto !important;
 }
 
-div.main-wrapper > div.overlay {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC') /*../../images/login-pattern.png*/ repeat top left;
-    *background: transparent url(../images/login-pattern.png) repeat top left; /* For IE 6 and 7 */
-    z-index: 10;
+/* line 8, ../scss/accountpage.scss */
+.main-wrapper > .background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: url(../images/login-main.jpg);
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
-
-#wrapper {
-    width: 100%;
-    margin: 10% auto;
+/* line 19, ../scss/accountpage.scss */
+.main-wrapper > div.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC") repeat top left;
+  z-index: 10;
 }
-
-@media (min-width: 768px) {
-    #wrapper {
-        margin: 30% auto;
-    }
+/* line 26, ../scss/accountpage.scss */
+.main-wrapper #wrapper {
+  width: 100%;
+  height: auto;
+  margin-top: 30%;
+  margin-right: auto;
+  margin-bottom: 30%;
+  margin-left: auto;
 }
-
+@media (max-width: 767px) {
+  /* line 26, ../scss/accountpage.scss */
+  .main-wrapper #wrapper {
+    margin-top: 10%;
+    margin-right: auto;
+    margin-bottom: 10%;
+    margin-left: auto;
+  }
+}
 @media (min-width: 992px) {
-    #wrapper {
-        margin: 50% auto;
-    }
+  /* line 26, ../scss/accountpage.scss */
+  .main-wrapper #wrapper {
+    margin-top: 50%;
+    margin-right: auto;
+    margin-bottom: 50%;
+    margin-left: auto;
+  }
 }
-
-div.login-alert {
-    position: absolute;
-    width: 100%;
-    margin: 15px;
-    z-index: 20;
-}
-
-    div.login-alert > strong {
-        padding-right: 5px;
-    }
-
-.download {
-    display: block;
-    position: absolute;
-    float: right;
-    right: 25px;
-    bottom: 25px;
-    padding: 5px;
-    font-weight: bold;
-    font-size: 11px;
-    text-align: right;
-    text-decoration: none;
-    color: #000000;
-    color: rgba(0, 0, 0, 0.50);
-    -webkit-text-shadow: 1px 1px 0 #ffffff;
-    text-shadow: 1px 1px 0 #ffffff;
-    text-shadow: 1px 1px 0 hsla(0, 0%, 100%, 0.50);
-}
-
-    .download:hover {
-        color: #000000;
-        color: rgba(0,0,0,0.75);
-        -webkit-text-shadow: 1px 1px 0 #ffffff;
-        -webkit-text-shadow: 1px 1px 0 hsla(0, 0%, 100%, 0.50);
-        text-shadow: 1px 1px 0 #ffffff;
-        text-shadow: 1px 1px 0 hsla(0, 0%, 100%, 0.50);
-    }
-
-    .download:focus {
-        bottom: 24px;
-    }

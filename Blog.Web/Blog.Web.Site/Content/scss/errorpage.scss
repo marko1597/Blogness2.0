@@ -1,0 +1,50 @@
+﻿@import 'variables';
+
+#error-page {
+    text-align: center;
+
+    > img {
+        @include size(100%, auto);
+        max-width: $md-screen-width;
+    }
+
+    h1 {
+        color: $default-color;
+        line-height: 2;
+        text-align: center;
+        letter-spacing: 1px;
+        text-shadow: 0 0 6px $dark-border-color;
+    }
+
+    .row {
+        &:last-child {
+            @include margin($default-margin, null, null, null);
+            text-align: center;
+
+            > a {
+                @include transition(opacity .25s ease-in-out);
+                @include opacity(1);
+                color: $default-color;
+                text-decoration: none;
+                cursor: pointer;
+
+                &:hover {
+                    @include opacity(0.5);
+                }
+            }
+        }
+
+        > div:last-child {
+            @include borders(1px, solid, $default-color, false, false, false, true);
+        }
+
+        .send-mail {
+            @include margin($default-margin);
+            @include padding($default-padding);
+            @include borders(1px, solid, $light-border-color, true);
+            background: $default-color;
+            min-height: 400px;
+            text-align: left;
+        }
+    }
+}

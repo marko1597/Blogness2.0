@@ -1,14 +1,14 @@
 ﻿.navigation-menu {
   width: 100%;
   height: 100%;
-  border-left: 1px solid #666;
+  border-right: 1px solid #666;
   padding-top: 50px;
   background: #4c4c4c;
   color: #eee; }
   .navigation-menu:after {
     width: 100%;
     height: auto;
-    border-left: 1px solid #666;
+    border-right: 1px solid #666;
     background: #4c4c4c;
     color: #eee; }
   .navigation-menu ul {
@@ -20,27 +20,21 @@
       padding-right: 15px;
       padding-bottom: 15px;
       padding-left: 15px;
+      border-bottom: 1px solid #3f3f3f;
+      box-shadow: none;
       color: #eee;
       outline: none;
       display: block;
-      -webkit-box-shadow: inset 0 -1px #000000;
-      -webkit-box-shadow: inset 0 -1px #000000;
-      -ms-box-shadow: inset 0 -1px #000000;
-      -ms-box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-      box-shadow: inset 0 -1px #000000;
-      box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
       text-transform: uppercase;
-      -webkit-text-shadow: 0 0 1px #ffffff;
-      -ms-text-shadow: 0 0 1px #ffffff;
-      -ms-text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
-      text-shadow: 0 0 1px #ffffff;
-      text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
       letter-spacing: 1px;
       font-weight: 400;
       -webkit-transition: background 0.3s, box-shadow 0.3s;
       -moz-transition: background 0.3s, box-shadow 0.3s;
       -o-transition: background 0.3s, box-shadow 0.3s;
       transition: background 0.3s, box-shadow 0.3s; }
+      .navigation-menu ul > li > a:hover {
+        box-shadow: inset 0 0 10px 0 #aaa;
+        box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5); }
       .navigation-menu ul > li > a > i {
         margin-right: 10px;
         font-size: 1.5em; }

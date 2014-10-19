@@ -84,17 +84,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.1.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.1.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Redis, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.AspNet.SignalR.Redis, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Redis.2.1.1\lib\net45\Microsoft.AspNet.SignalR.Redis.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Redis.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Redis.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -135,35 +135,41 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.4.0.31\lib\net40\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.31\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\..\packages\ServiceStack.Redis.4.0.31\lib\net40\ServiceStack.Redis.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.4.0.31\lib\net40\ServiceStack.Text.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector, Version=2.5.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.5.2\lib\net45\SimpleInjector.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Diagnostics, Version=2.5.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.5.2\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.LifetimeScoping">
-      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.5.2\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web">
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.5.2\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=2.5.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Redis, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.2.5.2\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.2.6.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Diagnostics, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.2.6.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.6.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.6.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.2.6.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -315,6 +321,15 @@
     <Content Include="Content\modules\comments\commentslist.css" />
     <Content Include="Content\modules\errorpage.css" />
     <Content Include="Content\modules\error\errorDisplay.css" />
+    <Content Include="Content\modules\extensions\angular-snap.css" />
+    <Content Include="Content\modules\extensions\animations.css" />
+    <Content Include="Content\modules\extensions\blockui.css" />
+    <Content Include="Content\modules\extensions\bootstrap.css" />
+    <Content Include="Content\modules\extensions\ckeditor.css" />
+    <Content Include="Content\modules\extensions\isotope.css" />
+    <Content Include="Content\modules\extensions\ngtagsinput.css" />
+    <Content Include="Content\modules\extensions\slick.css" />
+    <Content Include="Content\modules\extensions\videogular.css" />
     <Content Include="Content\modules\header\headermenu.css" />
     <Content Include="Content\modules\loginform\loggeduser.css" />
     <Content Include="Content\modules\loginform\loginform.css" />
@@ -348,6 +363,7 @@
     <Content Include="Content\modules\user\userprofilenavigation.css" />
     <Content Include="Content\modules\user\userprofileposts.css" />
     <Content Include="Content\modules\variables.css" />
+    <Content Include="Content\modules\viewpost.css" />
     <Content Include="Content\scss\comments\commentitem.css">
       <DependentUpon>commentitem.scss</DependentUpon>
     </Content>
@@ -369,11 +385,67 @@
     <Content Include="Content\scss\comments\commentslist.min.css">
       <DependentUpon>commentslist.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\errorpage.css">
+      <DependentUpon>errorpage.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\error\errordisplay.css">
       <DependentUpon>errordisplay.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\error\errordisplay.min.css">
       <DependentUpon>errordisplay.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\angular-snap.css">
+      <DependentUpon>angular-snap.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\animations.css">
+      <DependentUpon>animations.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\blockui.css">
+      <DependentUpon>blockui.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\bootstrap.css">
+      <DependentUpon>bootstrap.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\ckeditor.css.map">
+      <DependentUpon>ckeditor.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\angular-snap.scss" />
+    <Content Include="Content\scss\extensions\isotope.css">
+      <DependentUpon>isotope.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\isotope.scss" />
+    <Content Include="Content\scss\extensions\bootstrap.scss" />
+    <Content Include="Content\scss\extensions\animations.css.map">
+      <DependentUpon>animations.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\isotope.css.map">
+      <DependentUpon>isotope.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\ngtagsinput.css.map">
+      <DependentUpon>ngtagsinput.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\bootstrap.css.map">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\blockui.css.map">
+      <DependentUpon>blockui.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\angular-snap.css.map">
+      <DependentUpon>angular-snap.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\accountpage.scss" />
+    <None Include="Content\scss\extensions\ngtagsinput.scss" />
+    <Content Include="Content\scss\extensions\ckeditor.css">
+      <DependentUpon>ckeditor.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\ngtagsinput.css">
+      <DependentUpon>ngtagsinput.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\slick.css">
+      <DependentUpon>slick.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\videogular.css">
+      <DependentUpon>videogular.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\header\headermenu.css">
       <DependentUpon>headermenu.scss</DependentUpon>
@@ -420,6 +492,20 @@
     <Content Include="Content\scss\media\mediagroupedlist.css.map">
       <DependentUpon>mediagroupedlist.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\errorpage.scss" />
+    <Content Include="Content\scss\errorpage.css.map">
+      <DependentUpon>errorpage.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\animations.scss" />
+    <Content Include="Content\scss\extensions\blockui.scss" />
+    <Content Include="Content\scss\extensions\videogular.scss" />
+    <Content Include="Content\scss\extensions\videogular.css.map">
+      <DependentUpon>videogular.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\slick.scss" />
+    <Content Include="Content\scss\extensions\slick.css.map">
+      <DependentUpon>slick.css</DependentUpon>
+    </Content>
     <None Include="Content\scss\media\mediagroupedlist.scss" />
     <Content Include="Content\scss\media\mediagroupedlist.css">
       <DependentUpon>mediagroupedlist.scss</DependentUpon>
@@ -439,8 +525,15 @@
     <Content Include="Content\scss\media\mediaselectiondialog.min.css">
       <DependentUpon>mediaselectiondialog.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\modifypost.css">
+      <DependentUpon>modifypost.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\navigation\navigationmenu.css.map">
       <DependentUpon>navigationmenu.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\modifypost.scss" />
+    <Content Include="Content\scss\modifypost.css.map">
+      <DependentUpon>modifypost.css</DependentUpon>
     </Content>
     <None Include="Content\scss\navigation\navigationmenu.scss" />
     <Content Include="Content\scss\navigation\navigationmenu.css">
@@ -449,11 +542,45 @@
     <Content Include="Content\scss\navigation\navigationmenu.min.css">
       <DependentUpon>navigationmenu.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\posts.css">
+      <DependentUpon>posts.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postcontents.css">
+      <DependentUpon>postcontents.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlikes.css">
+      <DependentUpon>postlikes.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\posts\postlistitem.css">
       <DependentUpon>postlistitem.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\posts\postlistitem.min.css">
       <DependentUpon>postlistitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlistitemcomment.css">
+      <DependentUpon>postlistitemcomment.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postrelateditem.css.map">
+      <DependentUpon>postrelateditem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts.scss" />
+    <Content Include="Content\scss\posts.css.map">
+      <DependentUpon>posts.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlikes.css.map">
+      <DependentUpon>postlikes.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\ckeditor.scss" />
+    <None Include="Content\scss\posts\postrelateditem.scss" />
+    <Content Include="Content\scss\posts\postrelateditem.css">
+      <DependentUpon>postrelateditem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postrelateditems.css.map">
+      <DependentUpon>postrelateditems.css</DependentUpon>
+    </Content>
+    <None Include="Content\scss\posts\postrelateditems.scss" />
+    <Content Include="Content\scss\posts\postrelateditems.css">
+      <DependentUpon>postrelateditems.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\shared\fileupload.css">
       <DependentUpon>fileupload.scss</DependentUpon>
@@ -467,11 +594,53 @@
     <Content Include="Content\scss\shared\fileuploaditem.min.css">
       <DependentUpon>fileuploaditem.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\sockets\socketdebugger.css">
+      <DependentUpon>socketdebugger.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\tags\tagitem.css">
       <DependentUpon>tagitem.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\tags\tagitem.min.css">
       <DependentUpon>tagitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\usercommentitem.css">
+      <DependentUpon>usercommentitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userimage.css">
+      <DependentUpon>userimage.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userpostitem.css">
+      <DependentUpon>userpostitem.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilecomments.css">
+      <DependentUpon>userprofilecomments.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofiledetails.css">
+      <DependentUpon>userprofiledetails.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilefavorites.css">
+      <DependentUpon>userprofilefavorites.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilemedia.css">
+      <DependentUpon>userprofilemedia.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilenavigation.css.map">
+      <DependentUpon>userprofilenavigation.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilemedia.scss" />
+    <Content Include="Content\scss\user\userprofilemedia.css.map">
+      <DependentUpon>userprofilemedia.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofiledetails.scss" />
+    <Content Include="Content\scss\user\userprofiledetails.css.map">
+      <DependentUpon>userprofiledetails.css</DependentUpon>
+    </Content>
+    <None Include="Content\scss\user\userprofilenavigation.scss" />
+    <Content Include="Content\scss\user\userprofilenavigation.css">
+      <DependentUpon>userprofilenavigation.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofileposts.css">
+      <DependentUpon>userprofileposts.scss</DependentUpon>
     </Content>
     <Content Include="Content\scss\variables.css">
       <DependentUpon>variables.scss</DependentUpon>
@@ -2290,6 +2459,8 @@
     <Content Include="Scripts\cssbundle.min.css">
       <DependentUpon>cssbundle.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jsbundle.js">
       <DependentUpon>jsbundle.js.bundle</DependentUpon>
     </Content>
@@ -3137,7 +3308,6 @@
     <Content Include="Scripts\modules\user\user.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\site.css" />
     <Content Include="Scripts\modules\posts\directives\postListItem.js" />
     <Content Include="Scripts\modules\posts\directives\postListItemComment.js" />
     <Content Include="Scripts\modules\posts\controllers\postsController.js" />
@@ -3433,6 +3603,43 @@
     <Content Include="Content\scss\shared\fileuploaditem.css.map">
       <DependentUpon>fileuploaditem.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\sockets\socketdebugger.scss" />
+    <Content Include="Content\scss\sockets\socketdebugger.css.map">
+      <DependentUpon>socketdebugger.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postcontents.scss" />
+    <Content Include="Content\scss\posts\postcontents.css.map">
+      <DependentUpon>postcontents.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlikes.scss" />
+    <Content Include="Content\scss\posts\postlistitemcomment.scss" />
+    <Content Include="Content\scss\posts\postlistitemcomment.css.map">
+      <DependentUpon>postlistitemcomment.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\usercommentitem.scss" />
+    <Content Include="Content\scss\user\usercommentitem.css.map">
+      <DependentUpon>usercommentitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userimage.scss" />
+    <Content Include="Content\scss\user\userimage.css.map">
+      <DependentUpon>userimage.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userpostitem.scss" />
+    <Content Include="Content\scss\user\userpostitem.css.map">
+      <DependentUpon>userpostitem.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilecomments.scss" />
+    <Content Include="Content\scss\user\userprofilecomments.css.map">
+      <DependentUpon>userprofilecomments.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilefavorites.scss" />
+    <Content Include="Content\scss\user\userprofilefavorites.css.map">
+      <DependentUpon>userprofilefavorites.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofileposts.scss" />
+    <Content Include="Content\scss\user\userprofileposts.css.map">
+      <DependentUpon>userprofileposts.css</DependentUpon>
+    </Content>
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3445,8 +3652,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\scss\sockets\" />
-    <Folder Include="Content\scss\user\" />
     <Folder Include="Scripts\modules\comments\controllers\" />
     <Folder Include="Scripts\modules\messaging\directives\" />
   </ItemGroup>

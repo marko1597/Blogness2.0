@@ -12,7 +12,15 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Content/site.css</file>
+    <file>/Content/modules/extensions/animations.css</file>
+    <file>/Content/modules/extensions/ckeditor.css</file>
+    <file>/Content/modules/extensions/blockui.css</file>
+    <file>/Content/modules/extensions/ngtagsinput.css</file>
+    <file>/Content/modules/extensions/angular-snap.css</file>
+    <file>/Content/modules/extensions/slick.css</file>
+    <file>/Content/modules/extensions/isotope.css</file>
+    <file>/Content/modules/extensions/bootstrap.css</file>
+    
     <file>/Content/modules/main.css</file>
     <file>/Content/modules/accountpage.css</file>
     <file>/Content/modules/errorpage.css</file>

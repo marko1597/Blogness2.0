@@ -10,14 +10,13 @@
     background: $primary-color;
     display: inline-block;
     cursor: pointer;
-    box-shadow: inset 0 0 1px hsla(0, 0%, 100%, 0.1);
     -webkit-text-shadow: 0 1px 0 rgba(0,0,0,0.25);
     text-shadow: 0 1px 0 rgba(0,0,0,0.25);
 
     &:hover {
+        @include box-shadow(true);
         background: darken($primary-color, $hover-darken-value);
         border-color: darken(darken($primary-color, $border-darken-value), $hover-darken-value);
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
     }
 
     > i {
