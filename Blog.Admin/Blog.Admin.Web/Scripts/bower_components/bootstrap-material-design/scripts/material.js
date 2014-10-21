@@ -2,8 +2,12 @@
 
 $(function (){
 
-    if (ripples) {
-        ripples.init(".btn:not(.btn-link), .navbar a, .nav-tabs a, .withripple");
+    if (typeof ripples == "object") {
+        ripples.init( ".btn:not(.btn-link)," +
+                      ".card-image," +
+                      ".navbar a:not(.withoutripple)," +
+                      ".nav-tabs a:not(.withoutripple)," +
+                      ".withripple" );
     }
 
     var initInputs = function() {

@@ -1,7 +1,7 @@
-// main: material.less
+// main: _material.scss
 
 .nav-tabs {
-    background: @navbar-default-bg;
+    background: $navbar-default-bg;
     > li {
         > a {
             color: #FFFFFF;

@@ -1386,7 +1386,7 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
             })
             .state('ownprofile', {
                 url: "/user",
-                templateUrl: window.blogConfiguration.templatesUrl + 'user.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'users.html',
                 controller: 'userProfileController',
                 'abstract': true
             })

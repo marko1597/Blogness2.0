@@ -353,6 +353,7 @@
     <Content Include="Content\modules\shared\fileuploaditem.css" />
     <Content Include="Content\modules\sockets\socketdebugger.css" />
     <Content Include="Content\modules\tags\tagitem.css" />
+    <Content Include="Content\modules\users.css" />
     <Content Include="Content\modules\user\usercommentitem.css" />
     <Content Include="Content\modules\user\userimage.css" />
     <Content Include="Content\modules\user\userpostitem.css" />
@@ -603,6 +604,9 @@
     <Content Include="Content\scss\tags\tagitem.min.css">
       <DependentUpon>tagitem.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\users.css">
+      <DependentUpon>users.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\usercommentitem.css">
       <DependentUpon>usercommentitem.scss</DependentUpon>
     </Content>
@@ -634,6 +638,10 @@
     <Content Include="Content\scss\user\userprofiledetails.scss" />
     <Content Include="Content\scss\user\userprofiledetails.css.map">
       <DependentUpon>userprofiledetails.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\users.scss" />
+    <Content Include="Content\scss\users.css.map">
+      <DependentUpon>users.css</DependentUpon>
     </Content>
     <None Include="Content\scss\user\userprofilenavigation.scss" />
     <Content Include="Content\scss\user\userprofilenavigation.css">
@@ -3375,7 +3383,7 @@
     <Content Include="Scripts\templates\modules\user\userProfileMedia.html" />
     <Content Include="Scripts\templates\modules\user\userProfileNavigation.html" />
     <Content Include="Scripts\templates\modules\user\userProfilePosts.html" />
-    <Content Include="Scripts\templates\user.html" />
+    <Content Include="Scripts\templates\users.html" />
     <Content Include="Scripts\templates\friends.html" />
     <Content Include="Scripts\templates\posts.html" />
     <Content Include="Scripts\templates\viewpost.html" />

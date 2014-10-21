@@ -12,6 +12,19 @@
   -o-animation-name: bounceInLeft;
   animation-name: bounceInLeft; }
 
+ui-view ui-view, ui-view *[ui-view], *[ui-view] ui-view, *[ui-view] *[ui-view] {
+  -o-animation-duration: 0.5s;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -o-animation-fill-mode: both;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -moz-animation-name: bounceInUp;
+  -o-animation-name: bounceInUp;
+  -webkit-animation-name: bounceInUp;
+  animation-name: bounceInUp; }
+
 .animate {
   -moz-animation-duration: 1s;
   -o-animation-duration: 1s;

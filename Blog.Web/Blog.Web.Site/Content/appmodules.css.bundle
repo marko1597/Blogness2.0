@@ -26,6 +26,7 @@
     <file>/Content/modules/errorpage.css</file>
     <file>/Content/modules/modifypost.css</file>
     <file>/Content/modules/posts.css</file>
+    <file>/Content/modules/users.css</file>
     <file>/Content/modules/viewpost.css</file>
     
     <file>/Content/modules/comments/commentitem.css</file>
