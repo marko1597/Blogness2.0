@@ -20,20 +20,18 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/tags/{tagName}")]
-        public List<Tag> Get(string tagName)
+        public IHttpActionResult Get(string tagName)
         {
-            var tags = new List<Tag>();
-
             try
             {
-                tags = _tag.GetByName(tagName) ?? new List<Tag>();
-
+                var tags = _tag.GetByName(tagName) ?? new List<Tag>();
+                return Ok(tags);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return tags;
         }
     }
 }

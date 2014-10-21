@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net;
 using System.Web.Http;
-using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Web.Api.Controllers
@@ -21,19 +17,18 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/posts/{postId}/viewcount")]
-        public List<ViewCount> Get(int postId)
+        public IHttpActionResult Get(int postId)
         {
-            var viewCounts = new List<ViewCount>();
-
             try
             {
-                viewCounts = _service.Get(postId) ?? new List<ViewCount>();
+                var viewCounts = _service.Get(postId);
+                return Ok(viewCounts);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return viewCounts;
         }
     }
 }

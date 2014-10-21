@@ -39,33 +39,37 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/users/{userId:int}/albums")]
-        public List<Album> GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
-            var albums = new List<Album>();
+            
             try
             {
-                albums = _service.GetByUser(userId) ?? new List<Album>();
+                var albums = _service.GetByUser(userId) ?? new List<Album>();
+                return Ok(albums);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return albums;
         }
 
         [HttpGet]
         [Route("api/users/{userId:int}/albums/default")]
-        public Album GetUserDefault(int userId)
+        public IHttpActionResult GetUserDefault(int userId)
         {
             try
             {
-                return _service.GetUserDefaultGroup(userId) ?? new Album();
+                var result = _service.GetUserDefaultGroup(userId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Album().GenerateError<Album>((int)Constants.Error.InternalError,
+
+                var errorResult = new Album().GenerateError<Album>((int)Constants.Error.InternalError,
                     "Server technical error");
+                return Ok(errorResult);
             }
         }
 
@@ -119,7 +123,7 @@ namespace Blog.Web.Api.Controllers
 
         [HttpDelete]
         [Route("api/album/{albumId}")]
-        public bool Delete(int albumId)
+        public IHttpActionResult Delete(int albumId)
         {
             try
             {
@@ -127,24 +131,21 @@ namespace Blog.Web.Api.Controllers
                 if (album != null && album.Error != null)
                 {
                     _errorSignaler.SignalFromCurrentContext(new Exception(album.Error.Message));
-                    return false;
+                    return Ok(false);
                 }
 
-                if (album != null && album.User != null)
-                {
-                    var username = HttpContext.Current.User.Identity.Name;
-                    if (album.User.UserName == username)
-                    {
-                        _service.Delete(albumId);
-                        return true;
-                    }
-                }
+                if (album == null || album.User == null) return Ok(false);
 
-                return false;
+                var username = HttpContext.Current.User.Identity.Name;
+                if (album.User.UserName != username) return Ok(false);
+
+                _service.Delete(albumId);
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return Ok(false);
             }
         }
     }

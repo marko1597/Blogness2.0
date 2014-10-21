@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf.Interfaces;
-using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -16,34 +12,29 @@ namespace Blog.Web.Api.Controllers
         private readonly IUsersResource _user;
         private readonly ICommentLikesResource _service;
         private readonly IErrorSignaler _errorSignaler;
-        private readonly IHttpClientHelper _httpClientHelper;
-        private readonly IConfigurationHelper _configurationHelper;
 
-        public CommentLikesController(ICommentLikesResource service, IErrorSignaler errorSignaler, IUsersResource user, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public CommentLikesController(ICommentLikesResource service, IErrorSignaler errorSignaler, IUsersResource user)
         {
             _service = service;
             _errorSignaler = errorSignaler;
-            _user = user; 
-            _httpClientHelper = httpClientHelper;
-            _configurationHelper = configurationHelper;
+            _user = user;
         }
 
         [HttpGet]
         [Route("api/comments/{commentId}/likes")]
-        public List<CommentLike> Get(int commentId)
+        public IHttpActionResult Get(int commentId)
         {
-            var commentLikes = new List<CommentLike>();
-
             try
             {
-                commentLikes = _service.Get(commentId) ?? new List<CommentLike>();
+                var commentLikes = _service.Get(commentId);
+                return Ok(commentLikes);
 
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return commentLikes;
         }
 
         [HttpPost, Authorize]

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Blog.Common.Contracts;
+﻿using Blog.Common.Contracts;
 using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
@@ -22,18 +21,18 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/users/{userId:int}/education")]
-        public List<Education> GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
-            var education = new List<Education>();
             try
             {
-                education = _service.GetByUser(userId) ?? new List<Education>();
+                var education = _service.GetByUser(userId);
+                return Ok(education);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return education;
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
@@ -86,16 +85,17 @@ namespace Blog.Web.Api.Controllers
 
         [HttpDelete]
         [Route("api/education/{educationId}")]
-        public bool Delete(int educationId)
+        public IHttpActionResult Delete(int educationId)
         {
             try
             {
                 _service.Delete(educationId);
-                return true;
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
     }

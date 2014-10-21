@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils;
@@ -22,64 +21,71 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/posts/{postId:int}/contents")]
-        public List<PostContent> GetList(int postId)
+        public IHttpActionResult GetList(int postId)
         {
-            var postContents = new List<PostContent>();
             try
             {
-                postContents = _postContentsSvc.GetByPostId(postId) ?? new List<PostContent>();
+                var postContents = _postContentsSvc.GetByPostId(postId);
+                return Ok(postContents);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return postContents;
         }
 
         [HttpGet]
         [Route("api/postcontent/{postContentId:int}")]
-        public PostContent Get(int postContentId)
+        public IHttpActionResult Get(int postContentId)
         {
             try
             {
-                return _postContentsSvc.Get(postContentId) ?? new PostContent();
+                var result = _postContentsSvc.Get(postContentId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
+                var errorResult = new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/postcontent")]
-        public PostContent Post([FromBody]PostContent postContent)
+        public IHttpActionResult Post([FromBody]PostContent postContent)
         {
             try
             {
-                return _postContentsSvc.Add(postContent);
+                var result = _postContentsSvc.Add(postContent);
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
+                var errorResult = new PostContent().GenerateError<PostContent>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
         [HttpDelete]
         [Route("api/postcontent/{postContentId}")]
-        public bool Delete(int postContentId)
+        public IHttpActionResult Delete(int postContentId)
         {
             try
             {
                 _postContentsSvc.Delete(postContentId);
-                return true;
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
     }

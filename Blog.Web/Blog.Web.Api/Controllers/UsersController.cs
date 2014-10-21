@@ -86,20 +86,19 @@ namespace Blog.Web.Api.Controllers
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
         [Route("api/users")]
-        public User Post([FromBody] User user)
+        public IHttpActionResult Post([FromBody] User user)
         {
             try
             {
                 var tUser = _user.Add(user);
                 tUser = HideUserProperties(tUser);
 
-                return tUser;
+                return Ok(tUser);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-
-                return new User
+                var errorResult = new User
                 {
                     Error = new Error
                     {
@@ -107,6 +106,8 @@ namespace Blog.Web.Api.Controllers
                         Message = "Oops! That's not supposed to happen. Can you try again?"
                     }
                 };
+
+                return Ok(errorResult);
             }
         }
 
@@ -150,7 +151,7 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
-        private UserProfileViewModel GetViewModel(User user)
+        private static UserProfileViewModel GetViewModel(User user)
         {
             var userViewModel = new UserProfileViewModel
                                 {
@@ -208,7 +209,7 @@ namespace Blog.Web.Api.Controllers
             return userViewModel;
         }
 
-        private User HideUserProperties(User user)
+        private static User HideUserProperties(User user)
         {
             if (user.Picture != null)
             {

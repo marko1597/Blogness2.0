@@ -3485,7 +3485,7 @@ ngShared.directive("videoPlayer", [
                 ],
                 transclude: true,
                 theme: {
-                    url: window.blogConfiguration.blogRoot + "/content/plugins/videogular/themes/default/videogular.css"
+                    url: window.blogConfiguration.blogRoot + "/scripts/bower_components/videogular-themes-default/videogular.css"
                 },
                 plugins: {
                     poster: {

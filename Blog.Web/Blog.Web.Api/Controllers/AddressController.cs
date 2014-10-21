@@ -21,17 +21,20 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/users/{userId:int}/address")]
-        public Address GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
             try
             {
-                return _service.GetByUser(userId) ?? new Address();
+                var address = _service.GetByUser(userId);
+                return Ok(address);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return new Address().GenerateError<Address>((int)Constants.Error.InternalError,
+                var errorResult = new Address().GenerateError<Address>((int)Constants.Error.InternalError,
                     "Server technical error");
+
+                return Ok(errorResult);
             }
         }
 
@@ -85,16 +88,17 @@ namespace Blog.Web.Api.Controllers
 
         [HttpDelete]
         [Route("api/address/{addressId}")]
-        public bool Delete(int addressId)
+        public IHttpActionResult Delete(int addressId)
         {
             try
             {
                 _service.Delete(addressId);
-                return true;
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
     }

@@ -39,44 +39,46 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/album/{albumId:int}/media")]
-        public List<Media> GetByGroup(int albumId)
+        public IHttpActionResult GetByGroup(int albumId)
         {
-            var media = new List<Media>();
             try
             {
-                media = _media.GetByGroup(albumId) ?? new List<Media>();
+                var media = _media.GetByGroup(albumId) ?? new List<Media>();
                 media.ForEach(a =>
                 {
                     a.MediaPath = null;
                     a.ThumbnailPath = null;
                 });
+
+                return Ok(media);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return media;
         }
 
         [HttpGet]
         [Route("api/users/{userId:int}/media")]
-        public List<Media> GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
-            var media = new List<Media>();
             try
             {
-                media = _media.GetByUser(userId) ?? new List<Media>();
+                var media = _media.GetByUser(userId) ?? new List<Media>();
                 media.ForEach(a =>
                 {
                     a.MediaPath = null;
                     a.ThumbnailPath = null;
                 });
+
+                return Ok(media);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return media;
         }
 
         [HttpGet]
@@ -187,31 +189,32 @@ namespace Blog.Web.Api.Controllers
 
         [HttpDelete, Authorize]
         [Route("api/media/{mediaId}")]
-        public bool Delete(int mediaId)
+        public IHttpActionResult Delete(int mediaId)
         {
             try
             {
                 var media = _media.Get(mediaId);
 
-                if (media == null) return false;
+                if (media == null) return Ok(false);
                 if (media.Error != null)
                 {
                     _errorSignaler.SignalFromCurrentContext(new Exception(media.Error.Message));
-                    return false;
+                    return Ok(false);
                 }
 
                 var album = _album.Get(media.AlbumId);
-                if (album == null || album.User == null) return false;
+                if (album == null || album.User == null) return Ok(false);
 
                 var username = HttpContext.Current.User.Identity.Name;
-                if (album.User.UserName != username) return false;
+                if (album.User.UserName != username) return Ok(false);
 
                 _media.Delete(mediaId);
-                return true;
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
 

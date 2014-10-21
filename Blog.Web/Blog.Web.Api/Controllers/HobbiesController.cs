@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Utils;
 using Blog.Common.Contracts;
@@ -22,18 +21,18 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/users/{userId:int}/hobbies")]
-        public List<Hobby> GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
-            var hobbies = new List<Hobby>();
             try
             {
-                hobbies = _service.GetByUser(userId) ?? new List<Hobby>();
+                var hobbies = _service.GetByUser(userId);
+                return Ok(hobbies);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return hobbies;
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
@@ -86,16 +85,17 @@ namespace Blog.Web.Api.Controllers
 
         [HttpDelete]
         [Route("api/hobbies/{hobbyId}")]
-        public bool Delete(int hobbyId)
+        public IHttpActionResult Delete(int hobbyId)
         {
             try
             {
                 _service.Delete(hobbyId);
-                return true;
+                return Ok(true);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
     }

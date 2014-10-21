@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 using Blog.Common.Contracts;
-using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Common.Utils.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf.Interfaces;
-using Blog.Web.Api.Helper.Hub;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -16,34 +12,28 @@ namespace Blog.Web.Api.Controllers
         private readonly IPostLikesResource _service;
         private readonly IUsersResource _user;
         private readonly IErrorSignaler _errorSignaler;
-        private readonly IHttpClientHelper _httpClientHelper;
-        private readonly IConfigurationHelper _configurationHelper;
 
-        public PostLikesController(IPostLikesResource service, IUsersResource user, IErrorSignaler errorSignaler, IHttpClientHelper httpClientHelper, IConfigurationHelper configurationHelper)
+        public PostLikesController(IPostLikesResource service, IUsersResource user, IErrorSignaler errorSignaler)
         {
             _service = service;
             _user = user;
             _errorSignaler = errorSignaler;
-            _httpClientHelper = httpClientHelper;
-            _configurationHelper = configurationHelper;
         }
 
         [HttpGet]
         [Route("api/posts/{postId}/likes")]
-        public List<PostLike> Get(int postId)
+        public IHttpActionResult Get(int postId)
         {
-            var postLikes = new List<PostLike>();
-
             try
             {
-                postLikes = _service.Get(postId) ?? new List<PostLike>();
-
+                var postLikes = _service.Get(postId);
+                return Ok(postLikes);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return postLikes;
         }
 
         [HttpPost, Authorize]

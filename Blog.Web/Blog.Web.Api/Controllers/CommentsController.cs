@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
@@ -21,55 +20,50 @@ namespace Blog.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/posts/{postId}/comments")]
-        public List<Comment> GetByPost(int postId)
+        public IHttpActionResult GetByPost(int postId)
         {
-            var comments = new List<Comment>();
-
             try
             {
-                comments = _service.GetByPostId(postId) ?? new List<Comment>();
-
+                var comments = _service.GetByPostId(postId);
+                return Ok(comments);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return comments;
         }
 
         [HttpGet]
         [Route("api/user/{userId}/comments")]
-        public List<Comment> GetByUser(int userId)
+        public IHttpActionResult GetByUser(int userId)
         {
-            var comments = new List<Comment>();
-
             try
             {
-                comments = _service.GetByUser(userId) ?? new List<Comment>();
-
+                var comments = _service.GetByUser(userId);
+                return Ok(comments);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return comments;
         }
 
         [HttpGet]
         [Route("api/comments/{commentId}/replies")]
-        public List<Comment> Replies(int commentId)
+        public IHttpActionResult Replies(int commentId)
         {
-            var comments = new List<Comment>();
-
             try
             {
-                comments = _service.GetReplies(commentId) ?? new List<Comment>();
+                var comments = _service.GetReplies(commentId);
+                return Ok(comments);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
-            return comments;
         }
 
         [HttpPost, PreventCrossUserManipulation, Authorize]
@@ -89,21 +83,23 @@ namespace Blog.Web.Api.Controllers
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
-                return Ok();
+                return BadRequest();
             }
         }
 
         [HttpDelete, Authorize]
         [Route("api/comments/{id:int}")]
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             try
             {
                 _service.Delete(id);
+                return Ok(true);
             }
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
             }
         }
     }
