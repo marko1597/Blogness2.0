@@ -2418,7 +2418,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             fn: function (item /*{File|HTMLInputElement}*/) {
                 var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
                 type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|mp4|flv|webm|'.indexOf(type) !== -1;
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
         });
 
@@ -4272,10 +4272,6 @@ ngUser.directive('userProfileDetailsEducation', [function () {
                 _.each(g.Content, function (e) {
                     e.YearAttendedDisplay = dateHelper.getMonthYear(e.YearAttended);
                     e.YearGraduatedDisplay = dateHelper.getMonthYear(e.YearGraduated);
-
-                    if (!e.Course || e.Course === "") {
-                        e.Course = "No course selected";
-                    }
                 });
             });
         });
@@ -4468,6 +4464,14 @@ ngUser.directive('userProfileDetailsEducationItem', [function () {
                     }
                     return "";
                 }
+            }
+        };
+
+        $scope.educationCourseDisplay = function() {
+            if (!$scope.education.Course || $scope.education.Course === '') {
+                return 'No course selected';
+            } else {
+                return $scope.education.Course;
             }
         };
     };

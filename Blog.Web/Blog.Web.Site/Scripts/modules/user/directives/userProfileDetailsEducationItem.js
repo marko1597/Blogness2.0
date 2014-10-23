@@ -82,6 +82,14 @@
                 }
             }
         };
+
+        $scope.educationCourseDisplay = function() {
+            if (!$scope.education.Course || $scope.education.Course === '') {
+                return 'No course selected';
+            } else {
+                return $scope.education.Course;
+            }
+        };
     };
     ctrlFn.$inject = ["$scope", "userService", "dateHelper", "blockUiService", "errorService", "localStorageService"];
 

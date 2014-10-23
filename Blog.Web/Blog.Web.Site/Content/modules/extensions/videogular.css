@@ -1,5 +1,9 @@
-/* line 4, ../../scss/extensions/videogular.scss */
-videogular vg-video {
+/* line 3, ../../scss/extensions/videogular.scss */
+videogular {
+  text-align: left;
+}
+/* line 6, ../../scss/extensions/videogular.scss */
+videogular video {
   min-height: 380px;
-  max-height: 500px;
+  max-height: 380px !important;
 }
