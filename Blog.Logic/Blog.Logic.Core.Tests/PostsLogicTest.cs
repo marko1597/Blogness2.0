@@ -1351,6 +1351,48 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldThrowExceptionWhenAddPostHasMoreThanOneVideo()
+        {
+            #region Variables
+
+            var param = new Common.Contracts.Post
+            {
+                PostContents = new List<Common.Contracts.PostContent>
+                               {
+                                   new Common.Contracts.PostContent
+                                   {
+                                       Media = new Common.Contracts.Media
+                                               {
+                                                   MediaType = "video/mp4"
+                                               }
+                                   },
+                                   new Common.Contracts.PostContent
+                                   {
+                                       Media = new Common.Contracts.Media
+                                               {
+                                                   MediaType = "video/avi"
+                                               }
+                                   }
+                               },
+                Tags = null,
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
+            };
+
+            #endregion
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.AddPost(param));
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenAddPostFails()
         {
             #region Variables
@@ -1619,6 +1661,48 @@ namespace Blog.Logic.Core.Tests
             Assert.Throws<BlogException>(() => _postsLogic.UpdatePost(param));
         }
 
+        [Test]
+        public void ShouldThrowExceptionWhenUpdatePostHasMoreThanOneVideo()
+        {
+            #region Variables
+
+            var param = new Common.Contracts.Post
+            {
+                PostContents = new List<Common.Contracts.PostContent>
+                               {
+                                   new Common.Contracts.PostContent
+                                   {
+                                       Media = new Common.Contracts.Media
+                                               {
+                                                   MediaType = "video/mp4"
+                                               }
+                                   },
+                                   new Common.Contracts.PostContent
+                                   {
+                                       Media = new Common.Contracts.Media
+                                               {
+                                                   MediaType = "video/avi"
+                                               }
+                                   }
+                               },
+                Tags = null,
+                PostTitle = "Foo",
+                PostMessage = "Lorem Ipsum Dolor",
+                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
+            };
+
+            #endregion
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.AddPost(param));
+        }
+        
         [Test]
         public void ShouldReturnTrueOnDeletePostContent()
         {

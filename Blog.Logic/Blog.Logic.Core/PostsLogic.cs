@@ -229,6 +229,9 @@ namespace Blog.Logic.Core
         {
             try
             {
+                if (!ValidatePostContents(post.PostContents))
+                    throw new Exception("Cannot upload more than one video.");
+
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
 
@@ -245,6 +248,9 @@ namespace Blog.Logic.Core
         {
             try
             {
+                if (!ValidatePostContents(post.PostContents))
+                    throw new Exception("Cannot upload more than one video.");
+
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
 
@@ -282,6 +288,30 @@ namespace Blog.Logic.Core
             }
 
             return enumerable.ToList();
+        }
+
+        private static bool ValidatePostContents(IEnumerable<PostContent> contents)
+        {
+            if (contents == null) return true;
+
+            var postContents = contents as PostContent[] ?? contents.ToArray();
+            if (postContents.Length == 0) return true;
+
+            var supportedMedia = new List<string>
+            {
+                "video/avi",
+                "video/quicktime",
+                "video/mpeg",
+                "video/mp4",
+                "video/x-flv"
+            };
+
+            var videoContents = postContents.Where(content => 
+                content.Media != null && 
+                supportedMedia.Contains(content.Media.MediaType))
+                .ToList();
+
+            return !(videoContents.Count > 1);
         }
 
         private static List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int postId)

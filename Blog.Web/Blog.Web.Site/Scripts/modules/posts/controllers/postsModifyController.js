@@ -82,29 +82,33 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.savePost = function () {
             if ($scope.authData && $scope.user) {
-                $scope.post.User = $scope.user;
-                setPostContentsFromUploader();
+                if (uploader.getNotUploadedItems().length > 0) {
+                    $scope.post.User = $scope.user;
+                    setPostContentsFromUploader();
 
-                if ($scope.isAdding) {
-                    postsService.addPost($scope.post).then(function (resp) {
-                        if (resp.Error == undefined) {
-                            $location.path("/");
-                        } else {
-                            errorService.displayError(resp.Error);
-                        }
-                    }, function (e) {
-                        errorService.displayError(e);
-                    });
+                    if ($scope.isAdding) {
+                        postsService.addPost($scope.post).then(function(resp) {
+                            if (resp.Error == undefined) {
+                                $location.path("/");
+                            } else {
+                                errorService.displayError(resp.Error);
+                            }
+                        }, function(e) {
+                            errorService.displayError(e);
+                        });
+                    } else {
+                        postsService.updatePost($scope.post).then(function(resp) {
+                            if (resp.Error == undefined) {
+                                $location.path("/");
+                            } else {
+                                errorService.displayError(resp.Error);
+                            }
+                        }, function(e) {
+                            errorService.displayError(e);
+                        });
+                    }
                 } else {
-                    postsService.updatePost($scope.post).then(function (resp) {
-                        if (resp.Error == undefined) {
-                            $location.path("/");
-                        } else {
-                            errorService.displayError(resp.Error);
-                        }
-                    }, function (e) {
-                        errorService.displayError(e);
-                    });
+                    errorService.displayError("There are some contents not yet uploaded.");
                 }
             } else {
                 $rootScope.$broadcast("launchLoginForm");
@@ -126,6 +130,23 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                 }
             });
         };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.username = $scope.user.UserName;
+                $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+            }
+        });
+
+        $scope.$on("userLoggedIn", function () {
+            $scope.username = localStorageService.get("username");
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+
+        $scope.$on("windowSizeChanged", function (e, d) {
+            configProvider.setDimensions(d.width, d.height);
+        });
 
         // #region media selection dialog
 
@@ -158,7 +179,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             media.IsSelected = !media.IsSelected;
 
             if (media.IsSelected) {
-                addMediaToUploaderQueue(media, '', '');
+                media.IsSelected = addMediaToUploaderQueue(media, '', '');
             } else {
                 removeMediaFromUploaderQueue(media);
             }
@@ -174,32 +195,23 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         // #endregion
 
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.username = $scope.user.UserName;
-                $scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
-            }
-        });
-
-        $scope.$on("userLoggedIn", function () {
-            $scope.username = localStorageService.get("username");
-            $scope.authData = localStorageService.get("authorizationData");
-        });
-
-        $scope.$on("windowSizeChanged", function (e, d) {
-            configProvider.setDimensions(d.width, d.height);
-        });
-
         // #region angular-file-upload
 
         var addMediaToUploaderQueue = function (media, title, text) {
             var item = getUploaderItem(media, title, text);
 
+            var isValid = validateVideoUpload(item);
+            if (!isValid) {
+                errorService.displayError("You cannot upload more than one video in a post.");
+                return false;
+            }
+
             $timeout(function () {
                 uploader.queue.push(item);
                 $scope.$broadcast("resizeIsotopeItems");
             }, 500);
+
+            return true;
         };
 
         var removeMediaFromUploaderQueue = function (media) {
@@ -230,7 +242,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             var item = {
                 file: {
                     name: media.FileName,
-                    size: 1e6
+                    size: 1e6,
+                    type: media.MediaType,
                 },
                 mediaId: media.Id,
                 media: media,
@@ -261,7 +274,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
         var uploader = $scope.uploader = new FileUploader({
             scope: $rootScope,
             url: $scope.uploadUrl,
-            autoUpload: true,
+            autoUpload: false,
             headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
         });
 
@@ -270,7 +283,13 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             fn: function (item /*{File|HTMLInputElement}*/) {
                 var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
                 type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+
+                if (!validateVideoUpload(item)) {
+                    errorService.displayError("You cannot upload more than one video in a post.");
+                    return false;
+                }
+                
+                return '|jpg|png|jpeg|bmp|gif|mp4|flv|'.indexOf(type) !== -1;
             }
         });
 
@@ -293,7 +312,27 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
             fileItem.postContentText = "";
         };
 
-        uploader.onAfterAddingAll = function () {
+        var validateVideoUpload = function(fileItem) {
+            var supportedVideos = [
+                "video/avi",
+                "video/quicktime",
+                "video/mpeg",
+                "video/mp4",
+                "video/x-flv"
+            ];
+
+            var isVideo = _.contains(supportedVideos, (fileItem.file ? fileItem.file.type : fileItem.type));
+            if (isVideo) {
+                var videoUploads = _.filter(uploader.queue, function (upload) {
+                    return _.contains(supportedVideos, upload.file.type);
+                });
+
+                if (videoUploads.length > 0) {
+                    return false;
+                }
+                return true;
+            };
+            return true;
         };
 
         // #endregion

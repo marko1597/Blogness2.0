@@ -3,7 +3,7 @@
 #blog-error-global {
     @include position(absolute, null, null, 0);
     @include size(100%, auto);
-    z-index: 1020;
+    z-index: 1051;
     color: $default-color;
 
     .close-error {
