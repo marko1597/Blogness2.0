@@ -1,5 +1,5 @@
 ﻿ngMedia.directive('mediaItem', function () {
-    var ctrlFn = function ($scope, $rootScope, localStorageService, $modal, mediaService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, $modal, mediaService, errorService) {
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this item?",
@@ -46,6 +46,25 @@
             mediaDeleteDialog.$promise.then(mediaDeleteDialog.show);
         };
 
+        $scope.toggleGallery = function () {
+            if ($scope.galleryMode && $scope.galleryMode === 'true') {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.viewAsGallery = function () {
+            if ($rootScope.$stateParams.postId) {
+                $location.path("/post/" + $rootScope.$stateParams.postId + '/gallery');
+            } else {
+                if ($rootScope.$stateParams.username) {
+                    $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                } else {
+                    $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                }
+            }
+        };
+
         $scope.confirmDelete = function () {
             mediaService.deleteMedia($scope.media.Id).then(function (response) {
                 mediaDeleteDialog.hide();
@@ -77,12 +96,14 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "localStorageService", "$modal", "mediaService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "$modal", "mediaService", "errorService"];
 
     var linkFn = function (scope, elem, attrs) {
         scope.mode = attrs.mode;
 
         scope.crop = attrs.crop;
+
+        scope.galleryMode = attrs.galleryMode;
 
         scope.allowDelete = attrs.allowDelete;
 
@@ -98,7 +119,8 @@
         restrict: 'EA',
         scope: {
             media: '=',
-            user: '='
+            user: '=',
+            albumName: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaItem.html",

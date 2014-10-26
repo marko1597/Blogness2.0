@@ -1,0 +1,70 @@
+﻿@import '../variables';
+
+#media-gallery {
+    @include size(100%, auto);
+    @include position(fixed, 0, null, null, null);
+    background: rgba(0,0,0, 0.8);
+
+    > .modal-dialog {
+        @include size(100%);
+        @include margin(0);
+
+        > .modal-content {
+            background: transparent;
+
+            > button {
+                @include margin($default-margin);
+                @include position(absolute, 0, 0, null, null);
+                font-size: 3em;
+                color: $default-color;
+                cursor: pointer;
+                background: none;
+                border: none;
+                z-index: 101;
+
+                &:hover {
+                    @include opacity(0.5);
+                }
+            }
+
+            > .modal-header {
+                border-bottom: 0;
+            }
+
+            > .modal-body {
+                z-index: 100;
+
+                slick {
+                    @include size(auto, 100%);
+
+                    .slick-dots {
+                        @include position(absolute, null, null, 0);
+
+                        li {
+                            button {
+                                &:before {
+                                    color: $default-color;
+                                }
+                            }
+
+                            &.slick-active {
+                                button {
+                                    &:before {
+                                        color: $default-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    img {
+        background-size: cover;
+        max-height: 500px;
+        @include size(auto, auto);
+        @include margin(0, auto, 0, auto);
+    }
+}

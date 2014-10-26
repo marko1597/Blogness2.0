@@ -1,6 +1,30 @@
 ﻿.media-item {
   position: relative;
   text-align: center; }
+  .media-item:hover h5 {
+    display: block; }
+  .media-item h5 {
+    position: absolute;
+    bottom: 0;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    display: none;
+    color: #fff;
+    background: #56c2e1;
+    font-family: 'Open Sans', sans-serif;
+    cursor: pointer; }
+    .media-item h5:hover {
+      background: #40bbdd; }
+    .media-item h5 i {
+      margin-right: 15px; }
   .media-item img {
     width: 100%;
     height: auto;

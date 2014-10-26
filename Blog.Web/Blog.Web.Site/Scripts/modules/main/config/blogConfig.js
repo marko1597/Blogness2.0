@@ -43,6 +43,10 @@
                 templateUrl: window.blogConfiguration.templatesUrl + 'viewpost.html',
                 controller: 'postsViewController'
             })
+                .state('viewpost.gallery', {
+                    url: "/gallery",
+                    controller: 'mediaGalleryController'
+                })
             .state('friends', {
                 url: "/friends",
                 templateUrl: window.blogConfiguration.templatesUrl + 'friends.html'
@@ -86,19 +90,23 @@
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
                     controller: 'userProfileCommentsController'
                 })
-                .state('ownprofile.media', {
-                    url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
-                })
                 .state('ownprofile.favorites', {
                     url: '/favorites',
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
                     controller: 'userProfileFavoritesController'
                 })
+                .state('ownprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
+                })
+                    .state('ownprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
             .state('othersprofile', {
                 url: "/user/:username",
-                templateUrl: window.blogConfiguration.templatesUrl + 'user.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'users.html',
                 controller: 'userProfileController',
                 'abstract': true
             })
@@ -117,16 +125,19 @@
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
                     controller: 'userProfileCommentsController'
                 })
-                .state('othersprofile.media', {
-                    url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
-                })
                 .state('othersprofile.favorites', {
                     url: '/favorites',
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
                     controller: 'userProfileFavoritesController'
+                }).state('othersprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
                 })
+                    .state('othersprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
             .state('error', {
                 url: "/error",
                 templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',

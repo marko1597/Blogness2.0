@@ -1,6 +1,6 @@
 ﻿ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
-    "userService", "configProvider", "errorService", "localStorageService",
-    function ($scope, $rootScope, $location, postsService, userService, configProvider,
+    "userService", "mediaService", "configProvider", "errorService", "localStorageService",
+    function ($scope, $rootScope, $location, postsService, userService, mediaService, configProvider,
         errorService, localStorageService) {
 
         $scope.postId = parseInt($rootScope.$stateParams.postId);
@@ -85,6 +85,11 @@
 
                         // subscribe to post socket.io events
                         postsService.subscribeToPost($scope.post.Id);
+
+                        // update mediaservice viewed gallery
+                        var mediaList = _.pluck(post.PostContents, 'Media');
+                        mediaService.addViewedMediaListFromPost(mediaList, post.Id);
+                        $rootScope.$broadcast("updateMediaGalleryFromPost", {});
                     } else {
                         errorService.displayError({ Message: e });
                     }

@@ -4,6 +4,32 @@
     @include position(relative, null);
     text-align: center;
 
+    &:hover {
+        h5 {
+            display: block;
+        }
+    }
+
+    h5 {
+        @include position(absolute, null, null, 0);
+        @include padding($default-padding);
+        @include margin(0);
+        @include size(100%, auto);
+        display: none;
+        color: $default-color;
+        background: $primary-color;
+        font-family: $fonts;
+        cursor: pointer;
+
+        &:hover {
+            background: darken($primary-color, $hover-darken-value);
+        }
+
+        i {
+            @include margin(null, $default-margin);
+        }
+    }
+
     img {
         @include size(100%, auto);
         @include borders(1px, solid, $light-border-color, true);

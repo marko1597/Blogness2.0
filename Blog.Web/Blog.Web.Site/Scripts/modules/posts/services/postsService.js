@@ -11,6 +11,8 @@
             return post;
         };
 
+        var postsList = [];
+
         return {
             getPost: function (id) {
                 var deferred = $q.defer();
@@ -77,6 +79,7 @@
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
+                        postsList.push(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -95,6 +98,7 @@
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
+                        postsList.push(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {

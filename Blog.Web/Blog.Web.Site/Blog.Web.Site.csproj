@@ -490,6 +490,9 @@
     <Content Include="Content\scss\media\albumgroup.min.css">
       <DependentUpon>albumgroup.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\media\mediagallery.css">
+      <DependentUpon>mediagallery.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\media\mediagroupedlist.css.map">
       <DependentUpon>mediagroupedlist.css</DependentUpon>
     </Content>
@@ -506,6 +509,10 @@
     <Content Include="Content\scss\extensions\slick.scss" />
     <Content Include="Content\scss\extensions\slick.css.map">
       <DependentUpon>slick.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\media\mediagallery.scss" />
+    <Content Include="Content\scss\media\mediagallery.css.map">
+      <DependentUpon>mediagallery.css</DependentUpon>
     </Content>
     <None Include="Content\scss\media\mediagroupedlist.scss" />
     <Content Include="Content\scss\media\mediagroupedlist.css">
@@ -2498,7 +2505,9 @@
     <Content Include="Scripts\modules\main\config\blogConfig.js" />
     <Content Include="Scripts\modules\main\controllers\blogMainController.js" />
     <Content Include="Scripts\modules\main\directives\windowResize.js" />
+    <Content Include="Scripts\modules\media\controllers\mediaGalleryController.js" />
     <Content Include="Scripts\modules\media\directives\albumGroup.js" />
+    <Content Include="Scripts\modules\media\directives\mediaGalleryView.js" />
     <Content Include="Scripts\modules\media\directives\mediaGroupedList.js" />
     <Content Include="Scripts\modules\media\directives\mediaItem.js" />
     <Content Include="Scripts\modules\media\media.js" />
@@ -3350,6 +3359,7 @@
     <Content Include="Scripts\templates\modules\login\registerForm.html" />
     <Content Include="Scripts\templates\modules\media\albumGroup.html" />
     <Content Include="Scripts\templates\modules\media\mediaDeleteDialog.html" />
+    <Content Include="Scripts\templates\modules\media\mediaGallery.html" />
     <Content Include="Scripts\templates\modules\media\mediaGroupedList.html" />
     <Content Include="Scripts\templates\modules\media\mediaItem.html" />
     <Content Include="Scripts\templates\modules\media\mediaSelectionDialog.html" />

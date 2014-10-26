@@ -1,0 +1,16 @@
+﻿<div id="media-gallery" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <button type="button" ng-click="closeGallery()">&times;</button>
+            <div class="modal-body">
+                <div ng-style="getWindowHeight()" ng-show="showMediaGallery()">
+                    <slick dots="true" infinite="true" speed="300" slides-to-show="1" slides-to-scroll="1" arrows="true">
+                        <div ng-repeat="mediaItem in mediaList track by $index">
+                            <img ng-src="{{mediaItem.MediaUrl}}" />
+                        </div>
+                    </slick>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

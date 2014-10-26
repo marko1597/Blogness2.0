@@ -1,7 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 ngMedia.directive('albumGroup', function () {
-    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider,
+    var ctrlFn = function ($scope, $rootScope, $window, albumService, mediaService, errorService, dateHelper, configProvider,
         $modal, FileUploader, localStorageService) {
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
@@ -77,6 +77,12 @@ ngMedia.directive('albumGroup', function () {
             $scope.album.Media.splice(index, 1);
         });
 
+        $scope.init = function() {
+            mediaService.addViewedMediaListFromAlbum($scope.album.Media, $scope.user.UserName, $scope.album.AlbumName);
+        };
+
+        $scope.init();
+
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
@@ -139,8 +145,8 @@ ngMedia.directive('albumGroup', function () {
 
         // #endregion
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper",
-        "configProvider", "$modal", "FileUploader", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "mediaService", "errorService", 
+        "dateHelper", "configProvider", "$modal", "FileUploader", "localStorageService"];
 
     return {
         restrict: 'EA',

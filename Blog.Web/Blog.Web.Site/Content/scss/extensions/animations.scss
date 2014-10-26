@@ -17,7 +17,7 @@
     }
 }
 
-ui-view, *[ui-view] {
+/*ui-view, *[ui-view] {
     ui-view, *[ui-view] {
         -o-animation-duration: 0.5s;
         -webkit-animation-duration: 0.5s;
@@ -31,7 +31,7 @@ ui-view, *[ui-view] {
         -webkit-animation-name: bounceInUp;
         animation-name: bounceInUp;
     }
-}
+}*/
 
 .animate {
     -moz-animation-duration: 1s;
@@ -41,7 +41,7 @@ ui-view, *[ui-view] {
     -o-animation-fill-mode: both;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-
+    
     &.fade-in {
         -moz-animation-name: fadeIn;
         -o-animation-name: fadeIn;

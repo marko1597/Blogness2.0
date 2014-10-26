@@ -211,6 +211,10 @@ input, select, textarea {
     }
 }
 
+ui-view, *[ui-view] {
+    @include position (relative, null);
+}
+
 .page-content {
     @include padding(0, $default-padding, 0, $default-padding);
 }
@@ -222,6 +226,30 @@ input, select, textarea {
 
 .wrap-text {
     @include ellipsis-text;
+}
+
+.fill-container {
+    @include size(100%);
+}
+
+.row {
+    .sticky {
+        @include margin(0);
+    }
+}
+
+.sticky {
+    $neg-margin: unquote(($base-margin * -1) + 'px');
+    @include margin(0, $neg-margin, 0, $neg-margin);
+    z-index: 2000;
+
+    &.top {
+        @include position(fixed, 0, null, null, null);
+    }
+
+    &.bottom {
+        @include position(fixed, null, null, 0, null);
+    }
 }
 
 /* #region field validation errors */

@@ -1,5 +1,5 @@
 ﻿ngMedia.directive('mediaGroupedList', function () {
-    var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
+    var ctrlFn = function ($scope) {
         $scope.isAdding = false;
 
         $scope.addAlbum = function () {
@@ -23,7 +23,7 @@
             $scope.albums.splice(index, 1);
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
+    ctrlFn.$inject = ["$scope"];
 
     return {
         restrict: 'EA',

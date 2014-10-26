@@ -4,6 +4,7 @@
         "ngComments",
         "ngTags",
         "ngUser",
+        "ngMedia",
         "ngError",
         "ngMedia",
         "ngBlogSockets",

@@ -1362,6 +1362,10 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
                 templateUrl: window.blogConfiguration.templatesUrl + 'viewpost.html',
                 controller: 'postsViewController'
             })
+                .state('viewpost.gallery', {
+                    url: "/gallery",
+                    controller: 'mediaGalleryController'
+                })
             .state('friends', {
                 url: "/friends",
                 templateUrl: window.blogConfiguration.templatesUrl + 'friends.html'
@@ -1405,19 +1409,23 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
                     controller: 'userProfileCommentsController'
                 })
-                .state('ownprofile.media', {
-                    url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
-                })
                 .state('ownprofile.favorites', {
                     url: '/favorites',
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
                     controller: 'userProfileFavoritesController'
                 })
+                .state('ownprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
+                })
+                    .state('ownprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
             .state('othersprofile', {
                 url: "/user/:username",
-                templateUrl: window.blogConfiguration.templatesUrl + 'user.html',
+                templateUrl: window.blogConfiguration.templatesUrl + 'users.html',
                 controller: 'userProfileController',
                 'abstract': true
             })
@@ -1436,16 +1444,19 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
                     controller: 'userProfileCommentsController'
                 })
-                .state('othersprofile.media', {
-                    url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
-                })
                 .state('othersprofile.favorites', {
                     url: '/favorites',
                     templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
                     controller: 'userProfileFavoritesController'
+                }).state('othersprofile.media', {
+                    url: '/media',
+                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
+                    controller: 'userProfileMediaController'
                 })
+                    .state('othersprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
             .state('error', {
                 url: "/error",
                 templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',
@@ -1536,13 +1547,24 @@ var ngMedia = angular.module("ngMedia",
     [
         "ngShared",
         "iso.directives",
-        "angularFileUpload"
+        "angularFileUpload",
+        "slick"
     ]);
+///#source 1 1 /Scripts/modules/media/controllers/mediaGalleryController.js
+ngMedia.controller('mediaGalleryController', ["$scope", "$rootScope",
+    function ($scope, $rootScope) {
+        $scope.init = function () {
+            $rootScope.$broadcast("launchMediaGallery", {});
+        };
+
+        $scope.init();
+    }
+]);
 ///#source 1 1 /Scripts/modules/media/directives/albumGroup.js
 // ReSharper disable InconsistentNaming
 
 ngMedia.directive('albumGroup', function () {
-    var ctrlFn = function ($scope, $rootScope, $window, albumService, errorService, dateHelper, configProvider,
+    var ctrlFn = function ($scope, $rootScope, $window, albumService, mediaService, errorService, dateHelper, configProvider,
         $modal, FileUploader, localStorageService) {
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
@@ -1618,6 +1640,12 @@ ngMedia.directive('albumGroup', function () {
             $scope.album.Media.splice(index, 1);
         });
 
+        $scope.init = function() {
+            mediaService.addViewedMediaListFromAlbum($scope.album.Media, $scope.user.UserName, $scope.album.AlbumName);
+        };
+
+        $scope.init();
+
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
@@ -1680,8 +1708,8 @@ ngMedia.directive('albumGroup', function () {
 
         // #endregion
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "errorService", "dateHelper",
-        "configProvider", "$modal", "FileUploader", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "albumService", "mediaService", "errorService", 
+        "dateHelper", "configProvider", "$modal", "FileUploader", "localStorageService"];
 
     return {
         restrict: 'EA',
@@ -1696,9 +1724,75 @@ ngMedia.directive('albumGroup', function () {
 });
 
 // ReSharper restore InconsistentNaming
+///#source 1 1 /Scripts/modules/media/directives/mediaGalleryView.js
+ngMedia.directive('mediaGalleryView', function () {
+    var ctrlFn = function ($scope, $rootScope, $window, $location, $modal, mediaService, localStorageService) {
+        $scope.mediaList = [];
+
+        $scope.username = localStorageService.get("username");
+        
+        var mediaSelectionDialog = $modal({
+            title: 'Gallery view',
+            scope: $scope,
+            template: window.blogConfiguration.templatesModulesUrl + "media/mediaGallery.html",
+            show: false
+        });
+
+        $scope.closeGallery = function() {
+            mediaSelectionDialog.hide();
+            $scope.mediaList = [];
+
+            if ($rootScope.$stateParams.postId) {
+                $location.path("/post/" + $rootScope.$stateParams.postId);
+            } else {
+                if ($rootScope.$stateParams.username) {
+                    $location.path("/user/" + $scope.user.UserName + '/media');
+                } else {
+                    $location.path("/user/media");
+                }
+            }
+        };
+
+        $rootScope.$on("launchMediaGallery", function() {
+            if ($rootScope.$stateParams.postId) {
+                $scope.mediaList = mediaService.getViewMediaListFromPost($rootScope.$stateParams.postId);
+            } else {
+                if ($rootScope.$stateParams.username) {
+                    $scope.mediaList = mediaService.getViewMediaListFromAlbum($rootScope.$stateParams.username,
+                        $rootScope.$stateParams.albumName);
+                } else {
+                    $scope.mediaList = mediaService.getViewMediaListFromAlbum($scope.username,
+                        $rootScope.$stateParams.albumName);
+                }
+            }
+
+            mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+        });
+
+        $scope.getWindowHeight = function () {
+            return { height: $window.innerHeight - 30 + 'px' };
+        };
+
+        $scope.showMediaGallery = function () {
+            if ($scope.mediaList && $scope.mediaList.length > 0) {
+                return true;
+            }
+            return false;
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "$location", "$modal", "mediaService", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaGallery.html",
+        controller: ctrlFn
+    };
+});
+
 ///#source 1 1 /Scripts/modules/media/directives/mediaGroupedList.js
 ngMedia.directive('mediaGroupedList', function () {
-    var ctrlFn = function ($scope, $rootScope, albumService, localStorageService) {
+    var ctrlFn = function ($scope) {
         $scope.isAdding = false;
 
         $scope.addAlbum = function () {
@@ -1722,7 +1816,7 @@ ngMedia.directive('mediaGroupedList', function () {
             $scope.albums.splice(index, 1);
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "albumService", "localStorageService"];
+    ctrlFn.$inject = ["$scope"];
 
     return {
         restrict: 'EA',
@@ -1738,7 +1832,7 @@ ngMedia.directive('mediaGroupedList', function () {
 
 ///#source 1 1 /Scripts/modules/media/directives/mediaItem.js
 ngMedia.directive('mediaItem', function () {
-    var ctrlFn = function ($scope, $rootScope, localStorageService, $modal, mediaService, errorService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, $modal, mediaService, errorService) {
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this item?",
@@ -1785,6 +1879,25 @@ ngMedia.directive('mediaItem', function () {
             mediaDeleteDialog.$promise.then(mediaDeleteDialog.show);
         };
 
+        $scope.toggleGallery = function () {
+            if ($scope.galleryMode && $scope.galleryMode === 'true') {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.viewAsGallery = function () {
+            if ($rootScope.$stateParams.postId) {
+                $location.path("/post/" + $rootScope.$stateParams.postId + '/gallery');
+            } else {
+                if ($rootScope.$stateParams.username) {
+                    $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                } else {
+                    $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                }
+            }
+        };
+
         $scope.confirmDelete = function () {
             mediaService.deleteMedia($scope.media.Id).then(function (response) {
                 mediaDeleteDialog.hide();
@@ -1816,12 +1929,14 @@ ngMedia.directive('mediaItem', function () {
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "localStorageService", "$modal", "mediaService", "errorService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "$modal", "mediaService", "errorService"];
 
     var linkFn = function (scope, elem, attrs) {
         scope.mode = attrs.mode;
 
         scope.crop = attrs.crop;
+
+        scope.galleryMode = attrs.galleryMode;
 
         scope.allowDelete = attrs.allowDelete;
 
@@ -1837,7 +1952,8 @@ ngMedia.directive('mediaItem', function () {
         restrict: 'EA',
         scope: {
             media: '=',
-            user: '='
+            user: '=',
+            albumName: '='
         },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaItem.html",
@@ -1953,47 +2069,49 @@ ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
 
+        var viewedMediaList = [];
+
         return {
-            getMediaByAlbum: function(albumId) {
+            getMediaByAlbum: function (albumId) {
                 var deferred = $q.defer();
 
                 $http({
                     url: mediaApi + "album/" + albumId + "/media",
                     method: "GET"
-                }).success(function(response) {
+                }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function(e) {
+                }).error(function (e) {
                     deferred.reject(e);
                 });
 
                 return deferred.promise;
             },
 
-            getMediaByUser: function(userId) {
+            getMediaByUser: function (userId) {
                 var deferred = $q.defer();
 
                 $http({
                     url: mediaApi + "users/" + userId + "/media",
                     method: "GET"
-                }).success(function(response) {
+                }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function(e) {
+                }).error(function (e) {
                     deferred.reject(e);
                 });
 
                 return deferred.promise;
             },
 
-            addMedia: function(media, albumName, username) {
+            addMedia: function (media, albumName, username) {
                 var deferred = $q.defer();
 
                 $http({
                     url: mediaApi + "media?username=" + username + "&album=" + albumName,
                     method: "POST",
                     data: comment
-                }).success(function(response) {
+                }).success(function (response) {
                     deferred.resolve(response);
-                }).error(function(e) {
+                }).error(function (e) {
                     deferred.reject(e);
                 });
 
@@ -2001,19 +2119,65 @@ ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
             },
 
             deleteMedia: function (mediaId) {
-            var deferred = $q.defer();
+                var deferred = $q.defer();
 
-            $http({
-                url: mediaApi + "media/" + mediaId,
-                method: "DELETE",
-            }).success(function (response) {
-                deferred.resolve(response);
-            }).error(function (error) {
-                deferred.reject(error);
-            });
+                $http({
+                    url: mediaApi + "media/" + mediaId,
+                    method: "DELETE",
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
 
-            return deferred.promise;
-        }
+                return deferred.promise;
+            },
+
+            addViewedMediaListFromPost: function (mediaList, postId) {
+                var viewedMedia = {
+                    postId: postId.toString(),
+                    media: mediaList
+                };
+
+                var existingViewedMedia = _.where(viewedMediaList, { postId: postId });
+                if (existingViewedMedia && existingViewedMedia.length > 0) {
+                    var index = _.indexOf(viewedMediaList, existingViewedMedia[0]);
+                    viewedMediaList.splice(index, 1);
+                }
+                viewedMediaList.push(viewedMedia);
+            },
+
+            getViewMediaListFromPost: function (postId) {
+                var mediaList = _.where(viewedMediaList, { postId: postId });
+                return mediaList[0] ? mediaList[0].media : [];
+            },
+
+            addViewedMediaListFromAlbum: function (mediaList, username, albumName) {
+                var viewedMedia = {
+                    username: username,
+                    albumName: albumName.toLowerCase(),
+                    media: mediaList
+                };
+
+                var existingViewedMedia = _.where(viewedMediaList, {
+                    username: viewedMedia.username,
+                    albumName: viewedMedia.albumName.toLowerCase()
+                });
+
+                if (existingViewedMedia && existingViewedMedia.length > 0) {
+                    var index = _.indexOf(viewedMediaList, existingViewedMedia[0]);
+                    viewedMediaList.splice(index, 1);
+                }
+                viewedMediaList.push(viewedMedia);
+            },
+
+            getViewMediaListFromAlbum: function (username, albumName) {
+                if (albumName && username) {
+                    var mediaList = _.where(viewedMediaList, { username: username, albumName: albumName.toLowerCase() });
+                    return mediaList[0] ? mediaList[0].media : [];
+                }
+                return [];
+            },
         };
     }
 ]);
@@ -2079,6 +2243,7 @@ var ngPosts = angular.module("ngPosts",
         "ngComments",
         "ngTags",
         "ngUser",
+        "ngMedia",
         "ngError",
         "ngMedia",
         "ngBlogSockets",
@@ -2492,8 +2657,8 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 // ReSharper restore InconsistentNaming
 ///#source 1 1 /Scripts/modules/posts/controllers/postsViewController.js
 ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
-    "userService", "configProvider", "errorService", "localStorageService",
-    function ($scope, $rootScope, $location, postsService, userService, configProvider,
+    "userService", "mediaService", "configProvider", "errorService", "localStorageService",
+    function ($scope, $rootScope, $location, postsService, userService, mediaService, configProvider,
         errorService, localStorageService) {
 
         $scope.postId = parseInt($rootScope.$stateParams.postId);
@@ -2578,6 +2743,11 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
 
                         // subscribe to post socket.io events
                         postsService.subscribeToPost($scope.post.Id);
+
+                        // update mediaservice viewed gallery
+                        var mediaList = _.pluck(post.PostContents, 'Media');
+                        mediaService.addViewedMediaListFromPost(mediaList, post.Id);
+                        $rootScope.$broadcast("updateMediaGalleryFromPost", {});
                     } else {
                         errorService.displayError({ Message: e });
                     }
@@ -2959,6 +3129,8 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
             return post;
         };
 
+        var postsList = [];
+
         return {
             getPost: function (id) {
                 var deferred = $q.defer();
@@ -3025,6 +3197,7 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
+                        postsList.push(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -3043,6 +3216,7 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
+                        postsList.push(p);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {

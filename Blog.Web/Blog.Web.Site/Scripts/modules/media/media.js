@@ -2,5 +2,6 @@
     [
         "ngShared",
         "iso.directives",
-        "angularFileUpload"
+        "angularFileUpload",
+        "slick"
     ]);
