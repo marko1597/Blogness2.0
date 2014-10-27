@@ -82,7 +82,7 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 
         $scope.savePost = function () {
             if ($scope.authData && $scope.user) {
-                if (uploader.getNotUploadedItems().length > 0) {
+                if (uploader.getNotUploadedItems().length === 0) {
                     $scope.post.User = $scope.user;
                     setPostContentsFromUploader();
 
