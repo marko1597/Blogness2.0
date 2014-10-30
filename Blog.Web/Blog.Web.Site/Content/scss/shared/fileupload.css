@@ -1,4 +1,8 @@
 ﻿.file-upload .dropzone {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   border-top: 3px dotted #666666;
   border-right: 3px dotted #666666;
   border-bottom: 3px dotted #666666;
@@ -24,8 +28,7 @@
       margin-bottom: 5px;
       margin-left: 5px;
       width: 100%;
-      height: auto;
-      background: #fff; }
+      height: auto; }
     .file-upload .dropzone .upload-items .thumbnail {
       margin-top: 0;
       margin-right: 0;
@@ -35,8 +38,14 @@
       padding-right: 0;
       padding-bottom: 0;
       padding-left: 0;
-      border: 0;
-      border-radius: 0; }
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0; }
       .file-upload .dropzone .upload-items .thumbnail img, .file-upload .dropzone .upload-items .thumbnail canvas {
         width: 100%;
         height: auto; }
@@ -48,6 +57,9 @@
       padding-right: 15px;
       padding-bottom: 15px;
       padding-left: 15px;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background: #fff;
       color: #4c4c4c; }
       .file-upload .dropzone .upload-items .captions h5, .file-upload .dropzone .upload-items .captions input {
         margin-top: 0;
@@ -65,7 +77,10 @@
       border-right: 1px solid #cccccc;
       border-bottom: 1px solid #cccccc;
       border-left: 1px solid #cccccc;
-      border-radius: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
       background: #cccccc; }
 .file-upload > .btn {
   margin-bottom: 15px; }

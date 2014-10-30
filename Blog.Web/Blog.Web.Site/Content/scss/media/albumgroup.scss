@@ -2,6 +2,7 @@
 
 .album-group {
     @include margin(null, null, $default-margin, null);
+    @include border-radius(null, false);
     color: $content-font-color;
 
     &.new {

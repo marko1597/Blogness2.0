@@ -3,6 +3,7 @@
 .post-likes {
     @include size(30%, 28px);
     @include borders(1px, solid, $light-border-color, true);
+    @include border-radius(null, false);
     @include margin(null, $default-margin);
     @include box-shadow(false);
     background: $default-color;

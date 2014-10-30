@@ -12,6 +12,10 @@
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #e6e6e6;
   overflow: scroll;
   z-index: 10;

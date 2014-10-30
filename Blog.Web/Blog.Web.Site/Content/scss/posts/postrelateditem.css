@@ -1,5 +1,9 @@
 ﻿.post-related-item {
   margin-bottom: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #fff; }
   .post-related-item > div {
     padding: 5px; }

@@ -5,6 +5,7 @@
     @include position(relative, null);
     @include margin($default-margin, $default-margin, 0);
     @include box-shadow(false);
+    @include border-radius(null, false);
     background: $default-color;
 
     textarea {

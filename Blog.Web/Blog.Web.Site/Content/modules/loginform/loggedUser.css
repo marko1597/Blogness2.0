@@ -3,31 +3,43 @@
   margin-top: 8px;
   margin-right: 30px;
   margin-bottom: 8px;
-  margin-left: 30px; }
-  @media (max-width: 767px) {
-    /* line 3, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 0;
-      margin-left: 0; } }
-  /* line 10, ../../scss/loginform/loggeduser.scss */
-  #logged-user-info .btn-group, #logged-user-info button, #logged-user-info ul {
-    width: 100%;
-    height: auto; }
-  @media (max-width: 767px) {
-    /* line 14, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info button {
-      padding-top: 15px;
-      padding-right: 15px;
-      padding-bottom: 15px;
-      padding-left: 15px; } }
-  /* line 22, ../../scss/loginform/loggeduser.scss */
-  #logged-user-info ul li a {
-    border: none;
-    background: white;
-    color: #4c4c4c; }
-    /* line 27, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info ul li a:hover {
-      background: #56c2e1;
-      color: white; }
+  margin-left: 30px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+@media (max-width: 767px) {
+  /* line 3, ../../scss/loginform/loggeduser.scss */
+  #logged-user-info {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
+}
+/* line 11, ../../scss/loginform/loggeduser.scss */
+#logged-user-info .btn-group, #logged-user-info button, #logged-user-info ul {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  /* line 15, ../../scss/loginform/loggeduser.scss */
+  #logged-user-info button {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+  }
+}
+/* line 23, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li a {
+  border: none;
+  background: white;
+  color: #4c4c4c;
+}
+/* line 28, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li a:hover {
+  background: #56c2e1;
+  color: white;
+}

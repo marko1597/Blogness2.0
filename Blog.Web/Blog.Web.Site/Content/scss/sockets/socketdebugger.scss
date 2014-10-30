@@ -5,6 +5,8 @@
     @include padding($default-padding);
     @include size(300px);
     @include borders(1px, solid, $light-border-color, true);
+    @include border-radius(null, false);
+
     background: $default-color-darken;
     overflow: scroll;
     z-index: 10;

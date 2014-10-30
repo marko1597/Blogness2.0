@@ -4,6 +4,7 @@
     .dropzone {
         $dropzone-margin: unquote(($base-margin / 3) + 'px');
 
+        @include border-radius(null, false);
         @include borders(3px, dotted, $dark-border-color, true);
         @include hidden-file-input;
 
@@ -22,14 +23,13 @@
             > li {
                 @include margin($dropzone-margin);
                 @include size(100%, auto);
-                background: $default-color;
             }
 
             .thumbnail {
                 @include margin(0);
                 @include padding(0);
-                border: 0;
-                border-radius: $default-border-radius;
+                @include border-radius(null, false);
+                @include borders(0, empty, empty, true);
 
                 img, canvas {
                     @include size(100%, auto);
@@ -38,11 +38,13 @@
 
             .captions {
                 $captions-margin: unquote((($base-padding / 3) * 2) + 'px');
-                
+
                 @include borders(1px, solid, $light-border-color, false, true, true, true);
                 @include padding($default-padding);
+                @include border-radius(null, true, false, false, true, true);
+                background: $default-color;
                 color: $content-font-color;
-                
+
                 h5, input {
                     @include margin(0, null, $captions-margin, null);
                 }
@@ -52,7 +54,7 @@
                     max-width: 100%;
                     color: $content-font-color;
                 }
-                
+
                 textarea {
                     resize: none;
                 }
@@ -62,7 +64,7 @@
                 $progress-height: unquote((($base-padding / 3) * 2) + 'px');
                 @include size(100%, $progress-height);
                 @include borders(1px, solid, $light-border-color, false, true, true, true);
-                border-radius: $default-border-radius;
+                @include border-radius(null, false);
                 background: $light-border-color;
             }
         }

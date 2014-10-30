@@ -3,6 +3,7 @@
 .comment-item {
     @include position(relative, null);
     @include margin(null, null, $default-margin);
+    @include border-radius(null, false);
     background: $default-color;
 
     p {

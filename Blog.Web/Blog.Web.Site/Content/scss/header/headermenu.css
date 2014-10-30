@@ -20,15 +20,21 @@
     border-left: 1px solid #40bbdd;
     box-shadow: 0 2px 4px 0 #ccc;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    border-bottom-left-radius: 100%;
+    border-bottom-right-radius: 100%;
+    cursor: pointer;
     background: #56c2e1;
     z-index: 50;
-    border-radius: 50%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+    #blog-header .add-post:hover {
+      background: #40bbdd; }
     #blog-header .add-post i, #blog-header .add-post #blog-header .add-post a, #blog-header .add-post #blog-header .add-post a, #blog-header .add-post a {
       color: #fff; }
     #blog-header .add-post i, #blog-header .add-post #blog-header .add-post a, #blog-header .add-post #blog-header .add-post a {

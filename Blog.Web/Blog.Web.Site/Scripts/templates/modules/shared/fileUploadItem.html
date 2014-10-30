@@ -31,7 +31,11 @@
             <img ng-src="{{item.url}}" />
         </div>
     </div>
-    
+
+    <div class="progress" style="margin-bottom: 0;">
+        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+    </div>
+
     <div class="captions" ng-switch on="item.allowCaptions">
         <div ng-switch-when="true">
             <h5>Content Title</h5>
@@ -41,9 +45,5 @@
                       maxlength="140"></textarea>
         </div>
         <div ng-switch-default></div>
-    </div>
-
-    <div class="progress" style="margin-bottom: 0;">
-        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
     </div>
 </div>

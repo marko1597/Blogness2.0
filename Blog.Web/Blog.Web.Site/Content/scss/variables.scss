@@ -2,19 +2,26 @@
 $fonts: 'Open Sans', sans-serif;
 $fancy-font-3d: 'Canter-Bold-3d';
 $fancy-font: 'Canter-Bold';
+
 $main-background: #eee url('../../images/bg.jpg') no-repeat right top;
 $accountpage-background: url(../images/login-main.jpg);
 $accountpage-overlay: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC') /*../../images/login-pattern.png*/ repeat top left;
+
 $base-padding: 15;
 $base-margin: 15;
 $base-border-radius: 0;
 $default-border-radius: 0;
+$can-round-element: true;
+
 $default-padding: 15px;
 $default-margin: 15px;
+
 $min-input-width: 280px;
 $max-input-width: 100%;
+
 $hover-darken-value: 5%;
 $border-darken-value: 5%;
+
 $lg-screen-width: 1200px;
 $md-screen-width: 992px;
 $sm-screen-width: 768px;
@@ -222,20 +229,92 @@ $link-font-color: #fff;
         $color: $light-border-color;
     }
 
+    @if ($size == empty or $size == 0) {
+        $border-value: 0;
+    }
+
+    $border-value: $size;
+    $arr-params: ($type, $color);
+
+    @each $param in $arr-params {
+        @if ($param != empty) {
+            $border-value: $border-value $param;
+        }
+    }
+
     @if ($top != null and $top) {
-        border-top: $size $type $color;
+        border-top: $border-value;
     }
 
     @if ($right != null and $right) {
-        border-right: $size $type $color;
+        border-right: $border-value;
     }
 
     @if ($bottom != null and $bottom) {
-        border-bottom: $size $type $color;
+        border-bottom: $border-value;
     }
 
     @if ($left != null and $left) {
-        border-left: $size $type $color;
+        border-left: $border-value;
+    }
+}
+
+// mixin border-radius: type
+@mixin border-radius ($radius-size, $important, $top-left: true, $top-right: $top-left, $bottom-right: $top-left, $bottom-left: $top-left) {
+    $border-radius-value: $base-border-radius;
+
+    @if ($radius-size == null or $radius-size == xs) {
+        $border-radius-value: $default-border-radius;
+    }
+    @elseif ($radius-size == sm) {
+        $border-radius-value: unquote(($base-border-radius * 2) + 'px');
+    }
+    @elseif ($radius-size == md) {
+        $border-radius-value: unquote(($base-border-radius * 3) + 'px');
+    }
+    @elseif ($radius-size == lg) {
+        $border-radius-value: unquote(($base-border-radius * 4) + 'px');
+    }
+    @elseif ($radius-size == round and $can-round-element == true) {
+        $border-radius-value: 100%;
+    }
+    @else {
+        $border-radius-value: $default-border-radius;
+    }
+
+    @if ($important != null and $important == false) {
+        @if ($top-left != null and $top-left) {
+            border-top-left-radius: $border-radius-value;
+        }
+
+        @if ($top-right != null and $top-right) {
+            border-top-right-radius: $border-radius-value;
+        }
+
+        @if ($bottom-left != null and $bottom-left) {
+            border-bottom-left-radius: $border-radius-value;
+        }
+
+        @if ($bottom-right != null and $bottom-right) {
+            border-bottom-right-radius: $border-radius-value;
+        }
+    }
+    @elseif ($important == null or $important == true) {
+        @if ($top-left != null and $top-left) {
+            border-top-left-radius: $border-radius-value !important;
+        }
+
+        @if ($top-right != null and $top-right) {
+            border-top-right-radius: $border-radius-value !important;
+        }
+
+        @if ($bottom-left != null and $bottom-left) {
+            border-bottom-left-radius: $border-radius-value !important;
+        }
+
+        @if ($bottom-right != null and $bottom-right) {
+            border-bottom-right-radius: $border-radius-value !important;
+        }
     }
 }
 

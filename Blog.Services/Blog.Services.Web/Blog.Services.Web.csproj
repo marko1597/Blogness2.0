@@ -94,6 +94,7 @@
     <Content Include="EducationService.svc" />
     <Content Include="Global.asax" />
     <Content Include="HobbyService.svc" />
+    <Content Include="Index.html" />
     <Content Include="MediaService.svc" />
     <Content Include="NotificationService.svc" />
     <Content Include="PostContentsService.svc" />

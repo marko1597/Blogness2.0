@@ -8,6 +8,10 @@
   margin-left: auto;
   box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #e6e6e6;
   font-family: 'Open Sans', sans-serif;
   display: table-cell;
@@ -115,6 +119,8 @@
     border-top: 1px solid #bfbfbf;
     box-shadow: inset 0 0 10px 0 #aaa;
     box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     background: #595959;
     overflow: auto; }
     .login-form .footer .button, .login-form .footer .login-form .footer .register, .login-form .footer .login-form .footer .register, .login-form .footer .login-form .footer .back, .login-form .footer .login-form .footer .back {

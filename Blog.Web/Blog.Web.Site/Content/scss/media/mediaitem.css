@@ -1,5 +1,9 @@
 ﻿.media-item {
   position: relative;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   text-align: center; }
   .media-item:hover h5 {
     display: block; }

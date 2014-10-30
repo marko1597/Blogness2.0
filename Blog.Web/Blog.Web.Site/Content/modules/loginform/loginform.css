@@ -9,186 +9,215 @@
   margin-left: auto;
   box-shadow: 0 2px 4px 0 #cccccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #e6e6e6;
   font-family: "Open Sans", sans-serif;
   display: table-cell;
   vertical-align: middle;
-  z-index: 20; }
-  /* line 16, ../../scss/loginform/loginform.scss */
-  .login-form .header {
-    padding-top: 30px;
-    padding-right: 30px;
-    padding-bottom: 15px;
-    padding-left: 30px;
-    width: 100%;
-    height: auto;
-    background: transparent; }
-    /* line 21, ../../scss/loginform/loginform.scss */
-    .login-form .header h1 {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 10px;
-      margin-left: -5px;
-      color: #4c4c4c;
-      font-family: "Canter-Bold-3d";
-      line-height: 1em;
-      text-shadow: 1px 1px 0 white;
-      font-size: 5em; }
-    /* line 30, ../../scss/loginform/loginform.scss */
-    .login-form .header span {
-      font-size: .827em;
-      line-height: 16px;
-      color: #4c4c4c; }
-  /* line 37, ../../scss/loginform/loginform.scss */
-  .login-form .content {
-    padding-top: 15px;
-    padding-right: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    color: #4c4c4c; }
-    @media (min-width: 768px) {
-      /* line 42, ../../scss/loginform/loginform.scss */
-      .login-form .content .input:focus + div {
-        left: -47px !important; } }
-    /* line 47, ../../scss/loginform/loginform.scss */
-    .login-form .content .error-message {
-      margin-top: 15px;
-      margin-right: 0;
-      margin-bottom: 15px;
-      margin-left: 0;
-      color: #d9534f; }
-    /* line 52, ../../scss/loginform/loginform.scss */
-    .login-form .content > div {
-      position: relative; }
-      /* line 55, ../../scss/loginform/loginform.scss */
-      .login-form .content > div .input {
-        width: 100%;
-        height: auto;
-        margin-top: 2px;
-        margin-right: 0;
-        margin-bottom: 2px;
-        margin-left: 0;
-        padding-top: 15px;
-        padding-right: 15px;
-        padding-bottom: 15px;
-        padding-left: 15px;
-        -moz-transition: all 0.5s ease !important;
-        -o-transition: all 0.5s ease !important;
-        -webkit-transition: all 0.5s ease !important;
-        transition: all 0.5s ease !important;
-        border-top: 1px solid #cccccc;
-        border-right: 1px solid #cccccc;
-        border-bottom: 1px solid #cccccc;
-        border-left: 1px solid #cccccc;
-        background: white;
-        color: #4c4c4c;
-        font-weight: 400;
-        min-width: 100%; }
-        /* line 66, ../../scss/loginform/loginform.scss */
-        .login-form .content > div .input:hover, .login-form .content > div .input:focus {
-          background: #cccccc;
-          color: #3f3f3f; }
-        /* line 71, ../../scss/loginform/loginform.scss */
-        .login-form .content > div .input:focus {
-          box-shadow: inset 0 0 10px 0 #aaaaaa;
-          box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5); }
-      /* line 76, ../../scss/loginform/loginform.scss */
-      .login-form .content > div .user-icon, .login-form .content > div .pass-icon {
-        position: absolute;
-        left: 0;
-        width: 46px;
-        height: 47px;
-        padding-right: 2px;
-        -moz-transition: all 0.5s ease !important;
-        -o-transition: all 0.5s ease !important;
-        -webkit-transition: all 0.5s ease !important;
-        transition: all 0.5s ease !important;
-        display: block;
-        z-index: -1; }
-      /* line 85, ../../scss/loginform/loginform.scss */
-      .login-form .content > div .user-icon {
-        top: 4px;
-        background: #414848 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAUCAYAAABroNZJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1MDVGNkI4M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1MDVGNkI5M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTUwNUY2QjYzQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTUwNUY2QjczQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz69r5mNAAAA60lEQVR42mL8//8/Aw7ABsSuQCwNxB+BeB8Qv8aqEmQIFpwDxB/+o4I/QDwTiHnQ1WMzYPJ//OA8EHPiM8TvP3FgAj5DDhNpyDdk16Ab8vM/8cAGpo8JKYw5oTFCLODBFTuvSHCJFi7vTCDSgEv4AhaUBh4SMACUXswIpRNLIH6Ox4A0YhIbCIsCcTs0YYHAPSBeBMS62NQz4sk7RANchvADsTcQG0DZf4H4AhBvBeKnxGTAZCyZDzlMeoGYGV+YVBAZxUuRDUI2oP0/aWA1uiEe/8kDCTBDQM66SqYhoITJDDLE9T9lwBsgwACtfd8ecvFR5gAAAABJRU5ErkJggg==") no-repeat center;
-        *background: #414848 url("../../images/login-user-icon.png") no-repeat center;
-        /* For IE 6 and 7 */ }
-      /* line 91, ../../scss/loginform/loginform.scss */
-      .login-form .content > div .pass-icon {
-        top: 4px;
-        background: #414848 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAYAAABPPm7SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM2MzkxRkM3M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM2MzkxRkM4M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzYzOTFGQzUzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzYzOTFGQzYzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7+i7mhAAAAvElEQVR42mL8//8/AxbABsSWQKwO5V8D4iPYFDKADEDDgUD86j8muAfE9ujq0TUX/ScMopD1MCJ5QRGIb0CdDwL3gXgBlJ8GxKJQ8XdArATEH9G9UIrmXH4kOTkgfovNFUxIwaGOxJ4FtwECHgHxJmxqkQ3gRGJ/xBLeL9BiCcMAsgDFBoACwhgaaKSCXUAsBDJg73/yQSMTUvySA0QHPhBHDaCSAQcp0H8QVKCAcmE+tEAhBewG4jUAAQYAe087ET2JtgQAAAAASUVORK5CYII=") no-repeat center;
-        *background: #414848 url("../../images/login-pass-icon.png") no-repeat center;
-        /* For IE 6 and 7 */ }
-      /* line 97, ../../scss/loginform/loginform.scss */
-      .login-form .content > div span {
-        position: relative;
-        top: -3px;
-        font-size: .827em; }
-  /* line 104, ../../scss/loginform/loginform.scss */
-  .login-form .footer {
-    padding-top: 30px;
-    padding-right: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    border-top: 1px solid #bfbfbf;
-    box-shadow: inset 0 0 10px 0 #aaaaaa;
-    box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
-    background: #595959;
-    overflow: auto; }
-    /* line 111, ../../scss/loginform/loginform.scss */
-    .login-form .footer .button, .login-form .footer .register, .login-form .footer .back {
-      padding-top: 0;
-      padding-right: 25px;
-      padding-bottom: 5px;
-      padding-left: 25px;
-      -moz-transition: all 0.5s ease !important;
-      -o-transition: all 0.5s ease !important;
-      -webkit-transition: all 0.5s ease !important;
-      transition: all 0.5s ease !important;
-      border-top: 1px solid #40badd;
-      border-right: 1px solid #40badd;
-      border-bottom: 1px solid #40badd;
-      border-left: 1px solid #40badd;
-      box-shadow: none;
-      background: #56c2e1;
-      color: white;
-      float: right;
-      font-weight: 300;
-      font-family: "Canter-Bold";
-      font-size: 2.5em;
-      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-      cursor: pointer; }
-      /* line 128, ../../scss/loginform/loginform.scss */
-      .login-form .footer .button:hover, .login-form .footer .register:hover, .login-form .footer .back:hover {
-        box-shadow: inset 0 0 10px 0 #aaaaaa;
-        box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
-        background: #40badd;
-        border: 1px solid #2bb2d9; }
-      /* line 134, ../../scss/loginform/loginform.scss */
-      .login-form .footer .button:focus, .login-form .footer .register:focus, .login-form .footer .back:focus {
-        position: relative;
-        bottom: -1px;
-        box-shadow: inset 0 0 10px 0 #aaaaaa;
-        box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
-        background: #56c2e1; }
-    /* line 141, ../../scss/loginform/loginform.scss */
-    .login-form .footer .register, .login-form .footer .back {
-      margin-top: 0;
-      margin-right: 15px;
-      margin-bottom: 0;
-      margin-left: 0;
-      border: none;
-      background: none;
-      box-shadow: none; }
-      /* line 148, ../../scss/loginform/loginform.scss */
-      .login-form .footer .register:hover, .login-form .footer .back:hover {
-        color: #40badd;
-        background: none;
-        box-shadow: none;
-        border: none; }
-      /* line 155, ../../scss/loginform/loginform.scss */
-      .login-form .footer .register:focus, .login-form .footer .back:focus {
-        position: relative;
-        bottom: -1px;
-        color: #40badd;
-        background: none;
-        box-shadow: none;
-        border: none; }
+  z-index: 20;
+}
+/* line 17, ../../scss/loginform/loginform.scss */
+.login-form .header {
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+/* line 22, ../../scss/loginform/loginform.scss */
+.login-form .header h1 {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  margin-left: -5px;
+  color: #4c4c4c;
+  font-family: "Canter-Bold-3d";
+  line-height: 1em;
+  text-shadow: 1px 1px 0 white;
+  font-size: 5em;
+}
+/* line 31, ../../scss/loginform/loginform.scss */
+.login-form .header span {
+  font-size: .827em;
+  line-height: 16px;
+  color: #4c4c4c;
+}
+/* line 38, ../../scss/loginform/loginform.scss */
+.login-form .content {
+  padding-top: 15px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  color: #4c4c4c;
+}
+@media (min-width: 768px) {
+  /* line 43, ../../scss/loginform/loginform.scss */
+  .login-form .content .input:focus + div {
+    left: -47px !important;
+  }
+}
+/* line 48, ../../scss/loginform/loginform.scss */
+.login-form .content .error-message {
+  margin-top: 15px;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+  color: #d9534f;
+}
+/* line 53, ../../scss/loginform/loginform.scss */
+.login-form .content > div {
+  position: relative;
+}
+/* line 56, ../../scss/loginform/loginform.scss */
+.login-form .content > div .input {
+  width: 100%;
+  height: auto;
+  margin-top: 2px;
+  margin-right: 0;
+  margin-bottom: 2px;
+  margin-left: 0;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  -moz-transition: all 0.5s ease !important;
+  -o-transition: all 0.5s ease !important;
+  -webkit-transition: all 0.5s ease !important;
+  transition: all 0.5s ease !important;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  background: white;
+  color: #4c4c4c;
+  font-weight: 400;
+  min-width: 100%;
+}
+/* line 67, ../../scss/loginform/loginform.scss */
+.login-form .content > div .input:hover, .login-form .content > div .input:focus {
+  background: #cccccc;
+  color: #3f3f3f;
+}
+/* line 72, ../../scss/loginform/loginform.scss */
+.login-form .content > div .input:focus {
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 77, ../../scss/loginform/loginform.scss */
+.login-form .content > div .user-icon, .login-form .content > div .pass-icon {
+  position: absolute;
+  left: 0;
+  width: 46px;
+  height: 47px;
+  padding-right: 2px;
+  -moz-transition: all 0.5s ease !important;
+  -o-transition: all 0.5s ease !important;
+  -webkit-transition: all 0.5s ease !important;
+  transition: all 0.5s ease !important;
+  display: block;
+  z-index: -1;
+}
+/* line 86, ../../scss/loginform/loginform.scss */
+.login-form .content > div .user-icon {
+  top: 4px;
+  background: #414848 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAUCAYAAABroNZJAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU1MDVGNkI4M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU1MDVGNkI5M0E3MTExRTE5MDI2OTRBODU0MjU4NEU1Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTUwNUY2QjYzQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTUwNUY2QjczQTcxMTFFMTkwMjY5NEE4NTQyNTg0RTUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz69r5mNAAAA60lEQVR42mL8//8/Aw7ABsSuQCwNxB+BeB8Qv8aqEmQIFpwDxB/+o4I/QDwTiHnQ1WMzYPJ//OA8EHPiM8TvP3FgAj5DDhNpyDdk16Ab8vM/8cAGpo8JKYw5oTFCLODBFTuvSHCJFi7vTCDSgEv4AhaUBh4SMACUXswIpRNLIH6Ox4A0YhIbCIsCcTs0YYHAPSBeBMS62NQz4sk7RANchvADsTcQG0DZf4H4AhBvBeKnxGTAZCyZDzlMeoGYGV+YVBAZxUuRDUI2oP0/aWA1uiEe/8kDCTBDQM66SqYhoITJDDLE9T9lwBsgwACtfd8ecvFR5gAAAABJRU5ErkJggg==") no-repeat center;
+  *background: #414848 url("../../images/login-user-icon.png") no-repeat center;
+  /* For IE 6 and 7 */
+}
+/* line 92, ../../scss/loginform/loginform.scss */
+.login-form .content > div .pass-icon {
+  top: 4px;
+  background: #414848 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAVCAYAAABPPm7SAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjM2MzkxRkM3M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjM2MzkxRkM4M0E3RTExRTFBQzJEQzQ1MkQxNDdCNEQ3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MzYzOTFGQzUzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MzYzOTFGQzYzQTdFMTFFMUFDMkRDNDUyRDE0N0I0RDciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7+i7mhAAAAvElEQVR42mL8//8/AxbABsSWQKwO5V8D4iPYFDKADEDDgUD86j8muAfE9ujq0TUX/ScMopD1MCJ5QRGIb0CdDwL3gXgBlJ8GxKJQ8XdArATEH9G9UIrmXH4kOTkgfovNFUxIwaGOxJ4FtwECHgHxJmxqkQ3gRGJ/xBLeL9BiCcMAsgDFBoACwhgaaKSCXUAsBDJg73/yQSMTUvySA0QHPhBHDaCSAQcp0H8QVKCAcmE+tEAhBewG4jUAAQYAe087ET2JtgQAAAAASUVORK5CYII=") no-repeat center;
+  *background: #414848 url("../../images/login-pass-icon.png") no-repeat center;
+  /* For IE 6 and 7 */
+}
+/* line 98, ../../scss/loginform/loginform.scss */
+.login-form .content > div span {
+  position: relative;
+  top: -3px;
+  font-size: .827em;
+}
+/* line 105, ../../scss/loginform/loginform.scss */
+.login-form .footer {
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  border-top: 1px solid #bfbfbf;
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background: #595959;
+  overflow: auto;
+}
+/* line 113, ../../scss/loginform/loginform.scss */
+.login-form .footer .button, .login-form .footer .register, .login-form .footer .back {
+  padding-top: 0;
+  padding-right: 25px;
+  padding-bottom: 5px;
+  padding-left: 25px;
+  -moz-transition: all 0.5s ease !important;
+  -o-transition: all 0.5s ease !important;
+  -webkit-transition: all 0.5s ease !important;
+  transition: all 0.5s ease !important;
+  border-top: 1px solid #40badd;
+  border-right: 1px solid #40badd;
+  border-bottom: 1px solid #40badd;
+  border-left: 1px solid #40badd;
+  box-shadow: none;
+  background: #56c2e1;
+  color: white;
+  float: right;
+  font-weight: 300;
+  font-family: "Canter-Bold";
+  font-size: 2.5em;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+/* line 130, ../../scss/loginform/loginform.scss */
+.login-form .footer .button:hover, .login-form .footer .register:hover, .login-form .footer .back:hover {
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  background: #40badd;
+  border: 1px solid #2bb2d9;
+}
+/* line 136, ../../scss/loginform/loginform.scss */
+.login-form .footer .button:focus, .login-form .footer .register:focus, .login-form .footer .back:focus {
+  position: relative;
+  bottom: -1px;
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  background: #56c2e1;
+}
+/* line 143, ../../scss/loginform/loginform.scss */
+.login-form .footer .register, .login-form .footer .back {
+  margin-top: 0;
+  margin-right: 15px;
+  margin-bottom: 0;
+  margin-left: 0;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
+/* line 150, ../../scss/loginform/loginform.scss */
+.login-form .footer .register:hover, .login-form .footer .back:hover {
+  color: #40badd;
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+/* line 157, ../../scss/loginform/loginform.scss */
+.login-form .footer .register:focus, .login-form .footer .back:focus {
+  position: relative;
+  bottom: -1px;
+  color: #40badd;
+  background: none;
+  box-shadow: none;
+  border: none;
+}

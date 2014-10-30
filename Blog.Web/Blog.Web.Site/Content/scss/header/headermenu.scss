@@ -20,16 +20,21 @@
         @include position(absolute, null, 30px, $default-margin);
         @include center;@include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
         @include box-shadow(false);
+        @include border-radius(round, false);
 
+        cursor: pointer;
         background: $primary-color;
         z-index: 50;
-        border-radius: 50%;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+
+        &:hover {
+            background: darken($primary-color, $hover-darken-value);
+        }
 
         i, a {
             color: $main-font-color;

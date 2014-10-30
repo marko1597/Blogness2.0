@@ -8,6 +8,10 @@
   margin-left: 15px;
   box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #fff; }
   .comment-item-new textarea {
     width: 80%;

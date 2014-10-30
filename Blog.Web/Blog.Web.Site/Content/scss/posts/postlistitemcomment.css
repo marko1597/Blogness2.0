@@ -1,4 +1,8 @@
 ﻿.post-item-comment {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   color: #4c4c4c; }
   .post-item-comment p {
     margin-top: 0;
@@ -16,6 +20,7 @@
       .post-item-comment p:last-child:hover {
         color: #3f3f3f; }
     .post-item-comment p > a {
-      cursor: pointer; }
+      cursor: pointer;
+      color: #56c2e1; }
 
 /*# sourceMappingURL=postlistitemcomment.css.map */

@@ -1,6 +1,7 @@
 ﻿@import '../variables';
 
 .post-item-comment {
+    @include border-radius(null, false);
     color: $content-font-color;
 
     p {
@@ -18,6 +19,7 @@
 
         > a {
             cursor: pointer;
+            color: $primary-color;
         }
     }
 }

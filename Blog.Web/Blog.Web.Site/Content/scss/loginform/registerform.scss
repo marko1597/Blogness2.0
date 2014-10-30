@@ -1,6 +1,8 @@
 ﻿@import '../variables';
 
 .login-form.register {
+    @include border-radius(null, false);
+
     .content {
         @include padding(0);
     }
@@ -9,10 +11,10 @@
         border: 0;
 
         .panel-heading {
+            @include border-radius(null, false);
             color: $main-font-color;
             background: $main-color;
             border-color: darken($dark-border-color, $border-darken-value);
-            border-radius: $default-border-radius;
         }
     }
 }

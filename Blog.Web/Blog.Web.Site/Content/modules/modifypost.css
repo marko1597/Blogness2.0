@@ -2,57 +2,69 @@
 #modify-post-main {
   margin-bottom: 20px;
   min-height: 600px;
-  background: white; }
-  /* line 9, ../scss/modifypost.scss */
-  #modify-post-main > div {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    border-left: 1px solid #cccccc; }
-    /* line 10, ../scss/modifypost.scss */
-    #modify-post-main > div:first-child {
-      border-top: 1px solid #cccccc; }
-    /* line 17, ../scss/modifypost.scss */
-    #modify-post-main > div > h5 {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 15px;
-      margin-left: 0; }
-  /* line 23, ../scss/modifypost.scss */
-  #modify-post-main .modify-post-title > span {
-    width: 5%;
-    height: auto;
-    margin-right: 15px; }
-  /* line 28, ../scss/modifypost.scss */
-  #modify-post-main .modify-post-title input {
-    width: 100%;
-    height: auto;
-    max-width: 100%; }
-  /* line 34, ../scss/modifypost.scss */
-  #modify-post-main .modify-post-message {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px; }
-    /* line 37, ../scss/modifypost.scss */
-    #modify-post-main .modify-post-message > div {
-      overflow: hidden; }
-    /* line 41, ../scss/modifypost.scss */
-    #modify-post-main .modify-post-message textarea {
-      width: 100%;
-      height: auto;
-      min-height: 150px;
-      max-width: 100%;
-      resize: none; }
-    /* line 48, ../scss/modifypost.scss */
-    #modify-post-main .modify-post-message .cke_contents {
-      min-height: 200px !important; }
-    /* line 52, ../scss/modifypost.scss */
-    #modify-post-main .modify-post-message > .btn {
-      margin-bottom: 15px; }
-  /* line 58, ../scss/modifypost.scss */
-  #modify-post-main .modify-post-contents .btn-primary {
-    margin-bottom: 15px; }
+  background: white;
+}
+/* line 9, ../scss/modifypost.scss */
+#modify-post-main > div {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+}
+/* line 10, ../scss/modifypost.scss */
+#modify-post-main > div:first-child {
+  border-top: 1px solid #cccccc;
+}
+/* line 17, ../scss/modifypost.scss */
+#modify-post-main > div > h5 {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+}
+/* line 23, ../scss/modifypost.scss */
+#modify-post-main .modify-post-title > span {
+  width: 5%;
+  height: auto;
+  margin-right: 15px;
+}
+/* line 28, ../scss/modifypost.scss */
+#modify-post-main .modify-post-title input {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+/* line 34, ../scss/modifypost.scss */
+#modify-post-main .modify-post-message {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+/* line 37, ../scss/modifypost.scss */
+#modify-post-main .modify-post-message > div {
+  overflow: hidden;
+}
+/* line 41, ../scss/modifypost.scss */
+#modify-post-main .modify-post-message textarea {
+  width: 100%;
+  height: auto;
+  min-height: 150px;
+  max-width: 100%;
+  resize: none;
+}
+/* line 48, ../scss/modifypost.scss */
+#modify-post-main .modify-post-message .cke_contents {
+  min-height: 200px !important;
+}
+/* line 52, ../scss/modifypost.scss */
+#modify-post-main .modify-post-message > .btn {
+  margin-bottom: 15px;
+}
+/* line 58, ../scss/modifypost.scss */
+#modify-post-main .modify-post-contents .btn-primary {
+  margin-bottom: 15px;
+}

@@ -1,10 +1,18 @@
-/* line 4, ../../scss/posts/postrelateditems.scss */
+/* line 3, ../../scss/posts/postrelateditems.scss */
+.post-related-items-container {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* line 6, ../../scss/posts/postrelateditems.scss */
 .post-related-items-container > .post-related-list {
   padding-top: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
-  padding-left: 15px; }
-/* line 8, ../../scss/posts/postrelateditems.scss */
+  padding-left: 15px;
+}
+/* line 10, ../../scss/posts/postrelateditems.scss */
 .post-related-items-container > .post-related-category {
   padding-top: 15px;
   padding-right: 15px;
@@ -12,4 +20,5 @@
   padding-left: 15px;
   border-bottom: 1px solid #cccccc;
   background: white;
-  color: #4c4c4c; }
+  color: #4c4c4c;
+}

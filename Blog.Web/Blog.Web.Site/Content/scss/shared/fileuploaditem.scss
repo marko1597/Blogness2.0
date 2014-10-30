@@ -2,6 +2,7 @@
 
 .upload-details {
     @include padding($default-padding);
+    @include border-radius(null, true, true, true, false, false);
     background: $main-color;
     color: $main-font-color;
 
@@ -42,7 +43,7 @@
     > .buttons {
         > button {
             @include size(25px);
-            border-radius: $default-border-radius;
+            @include border-radius(null, false);
         }
     }
 

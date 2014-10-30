@@ -1,15 +1,28 @@
-/* line 4, ../../scss/loginform/registerform.scss */
+/* line 3, ../../scss/loginform/registerform.scss */
+.login-form.register {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* line 6, ../../scss/loginform/registerform.scss */
 .login-form.register .content {
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;
-  padding-left: 0; }
-/* line 8, ../../scss/loginform/registerform.scss */
+  padding-left: 0;
+}
+/* line 10, ../../scss/loginform/registerform.scss */
 .login-form.register .panel {
-  border: 0; }
-  /* line 11, ../../scss/loginform/registerform.scss */
-  .login-form.register .panel .panel-heading {
-    color: white;
-    background: #4c4c4c;
-    border-color: #595959;
-    border-radius: 0; }
+  border: 0;
+}
+/* line 13, ../../scss/loginform/registerform.scss */
+.login-form.register .panel .panel-heading {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: white;
+  background: #4c4c4c;
+  border-color: #595959;
+}

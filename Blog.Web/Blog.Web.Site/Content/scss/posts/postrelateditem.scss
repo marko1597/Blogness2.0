@@ -2,6 +2,7 @@
 
 .post-related-item {
     @include margin(null, null, $default-margin);
+    @include border-radius(null, false);
     background: $default-color;
 
     > div {

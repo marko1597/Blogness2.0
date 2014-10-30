@@ -31,10 +31,32 @@
     }
 }
 
+/* #region dropdown-menu overrides */
+
 .dropdown-menu {
+    @include border-radius(null, true);
+
     > li {
         > a {
             color: $content-font-color;
+
+            &:hover {
+                color: $main-font-color;
+                background-color: $primary-color;
+            }
+        }
+    }
+}
+
+/* #endregion */
+
+/* #region navbar overrides */
+
+.nav {
+    .open {
+        > a, > a:hover, > a:focus {
+            background-color: $main-color;
+            border-color: $main-color;
         }
     }
 }
@@ -43,17 +65,14 @@
     @include borders(1px, solid, darken($main-color, $border-darken-value), null, null, 1px);
     background: $main-color;
 
-    &.navbar-nav {
-        > li {
-            a {
-                color: $main-font-color;
-            }
-        }
-    }
-
     > .navbar-header {
         .navbar-brand {
             color: $main-font-color;
+            cursor: pointer;
+
+            &:hover {
+                @include opacity(0.5);
+            }
         }
 
         > .navmenu-toggle {
@@ -82,7 +101,28 @@
     }
 }
 
+.navbar-nav {
+    > li {
+        > a {
+            color: $main-font-color;
+            cursor: pointer;
+
+            &:hover {
+                @include opacity(0.5);
+                text-decoration: underline;
+                background-color: $main-color;
+            }
+        }
+    }
+}
+
+/* #endregion */
+
+/* #region button overrides */
+
 .btn {
+    @include border-radius(null, true);
+
     &.btn-primary {
         @include borders(1px, solid, $primary-color, 1px);
         background: $primary-color;
@@ -113,3 +153,73 @@
         background: $default-color;
     }
 }
+
+/* #endregion */
+
+/* #region popover overrides */
+
+.popover {
+    @include padding(0);
+    @include border-radius(null, false);
+
+    &.top, &.top-left, &.top-right {
+        > .arrow {
+            border-top-color: darken($main-color, $border-darken-value);
+
+            &:after {
+                border-top-color: $main-color;
+            }
+        }
+    }
+
+    &.right {
+        > .arrow {
+            border-right-color: darken($main-color, $border-darken-value);
+
+            &:after {
+                border-right-color: $main-color;
+            }
+        }
+    }
+
+    &.bottom, &.bottom-left, &.bottom-right {
+        > .arrow {
+            border-bottom-color: darken($main-color, $border-darken-value);
+
+            &:after {
+                border-bottom-color: $main-color;
+            }
+        }
+    }
+
+    &.left {
+        > .arrow {
+            border-left-color: darken($main-color, $border-darken-value);
+
+            &:after {
+                border-left-color: $main-color;
+            }
+        }
+    }
+}
+
+.popover-title {
+    @include border-radius(null, false);
+    color: $main-font-color;
+    background-color: $main-color;
+    border-bottom: darken($main-color, $border-darken-value);
+}
+
+.popover-content {
+    @include borders(1px, solid, $light-border-color, false, true, true, true);
+}
+
+/* #endregion */
+
+/* #region panel overrides */
+
+.panel {
+    @include border-radius(null, false);
+}
+
+/* #endregion */

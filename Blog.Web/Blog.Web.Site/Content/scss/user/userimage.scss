@@ -58,7 +58,7 @@
 
     .edit {
         @include position(absolute, null);
-        color: $content-font-color;
+        color: $main-font-color;
         visibility: hidden;
         display: none;
         font-size: 2em;
@@ -93,7 +93,7 @@
             > img {
                 @include size(120px);
                 @include borders(3px, solid, $default-color, true);
-                border-radius: 60px;
+                @include border-radius(round, false);
                 -moz-background-size: cover;
                 -o-background-size: cover;
                 -webkit-background-size: cover;

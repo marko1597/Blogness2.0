@@ -1,6 +1,8 @@
 ﻿@import '../variables';
 
 #media-selection-dialog {
+    @include border-radius(null, false);
+
     .modal-body {
         ul {
             @include clean-list;

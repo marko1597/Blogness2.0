@@ -6,7 +6,7 @@
     @include margin(0, $tag-margin, $tag-margin);
     @include padding($tag-padding);
     @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
-    color: $main-font-color;
+    @include border-radius(null, false);color: $main-font-color;
     background: $primary-color;
     display: inline-block;
     cursor: pointer;

@@ -3,6 +3,10 @@
   height: auto;
   position: fixed;
   top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: rgba(0, 0, 0, 0.8); }
   #media-gallery > .modal-dialog {
     width: 100%;

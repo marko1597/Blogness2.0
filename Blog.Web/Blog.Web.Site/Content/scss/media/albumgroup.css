@@ -1,5 +1,9 @@
 ﻿.album-group {
   margin-bottom: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   color: #4c4c4c; }
   .album-group.new {
     cursor: pointer; }

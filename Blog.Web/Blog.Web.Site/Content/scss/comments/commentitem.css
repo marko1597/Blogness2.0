@@ -1,6 +1,10 @@
 ﻿.comment-item {
   position: relative;
   margin-bottom: 15px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #fff; }
   .comment-item p {
     margin-top: 0;

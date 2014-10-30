@@ -3,19 +3,19 @@
 $cke-border-color: darken($light-border-color, 20%);
 
 #cke_post-message-editor {
+    @include border-radius(null, true);
     background: none !important;
     padding: 3px 5px 5px 5px !important;
-    border-radius: 0 !important;
     border: 1px solid $cke-border-color !important;
     width: auto !important;
     color: $content-font-color !important;
 
     div {
-        border-radius: 0 !important;
+        @include border-radius(null, true);
     }
 
     span {
-        border-radius: 0 !important;
+        @include border-radius(null, true);
     }
 }
 

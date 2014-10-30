@@ -1,11 +1,14 @@
 @import 'variables';
 
+/* #region base element styles */
+
 html, body {
     font-family: $fonts;
     @include size(auto, 100%);
 }
 
 input, select, textarea {
+    @include border-radius(null, true);
     max-width: $max-input-width;
 }
 
@@ -28,17 +31,13 @@ a {
     background: $primary-color;
 }
 
-.blog-brand-icon {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
-    background-size: cover;
-    float: left;
-    @include position(relative, -5px, null, null, null);
-    @include margin(null, 5px);
-    @include size(30px, 30px);
-}
+/* #endregion */
+
+/* #region card class */
 
 .card {
     @include box-shadow(false);
+    @include border-radius(null, false);
     vertical-align: top;
     font-size: 1em;
     color: darken($dark-border-color, 20%);
@@ -129,11 +128,16 @@ a {
     }
 }
 
+/* #endregion */
+
+/* #region header class */
+
 .header {
     background: $main-color;
     color: $main-font-color;
     @include position(relative, null);
     @include size(100%, 38px);
+    @include border-radius(null, false, true, true, false, false);
 
     &.big {
         @include padding($default-padding);
@@ -147,8 +151,8 @@ a {
 
             img {
                 @include size(80px, 80px);
-                border-radius: 40px;
-                border: 3px solid $default-color;
+                @include border-radius(round, false);
+                @include borders(3px, solid, $default-color, true);
             }
         }
 
@@ -201,6 +205,10 @@ a {
     }
 }
 
+/* #endregion */
+
+/* #region image center cropping */
+
 .center-cropped {
     float: left;
     background-position: center center;
@@ -213,6 +221,19 @@ a {
         min-width: 100%;
         @include opacity(0);
     }
+}
+
+/* #endregion */
+
+/* #region bloggity base classes */
+
+.blog-brand-icon {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAV1BMVEUAAADHx8fOzs6pqamfn5+dnZ3BwcHExMTQ0NDf399xcXGNjY3w8PBMTExSvt1WwuFav91bv91cvttoxeBqxN5vxd9xcXF8yuHi8/jm9fnn5+fo9fn///+UDZIMAAAADXRSTlMANG16fn9/f3/z/v7+rTi8VQAAAJVJREFUeNrt2zkSgkAURVEcUVFBwQF0/+s0M6KK6qB/dXDuCk76gldVkqR/m11U29Us4HQJaw8AAAAAAAAAAAAAAABQJqB5hlXPAs7fsA4AAAAAAAAAAAAAAAAAAAAAAAAAAMUDxneGPgmA+zVDQwKgazPUAwAAAAAAAAAAACQAHrcMvSwjAAAAgCXAcQpr7dcmSQX1Axb4wNVzzdKdAAAAAElFTkSuQmCC') /*images/brand-logo.png*/;
+    background-size: cover;
+    float: left;
+    @include position(relative, -5px, null, null, null);
+    @include margin(null, 5px);
+    @include size(30px, 30px);
 }
 
 ui-view, *[ui-view] {
@@ -255,6 +276,8 @@ ui-view, *[ui-view] {
         @include position(fixed, null, null, 0, null);
     }
 }
+
+/* #endregion */
 
 /* #region field validation errors */
 

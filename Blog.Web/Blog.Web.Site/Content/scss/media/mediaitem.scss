@@ -2,6 +2,7 @@
 
 .media-item {
     @include position(relative, null);
+    @include border-radius(null, false);
     text-align: center;
 
     &:hover {

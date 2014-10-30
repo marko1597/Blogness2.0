@@ -11,6 +11,10 @@
   border-right: 1px solid #40bbdd;
   border-bottom: 1px solid #40bbdd;
   border-left: 1px solid #40bbdd;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   color: #fff;
   background: #56c2e1;
   display: inline-block;

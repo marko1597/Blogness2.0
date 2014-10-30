@@ -1,6 +1,8 @@
 ﻿@import '../variables';
 
 .post-related-items-container {
+    @include border-radius(null, false);
+
     > .post-related-list {
         @include padding($default-padding);
     }

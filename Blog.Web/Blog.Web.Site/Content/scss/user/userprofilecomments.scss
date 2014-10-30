@@ -3,4 +3,5 @@
 .user-profile-comments {
     background: $default-color-darken;
     @include padding($default-padding);
+    @include border-radius(null, false);
 }

@@ -13,29 +13,37 @@
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   background: #e6e6e6;
   overflow: scroll;
   z-index: 10;
-  color: #4c4c4c; }
-  /* line 13, ../../scss/sockets/socketdebugger.scss */
-  #socket-debugger > div {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    border-top: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    border-left: 1px solid #cccccc;
-    margin-bottom: 15px; }
-    /* line 18, ../../scss/sockets/socketdebugger.scss */
-    #socket-debugger > div > p {
-      font-family: inherit;
-      color: #4c4c4c;
-      -ms-word-wrap: break-word;
-      word-wrap: break-word; }
-      /* line 24, ../../scss/sockets/socketdebugger.scss */
-      #socket-debugger > div > p > code {
-        width: 100%;
-        height: auto;
-        font-family: Consolas; }
+  color: #4c4c4c;
+}
+/* line 15, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  margin-bottom: 15px;
+}
+/* line 20, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div > p {
+  font-family: inherit;
+  color: #4c4c4c;
+  -ms-word-wrap: break-word;
+  word-wrap: break-word;
+}
+/* line 26, ../../scss/sockets/socketdebugger.scss */
+#socket-debugger > div > p > code {
+  width: 100%;
+  height: auto;
+  font-family: Consolas;
+}

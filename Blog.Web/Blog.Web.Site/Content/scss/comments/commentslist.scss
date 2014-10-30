@@ -2,6 +2,7 @@
 
 .comment-items-list {
     @include padding($default-padding);
+    @include border-radius(null, false);
 
     .comments-empty-message {
         @include center;

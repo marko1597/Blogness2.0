@@ -1,6 +1,8 @@
 ﻿@import '../variables';
 
 #media-grouped-list {
+    @include border-radius(null, false);
+
     .album-group {
         &.new {
             i {
