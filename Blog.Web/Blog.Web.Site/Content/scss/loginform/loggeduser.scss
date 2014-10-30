@@ -22,11 +22,11 @@
             a {
                 border: none;
                 background: $default-color;
-                color: $dark-color;
+                color: $content-font-color;
 
                 &:hover {
                     background: $primary-color;
-                    color: $default-color;
+                    color: $main-font-color;
                 }
             }
         }

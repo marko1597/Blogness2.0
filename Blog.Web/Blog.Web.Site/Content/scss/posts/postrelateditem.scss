@@ -14,11 +14,7 @@
         @include ellipsis-text;
         @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
         background: $primary-color;
-        color: $default-color;
-
-        > a {
-            color: $default-color;
-        }
+        color: $main-font-color;
     }
 
     >.body {

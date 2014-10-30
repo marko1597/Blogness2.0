@@ -3,16 +3,13 @@
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;
-  padding-left: 0;
-}
+  padding-left: 0; }
 /* line 8, ../../scss/loginform/registerform.scss */
 .login-form.register .panel {
-  border: 0;
-}
-/* line 11, ../../scss/loginform/registerform.scss */
-.login-form.register .panel .panel-heading {
-  color: white;
-  background: #4c4c4c;
-  border-color: #595959;
-  border-radius: 0;
-}
+  border: 0; }
+  /* line 11, ../../scss/loginform/registerform.scss */
+  .login-form.register .panel .panel-heading {
+    color: white;
+    background: #4c4c4c;
+    border-color: #595959;
+    border-radius: 0; }

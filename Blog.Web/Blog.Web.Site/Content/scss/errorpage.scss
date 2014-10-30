@@ -9,7 +9,7 @@
     }
 
     h1 {
-        color: $default-color;
+        color: $main-font-color;
         line-height: 2;
         text-align: center;
         letter-spacing: 1px;
@@ -24,7 +24,7 @@
             > a {
                 @include transition(opacity .25s ease-in-out);
                 @include opacity(1);
-                color: $default-color;
+                color: $main-font-color;
                 text-decoration: none;
                 cursor: pointer;
 

@@ -16,7 +16,7 @@
         @include margin(0);
         @include size(100%, auto);
         display: none;
-        color: $default-color;
+        color: $main-font-color;
         background: $primary-color;
         font-family: $fonts;
         cursor: pointer;

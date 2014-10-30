@@ -2,37 +2,35 @@
 .post-likes {
   width: 30%;
   height: 28px;
-  border-top: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
   margin-right: 15px;
   box-shadow: 0 2px 4px 0 #cccccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background: white;
+  color: #4c4c4c;
   display: inline-block;
   line-height: 28px;
   max-width: 120px;
   min-width: 100px;
-  cursor: pointer;
-}
-/* line 14, ../../scss/posts/postlikes.scss */
-.post-likes:hover {
-  border-top: 1px solid #d0d0d0;
-  border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #d0d0d0;
-  border-left: 1px solid #d0d0d0;
-}
-/* line 18, ../../scss/posts/postlikes.scss */
-.post-likes > .wrapper {
-  padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 0;
-  padding-left: 15px;
-}
-/* line 21, ../../scss/posts/postlikes.scss */
-.post-likes > .wrapper span {
-  padding-top: 3px;
-  padding-right: 3px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-}
+  cursor: pointer; }
+  /* line 16, ../../scss/posts/postlikes.scss */
+  .post-likes:hover {
+    border-top: 1px solid #bfbfbf;
+    border-right: 1px solid #bfbfbf;
+    border-bottom: 1px solid #bfbfbf;
+    border-left: 1px solid #bfbfbf; }
+  /* line 20, ../../scss/posts/postlikes.scss */
+  .post-likes > .wrapper {
+    padding-top: 0;
+    padding-right: 15px;
+    padding-bottom: 0;
+    padding-left: 15px; }
+    /* line 23, ../../scss/posts/postlikes.scss */
+    .post-likes > .wrapper span {
+      padding-top: 3px;
+      padding-right: 3px;
+      padding-bottom: 3px;
+      padding-left: 3px; }

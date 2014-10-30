@@ -1,29 +1,30 @@
 ﻿@import '../variables';
 
 .user-profile-navigation {
+    @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
+    @include padding($default-margin);
+    @include margin(null, null, $default-margin);
+    background: $primary-color;
+    color: $main-font-color;
     text-shadow: 0 1px 0 rgba(0,0,0,0.25);
-    background: #56c2e1;
-    border: 1px solid #46b3d3;
-    margin-bottom: 15px;
-}
 
-    .user-profile-navigation nav {
-        height: 100%;
-    }
+    nav {
+        @include size(auto, 100%);
 
-        .user-profile-navigation nav ul {
-            padding: 10px;
-            list-style-type: none;
+        ul {
+            @include clean-list;
+            @include padding($default-padding);
             text-align: center;
-            margin: 0;
-        }
 
-            .user-profile-navigation nav ul > li {
+            > li {
+                @include padding(0, $default-padding, 0, $default-padding);
                 display: inline;
-                padding: 0 5px;
-            }
 
-                .user-profile-navigation nav ul > li a {
-                    color: #f8f8f8;
+                a {
+                    color: $default-color;
                     font-weight: normal;
                 }
+            }
+        }
+    }
+}

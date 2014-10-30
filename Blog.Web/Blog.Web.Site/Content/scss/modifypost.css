@@ -7,11 +7,11 @@
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd; }
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc; }
     #modify-post-main > div:first-child {
-      border-top: 1px solid #ddd; }
+      border-top: 1px solid #cccccc; }
     #modify-post-main > div > h5 {
       margin-top: 0;
       margin-right: 0;

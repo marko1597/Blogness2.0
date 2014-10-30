@@ -1,13 +1,11 @@
 /* line 3, ../../scss/extensions/isotope.scss */
 .isotope-item {
-  z-index: 2;
-}
+  z-index: 2; }
 
 /* line 7, ../../scss/extensions/isotope.scss */
 .isotope-hidden.isotope-item {
   pointer-events: none;
-  z-index: 1;
-}
+  z-index: 1; }
 
 /* line 13, ../../scss/extensions/isotope.scss */
 .isotope .isotope-item {
@@ -18,8 +16,7 @@
   -moz-animation-name: fadeIn;
   -o-animation-name: fadeIn;
   -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
+  animation-name: fadeIn; }
 
 /* line 26, ../../scss/extensions/isotope.scss */
 .isotope.no-transition,
@@ -28,13 +25,11 @@
   -webkit-transition-duration: 0;
   -moz-transition-duration: 0;
   -o-transition-duration: 0;
-  transition-duration: 0;
-}
+  transition-duration: 0; }
 
 /* line 33, ../../scss/extensions/isotope.scss */
 .isotope.infinite-scrolling {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
-  transition: none;
-}
+  transition: none; }

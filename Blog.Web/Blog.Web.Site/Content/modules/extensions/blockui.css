@@ -11,15 +11,13 @@
   border-top: 1px solid #666666;
   border-bottom: 1px solid #666666;
   text-align: center;
-  color: #000 !important;
+  color: #4c4c4c !important;
   border: none;
   background-color: white !important;
-  cursor: default;
-}
-/* line 15, ../../scss/extensions/blockui.scss */
-.blockUI.blockMsg > .alert {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-}
+  cursor: default; }
+  /* line 15, ../../scss/extensions/blockui.scss */
+  .blockUI.blockMsg > .alert {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }

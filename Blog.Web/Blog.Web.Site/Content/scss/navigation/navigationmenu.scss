@@ -4,14 +4,14 @@
     @include size(100%, 100%);
     @include borders(1px, solid, $dark-border-color, false, true, false, false);
     @include padding(50px, null, null, null);
-    background: $dark-color;
-    color: $default-color-darken;
+    background: $main-color;
+    color: $main-font-color;
 
     &:after {
         @include size(100%, auto);
         @include borders(1px, solid, $dark-border-color, false, true, false, false);
-        background: $dark-color;
-        color: $default-color-darken;
+        background: $main-color;
+        color: $main-font-color;
     }
 
     ul {
@@ -20,9 +20,9 @@
         > li {
             > a {
                 @include padding($default-padding);
-                @include borders(1px, solid, darken($dark-color, $border-darken-value), false, false, true);
+                @include borders(1px, solid, darken($main-color, $border-darken-value), false, false, true);
                 box-shadow: none;
-                color: $default-color-darken;
+                color: $main-font-color;
                 outline: none;
                 display: block;
                 text-transform: uppercase;

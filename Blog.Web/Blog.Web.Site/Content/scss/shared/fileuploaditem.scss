@@ -2,11 +2,11 @@
 
 .upload-details {
     @include padding($default-padding);
-    background: $dark-color;
-    color: $default-color;
+    background: $main-color;
+    color: $main-font-color;
 
     .popover {
-        color: $dark-color;
+        color: $content-font-color;
 
         .popover-content {
             -ms-word-wrap: break-word;

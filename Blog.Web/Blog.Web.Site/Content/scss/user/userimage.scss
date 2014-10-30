@@ -58,7 +58,7 @@
 
     .edit {
         @include position(absolute, null);
-        color: $default-color;
+        color: $content-font-color;
         visibility: hidden;
         display: none;
         font-size: 2em;
@@ -75,7 +75,7 @@
         @include position(absolute, 0, null, null);
         @include size(30%, 100%);
         @include padding($detail-padding);
-        background: $dark-color;
+        background: $main-color;
         text-align: center;
 
         @include media(xs) {
@@ -102,12 +102,12 @@
         }
 
         h4 {
-            color: $default-color;
+            color: $content-font-color;
         }
 
         p {
             a {
-                color: $default-color;
+                color: $main-font-color;
                 font-size: 1em;
                 cursor: pointer;
             }

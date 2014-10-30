@@ -2,6 +2,7 @@
 
 .album-group {
     @include margin(null, null, $default-margin, null);
+    color: $content-font-color;
 
     &.new {
         cursor: pointer;
@@ -56,6 +57,7 @@
                     @include padding($default-padding);
                     background: $default-color;
                     overflow: hidden;
+                    color: $content-font-color;
 
                     .btn {
                         @include media(xs) {

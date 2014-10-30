@@ -7,7 +7,7 @@
         @include size(100%, auto);
         @include borders(1px, solid, $dark-border-color, true, false, true, false);
         text-align: center;
-        color: #000 !important;
+        color: $content-font-color !important;
         border: none;
         background-color: $default-color !important;
         cursor: default;

@@ -2,106 +2,92 @@
 tags-input *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
 
 /* line 10, ../../scss/extensions/ngtagsinput.scss */
 tags-input .host {
-  position: relative;
-}
-/* line 13, ../../scss/extensions/ngtagsinput.scss */
-tags-input .host:active {
-  outline: none;
-}
+  position: relative; }
+  /* line 13, ../../scss/extensions/ngtagsinput.scss */
+  tags-input .host:active {
+    outline: none; }
 /* line 18, ../../scss/extensions/ngtagsinput.scss */
 tags-input .tags {
-  border-top: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
   -moz-appearance: textfield;
   -webkit-appearance: textfield;
   overflow: hidden;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
   cursor: text;
-  background-color: white;
-}
-/* line 28, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .tag-list {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-/* line 32, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .tag-item {
-  margin-top: 3px;
-  margin-right: 3px;
-  margin-bottom: 3px;
-  margin-left: 3px;
-  display: inline-block;
-  float: left;
-}
-/* line 38, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .tag-item.selected {
-  background-color: #d9534f;
-  border-color: #d43f3a;
-}
-/* line 43, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .tag-item .remove-button {
-  margin-left: 5px;
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  vertical-align: middle;
-  color: white;
-}
-/* line 53, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .tag-item .remove-button:active {
-  color: #de6764;
-}
-/* line 59, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .input {
-  border: none;
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 5px;
-  width: auto;
-  height: 26px;
-  border-bottom: 1px solid #dddddd;
-  outline: none;
-  float: left;
-  min-width: 280px;
-}
-/* line 70, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .input.invalid-tag {
-  color: #de6764;
-  border-bottom: 1px solid #d9534f;
-}
-/* line 75, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags .input::-ms-clear {
-  display: none;
-}
-/* line 80, ../../scss/extensions/ngtagsinput.scss */
-tags-input .tags.focused {
-  outline: none;
-  -webkit-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
-  -moz-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
-  box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
-}
+  background-color: white; }
+  /* line 28, ../../scss/extensions/ngtagsinput.scss */
+  tags-input .tags .tag-list {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 0 !important; }
+  /* line 32, ../../scss/extensions/ngtagsinput.scss */
+  tags-input .tags .tag-item {
+    margin-top: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    display: inline-block;
+    float: left; }
+    /* line 38, ../../scss/extensions/ngtagsinput.scss */
+    tags-input .tags .tag-item.selected {
+      background-color: #d9534f;
+      border-color: #d43f3a; }
+    /* line 43, ../../scss/extensions/ngtagsinput.scss */
+    tags-input .tags .tag-item .remove-button {
+      margin-left: 5px;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      vertical-align: middle;
+      color: white; }
+      /* line 53, ../../scss/extensions/ngtagsinput.scss */
+      tags-input .tags .tag-item .remove-button:active {
+        color: #de6764; }
+  /* line 59, ../../scss/extensions/ngtagsinput.scss */
+  tags-input .tags .input {
+    border: none;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+    width: auto;
+    height: 26px;
+    border-bottom: 1px solid #cccccc;
+    outline: none;
+    float: left;
+    min-width: 280px; }
+    /* line 70, ../../scss/extensions/ngtagsinput.scss */
+    tags-input .tags .input.invalid-tag {
+      color: #de6764;
+      border-bottom: 1px solid #d9534f; }
+    /* line 75, ../../scss/extensions/ngtagsinput.scss */
+    tags-input .tags .input::-ms-clear {
+      display: none; }
+  /* line 80, ../../scss/extensions/ngtagsinput.scss */
+  tags-input .tags.focused {
+    outline: none;
+    -webkit-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+    -moz-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
+    box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6); }
 /* line 88, ../../scss/extensions/ngtagsinput.scss */
 tags-input.ng-invalid .tags {
-  box-shadow: 0 0 0 1px #d9534f;
-}
+  box-shadow: 0 0 0 1px #d9534f; }
 /* line 92, ../../scss/extensions/ngtagsinput.scss */
 tags-input.autocomplete {
   margin-top: 5px;
@@ -112,47 +98,41 @@ tags-input.autocomplete {
   position: absolute;
   width: 100%;
   height: auto;
-  border-top: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
   z-index: 999;
   background-color: white;
-  box-shadow: 0 5px 10px #dddddd;
-}
-/* line 103, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-list {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-/* line 107, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item {
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  padding-top: 5px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  padding-left: 10px;
-  cursor: pointer;
-  color: #4c4c4c;
-  background-color: white;
-}
-/* line 116, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item.selected {
-  color: white;
-  background-color: #56c2e1;
-}
-/* line 120, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item.selected em {
-  color: white;
-  background-color: #56c2e1;
-}
-/* line 126, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item em {
-  color: #4c4c4c;
-  background-color: white;
-}
+  box-shadow: 0 5px 10px #cccccc; }
+  /* line 103, ../../scss/extensions/ngtagsinput.scss */
+  tags-input.autocomplete .suggestion-list {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 0 !important; }
+  /* line 107, ../../scss/extensions/ngtagsinput.scss */
+  tags-input.autocomplete .suggestion-item {
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-top: 5px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #4c4c4c;
+    background-color: white; }
+    /* line 116, ../../scss/extensions/ngtagsinput.scss */
+    tags-input.autocomplete .suggestion-item.selected {
+      color: white;
+      background-color: #56c2e1; }
+      /* line 120, ../../scss/extensions/ngtagsinput.scss */
+      tags-input.autocomplete .suggestion-item.selected em {
+        color: white;
+        background-color: #56c2e1; }
+    /* line 126, ../../scss/extensions/ngtagsinput.scss */
+    tags-input.autocomplete .suggestion-item em {
+      color: #4c4c4c;
+      background-color: white; }

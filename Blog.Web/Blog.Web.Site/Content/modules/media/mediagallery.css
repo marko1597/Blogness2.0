@@ -4,76 +4,64 @@
   height: auto;
   position: fixed;
   top: 0;
-  background: rgba(0, 0, 0, 0.8);
-}
-/* line 8, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog {
-  width: 100%;
-  height: 100%;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-}
-/* line 12, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content {
-  background: transparent;
-}
-/* line 15, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > button {
-  margin-top: 15px;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  margin-left: 15px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 3em;
-  color: white;
-  cursor: pointer;
-  background: none;
-  border: none;
-  z-index: 101;
-}
-/* line 25, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > button:hover {
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
-/* line 30, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-header {
-  border-bottom: 0;
-}
-/* line 34, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-body {
-  z-index: 100;
-}
-/* line 37, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-body slick {
-  width: auto;
-  height: 100%;
-}
-/* line 40, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots {
-  position: absolute;
-  bottom: 0;
-}
-/* line 45, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li button:before {
-  color: white;
-}
-/* line 52, ../../scss/media/mediagallery.scss */
-#media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li.slick-active button:before {
-  color: white;
-}
-/* line 64, ../../scss/media/mediagallery.scss */
-#media-gallery img {
-  background-size: cover;
-  max-height: 500px;
-  width: auto;
-  height: auto;
-  margin-top: 0;
-  margin-right: auto;
-  margin-bottom: 0;
-  margin-left: auto;
-}
+  background: rgba(0, 0, 0, 0.8); }
+  /* line 8, ../../scss/media/mediagallery.scss */
+  #media-gallery > .modal-dialog {
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }
+    /* line 12, ../../scss/media/mediagallery.scss */
+    #media-gallery > .modal-dialog > .modal-content {
+      background: transparent; }
+      /* line 15, ../../scss/media/mediagallery.scss */
+      #media-gallery > .modal-dialog > .modal-content > button {
+        margin-top: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        margin-left: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 3em;
+        color: white;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 101; }
+        /* line 25, ../../scss/media/mediagallery.scss */
+        #media-gallery > .modal-dialog > .modal-content > button:hover {
+          opacity: 0.5;
+          filter: alpha(opacity=50); }
+      /* line 30, ../../scss/media/mediagallery.scss */
+      #media-gallery > .modal-dialog > .modal-content > .modal-header {
+        border-bottom: 0; }
+      /* line 34, ../../scss/media/mediagallery.scss */
+      #media-gallery > .modal-dialog > .modal-content > .modal-body {
+        z-index: 100; }
+        /* line 37, ../../scss/media/mediagallery.scss */
+        #media-gallery > .modal-dialog > .modal-content > .modal-body slick {
+          width: auto;
+          height: 100%; }
+          /* line 40, ../../scss/media/mediagallery.scss */
+          #media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots {
+            position: absolute;
+            bottom: 0; }
+            /* line 45, ../../scss/media/mediagallery.scss */
+            #media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li button:before {
+              color: white; }
+            /* line 52, ../../scss/media/mediagallery.scss */
+            #media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li.slick-active button:before {
+              color: white; }
+  /* line 64, ../../scss/media/mediagallery.scss */
+  #media-gallery img {
+    background-size: cover;
+    max-height: 500px;
+    width: auto;
+    height: auto;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto; }

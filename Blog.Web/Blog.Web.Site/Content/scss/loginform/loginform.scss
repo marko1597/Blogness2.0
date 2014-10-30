@@ -20,7 +20,7 @@ $double-padding: unquote(($base-padding * 2) + 'px');
 
         h1 {
             @include margin(0, 0, 10px, -5px);
-            color: $dark-border-color;
+            color: $content-font-color;
             font-family: $fancy-font-3d;
             line-height: 1em;
             text-shadow: 1px 1px 0 hsl(0, 0%, 100%);
@@ -30,12 +30,13 @@ $double-padding: unquote(($base-padding * 2) + 'px');
         span {
             font-size: .827em;
             line-height: 16px;
-            color: $dark-border-color;
+            color: $content-font-color;
         }
     }
 
     .content {
         @include padding($default-padding, $double-padding, $double-padding, $double-padding);
+        color: $content-font-color;
 
         @include media(sm) {
             .input:focus + div {
@@ -58,13 +59,13 @@ $double-padding: unquote(($base-padding * 2) + 'px');
                 @include transition(all 0.5s ease);
                 @include borders(1px, solid, $light-border-color, true);
                 background: $default-color;
-                color: $dark-color;
+                color: $content-font-color;
                 font-weight: 400;
                 min-width: 100%;
 
                 &:hover, &:focus {
                     background: $light-border-color;
-                    color: darken($dark-border-color, $hover-darken-value);
+                    color: darken($content-font-color, $hover-darken-value);
                 }
 
                 &:focus {
@@ -116,7 +117,7 @@ $double-padding: unquote(($base-padding * 2) + 'px');
             @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
             box-shadow: none;
             background: $primary-color;
-            color: $default-color;
+            color: $main-font-color;
             float: right;
             font-weight: 300;
             font-family: $fancy-font;

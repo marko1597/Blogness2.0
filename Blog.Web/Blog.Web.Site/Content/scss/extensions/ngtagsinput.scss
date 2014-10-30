@@ -110,7 +110,7 @@ tags-input {
             @include ellipsis-text;
             @include padding($suggestion-padding-y, $suggestion-padding-x, $suggestion-padding-y, $suggestion-padding-x);
             cursor: pointer;
-            color: $dark-color;
+            color: $main-color;
             background-color: $default-color;
 
             &.selected {
@@ -124,7 +124,7 @@ tags-input {
             }
 
             em {
-                color: $dark-color;
+                color: $main-color;
                 background-color: $default-color;
             }
         }

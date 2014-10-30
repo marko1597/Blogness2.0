@@ -4,11 +4,12 @@
     @include position(relative, null);
     @include margin(null, null, $default-margin);
     background: $default-color;
-    
+
     p {
         @include margin(0);
         @include padding(10px);
         @include borders(1px, solid, $light-border-color, false, true, true, true);
+        color: $content-font-color;
     }
 
     .header {
@@ -16,7 +17,7 @@
         @include margin(0);
         @include size(auto, 25px);
         background: $primary-color;
-        color: $default-color;
+        color: $main-font-color;
 
         .btn-header {
             $computed-x-padding: unquote((($base-padding / 5) * 2) + 'px');
@@ -43,11 +44,7 @@
 
             @include position(absolute, $computed-top, null, null, null);
             display: inline-block;
-            color: $default-color;
-
-            a {
-                color: $default-color;
-            }
+            color: $main-font-color;
 
             span {
                 font-size: .7em;

@@ -41,7 +41,7 @@
                 
                 @include borders(1px, solid, $light-border-color, false, true, true, true);
                 @include padding($default-padding);
-                color: darken($dark-color, 10%);
+                color: $content-font-color;
                 
                 h5, input {
                     @include margin(0, null, $captions-margin, null);
@@ -50,7 +50,7 @@
                 input, textarea {
                     @include size(100%, auto);
                     max-width: 100%;
-                    color: $dark-border-color;
+                    color: $content-font-color;
                 }
                 
                 textarea {

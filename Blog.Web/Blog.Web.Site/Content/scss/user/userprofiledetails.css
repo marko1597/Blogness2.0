@@ -36,8 +36,8 @@
     padding-left: 15px; }
     .user-profile-details .body .panel {
       margin-bottom: 15px;
-      border-color: #ddd;
-      background: #e6e6e6; }
+      border-color: #cccccc;
+      background: #fff; }
       .user-profile-details .body .panel .panel-heading {
         background-color: transparent;
         border-color: transparent;
@@ -45,10 +45,10 @@
     .user-profile-details .body .education-item {
       margin-bottom: 15px;
       padding-top: 15px;
-      border-top: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      border-left: 1px solid #ddd;
+      border-top: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
       background: #fff; }
       .user-profile-details .body .education-item label[data-display] {
         font-weight: normal;
@@ -57,7 +57,8 @@
     padding-top: 0;
     padding-right: 15px;
     padding-bottom: 15px;
-    padding-left: 15px; }
+    padding-left: 15px;
+    color: #4c4c4c; }
     .user-profile-details .user-form[name='user-hobbies-form'] .form-group {
       margin-bottom: 5px; }
       .user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {

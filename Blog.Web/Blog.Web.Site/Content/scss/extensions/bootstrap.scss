@@ -31,8 +31,31 @@
     }
 }
 
+.dropdown-menu {
+    > li {
+        > a {
+            color: $content-font-color;
+        }
+    }
+}
+
 .navbar {
+    @include borders(1px, solid, darken($main-color, $border-darken-value), null, null, 1px);
+    background: $main-color;
+
+    &.navbar-nav {
+        > li {
+            a {
+                color: $main-font-color;
+            }
+        }
+    }
+
     > .navbar-header {
+        .navbar-brand {
+            color: $main-font-color;
+        }
+
         > .navmenu-toggle {
             @include position(absolute, 27%, null, null, null);
             display: inline-block;
@@ -56,5 +79,37 @@
         > .nav-close {
             left: -10px;
         }
+    }
+}
+
+.btn {
+    &.btn-primary {
+        @include borders(1px, solid, $primary-color, 1px);
+        background: $primary-color;
+    }
+
+    &.btn-success {
+        @include borders(1px, solid, $success-color, true);
+        background: $success-color;
+    }
+
+    &.btn-warning {
+        @include borders(1px, solid, $warning-color, true);
+        background: $warning-color;
+    }
+
+    &.btn-danger {
+        @include borders(1px, solid, $danger-color, true);
+        background: $danger-color;
+    }
+
+    &.btn-info {
+        @include borders(1px, solid, $info-color, true);
+        background: $info-color;
+    }
+
+    &.btn-default {
+        @include borders(1px, solid, $default-color, true);
+        background: $default-color;
     }
 }

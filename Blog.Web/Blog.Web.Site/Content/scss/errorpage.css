@@ -9,7 +9,7 @@
     line-height: 2;
     text-align: center;
     letter-spacing: 1px;
-    text-shadow: 0 0 6px #666; }
+    text-shadow: 0 0 6px #666666; }
   #error-page .row:last-child {
     margin-top: 15px;
     text-align: center; }
@@ -37,10 +37,10 @@
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
+    border-top: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
     background: #fff;
     min-height: 400px;
     text-align: left; }

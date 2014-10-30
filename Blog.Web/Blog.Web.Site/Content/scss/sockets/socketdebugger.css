@@ -8,26 +8,27 @@
   padding-left: 15px;
   width: 300px;
   height: 300px;
-  border-top: 1px solid #666;
-  border-right: 1px solid #666;
-  border-bottom: 1px solid #666;
-  border-left: 1px solid #666;
-  background: #eee;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  background: #e6e6e6;
   overflow: scroll;
-  z-index: 10; }
+  z-index: 10;
+  color: #4c4c4c; }
   #socket-debugger > div {
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
-    border-top: 1px solid #666;
-    border-right: 1px solid #666;
-    border-bottom: 1px solid #666;
-    border-left: 1px solid #666;
+    border-top: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
     margin-bottom: 15px; }
     #socket-debugger > div > p {
       font-family: inherit;
-      color: #191919;
+      color: #4c4c4c;
       -ms-word-wrap: break-word;
       word-wrap: break-word; }
       #socket-debugger > div > p > code {

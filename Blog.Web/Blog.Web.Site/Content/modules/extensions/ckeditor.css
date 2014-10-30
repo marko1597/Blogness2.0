@@ -3,30 +3,25 @@
   background: none !important;
   padding: 3px 5px 5px 5px !important;
   border-radius: 0 !important;
-  border: 1px solid #aaaaaa !important;
+  border: 1px solid #999999 !important;
   width: auto !important;
-}
-/* line 12, ../../scss/extensions/ckeditor.scss */
-#cke_post-message-editor div {
-  border-radius: 0 !important;
-}
-/* line 16, ../../scss/extensions/ckeditor.scss */
-#cke_post-message-editor span {
-  border-radius: 0 !important;
-}
+  color: #4c4c4c !important; }
+  /* line 13, ../../scss/extensions/ckeditor.scss */
+  #cke_post-message-editor div {
+    border-radius: 0 !important; }
+  /* line 17, ../../scss/extensions/ckeditor.scss */
+  #cke_post-message-editor span {
+    border-radius: 0 !important; }
 
-/* line 21, ../../scss/extensions/ckeditor.scss */
+/* line 22, ../../scss/extensions/ckeditor.scss */
 .cke_toolgroup {
-  border: 1px solid #aaaaaa !important;
-}
+  border: 1px solid #999999 !important; }
 
-/* line 25, ../../scss/extensions/ckeditor.scss */
+/* line 26, ../../scss/extensions/ckeditor.scss */
 .cke_contents {
   margin-top: 5px !important;
-  border: 1px solid #aaaaaa !important;
-}
+  border: 1px solid #999999 !important; }
 
-/* line 30, ../../scss/extensions/ckeditor.scss */
+/* line 31, ../../scss/extensions/ckeditor.scss */
 .cke_inner .cke_top {
-  background: none !important;
-}
+  background: none !important; }

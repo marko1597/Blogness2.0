@@ -46,7 +46,7 @@
     right: 40%; }
   .user-image .edit {
     position: absolute;
-    color: #fff;
+    color: #4c4c4c;
     visibility: hidden;
     display: none;
     font-size: 2em;
@@ -92,7 +92,7 @@
         -webkit-background-size: cover;
         background-size: cover; }
     .user-image .details h4 {
-      color: #fff; }
+      color: #4c4c4c; }
     .user-image .details p a {
       color: #fff;
       font-size: 1em;

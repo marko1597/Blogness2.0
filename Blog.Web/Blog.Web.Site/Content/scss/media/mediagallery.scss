@@ -16,7 +16,7 @@
                 @include margin($default-margin);
                 @include position(absolute, 0, 0, null, null);
                 font-size: 3em;
-                color: $default-color;
+                color: $main-font-color;
                 cursor: pointer;
                 background: none;
                 border: none;
@@ -43,14 +43,14 @@
                         li {
                             button {
                                 &:before {
-                                    color: $default-color;
+                                    color: $main-font-color;
                                 }
                             }
 
                             &.slick-active {
                                 button {
                                     &:before {
-                                        color: $default-color;
+                                        color: $main-font-color;
                                     }
                                 }
                             }

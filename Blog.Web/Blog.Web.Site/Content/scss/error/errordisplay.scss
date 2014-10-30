@@ -4,7 +4,7 @@
     @include position(absolute, null, null, 0);
     @include size(100%, auto);
     z-index: 1051;
-    color: $default-color;
+    color: $main-font-color;
 
     .close-error {
         @include position(absolute, 15px, 15px, null, null);

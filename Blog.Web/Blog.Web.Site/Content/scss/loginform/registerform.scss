@@ -9,8 +9,8 @@
         border: 0;
 
         .panel-heading {
-            color: $default-color;
-            background: $dark-color;
+            color: $main-font-color;
+            background: $main-color;
             border-color: darken($dark-border-color, $border-darken-value);
             border-radius: $default-border-radius;
         }

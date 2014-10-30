@@ -8,6 +8,7 @@
     background: $default-color-darken;
     overflow: scroll;
     z-index: 10;
+    color: $content-font-color;
 
     > div {
         @include padding($default-padding);
@@ -16,7 +17,7 @@
 
         > p {
             font-family: inherit;
-            color: darken($dark-color, 20%);
+            color: $content-font-color;
             -ms-word-wrap: break-word;
             word-wrap: break-word;
 

@@ -76,7 +76,7 @@ $input-margin: unquote(($base-margin / 3) + 'px');
             .panel-heading {
                 background-color: transparent;
                 border-color: transparent;
-                color: $dark-color;
+                color: $content-font-color;
             }
         }
 
@@ -95,6 +95,7 @@ $input-margin: unquote(($base-margin / 3) + 'px');
 
     .user-form {
         @include padding(0, $default-padding, $default-padding, $default-padding);
+        color: $content-font-color;
 
         &[name='user-hobbies-form'] {
             .form-group {
@@ -126,7 +127,7 @@ $input-margin: unquote(($base-margin / 3) + 'px');
                 $icon-margin: unquote(($base-margin / 2) + 'px');
                 @include margin($icon-margin, $icon-margin, null, null);
                 font-size: 1.2em;
-                color: $dark-color;
+                color: $content-font-color;
                 cursor: pointer;
             }
         }

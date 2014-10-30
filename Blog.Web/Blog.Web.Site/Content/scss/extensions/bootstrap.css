@@ -18,23 +18,70 @@
     width: 50%;
     height: auto; } }
 
-.navbar > .navbar-header > .navmenu-toggle {
-  position: absolute;
-  top: 27%;
-  display: inline-block;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  -webkit-transition: all 0.5s linear;
-  transition: all 0.5s linear; }
-  .navbar > .navbar-header > .navmenu-toggle > span {
-    width: 22px;
-    height: 2px;
-    background: #fff;
-    display: block;
-    margin-top: 4px; }
-.navbar > .navbar-header > .nav-open {
-  left: -15px; }
-.navbar > .navbar-header > .nav-close {
-  left: -10px; }
+.dropdown-menu > li > a {
+  color: #4c4c4c; }
+
+.navbar {
+  border-bottom: 1px solid #3f3f3f;
+  background: #4c4c4c; }
+  .navbar.navbar-nav > li a {
+    color: #fff; }
+  .navbar > .navbar-header .navbar-brand {
+    color: #fff; }
+  .navbar > .navbar-header > .navmenu-toggle {
+    position: absolute;
+    top: 27%;
+    display: inline-block;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -webkit-transition: all 0.5s linear;
+    transition: all 0.5s linear; }
+    .navbar > .navbar-header > .navmenu-toggle > span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      display: block;
+      margin-top: 4px; }
+  .navbar > .navbar-header > .nav-open {
+    left: -15px; }
+  .navbar > .navbar-header > .nav-close {
+    left: -10px; }
+
+.btn.btn-primary {
+  border-top: 1px solid #56c2e1;
+  border-right: 1px solid #56c2e1;
+  border-bottom: 1px solid #56c2e1;
+  border-left: 1px solid #56c2e1;
+  background: #56c2e1; }
+.btn.btn-success {
+  border-top: 1px solid #5cb85c;
+  border-right: 1px solid #5cb85c;
+  border-bottom: 1px solid #5cb85c;
+  border-left: 1px solid #5cb85c;
+  background: #5cb85c; }
+.btn.btn-warning {
+  border-top: 1px solid #f0ad4e;
+  border-right: 1px solid #f0ad4e;
+  border-bottom: 1px solid #f0ad4e;
+  border-left: 1px solid #f0ad4e;
+  background: #f0ad4e; }
+.btn.btn-danger {
+  border-top: 1px solid #d9534f;
+  border-right: 1px solid #d9534f;
+  border-bottom: 1px solid #d9534f;
+  border-left: 1px solid #d9534f;
+  background: #d9534f; }
+.btn.btn-info {
+  border-top: 1px solid #428bca;
+  border-right: 1px solid #428bca;
+  border-bottom: 1px solid #428bca;
+  border-left: 1px solid #428bca;
+  background: #428bca; }
+.btn.btn-default {
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+  background: #fff; }
 
 /*# sourceMappingURL=bootstrap.css.map */

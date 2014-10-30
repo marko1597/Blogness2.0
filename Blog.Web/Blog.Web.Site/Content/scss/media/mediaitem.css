@@ -28,10 +28,10 @@
   .media-item img {
     width: 100%;
     height: auto;
-    border-top: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
+    border-top: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
     max-width: 100%; }
   .media-item .btn-danger {
     position: absolute;

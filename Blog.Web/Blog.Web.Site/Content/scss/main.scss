@@ -9,13 +9,22 @@ input, select, textarea {
     max-width: $max-input-width;
 }
 
+a {
+    color: $link-font-color;
+
+    &:hover {
+        color: $link-font-color;
+        text-decoration: underline;
+    }
+}
+
 ::selection {
-    color: $default-color;
+    color: $main-font-color;
     background: $primary-color;
 }
 
 ::-moz-selection {
-    color: $default-color;
+    color: $main-font-color;
     background: $primary-color;
 }
 
@@ -43,7 +52,7 @@ input, select, textarea {
 
 .success {
     @extend .card;
-    color: $default-color;
+    color: $main-font-color;
     background: $success-color;
 
     .content {
@@ -63,7 +72,7 @@ input, select, textarea {
 
 .danger {
     @extend .card;
-    color: $default-color;
+    color: $main-font-color;
     background: $danger-color;
 
     .content {
@@ -73,7 +82,7 @@ input, select, textarea {
 
 .info {
     @extend .card;
-    color: $default-color;
+    color: $main-font-color;
     background: $info-color;
 
     .content {
@@ -121,8 +130,8 @@ input, select, textarea {
 }
 
 .header {
-    background: $dark-color;
-    color: $default-color;
+    background: $main-color;
+    color: $main-font-color;
     @include position(relative, null);
     @include size(100%, 38px);
 
@@ -150,10 +159,6 @@ input, select, textarea {
                 @include padding(null, null, null, 90px);
                 @include margin(0, 0, 5px);
                 font-weight: bold;
-
-                a {
-                    color: $default-color;
-                }
             }
 
             p {
@@ -161,7 +166,6 @@ input, select, textarea {
 
                 a {
                     @include margin(0, 0, 5px);
-                    color: $default-color;
                 }
             }
         }
@@ -281,47 +285,47 @@ input[type="checkbox"].input-validation-error {
 
 .has-error {
     background: $danger-color !important;
-    color: $default-color !important;
+    color: $main-font-color !important;
 }
 
 .input.has-error::-webkit-input-placeholder { /* WebKit browsers */
-    color: $default-color;
+    color: $main-font-color;
 }
 
 .input.has-error:hover::-webkit-input-placeholder,
 .input.has-error:focus::-webkit-input-placeholder { /* WebKit browsers */
-    color: $dark-color;
+    color: $content-font-color;
 }
 
 .input.has-error:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: $default-color;
+    color: $main-font-color;
     opacity: 1;
 }
 
 .input.has-error:hover:-moz-placeholder,
 .input.has-error:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: $dark-color;
+    color: $content-font-color;
     @include opacity(1);
 }
 
 .input.has-error::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: $default-color;
+    color: $main-font-color;
     opacity: 1;
 }
 
 .input.has-error:hover::-moz-placeholder,
 .input.has-error:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: $dark-color;
+    color: $content-font-color;
     opacity: 1;
 }
 
 .input.has-error:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: $default-color;
+    color: $main-font-color;
 }
 
 .input.has-error:hover:-ms-input-placeholder,
 .input.has-error:focus:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: $dark-color;
+    color: $content-font-color;
 }
 
 .validation-summary-valid {

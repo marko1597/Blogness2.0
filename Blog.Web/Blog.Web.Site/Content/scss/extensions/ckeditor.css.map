@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"ckeditor.css","sources":["ckeditor.scss","../variables.scss"],"names":[],"mappings":"AAEA;EACI,YAAY;EACZ,SAAS;EACT,eAAe;EACf,QAAQ;EACR,OAAO;EAAX,yBAAyB;IAGjB,eAAe;EACvB,yBAAyB;IAGjB,eAAe;;AAIvB;EACI,QAAQ;;AAGZ;EACI,YAAY;EACZ,QAAQ;;AAGZ,WAAW;EACP,YAAY"}
+﻿{"version":3,"file":"ckeditor.css","sources":["ckeditor.scss","../variables.scss"],"names":[],"mappings":"AAIA;EACI,YAAY;EACZ,SAAS;EACT,eAAe;EACf,QAAQ;EACR,OAAO;EACP,OAAO;EAAX,yBAAyB;IAGjB,eAAe;EACvB,yBAAyB;IAGjB,eAAe;;AAIvB;EACI,QAAQ;;AAGZ;EACI,YAAY;EACZ,QAAQ;;AAGZ,WAAW;EACP,YAAY"}

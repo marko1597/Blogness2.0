@@ -35,16 +35,20 @@ $box-shadow-color-default: #ccc;
 $box-shadow-color-default-inset: #aaa;
 
 // base colors
+$base-grayscale-color: #999;
 $primary-color: #56c2e1;
-$dark-color: #4c4c4c; // used in headers and navigation
-$light-border-color: #ddd; // used as border colors
-$dark-border-color: #666; // used as border colors
+$main-color: #4c4c4c; // used in headers and navigation
+$light-border-color: lighten($base-grayscale-color, 20%); // used as border colors
+$dark-border-color: darken($base-grayscale-color, 20%); // used as border colors
 $success-color: #5cb85c;
 $danger-color: #d9534f;
 $warning-color: #f0ad4e;
 $info-color: #428bca;
 $default-color: #fff;
-$default-color-darken: #eee;
+$default-color-darken: darken($default-color, 10%);
+$main-font-color: #fff;
+$content-font-color: #4c4c4c;
+$link-font-color: #fff;
 
 // mixin size: width; height;
 @mixin size($width, $height: $width) {

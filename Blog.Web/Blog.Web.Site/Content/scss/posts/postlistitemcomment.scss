@@ -1,6 +1,8 @@
 ﻿@import '../variables';
 
 .post-item-comment {
+    color: $content-font-color;
+
     p {
         @include margin(0);
 
@@ -10,7 +12,7 @@
             cursor: pointer;
 
             &:hover {
-                color: lighten($dark-border-color, 20%);
+                color: darken($content-font-color, $hover-darken-value);
             }
         }
 

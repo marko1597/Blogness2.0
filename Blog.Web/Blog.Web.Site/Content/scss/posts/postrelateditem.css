@@ -17,12 +17,10 @@
     border-left: 1px solid #40bbdd;
     background: #56c2e1;
     color: #fff; }
-    .post-related-item > .header > a {
-      color: #fff; }
   .post-related-item > .body {
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
     clear: both; }
     .post-related-item > .body > .details {
       width: auto;

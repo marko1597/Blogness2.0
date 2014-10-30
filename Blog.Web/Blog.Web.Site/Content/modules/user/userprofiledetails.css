@@ -1,159 +1,128 @@
 /* line 22, ../../scss/user/userprofiledetails.scss */
 .user-profile-details {
-  overflow: visible !important;
-}
-@media (max-width: 767px) {
-  /* line 27, ../../scss/user/userprofiledetails.scss */
-  .user-profile-details .header > .btn-header {
-    width: 40px;
-    height: auto;
-  }
-}
-/* line 33, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .fa {
-  cursor: pointer;
-}
-/* line 36, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .fa:hover {
-  opacity: 0.5;
-}
-/* line 41, ../../scss/user/userprofiledetails.scss */
-.user-profile-details input[type=text] {
-  font-weight: normal;
-  max-width: 100%;
-  width: 100%;
-}
-@media (max-width: 767px) {
-  /* line 45, ../../scss/user/userprofiledetails.scss */
-  .user-profile-details .card {
-    margin-top: 0;
+  overflow: visible !important; }
+  @media (max-width: 767px) {
+    /* line 27, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .header > .btn-header {
+      width: 40px;
+      height: auto; } }
+  /* line 33, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .fa {
+    cursor: pointer; }
+    /* line 36, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .fa:hover {
+      opacity: 0.5; }
+  /* line 41, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details input[type=text] {
+    font-weight: normal;
+    max-width: 100%;
+    width: 100%; }
+  @media (max-width: 767px) {
+    /* line 45, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .card {
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 15px;
+      margin-left: 0; } }
+  /* line 17, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .card.hobbies input[type='text'] {
+    margin-bottom: 5px; }
+  /* line 53, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .card.hobbies .empty-record-message {
+    margin-top: 15px; }
+  /* line 58, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .card .user-hobby-item {
+    position: relative; }
+  /* line 62, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .card .error-message {
+    margin-top: 15px;
     margin-right: 0;
-    margin-bottom: 15px;
-    margin-left: 0;
-  }
-}
-/* line 17, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .card.hobbies input[type='text'] {
-  margin-bottom: 5px;
-}
-/* line 53, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .card.hobbies .empty-record-message {
-  margin-top: 15px;
-}
-/* line 58, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .card .user-hobby-item {
-  position: relative;
-}
-/* line 62, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .card .error-message {
-  margin-top: 15px;
-  margin-right: 0;
-  margin-bottom: 0;
-  color: #d9534f;
-}
-/* line 68, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .body {
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-}
-/* line 71, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .body .panel {
-  margin-bottom: 15px;
-  border-color: #dddddd;
-  background: white;
-}
-/* line 76, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .body .panel .panel-heading {
-  background-color: transparent;
-  border-color: transparent;
-  color: #4c4c4c;
-}
-/* line 83, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .body .education-item {
-  margin-bottom: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  background: white;
-}
-/* line 89, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .body .education-item label[data-display] {
-  font-weight: normal;
-  width: auto;
-}
-/* line 96, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form {
-  padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-}
-/* line 100, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form[name='user-hobbies-form'] .form-group {
-  margin-bottom: 5px;
-}
-/* line 17, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {
-  margin-bottom: 5px;
-}
-/* line 104, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form[name='user-hobbies-form'] .form-group label {
-  font-weight: normal;
-}
-/* line 108, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form[name='user-hobbies-form'] .form-group .buttons {
-  top: -1px;
-}
-/* line 116, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form[name='user-education-form'] .form-group input[type=text] {
-  margin-bottom: 5px;
-}
-/* line 122, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form .buttons {
-  position: absolute;
-  top: 2px;
-  right: 25px;
-}
-/* line 125, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form .buttons > .fa {
-  margin-top: 7.5px;
-  margin-right: 7.5px;
-  font-size: 1.2em;
-  color: #4c4c4c;
-  cursor: pointer;
-}
-/* line 134, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form .form-group {
-  position: relative;
-}
-/* line 137, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form .form-group label {
-  margin-top: 5px;
-  margin-right: 0;
-  margin-bottom: 5px;
-  margin-left: 0;
-}
-/* line 141, ../../scss/user/userprofiledetails.scss */
-.user-profile-details .user-form .form-group label[data-display] {
-  font-weight: normal;
-  max-width: 100%;
-  width: 100%;
-}
-@media (max-width: 767px) {
-  /* line 141, ../../scss/user/userprofiledetails.scss */
-  .user-profile-details .user-form .form-group label[data-display] {
-    position: static;
-    display: block;
-  }
-}
-@media (max-width: 767px) {
-  /* line 150, ../../scss/user/userprofiledetails.scss */
-  .user-profile-details .user-form .form-group input[type='text'] {
-    position: static;
-    display: block;
-  }
-}
+    margin-bottom: 0;
+    color: #d9534f; }
+  /* line 68, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .body {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px; }
+    /* line 71, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .body .panel {
+      margin-bottom: 15px;
+      border-color: #cccccc;
+      background: white; }
+      /* line 76, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .body .panel .panel-heading {
+        background-color: transparent;
+        border-color: transparent;
+        color: #4c4c4c; }
+    /* line 83, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .body .education-item {
+      margin-bottom: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      background: white; }
+      /* line 89, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .body .education-item label[data-display] {
+        font-weight: normal;
+        width: auto; }
+  /* line 96, ../../scss/user/userprofiledetails.scss */
+  .user-profile-details .user-form {
+    padding-top: 0;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    color: #4c4c4c; }
+    /* line 101, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .user-form[name='user-hobbies-form'] .form-group {
+      margin-bottom: 5px; }
+      /* line 17, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .user-form[name='user-hobbies-form'] .form-group input[type='text'] {
+        margin-bottom: 5px; }
+      /* line 105, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .user-form[name='user-hobbies-form'] .form-group label {
+        font-weight: normal; }
+      /* line 109, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .user-form[name='user-hobbies-form'] .form-group .buttons {
+        top: -1px; }
+    /* line 117, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .user-form[name='user-education-form'] .form-group input[type=text] {
+      margin-bottom: 5px; }
+    /* line 123, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .user-form .buttons {
+      position: absolute;
+      top: 2px;
+      right: 25px; }
+      /* line 126, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .user-form .buttons > .fa {
+        margin-top: 7.5px;
+        margin-right: 7.5px;
+        font-size: 1.2em;
+        color: #4c4c4c;
+        cursor: pointer; }
+    /* line 135, ../../scss/user/userprofiledetails.scss */
+    .user-profile-details .user-form .form-group {
+      position: relative; }
+      /* line 138, ../../scss/user/userprofiledetails.scss */
+      .user-profile-details .user-form .form-group label {
+        margin-top: 5px;
+        margin-right: 0;
+        margin-bottom: 5px;
+        margin-left: 0; }
+        /* line 142, ../../scss/user/userprofiledetails.scss */
+        .user-profile-details .user-form .form-group label[data-display] {
+          font-weight: normal;
+          max-width: 100%;
+          width: 100%; }
+          @media (max-width: 767px) {
+            /* line 142, ../../scss/user/userprofiledetails.scss */
+            .user-profile-details .user-form .form-group label[data-display] {
+              position: static;
+              display: block; } }
+      @media (max-width: 767px) {
+        /* line 151, ../../scss/user/userprofiledetails.scss */
+        .user-profile-details .user-form .form-group input[type='text'] {
+          position: static;
+          display: block; } }

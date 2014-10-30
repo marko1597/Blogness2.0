@@ -389,6 +389,9 @@
     <Content Include="Content\scss\errorpage.css">
       <DependentUpon>errorpage.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\errorpage.min.css">
+      <DependentUpon>errorpage.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\error\errordisplay.css">
       <DependentUpon>errordisplay.scss</DependentUpon>
     </Content>
@@ -398,21 +401,39 @@
     <Content Include="Content\scss\extensions\angular-snap.css">
       <DependentUpon>angular-snap.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\extensions\angular-snap.min.css">
+      <DependentUpon>angular-snap.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\extensions\animations.css">
       <DependentUpon>animations.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\animations.min.css">
+      <DependentUpon>animations.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\extensions\blockui.css">
       <DependentUpon>blockui.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\extensions\blockui.min.css">
+      <DependentUpon>blockui.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\extensions\bootstrap.css">
       <DependentUpon>bootstrap.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\extensions\ckeditor.css.map">
       <DependentUpon>ckeditor.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\extensions\angular-snap.scss" />
+    <Content Include="Content\scss\extensions\ckeditor.min.css">
+      <DependentUpon>ckeditor.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\extensions\isotope.css">
       <DependentUpon>isotope.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\isotope.min.css">
+      <DependentUpon>isotope.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\extensions\isotope.scss" />
     <Content Include="Content\scss\extensions\bootstrap.scss" />
@@ -442,11 +463,20 @@
     <Content Include="Content\scss\extensions\ngtagsinput.css">
       <DependentUpon>ngtagsinput.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\extensions\ngtagsinput.min.css">
+      <DependentUpon>ngtagsinput.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\extensions\slick.css">
       <DependentUpon>slick.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\extensions\slick.min.css">
+      <DependentUpon>slick.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\extensions\videogular.css">
       <DependentUpon>videogular.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\extensions\videogular.min.css">
+      <DependentUpon>videogular.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\header\headermenu.css">
       <DependentUpon>headermenu.scss</DependentUpon>
@@ -493,6 +523,9 @@
     <Content Include="Content\scss\media\mediagallery.css">
       <DependentUpon>mediagallery.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\media\mediagallery.min.css">
+      <DependentUpon>mediagallery.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\media\mediagroupedlist.css.map">
       <DependentUpon>mediagroupedlist.css</DependentUpon>
     </Content>
@@ -536,6 +569,9 @@
     <Content Include="Content\scss\modifypost.css">
       <DependentUpon>modifypost.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\modifypost.min.css">
+      <DependentUpon>modifypost.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\navigation\navigationmenu.css.map">
       <DependentUpon>navigationmenu.css</DependentUpon>
     </Content>
@@ -553,11 +589,20 @@
     <Content Include="Content\scss\posts.css">
       <DependentUpon>posts.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\posts.min.css">
+      <DependentUpon>posts.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\posts\postcontents.css">
       <DependentUpon>postcontents.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\posts\postcontents.min.css">
+      <DependentUpon>postcontents.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\posts\postlikes.css">
       <DependentUpon>postlikes.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlikes.min.css">
+      <DependentUpon>postlikes.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\posts\postlistitem.css">
       <DependentUpon>postlistitem.scss</DependentUpon>
@@ -567,6 +612,9 @@
     </Content>
     <Content Include="Content\scss\posts\postlistitemcomment.css">
       <DependentUpon>postlistitemcomment.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postlistitemcomment.min.css">
+      <DependentUpon>postlistitemcomment.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\posts\postrelateditem.css.map">
       <DependentUpon>postrelateditem.css</DependentUpon>
@@ -583,12 +631,18 @@
     <Content Include="Content\scss\posts\postrelateditem.css">
       <DependentUpon>postrelateditem.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\posts\postrelateditem.min.css">
+      <DependentUpon>postrelateditem.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\posts\postrelateditems.css.map">
       <DependentUpon>postrelateditems.css</DependentUpon>
     </Content>
     <None Include="Content\scss\posts\postrelateditems.scss" />
     <Content Include="Content\scss\posts\postrelateditems.css">
       <DependentUpon>postrelateditems.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postrelateditems.min.css">
+      <DependentUpon>postrelateditems.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\shared\fileupload.css">
       <DependentUpon>fileupload.scss</DependentUpon>
@@ -605,6 +659,9 @@
     <Content Include="Content\scss\sockets\socketdebugger.css">
       <DependentUpon>socketdebugger.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\sockets\socketdebugger.min.css">
+      <DependentUpon>socketdebugger.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\tags\tagitem.css">
       <DependentUpon>tagitem.scss</DependentUpon>
     </Content>
@@ -617,23 +674,44 @@
     <Content Include="Content\scss\user\usercommentitem.css">
       <DependentUpon>usercommentitem.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\user\usercommentitem.min.css">
+      <DependentUpon>usercommentitem.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\userimage.css">
       <DependentUpon>userimage.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userimage.min.css">
+      <DependentUpon>userimage.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\user\userpostitem.css">
       <DependentUpon>userpostitem.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\user\userpostitem.min.css">
+      <DependentUpon>userpostitem.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\userprofilecomments.css">
       <DependentUpon>userprofilecomments.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilecomments.min.css">
+      <DependentUpon>userprofilecomments.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\user\userprofiledetails.css">
       <DependentUpon>userprofiledetails.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\user\userprofiledetails.min.css">
+      <DependentUpon>userprofiledetails.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\userprofilefavorites.css">
       <DependentUpon>userprofilefavorites.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\user\userprofilefavorites.min.css">
+      <DependentUpon>userprofilefavorites.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\userprofilemedia.css">
       <DependentUpon>userprofilemedia.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofilemedia.min.css">
+      <DependentUpon>userprofilemedia.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\user\userprofilenavigation.css.map">
       <DependentUpon>userprofilenavigation.css</DependentUpon>
@@ -654,8 +732,14 @@
     <Content Include="Content\scss\user\userprofilenavigation.css">
       <DependentUpon>userprofilenavigation.scss</DependentUpon>
     </Content>
+    <Content Include="Content\scss\user\userprofilenavigation.min.css">
+      <DependentUpon>userprofilenavigation.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\user\userprofileposts.css">
       <DependentUpon>userprofileposts.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userprofileposts.min.css">
+      <DependentUpon>userprofileposts.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\variables.css">
       <DependentUpon>variables.scss</DependentUpon>
