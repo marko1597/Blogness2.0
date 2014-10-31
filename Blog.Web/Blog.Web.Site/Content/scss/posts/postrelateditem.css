@@ -1,9 +1,5 @@
 ﻿.post-related-item {
   margin-bottom: 15px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   background: #fff; }
   .post-related-item > div {
     padding: 5px; }
@@ -19,12 +15,16 @@
     border-right: 1px solid #40bbdd;
     border-bottom: 1px solid #40bbdd;
     border-left: 1px solid #40bbdd;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     background: #56c2e1;
     color: #fff; }
   .post-related-item > .body {
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     clear: both; }
     .post-related-item > .body > .details {
       width: auto;

@@ -4,6 +4,8 @@
   border-right: 1px solid #40badd;
   border-bottom: 1px solid #40badd;
   border-left: 1px solid #40badd;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   padding-top: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
@@ -11,34 +13,29 @@
   margin-bottom: 15px;
   background: #56c2e1;
   color: white;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-}
-/* line 11, ../../scss/user/userprofilenavigation.scss */
-.user-profile-navigation nav {
-  width: auto;
-  height: 100%;
-}
-/* line 14, ../../scss/user/userprofilenavigation.scss */
-.user-profile-navigation nav ul {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  text-align: center;
-}
-/* line 19, ../../scss/user/userprofilenavigation.scss */
-.user-profile-navigation nav ul > li {
-  padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 0;
-  padding-left: 15px;
-  display: inline;
-}
-/* line 23, ../../scss/user/userprofilenavigation.scss */
-.user-profile-navigation nav ul > li a {
-  color: white;
-  font-weight: normal;
-}
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25); }
+  /* line 12, ../../scss/user/userprofilenavigation.scss */
+  .user-profile-navigation nav {
+    width: auto;
+    height: 100%; }
+    /* line 15, ../../scss/user/userprofilenavigation.scss */
+    .user-profile-navigation nav ul {
+      list-style-type: none;
+      padding: 0 !important;
+      margin: 0 !important;
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      text-align: center; }
+      /* line 20, ../../scss/user/userprofilenavigation.scss */
+      .user-profile-navigation nav ul > li {
+        padding-top: 0;
+        padding-right: 15px;
+        padding-bottom: 0;
+        padding-left: 15px;
+        display: inline; }
+        /* line 24, ../../scss/user/userprofilenavigation.scss */
+        .user-profile-navigation nav ul > li a {
+          color: white;
+          font-weight: normal; }

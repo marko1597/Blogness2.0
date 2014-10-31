@@ -1,7 +1,6 @@
 /* line 3, ../scss/accountpage.scss */
 html, body {
-  overflow: auto !important;
-}
+  overflow: auto !important; }
 
 /* line 8, ../scss/accountpage.scss */
 .main-wrapper > .background {
@@ -15,8 +14,7 @@ html, body {
   -moz-background-size: cover;
   -o-background-size: cover;
   -webkit-background-size: cover;
-  background-size: cover;
-}
+  background-size: cover; }
 /* line 19, ../scss/accountpage.scss */
 .main-wrapper > div.overlay {
   position: fixed;
@@ -25,8 +23,7 @@ html, body {
   width: 100%;
   height: 100%;
   background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC") repeat top left;
-  z-index: 10;
-}
+  z-index: 10; }
 /* line 26, ../scss/accountpage.scss */
 .main-wrapper #wrapper {
   width: 100%;
@@ -34,23 +31,18 @@ html, body {
   margin-top: 30%;
   margin-right: auto;
   margin-bottom: 30%;
-  margin-left: auto;
-}
-@media (max-width: 767px) {
-  /* line 26, ../scss/accountpage.scss */
-  .main-wrapper #wrapper {
-    margin-top: 10%;
-    margin-right: auto;
-    margin-bottom: 10%;
-    margin-left: auto;
-  }
-}
-@media (min-width: 992px) {
-  /* line 26, ../scss/accountpage.scss */
-  .main-wrapper #wrapper {
-    margin-top: 50%;
-    margin-right: auto;
-    margin-bottom: 50%;
-    margin-left: auto;
-  }
-}
+  margin-left: auto; }
+  @media (max-width: 767px) {
+    /* line 26, ../scss/accountpage.scss */
+    .main-wrapper #wrapper {
+      margin-top: 10%;
+      margin-right: auto;
+      margin-bottom: 10%;
+      margin-left: auto; } }
+  @media (min-width: 992px) {
+    /* line 26, ../scss/accountpage.scss */
+    .main-wrapper #wrapper {
+      margin-top: 50%;
+      margin-right: auto;
+      margin-bottom: 50%;
+      margin-left: auto; } }

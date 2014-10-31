@@ -36,6 +36,10 @@
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     max-width: 100%; }
   .media-item .btn-danger {
     position: absolute;
@@ -45,5 +49,12 @@
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0; }
+
+.isotope-item .media-item {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; }
+  .isotope-item .media-item img {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important; }
 
 /*# sourceMappingURL=mediaitem.css.map */

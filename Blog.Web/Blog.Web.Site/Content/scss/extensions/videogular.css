@@ -1,5 +1,7 @@
 ﻿videogular {
   text-align: left; }
+  videogular vg-poster-image img {
+    border: 0 !important; }
   videogular video {
     min-height: 380px;
     max-height: 380px !important; }

@@ -2,6 +2,7 @@
 
 .user-profile-navigation {
     @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
+    @include border-radius(null, false, false, false, true, true);
     @include padding($default-margin);
     @include margin(null, null, $default-margin);
     background: $primary-color;

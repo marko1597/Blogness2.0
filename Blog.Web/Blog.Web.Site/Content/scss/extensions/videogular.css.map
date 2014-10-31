@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"videogular.css","sources":["videogular.scss","../variables.scss"],"names":[],"mappings":"AAEA;EACI,YAAY;EAAhB,WAAW;IAGH,YAAY;IACZ,YAAY"}
+﻿{"version":3,"file":"videogular.css","sources":["videogular.scss","../variables.scss"],"names":[],"mappings":"AAEA;EACI,YAAY;EAEhB,WAAW,gBAAgB;IAEf,QAAQ;EAEpB,WAAW;IAGH,YAAY;IACZ,YAAY"}

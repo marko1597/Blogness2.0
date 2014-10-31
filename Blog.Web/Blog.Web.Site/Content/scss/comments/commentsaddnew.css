@@ -5,23 +5,22 @@
   margin-top: 15px;
   margin-right: 15px;
   margin-bottom: 0;
-  margin-left: 15px;
-  box-shadow: 0 2px 4px 0 #ccc;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background: #fff; }
+  margin-left: 15px; }
   .comment-item-new textarea {
     width: 80%;
     height: 100%;
+    box-shadow: 0 2px 4px 0 #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
     max-width: 80%;
     resize: none;
     color: #4c4c4c;
-    border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-    border-left: 1px solid #cccccc; }
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important; }
   .comment-item-new div {
     position: absolute;
     top: 0;
@@ -32,9 +31,14 @@
     padding-left: 8px;
     width: 20%;
     height: 100%;
+    box-shadow: 0 2px 4px 0 #ccc;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     border-top: 1px solid #cccccc;
     border-right: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc; }
+    border-bottom: 1px solid #cccccc;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background: #fff; }
     @media (max-width: 767px) {
       .comment-item-new div {
         padding-top: 0;

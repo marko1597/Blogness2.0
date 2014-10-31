@@ -1,10 +1,6 @@
 ﻿.comment-item {
   position: relative;
   margin-bottom: 15px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
   background: #fff; }
   .comment-item p {
     margin-top: 0;
@@ -18,6 +14,8 @@
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     color: #4c4c4c; }
   .comment-item .header {
     position: relative;
@@ -27,6 +25,8 @@
     margin-left: 0;
     width: auto;
     height: 25px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     background: #56c2e1;
     color: #fff; }
     .comment-item .header .btn-header {

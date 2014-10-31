@@ -7,123 +7,106 @@
   border-top: 3px dotted #666666;
   border-right: 3px dotted #666666;
   border-bottom: 3px dotted #666666;
-  border-left: 3px dotted #666666;
-}
-/* line 207, ../../scss/variables.scss */
-.file-upload .dropzone label {
-  margin-right: 0;
-  cursor: pointer;
-}
-/* line 211, ../../scss/variables.scss */
-.file-upload .dropzone label > input[type='file'] {
-  position: fixed;
-  top: -1000px;
-}
-/* line 11, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone > h4, .file-upload .dropzone > p, .file-upload .dropzone .upload-all {
-  margin-left: 5px;
-}
-/* line 15, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone > .upload-all > i {
-  padding-right: 5px;
-}
-/* line 19, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-  margin-top: 15;
-}
-/* line 23, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items > li {
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  width: 100%;
-  height: auto;
-}
-/* line 28, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .thumbnail {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  padding-top: 0;
-  padding-right: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top: 0;
-  border-right: 0;
-  border-bottom: 0;
-  border-left: 0;
-}
-/* line 34, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .thumbnail img, .file-upload .dropzone .upload-items .thumbnail canvas {
-  width: 100%;
-  height: auto;
-}
-/* line 39, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .captions {
-  border-right: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
-  border-left: 1px solid #cccccc;
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  background: white;
-  color: #4c4c4c;
-}
-/* line 48, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .captions h5, .file-upload .dropzone .upload-items .captions input {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-/* line 52, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .captions input, .file-upload .dropzone .upload-items .captions textarea {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  color: #4c4c4c;
-}
-/* line 58, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .captions textarea {
-  resize: none;
-}
-/* line 63, ../../scss/shared/fileupload.scss */
-.file-upload .dropzone .upload-items .progress {
-  width: 100%;
-  height: 10px;
-  border-right: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
-  border-left: 1px solid #cccccc;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background: #cccccc;
-}
+  border-left: 3px dotted #666666; }
+  /* line 207, ../../scss/variables.scss */
+  .file-upload .dropzone label {
+    margin-right: 0;
+    cursor: pointer; }
+    /* line 211, ../../scss/variables.scss */
+    .file-upload .dropzone label > input[type='file'] {
+      position: fixed;
+      top: -1000px; }
+  /* line 11, ../../scss/shared/fileupload.scss */
+  .file-upload .dropzone > h4, .file-upload .dropzone > p, .file-upload .dropzone .upload-all {
+    margin-left: 5px; }
+  /* line 15, ../../scss/shared/fileupload.scss */
+  .file-upload .dropzone > .upload-all > i {
+    padding-right: 5px; }
+  /* line 19, ../../scss/shared/fileupload.scss */
+  .file-upload .dropzone .upload-items {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: 15; }
+    /* line 23, ../../scss/shared/fileupload.scss */
+    .file-upload .dropzone .upload-items > li {
+      margin-top: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      width: 100%;
+      height: auto; }
+    /* line 28, ../../scss/shared/fileupload.scss */
+    .file-upload .dropzone .upload-items .thumbnail {
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      margin-left: 0;
+      padding-top: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top: 0;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 0; }
+      /* line 34, ../../scss/shared/fileupload.scss */
+      .file-upload .dropzone .upload-items .thumbnail img, .file-upload .dropzone .upload-items .thumbnail canvas {
+        width: 100%;
+        height: auto; }
+    /* line 39, ../../scss/shared/fileupload.scss */
+    .file-upload .dropzone .upload-items .captions {
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      background: white;
+      color: #4c4c4c; }
+      /* line 48, ../../scss/shared/fileupload.scss */
+      .file-upload .dropzone .upload-items .captions h5, .file-upload .dropzone .upload-items .captions input {
+        margin-top: 0;
+        margin-bottom: 10px; }
+      /* line 52, ../../scss/shared/fileupload.scss */
+      .file-upload .dropzone .upload-items .captions input, .file-upload .dropzone .upload-items .captions textarea {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        color: #4c4c4c; }
+      /* line 58, ../../scss/shared/fileupload.scss */
+      .file-upload .dropzone .upload-items .captions textarea {
+        resize: none; }
+    /* line 63, ../../scss/shared/fileupload.scss */
+    .file-upload .dropzone .upload-items .progress {
+      width: 100%;
+      height: 10px;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-left: 1px solid #cccccc;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background: #cccccc; }
 /* line 73, ../../scss/shared/fileupload.scss */
 .file-upload > .btn {
-  margin-bottom: 15px;
-}
-/* line 76, ../../scss/shared/fileupload.scss */
-.file-upload > .btn > input[type=file] {
-  position: fixed;
-  top: -1000px;
-}
+  margin-bottom: 15px; }
+  /* line 76, ../../scss/shared/fileupload.scss */
+  .file-upload > .btn > input[type=file] {
+    position: fixed;
+    top: -1000px; }
 
 /* line 82, ../../scss/shared/fileupload.scss */
 .ng-file-over {
   border-top: 3px dotted #d9534f;
   border-right: 3px dotted #d9534f;
   border-bottom: 3px dotted #d9534f;
-  border-left: 3px dotted #d9534f;
-}
+  border-left: 3px dotted #d9534f; }

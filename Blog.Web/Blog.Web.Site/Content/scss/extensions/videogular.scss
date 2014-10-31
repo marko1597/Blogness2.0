@@ -3,6 +3,12 @@
 videogular {
     text-align: left;
 
+    vg-poster-image {
+        img {
+            border: 0 !important;
+        }
+    }
+
     video {
         min-height: 380px;
         max-height: 380px !important;

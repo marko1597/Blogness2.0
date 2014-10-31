@@ -19,26 +19,22 @@
   line-height: 28px;
   max-width: 120px;
   min-width: 100px;
-  cursor: pointer;
-}
-/* line 17, ../../scss/posts/postlikes.scss */
-.post-likes:hover {
-  border-top: 1px solid #bfbfbf;
-  border-right: 1px solid #bfbfbf;
-  border-bottom: 1px solid #bfbfbf;
-  border-left: 1px solid #bfbfbf;
-}
-/* line 21, ../../scss/posts/postlikes.scss */
-.post-likes > .wrapper {
-  padding-top: 0;
-  padding-right: 15px;
-  padding-bottom: 0;
-  padding-left: 15px;
-}
-/* line 24, ../../scss/posts/postlikes.scss */
-.post-likes > .wrapper span {
-  padding-top: 3px;
-  padding-right: 3px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-}
+  cursor: pointer; }
+  /* line 17, ../../scss/posts/postlikes.scss */
+  .post-likes:hover {
+    border-top: 1px solid #bfbfbf;
+    border-right: 1px solid #bfbfbf;
+    border-bottom: 1px solid #bfbfbf;
+    border-left: 1px solid #bfbfbf; }
+  /* line 21, ../../scss/posts/postlikes.scss */
+  .post-likes > .wrapper {
+    padding-top: 0;
+    padding-right: 15px;
+    padding-bottom: 0;
+    padding-left: 15px; }
+    /* line 24, ../../scss/posts/postlikes.scss */
+    .post-likes > .wrapper span {
+      padding-top: 3px;
+      padding-right: 3px;
+      padding-bottom: 3px;
+      padding-left: 3px; }

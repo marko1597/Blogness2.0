@@ -19,10 +19,26 @@
     }
 
     ul {
+        @include border-radius(null, false);
+        @include padding(0);
+        background: $default-color;
+
         li {
+
+            &:first-child {
+                a {
+                    @include border-radius(null, false, true, true, false, false);
+                }
+            }
+
+            &:last-child {
+                a {
+                    @include border-radius(null, false, false, false, true, true);
+                }
+            }
+
             a {
                 border: none;
-                background: $default-color;
                 color: $content-font-color;
 
                 &:hover {

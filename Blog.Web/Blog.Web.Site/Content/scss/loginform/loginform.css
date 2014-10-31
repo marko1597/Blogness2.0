@@ -88,6 +88,10 @@
       .login-form .content > div .user-icon, .login-form .content > div .pass-icon {
         position: absolute;
         left: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
         width: 46px;
         height: 47px;
         padding-right: 2px;

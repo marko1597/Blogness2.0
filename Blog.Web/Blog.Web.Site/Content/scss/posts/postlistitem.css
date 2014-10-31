@@ -40,5 +40,7 @@
     margin-right: -15px;
     margin-bottom: 0;
     margin-left: -15px; }
+  .post-list-item .tags {
+    border-bottom: 0; }
 
 /*# sourceMappingURL=postlistitem.css.map */

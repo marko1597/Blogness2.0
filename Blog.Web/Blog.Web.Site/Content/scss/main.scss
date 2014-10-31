@@ -46,6 +46,10 @@ a {
     .content {
         @include padding($default-padding);
         @include borders(1px, solid, $light-border-color, false, false, true, false);
+
+        &:last-child {
+            @include borders(0, empty, empty, false, false, true);
+        }
     }
 }
 
@@ -111,7 +115,6 @@ a {
             @include margin(5px);
 
             .captions {
-                @include borders(1px, solid, $light-border-color, false, true, true, true);
                 @include padding($default-padding);
 
                 p {
@@ -215,6 +218,7 @@ a {
     background-repeat: no-repeat;
     overflow: hidden;
     @include size(70px, 70px);
+    @include border-radius(null, false);
 
     img {
         min-height: 100%;

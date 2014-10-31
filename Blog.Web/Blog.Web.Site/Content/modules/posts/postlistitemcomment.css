@@ -4,31 +4,26 @@
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  color: #4c4c4c;
-}
-/* line 7, ../../scss/posts/postlistitemcomment.scss */
-.post-item-comment p {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-}
-/* line 10, ../../scss/posts/postlistitemcomment.scss */
-.post-item-comment p:last-child {
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: auto;
-  cursor: pointer;
-}
-/* line 15, ../../scss/posts/postlistitemcomment.scss */
-.post-item-comment p:last-child:hover {
-  color: #3f3f3f;
-}
-/* line 20, ../../scss/posts/postlistitemcomment.scss */
-.post-item-comment p > a {
-  cursor: pointer;
-  color: #56c2e1;
-}
+  color: #4c4c4c; }
+  /* line 7, ../../scss/posts/postlistitemcomment.scss */
+  .post-item-comment p {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }
+    /* line 10, ../../scss/posts/postlistitemcomment.scss */
+    .post-item-comment p:last-child {
+      -ms-text-overflow: ellipsis;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: auto;
+      cursor: pointer; }
+      /* line 15, ../../scss/posts/postlistitemcomment.scss */
+      .post-item-comment p:last-child:hover {
+        color: #3f3f3f; }
+    /* line 20, ../../scss/posts/postlistitemcomment.scss */
+    .post-item-comment p > a {
+      cursor: pointer;
+      color: #56c2e1; }

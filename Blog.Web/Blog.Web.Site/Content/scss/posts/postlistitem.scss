@@ -39,4 +39,8 @@
             @include margin(-15px, -15px, 0, -15px);
         }
     }
+
+    .tags {
+        @include borders(0, empty, empty, false, false, true);
+    }
 }

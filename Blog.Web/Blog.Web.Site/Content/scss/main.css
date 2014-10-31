@@ -44,6 +44,8 @@ a {
     padding-bottom: 15px;
     padding-left: 15px;
     border-bottom: 1px solid #cccccc; }
+    .card .content:last-child, .card .success, .card .warning, .card .danger, .card .info, .card .default, .card .masonry {
+      border-bottom: 0; }
 
 .success {
   color: #fff;
@@ -91,9 +93,6 @@ a {
       margin-bottom: 5px;
       margin-left: 5px; }
       .masonry ul.isotope li.isotope-item .captions {
-        border-right: 1px solid #cccccc;
-        border-bottom: 1px solid #cccccc;
-        border-left: 1px solid #cccccc;
         padding-top: 15px;
         padding-right: 15px;
         padding-bottom: 15px;
@@ -209,7 +208,11 @@ a {
   background-repeat: no-repeat;
   overflow: hidden;
   width: 70px;
-  height: 70px; }
+  height: 70px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
   .center-cropped img {
     min-height: 100%;
     min-width: 100%;

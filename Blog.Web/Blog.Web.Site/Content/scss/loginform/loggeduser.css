@@ -22,12 +22,27 @@
       padding-right: 15px;
       padding-bottom: 15px;
       padding-left: 15px; } }
-  #logged-user-info ul li a {
-    border: none;
-    background: #fff;
-    color: #4c4c4c; }
-    #logged-user-info ul li a:hover {
-      background: #56c2e1;
-      color: #fff; }
+  #logged-user-info ul {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    background: #fff; }
+    #logged-user-info ul li:first-child a {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0; }
+    #logged-user-info ul li:last-child a {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0; }
+    #logged-user-info ul li a {
+      border: none;
+      color: #4c4c4c; }
+      #logged-user-info ul li a:hover {
+        background: #56c2e1;
+        color: #fff; }
 
 /*# sourceMappingURL=loggeduser.css.map */

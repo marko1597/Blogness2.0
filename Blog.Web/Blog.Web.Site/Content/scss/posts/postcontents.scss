@@ -3,7 +3,12 @@
 .slick-list {
     .post-item-content {
         .media-item {
+            border-radius: 0;
             max-height: 350px;
+            
+            img {
+                border-radius: 0;
+            }
         }
     }
 }

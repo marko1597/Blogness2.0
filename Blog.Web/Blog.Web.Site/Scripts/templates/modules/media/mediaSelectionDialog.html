@@ -11,12 +11,14 @@
                         <div class="header">
                             <h5>{{album.AlbumName}}</h5>
                         </div>
-                        <div ng-repeat="media in album.Media" class="center-cropped" ng-style="getThumbnailUrl(media)"
-                             ng-click="toggleMediaSelectionToExistingContents(media)">
-                            <button class="btn" ng-class="getMediaToggleButtonStyle(media)">
-                                <i class="fa" ng-class="getMediaToggleButtonIcon(media)"></i>
-                            </button>
-                            <img ng-src="{{media.ThumbnailUrl}}" />
+                        <div class="body">
+                            <div ng-repeat="media in album.Media" class="center-cropped" ng-style="getThumbnailUrl(media)"
+                                 ng-click="toggleMediaSelectionToExistingContents(media)">
+                                <button class="btn" ng-class="getMediaToggleButtonStyle(media)">
+                                    <i class="fa" ng-class="getMediaToggleButtonIcon(media)"></i>
+                                </button>
+                                <img ng-src="{{media.ThumbnailUrl}}" />
+                            </div>
                         </div>
                     </li>
                 </ul>

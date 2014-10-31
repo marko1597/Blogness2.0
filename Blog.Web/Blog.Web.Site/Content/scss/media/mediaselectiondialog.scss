@@ -11,28 +11,33 @@
             > li {
                 @include position(relative, null);
                 @include margin(null, null, $default-margin);
-                @include borders(1px, solid, $light-border-color, true);
                 display: block;
                 overflow: hidden;
 
-                .center-cropped {
-                    @include size(22.4%, 150px);
-                    @include margin(7px);
-                    @include borders(1px, solid, $light-border-color, true);
+                .body {
+                    @include borders(1px, solid, $light-border-color, false, true, true, true);
+                    @include border-radius(null, false, false, false,true, true);
+                    overflow: hidden;
 
-                    @include media(xs) {
-                        @include size(47%, 150px);
-                    }
-
-                    button {
-                        $button-margin: unquote((($base-margin / 3) * 2) + 'px');
-                        @include margin($button-margin);
-                    }
-
-                    img {
-                        @include size(100%, auto);
+                    .center-cropped {
+                        @include size(22.4%, 150px);
+                        @include margin(7px);
                         @include borders(1px, solid, $light-border-color, true);
-                        max-width: 100%;
+
+                        @include media(xs) {
+                            @include size(47%, 150px);
+                        }
+
+                        button {
+                            $button-margin: unquote((($base-margin / 3) * 2) + 'px');
+                            @include margin($button-margin);
+                        }
+
+                        img {
+                            @include size(100%, auto);
+                            @include borders(1px, solid, $light-border-color, true);
+                            max-width: 100%;
+                        }
                     }
                 }
             }

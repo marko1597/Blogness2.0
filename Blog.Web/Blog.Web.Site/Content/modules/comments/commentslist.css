@@ -7,37 +7,31 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-/* line 7, ../../scss/comments/commentslist.scss */
-.comment-items-list .comments-empty-message {
-  margin: 0 auto;
-  text-align: center;
-}
-/* line 10, ../../scss/comments/commentslist.scss */
-.comment-items-list .comments-empty-message p {
-  margin-top: 15px;
-  margin-right: 0;
-  margin-bottom: 15px;
-  margin-left: 0;
-}
-/* line 16, ../../scss/comments/commentslist.scss */
-.comment-items-list div:last-child .comment-item {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-}
+  border-bottom-right-radius: 0; }
+  /* line 7, ../../scss/comments/commentslist.scss */
+  .comment-items-list .comments-empty-message {
+    margin: 0 auto;
+    text-align: center; }
+    /* line 10, ../../scss/comments/commentslist.scss */
+    .comment-items-list .comments-empty-message p {
+      margin-top: 15px;
+      margin-right: 0;
+      margin-bottom: 15px;
+      margin-left: 0; }
+  /* line 16, ../../scss/comments/commentslist.scss */
+  .comment-items-list div:last-child .comment-item {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0; }
 
 /* line 22, ../../scss/comments/commentslist.scss */
 .comment-reply-new {
   margin-top: 15px;
   margin-right: 0;
   margin-bottom: 15px;
-  margin-left: 15px;
-}
+  margin-left: 15px; }
 
 /* line 26, ../../scss/comments/commentslist.scss */
 .comment-replies {
-  padding-left: 15px;
-}
+  padding-left: 15px; }

@@ -1,9 +1,10 @@
 /* line 3, ../../scss/extensions/videogular.scss */
 videogular {
-  text-align: left;
-}
-/* line 6, ../../scss/extensions/videogular.scss */
-videogular video {
-  min-height: 380px;
-  max-height: 380px !important;
-}
+  text-align: left; }
+  /* line 7, ../../scss/extensions/videogular.scss */
+  videogular vg-poster-image img {
+    border: 0 !important; }
+  /* line 12, ../../scss/extensions/videogular.scss */
+  videogular video {
+    min-height: 380px;
+    max-height: 380px !important; }

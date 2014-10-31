@@ -2,7 +2,6 @@
 
 .post-related-item {
     @include margin(null, null, $default-margin);
-    @include border-radius(null, false);
     background: $default-color;
 
     > div {
@@ -14,12 +13,14 @@
         @include size(auto);
         @include ellipsis-text;
         @include borders(1px, solid, darken($primary-color, $border-darken-value), true);
+        @include border-radius(null, false, true, true, false, false);
         background: $primary-color;
         color: $main-font-color;
     }
 
-    >.body {
+    > .body {
         @include borders(1px, solid, $light-border-color, false, true, true, true);
+        @include border-radius(null, false, false, false, true, true);
         clear: both;
 
         > .details {

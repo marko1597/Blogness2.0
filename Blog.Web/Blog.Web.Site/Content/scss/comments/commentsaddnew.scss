@@ -4,23 +4,27 @@
     @include size(inherit, 90px);
     @include position(relative, null);
     @include margin($default-margin, $default-margin, 0);
-    @include box-shadow(false);
-    @include border-radius(null, false);
-    background: $default-color;
-
+    
     textarea {
         @include size(80%, 100%);
+        @include box-shadow(false);
+        @include borders(1px, solid, $light-border-color, false, true, true, true);
+        @include border-radius(null, true, true, false, false, true);
         max-width: 80%;
         resize: none;
         color: $content-font-color;
-        @include borders(1px, solid, $light-border-color, false, true, true, true);
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important; 
     }
 
     div {
         @include position(absolute, 0, 0, null, null);
         @include padding(8px);
         @include size(20%, 100%);
+        @include box-shadow(false);
         @include borders(1px, solid, $light-border-color, true, true, true, false);
+        @include border-radius(null, false, false, true, true, false);
+        background: $default-color;
 
         @include media(xs) {
             @include padding(0);

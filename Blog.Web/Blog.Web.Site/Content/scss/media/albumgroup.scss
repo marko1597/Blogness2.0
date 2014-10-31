@@ -45,6 +45,7 @@
         $body-padding: unquote(($base-padding / 3) + 'px');
         @include borders(1px, solid, $light-border-color, false, true, true, true);
         @include padding($body-padding);
+        @include border-radius(null, false, false, false, true, true);
         background: $default-color-darken;
 
         > ul {
@@ -55,6 +56,7 @@
 
                 .details {
                     @include borders(1px, solid, $light-border-color, false, true, true, true);
+                    @include border-radius(null, false, false, false, true, true);
                     @include padding($default-padding);
                     background: $default-color;
                     overflow: hidden;

@@ -76,6 +76,7 @@ $double-padding: unquote(($base-padding * 2) + 'px');
 
             .user-icon, .pass-icon {
                 @include position(absolute, null, null, null, 0);
+                @include border-radius(null, false);
                 @include size(46px, 47px);
                 @include padding(null, 2px);
                 @include transition(all 0.5s ease);

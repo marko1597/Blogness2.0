@@ -3,13 +3,13 @@
 .comment-item {
     @include position(relative, null);
     @include margin(null, null, $default-margin);
-    @include border-radius(null, false);
     background: $default-color;
 
     p {
         @include margin(0);
         @include padding(10px);
         @include borders(1px, solid, $light-border-color, false, true, true, true);
+        @include border-radius(null, false, false, false, true, true);
         color: $content-font-color;
     }
 
@@ -17,6 +17,7 @@
         @include position(relative, null);
         @include margin(0);
         @include size(auto, 25px);
+        @include border-radius(null, false, true, true, false, false);
         background: $primary-color;
         color: $main-font-color;
 

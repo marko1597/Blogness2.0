@@ -160,7 +160,9 @@
 
 .popover {
     @include padding(0);
-    @include border-radius(null, false);
+    border: 0;
+    border-radius: 0;
+    background-color: transparent !important;
 
     &.top, &.top-left, &.top-right {
         > .arrow {
@@ -204,7 +206,8 @@
 }
 
 .popover-title {
-    @include border-radius(null, false);
+    @include borders(1px, solid, darken($main-color, $border-darken-value), true);
+    @include border-radius(null, false, true, true, false, false);
     color: $main-font-color;
     background-color: $main-color;
     border-bottom: darken($main-color, $border-darken-value);
@@ -212,6 +215,9 @@
 
 .popover-content {
     @include borders(1px, solid, $light-border-color, false, true, true, true);
+    @include border-radius(null, false, false, false, true, true);
+    background: $default-color;
+    color: $content-font-color;
 }
 
 /* #endregion */
@@ -220,6 +226,24 @@
 
 .panel {
     @include border-radius(null, false);
+}
+
+/* #endregion */
+
+/* #region modal dialog overrides */
+
+.modal {
+    .modal-dialog {
+        .modal-content {
+            @include border-radius(null, false);
+
+            .modal-header {
+                @include border-radius(null, false, true, true, false, false);
+                background: $main-color;
+                color: $main-font-color;
+            }
+        }
+    }
 }
 
 /* #endregion */
