@@ -1465,9 +1465,9 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
     }
 ]);
 ///#source 1 1 /Scripts/modules/main/controllers/blogMainController.js
-blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout",
-    "localStorageService", "userService", "authenticationService",
-    function ($scope, $location, $rootScope, $log, $timeout, localStorageService,
+blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
+    "localStorageService", "postsService", "userService", "authenticationService", 
+    function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
         userService, authenticationService) {
 
         $scope.authData = localStorageService.get('authorizationData');
@@ -1476,6 +1476,16 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             $log.info("location changing from " + current + " to " + next);
+
+            if (current !== configProvider.getSettings().BlogRoot + "/#/") {
+                postsService.getRecentPosts()
+                    .then(function (response) {
+                        $log.info(response);
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
+
             if ($rootScope.user) {
                 $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
             }
@@ -2854,6 +2864,41 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
             return false;
         };
 
+        $scope.nextPost = function () {
+            if (!$scope.post) return;
+
+            var nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
+
+            if (nextPost) {
+                $location.path("/post/" + nextPost);
+            } else {
+                postsService.getMoreRecentPosts()
+                    .then(function () {
+                        nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
+
+                        if (nextPost) {
+                            $location.path("/post/" + nextPost);
+                        } else {
+                            $location.path("/");
+                        }
+                    }, function () {
+                        $location.path("/");
+                    });
+            }
+        };
+
+        $scope.previousPost = function () {
+            if (!$scope.post) return;
+
+            var previousPost = postsService.getPreviousPostIdFromCache($scope.post.Id);
+
+            if (previousPost) {
+                $location.path("/post/" + previousPost);
+            } else {
+                $location.path("/");
+            }
+        };
+
         $scope.init = function () {
             if ($scope.isBusy) {
                 return;
@@ -3210,14 +3255,40 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
             window.blogConfiguration.blogApi + "Posts/" :
             configProvider.getSettings().BlogApi + "Posts/";
 
-        var addPostViewData = function(post) {
+        var addPostViewData = function (post) {
             post.DateDisplay = dateHelper.getDateDisplay(post.CreatedDate);
             post.Url = "/#/post/" + post.Id;
 
             return post;
         };
 
-        var postsList = [];
+        var cachedPostsList = [];
+
+        var getCachedPostId = function (currentPostId, isNext) {
+            if (cachedPostsList && cachedPostsList.length > 0) {
+                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
+                var isCurrentPostInCache = _.contains(cachedPostIds, currentPostId);
+
+                if (!isCurrentPostInCache) return null;
+                
+                var index = _.indexOf(cachedPostIds, currentPostId);
+                if (index < 0) return cachedPostIds[0];
+
+                if (index === 0 && !isNext) {
+                    return null;
+                } else {
+                    index = isNext ? index + 1 : index - 1;
+
+                    if (cachedPostIds.length < index + 1) {
+                        return null;
+                    }
+
+                    return cachedPostIds[index];
+                }
+            } else {
+                return null;
+            }
+        };
 
         return {
             getPost: function (id) {
@@ -3243,13 +3314,13 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                     url: postsApi + id + "/related",
                     method: "GET"
                 }).success(function (response) {
-                    _.each(response.PostsByUser, function(p) {
+                    _.each(response.PostsByUser, function (p) {
                         addPostViewData(p);
                     });
                     _.each(response.PostsByTags, function (p) {
                         addPostViewData(p);
                     });
-                    
+
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3277,6 +3348,7 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
             },
 
             getRecentPosts: function () {
+                var self = this;
                 var deferred = $q.defer();
 
                 $http({
@@ -3285,7 +3357,7 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
-                        postsList.push(p);
+                        self.addToCachedPostsList([p]);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -3295,16 +3367,19 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 return deferred.promise;
             },
 
-            getMoreRecentPosts: function (c) {
+            getMoreRecentPosts: function (currentPostsCount) {
+                var self = this;
                 var deferred = $q.defer();
 
+                if (!currentPostsCount || currentPostsCount === 0) currentPostsCount = cachedPostsList.length;
+
                 $http({
-                    url: postsApi + "recent/more/" + c,
+                    url: postsApi + "recent/more/" + currentPostsCount,
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {
                         addPostViewData(p);
-                        postsList.push(p);
+                        self.addToCachedPostsList([p]);
                     });
                     deferred.resolve(response);
                 }).error(function (e) {
@@ -3314,7 +3389,7 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 return deferred.promise;
             },
 
-            getPostsByUser: function(userId) {
+            getPostsByUser: function (userId) {
                 var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
                     window.blogConfiguration.blogApi + "user/" :
                     configProvider.getSettings().BlogApi + "user/";
@@ -3408,7 +3483,26 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
                 });
 
                 return deferred.promise;
-            }
+            },
+
+            addToCachedPostsList: function (postsList) {
+                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
+
+                _.each(postsList, function (post) {
+                    if (!_.contains(cachedPostIds, post.Id)) {
+                        cachedPostsList.push(post);
+                        return;
+                    }
+                });
+            },
+
+            getNextPostIdFromCache: function (currentPostId) {
+                return getCachedPostId(currentPostId, true);
+            },
+
+            getPreviousPostIdFromCache: function (currentPostId) {
+                return getCachedPostId(currentPostId, false);
+            },
         };
     }
 ]);

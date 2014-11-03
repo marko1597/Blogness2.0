@@ -108,6 +108,41 @@
             return false;
         };
 
+        $scope.nextPost = function () {
+            if (!$scope.post) return;
+
+            var nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
+
+            if (nextPost) {
+                $location.path("/post/" + nextPost);
+            } else {
+                postsService.getMoreRecentPosts()
+                    .then(function () {
+                        nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
+
+                        if (nextPost) {
+                            $location.path("/post/" + nextPost);
+                        } else {
+                            $location.path("/");
+                        }
+                    }, function () {
+                        $location.path("/");
+                    });
+            }
+        };
+
+        $scope.previousPost = function () {
+            if (!$scope.post) return;
+
+            var previousPost = postsService.getPreviousPostIdFromCache($scope.post.Id);
+
+            if (previousPost) {
+                $location.path("/post/" + previousPost);
+            } else {
+                $location.path("/");
+            }
+        };
+
         $scope.init = function () {
             if ($scope.isBusy) {
                 return;

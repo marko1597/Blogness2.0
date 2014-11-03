@@ -1,6 +1,6 @@
-﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout",
-    "localStorageService", "userService", "authenticationService",
-    function ($scope, $location, $rootScope, $log, $timeout, localStorageService,
+﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
+    "localStorageService", "postsService", "userService", "authenticationService", 
+    function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
         userService, authenticationService) {
 
         $scope.authData = localStorageService.get('authorizationData');
@@ -9,6 +9,16 @@
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
             $log.info("location changing from " + current + " to " + next);
+
+            if (current !== configProvider.getSettings().BlogRoot + "/#/") {
+                postsService.getRecentPosts()
+                    .then(function (response) {
+                        $log.info(response);
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
+
             if ($rootScope.user) {
                 $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
             }

@@ -13,8 +13,20 @@
     opacity: 0.5;
     filter: alpha(opacity=50); }
 
-/* line 7, ../scss/viewpost.scss */
+/* line 8, ../scss/viewpost.scss */
 .card.masonry > ul {
   list-style-type: none;
   padding: 0 !important;
   margin: 0 !important; }
+
+/* line 13, ../scss/viewpost.scss */
+.nav-buttons {
+  padding-top: 15px;
+  padding-right: 0;
+  padding-bottom: 15px;
+  padding-left: 0;
+  overflow: hidden; }
+  /* line 17, ../scss/viewpost.scss */
+  .nav-buttons .btn {
+    width: 100%;
+    height: auto; }

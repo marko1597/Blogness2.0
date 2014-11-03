@@ -16,4 +16,14 @@
   padding: 0 !important;
   margin: 0 !important; }
 
+.nav-buttons {
+  padding-top: 15px;
+  padding-right: 0;
+  padding-bottom: 15px;
+  padding-left: 0;
+  overflow: hidden; }
+  .nav-buttons .btn {
+    width: 100%;
+    height: auto; }
+
 /*# sourceMappingURL=viewpost.css.map */
