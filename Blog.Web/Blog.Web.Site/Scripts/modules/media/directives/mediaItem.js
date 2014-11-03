@@ -95,6 +95,19 @@
                 return "image";
             }
         };
+
+        $scope.isVideo = function () {
+            var supportedVideos = [
+               "video/avi",
+               "video/quicktime",
+               "video/mpeg",
+               "video/mp4",
+               "video/x-flv"
+            ];
+
+            var isVideo = _.contains(supportedVideos, $scope.media.MediaType);
+            return isVideo ? "hidden" : "";
+        };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "$modal", "mediaService", "errorService"];
 

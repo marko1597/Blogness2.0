@@ -9,7 +9,7 @@
     <button class="btn btn-danger" ng-show="toggleDelete()" ng-click="deleteMedia()">
         <i class="fa fa-trash"></i>
     </button>
-    <h5 ng-show="toggleGallery()" ng-click="viewAsGallery()">
+    <h5 ng-show="toggleGallery()" ng-click="viewAsGallery()" ng-class="isVideo()">
         <i class="fa fa-search-plus"></i>View as gallery
     </h5>
 </div>
