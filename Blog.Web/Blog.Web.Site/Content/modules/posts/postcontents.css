@@ -1,7 +1,9 @@
 /* line 5, ../../scss/posts/postcontents.scss */
 .slick-list .post-item-content .media-item {
   border-radius: 0;
-  max-height: 350px; }
-  /* line 9, ../../scss/posts/postcontents.scss */
-  .slick-list .post-item-content .media-item img {
-    border-radius: 0; }
+  max-height: 350px;
+}
+/* line 9, ../../scss/posts/postcontents.scss */
+.slick-list .post-item-content .media-item img {
+  border-radius: 0;
+}

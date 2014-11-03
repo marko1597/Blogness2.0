@@ -73,6 +73,7 @@
     <file>/Scripts/modules/posts/directives/postListItemComment.js</file>
     <file>/Scripts/modules/posts/directives/postRelatedItem.js</file>
     <file>/Scripts/modules/posts/directives/postRelatedItems.js</file>
+    <file>/Scripts/modules/posts/directives/postViewNavigator.js</file>
     <file>/Scripts/modules/posts/services/postsService.js</file>
 
     <file>/Scripts/modules/shared/shared.js</file>

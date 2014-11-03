@@ -8,29 +8,35 @@
   padding: 3px 5px 5px 5px !important;
   border: 1px solid #999999 !important;
   width: auto !important;
-  color: #4c4c4c !important; }
-  /* line 13, ../../scss/extensions/ckeditor.scss */
-  #cke_post-message-editor div {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important; }
-  /* line 17, ../../scss/extensions/ckeditor.scss */
-  #cke_post-message-editor span {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important; }
+  color: #4c4c4c !important;
+}
+/* line 13, ../../scss/extensions/ckeditor.scss */
+#cke_post-message-editor div {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+/* line 17, ../../scss/extensions/ckeditor.scss */
+#cke_post-message-editor span {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
 
 /* line 22, ../../scss/extensions/ckeditor.scss */
 .cke_toolgroup {
-  border: 1px solid #999999 !important; }
+  border: 1px solid #999999 !important;
+}
 
 /* line 26, ../../scss/extensions/ckeditor.scss */
 .cke_contents {
   margin-top: 5px !important;
-  border: 1px solid #999999 !important; }
+  border: 1px solid #999999 !important;
+}
 
 /* line 31, ../../scss/extensions/ckeditor.scss */
 .cke_inner .cke_top {
-  background: none !important; }
+  background: none !important;
+}

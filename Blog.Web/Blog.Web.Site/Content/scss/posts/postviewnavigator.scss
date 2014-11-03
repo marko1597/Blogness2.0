@@ -1,0 +1,22 @@
+﻿@import '../variables';
+
+.post-view-navigator {
+    @include padding($default-padding, 0, $default-padding, 0);
+    overflow: hidden;
+
+    @include media(xs) {
+        @include position(fixed, null, null, 0, 0);
+        @include size(100%, unquote($default-footer-height + 'px'));
+        background: $main-color;
+        z-index: 40;
+    }
+
+    .btn {
+        @include size(100%, auto);
+        @include position(relative, null);
+
+        @include media(xs) {
+            z-index: 41;
+        }
+    }
+}

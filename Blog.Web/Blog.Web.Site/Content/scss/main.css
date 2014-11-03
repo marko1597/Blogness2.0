@@ -244,12 +244,16 @@ ui-view, *[ui-view] {
 .body-content {
   padding-top: 15px;
   padding-right: 0;
-  padding-bottom: 15px;
+  padding-bottom: 0;
   padding-left: 0;
   margin-top: 51px;
   margin-right: 0;
   margin-bottom: 0;
   margin-left: 0; }
+  @media (max-width: 767px) {
+    .body-content {
+      padding-bottom: 15px;
+      margin-bottom: 50px; } }
 
 .wrap-text {
   -ms-text-overflow: ellipsis;

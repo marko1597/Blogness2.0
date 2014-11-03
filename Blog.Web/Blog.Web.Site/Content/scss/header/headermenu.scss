@@ -16,12 +16,12 @@
     }
 
     .add-post {
-        @include size(50px);
-        @include position(absolute, null, 30px, $default-margin);
-        @include center;@include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
+        @include size(unquote(($base-margin * 3) + 'px'));
+        @include position(absolute, null, 30px, unquote((($base-margin /3) * 2) + 'px'));
+        @include center;
+        @include borders(1px, solid, darken($primary-color, $border-darken-value), true, true, true, true);
         @include box-shadow(false);
         @include border-radius(round, false);
-
         cursor: pointer;
         background: $primary-color;
         z-index: 50;

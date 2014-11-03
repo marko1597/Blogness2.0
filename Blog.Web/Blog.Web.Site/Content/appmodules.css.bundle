@@ -53,7 +53,7 @@
     
     <file>/Content/modules/posts/postcontents.css</file>
     <file>/Content/modules/posts/postlikes.css</file>
-    
+    <file>/Content/modules/posts/postviewnavigator.css</file>
     <file>/Content/modules/posts/postlistitem.css</file>
     <file>/Content/modules/posts/postlistitemcomment.css</file>
     <file>/Content/modules/posts/postrelateditem.css</file>

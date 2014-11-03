@@ -9,12 +9,3 @@
         @include clean-list;
     }
 }
-
-.nav-buttons {
-    @include padding($default-padding, 0, $default-padding, 0);
-    overflow: hidden;
-
-    .btn {
-        @include size(100%, auto);
-    }
-}

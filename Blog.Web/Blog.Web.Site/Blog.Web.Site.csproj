@@ -350,6 +350,7 @@
     <Content Include="Content\modules\posts\postrelateditem.css" />
     <Content Include="Content\modules\posts\postrelateditems.css" />
     <Content Include="Content\modules\posts.css" />
+    <Content Include="Content\modules\posts\postviewnavigator.css" />
     <Content Include="Content\modules\shared\fileupload.css" />
     <Content Include="Content\modules\shared\fileuploaditem.css" />
     <Content Include="Content\modules\sockets\socketdebugger.css" />
@@ -645,6 +646,9 @@
     <Content Include="Content\scss\posts\postrelateditems.min.css">
       <DependentUpon>postrelateditems.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\posts\postviewnavigator.css">
+      <DependentUpon>postviewnavigator.scss</DependentUpon>
+    </Content>
     <Content Include="Content\scss\shared\fileupload.css">
       <DependentUpon>fileupload.scss</DependentUpon>
     </Content>
@@ -728,6 +732,10 @@
     <Content Include="Content\scss\users.scss" />
     <Content Include="Content\scss\users.css.map">
       <DependentUpon>users.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postviewnavigator.scss" />
+    <Content Include="Content\scss\posts\postviewnavigator.css.map">
+      <DependentUpon>postviewnavigator.css</DependentUpon>
     </Content>
     <None Include="Content\scss\user\userprofilenavigation.scss" />
     <Content Include="Content\scss\user\userprofilenavigation.css">
@@ -2601,6 +2609,7 @@
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\posts\directives\postViewCount.js" />
+    <Content Include="Scripts\modules\posts\directives\postViewNavigator.js" />
     <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
     <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
     <Content Include="Scripts\modules\sockets\services\socketsService.js" />
@@ -3454,6 +3463,7 @@
     <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
     <Content Include="Scripts\templates\modules\posts\postViewCount.html" />
+    <Content Include="Scripts\templates\modules\posts\postViewNavigator.html" />
     <Content Include="Scripts\templates\modules\shared\emptyRecordMessage.html" />
     <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
     <Content Include="Scripts\templates\modules\posts\postListItem.html" />

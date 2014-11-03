@@ -73,11 +73,9 @@ namespace Blog.Web.Api.Controllers
                     return Ok(new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "Album not found!"));
                 }
                 
-                var albumByName = albumList.Where(a => a.AlbumName == albumName).First();
+                var albumByName = albumList.First(a => a.AlbumName == albumName);
 
-                if (albumByName != null) return Ok(albumByName);
-
-                return Ok(new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "Album not found!"));
+                return Ok(albumByName ?? new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "Album not found!"));
             }
             catch (Exception ex)
             {

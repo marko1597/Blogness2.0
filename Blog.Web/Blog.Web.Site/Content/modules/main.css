@@ -3,7 +3,8 @@
 html, body {
   font-family: "Open Sans", sans-serif;
   width: auto;
-  height: 100%; }
+  height: 100%;
+}
 
 /* line 10, ../scss/main.scss */
 input, select, textarea {
@@ -11,25 +12,30 @@ input, select, textarea {
   border-top-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  max-width: 100%; }
+  max-width: 100%;
+}
 
 /* line 15, ../scss/main.scss */
 a {
-  color: white; }
-  /* line 18, ../scss/main.scss */
-  a:hover {
-    color: white;
-    text-decoration: underline; }
+  color: white;
+}
+/* line 18, ../scss/main.scss */
+a:hover {
+  color: white;
+  text-decoration: underline;
+}
 
 /* line 24, ../scss/main.scss */
 ::selection {
   color: white;
-  background: #56c2e1; }
+  background: #56c2e1;
+}
 
 /* line 29, ../scss/main.scss */
 ::-moz-selection {
   color: white;
-  background: #56c2e1; }
+  background: #56c2e1;
+}
 
 /* #endregion */
 /* #region card class */
@@ -44,56 +50,69 @@ a {
   vertical-align: top;
   font-size: 1em;
   color: #333333;
-  margin-bottom: 15px; }
-  /* line 46, ../scss/main.scss */
-  .card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content, .masonry .content {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    border-bottom: 1px solid #cccccc; }
-    /* line 50, ../scss/main.scss */
-    .card .content:last-child, .success .content:last-child, .warning .content:last-child, .danger .content:last-child, .info .content:last-child, .default .content:last-child, .masonry .content:last-child {
-      border-bottom: 0; }
+  margin-bottom: 15px;
+}
+/* line 46, ../scss/main.scss */
+.card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content, .masonry .content {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid #cccccc;
+}
+/* line 50, ../scss/main.scss */
+.card .content:last-child, .success .content:last-child, .warning .content:last-child, .danger .content:last-child, .info .content:last-child, .default .content:last-child, .masonry .content:last-child {
+  border-bottom: 0;
+}
 
 /* line 56, ../scss/main.scss */
 .success {
   color: white;
-  background: #5cb85c; }
-  /* line 61, ../scss/main.scss */
-  .success .content {
-    border-bottom: 1px solid #4cae4c; }
+  background: #5cb85c;
+}
+/* line 61, ../scss/main.scss */
+.success .content {
+  border-bottom: 1px solid #4cae4c;
+}
 
 /* line 66, ../scss/main.scss */
 .warning {
   color: white;
-  background: #f0ad4e; }
-  /* line 71, ../scss/main.scss */
-  .warning .content {
-    border-bottom: 1px solid #eea236; }
+  background: #f0ad4e;
+}
+/* line 71, ../scss/main.scss */
+.warning .content {
+  border-bottom: 1px solid #eea236;
+}
 
 /* line 76, ../scss/main.scss */
 .danger {
   color: white;
-  background: #d9534f; }
-  /* line 81, ../scss/main.scss */
-  .danger .content {
-    border-bottom: 1px solid #d43f3a; }
+  background: #d9534f;
+}
+/* line 81, ../scss/main.scss */
+.danger .content {
+  border-bottom: 1px solid #d43f3a;
+}
 
 /* line 86, ../scss/main.scss */
 .info {
   color: white;
-  background: #428bca; }
-  /* line 91, ../scss/main.scss */
-  .info .content {
-    border-bottom: 1px solid #357ebd; }
+  background: #428bca;
+}
+/* line 91, ../scss/main.scss */
+.info .content {
+  border-bottom: 1px solid #357ebd;
+}
 
 /* line 96, ../scss/main.scss */
 .default {
-  background: white; }
-  /* line 100, ../scss/main.scss */
-  .default.darken {
-    background: #e6e6e6; }
+  background: white;
+}
+/* line 100, ../scss/main.scss */
+.default.darken {
+  background: #e6e6e6;
+}
 
 /* line 105, ../scss/main.scss */
 .masonry {
@@ -101,42 +120,48 @@ a {
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  background: #e6e6e6; }
-  /* line 110, ../scss/main.scss */
-  .masonry ul.isotope {
-    list-style-type: none;
-    padding: 0 !important;
-    margin: 0 !important; }
-    /* line 113, ../scss/main.scss */
-    .masonry ul.isotope li.isotope-item {
-      background: white;
-      margin-top: 5px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      margin-left: 5px; }
-      /* line 117, ../scss/main.scss */
-      .masonry ul.isotope li.isotope-item .captions {
-        padding-top: 15px;
-        padding-right: 15px;
-        padding-bottom: 15px;
-        padding-left: 15px; }
-        /* line 120, ../scss/main.scss */
-        .masonry ul.isotope li.isotope-item .captions p {
-          padding-top: 0;
-          padding-right: 0;
-          padding-bottom: 0;
-          padding-left: 0;
-          margin-top: 0;
-          margin-right: 0;
-          margin-bottom: 0;
-          margin-left: 0; }
-          /* line 124, ../scss/main.scss */
-          .masonry ul.isotope li.isotope-item .captions p:first-of-type {
-            font-weight: bold;
-            margin-top: 0;
-            margin-right: 0;
-            margin-bottom: 5px;
-            margin-left: 0; }
+  background: #e6e6e6;
+}
+/* line 110, ../scss/main.scss */
+.masonry ul.isotope {
+  list-style-type: none;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* line 113, ../scss/main.scss */
+.masonry ul.isotope li.isotope-item {
+  background: white;
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+/* line 117, ../scss/main.scss */
+.masonry ul.isotope li.isotope-item .captions {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+/* line 120, ../scss/main.scss */
+.masonry ul.isotope li.isotope-item .captions p {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+/* line 124, ../scss/main.scss */
+.masonry ul.isotope li.isotope-item .captions p:first-of-type {
+  font-weight: bold;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+  margin-left: 0;
+}
 
 /* #endregion */
 /* #region header class */
@@ -148,95 +173,108 @@ a {
   width: 100%;
   height: 38px;
   border-top-left-radius: 0;
-  border-top-right-radius: 0; }
-  /* line 145, ../scss/main.scss */
-  .header.big {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    margin-top: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    width: 100%;
-    height: auto; }
-    /* line 150, ../scss/main.scss */
-    .header.big div:first-child {
-      width: 80px;
-      height: auto;
-      margin-top: 0;
-      margin-right: 10px;
-      margin-bottom: 0;
-      margin-left: 0;
-      float: left; }
-      /* line 155, ../scss/main.scss */
-      .header.big div:first-child img {
-        width: 80px;
-        height: 80px;
-        border-top-left-radius: 100%;
-        border-top-right-radius: 100%;
-        border-bottom-left-radius: 100%;
-        border-bottom-right-radius: 100%;
-        border-top: 3px solid white;
-        border-right: 3px solid white;
-        border-bottom: 3px solid white;
-        border-left: 3px solid white; }
-    /* line 162, ../scss/main.scss */
-    .header.big div:last-child {
-      width: 100%;
-      height: auto; }
-      /* line 165, ../scss/main.scss */
-      .header.big div:last-child h4 {
-        padding-left: 90px;
-        margin-top: 0;
-        margin-right: 0;
-        margin-bottom: 5px;
-        margin-left: 0;
-        font-weight: bold; }
-      /* line 171, ../scss/main.scss */
-      .header.big div:last-child p {
-        padding-left: 90px; }
-        /* line 174, ../scss/main.scss */
-        .header.big div:last-child p a {
-          margin-top: 0;
-          margin-right: 0;
-          margin-bottom: 5px;
-          margin-left: 0; }
-  /* line 181, ../scss/main.scss */
-  .header h5 {
-    padding-top: 12px;
-    padding-right: 15px;
-    padding-bottom: 12px;
-    padding-left: 15px;
-    margin: 0;
-    display: inline-block; }
-  /* line 187, ../scss/main.scss */
-  .header .btn-header {
-    width: auto;
-    height: 100%;
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-    position: inherit;
-    top: 0;
-    right: 0;
-    cursor: pointer;
-    color: inherit;
-    text-align: center; }
-    /* line 195, ../scss/main.scss */
-    .header .btn-header:hover {
-      box-shadow: inset 0 0 10px 0 #aaaaaa;
-      box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5); }
-    /* line 199, ../scss/main.scss */
-    .header .btn-header.left {
-      border-right: 1px solid #cccccc;
-      display: inline-block;
-      margin-right: 5px; }
-    /* line 205, ../scss/main.scss */
-    .header .btn-header.right {
-      border-left: 1px solid #cccccc; }
+  border-top-right-radius: 0;
+}
+/* line 145, ../scss/main.scss */
+.header.big {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: 100%;
+  height: auto;
+}
+/* line 150, ../scss/main.scss */
+.header.big div:first-child {
+  width: 80px;
+  height: auto;
+  margin-top: 0;
+  margin-right: 10px;
+  margin-bottom: 0;
+  margin-left: 0;
+  float: left;
+}
+/* line 155, ../scss/main.scss */
+.header.big div:first-child img {
+  width: 80px;
+  height: 80px;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  border-top: 3px solid white;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  border-left: 3px solid white;
+}
+/* line 162, ../scss/main.scss */
+.header.big div:last-child {
+  width: 100%;
+  height: auto;
+}
+/* line 165, ../scss/main.scss */
+.header.big div:last-child h4 {
+  padding-left: 90px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+  margin-left: 0;
+  font-weight: bold;
+}
+/* line 171, ../scss/main.scss */
+.header.big div:last-child p {
+  padding-left: 90px;
+}
+/* line 174, ../scss/main.scss */
+.header.big div:last-child p a {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 5px;
+  margin-left: 0;
+}
+/* line 181, ../scss/main.scss */
+.header h5 {
+  padding-top: 12px;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  padding-left: 15px;
+  margin: 0;
+  display: inline-block;
+}
+/* line 187, ../scss/main.scss */
+.header .btn-header {
+  width: auto;
+  height: 100%;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  position: inherit;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+}
+/* line 195, ../scss/main.scss */
+.header .btn-header:hover {
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 199, ../scss/main.scss */
+.header .btn-header.left {
+  border-right: 1px solid #cccccc;
+  display: inline-block;
+  margin-right: 5px;
+}
+/* line 205, ../scss/main.scss */
+.header .btn-header.right {
+  border-left: 1px solid #cccccc;
+}
 
 /* #endregion */
 /* #region image center cropping */
@@ -251,13 +289,15 @@ a {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0; }
-  /* line 223, ../scss/main.scss */
-  .center-cropped img {
-    min-height: 100%;
-    min-width: 100%;
-    opacity: 0;
-    filter: alpha(opacity=0); }
+  border-bottom-right-radius: 0;
+}
+/* line 223, ../scss/main.scss */
+.center-cropped img {
+  min-height: 100%;
+  min-width: 100%;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
 
 /* #endregion */
 /* #region bloggity base classes */
@@ -270,149 +310,182 @@ a {
   top: -5px;
   margin-right: 5px;
   width: 30px;
-  height: 30px; }
+  height: 30px;
+}
 
 /* line 243, ../scss/main.scss */
 ui-view, *[ui-view] {
-  position: relative; }
+  position: relative;
+}
 
 /* line 247, ../scss/main.scss */
 .page-content {
   padding-top: 0;
   padding-right: 15px;
   padding-bottom: 0;
-  padding-left: 15px; }
+  padding-left: 15px;
+}
 
 /* line 251, ../scss/main.scss */
 .body-content {
   padding-top: 15px;
   padding-right: 0;
-  padding-bottom: 15px;
+  padding-bottom: 0;
   padding-left: 0;
   margin-top: 51px;
   margin-right: 0;
   margin-bottom: 0;
-  margin-left: 0; }
+  margin-left: 0;
+}
+@media (max-width: 767px) {
+  /* line 251, ../scss/main.scss */
+  .body-content {
+    padding-bottom: 15px;
+    margin-bottom: 50px;
+  }
+}
 
-/* line 256, ../scss/main.scss */
+/* line 264, ../scss/main.scss */
 .wrap-text {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
-/* line 260, ../scss/main.scss */
+/* line 268, ../scss/main.scss */
 .fill-container {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+}
 
-/* line 265, ../scss/main.scss */
+/* line 273, ../scss/main.scss */
 .row .sticky {
   margin-top: 0;
   margin-right: 0;
   margin-bottom: 0;
-  margin-left: 0; }
+  margin-left: 0;
+}
 
-/* line 270, ../scss/main.scss */
+/* line 278, ../scss/main.scss */
 .sticky {
   margin-top: 0;
   margin-right: -15px;
   margin-bottom: 0;
   margin-left: -15px;
-  z-index: 2000; }
-  /* line 275, ../scss/main.scss */
-  .sticky.top {
-    position: fixed;
-    top: 0; }
-  /* line 279, ../scss/main.scss */
-  .sticky.bottom {
-    position: fixed;
-    bottom: 0; }
+  z-index: 2000;
+}
+/* line 283, ../scss/main.scss */
+.sticky.top {
+  position: fixed;
+  top: 0;
+}
+/* line 287, ../scss/main.scss */
+.sticky.bottom {
+  position: fixed;
+  bottom: 0;
+}
 
 /* #endregion */
 /* #region field validation errors */
-/* line 288, ../scss/main.scss */
+/* line 296, ../scss/main.scss */
 .field-error {
   border: 1px solid #d43f3a;
-  color: #d9534f; }
-
-/* line 293, ../scss/main.scss */
-.field-validation-error {
-  color: #d9534f; }
-
-/* line 297, ../scss/main.scss */
-.field-validation-valid {
-  display: none; }
+  color: #d9534f;
+}
 
 /* line 301, ../scss/main.scss */
-input.input-validation-error {
-  border: 1px solid #d43f3a; }
+.field-validation-error {
+  color: #d9534f;
+}
 
 /* line 305, ../scss/main.scss */
-input[type="checkbox"].input-validation-error {
-  border: 0 none; }
+.field-validation-valid {
+  display: none;
+}
 
 /* line 309, ../scss/main.scss */
-.validation-summary-errors {
-  color: #d9534f; }
+input.input-validation-error {
+  border: 1px solid #d43f3a;
+}
 
 /* line 313, ../scss/main.scss */
+input[type="checkbox"].input-validation-error {
+  border: 0 none;
+}
+
+/* line 317, ../scss/main.scss */
+.validation-summary-errors {
+  color: #d9534f;
+}
+
+/* line 321, ../scss/main.scss */
 .has-error {
   background: #d9534f !important;
-  color: white !important; }
+  color: white !important;
+}
 
-/* line 318, ../scss/main.scss */
+/* line 326, ../scss/main.scss */
 .input.has-error::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: white; }
+  color: white;
+}
 
-/* line 323, ../scss/main.scss */
+/* line 331, ../scss/main.scss */
 .input.has-error:hover::-webkit-input-placeholder,
 .input.has-error:focus::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: #4c4c4c; }
+  color: #4c4c4c;
+}
 
-/* line 327, ../scss/main.scss */
+/* line 335, ../scss/main.scss */
 .input.has-error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: white;
-  opacity: 1; }
+  opacity: 1;
+}
 
-/* line 333, ../scss/main.scss */
+/* line 341, ../scss/main.scss */
 .input.has-error:hover:-moz-placeholder,
 .input.has-error:focus:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #4c4c4c;
   opacity: 1;
-  filter: alpha(opacity=100); }
+  filter: alpha(opacity=100);
+}
 
-/* line 338, ../scss/main.scss */
+/* line 346, ../scss/main.scss */
 .input.has-error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: white;
-  opacity: 1; }
+  opacity: 1;
+}
 
-/* line 344, ../scss/main.scss */
+/* line 352, ../scss/main.scss */
 .input.has-error:hover::-moz-placeholder,
 .input.has-error:focus::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #4c4c4c;
-  opacity: 1; }
+  opacity: 1;
+}
 
-/* line 349, ../scss/main.scss */
+/* line 357, ../scss/main.scss */
 .input.has-error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: white; }
+  color: white;
+}
 
-/* line 354, ../scss/main.scss */
+/* line 362, ../scss/main.scss */
 .input.has-error:hover:-ms-input-placeholder,
 .input.has-error:focus:-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: #4c4c4c; }
+  color: #4c4c4c;
+}
 
-/* line 358, ../scss/main.scss */
+/* line 366, ../scss/main.scss */
 .validation-summary-valid {
-  display: none; }
+  display: none;
+}
 
 /* #endregion */

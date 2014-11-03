@@ -2864,41 +2864,6 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
             return false;
         };
 
-        $scope.nextPost = function () {
-            if (!$scope.post) return;
-
-            var nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
-
-            if (nextPost) {
-                $location.path("/post/" + nextPost);
-            } else {
-                postsService.getMoreRecentPosts()
-                    .then(function () {
-                        nextPost = postsService.getNextPostIdFromCache($scope.post.Id);
-
-                        if (nextPost) {
-                            $location.path("/post/" + nextPost);
-                        } else {
-                            $location.path("/");
-                        }
-                    }, function () {
-                        $location.path("/");
-                    });
-            }
-        };
-
-        $scope.previousPost = function () {
-            if (!$scope.post) return;
-
-            var previousPost = postsService.getPreviousPostIdFromCache($scope.post.Id);
-
-            if (previousPost) {
-                $location.path("/post/" + previousPost);
-            } else {
-                $location.path("/");
-            }
-        };
-
         $scope.init = function () {
             if ($scope.isBusy) {
                 return;
@@ -3244,6 +3209,60 @@ ngPosts.directive('postRelatedItems', [function () {
         scope: { parentpostid: '=' },
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditems.html",
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /Scripts/modules/posts/directives/postViewNavigator.js
+ngPosts.directive('postViewNavigator', [function () {
+    var ctrlFn = function ($scope, $location, $rootScope, postsService) {
+        $scope.nextPost = function () {
+            if (!$rootScope.$stateParams.postId) return;
+
+            var nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+            if (nextPost) {
+                $location.path("/post/" + nextPost);
+            } else {
+                postsService.getMoreRecentPosts().then(function () {
+                    nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+                    if (nextPost) {
+                        $location.path("/post/" + nextPost);
+                    } else {
+                        $location.path("/");
+                    }
+                }, function () {
+                    $location.path("/");
+                });
+            }
+        };
+
+        $scope.previousPost = function () {
+            if (!$rootScope.$stateParams.postId) return;
+
+            var previousPost = postsService.getPreviousPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+            if (previousPost) {
+                $location.path("/post/" + previousPost);
+            } else {
+                $location.path("/");
+            }
+        };
+
+        $scope.isVisible = function() {
+            if ($rootScope.$stateParams.postId) {
+                return true;
+            };
+            return false;
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "postsService"];
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postViewNavigator.html",
         controller: ctrlFn
     };
 }]);

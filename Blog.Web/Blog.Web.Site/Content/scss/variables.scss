@@ -7,6 +7,9 @@ $main-background: #eee url('../../images/bg.jpg') no-repeat right top;
 $accountpage-background: url(../images/login-main.jpg);
 $accountpage-overlay: transparent url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACAQMAAABIeJ9nAAAABlBMVEX///8AAABVwtN+AAAAAnRSTlMA40+QfvoAAAATSURBVHheBcABDQAAAECwRxfdxAGEAIHfElzbAAAAAElFTkSuQmCC') /*../../images/login-pattern.png*/ repeat top left;
 
+$default-header-height: 50;
+$default-footer-height: 65;
+
 $base-padding: 15;
 $base-margin: 15;
 $base-border-radius: 0;

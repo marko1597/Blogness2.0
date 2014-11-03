@@ -249,8 +249,16 @@ ui-view, *[ui-view] {
 }
 
 .body-content {
-    @include padding($default-padding, 0, $default-padding, 0);
-    @include margin(51px, 0, 0, 0);
+    $header-margin: unquote(($default-header-height + 1) + 'px');
+    $footer-margin: unquote(($default-footer-height - $base-margin) + 'px');
+
+    @include padding($default-padding, 0, 0, 0);
+    @include margin($header-margin, 0, 0, 0);
+
+    @include media(xs) {
+        @include padding(null, null, $default-padding);
+        @include margin(null, null, $footer-margin);
+    }
 }
 
 .wrap-text {
