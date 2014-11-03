@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Blog.Common.Contracts;
@@ -13,11 +14,13 @@ namespace Blog.Web.Api.Controllers
     public class AlbumController : ApiController
     {
         private readonly IAlbumResource _service;
+        private readonly IUsersResource _usersService;
         private readonly IErrorSignaler _errorSignaler;
 
-        public AlbumController(IAlbumResource service, IErrorSignaler errorSignaler)
+        public AlbumController(IAlbumResource service, IUsersResource usersService, IErrorSignaler errorSignaler)
         {
             _service = service;
+            _usersService = usersService;
             _errorSignaler = errorSignaler;
         }
 
@@ -46,6 +49,35 @@ namespace Blog.Web.Api.Controllers
             {
                 var albums = _service.GetByUser(userId) ?? new List<Album>();
                 return Ok(albums);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [Route("api/users/{username}/{albumName}")]
+        public IHttpActionResult GetByUser(string username, string albumName)
+        {
+            try
+            {
+                var user = _usersService.GetByUserName(username);
+                if (user == null) return Ok(new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "User not found!"));
+
+                var albumList = _service.GetByUser(user.Id);
+
+                if (albumList == null || albumList.Count == 0)
+                {
+                    return Ok(new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "Album not found!"));
+                }
+                
+                var albumByName = albumList.Where(a => a.AlbumName == albumName).First();
+
+                if (albumByName != null) return Ok(albumByName);
+
+                return Ok(new Album().GenerateError<Album>((int)Constants.Error.RecordNotFound, "Album not found!"));
             }
             catch (Exception ex)
             {

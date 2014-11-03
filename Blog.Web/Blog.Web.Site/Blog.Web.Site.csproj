@@ -337,6 +337,7 @@
     <Content Include="Content\modules\loginform\registerform.css" />
     <Content Include="Content\modules\main.css" />
     <Content Include="Content\modules\media\albumgroup.css" />
+    <Content Include="Content\modules\media\mediagallery.css" />
     <Content Include="Content\modules\media\mediagroupedlist.css" />
     <Content Include="Content\modules\media\mediaitem.css" />
     <Content Include="Content\modules\media\mediaselectiondialog.css" />

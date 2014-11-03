@@ -1,6 +1,6 @@
 ﻿ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
     function ($http, $q, configProvider) {
-        var mediaApi = configProvider.getSettings().BlogApi == "" ?
+        var baseApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
 
@@ -11,7 +11,7 @@
                 var deferred = $q.defer();
 
                 $http({
-                    url: mediaApi + "album/" + albumId + "/media",
+                    url: baseApi + "album/" + albumId + "/media",
                     method: "GET"
                 }).success(function (response) {
                     deferred.resolve(response);
@@ -26,7 +26,7 @@
                 var deferred = $q.defer();
 
                 $http({
-                    url: mediaApi + "users/" + userId + "/media",
+                    url: baseApi + "users/" + userId + "/media",
                     method: "GET"
                 }).success(function (response) {
                     deferred.resolve(response);
@@ -41,7 +41,7 @@
                 var deferred = $q.defer();
 
                 $http({
-                    url: mediaApi + "media?username=" + username + "&album=" + albumName,
+                    url: baseApi + "media?username=" + username + "&album=" + albumName,
                     method: "POST",
                     data: comment
                 }).success(function (response) {
@@ -57,7 +57,7 @@
                 var deferred = $q.defer();
 
                 $http({
-                    url: mediaApi + "media/" + mediaId,
+                    url: baseApi + "media/" + mediaId,
                     method: "DELETE",
                 }).success(function (response) {
                     deferred.resolve(response);
@@ -83,8 +83,32 @@
             },
 
             getViewMediaListFromPost: function (postId) {
+                var deferred = $q.defer();
+                var self = this;
                 var mediaList = _.where(viewedMediaList, { postId: postId });
-                return mediaList[0] ? mediaList[0].media : [];
+
+                if (!mediaList[0] || mediaList[0].length === 0) {
+                    $http({
+                        url: baseApi + "posts/" + postId + "/contents",
+                        method: "GET",
+                    }).success(function (response) {
+                        if (!response.Error) {
+                            var responseMediaList = _.pluck(response, 'Media');
+                            self.addViewedMediaListFromPost(responseMediaList, postId);
+
+                            deferred.resolve(responseMediaList);
+                        } else {
+                            deferred.reject(response.Error);
+                        }
+                    }).error(function (error) {
+                        deferred.reject(error);
+                    });
+                } else {
+                    deferred.resolve(mediaList[0].media);
+                }
+
+
+                return deferred.promise;
             },
 
             addViewedMediaListFromAlbum: function (mediaList, username, albumName) {
@@ -107,11 +131,38 @@
             },
 
             getViewMediaListFromAlbum: function (username, albumName) {
+                var deferred = $q.defer();
+
                 if (albumName && username) {
+                    var self = this;
+
                     var mediaList = _.where(viewedMediaList, { username: username, albumName: albumName.toLowerCase() });
-                    return mediaList[0] ? mediaList[0].media : [];
+
+                    if (!mediaList[0] || mediaList[0].length === 0) {
+                        $http({
+                            url: baseApi + "users/" + username + "/" + albumName,
+                            method: "GET",
+                        }).success(function (response) {
+                            if (!response.Error) {
+                                var responseMediaList = _.pluck(response, 'Media');
+                                self.addViewedMediaListFromAlbum(responseMediaList, username, albumName);
+
+                                deferred.resolve(responseMediaList);
+                            } else {
+                                deferred.reject(response.Error);
+                            }
+                        }).error(function (error) {
+                            deferred.reject(error);
+                        });
+                    }
+                    else {
+                        deferred.resolve(mediaList[0].media);
+                    }
+                } else {
+                    deferred.reject({ Message: "Invalid request!" });
                 }
-                return [];
+
+                return deferred.promise;
             },
         };
     }

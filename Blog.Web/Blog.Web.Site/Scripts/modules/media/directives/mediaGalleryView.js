@@ -3,7 +3,7 @@
         $scope.mediaList = [];
 
         $scope.username = localStorageService.get("username");
-        
+
         var mediaSelectionDialog = $modal({
             title: 'Gallery view',
             scope: $scope,
@@ -11,7 +11,7 @@
             show: false
         });
 
-        $scope.closeGallery = function() {
+        $scope.closeGallery = function () {
             mediaSelectionDialog.hide();
             $scope.mediaList = [];
 
@@ -26,16 +26,29 @@
             }
         };
 
-        $rootScope.$on("launchMediaGallery", function() {
+        $rootScope.$on("launchMediaGallery", function () {
             if ($rootScope.$stateParams.postId) {
-                $scope.mediaList = mediaService.getViewMediaListFromPost($rootScope.$stateParams.postId);
+                mediaService.getViewMediaListFromPost($rootScope.$stateParams.postId)
+                    .then(function (response) {
+                        $scope.mediaList = response;
+                    }, function (error) {
+                        console.log(error);
+                    });
             } else {
                 if ($rootScope.$stateParams.username) {
-                    $scope.mediaList = mediaService.getViewMediaListFromAlbum($rootScope.$stateParams.username,
-                        $rootScope.$stateParams.albumName);
+                    mediaService.getViewMediaListFromAlbum($rootScope.$stateParams.username, $rootScope.$stateParams.albumName)
+                        .then(function (response) {
+                            $scope.mediaList = response;
+                        }, function (error) {
+                            console.log(error);
+                        });
                 } else {
-                    $scope.mediaList = mediaService.getViewMediaListFromAlbum($scope.username,
-                        $rootScope.$stateParams.albumName);
+                    mediaService.getViewMediaListFromAlbum($scope.username, $rootScope.$stateParams.albumName)
+                        .then(function (response) {
+                            $scope.mediaList = response;
+                        }, function (error) {
+                            console.log(error);
+                        });
                 }
             }
 
