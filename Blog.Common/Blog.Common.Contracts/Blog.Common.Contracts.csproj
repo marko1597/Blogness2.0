@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="BaseObject.cs" />
+    <Compile Include="ChatMessage.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommentLike.cs" />
     <Compile Include="Education.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Tag.cs" />
     <Compile Include="User.cs" />
     <Compile Include="ViewCount.cs" />
+    <Compile Include="ViewModels\ChatMessagesList.cs" />
+    <Compile Include="ViewModels\SocketViewModels\ChatMessageSend.cs" />
     <Compile Include="ViewModels\SocketViewModels\PostComments.cs" />
     <Compile Include="ViewModels\SocketViewModels\BaseSocketViewModel.cs" />
     <Compile Include="ViewModels\SocketViewModels\CommentAdded.cs" />

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AddressMapper.cs" />
     <Compile Include="AlbumMapper.cs" />
+    <Compile Include="ChatMessageMapper.cs" />
     <Compile Include="CommentLikeMapper.cs" />
     <Compile Include="CommentMapper.cs" />
     <Compile Include="EducationMapper.cs" />

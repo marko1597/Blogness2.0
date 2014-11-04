@@ -11,7 +11,7 @@ namespace Blog.DataAccess.Database.Repository
     {
         public override Media Add(Media entity)
         {
-            var album = Context.Albums.Where(a => a.AlbumId == entity.AlbumId).FirstOrDefault();
+            var album = Context.Albums.FirstOrDefault(a => a.AlbumId == entity.AlbumId);
             if (album == null) throw new Exception(string.Format("Missing album on adding media {0}", entity.CustomName));
 
             entity.CreatedBy = album.UserId;

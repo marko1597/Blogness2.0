@@ -1,0 +1,4 @@
+﻿<%@ ServiceHost
+    Service="Blog.Services.Implementation.ChatMessagesService"
+    CodeBehind="Blog.Services.Implementation.ChatMessagesService.cs"
+    Factory="SimpleInjector.Integration.Wcf.SimpleInjectorServiceHostFactory, SimpleInjector.Integration.Wcf" %>

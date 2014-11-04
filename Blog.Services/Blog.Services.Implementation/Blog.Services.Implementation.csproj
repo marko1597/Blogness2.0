@@ -80,6 +80,7 @@
     <Compile Include="AddressService.cs" />
     <Compile Include="Attributes\ServiceErrorBehaviorAttribute.cs" />
     <Compile Include="BaseService.cs" />
+    <Compile Include="ChatMessagesService.cs" />
     <Compile Include="CommentLikesService.cs" />
     <Compile Include="CommentsService.cs" />
     <Compile Include="EducationService.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="HobbyService.cs" />
     <Compile Include="Interfaces\IAddressService.cs" />
     <Compile Include="Interfaces\IBaseService.cs" />
+    <Compile Include="Interfaces\IChatMessagesService.cs" />
     <Compile Include="Interfaces\ICommentLikesService.cs" />
     <Compile Include="Interfaces\ICommentsService.cs" />
     <Compile Include="Interfaces\IEducationService.cs" />

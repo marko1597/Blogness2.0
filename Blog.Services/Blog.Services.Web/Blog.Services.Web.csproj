@@ -89,6 +89,7 @@
   <ItemGroup>
     <Content Include="AddressService.svc" />
     <Content Include="AlbumService.svc" />
+    <Content Include="ChatMessagesService.svc" />
     <Content Include="CommentLikesService.svc" />
     <Content Include="CommentsService.svc" />
     <Content Include="EducationService.svc" />

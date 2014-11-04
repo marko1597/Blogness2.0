@@ -53,6 +53,11 @@ namespace Blog.DataAccess.Database.Entities
                 .WithRequired(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .WillCascadeOnDelete(false);
+            mb.Entity<User>()
+                .HasMany<ChatMessage>(a => a.ChatMessages)
+                .WithRequired(a => a.FromUser)
+                .HasForeignKey(a => a.FromUserId)
+                .WillCascadeOnDelete(true);
 
             //Education
             mb.Entity<Education>()
@@ -124,6 +129,7 @@ namespace Blog.DataAccess.Database.Entities
         public DbSet<Album> Albums { get; set; }
         public DbSet<Media> Media { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
 
         public class BlogDbInitializer : CreateDatabaseIfNotExists<BlogDb>
         {

@@ -29,6 +29,7 @@ namespace Blog.Services.Web
             // Logic core registry. This includes all blog logic functionalities
             container.Register<IAddressLogic, AddressLogic>();
             container.Register<IAlbumLogic, AlbumLogic>();
+            container.Register<IChatMessagesLogic, ChatMessagesLogic>();
             container.Register<ICommentLikesLogic, CommentLikesLogic>();
             container.Register<ICommentsLogic, CommentsLogic>();
             container.Register<IEducationLogic, EducationLogic>();
@@ -45,6 +46,7 @@ namespace Blog.Services.Web
             // Db repository registry. All entity framework repositories are registered here.
             container.Register<IAddressRepository, AddressRepository>();
             container.Register<IAlbumRepository, AlbumRepository>();
+            container.Register<IChatMessageRepository, ChatMessageRepository>();
             container.Register<ICommentLikeRepository, CommentLikeRepository>();
             container.Register<ICommentRepository, CommentRepository>();
             container.Register<IEducationRepository, EducationRepository>();

@@ -42,7 +42,7 @@ namespace Blog.Web.Api
             var container = new Container();
             container.Options.PropertySelectionBehavior = new ImportPropertySelectionBehavior();
 
-            // SI Controllers Dependency Injection
+            // SI Controllers registry
             container.Register<ICommentsResource, CommentsResource>(Lifestyle.Singleton);
             container.Register<ICommentLikesResource, CommentLikesResource>(Lifestyle.Singleton);
             container.Register<IPostsResource, PostsResource>(Lifestyle.Singleton);
@@ -54,14 +54,17 @@ namespace Blog.Web.Api
             container.Register<IEducationResource, EducationResource>(Lifestyle.Singleton);
             container.Register<IHobbyResource, HobbyResource>(Lifestyle.Singleton);
             container.Register<IAddressResource, AddressResource>(Lifestyle.Singleton);
-            container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<ITagsResource, TagsResource>(Lifestyle.Singleton);
             container.Register<IViewCountResource, ViewCountResource>(Lifestyle.Singleton);
+            container.Register<IChatMessagesResource, ChatMessagesResource>(Lifestyle.Singleton);
+
+            // SI Helpers and Utilities registry
+            container.Register<IImageHelper, ImageHelper>(Lifestyle.Singleton);
             container.Register<IErrorSignaler, ErrorSignaler>(Lifestyle.Singleton);
             container.Register<IHttpClientHelper, HttpClientHelper>(Lifestyle.Singleton);
             container.Register<IConfigurationHelper, ConfigurationHelper>(Lifestyle.Singleton);
 
-            // SI Token Identity Registers
+            // SI Token Identity registry
             container.Register<IdentityDbContext<BlogUser>, BlogIdentityDbContext>(Lifestyle.Singleton);
             container.Register<IUserStore<BlogUser>, BlogUserStore>(Lifestyle.Singleton);
             container.Register<IBlogDbRepository, BlogDbRepository>(Lifestyle.Singleton);

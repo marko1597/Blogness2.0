@@ -52,12 +52,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Wcf\AddressResource.cs" />
     <Compile Include="Wcf\AlbumResource.cs" />
+    <Compile Include="Wcf\ChatMessagesResource.cs" />
     <Compile Include="Wcf\CommentLikesResource.cs" />
     <Compile Include="Wcf\CommentsResource.cs" />
     <Compile Include="Wcf\EducationResource.cs" />
     <Compile Include="Wcf\HobbyResource.cs" />
     <Compile Include="Wcf\Interfaces\IAddressResource.cs" />
     <Compile Include="Wcf\Interfaces\IAlbumResource.cs" />
+    <Compile Include="Wcf\Interfaces\IChatMessagesResource.cs" />
     <Compile Include="Wcf\Interfaces\ICommentLikesResource.cs" />
     <Compile Include="Wcf\Interfaces\ICommentsResource.cs" />
     <Compile Include="Wcf\Interfaces\IEducationResource.cs" />

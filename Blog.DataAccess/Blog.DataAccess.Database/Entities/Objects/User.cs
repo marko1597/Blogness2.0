@@ -46,5 +46,6 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<CommentLike> CommentLikes { get; set; }
         public virtual ICollection<PostLike> PostLikes { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
     }
 }

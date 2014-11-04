@@ -66,12 +66,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressLogic.cs" />
+    <Compile Include="ChatMessagesLogic.cs" />
     <Compile Include="CommentLikesLogic.cs" />
     <Compile Include="CommentsLogic.cs" />
     <Compile Include="EducationLogic.cs" />
     <Compile Include="HobbyLogic.cs" />
     <Compile Include="Interfaces\IAddressLogic.cs" />
     <Compile Include="Interfaces\IAlbumLogic.cs" />
+    <Compile Include="Interfaces\IChatMessagesLogic.cs" />
     <Compile Include="Interfaces\ICommentLikesLogic.cs" />
     <Compile Include="Interfaces\ICommentsLogic.cs" />
     <Compile Include="Interfaces\IEducationLogic.cs" />
