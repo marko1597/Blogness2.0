@@ -1,0 +1,52 @@
+﻿@import '../variables';
+
+#messages-panel {
+    @include size(100%);
+    @include padding(unquote($default-header-height + 'px'), null, null, null);
+    @include box-shadow(false);
+
+    .body {
+        @include size(100%);
+        background: $default-color;
+        color: $content-font-color;
+
+        .alert {
+            @include margin($default-margin);
+        }
+
+        $chat-user-image-size: 50;
+
+        .messages-list {
+            .message-item {
+                @include padding($default-padding);
+                @include borders(1px, solid, $light-border-color, null, null, true);
+                background: $default-color;
+                cursor: pointer;
+
+                &:hover {
+                    @include box-shadow(true);
+                }
+
+                .chat-user-image {
+                    @include margin(null, $default-margin);
+                    float: left;
+
+                    img {
+                        @include borders(3px, solid, $primary-color, true);
+                        @include border-radius(round, false);
+                        @include size(unquote($chat-user-image-size + 'px'));
+                    }
+                }
+
+                .message-body {
+                    @include size(100%, auto);
+
+                    > p {
+                        @include margin(null, null, 0, null);
+                        @include padding(null, null, null, unquote(($chat-user-image-size + $base-padding) + 'px'));
+                    }
+                }
+            }
+        }
+    }
+}

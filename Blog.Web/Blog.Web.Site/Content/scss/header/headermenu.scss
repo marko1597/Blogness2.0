@@ -3,6 +3,19 @@
 #blog-header {
     overflow: hidden;
 
+    .messages-toggle {
+        @include size(auto, 100%);
+        @include margin(8px, $default-margin, 8px, $default-margin);
+        display: inline-block;
+        color: $default-color;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($default-color, $hover-darken-value);
+            text-decoration: underline;
+        }
+    }
+
     i {
         @include margin(null, 7px);
     }

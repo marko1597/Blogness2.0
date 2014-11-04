@@ -7,17 +7,14 @@
   -moz-transition: opacity .25s ease-in-out;
   -webkit-transition: opacity .25s ease-in-out;
   -o-transition: opacity .25s ease-in-out;
-  transition: opacity .25s ease-in-out;
-}
-/* line 337, ../scss/variables.scss */
-.view-post .header h4 .edit:hover {
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-}
+  transition: opacity .25s ease-in-out; }
+  /* line 337, ../scss/variables.scss */
+  .view-post .header h4 .edit:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=50); }
 
 /* line 8, ../scss/viewpost.scss */
 .card.masonry > ul {
   list-style-type: none;
   padding: 0 !important;
-  margin: 0 !important;
-}
+  margin: 0 !important; }

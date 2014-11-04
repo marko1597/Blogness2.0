@@ -5,58 +5,50 @@
   border-right: 1px solid #666666;
   padding-top: 50px;
   background: #4c4c4c;
-  color: white;
-}
-/* line 10, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu:after {
-  width: 100%;
-  height: auto;
-  border-right: 1px solid #666666;
-  background: #4c4c4c;
-  color: white;
-}
-/* line 17, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-/* line 21, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul > li > a {
-  padding-top: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  padding-left: 15px;
-  border-bottom: 1px solid #3f3f3f;
-  box-shadow: none;
-  color: white;
-  outline: none;
-  display: block;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 400;
-  -webkit-transition: background 0.3s, box-shadow 0.3s;
-  -moz-transition: background 0.3s, box-shadow 0.3s;
-  -o-transition: background 0.3s, box-shadow 0.3s;
-  transition: background 0.3s, box-shadow 0.3s;
-}
-/* line 36, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul > li > a:hover {
-  box-shadow: inset 0 0 10px 0 #aaaaaa;
-  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
-}
-/* line 40, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul > li > a > i {
-  margin-right: 10px;
-  font-size: 1.5em;
-}
-/* line 46, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul > li > a form {
-  position: relative;
-}
-/* line 49, ../../scss/navigation/navigationmenu.scss */
-.navigation-menu ul > li > a form .fa-search {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
+  color: white; }
+  /* line 10, ../../scss/navigation/navigationmenu.scss */
+  .navigation-menu:after {
+    width: 100%;
+    height: auto;
+    border-right: 1px solid #666666;
+    background: #4c4c4c;
+    color: white; }
+  /* line 17, ../../scss/navigation/navigationmenu.scss */
+  .navigation-menu ul {
+    list-style-type: none;
+    padding: 0 !important;
+    margin: 0 !important; }
+    /* line 21, ../../scss/navigation/navigationmenu.scss */
+    .navigation-menu ul > li > a {
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      border-bottom: 1px solid #3f3f3f;
+      box-shadow: none;
+      color: white;
+      outline: none;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 400;
+      -webkit-transition: background 0.3s, box-shadow 0.3s;
+      -moz-transition: background 0.3s, box-shadow 0.3s;
+      -o-transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.3s, box-shadow 0.3s; }
+      /* line 36, ../../scss/navigation/navigationmenu.scss */
+      .navigation-menu ul > li > a:hover {
+        box-shadow: inset 0 0 10px 0 #aaaaaa;
+        box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5); }
+      /* line 40, ../../scss/navigation/navigationmenu.scss */
+      .navigation-menu ul > li > a > i {
+        margin-right: 10px;
+        font-size: 1.5em; }
+      /* line 46, ../../scss/navigation/navigationmenu.scss */
+      .navigation-menu ul > li > a form {
+        position: relative; }
+        /* line 49, ../../scss/navigation/navigationmenu.scss */
+        .navigation-menu ul > li > a form .fa-search {
+          position: absolute;
+          top: 10px;
+          right: 10px; }

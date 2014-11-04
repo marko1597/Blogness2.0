@@ -3,7 +3,7 @@
 .navigation-menu {
     @include size(100%, 100%);
     @include borders(1px, solid, $dark-border-color, false, true, false, false);
-    @include padding(50px, null, null, null);
+    @include padding(unquote($default-header-height + 'px'), null, null, null);
     background: $main-color;
     color: $main-font-color;
 

@@ -1,0 +1,21 @@
+﻿<nav class="messages-panel" id="messages-panel">
+    <div class="header">
+        <h5>Messages</h5>
+    </div>
+    <div class="body">
+        <div ng-show="!isLoggedIn()" class="alert alert-warning">
+            <h4>Not logged in</h4>
+        </div>
+        <div ng-show="isLoggedIn()" class="messages-list">
+            <div class="message-item" ng-repeat="messageItem in messagesList">
+                <div class="chat-user-image">
+                    <img ng-src="{{messageItem.User.Picture.MediaUrl}}" />
+                </div>
+                <div class="message-body">
+                    <p>{{messageItem.LastMessage.Text}}</p>
+                    <span>{{messageItem.LastMessage.DateDisplay}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

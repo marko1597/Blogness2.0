@@ -45,6 +45,8 @@
     
     <file>/Content/modules/navigation/navigationmenu.css</file>
     
+    <file>/Content/modules/messaging/messagespanel.css</file>
+    
     <file>/Content/modules/media/mediagallery.css</file>
     <file>/Content/modules/media/mediagroupedlist.css</file>
     <file>/Content/modules/media/albumgroup.css</file>

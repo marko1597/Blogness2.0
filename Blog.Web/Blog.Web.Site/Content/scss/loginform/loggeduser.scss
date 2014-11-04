@@ -1,8 +1,9 @@
 ﻿@import '../variables.scss';
 
 #logged-user-info {
-    @include margin(8px, 30px, 8px, 30px);
+    @include margin(8px, unquote(($base-margin * 2) + 'px'), 8px, $default-margin);
     @include border-radius(null, false);
+    display: inline-block;
 
     @include media(xs) {
         @include margin(0);

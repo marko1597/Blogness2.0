@@ -13,6 +13,7 @@
         "ngComments",
         "ngError",
         "ngNavigation",
+        "ngMessaging",
         "ngUser",
         "ngTags",
         "ui.router"
