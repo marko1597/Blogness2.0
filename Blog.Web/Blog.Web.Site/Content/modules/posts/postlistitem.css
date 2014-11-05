@@ -7,7 +7,7 @@
   width: 340px;
   height: auto;
   position: relative; }
-  /* line 328, C:/Users/jmagpant/Documents/GitHub/blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/posts/../variables.scss */
+  /* line 330, ../../scss/variables.scss */
   .post-list-item .header h4 .edit {
     opacity: 1;
     filter: alpha(opacity=100);
@@ -17,7 +17,7 @@
     -webkit-transition: opacity .25s ease-in-out;
     -o-transition: opacity .25s ease-in-out;
     transition: opacity .25s ease-in-out; }
-    /* line 337, C:/Users/jmagpant/Documents/GitHub/blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/posts/../variables.scss */
+    /* line 339, ../../scss/variables.scss */
     .post-list-item .header h4 .edit:hover {
       opacity: 0.5;
       filter: alpha(opacity=50); }

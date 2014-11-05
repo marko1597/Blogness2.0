@@ -4,15 +4,19 @@
     overflow: hidden;
 
     .messages-toggle {
+        $message-toggle-y: unquote(round(($base-margin / 2)) + 'px');
         @include size(auto, 100%);
-        @include margin(8px, $default-margin, 8px, $default-margin);
+        @include margin($message-toggle-y, $default-margin, $message-toggle-y, $default-margin);
         display: inline-block;
         color: $default-color;
         cursor: pointer;
 
+        @include media(xs) {
+            @include margin($default-margin);
+        }
+
         &:hover {
             color: darken($default-color, $hover-darken-value);
-            text-decoration: underline;
         }
     }
 

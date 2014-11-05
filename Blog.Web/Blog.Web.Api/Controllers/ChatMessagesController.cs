@@ -50,7 +50,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet, Authorize]
-        [Route("api/chat/{username}/chats")]
+        [Route("api/chat/{fromUserId:int}/{toUserId:int}")]
         public IHttpActionResult GetChatByIds(int fromUserId, int toUserId)
         {
             try
@@ -66,7 +66,7 @@ namespace Blog.Web.Api.Controllers
         }
 
         [HttpGet, Authorize]
-        [Route("api/chat/{username}/chats")]
+        [Route("api/chat/{fromUsername}/{toUsername}")]
         public IHttpActionResult GetChatByNames(string fromUsername, string toUsername)
         {
             try

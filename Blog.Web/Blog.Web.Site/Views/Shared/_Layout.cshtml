@@ -13,7 +13,6 @@
     <link href="~/Content/font.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
-    @*<link href="~/Content/theme/default/blog-bootstrap.css" rel="stylesheet" />*@
     <!-- #endregion -->
     <!-- #region css styles -->
     @if (UseBundle())
@@ -84,6 +83,7 @@
 
         <!-- blog messaging module styles -->
         <link href="~/Content/modules/messaging/messagespanel.css" rel="stylesheet" />
+        <link href="~/Content/modules/messaging/chatwindow.css" rel="stylesheet" />
 
         <!-- blog posts module styles -->
         <link href="~/Content/modules/posts/postcontents.css" rel="stylesheet" />
@@ -326,6 +326,8 @@
         <!-- blog messaging module -->
         <script src="~/Scripts/modules/messaging/messaging.js"></script>
         <script src="~/Scripts/modules/messaging/directives/messagesPanel.js"></script>
+        <script src="~/Scripts/modules/messaging/directives/chatWindow.js"></script>
+        <script src="~/Scripts/modules/messaging/services/messagingService.js"></script>
 
         <!-- blog posts module -->
         <script src="~/Scripts/modules/posts/posts.js"></script>

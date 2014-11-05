@@ -1,21 +1,21 @@
-﻿<nav class="messages-panel" id="messages-panel">
+﻿<div class="messages-panel" id="messages-panel" ng-style="{ 'height' : elemHeight }">
     <div class="header">
         <h5>Messages</h5>
     </div>
-    <div class="body">
+    <div class="body" ng-style="{ 'height' : bodyHeight }">
         <div ng-show="!isLoggedIn()" class="alert alert-warning">
             <h4>Not logged in</h4>
         </div>
         <div ng-show="isLoggedIn()" class="messages-list">
-            <div class="message-item" ng-repeat="messageItem in messagesList">
+            <div class="message-item" ng-repeat="messageItem in messagesList" ng-click="launchChatWindow(messageItem)">
                 <div class="chat-user-image">
                     <img ng-src="{{messageItem.User.Picture.MediaUrl}}" />
                 </div>
                 <div class="message-body">
-                    <p>{{messageItem.LastMessage.Text}}</p>
-                    <span>{{messageItem.LastMessage.DateDisplay}}</span>
+                    <p>{{messageItem.LastChatMessage.Text}}</p>
+                    <span>{{messageItem.LastChatMessage.DateDisplay}}</span>
                 </div>
             </div>
         </div>
     </div>
-</nav>
+</div>

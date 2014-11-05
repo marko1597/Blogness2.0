@@ -653,6 +653,12 @@ ngHeader.directive('headerMenu', function () {
 
         $scope.toggleClass = "nav-close";
 
+        $scope.addPostButtonVisible = true;
+
+        $scope.showAddPostButton = function () {
+            return $scope.addPostButtonVisible;
+        }
+
         $scope.goAddNewPost = function () {
             $('#blog-header-collapsible').collapse("hide");
             $location.path("/post/create/new");
@@ -704,10 +710,12 @@ ngHeader.directive('headerMenu', function () {
 
             snapper.on('open', function () {
                 checkNav();
+                $scope.addPostButtonVisible = false;
             });
 
             snapper.on('close', function () {
                 checkNav();
+                $scope.addPostButtonVisible = true;
             });
         });
     };
@@ -1520,6 +1528,11 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
             });
         };
 
+        $scope.snapOptions = {
+            maxPosition: 321,
+            minPosition: -321
+        };
+
         $rootScope.$on("userLoggedIn", function (ev, data) {
             $scope.getUserInfo(data.username);
         });
@@ -2281,7 +2294,109 @@ ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
     }
 ]);
 ///#source 1 1 /Scripts/modules/messaging/messaging.js
-var ngMessaging = angular.module("ngMessaging", ["ngConfig"]);
+var ngMessaging = angular.module("ngMessaging",
+    [
+        "ngShared",
+        "ngError",
+        "ngConfig"
+    ]);
+///#source 1 1 /Scripts/modules/messaging/directives/chatWindow.js
+ngMessaging.directive('chatWindow', function () {
+    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, localStorageService) {
+        $scope.user = null;
+
+        $scope.recipient = null;
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.chatMessages = [];
+
+        $scope.isActive = false;
+
+        $scope.newMessage = "";
+
+        $scope.recipientName = function () {
+            return $scope.recipient ? $scope.recipient.FirstName + ' ' + $scope.recipient.LastName : '';
+        };
+
+        $scope.hideChatWindow = function () {
+            $scope.isActive = false;
+        };
+
+        $scope.chatWindowVisibility = function () {
+            return $scope.isActive;
+        };
+
+        $scope.isLoggedIn = function () {
+            if ($scope.authData && $scope.user) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.isFromRecipient = function (chatMessage) {
+            if (chatMessage.FromUser.UserName == $scope.user.UserName) {
+                return "";
+            } else {
+                return "recipient-message";
+            }
+        };
+
+        $scope.$on("launchChatWindow", function(ev, userData) {
+            $scope.isActive = true;
+
+            $scope.recipient = userData;
+
+            setUserInSession();
+            
+            messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
+                if (response) {
+                    $scope.chatMessages = response;
+                } else {
+                    errorService.displayError({ Message: "No messages found! " });
+                }
+            }, function (error) {
+                errorService.displayError({ Message: "Failed getting messages!" });
+            });
+        });
+            
+        $rootScope.$watch('user', function () {
+            setUserInSession();
+        });
+
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+
+        $scope.init();
+
+        var setUserInSession = function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "localStorageService"];
+
+    var linkFn = function (scope, elem) {
+        scope.elemHeight = ($(document).height()) + 'px';
+
+        scope.bodyHeight = function () {
+            var headerHeight = $(elem).find('.header').height();
+            return ($(document).height() - (50 * 2) - headerHeight) + 'px';
+        };
+    };
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "messaging/chatwindow.html",
+        controller: ctrlFn,
+        link: linkFn
+    };
+});
+
 ///#source 1 1 /Scripts/modules/messaging/directives/messagesPanel.js
 ngMessaging.directive('messagesPanel', function () {
     var ctrlFn = function ($scope, $rootScope, dateHelper, localStorageService) {
@@ -2298,12 +2413,17 @@ ngMessaging.directive('messagesPanel', function () {
             return false;
         };
 
+        $scope.launchChatWindow = function (messageItem) {
+            $rootScope.$broadcast("launchChatWindow", messageItem.User);
+        };
+
         $scope.init = function () {
             // TODO: dummy message list data
             var messagesList = [];
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < 20; i++) {
                 var messageItem = {
                     User: {
+                        Id: i,
                         UserName: 'test-user_' + i,
                         FirstName: 'FirstName_' + i,
                         LastName: 'LastName_' + i,
@@ -2311,8 +2431,8 @@ ngMessaging.directive('messagesPanel', function () {
                             MediaUrl: "https://localhost:4414/api/media/defaultprofilepicture"
                         }
                     },
-                    LastMessage: {
-                        Text: 'Lorem ipsum dolor',
+                    LastChatMessage: {
+                        Text: 'Lorem ipsum dolor ' + i ,
                         DateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
                     }
                 };
@@ -2337,14 +2457,104 @@ ngMessaging.directive('messagesPanel', function () {
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "localStorageService"];
 
+    var linkFn = function (scope, elem) {
+        scope.elemHeight = ($(document).height()) + 'px';
+
+        scope.bodyHeight = function () {
+            var headerHeight = $(elem).find('.header').height();
+            return ($(document).height() - 50 - headerHeight) + 'px';
+        };
+    };
+
     return {
         restrict: 'EA',
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "messaging/messagesPanel.html",
-        controller: ctrlFn
+        controller: ctrlFn,
+        link: linkFn
     };
 });
 
+///#source 1 1 /Scripts/modules/messaging/services/messagingService.js
+ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper",
+    function ($http, $q, configProvider, dateHelper) {
+        var baseUrl = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getChatMessages: function (fromUserId, toUserId) {
+                var deferred = $q.defer();
+
+                var chatMessages = [];
+                for (var i = 0; i < 20; i++) {
+                    var messageItem = {};
+
+                    if (i % 2 == 0) {
+                        messageItem = {
+                            FromUser: {
+                                Id: 2,
+                                UserName: 'avelness'
+                            },
+                            ToUser: {
+                                Id: 1,
+                                UserName: 'jamaness'
+                            },
+                            Text: 'Lorem ipsum dolor ' + i,
+                            CreatedDateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
+                        };
+                    } else {
+                        messageItem = {
+                            FromUser: {
+                                Id: 1,
+                                UserName: 'jamaness'
+                            },
+                            ToUser: {
+                                Id: 2,
+                                UserName: 'avelness'
+                            },
+                            Text: 'Lorem ipsum dolor ' + i,
+                            CreatedDateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
+                        };
+                    }
+                    chatMessages.push(messageItem);
+                }
+
+                deferred.resolve(chatMessages);
+
+                //$http({
+                //    url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
+                //    method: "GET"
+                //}).success(function (response) {
+                //    _.each(response, function (a) {
+                //        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                //    });
+                //    deferred.resolve(response);
+                //}).error(function (e) {
+                //    deferred.reject(e);
+                //});
+
+                return deferred.promise;
+            },
+
+            addChatMessage: function (chatMessage) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat",
+                    method: "POST",
+                    data: chatMessage
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            }
+        };
+    }
+]);
 ///#source 1 1 /Scripts/modules/navigation/navigation.js
 var ngNavigation = angular.module("ngNavigation", ["ngConfig"]);
 ///#source 1 1 /Scripts/modules/navigation/directives/navigationMenu.js

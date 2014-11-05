@@ -12,10 +12,11 @@
     </div>
     <div snap-drawer="right">
         <messages-panel></messages-panel>
+        <chat-window></chat-window>
     </div>
 </snap-drawers>
 
-<snap-content class="body-content" scroll-trigger>
+<snap-content snap-options="snapOptions" class="body-content" scroll-trigger>
     <div class="page-content" ui-view></div>
 </snap-content>
 

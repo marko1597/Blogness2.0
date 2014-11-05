@@ -8,11 +8,11 @@
   border-right: 3px dotted #666666;
   border-bottom: 3px dotted #666666;
   border-left: 3px dotted #666666; }
-  /* line 210, C:/Users/jmagpant/Documents/GitHub/blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/shared/../variables.scss */
+  /* line 212, ../../scss/variables.scss */
   .file-upload .dropzone label {
     margin-right: 0;
     cursor: pointer; }
-    /* line 214, C:/Users/jmagpant/Documents/GitHub/blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/shared/../variables.scss */
+    /* line 216, ../../scss/variables.scss */
     .file-upload .dropzone label > input[type='file'] {
       position: fixed;
       top: -1000px; }

@@ -81,10 +81,10 @@
     animation-name: fadeInRight; }
     /* line 94, ../../scss/extensions/animations.scss */
     .animate.fade-right.ng-hide {
-      -moz-animation-name: fadeOutLeft;
-      -o-animation-name: fadeOutLeft;
-      -webkit-animation-name: fadeOutLeft;
-      animation-name: fadeOutLeft; }
+      -moz-animation-name: fadeOutRight;
+      -o-animation-name: fadeOutRight;
+      -webkit-animation-name: fadeOutRight;
+      animation-name: fadeOutRight; }
   /* line 102, ../../scss/extensions/animations.scss */
   .animate.bounce-up {
     -moz-animation-name: bounceInUp;

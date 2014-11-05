@@ -341,6 +341,7 @@
     <Content Include="Content\modules\media\mediagroupedlist.css" />
     <Content Include="Content\modules\media\mediaitem.css" />
     <Content Include="Content\modules\media\mediaselectiondialog.css" />
+    <Content Include="Content\modules\messaging\chatwindow.css" />
     <Content Include="Content\modules\messaging\messagespanel.css" />
     <Content Include="Content\modules\modifypost.css" />
     <Content Include="Content\modules\navigation\navigationmenu.css" />
@@ -569,6 +570,12 @@
     <Content Include="Content\scss\media\mediaselectiondialog.min.css">
       <DependentUpon>mediaselectiondialog.css</DependentUpon>
     </Content>
+    <Content Include="Content\scss\messaging\chatwindow.css">
+      <DependentUpon>chatwindow.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\messaging\chatwindow.min.css">
+      <DependentUpon>chatwindow.css</DependentUpon>
+    </Content>
     <Content Include="Content\scss\messaging\messagespanel.css">
       <DependentUpon>messagespanel.scss</DependentUpon>
     </Content>
@@ -591,6 +598,10 @@
     <Content Include="Content\scss\messaging\messagespanel.scss" />
     <Content Include="Content\scss\messaging\messagespanel.css.map">
       <DependentUpon>messagespanel.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\messaging\chatwindow.scss" />
+    <Content Include="Content\scss\messaging\chatwindow.css.map">
+      <DependentUpon>chatwindow.css</DependentUpon>
     </Content>
     <None Include="Content\scss\navigation\navigationmenu.scss" />
     <Content Include="Content\scss\navigation\navigationmenu.css">
@@ -659,6 +670,9 @@
     </Content>
     <Content Include="Content\scss\posts\postviewnavigator.css">
       <DependentUpon>postviewnavigator.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\posts\postviewnavigator.min.css">
+      <DependentUpon>postviewnavigator.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\shared\fileupload.css">
       <DependentUpon>fileupload.scss</DependentUpon>
@@ -2617,7 +2631,9 @@
     <Content Include="Scripts\modules\media\media.js" />
     <Content Include="Scripts\modules\media\services\albumService.js" />
     <Content Include="Scripts\modules\media\services\mediaService.js" />
+    <Content Include="Scripts\modules\messaging\directives\chatWindow.js" />
     <Content Include="Scripts\modules\messaging\directives\messagesPanel.js" />
+    <Content Include="Scripts\modules\messaging\services\messagingService.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\posts\directives\postViewCount.js" />
@@ -3469,6 +3485,7 @@
     <Content Include="Scripts\templates\modules\media\mediaGroupedList.html" />
     <Content Include="Scripts\templates\modules\media\mediaItem.html" />
     <Content Include="Scripts\templates\modules\media\mediaSelectionDialog.html" />
+    <Content Include="Scripts\templates\modules\messaging\chatWindow.html" />
     <Content Include="Scripts\templates\modules\messaging\messagesPanel.html" />
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />

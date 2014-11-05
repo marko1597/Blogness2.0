@@ -12,6 +12,10 @@ input, select, textarea {
     max-width: $max-input-width;
 }
 
+textarea {
+    resize: none;
+}
+
 a {
     color: $link-font-color;
 
@@ -257,7 +261,7 @@ ui-view, *[ui-view] {
 
     @include media(xs) {
         @include padding(null, null, $default-padding);
-        @include margin(null, null, $footer-margin);
+        @include margin(null, null, 0);
     }
 }
 

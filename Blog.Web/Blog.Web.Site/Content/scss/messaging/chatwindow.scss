@@ -1,0 +1,58 @@
+﻿@import '../variables';
+
+.chat-window {
+    @include size(100%);
+    @include padding(unquote($default-header-height + 'px'), null, null, null);
+    @include box-shadow(false);
+    @include position(absolute, 0, null, null, null);
+    background: $default-color-darken;
+    overflow-y: hidden;
+
+    .body {
+        @include position(relative, null);
+        overflow-y: scroll;
+
+        .chat-message {
+            $chat-message-space-big: unquote(($base-margin * 6) + 'px');
+            $chat-message-space-min: unquote(($base-padding / 3) + 'px');
+            @include margin($chat-message-space-min, $chat-message-space-big);
+            @include padding($chat-message-space-min);
+            @include box-shadow(false);
+            background: $default-color;
+            color: $content-font-color;
+
+            .details {
+                font-size: 0.7em;
+            }
+
+            &.recipient-message {
+                @include margin($chat-message-space-min, $chat-message-space-min, $chat-message-space-min, $chat-message-space-big);
+                background: $primary-color;
+                color: $main-font-color;
+            }
+
+            p {
+                @include margin(null, null, 0);
+            }
+        }
+    }
+
+    .new-message {
+        $new-message-padding: unquote((($base-padding / 3) * 2) + 'px');
+        @include position(absolute, null, null, 0);
+        @include padding($new-message-padding);
+        @include size(100%, unquote($default-header-height + 'px'));
+        background: $main-color;
+
+        textarea {
+            @include size(80%, 100%);
+        }
+
+        button {
+            $btn-x: unquote((($base-padding / 3) * 2) + 'px');
+            $btn-y: unquote(($base-padding / 3) + 'px');
+            @include size(auto, 100%);
+            @include padding($btn-y, $btn-x, $btn-y, $btn-x);
+        }
+    }
+}

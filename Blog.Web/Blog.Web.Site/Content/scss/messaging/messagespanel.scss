@@ -4,11 +4,14 @@
     @include size(100%);
     @include padding(unquote($default-header-height + 'px'), null, null, null);
     @include box-shadow(false);
+    background: $default-color;
+    overflow: hidden;
 
     .body {
-        @include size(100%);
+        @include size(100%, auto);
         background: $default-color;
         color: $content-font-color;
+        overflow-y: scroll;
 
         .alert {
             @include margin($default-margin);

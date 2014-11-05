@@ -11,6 +11,9 @@ input, select, textarea {
   border-bottom-right-radius: 0 !important;
   max-width: 100%; }
 
+textarea {
+  resize: none; }
+
 a {
   color: #fff; }
   a:hover {
@@ -253,7 +256,7 @@ ui-view, *[ui-view] {
   @media (max-width: 767px) {
     .body-content {
       padding-bottom: 15px;
-      margin-bottom: 50px; } }
+      margin-bottom: 0; } }
 
 .wrap-text {
   -ms-text-overflow: ellipsis;

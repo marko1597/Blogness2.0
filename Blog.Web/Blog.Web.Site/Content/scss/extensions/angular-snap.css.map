@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"angular-snap.css","sources":["angular-snap.scss","../variables.scss"],"names":[],"mappings":"AAEA,cAAc,iBAAiB,gBAAgB,qBAAqB,kBAAkB,eAAe,iBAAiB,cAAc,iBAAiB,gBAAgB,qBAAqB,kBAAkB,eAAe,iBAAiB,eAAe;EAgBvP,YCbc"}
+﻿{"version":3,"file":"angular-snap.css","sources":["angular-snap.scss","../variables.scss"],"names":[],"mappings":"AAEA,cAAc,iBAAiB,gBAAgB,qBAAqB,kBAAkB,eAAe,iBAAiB,cAAc,iBAAiB,gBAAgB,qBAAqB,kBAAkB,eAAe,iBAAiB,eAAe;EAgBvP,YCbc;;ADgBlB,aAAa,gBAAgB,eAAe,oBAAoB,iBAAiB,cAAc,gBAAgB;EAC3G,OAAO;;AAGX;EACI,YAAY"}

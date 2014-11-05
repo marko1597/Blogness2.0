@@ -18,3 +18,11 @@ snap-drawers,
 .snap-content {
     background: $main-background;
 }
+
+snap-drawer, [snap\:drawer], [snap-drawer], [data-snap-drawer], [x-snap-drawer], .snap-drawer, .x-snap-drawer, .snap-drawer {
+    width: unquote($snap-drawer-width + 'px');
+}
+
+.snap-drawer-right {
+    overflow-x: hidden;
+}

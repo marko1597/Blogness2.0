@@ -52,6 +52,11 @@
             });
         };
 
+        $scope.snapOptions = {
+            maxPosition: 321,
+            minPosition: -321
+        };
+
         $rootScope.$on("userLoggedIn", function (ev, data) {
             $scope.getUserInfo(data.username);
         });

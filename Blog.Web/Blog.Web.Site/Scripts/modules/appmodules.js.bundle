@@ -58,7 +58,9 @@
     <file>/Scripts/modules/media/services/mediaService.js</file>
 
     <file>/Scripts/modules/messaging/messaging.js</file>
+    <file>/Scripts/modules/messaging/directives/chatWindow.js</file>
     <file>/Scripts/modules/messaging/directives/messagesPanel.js</file>
+    <file>/Scripts/modules/messaging/services/messagingService.js</file>
 
     <file>/Scripts/modules/navigation/navigation.js</file>
     <file>/Scripts/modules/navigation/directives/navigationMenu.js</file>

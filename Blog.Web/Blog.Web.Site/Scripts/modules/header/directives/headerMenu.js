@@ -4,6 +4,12 @@
 
         $scope.toggleClass = "nav-close";
 
+        $scope.addPostButtonVisible = true;
+
+        $scope.showAddPostButton = function () {
+            return $scope.addPostButtonVisible;
+        }
+
         $scope.goAddNewPost = function () {
             $('#blog-header-collapsible').collapse("hide");
             $location.path("/post/create/new");
@@ -55,10 +61,12 @@
 
             snapper.on('open', function () {
                 checkNav();
+                $scope.addPostButtonVisible = false;
             });
 
             snapper.on('close', function () {
                 checkNav();
+                $scope.addPostButtonVisible = true;
             });
         });
     };
