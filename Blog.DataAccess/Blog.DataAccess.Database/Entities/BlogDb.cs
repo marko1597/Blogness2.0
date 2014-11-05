@@ -53,11 +53,18 @@ namespace Blog.DataAccess.Database.Entities
                 .WithRequired(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .WillCascadeOnDelete(false);
-            mb.Entity<User>()
-                .HasMany<ChatMessage>(a => a.ChatMessages)
-                .WithRequired(a => a.FromUser)
+            
+            // Chat Message
+            mb.Entity<ChatMessage>()
+                .HasRequired(a => a.FromUser)
+                .WithMany(a => a.SentChatMessages)
                 .HasForeignKey(a => a.FromUserId)
-                .WillCascadeOnDelete(true);
+                .WillCascadeOnDelete(false);
+            mb.Entity<ChatMessage>()
+                .HasRequired(a => a.ToUser)
+                .WithMany(a => a.ReceivedChatMessages)
+                .HasForeignKey(a => a.ToUserId)
+                .WillCascadeOnDelete(false);
 
             //Education
             mb.Entity<Education>()

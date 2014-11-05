@@ -11,8 +11,11 @@ namespace Blog.DataAccess.Database.Repository
         public List<UserChatMessage> GetUserChatMessages(int userId)
         {
             var userChatMessages = new List<UserChatMessage>();
-            var users = Find(a => a.FromUserId == userId).Select(a => a.ToUser).Distinct();
-
+            var userIds = Find(a => a.FromUserId == userId)
+                .Select(a => a.ToUserId)
+                .Distinct();
+            var users = Context.Users.Where(a => userIds.Contains(a.UserId)).ToList();
+            
             foreach (var user in users)
             {
                 var tUser = user;
@@ -34,6 +37,18 @@ namespace Blog.DataAccess.Database.Repository
             }
 
             return userChatMessages;
+        }
+
+        public List<ChatMessage> GetChatMessages(int fromUserId, int toUserId)
+        {
+            var toRecipientMessages = Find(a => a.FromUserId == fromUserId && a.ToUserId == toUserId, true);
+            var fromRecipientMessages = Find(a => a.FromUserId == toUserId && a.ToUserId == fromUserId, true);
+            var chatMessages = toRecipientMessages
+                .Union(fromRecipientMessages)
+                .OrderByDescending(a => a.CreatedDate)
+                .ToList();
+
+            return chatMessages;
         }
     }
 }

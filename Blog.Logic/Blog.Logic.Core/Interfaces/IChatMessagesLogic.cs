@@ -10,6 +10,6 @@ namespace Blog.Logic.Core.Interfaces
         ChatMessagesList GetChatMessagesListByUser(string username);
         List<ChatMessage> GetChatMessagesByUser(int fromUserId, int toUserId);
         List<ChatMessage> GetChatMessagesByUser(string fromUsername, string toUsername);
-        ChatMessage AddChatMessage(ChatMessage chatMessage);
+        ChatMessage Add(ChatMessage chatMessage);
     }
 }

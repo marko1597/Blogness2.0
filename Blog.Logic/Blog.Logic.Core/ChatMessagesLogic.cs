@@ -84,7 +84,7 @@ namespace Blog.Logic.Core
             }
         }
 
-        public ChatMessage AddChatMessage(ChatMessage chatMessage)
+        public ChatMessage Add(ChatMessage chatMessage)
         {
             try
             {
@@ -99,9 +99,7 @@ namespace Blog.Logic.Core
 
         private List<ChatMessage> GetChatMessages(int fromUserId, int toUserId)
         {
-            var dbChatMessages = _chatMessageRepository.Find(a => a.FromUserId == fromUserId
-                                                                && a.ToUserId == toUserId).ToList();
-
+            var dbChatMessages = _chatMessageRepository.GetChatMessages(fromUserId, toUserId);
             var chatMessages = new List<ChatMessage>();
             dbChatMessages.ForEach(a => chatMessages.Add(ChatMessageMapper.ToDto(a)));
             

@@ -2355,7 +2355,7 @@ ngMessaging.directive('chatWindow', function () {
                 } else {
                     errorService.displayError({ Message: "No messages found! " });
                 }
-            }, function (error) {
+            }, function () {
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });
@@ -2399,7 +2399,7 @@ ngMessaging.directive('chatWindow', function () {
 
 ///#source 1 1 /Scripts/modules/messaging/directives/messagesPanel.js
 ngMessaging.directive('messagesPanel', function () {
-    var ctrlFn = function ($scope, $rootScope, dateHelper, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, localStorageService) {
         $scope.user = null;
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -2418,34 +2418,13 @@ ngMessaging.directive('messagesPanel', function () {
         };
 
         $scope.init = function () {
-            // TODO: dummy message list data
-            var messagesList = [];
-            for (var i = 0; i < 20; i++) {
-                var messageItem = {
-                    User: {
-                        Id: i,
-                        UserName: 'test-user_' + i,
-                        FirstName: 'FirstName_' + i,
-                        LastName: 'LastName_' + i,
-                        Picture: {
-                            MediaUrl: "https://localhost:4414/api/media/defaultprofilepicture"
-                        }
-                    },
-                    LastChatMessage: {
-                        Text: 'Lorem ipsum dolor ' + i ,
-                        DateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
-                    }
-                };
-                messagesList.push(messageItem);
-            }
-
-            $scope.messagesList = messagesList;
+            getUserChatMessageList();
         };
 
         $rootScope.$watch('user', function () {
             if ($rootScope.user) {
                 $scope.user = $rootScope.user;
-                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+                getUserChatMessageList();
             }
         });
 
@@ -2454,8 +2433,24 @@ ngMessaging.directive('messagesPanel', function () {
         });
 
         $scope.init();
+
+        var getUserChatMessageList = function() {
+            if ($scope.authData && $rootScope.user) {
+                $scope.user = $rootScope.user;
+
+                messagingService.getUserChatMessageList($scope.user.Id).then(function(response) {
+                    if (response) {
+                        $scope.messagesList = messagesList;
+                    } else {
+                        errorService.displayError({ Message: "No messages found! " });
+                    }
+                }, function() {
+                    errorService.displayError({ Message: "Failed getting messages!" });
+                });
+            }
+        };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';
@@ -2483,56 +2478,41 @@ ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateH
             configProvider.getSettings().BlogApi;
 
         return {
+            getUserChatMessageList: function(userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "user/" + userId + "/chats",
+                    method: "GET"
+                }).success(function (response) {
+                    var userChatMessages = response.ChatMessageListItems;
+
+                    _.each(userChatMessages, function (a) {
+                        a.User.NameDisplay = a.User.FirstName + ' ' + a.User.LastName;
+                        a.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(a.LastChatMessage.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
             getChatMessages: function (fromUserId, toUserId) {
                 var deferred = $q.defer();
 
-                var chatMessages = [];
-                for (var i = 0; i < 20; i++) {
-                    var messageItem = {};
-
-                    if (i % 2 == 0) {
-                        messageItem = {
-                            FromUser: {
-                                Id: 2,
-                                UserName: 'avelness'
-                            },
-                            ToUser: {
-                                Id: 1,
-                                UserName: 'jamaness'
-                            },
-                            Text: 'Lorem ipsum dolor ' + i,
-                            CreatedDateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
-                        };
-                    } else {
-                        messageItem = {
-                            FromUser: {
-                                Id: 1,
-                                UserName: 'jamaness'
-                            },
-                            ToUser: {
-                                Id: 2,
-                                UserName: 'avelness'
-                            },
-                            Text: 'Lorem ipsum dolor ' + i,
-                            CreatedDateDisplay: dateHelper.getDateDisplay("2014-01-01T00:00:00Z")
-                        };
-                    }
-                    chatMessages.push(messageItem);
-                }
-
-                deferred.resolve(chatMessages);
-
-                //$http({
-                //    url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
-                //    method: "GET"
-                //}).success(function (response) {
-                //    _.each(response, function (a) {
-                //        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
-                //    });
-                //    deferred.resolve(response);
-                //}).error(function (e) {
-                //    deferred.reject(e);
-                //});
+                $http({
+                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
 
                 return deferred.promise;
             },

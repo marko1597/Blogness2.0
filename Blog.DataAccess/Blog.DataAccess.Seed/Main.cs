@@ -64,6 +64,7 @@ namespace Blog.DataAccess.Seed
 				await LoadRoles();
 				LoadUsers();
 				await LoadIdentities();
+				LoadChatMessages();
 				LoadAddress();
 				LoadEducationType();
 				LoadEducation();
@@ -278,6 +279,38 @@ namespace Blog.DataAccess.Seed
 			AddConsoleMessage("Successfully added hobbies...");
 		}
 
+		private void LoadChatMessages()
+		{
+			var index = 1;
+
+			foreach (var u in _users)
+			{
+				var recipients = _users.Where(a => a.UserId != u.UserId).ToList();
+
+				foreach (var recipient in recipients)
+				{
+					for (var i = 0; i < 3; i++)
+					{
+						_chatMessageRepository.Add(new ChatMessage
+						{
+							FromUserId = u.UserId,
+							ToUserId = recipient.UserId,
+							Text = string.Format("Lorem ipsum dolor sit amet ({0})", index),
+							CreatedBy = u.UserId,
+							CreatedDate = DateTime.Now,
+							ModifiedBy = u.UserId,
+							ModifiedDate = DateTime.Now
+						});
+
+						index++;
+					}
+					
+				}
+			}
+
+			AddConsoleMessage("Successfully added chat messages...");
+		}
+
 		private void LoadAlbums()
 		{
 			foreach (var u in _users)
@@ -342,28 +375,23 @@ namespace Blog.DataAccess.Seed
 				for (var i = 1; i < 18; i++)
 				{
 					var albumId = 0;
-					var albumName = string.Empty;
-					if (i > 2 && i < 8)
+				    if (i > 2 && i < 8)
 					{
-						albumName = "Miscellaneous";
-						albumId = albums[0].AlbumId;
+					    albumId = albums[0].AlbumId;
 					}
 					else if (i >= 8)
 					{
-						albumName = "Stuff";
-						albumId = albums[1].AlbumId;
+					    albumId = albums[1].AlbumId;
 					}
 					else if (i == 2)
 					{
-						albumName = "Profile";
-						albumId = albums[2].AlbumId;
+					    albumId = albums[2].AlbumId;
 						u1.PictureId = mediaId;
 						_userRepository.Edit(u1);
 					}
 					else if (i == 1)
 					{
-						albumName = "Background";
-						albumId = albums[3].AlbumId;
+					    albumId = albums[3].AlbumId;
 						u1.BackgroundId = mediaId;
 						_userRepository.Edit(u1);
 					}

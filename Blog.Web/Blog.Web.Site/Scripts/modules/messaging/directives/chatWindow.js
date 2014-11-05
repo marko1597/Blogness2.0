@@ -52,7 +52,7 @@
                 } else {
                     errorService.displayError({ Message: "No messages found! " });
                 }
-            }, function (error) {
+            }, function () {
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });

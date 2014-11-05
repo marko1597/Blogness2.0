@@ -42,7 +42,7 @@ namespace Blog.Services.Implementation
 
         public ChatMessage AddChatMessage(ChatMessage chatMessage)
         {
-            return _chatMessagesLogic.AddChatMessage(chatMessage);
+            return _chatMessagesLogic.Add(chatMessage);
         }
     }
 }

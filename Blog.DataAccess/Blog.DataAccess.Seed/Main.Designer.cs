@@ -104,6 +104,7 @@ namespace Blog.DataAccess.Seed
         private readonly IPostRepository _postRepository = new PostRepository();
         private readonly ITagRepository _tagRepository = new TagRepository();
         private readonly IUserRepository _userRepository = new UserRepository();
+        private readonly IChatMessageRepository _chatMessageRepository = new ChatMessageRepository();
         private readonly IImageHelper _imageHelper = new ImageHelper();
         private readonly IBlogDbRepository _blogDbRepository = new BlogDbRepository();
         private System.Windows.Forms.TextBox TxtConsole;

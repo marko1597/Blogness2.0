@@ -1,4 +1,4 @@
-﻿<div class="messages-panel" id="messages-panel" ng-style="{ 'height' : elemHeight }">
+﻿<div id="messages-panel" ng-style="{ 'height' : elemHeight }">
     <div class="header">
         <h5>Messages</h5>
     </div>
@@ -12,8 +12,11 @@
                     <img ng-src="{{messageItem.User.Picture.MediaUrl}}" />
                 </div>
                 <div class="message-body">
-                    <p>{{messageItem.LastChatMessage.Text}}</p>
-                    <span>{{messageItem.LastChatMessage.DateDisplay}}</span>
+                    <p>
+                        <span>{{messageItem.User.NameDisplay}}</span>
+                        {{messageItem.LastChatMessage.Text}}
+                    </p>
+                    <span>{{messageItem.LastChatMessage.CreatedDateDisplay}}</span>
                 </div>
             </div>
         </div>

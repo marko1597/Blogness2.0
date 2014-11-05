@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Utils;
+using Blog.Common.Utils.Extensions;
 using Blog.DataAccess.Database.Entities.Objects;
 using Blog.DataAccess.Database.Repository.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace Blog.Logic.Core.Tests
 {
@@ -14,15 +20,25 @@ namespace Blog.Logic.Core.Tests
     {
         private Mock<IChatMessageRepository> _chatMessageRepository;
 
+        private Mock<IUserRepository> _userRepository;
+
         private ChatMessagesLogic _chatMessagesLogic;
 
         private List<ChatMessage> _chatMessages;
 
         private List<UserChatMessage> _userChatMessages;
 
+        private List<User> _user;
+
         [SetUp]
         public void TestInit()
         {
+            #region User
+
+            _user = new List<User> { new User { UserId = 1, UserName = "FooBar" } };
+
+            #endregion
+
             #region Chat Messages
 
             _chatMessages = new List<ChatMessage>
@@ -198,9 +214,201 @@ namespace Blog.Logic.Core.Tests
             #endregion
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldGetChatListMessagesById()
         {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Returns(_userChatMessages);
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.GetChatMessagesListByUser(1);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(ChatMessagesList), result);
+            Assert.AreEqual(result.ChatMessageListItems.Count, 2);
+        }
+
+        [Test]
+        public void ShouldGetErrorWhenGettingChatListMessagesByIdReturnsNull()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Returns((List<UserChatMessage>)null);
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.GetChatMessagesListByUser(1);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(ChatMessagesList), result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int)Constants.Error.RecordNotFound, result.Error.Id);
+            Assert.AreEqual("No chat messages found for user with Id 1", result.Error.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGettingChatListMessagesByIdFails()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Throws(new Exception());
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _chatMessagesLogic.GetChatMessagesListByUser(1));
+        }
+
+        [Test]
+        public void ShouldGetChatListMessagesByName()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Returns(_userChatMessages);
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Returns(_user);
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.GetChatMessagesListByUser("adhesive");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(ChatMessagesList), result);
+            Assert.AreEqual(result.ChatMessageListItems.Count, 2);
+        }
+
+        [Test]
+        public void ShouldGetErrorWhenGettingChatListMessagesByNameCannotFindUser()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Returns((List<UserChatMessage>)null);
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Returns(new List<User>());
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.GetChatMessagesListByUser("adhesive");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(ChatMessagesList), result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int)Constants.Error.RecordNotFound, result.Error.Id);
+        }
+
+        [Test]
+        public void ShouldGetErrorWhenGettingChatListMessagesByNameReturnsNull()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Returns((List<UserChatMessage>)null);
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Returns(_user);
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.GetChatMessagesListByUser("adhesive");
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf(typeof(ChatMessagesList), result);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual((int)Constants.Error.RecordNotFound, result.Error.Id);
+            Assert.AreEqual("No chat messages found for user with Id 1", result.Error.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGettingChatListMessagesByNameFailsOnGettingUser()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Throws(new Exception());
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _chatMessagesLogic.GetChatMessagesListByUser("adhesive"));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGettingChatListMessagesByNameFailsOnGettingChatList()
+        {
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.GetUserChatMessages(It.IsAny<int>())).Throws(new Exception());
+
+            _userRepository = new Mock<IUserRepository>();
+            _userRepository.Setup(a => a.Find(It.IsAny<Expression<Func<User, bool>>>(), false)).Returns(_user);
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _chatMessagesLogic.GetChatMessagesListByUser("adhesive"));
+        }
+
+        [Test]
+        public void ShouldAddChatMessage()
+        {
+            var dbResult = _chatMessages.FirstOrDefault();
+            var chatMessageParam = new Common.Contracts.ChatMessage
+            {
+                Id = 1,
+                Text = "Lorem ipsum dolor sit amet",
+                FromUser = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                },
+                ToUser = new Common.Contracts.User
+                {
+                    Id = 2,
+                    UserName = "Drums"
+                }
+            };
+
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Returns(dbResult);
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var result = _chatMessagesLogic.Add(chatMessageParam);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.FromUser);
+            Assert.IsNotNull(result.ToUser);
+            Assert.IsInstanceOf(typeof(Common.Contracts.ChatMessage), result);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenAddingChatMessageFails()
+        {
+            var chatMessageParam = new Common.Contracts.ChatMessage
+            {
+                Id = 1,
+                Text = "Lorem ipsum dolor sit amet",
+                FromUser = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                },
+                ToUser = new Common.Contracts.User
+                {
+                    Id = 2,
+                    UserName = "Drums"
+                }
+            };
+
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Throws(new Exception());
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            Assert.Throws<BlogException>(() => _chatMessagesLogic.Add(chatMessageParam));
         }
     }
 }
