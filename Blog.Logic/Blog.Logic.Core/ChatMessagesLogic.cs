@@ -137,7 +137,7 @@ namespace Blog.Logic.Core
                 var chatMessageItem = new ChatMessageListItem
                 {
                     User = UserMapper.ToDto(chatMessage.User),
-                    LastChatMessage = ChatMessageMapper.ToDto(chatMessage.ChatMessages.FirstOrDefault())
+                    LastChatMessage = ChatMessageMapper.ToDto(chatMessage.LastChatMessage)
                 };
 
                 chatMessagesList.ChatMessageListItems.Add(chatMessageItem);

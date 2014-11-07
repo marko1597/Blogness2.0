@@ -1,4 +1,4 @@
-/* line 330, ../scss/variables.scss */
+/* line 330, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/variables.scss */
 .view-post .header h4 .edit {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -7,14 +7,17 @@
   -moz-transition: opacity .25s ease-in-out;
   -webkit-transition: opacity .25s ease-in-out;
   -o-transition: opacity .25s ease-in-out;
-  transition: opacity .25s ease-in-out; }
-  /* line 339, ../scss/variables.scss */
-  .view-post .header h4 .edit:hover {
-    opacity: 0.5;
-    filter: alpha(opacity=50); }
+  transition: opacity .25s ease-in-out;
+}
+/* line 339, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/variables.scss */
+.view-post .header h4 .edit:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
 
 /* line 8, ../scss/viewpost.scss */
 .card.masonry > ul {
   list-style-type: none;
   padding: 0 !important;
-  margin: 0 !important; }
+  margin: 0 !important;
+}

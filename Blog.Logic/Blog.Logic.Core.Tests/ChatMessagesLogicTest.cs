@@ -160,9 +160,7 @@ namespace Blog.Logic.Core.Tests
                                         UserId = 2,
                                         UserName = "Drums"
                                     },
-                             ChatMessages = new List<ChatMessage>
-                                    {
-                                        new ChatMessage
+                             LastChatMessage = new ChatMessage
                                         {
                                             ChatMessageId = 1,
                                             Text = "Lorem ipsum dolor sit amet",
@@ -179,7 +177,6 @@ namespace Blog.Logic.Core.Tests
                                                         UserName = "FooBar"
                                                     }
                                          }   
-                                    }
                          },
                          new UserChatMessage
                          {
@@ -188,9 +185,7 @@ namespace Blog.Logic.Core.Tests
                                         UserId = 3,
                                         UserName = "Penny"
                                     },
-                             ChatMessages = new List<ChatMessage>
-                                    {
-                                        new ChatMessage
+                             LastChatMessage = new ChatMessage
                                         {
                                             ChatMessageId = 2,
                                             Text = "Lorem ipsum dolor sit amet",
@@ -206,8 +201,7 @@ namespace Blog.Logic.Core.Tests
                                                         UserId = 1,
                                                         UserName = "FooBar"
                                                     }
-                                         }   
-                                    }
+                                         }
                          }
                      };
 
@@ -420,7 +414,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenSuccessfullyAddedChatButFromUserIsNull()
         {
             var addDbResult = _chatMessages.FirstOrDefault();
-            var getDbResult = _chatMessages.FirstOrDefault();
+            var getDbResult = _chatMessages.FirstOrDefault() ?? new ChatMessage();
             getDbResult.FromUser = null;
 
             var chatMessageParam = new Common.Contracts.ChatMessage
@@ -456,7 +450,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenSuccessfullyAddedChatButToUserIsNull()
         {
             var addDbResult = _chatMessages.FirstOrDefault();
-            var getDbResult = _chatMessages.FirstOrDefault();
+            var getDbResult = _chatMessages.FirstOrDefault() ?? new ChatMessage();
             getDbResult.ToUser = null;
 
             var chatMessageParam = new Common.Contracts.ChatMessage

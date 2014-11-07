@@ -1,5 +1,7 @@
 ﻿ngMessaging.directive('messagesPanel', function () {
-    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, configProvider,
+        localStorageService) {
+
         $scope.user = null;
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -32,17 +34,41 @@
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        var getUserChatMessageList = function() {
+        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+            if (d && d.FromUser) {
+                var messageItem = null;
+                var messageItemIndex = -1;
+
+                for (var i = 0; i < $scope.messagesList.length; i++) {
+                    if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
+                        messageItem = $scope.messagesList[i];
+                        messageItemIndex = i;
+                        break;
+                    }
+                }
+
+                if (messageItem && messageItemIndex > -1) {
+                    messageItem.LastChatMessage.Text = d.Text;
+                    messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                    $scope.messagesList.splice(messageItemIndex, 1);
+                    $scope.messagesList.unshift(messageItem);
+
+                    $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                }
+            }
+        });
+
+        var getUserChatMessageList = function () {
             if ($scope.authData && $rootScope.user) {
                 $scope.user = $rootScope.user;
 
-                messagingService.getUserChatMessageList($scope.user.Id).then(function(response) {
+                messagingService.getUserChatMessageList($scope.user.Id).then(function (response) {
                     if (response) {
                         $scope.messagesList = response;
                     } else {
                         errorService.displayError({ Message: "No messages found! " });
                     }
-                }, function() {
+                }, function () {
                     errorService.displayError({ Message: "Failed getting messages!" });
                 });
             }
@@ -50,7 +76,7 @@
 
         $scope.init();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';

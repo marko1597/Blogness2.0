@@ -8,15 +8,10 @@
         $scope.username = null;
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            $log.info("location changing from " + current + " to " + next);
+            //$log.info("location changing from " + current + " to " + next);
 
             if (current !== configProvider.getSettings().BlogRoot + "/#/") {
-                postsService.getRecentPosts()
-                    .then(function (response) {
-                        $log.info(response);
-                    }, function (error) {
-                        console.log(error);
-                    });
+                postsService.getRecentPosts();
             }
 
             if ($rootScope.user) {
@@ -48,6 +43,7 @@
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
                         messagingService.userChatOnline(user.Id);
+                        console.log("Conneted to chat (userChat_" + user.Id + ")");
                     }, 1500);
                 }
             });

@@ -70,6 +70,20 @@
         }
     }
 
+    &.fade-down {
+        -moz-animation-name: fadeInUp;
+        -o-animation-name: fadeInUp;
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+
+        &.ng-hide {
+            -moz-animation-name: fadeOutDown;
+            -o-animation-name: fadeOutDown;
+            -webkit-animation-name: fadeOutDown;
+            animation-name: fadeOutDown;
+        }
+    }
+
     &.fade-left {
         -moz-animation-name: fadeInLeft;
         -o-animation-name: fadeInLeft;
@@ -83,7 +97,6 @@
             animation-name: fadeOutRight;
         }
     }
-
 
     &.fade-right {
         -moz-animation-name: fadeInRight;

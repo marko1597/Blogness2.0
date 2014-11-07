@@ -6,54 +6,63 @@
   box-shadow: 0 2px 4px 0 #cccccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   background: white;
-  overflow: hidden; }
-  /* line 10, ../../scss/messaging/messagespanel.scss */
-  #messages-panel .body {
-    width: 100%;
-    height: auto;
-    background: white;
-    color: #4c4c4c;
-    overflow-y: scroll; }
-    /* line 16, ../../scss/messaging/messagespanel.scss */
-    #messages-panel .body .alert {
-      margin-top: 15px;
-      margin-right: 15px;
-      margin-bottom: 15px;
-      margin-left: 15px; }
-    /* line 23, ../../scss/messaging/messagespanel.scss */
-    #messages-panel .body .messages-list .message-item {
-      padding-top: 15px;
-      padding-right: 15px;
-      padding-bottom: 15px;
-      padding-left: 15px;
-      border-bottom: 1px solid #cccccc;
-      background: white;
-      cursor: pointer; }
-      /* line 29, ../../scss/messaging/messagespanel.scss */
-      #messages-panel .body .messages-list .message-item:hover {
-        box-shadow: inset 0 0 10px 0 #aaaaaa;
-        box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5); }
-      /* line 33, ../../scss/messaging/messagespanel.scss */
-      #messages-panel .body .messages-list .message-item .chat-user-image {
-        margin-right: 15px;
-        float: left; }
-        /* line 37, ../../scss/messaging/messagespanel.scss */
-        #messages-panel .body .messages-list .message-item .chat-user-image img {
-          border-top: 3px solid #56c2e1;
-          border-right: 3px solid #56c2e1;
-          border-bottom: 3px solid #56c2e1;
-          border-left: 3px solid #56c2e1;
-          border-top-left-radius: 100%;
-          border-top-right-radius: 100%;
-          border-bottom-left-radius: 100%;
-          border-bottom-right-radius: 100%;
-          width: 50px;
-          height: 50px; }
-      /* line 44, ../../scss/messaging/messagespanel.scss */
-      #messages-panel .body .messages-list .message-item .message-body {
-        width: 100%;
-        height: auto; }
-        /* line 47, ../../scss/messaging/messagespanel.scss */
-        #messages-panel .body .messages-list .message-item .message-body > p {
-          margin-bottom: 0;
-          padding-left: 65px; }
+  overflow: hidden;
+}
+/* line 10, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body {
+  width: 100%;
+  height: auto;
+  background: white;
+  color: #4c4c4c;
+  overflow-y: scroll;
+}
+/* line 16, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .alert {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+/* line 23, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  border-bottom: 1px solid #cccccc;
+  background: white;
+  cursor: pointer;
+}
+/* line 29, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item:hover {
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 33, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item .chat-user-image {
+  margin-right: 15px;
+  float: left;
+}
+/* line 37, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item .chat-user-image img {
+  border-top: 3px solid #56c2e1;
+  border-right: 3px solid #56c2e1;
+  border-bottom: 3px solid #56c2e1;
+  border-left: 3px solid #56c2e1;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  width: 50px;
+  height: 50px;
+}
+/* line 44, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item .message-body {
+  width: 100%;
+  height: auto;
+}
+/* line 47, ../../scss/messaging/messagespanel.scss */
+#messages-panel .body .messages-list .message-item .message-body > p {
+  margin-bottom: 0;
+  padding-left: 65px;
+}

@@ -5,9 +5,9 @@
             <i class="fa fa-times"></i>
         </div>
     </div>
-    <div class="body" ng-style="{ 'height' : bodyHeight() }">
+    <div class="body" scroll-glue ng-style="{ 'height' : bodyHeight() }">
         <div ng-repeat="chatMessage in chatMessages">
-            <div class="chat-message" ng-class="isFromRecipient(chatMessage)">
+            <div class="chat-message animate fade-down" ng-class="isFromRecipient(chatMessage)">
                 <p>{{chatMessage.Text}}</p>
                 <div class="details">
                     <i class="fa fa-clock-o"></i>

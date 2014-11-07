@@ -11,7 +11,8 @@
   -webkit-animation-name: bounceInLeft;
   -moz-animation-name: bounceInLeft;
   -o-animation-name: bounceInLeft;
-  animation-name: bounceInLeft; }
+  animation-name: bounceInLeft;
+}
 
 /*ui-view, *[ui-view] {
     ui-view, *[ui-view] {
@@ -36,193 +37,237 @@
   animation-duration: 1s;
   -o-animation-fill-mode: both;
   -webkit-animation-fill-mode: both;
-  animation-fill-mode: both; }
-  /* line 45, ../../scss/extensions/animations.scss */
-  .animate.fade-in {
-    -moz-animation-name: fadeIn;
-    -o-animation-name: fadeIn;
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn; }
-    /* line 51, ../../scss/extensions/animations.scss */
-    .animate.fade-in.ng-hide {
-      -moz-animation-name: fadeOut;
-      -o-animation-name: fadeOut;
-      -webkit-animation-name: fadeOut;
-      animation-name: fadeOut; }
-  /* line 59, ../../scss/extensions/animations.scss */
-  .animate.fade-up {
-    -moz-animation-name: fadeInDown;
-    -o-animation-name: fadeInDown;
-    -webkit-animation-name: fadeInDown;
-    animation-name: fadeInDown; }
-    /* line 65, ../../scss/extensions/animations.scss */
-    .animate.fade-up.ng-hide {
-      -moz-animation-name: fadeOutUp;
-      -o-animation-name: fadeOutUp;
-      -webkit-animation-name: fadeOutUp;
-      animation-name: fadeOutUp; }
-  /* line 73, ../../scss/extensions/animations.scss */
-  .animate.fade-left {
-    -moz-animation-name: fadeInLeft;
-    -o-animation-name: fadeInLeft;
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft; }
-    /* line 79, ../../scss/extensions/animations.scss */
-    .animate.fade-left.ng-hide {
-      -moz-animation-name: fadeOutRight;
-      -o-animation-name: fadeOutRight;
-      -webkit-animation-name: fadeOutRight;
-      animation-name: fadeOutRight; }
-  /* line 88, ../../scss/extensions/animations.scss */
-  .animate.fade-right {
-    -moz-animation-name: fadeInRight;
-    -o-animation-name: fadeInRight;
-    -webkit-animation-name: fadeInRight;
-    animation-name: fadeInRight; }
-    /* line 94, ../../scss/extensions/animations.scss */
-    .animate.fade-right.ng-hide {
-      -moz-animation-name: fadeOutRight;
-      -o-animation-name: fadeOutRight;
-      -webkit-animation-name: fadeOutRight;
-      animation-name: fadeOutRight; }
-  /* line 102, ../../scss/extensions/animations.scss */
-  .animate.bounce-up {
-    -moz-animation-name: bounceInUp;
-    -o-animation-name: bounceInUp;
-    -webkit-animation-name: bounceInUp;
-    animation-name: bounceInUp; }
-    /* line 108, ../../scss/extensions/animations.scss */
-    .animate.bounce-up.ng-hide {
-      -moz-animation-name: bounceInDown;
-      -o-animation-name: bounceInDown;
-      -webkit-animation-name: bounceInDown;
-      animation-name: bounceInDown; }
-  /* line 116, ../../scss/extensions/animations.scss */
-  .animate.rotate-in-right {
-    -moz-animation-name: rotateInDownRight;
-    -o-animation-name: rotateInDownRight;
-    -webkit-animation-name: rotateInDownRight;
-    animation-name: rotateInDownRight; }
-    /* line 122, ../../scss/extensions/animations.scss */
-    .animate.rotate-in-right.ng-hide {
-      -moz-animation-name: rotateOutUpRight;
-      -o-animation-name: rotateOutUpRight;
-      -webkit-animation-name: rotateOutUpRight;
-      animation-name: rotateOutUpRight; }
-  /* line 130, ../../scss/extensions/animations.scss */
-  .animate.flip-x {
-    -moz-animation-name: flipInX;
-    -o-animation-name: flipInX;
-    -webkit-animation-name: flipInX;
-    animation-name: flipInX; }
-    /* line 136, ../../scss/extensions/animations.scss */
-    .animate.flip-x.ng-hide {
-      -moz-animation-name: flipOutX;
-      -o-animation-name: flipOutX;
-      -webkit-animation-name: flipOutX;
-      animation-name: flipOutX; }
+  animation-fill-mode: both;
+}
+/* line 45, ../../scss/extensions/animations.scss */
+.animate.fade-in {
+  -moz-animation-name: fadeIn;
+  -o-animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+/* line 51, ../../scss/extensions/animations.scss */
+.animate.fade-in.ng-hide {
+  -moz-animation-name: fadeOut;
+  -o-animation-name: fadeOut;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+/* line 59, ../../scss/extensions/animations.scss */
+.animate.fade-up {
+  -moz-animation-name: fadeInDown;
+  -o-animation-name: fadeInDown;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+/* line 65, ../../scss/extensions/animations.scss */
+.animate.fade-up.ng-hide {
+  -moz-animation-name: fadeOutUp;
+  -o-animation-name: fadeOutUp;
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+}
+/* line 73, ../../scss/extensions/animations.scss */
+.animate.fade-down {
+  -moz-animation-name: fadeInUp;
+  -o-animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+/* line 79, ../../scss/extensions/animations.scss */
+.animate.fade-down.ng-hide {
+  -moz-animation-name: fadeOutDown;
+  -o-animation-name: fadeOutDown;
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+/* line 87, ../../scss/extensions/animations.scss */
+.animate.fade-left {
+  -moz-animation-name: fadeInLeft;
+  -o-animation-name: fadeInLeft;
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+}
+/* line 93, ../../scss/extensions/animations.scss */
+.animate.fade-left.ng-hide {
+  -moz-animation-name: fadeOutRight;
+  -o-animation-name: fadeOutRight;
+  -webkit-animation-name: fadeOutRight;
+  animation-name: fadeOutRight;
+}
+/* line 101, ../../scss/extensions/animations.scss */
+.animate.fade-right {
+  -moz-animation-name: fadeInRight;
+  -o-animation-name: fadeInRight;
+  -webkit-animation-name: fadeInRight;
+  animation-name: fadeInRight;
+}
+/* line 107, ../../scss/extensions/animations.scss */
+.animate.fade-right.ng-hide {
+  -moz-animation-name: fadeOutRight;
+  -o-animation-name: fadeOutRight;
+  -webkit-animation-name: fadeOutRight;
+  animation-name: fadeOutRight;
+}
+/* line 115, ../../scss/extensions/animations.scss */
+.animate.bounce-up {
+  -moz-animation-name: bounceInUp;
+  -o-animation-name: bounceInUp;
+  -webkit-animation-name: bounceInUp;
+  animation-name: bounceInUp;
+}
+/* line 121, ../../scss/extensions/animations.scss */
+.animate.bounce-up.ng-hide {
+  -moz-animation-name: bounceInDown;
+  -o-animation-name: bounceInDown;
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
+/* line 129, ../../scss/extensions/animations.scss */
+.animate.rotate-in-right {
+  -moz-animation-name: rotateInDownRight;
+  -o-animation-name: rotateInDownRight;
+  -webkit-animation-name: rotateInDownRight;
+  animation-name: rotateInDownRight;
+}
+/* line 135, ../../scss/extensions/animations.scss */
+.animate.rotate-in-right.ng-hide {
+  -moz-animation-name: rotateOutUpRight;
+  -o-animation-name: rotateOutUpRight;
+  -webkit-animation-name: rotateOutUpRight;
+  animation-name: rotateOutUpRight;
+}
+/* line 143, ../../scss/extensions/animations.scss */
+.animate.flip-x {
+  -moz-animation-name: flipInX;
+  -o-animation-name: flipInX;
+  -webkit-animation-name: flipInX;
+  animation-name: flipInX;
+}
+/* line 149, ../../scss/extensions/animations.scss */
+.animate.flip-x.ng-hide {
+  -moz-animation-name: flipOutX;
+  -o-animation-name: flipOutX;
+  -webkit-animation-name: flipOutX;
+  animation-name: flipOutX;
+}
 
 @-moz-keyframes bounceInLeft {
-  /* line 146, ../../scss/extensions/animations.scss */
+  /* line 159, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
     -moz-transform: translateX(-2000px);
     -ms-transform: translateX(-2000px);
     -o-transform: translateX(-2000px);
-    transform: translateX(-2000px); }
+    transform: translateX(-2000px);
+  }
 
-  /* line 155, ../../scss/extensions/animations.scss */
+  /* line 168, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
     -moz-transform: translateX(30px);
     -ms-transform: translateX(30px);
     -o-transform: translateX(30px);
-    transform: translateX(30px); }
+    transform: translateX(30px);
+  }
 
-  /* line 164, ../../scss/extensions/animations.scss */
+  /* line 177, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
     -ms-transform: translateX(-10px);
     -o-transform: translateX(-10px);
-    transform: translateX(-10px); }
+    transform: translateX(-10px);
+  }
 
-  /* line 172, ../../scss/extensions/animations.scss */
+  /* line 185, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
-    transform: translateX(0); } }
+    transform: translateX(0);
+  }
+}
 
 @-webkit-keyframes bounceInLeft {
-  /* line 182, ../../scss/extensions/animations.scss */
+  /* line 195, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
     -moz-transform: translateX(-2000px);
     -ms-transform: translateX(-2000px);
     -o-transform: translateX(-2000px);
-    transform: translateX(-2000px); }
+    transform: translateX(-2000px);
+  }
 
-  /* line 191, ../../scss/extensions/animations.scss */
+  /* line 204, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
     -moz-transform: translateX(30px);
     -ms-transform: translateX(30px);
     -o-transform: translateX(30px);
-    transform: translateX(30px); }
+    transform: translateX(30px);
+  }
 
-  /* line 200, ../../scss/extensions/animations.scss */
+  /* line 213, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
     -ms-transform: translateX(-10px);
     -o-transform: translateX(-10px);
-    transform: translateX(-10px); }
+    transform: translateX(-10px);
+  }
 
-  /* line 208, ../../scss/extensions/animations.scss */
+  /* line 221, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
-    transform: translateX(0); } }
+    transform: translateX(0);
+  }
+}
 
 @keyframes bounceInLeft {
-  /* line 218, ../../scss/extensions/animations.scss */
+  /* line 231, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
     -moz-transform: translateX(-2000px);
     -ms-transform: translateX(-2000px);
     -o-transform: translateX(-2000px);
-    transform: translateX(-2000px); }
+    transform: translateX(-2000px);
+  }
 
-  /* line 227, ../../scss/extensions/animations.scss */
+  /* line 240, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
     -moz-transform: translateX(30px);
     -ms-transform: translateX(30px);
     -o-transform: translateX(30px);
-    transform: translateX(30px); }
+    transform: translateX(30px);
+  }
 
-  /* line 236, ../../scss/extensions/animations.scss */
+  /* line 249, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
     -ms-transform: translateX(-10px);
     -o-transform: translateX(-10px);
-    transform: translateX(-10px); }
+    transform: translateX(-10px);
+  }
 
-  /* line 244, ../../scss/extensions/animations.scss */
+  /* line 257, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
     -o-transform: translateX(0);
-    transform: translateX(0); } }
+    transform: translateX(0);
+  }
+}

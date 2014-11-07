@@ -3,5 +3,6 @@
         "ngShared",
         "ngError",
         "ngBlogSockets",
-        "ngConfig"
+        "ngConfig",
+        "luegg.directives"
     ]);

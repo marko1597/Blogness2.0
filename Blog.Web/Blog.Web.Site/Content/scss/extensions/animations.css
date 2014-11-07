@@ -55,6 +55,16 @@
       -o-animation-name: fadeOutUp;
       -webkit-animation-name: fadeOutUp;
       animation-name: fadeOutUp; }
+  .animate.fade-down {
+    -moz-animation-name: fadeInUp;
+    -o-animation-name: fadeInUp;
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp; }
+    .animate.fade-down.ng-hide {
+      -moz-animation-name: fadeOutDown;
+      -o-animation-name: fadeOutDown;
+      -webkit-animation-name: fadeOutDown;
+      animation-name: fadeOutDown; }
   .animate.fade-left {
     -moz-animation-name: fadeInLeft;
     -o-animation-name: fadeInLeft;

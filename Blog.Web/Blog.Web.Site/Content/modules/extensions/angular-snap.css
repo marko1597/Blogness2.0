@@ -15,12 +15,15 @@ snap-drawers,
 .x-snap-drawers,
 .snap-drawers,
 .snap-content {
-  background: #eeeeee url("../../images/bg.jpg") no-repeat right top; }
+  background: #eeeeee url("../../images/bg.jpg") no-repeat right top;
+}
 
 /* line 22, ../../scss/extensions/angular-snap.scss */
 snap-drawer, [snap\:drawer], [snap-drawer], [data-snap-drawer], [x-snap-drawer], .snap-drawer, .x-snap-drawer, .snap-drawer {
-  width: 320px; }
+  width: 320px;
+}
 
 /* line 26, ../../scss/extensions/angular-snap.scss */
 .snap-drawer-right {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+}

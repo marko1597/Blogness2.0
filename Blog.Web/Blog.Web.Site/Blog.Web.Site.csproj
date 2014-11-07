@@ -1006,6 +1006,9 @@
     <Content Include="Scripts\bower_components\angular-ui-router\src\view.js" />
     <Content Include="Scripts\bower_components\angular-ui-router\src\viewDirective.js" />
     <Content Include="Scripts\bower_components\angular-ui-router\src\viewScroll.js" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\example.html" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\src\scrollglue.js" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\testacular.conf.js" />
     <Content Include="Scripts\bower_components\angular\angular-csp.css" />
     <Content Include="Scripts\bower_components\angular\angular.js" />
     <Content Include="Scripts\bower_components\angular\angular.min.js" />
@@ -3783,6 +3786,11 @@
     <Content Include="Content\scss\user\userprofileposts.css.map">
       <DependentUpon>userprofileposts.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\.bower.json" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\bower.json" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\package.json" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\README.md" />
+    <Content Include="Scripts\bower_components\angularjs-scroll-glue\src\LICENSE" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

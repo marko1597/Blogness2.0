@@ -112,12 +112,12 @@ var serverFunctions = {
         if (d != null && d.ChatMessage != null) {
             var chat = d.ChatMessage;
             var data = {
-                fromUser: chat.FromUser,
-                toUser: chat.ToUser,
-                text: chat.Text,
-                createdDate: chat.CreatedDate
+                FromUser: chat.FromUser,
+                ToUser: chat.ToUser,
+                Text: chat.Text,
+                CreatedDate: chat.CreatedDate
             };
-            io.sockets.in(blogChannels.userChat + data.RecipientUserId).emit(clientFunctions.sendChatMessage, data);
+            io.sockets.in(blogChannels.userChat + d.RecipientUserId).emit(clientFunctions.sendChatMessage, data);
             io.sockets.in(blogChannels.adminApp).emit(clientFunctions.sendChatMessage, data);
         }
     }

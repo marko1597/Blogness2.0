@@ -8,49 +8,62 @@
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  display: inline-block; }
-  @media (max-width: 767px) {
-    /* line 3, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 0;
-      margin-left: 0; } }
-  /* line 12, ../../scss/loginform/loggeduser.scss */
-  #logged-user-info .btn-group, #logged-user-info button, #logged-user-info ul {
+  display: inline-block;
+}
+@media (max-width: 767px) {
+  /* line 3, ../../scss/loginform/loggeduser.scss */
+  #logged-user-info {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
     width: 100%;
-    height: auto; }
-  @media (max-width: 767px) {
-    /* line 16, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info button {
-      padding-top: 15px;
-      padding-right: 15px;
-      padding-bottom: 15px;
-      padding-left: 15px; } }
-  /* line 22, ../../scss/loginform/loggeduser.scss */
-  #logged-user-info ul {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    background: white; }
-    /* line 30, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info ul li:first-child a {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0; }
-    /* line 36, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info ul li:last-child a {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0; }
-    /* line 41, ../../scss/loginform/loggeduser.scss */
-    #logged-user-info ul li a {
-      border: none;
-      color: #4c4c4c; }
-      /* line 45, ../../scss/loginform/loggeduser.scss */
-      #logged-user-info ul li a:hover {
-        background: #56c2e1;
-        color: white; }
+    height: auto;
+  }
+}
+/* line 13, ../../scss/loginform/loggeduser.scss */
+#logged-user-info .btn-group, #logged-user-info button, #logged-user-info ul {
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 767px) {
+  /* line 17, ../../scss/loginform/loggeduser.scss */
+  #logged-user-info button {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+  }
+}
+/* line 23, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  background: white;
+}
+/* line 31, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li:first-child a {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+/* line 37, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li:last-child a {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* line 42, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li a {
+  border: none;
+  color: #4c4c4c;
+}
+/* line 46, ../../scss/loginform/loggeduser.scss */
+#logged-user-info ul li a:hover {
+  background: #56c2e1;
+  color: white;
+}

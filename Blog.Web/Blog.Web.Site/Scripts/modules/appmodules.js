@@ -1484,15 +1484,10 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
         $scope.username = null;
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            $log.info("location changing from " + current + " to " + next);
+            //$log.info("location changing from " + current + " to " + next);
 
             if (current !== configProvider.getSettings().BlogRoot + "/#/") {
-                postsService.getRecentPosts()
-                    .then(function (response) {
-                        $log.info(response);
-                    }, function (error) {
-                        console.log(error);
-                    });
+                postsService.getRecentPosts();
             }
 
             if ($rootScope.user) {
@@ -1524,6 +1519,7 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
                         messagingService.userChatOnline(user.Id);
+                        console.log("Conneted to chat (userChat_" + user.Id + ")");
                     }, 1500);
                 }
             });
@@ -2300,10 +2296,11 @@ var ngMessaging = angular.module("ngMessaging",
         "ngShared",
         "ngError",
         "ngBlogSockets",
-        "ngConfig"
+        "ngConfig",
+        "luegg.directives"
     ]);
 ///#source 1 1 /Scripts/modules/messaging/directives/chatWindow.js
-ngMessaging.directive('chatWindow', function () {
+ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
     var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
@@ -2344,13 +2341,13 @@ ngMessaging.directive('chatWindow', function () {
             }
         };
 
-        $scope.$on("launchChatWindow", function(ev, userData) {
+        $scope.$on("launchChatWindow", function (ev, userData) {
             $scope.isActive = true;
 
             $scope.recipient = userData;
 
             setUserInSession();
-            
+
             messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
                 if (response) {
                     $scope.chatMessages = response;
@@ -2362,9 +2359,9 @@ ngMessaging.directive('chatWindow', function () {
             });
         });
 
-        $scope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
             if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
-                d.ChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.ChatMessage.CreatedDate);
+                d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
                 $scope.chatMessages.push(d);
             }
         });
@@ -2378,7 +2375,9 @@ ngMessaging.directive('chatWindow', function () {
 
             messagingService.addChatMessage(chatMessage).then(function (response) {
                 if (response) {
+                    response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
                     $scope.chatMessages.push(response);
+                    $scope.newMessage = "";
                 } else {
                     errorService.displayError({ Message: "Failed to send message!" });
                 }
@@ -2386,7 +2385,7 @@ ngMessaging.directive('chatWindow', function () {
                 errorService.displayError({ Message: "Failed to send message!" });
             });
         };
-            
+
         $rootScope.$watch('user', function () {
             setUserInSession();
         });
@@ -2407,12 +2406,14 @@ ngMessaging.directive('chatWindow', function () {
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
-        scope.elemHeight = ($(document).height()) + 'px';
+        $timeout(function() {
+            scope.elemHeight = ($(document).height()) + 'px';
 
-        scope.bodyHeight = function () {
-            var headerHeight = $(elem).find('.header').height();
-            return ($(document).height() - (50 * 2) - headerHeight) + 'px';
-        };
+            scope.bodyHeight = function () {
+                var headerHeight = $(elem).find('.header').height();
+                return ($(document).height() - (50 * 2) - headerHeight) + 'px';
+            };
+        }, 1000);
     };
 
     return {
@@ -2422,11 +2423,13 @@ ngMessaging.directive('chatWindow', function () {
         controller: ctrlFn,
         link: linkFn
     };
-});
+}]);
 
 ///#source 1 1 /Scripts/modules/messaging/directives/messagesPanel.js
 ngMessaging.directive('messagesPanel', function () {
-    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, configProvider,
+        localStorageService) {
+
         $scope.user = null;
 
         $scope.authData = localStorageService.get("authorizationData");
@@ -2459,17 +2462,41 @@ ngMessaging.directive('messagesPanel', function () {
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        var getUserChatMessageList = function() {
+        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+            if (d && d.FromUser) {
+                var messageItem = null;
+                var messageItemIndex = -1;
+
+                for (var i = 0; i < $scope.messagesList.length; i++) {
+                    if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
+                        messageItem = $scope.messagesList[i];
+                        messageItemIndex = i;
+                        break;
+                    }
+                }
+
+                if (messageItem && messageItemIndex > -1) {
+                    messageItem.LastChatMessage.Text = d.Text;
+                    messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                    $scope.messagesList.splice(messageItemIndex, 1);
+                    $scope.messagesList.unshift(messageItem);
+
+                    $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                }
+            }
+        });
+
+        var getUserChatMessageList = function () {
             if ($scope.authData && $rootScope.user) {
                 $scope.user = $rootScope.user;
 
-                messagingService.getUserChatMessageList($scope.user.Id).then(function(response) {
+                messagingService.getUserChatMessageList($scope.user.Id).then(function (response) {
                     if (response) {
                         $scope.messagesList = response;
                     } else {
                         errorService.displayError({ Message: "No messages found! " });
                     }
-                }, function() {
+                }, function () {
                     errorService.displayError({ Message: "Failed getting messages!" });
                 });
             }
@@ -2477,7 +2504,7 @@ ngMessaging.directive('messagesPanel', function () {
 
         $scope.init();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';

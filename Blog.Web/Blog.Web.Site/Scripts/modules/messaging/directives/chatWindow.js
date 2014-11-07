@@ -1,4 +1,4 @@
-﻿ngMessaging.directive('chatWindow', function () {
+﻿ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
     var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
@@ -39,13 +39,13 @@
             }
         };
 
-        $scope.$on("launchChatWindow", function(ev, userData) {
+        $scope.$on("launchChatWindow", function (ev, userData) {
             $scope.isActive = true;
 
             $scope.recipient = userData;
 
             setUserInSession();
-            
+
             messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
                 if (response) {
                     $scope.chatMessages = response;
@@ -57,9 +57,9 @@
             });
         });
 
-        $scope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
             if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
-                d.ChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.ChatMessage.CreatedDate);
+                d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
                 $scope.chatMessages.push(d);
             }
         });
@@ -73,7 +73,9 @@
 
             messagingService.addChatMessage(chatMessage).then(function (response) {
                 if (response) {
+                    response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
                     $scope.chatMessages.push(response);
+                    $scope.newMessage = "";
                 } else {
                     errorService.displayError({ Message: "Failed to send message!" });
                 }
@@ -81,7 +83,7 @@
                 errorService.displayError({ Message: "Failed to send message!" });
             });
         };
-            
+
         $rootScope.$watch('user', function () {
             setUserInSession();
         });
@@ -102,12 +104,14 @@
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
-        scope.elemHeight = ($(document).height()) + 'px';
+        $timeout(function() {
+            scope.elemHeight = ($(document).height()) + 'px';
 
-        scope.bodyHeight = function () {
-            var headerHeight = $(elem).find('.header').height();
-            return ($(document).height() - (50 * 2) - headerHeight) + 'px';
-        };
+            scope.bodyHeight = function () {
+                var headerHeight = $(elem).find('.header').height();
+                return ($(document).height() - (50 * 2) - headerHeight) + 'px';
+            };
+        }, 1000);
     };
 
     return {
@@ -117,4 +121,4 @@
         controller: ctrlFn,
         link: linkFn
     };
-});
+}]);
