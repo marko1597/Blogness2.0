@@ -1,5 +1,5 @@
-﻿ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper",
-    function ($http, $q, configProvider, dateHelper) {
+﻿ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper", "blogSocketsService",
+    function ($http, $q, configProvider, dateHelper, blogSocketsService) {
         var baseUrl = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
@@ -58,6 +58,15 @@
                 });
 
                 return deferred.promise;
+            },
+
+            userChatOnline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOnline, { userId: id });
+            },
+
+            userChatOffline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
             }
         };
     }

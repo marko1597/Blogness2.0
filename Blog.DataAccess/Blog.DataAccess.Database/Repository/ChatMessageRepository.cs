@@ -47,14 +47,14 @@ namespace Blog.DataAccess.Database.Repository
             {
                 var tUser = user;
                 var lastMessage = Find(a => a.ToUserId == tUser.UserId, false)
-                    .OrderByDescending(a => a.CreatedDate)
+                    .OrderBy(a => a.CreatedDate)
                     .Take(1)
                     .ToList();
 
                 if (lastMessage.Count == 0)
                 {
                     lastMessage = Find(a => a.FromUserId == userId && a.ToUserId == tUser.UserId, false)
-                        .OrderByDescending(a => a.CreatedDate)
+                        .OrderBy(a => a.CreatedDate)
                         .Take(1)
                         .ToList();
 
@@ -80,7 +80,7 @@ namespace Blog.DataAccess.Database.Repository
             var fromRecipientMessages = Find(a => a.FromUserId == toUserId && a.ToUserId == fromUserId, true);
             var chatMessages = toRecipientMessages
                 .Union(fromRecipientMessages)
-                .OrderByDescending(a => a.CreatedDate)
+                .OrderBy(a => a.CreatedDate)
                 .ToList();
 
             return chatMessages;

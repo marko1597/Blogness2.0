@@ -42,6 +42,9 @@ namespace Blog.Common.Utils
             CommentAdded,
             SubscribeViewPost,
             UnsubscribeViewPost,
+            UserChatOnline,
+            UserChatOffline,
+            SendChatMessage,
             WsConnected
         }
     }

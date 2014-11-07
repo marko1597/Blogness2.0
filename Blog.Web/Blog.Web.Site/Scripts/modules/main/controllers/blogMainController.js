@@ -1,7 +1,7 @@
 ﻿blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
-    "localStorageService", "postsService", "userService", "authenticationService", 
+    "localStorageService", "postsService", "userService", "authenticationService", "messagingService",
     function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
-        userService, authenticationService) {
+        userService, authenticationService, messagingService) {
 
         $scope.authData = localStorageService.get('authorizationData');
 
@@ -47,6 +47,7 @@
                     $rootScope.authData = $scope.authData;
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
+                        messagingService.userChatOnline(user.Id);
                     }, 1500);
                 }
             });

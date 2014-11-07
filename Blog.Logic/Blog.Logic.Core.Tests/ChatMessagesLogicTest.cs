@@ -369,6 +369,7 @@ namespace Blog.Logic.Core.Tests
 
             _chatMessageRepository = new Mock<IChatMessageRepository>();
             _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Returns(dbResult);
+            _chatMessageRepository.Setup(a => a.Find(It.IsAny<Expression<Func<ChatMessage, bool>>>(), null, It.IsAny<string>())).Returns(_chatMessages);
 
             _userRepository = new Mock<IUserRepository>();
 
@@ -380,6 +381,111 @@ namespace Blog.Logic.Core.Tests
             Assert.IsNotNull(result.FromUser);
             Assert.IsNotNull(result.ToUser);
             Assert.IsInstanceOf(typeof(Common.Contracts.ChatMessage), result);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSuccessfullyAddedChatButChatIsNull()
+        {
+            var dbResult = _chatMessages.FirstOrDefault();
+            var chatMessageParam = new Common.Contracts.ChatMessage
+            {
+                Id = 1,
+                Text = "Lorem ipsum dolor sit amet",
+                FromUser = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                },
+                ToUser = new Common.Contracts.User
+                {
+                    Id = 2,
+                    UserName = "Drums"
+                }
+            };
+
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Returns(dbResult);
+            _chatMessageRepository.Setup(a => a.Find(It.IsAny<Expression<Func<ChatMessage, bool>>>(), null, It.IsAny<string>())).Returns(new List<ChatMessage>());
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var exception = Assert.Throws<BlogException>(() => _chatMessagesLogic.Add(chatMessageParam));
+
+            Assert.AreEqual("Successfully created message but failed to get users related to the message.", exception.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSuccessfullyAddedChatButFromUserIsNull()
+        {
+            var addDbResult = _chatMessages.FirstOrDefault();
+            var getDbResult = _chatMessages.FirstOrDefault();
+            getDbResult.FromUser = null;
+
+            var chatMessageParam = new Common.Contracts.ChatMessage
+            {
+                Id = 1,
+                Text = "Lorem ipsum dolor sit amet",
+                FromUser = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                },
+                ToUser = new Common.Contracts.User
+                {
+                    Id = 2,
+                    UserName = "Drums"
+                }
+            };
+
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Returns(addDbResult);
+            _chatMessageRepository.Setup(a => a.Find(It.IsAny<Expression<Func<ChatMessage, bool>>>(), null, It.IsAny<string>())).Returns(new List<ChatMessage> { getDbResult });
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var exception = Assert.Throws<BlogException>(() => _chatMessagesLogic.Add(chatMessageParam));
+
+            Assert.AreEqual("Successfully created message but failed to get users related to the message.", exception.Message);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenSuccessfullyAddedChatButToUserIsNull()
+        {
+            var addDbResult = _chatMessages.FirstOrDefault();
+            var getDbResult = _chatMessages.FirstOrDefault();
+            getDbResult.ToUser = null;
+
+            var chatMessageParam = new Common.Contracts.ChatMessage
+            {
+                Id = 1,
+                Text = "Lorem ipsum dolor sit amet",
+                FromUser = new Common.Contracts.User
+                {
+                    Id = 1,
+                    UserName = "FooBar"
+                },
+                ToUser = new Common.Contracts.User
+                {
+                    Id = 2,
+                    UserName = "Drums"
+                }
+            };
+
+            _chatMessageRepository = new Mock<IChatMessageRepository>();
+            _chatMessageRepository.Setup(a => a.Add(It.IsAny<ChatMessage>())).Returns(addDbResult);
+            _chatMessageRepository.Setup(a => a.Find(It.IsAny<Expression<Func<ChatMessage, bool>>>(), null, It.IsAny<string>())).Returns(new List<ChatMessage> { getDbResult });
+
+            _userRepository = new Mock<IUserRepository>();
+
+            _chatMessagesLogic = new ChatMessagesLogic(_chatMessageRepository.Object, _userRepository.Object);
+
+            var exception = Assert.Throws<BlogException>(() => _chatMessagesLogic.Add(chatMessageParam));
+
+            Assert.AreEqual("Successfully created message but failed to get users related to the message.", exception.Message);
         }
 
         [Test]

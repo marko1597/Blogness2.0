@@ -2,5 +2,6 @@
     [
         "ngShared",
         "ngError",
+        "ngBlogSockets",
         "ngConfig"
     ]);

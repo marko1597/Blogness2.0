@@ -77,7 +77,7 @@
     <Compile Include="User.cs" />
     <Compile Include="ViewCount.cs" />
     <Compile Include="ViewModels\ChatMessagesList.cs" />
-    <Compile Include="ViewModels\SocketViewModels\ChatMessageSend.cs" />
+    <Compile Include="ViewModels\SocketViewModels\SendChatMessage.cs" />
     <Compile Include="ViewModels\SocketViewModels\PostComments.cs" />
     <Compile Include="ViewModels\SocketViewModels\BaseSocketViewModel.cs" />
     <Compile Include="ViewModels\SocketViewModels\CommentAdded.cs" />

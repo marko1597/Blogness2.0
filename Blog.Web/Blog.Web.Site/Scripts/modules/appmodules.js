@@ -1475,9 +1475,9 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$
 ]);
 ///#source 1 1 /Scripts/modules/main/controllers/blogMainController.js
 blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
-    "localStorageService", "postsService", "userService", "authenticationService", 
+    "localStorageService", "postsService", "userService", "authenticationService", "messagingService",
     function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
-        userService, authenticationService) {
+        userService, authenticationService, messagingService) {
 
         $scope.authData = localStorageService.get('authorizationData');
 
@@ -1523,6 +1523,7 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
                     $rootScope.authData = $scope.authData;
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
+                        messagingService.userChatOnline(user.Id);
                     }, 1500);
                 }
             });
@@ -2298,11 +2299,12 @@ var ngMessaging = angular.module("ngMessaging",
     [
         "ngShared",
         "ngError",
+        "ngBlogSockets",
         "ngConfig"
     ]);
 ///#source 1 1 /Scripts/modules/messaging/directives/chatWindow.js
 ngMessaging.directive('chatWindow', function () {
-    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
         $scope.recipient = null;
@@ -2359,6 +2361,31 @@ ngMessaging.directive('chatWindow', function () {
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });
+
+        $scope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+            if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
+                d.ChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.ChatMessage.CreatedDate);
+                $scope.chatMessages.push(d);
+            }
+        });
+
+        $scope.sendChatMessage = function () {
+            var chatMessage = {
+                FromUser: $scope.user,
+                ToUser: $scope.recipient,
+                Text: $scope.newMessage
+            };
+
+            messagingService.addChatMessage(chatMessage).then(function (response) {
+                if (response) {
+                    $scope.chatMessages.push(response);
+                } else {
+                    errorService.displayError({ Message: "Failed to send message!" });
+                }
+            }, function () {
+                errorService.displayError({ Message: "Failed to send message!" });
+            });
+        };
             
         $rootScope.$watch('user', function () {
             setUserInSession();
@@ -2377,7 +2404,7 @@ ngMessaging.directive('chatWindow', function () {
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';
@@ -2471,8 +2498,8 @@ ngMessaging.directive('messagesPanel', function () {
 });
 
 ///#source 1 1 /Scripts/modules/messaging/services/messagingService.js
-ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper",
-    function ($http, $q, configProvider, dateHelper) {
+ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper", "blogSocketsService",
+    function ($http, $q, configProvider, dateHelper, blogSocketsService) {
         var baseUrl = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
@@ -2531,6 +2558,15 @@ ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateH
                 });
 
                 return deferred.promise;
+            },
+
+            userChatOnline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOnline, { userId: id });
+            },
+
+            userChatOffline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
             }
         };
     }
@@ -4325,7 +4361,9 @@ ngBlogSockets.directive("socketDebugger", [
 // ReSharper disable UseOfImplicitGlobalInFunctionScope
 ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interval", "configProvider",
     function ($rootScope, $timeout, $interval, configProvider) {
-        var address = configProvider.getSettings().BlogSockets;
+        var address = configProvider.getSettings().BlogSockets === "" ?
+            window.blogConfiguration.blogSockets :
+            configProvider.getSettings().BlogSockets;
 
         var details = {
             resource: address + "socket.io"
@@ -4348,7 +4386,9 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
             }, 250);
         };
 
-        if (configProvider.getSettings().BlogSocketsAvailable === "true") {
+        var isBlogSocketsAvailable = window.blogConfiguration.blogSocketsAvailable;
+
+        if (isBlogSocketsAvailable || isBlogSocketsAvailable === 'true') {
             var socketReady;
 
             socketReady = $interval(function() {
@@ -4397,6 +4437,11 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
 
                     socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
                         var topic = configProvider.getSocketClientFunctions().commentAdded;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().sendChatMessage, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().sendChatMessage;
                         broadcastMessage(topic, data);
                     });
                 }

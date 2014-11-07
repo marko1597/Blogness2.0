@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel.Activation;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels;
+using Blog.Common.Contracts.ViewModels.SocketViewModels;
+using Blog.Common.Utils;
 using Blog.Logic.Core.Interfaces;
 using Blog.Services.Implementation.Attributes;
 using Blog.Services.Implementation.Handlers;
@@ -14,10 +17,12 @@ namespace Blog.Services.Implementation
     public class ChatMessagesService: BaseService, IChatMessagesService
     {
         private readonly IChatMessagesLogic _chatMessagesLogic;
+        private readonly IRedisService _redisService;
 
-        public ChatMessagesService(IChatMessagesLogic chatMessagesLogic)
+        public ChatMessagesService(IChatMessagesLogic chatMessagesLogic, IRedisService redisService)
         {
             _chatMessagesLogic = chatMessagesLogic;
+            _redisService = redisService;
         }
 
         public ChatMessagesList GetChatMessagesListByUserId(int userId)
@@ -42,7 +47,18 @@ namespace Blog.Services.Implementation
 
         public ChatMessage AddChatMessage(ChatMessage chatMessage)
         {
-            return _chatMessagesLogic.Add(chatMessage);
+            var result = _chatMessagesLogic.Add(chatMessage);
+            if (result != null && result.Error != null) throw new Exception(result.Error.Message);
+
+            var sendChatMessage = new SendChatMessage
+            {
+                ChatMessage = result,
+                RecipientUserId = result.ToUser.Id,
+                ClientFunction = Constants.SocketClientFunctions.SendChatMessage.ToString()
+            };
+
+            _redisService.Publish(sendChatMessage);
+            return result;
         }
     }
 }

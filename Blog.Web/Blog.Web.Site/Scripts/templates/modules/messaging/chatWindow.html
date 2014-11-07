@@ -18,8 +18,8 @@
     </div>
 
     <div class="new-message">
-        <textarea placeholder="Enter message..." ng-model="newMessage" />
-        <button class="btn btn-primary pull-right">
+        <textarea placeholder="Enter message..." ng-model="newMessage" ng-enter="sendChatMessage()" />
+        <button class="btn btn-primary pull-right" ng-click="sendChatMessage()">
             <i class="fa fa-send"></i>
         </button>
     </div>

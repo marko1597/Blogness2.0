@@ -6,7 +6,7 @@
     , redisPublisher = redis.createClient('6379', process.env.redisServer)
     , blogChannels = {
         viewPost: "post_",
-        userLoggedIn: "user_",
+        userChat: "userchat_",
         adminApp: "adminApp"
     }
     , clientFunctions = {
@@ -17,13 +17,16 @@
         commentAdded: "CommentAdded",
         commentLikesUpdate: "CommentLikesUpdate",
         postLikesUpdate: "PostLikesUpdate",
+        userChatOnline: "UserChatOnline",
+        userChatOffline: "UserChatOffline",
+        sendChatMessage: "SendChatMessage",
         subscribeViewPost: "SubscribeViewPost",
         unsubscribeViewPost: "UnsubscribeViewPost",
         subscribeAdmin: "SubscribeAdmin"
     };
 
 io.set('transports', ['polling']);
-		
+
 var serverFunctions = {
     init: function (data) {
         if (data.fn !== undefined) {
@@ -103,6 +106,20 @@ var serverFunctions = {
             io.sockets.in(blogChannels.viewPost + data.postId).emit(clientFunctions.commentAdded, data);
             io.sockets.in(blogChannels.adminApp).emit(clientFunctions.commentAdded, data);
         }
+    },
+    
+    SendChatMessage: function (d) {
+        if (d != null && d.ChatMessage != null) {
+            var chat = d.ChatMessage;
+            var data = {
+                fromUser: chat.FromUser,
+                toUser: chat.ToUser,
+                text: chat.Text,
+                createdDate: chat.CreatedDate
+            };
+            io.sockets.in(blogChannels.userChat + data.RecipientUserId).emit(clientFunctions.sendChatMessage, data);
+            io.sockets.in(blogChannels.adminApp).emit(clientFunctions.sendChatMessage, data);
+        }
     }
 };
 
@@ -116,6 +133,16 @@ io.sockets.on('connection', function (socket) {
     socket.on(clientFunctions.subscribeAdmin, function () {
         socket.join(blogChannels.adminApp);
         io.sockets.in(blogChannels.adminApp).send('>>> Subscribing admin app');
+    });
+    
+    socket.on(clientFunctions.userChatOnline, function (data) {
+        socket.join(blogChannels.userChat + data.userId);
+        io.sockets.in(blogChannels.userChat + data.userId).send('>>> User ' + data.userId + ' is online');
+    });
+    
+    socket.on(clientFunctions.userChatOffline, function (data) {
+        io.sockets.in(blogChannels.userChat + data.userId).send('>>> User ' + data.userId + ' is now offline');
+        socket.leave(blogChannels.userChat + data.userId);
     });
     
     socket.on(clientFunctions.subscribeViewPost, function (data) {
@@ -142,7 +169,7 @@ redisSubscriber.on("message", function (channel, message) {
         if (message.fn !== undefined) {
             serverFunctions.init(message);
         }
-    }    ;
+    }
 });
 
 bloggityServer.displayInfo = function (socket) {

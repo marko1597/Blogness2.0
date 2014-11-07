@@ -88,8 +88,21 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var result = _chatMessageRepository.Add(ChatMessageMapper.ToEntity(chatMessage));
-                return ChatMessageMapper.ToDto(result);
+                var dbChatMessage = ChatMessageMapper.ToEntity(chatMessage);
+                dbChatMessage.FromUser = null;
+                dbChatMessage.ToUser = null;
+                dbChatMessage.CreatedBy = dbChatMessage.FromUserId;
+                dbChatMessage.ModifiedBy = dbChatMessage.FromUserId;
+
+                var addResult = _chatMessageRepository.Add(dbChatMessage);
+                var newChatMessage = _chatMessageRepository.Find(a => a.ChatMessageId == addResult.ChatMessageId, null, "FromUser,ToUser").FirstOrDefault();
+
+                if (newChatMessage == null || newChatMessage.FromUser == null || newChatMessage.ToUser == null)
+                {
+                    throw new Exception("Successfully created message but failed to get users related to the message.");
+                }
+
+                return ChatMessageMapper.ToDto(newChatMessage);
             }
             catch (Exception ex)
             {

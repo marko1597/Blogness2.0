@@ -1,5 +1,5 @@
 ﻿ngMessaging.directive('chatWindow', function () {
-    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
         $scope.recipient = null;
@@ -56,6 +56,31 @@
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });
+
+        $scope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+            if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
+                d.ChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.ChatMessage.CreatedDate);
+                $scope.chatMessages.push(d);
+            }
+        });
+
+        $scope.sendChatMessage = function () {
+            var chatMessage = {
+                FromUser: $scope.user,
+                ToUser: $scope.recipient,
+                Text: $scope.newMessage
+            };
+
+            messagingService.addChatMessage(chatMessage).then(function (response) {
+                if (response) {
+                    $scope.chatMessages.push(response);
+                } else {
+                    errorService.displayError({ Message: "Failed to send message!" });
+                }
+            }, function () {
+                errorService.displayError({ Message: "Failed to send message!" });
+            });
+        };
             
         $rootScope.$watch('user', function () {
             setUserInSession();
@@ -74,7 +99,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';

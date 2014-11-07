@@ -1,7 +1,9 @@
 ﻿// ReSharper disable UseOfImplicitGlobalInFunctionScope
 ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interval", "configProvider",
     function ($rootScope, $timeout, $interval, configProvider) {
-        var address = configProvider.getSettings().BlogSockets;
+        var address = configProvider.getSettings().BlogSockets === "" ?
+            window.blogConfiguration.blogSockets :
+            configProvider.getSettings().BlogSockets;
 
         var details = {
             resource: address + "socket.io"
@@ -24,7 +26,9 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
             }, 250);
         };
 
-        if (configProvider.getSettings().BlogSocketsAvailable === "true") {
+        var isBlogSocketsAvailable = window.blogConfiguration.blogSocketsAvailable;
+
+        if (isBlogSocketsAvailable || isBlogSocketsAvailable === 'true') {
             var socketReady;
 
             socketReady = $interval(function() {
@@ -73,6 +77,11 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
 
                     socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
                         var topic = configProvider.getSocketClientFunctions().commentAdded;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().sendChatMessage, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().sendChatMessage;
                         broadcastMessage(topic, data);
                     });
                 }
