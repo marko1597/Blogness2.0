@@ -18,7 +18,7 @@
                         a.User.NameDisplay = a.User.FirstName + ' ' + a.User.LastName;
                         a.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(a.LastChatMessage.CreatedDate);
                     });
-                    deferred.resolve(response);
+                    deferred.resolve(userChatMessages);
                 }).error(function (e) {
                     deferred.reject(e);
                 });

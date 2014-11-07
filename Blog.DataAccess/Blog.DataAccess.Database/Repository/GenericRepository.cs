@@ -75,6 +75,11 @@ namespace Blog.DataAccess.Database.Repository
                 entity = SetCreatedDateValues(entity, userId, DateTime.Now);
                 entity = SetModifiedDateValues(entity, userId);
             }
+            else
+            {
+                entity = SetCreatedDateValues(entity, 0, DateTime.Now);
+                entity = SetModifiedDateValues(entity, 0);
+            }
             
             _context.Set<T>().Add(entity);
             _context.Entry(entity).State = EntityState.Added;
@@ -115,7 +120,7 @@ namespace Blog.DataAccess.Database.Repository
         public T SetCreatedDateValues(T entity, int userId, DateTime createdDate)
         {
             var hasCreatedBy = PropertyReflection.HasProperty(entity, "CreatedBy");
-            if (hasCreatedBy)
+            if (hasCreatedBy && userId > 0)
             {
                 PropertyReflection.SetProperty(entity, "CreatedBy", userId);
             }
@@ -132,7 +137,7 @@ namespace Blog.DataAccess.Database.Repository
         public T SetModifiedDateValues(T entity, int userId)
         {
             var hasCreatedBy = PropertyReflection.HasProperty(entity, "ModifiedBy");
-            if (hasCreatedBy)
+            if (hasCreatedBy && userId > 0)
             {
                 PropertyReflection.SetProperty(entity, "ModifiedBy", userId);
             }
@@ -148,8 +153,19 @@ namespace Blog.DataAccess.Database.Repository
 
         public int GetUserId(T entity)
         {
-            var userId = PropertyReflection.GetPropertyValue(entity, "UserId", true);
-            if (userId != null) return Convert.ToInt32(userId);
+            int userId;
+
+            var result = PropertyReflection.GetPropertyValue(entity, "UserId", true);
+            if (result == null)
+            {
+                result = PropertyReflection.GetPropertyValue(entity, "Id", true);
+            }
+
+            if (result != null)
+            {
+                int.TryParse(result.ToString(), out userId);
+                return userId;
+            }
 
             return 0;
         }

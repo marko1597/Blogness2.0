@@ -312,7 +312,7 @@ namespace Blog.Web.Api.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register"), EnableCors(origins: "*", headers: "*", methods: "*")]
-        public async Task<IHttpActionResult> Register(BlogRegisterModel model, [FromUri]string trNsUm3GtEwsLe)
+        public async Task<IHttpActionResult> Register(BlogRegisterModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -326,10 +326,7 @@ namespace Blog.Web.Api.Controllers
 
             var rolesResult = await UserManager.AddToRolesAsync(user.Id, new[] { "Blogger" });
             if (!rolesResult.Succeeded) return GetErrorResult(result);
-
-            // Special flag to bypass creation of user in BlogDb
-            if (!string.IsNullOrEmpty(trNsUm3GtEwsLe)) return Ok();
-
+            
             var blogUser = await AddBlogUser(model);
             return blogUser.Error != null ? GetErrorResult(result) : Ok();
         }

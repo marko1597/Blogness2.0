@@ -792,7 +792,7 @@ ngLogin.directive('loggedUser', function () {
         $scope.authData = localStorageService.get("authorizationData");
 
         $scope.isLoggedIn = function () {
-            if ($scope.authData) {
+            if ($scope.authData && $rootScope.user) {
                 return true;
             }
             return false;
@@ -1130,7 +1130,7 @@ ngLogin.factory('authenticationService', ['$http', '$q', 'configProvider', 'loca
                 var deferred = $q.defer();
 
                 $http({
-                    url: authenticationApi + "register?trNsUm3GtEwsLe='allow'",
+                    url: authenticationApi + "register",
                     method: "POST",
                     data: registerInfo
                 }).success(function (response) {
@@ -2432,15 +2432,13 @@ ngMessaging.directive('messagesPanel', function () {
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        $scope.init();
-
         var getUserChatMessageList = function() {
             if ($scope.authData && $rootScope.user) {
                 $scope.user = $rootScope.user;
 
                 messagingService.getUserChatMessageList($scope.user.Id).then(function(response) {
                     if (response) {
-                        $scope.messagesList = messagesList;
+                        $scope.messagesList = response;
                     } else {
                         errorService.displayError({ Message: "No messages found! " });
                     }
@@ -2449,6 +2447,8 @@ ngMessaging.directive('messagesPanel', function () {
                 });
             }
         };
+
+        $scope.init();
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "localStorageService"];
 
@@ -2491,7 +2491,7 @@ ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateH
                         a.User.NameDisplay = a.User.FirstName + ' ' + a.User.LastName;
                         a.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(a.LastChatMessage.CreatedDate);
                     });
-                    deferred.resolve(response);
+                    deferred.resolve(userChatMessages);
                 }).error(function (e) {
                     deferred.reject(e);
                 });

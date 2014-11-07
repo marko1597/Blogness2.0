@@ -32,13 +32,16 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public int? PictureId { get; set; }
 
         public int? BackgroundId { get; set; }
-
-        public virtual Address Address { get; set; }
+        
+        public int? AddressId { get; set; }
 
         public int? UserPictureId { get; set; }
 
         public int? UserBackgroundId { get; set; }
 
+        public virtual Address Address { get; set; }
+        public virtual Media Picture { get; set; }
+        public virtual Media Background { get; set; }
         public virtual ICollection<Education> Education { get; set; }
         public virtual ICollection<Hobby> Hobbies { get; set; }
         public virtual ICollection<Post> Posts { get; set; }

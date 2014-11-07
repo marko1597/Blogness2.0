@@ -15,7 +15,7 @@
                 var deferred = $q.defer();
 
                 $http({
-                    url: authenticationApi + "register?trNsUm3GtEwsLe='allow'",
+                    url: authenticationApi + "register",
                     method: "POST",
                     data: registerInfo
                 }).success(function (response) {

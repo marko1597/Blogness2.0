@@ -11,25 +11,60 @@ namespace Blog.DataAccess.Database.Repository
         public List<UserChatMessage> GetUserChatMessages(int userId)
         {
             var userChatMessages = new List<UserChatMessage>();
+
+            var receiverUser = Context.Users.Where(a => a.UserId == userId).FirstOrDefault();
             var userIds = Find(a => a.FromUserId == userId)
                 .Select(a => a.ToUserId)
+                .Union(Find(a => a.ToUserId == userId).Select(a => a.FromUserId))
                 .Distinct();
-            var users = Context.Users.Where(a => userIds.Contains(a.UserId)).ToList();
-            
+
+            var query = Context.Users
+                .Where(a => userIds.Contains(a.UserId))
+                .Join(Context.Media, u => u.PictureId, m => m.MediaId, (u, m) => new
+                {
+                    UserId = u.UserId,
+                    UserName = u.UserName,
+                    Picture = m,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName
+                }).ToList();
+
+            var users = new List<User>();
+            query.ForEach(a =>
+            {
+                users.Add(new User
+                {
+                    UserId = a.UserId,
+                    UserName = a.UserName,
+                    Picture = a.Picture,
+                    FirstName = a.FirstName,
+                    LastName = a.LastName
+                });
+            });
+
+
             foreach (var user in users)
             {
                 var tUser = user;
-                var lastMessage = Find(a => a.ToUserId == tUser.UserId)
+                var lastMessage = Find(a => a.ToUserId == tUser.UserId, false)
                     .OrderByDescending(a => a.CreatedDate)
                     .Take(1)
                     .ToList();
 
                 if (lastMessage.Count == 0)
                 {
-                    lastMessage = Find(a => a.FromUserId == userId && a.ToUserId == tUser.UserId)
-                    .OrderByDescending(a => a.CreatedDate)
-                    .Take(1)
-                    .ToList();
+                    lastMessage = Find(a => a.FromUserId == userId && a.ToUserId == tUser.UserId, false)
+                        .OrderByDescending(a => a.CreatedDate)
+                        .Take(1)
+                        .ToList();
+
+                    lastMessage.FirstOrDefault().FromUser = receiverUser;
+                    lastMessage.FirstOrDefault().ToUser = tUser;
+                }
+                else
+                {
+                    lastMessage.FirstOrDefault().FromUser = tUser;
+                    lastMessage.FirstOrDefault().ToUser = receiverUser;
                 }
 
                 var userChatMessage = new UserChatMessage { User = user, ChatMessages = lastMessage };

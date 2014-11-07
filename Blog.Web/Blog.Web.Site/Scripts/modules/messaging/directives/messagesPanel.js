@@ -32,15 +32,13 @@
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        $scope.init();
-
         var getUserChatMessageList = function() {
             if ($scope.authData && $rootScope.user) {
                 $scope.user = $rootScope.user;
 
                 messagingService.getUserChatMessageList($scope.user.Id).then(function(response) {
                     if (response) {
-                        $scope.messagesList = messagesList;
+                        $scope.messagesList = response;
                     } else {
                         errorService.displayError({ Message: "No messages found! " });
                     }
@@ -49,6 +47,8 @@
                 });
             }
         };
+
+        $scope.init();
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "localStorageService"];
 

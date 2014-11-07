@@ -16,6 +16,12 @@ namespace Blog.Logic.ObjectMapper
                 var hobbies = user.Hobbies != null
                     ? user.Hobbies.Select(HobbyMapper.ToDto).ToList()
                     : null;
+                var picture = user.Picture != null
+                    ? MediaMapper.ToDto(user.Picture)
+                    : null;
+                var background = user.Background != null
+                   ? MediaMapper.ToDto(user.Background)
+                   : null;
 
                 return new User
                 {
@@ -30,7 +36,9 @@ namespace Blog.Logic.ObjectMapper
                     Education = education,
                     Hobbies = hobbies,
                     PictureId = user.PictureId,
+                    Picture = picture,
                     BackgroundId = user.BackgroundId,
+                    Background = background,
                     IsDeleted = user.IsDeleted
                 };
             }

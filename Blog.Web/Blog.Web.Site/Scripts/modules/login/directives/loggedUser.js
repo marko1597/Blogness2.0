@@ -5,7 +5,7 @@
         $scope.authData = localStorageService.get("authorizationData");
 
         $scope.isLoggedIn = function () {
-            if ($scope.authData) {
+            if ($scope.authData && $rootScope.user) {
                 return true;
             }
             return false;

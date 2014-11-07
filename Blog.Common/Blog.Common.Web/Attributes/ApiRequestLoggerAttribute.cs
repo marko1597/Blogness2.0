@@ -29,10 +29,17 @@ namespace Blog.Common.Web.Attributes
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            _stopWatch.Stop();
-            var executionTime = _stopWatch.ElapsedMilliseconds;
-            var log = new Exception(GetLogMessage(actionExecutedContext, executionTime));
-            ErrorSignaler.SignalFromCurrentContext(log);
+            try
+            {
+                _stopWatch.Stop();
+                var executionTime = _stopWatch.ElapsedMilliseconds;
+                var log = new Exception(GetLogMessage(actionExecutedContext, executionTime));
+                ErrorSignaler.SignalFromCurrentContext(log);
+            }
+            catch (Exception ex)
+            {
+                ErrorSignaler.SignalFromCurrentContext(ex);
+            }
         }
 
         private string GetLogMessage(HttpActionExecutedContext actionExecutedContext, long duration)

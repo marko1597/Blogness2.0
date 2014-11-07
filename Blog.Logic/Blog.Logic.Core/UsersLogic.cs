@@ -135,8 +135,8 @@ namespace Blog.Logic.Core
         private User GetUser(int? userId, string username)
         {
             var tUser = string.IsNullOrEmpty(username) ? 
-                _userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies").FirstOrDefault() : 
-                _userRepository.Find(a => a.UserName == username, null, "Address,Hobbies").FirstOrDefault();
+                _userRepository.Find(a => a.UserId == userId, null, "Address,Hobbies,Picture,Background").FirstOrDefault() :
+                _userRepository.Find(a => a.UserName == username, null, "Address,Hobbies,Picture,Background").FirstOrDefault();
 
             if (tUser != null)
             {
@@ -213,17 +213,23 @@ namespace Blog.Logic.Core
                 new Db.Album
                 {
                     AlbumName = "Miscellaneous",
-                    IsUserDefault = true
+                    IsUserDefault = true,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new Db.Album
                 {
                     AlbumName = "Profile",
-                    IsUserDefault = false
+                    IsUserDefault = false,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 },
                 new Db.Album
                 {
                     AlbumName = "Background",
-                    IsUserDefault = false
+                    IsUserDefault = false,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now
                 }
             };
 

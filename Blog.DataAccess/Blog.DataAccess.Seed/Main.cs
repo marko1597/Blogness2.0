@@ -45,6 +45,7 @@ namespace Blog.DataAccess.Seed
 			{
 				DropDatabaseOnFail();
 				Directory.Delete(@"C:\Temp\SampleImages\", true);
+                TxtConsole.Clear();
 				AddConsoleMessage("Dropped it like its hot!");
 			}
 			catch (Exception exception)

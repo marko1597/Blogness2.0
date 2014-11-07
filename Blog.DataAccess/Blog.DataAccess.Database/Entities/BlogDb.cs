@@ -7,7 +7,8 @@ namespace Blog.DataAccess.Database.Entities
     [ExcludeFromCodeCoverage]
     public class BlogDb : DbContext
     {
-        public BlogDb() : base("name=BlogDb")
+        public BlogDb()
+            : base("name=BlogDb")
         {
             System.Data.Entity.Database.SetInitializer(new BlogDbInitializer());
         }
@@ -25,9 +26,6 @@ namespace Blog.DataAccess.Database.Entities
                 .HasMany<Hobby>(a => a.Hobbies)
                 .WithRequired(a => a.User)
                 .HasForeignKey(a => a.UserId);
-            mb.Entity<User>()
-                .HasOptional<Address>(a => a.Address)
-                .WithOptionalDependent();
             mb.Entity<User>()
                 .HasMany<Comment>(a => a.Comments)
                 .WithRequired(a => a.User)
@@ -53,7 +51,17 @@ namespace Blog.DataAccess.Database.Entities
                 .WithRequired(a => a.User)
                 .HasForeignKey(a => a.UserId)
                 .WillCascadeOnDelete(false);
-            
+            mb.Entity<User>()
+                .HasOptional<Media>(a => a.Picture)
+                .WithOptionalPrincipal();
+            mb.Entity<User>()
+                .HasOptional<Media>(a => a.Background)
+                .WithOptionalPrincipal();
+            mb.Entity<User>()
+                .HasOptional<Address>(a => a.Address)
+                .WithOptionalPrincipal()
+                .WillCascadeOnDelete(false);
+
             // Chat Message
             mb.Entity<ChatMessage>()
                 .HasRequired(a => a.FromUser)
@@ -89,7 +97,7 @@ namespace Blog.DataAccess.Database.Entities
                 .HasMany<Comment>(a => a.Comments)
                 .WithOptional(a => a.ParentComment)
                 .HasForeignKey(a => a.ParentCommentId);
-            
+
             //Posts
             mb.Entity<Post>()
                 .HasMany<Comment>(a => a.Comments)
