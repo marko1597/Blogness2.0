@@ -71,6 +71,7 @@
     
     <file>/Content/modules/user/usercommentitem.css</file>
     <file>/Content/modules/user/userimage.css</file>
+    <file>/Content/modules/user/userinfopopup.css</file>
     <file>/Content/modules/user/userpostitem.css</file>
     <file>/Content/modules/user/userprofilecomments.css</file>
     <file>/Content/modules/user/userprofiledetails.css</file>

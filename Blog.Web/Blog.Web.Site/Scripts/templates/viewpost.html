@@ -1,21 +1,7 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
         <div id="post-{{post.Id}}" class="card default view-post ng-cloak">
-            <div class="header big row" data-user-id="{{post.CreatedBy}}">
-                <div>
-                    <img ng-src="{{post.User.Picture.MediaUrl}}" />
-                </div>
-                <div>
-                    <h4>
-                        <i class="fa fa-edit edit" ng-show="isEditable" ng-click="editPost()"></i>
-                        {{post.PostTitle}}
-                    </h4>
-                    <p>
-                        <a href="#/user/{{post.User.UserName}}">@{{post.User.UserName}}</a>
-                        <span>{{post.DateDisplay}}</span>
-                    </p>
-                </div>
-            </div>
+            <div post-header post="post" user="post.User" />
             <div class="content">
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
             </div>

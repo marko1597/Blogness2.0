@@ -137,7 +137,7 @@ a {
     margin-left: 0;
     width: 100%;
     height: auto; }
-    .header.big div:first-child {
+    .header.big > div:first-child {
       width: 80px;
       height: auto;
       margin-top: 0;
@@ -145,7 +145,7 @@ a {
       margin-bottom: 0;
       margin-left: 0;
       float: left; }
-      .header.big div:first-child img {
+      .header.big > div:first-child img {
         width: 80px;
         height: 80px;
         border-top-left-radius: 100%;
@@ -156,23 +156,26 @@ a {
         border-right: 3px solid #fff;
         border-bottom: 3px solid #fff;
         border-left: 3px solid #fff; }
-    .header.big div:last-child {
+    .header.big > div:last-child {
       width: 100%;
       height: auto; }
-      .header.big div:last-child h4 {
+      .header.big > div:last-child > h4 {
         padding-left: 90px;
         margin-top: 0;
         margin-right: 0;
         margin-bottom: 5px;
         margin-left: 0;
         font-weight: bold; }
-      .header.big div:last-child p {
+      .header.big > div:last-child > p {
         padding-left: 90px; }
-        .header.big div:last-child p a {
+        .header.big > div:last-child > p a {
           margin-top: 0;
           margin-right: 0;
           margin-bottom: 5px;
-          margin-left: 0; }
+          margin-left: 0;
+          cursor: pointer; }
+          .header.big > div:last-child > p a:hover {
+            color: #f2f2f2; }
   .header h5 {
     padding-top: 12px;
     padding-right: 15px;

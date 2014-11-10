@@ -360,6 +360,7 @@
     <Content Include="Content\modules\users.css" />
     <Content Include="Content\modules\user\usercommentitem.css" />
     <Content Include="Content\modules\user\userimage.css" />
+    <Content Include="Content\modules\user\userinfopopup.css" />
     <Content Include="Content\modules\user\userpostitem.css" />
     <Content Include="Content\modules\user\userprofilecomments.css" />
     <Content Include="Content\modules\user\userprofiledetails.css" />
@@ -712,6 +713,16 @@
     </Content>
     <Content Include="Content\scss\user\userimage.min.css">
       <DependentUpon>userimage.css</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userinfopopup.css.map">
+      <DependentUpon>userinfopopup.css</DependentUpon>
+    </Content>
+    <None Include="Content\scss\user\userinfopopup.scss" />
+    <Content Include="Content\scss\user\userinfopopup.css">
+      <DependentUpon>userinfopopup.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\scss\user\userinfopopup.min.css">
+      <DependentUpon>userinfopopup.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\user\userpostitem.css">
       <DependentUpon>userpostitem.scss</DependentUpon>
@@ -2637,6 +2648,7 @@
     <Content Include="Scripts\modules\messaging\directives\chatWindow.js" />
     <Content Include="Scripts\modules\messaging\directives\messagesPanel.js" />
     <Content Include="Scripts\modules\messaging\services\messagingService.js" />
+    <Content Include="Scripts\modules\posts\directives\postHeader.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
     <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
     <Content Include="Scripts\modules\posts\directives\postViewCount.js" />
@@ -2652,6 +2664,7 @@
     <Content Include="Scripts\modules\user\controllers\userProfileMediaController.js" />
     <Content Include="Scripts\modules\user\controllers\userProfilePostsController.js" />
     <Content Include="Scripts\modules\user\directives\userImage.js" />
+    <Content Include="Scripts\modules\user\directives\userInfoPopup.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
     <Content Include="Blog.Web.Site.nuspec" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -3493,6 +3506,7 @@
     <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
     <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
     <Content Include="Scripts\templates\modules\posts\postContents.html" />
+    <Content Include="Scripts\templates\modules\posts\postHeader.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
     <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
     <Content Include="Scripts\templates\modules\posts\postViewCount.html" />
@@ -3508,6 +3522,7 @@
     <Content Include="Scripts\templates\modules\tags\tagItem.html" />
     <Content Include="Scripts\templates\errorpage.html" />
     <Content Include="Scripts\templates\modules\user\userImage.html" />
+    <Content Include="Scripts\templates\modules\user\userInfoPopup.html" />
     <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetails.html" />
     <Content Include="Scripts\templates\modules\user\userProfileDetailsAddress.html" />

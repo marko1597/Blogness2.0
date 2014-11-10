@@ -3,6 +3,10 @@
         getJsFullDate: function (jsonDate) {
             return moment(jsonDate);
         },
+
+        getYearsDifference: function (jsonDate) {
+            return moment().diff(jsonDate, 'years');
+        },
         
         getJsDate: function (jsonDate) {
             var date = moment(jsonDate).format("MMM D, YYYY");

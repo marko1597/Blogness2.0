@@ -7,5 +7,6 @@
         "ngPosts",
         "ngLogin",
         "ngConfig",
+        "ngMessaging",
         "angularFileUpload"
     ]);

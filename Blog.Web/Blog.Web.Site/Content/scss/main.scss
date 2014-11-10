@@ -151,7 +151,7 @@ a {
         @include margin(0);
         @include size(100%, auto);
 
-        div:first-child {
+        > div:first-child {
             @include size(80px, auto);
             @include margin(0, 10px);
             float: left;
@@ -163,20 +163,25 @@ a {
             }
         }
 
-        div:last-child {
+        > div:last-child {
             @include size(100%, auto);
 
-            h4 {
+            > h4 {
                 @include padding(null, null, null, 90px);
                 @include margin(0, 0, 5px);
                 font-weight: bold;
             }
 
-            p {
+            > p {
                 @include padding(null, null, null, 90px);
 
                 a {
                     @include margin(0, 0, 5px);
+                    cursor: pointer;
+
+                    &:hover {
+                        color: darken($default-color, $hover-darken-value);
+                    }
                 }
             }
         }

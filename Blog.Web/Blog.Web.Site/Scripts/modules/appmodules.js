@@ -3199,6 +3199,48 @@ ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", 
         $scope.init();
     }
 ]);
+///#source 1 1 /Scripts/modules/posts/directives/postHeader.js
+ngPosts.directive('postHeader', [function () {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+        $scope.username = localStorageService.get("username");
+
+        $scope.isEditable = function () {
+            if ($scope.user && $scope.user.UserName === $scope.username) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+            }
+        });
+
+        $scope.editPost = function () {
+            $location.path("/post/edit/" + $scope.post.Id);
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            post: '=',
+            user: '='
+        },
+        replace: true,
+        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postHeader.html",
+        controller: ctrlFn
+    };
+}]);
+
 ///#source 1 1 /Scripts/modules/posts/directives/postContents.js
 ngPosts.directive('postContents', function () {
     var ctrlFn = function ($scope) {
@@ -4284,6 +4326,10 @@ ngShared.factory('dateHelper', [function () {
         getJsFullDate: function (jsonDate) {
             return moment(jsonDate);
         },
+
+        getYearsDifference: function (jsonDate) {
+            return moment().diff(jsonDate, 'years');
+        },
         
         getJsDate: function (jsonDate) {
             var date = moment(jsonDate).format("MMM D, YYYY");
@@ -4549,6 +4595,7 @@ var ngUser = angular.module("ngUser",
         "ngPosts",
         "ngLogin",
         "ngConfig",
+        "ngMessaging",
         "angularFileUpload"
     ]);
 ///#source 1 1 /Scripts/modules/user/controllers/userProfileCommentsController.js
@@ -4902,6 +4949,60 @@ ngUser.directive('userImage', [function () {
         replace: true,
         templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userImage.html",
         controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /Scripts/modules/user/directives/userInfoPopup.js
+ngUser.directive('userInfoPopup', ["$popover", function ($popover) {
+    var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper) {
+        $scope.username = null;
+                
+        $scope.fullName = function () {
+            if ($scope.user) {
+                return $scope.user.FirstName + ' ' + $scope.user.LastName;
+            }
+            return "Dont dead open inside";
+        };
+
+        $scope.birthdate = function () {
+            if ($scope.user) {
+                var years = dateHelper.getYearsDifference($scope.user.BirthDate);
+                return years + " years old";
+            }
+            return "I can't tell you that mate!";
+        };
+
+        $scope.viewProfile = function () {
+            $location.path("/user/" + $scope.user.UserName);
+        };
+
+        $scope.goToChat = function () {
+            $rootScope.$broadcast("launchChatWindow", $scope.user);
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper"];
+
+    var linkFn = function (scope, el, attr) {
+        var popover = $popover(el, {
+            title: scope.fullName(),
+            animation: 'am-flip-x',
+            scope: scope,
+            template: window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
+            placement: 'bottom'
+        });
+
+        scope.hide = function () {
+            popover.hide();
+        };
+    };
+
+    return {
+        restrict: 'A',
+        scope: {
+            user: '='
+        },
+        controller: ctrlFn,
+        link: linkFn
     };
 }]);
 
