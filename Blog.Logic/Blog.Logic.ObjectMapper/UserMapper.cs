@@ -42,7 +42,7 @@ namespace Blog.Logic.ObjectMapper
                     IsDeleted = user.IsDeleted
                 };
             }
-            return new User();
+            return null;
         }
 
         public static Db.User ToEntity(User user)
