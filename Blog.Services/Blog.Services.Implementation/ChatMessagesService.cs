@@ -45,10 +45,21 @@ namespace Blog.Services.Implementation
             return _chatMessagesLogic.GetChatMessagesByUser(fromUsername, toUsername);
         }
 
+        public List<ChatMessage> GetMoreChatMessagesByUserIds(int fromUserId, int toUserId, int skip = 25)
+        {
+            return _chatMessagesLogic.GetMoreChatMessagesByUser(fromUserId, toUserId, skip);
+        }
+
+        public List<ChatMessage> GetMoreChatMessagesByUsernames(string fromUsername, string toUsername, int skip = 25)
+        {
+            return _chatMessagesLogic.GetMoreChatMessagesByUser(fromUsername, toUsername, skip);
+        }
+
         public ChatMessage AddChatMessage(ChatMessage chatMessage)
         {
             var result = _chatMessagesLogic.Add(chatMessage);
             if (result != null && result.Error != null) throw new Exception(result.Error.Message);
+            if (result == null) return null;
 
             var sendChatMessage = new SendChatMessage
             {

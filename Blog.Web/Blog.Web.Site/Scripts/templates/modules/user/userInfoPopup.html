@@ -7,13 +7,16 @@
                 <span>{{birthdate()}}</span>
             </p>
             <div class="buttons">
-                <div class="btn btn-primary" data-trigger="hover" data-type="info" data-title="Send a message" bs-tooltip ng-click="goToChat()">
-                    <i class="fa fa-quote-left"></i>
+                <div class="btn btn-primary" data-trigger="hover" data-type="info" 
+                     data-title="Send a message" bs-tooltip ng-show="showSendMessage()" ng-click="goToChat()">
+                    <i class="fa fa-comments"></i>
                 </div>
-                <div class="btn btn-success" data-trigger="hover" data-type="info" data-title="View profile" bs-tooltip ng-click="viewProfile()">
+                <div class="btn btn-success" data-trigger="hover" data-type="info" 
+                     data-title="View profile" bs-tooltip ng-click="viewProfile()">
                     <i class="fa fa-user"></i>
                 </div>
-                <div class="btn btn-danger" data-trigger="hover" data-type="info" data-title="Close" bs-tooltip ng-click="hide()">
+                <div class="btn btn-danger" data-trigger="hover" data-type="info" 
+                     data-title="Close" bs-tooltip ng-click="hide()">
                     <i class="fa fa-times"></i>
                 </div>
             </div>

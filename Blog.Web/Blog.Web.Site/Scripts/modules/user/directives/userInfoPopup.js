@@ -1,6 +1,13 @@
-﻿ngUser.directive('userInfoPopup', ["$popover", function ($popover) {
-    var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper) {
-        $scope.username = null;
+﻿ngUser.directive('userInfoPopup', ["$popover", "$window", function ($popover, $window) {
+    var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper, snapRemote, localStorageService) {
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.showSendMessage = function () {
+            if (($scope.authData && $rootScope.user) && ($rootScope.user.UserName !== $scope.user.UserName)) {
+                return true;
+            }
+            return false;
+        };
                 
         $scope.fullName = function () {
             if ($scope.user) {
@@ -22,17 +29,19 @@
         };
 
         $scope.goToChat = function () {
+            $scope.hide();
+            snapRemote.open("right");
             $rootScope.$broadcast("launchChatWindow", $scope.user);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper", "snapRemote", "localStorageService"];
 
-    var linkFn = function (scope, el, attr) {
+    var linkFn = function (scope, el) {
         var popover = $popover(el, {
             title: scope.fullName(),
             animation: 'am-flip-x',
             scope: scope,
-            template: window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
+            template: $window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
             placement: 'bottom'
         });
 

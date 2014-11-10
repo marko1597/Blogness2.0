@@ -16,13 +16,13 @@ CDN hosted slick is a great way to get set up quick:
 In your ```<head>``` add:
 
 ````
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.13/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.3.14/slick.css"/>
 ````
 
 Then, before your closing ```<body>``` tag add:
 
 ```
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.13/slick.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.3.14/slick.min.js"></script>
 ```
 
 #### Bower
@@ -63,8 +63,10 @@ onBeforeChange(this, currentIndex,targetIndex) | method | null | Before slide ch
 onAfterChange(this, index) | method | null | After slide change callback
 onInit(this) | method | null | When Slick initializes for the first time callback
 onReInit(this) | method | null | Every time Slick (re-)initializes callback
+onSetPosition(this) | method | null | Every time Slick recalculates position
 pauseOnHover | boolean | true | Pauses autoplay on hover
 pauseOnDotsHover | boolean | false | Pauses autoplay when a dot is hovered
+respondTo | string | 'window' | Width that responsive object responds to. Can be 'window', 'slider' or 'min' (the smaller of the two).
 responsive | object | null | Breakpoint triggered settings
 slide | string | 'div' | Slide element query
 slidesToShow | int | 1 | # of slides to show at a time

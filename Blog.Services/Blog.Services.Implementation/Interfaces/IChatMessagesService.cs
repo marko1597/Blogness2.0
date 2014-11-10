@@ -21,6 +21,12 @@ namespace Blog.Services.Implementation.Interfaces
         List<ChatMessage> GetChatMessagesByUsernames(string fromUsername, string toUsername);
 
         [OperationContract]
+        List<ChatMessage> GetMoreChatMessagesByUserIds(int fromUserId, int toUserId, int skip = 25);
+
+        [OperationContract]
+        List<ChatMessage> GetMoreChatMessagesByUsernames(string fromUsername, string toUsername, int skip = 25);
+
+        [OperationContract]
         ChatMessage AddChatMessage(ChatMessage chatMessage);
     }
 }

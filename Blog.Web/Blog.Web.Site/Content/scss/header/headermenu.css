@@ -4,9 +4,9 @@
     width: auto;
     height: 100%;
     margin-top: 8px;
-    margin-right: 15px;
+    margin-right: 0;
     margin-bottom: 8px;
-    margin-left: 15px;
+    margin-left: 0;
     display: inline-block;
     color: #fff;
     cursor: pointer; }
@@ -18,6 +18,12 @@
         margin-left: 15px; } }
     #blog-header .messages-toggle:hover {
       color: #f2f2f2; }
+    #blog-header .messages-toggle i, #blog-header .messages-toggle #blog-header .add-post a, #blog-header .add-post #blog-header .messages-toggle a {
+      margin-top: 0;
+      margin-right: 0;
+      margin-bottom: 0;
+      margin-left: 0;
+      font-size: 1.5em; }
   #blog-header i, #blog-header #blog-header .add-post a, #blog-header .add-post #blog-header a {
     margin-right: 7px; }
   #blog-header .header-dropdown-item {

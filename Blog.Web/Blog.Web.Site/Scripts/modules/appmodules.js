@@ -655,9 +655,9 @@ ngHeader.directive('headerMenu', function () {
 
         $scope.addPostButtonVisible = true;
 
-        $scope.showAddPostButton = function () {
+        $scope.showAddPostButton = function() {
             return $scope.addPostButtonVisible;
-        }
+        };
 
         $scope.goAddNewPost = function () {
             $('#blog-header-collapsible').collapse("hide");
@@ -2308,11 +2308,19 @@ ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
 
         $scope.authData = localStorageService.get("authorizationData");
 
+        $scope.isBusy = false;
+
         $scope.chatMessages = [];
 
         $scope.isActive = false;
 
         $scope.newMessage = "";
+
+        $scope.hasMoreMessages = true;
+
+        $scope.showViewMoreMessagesButton = function () {
+            return $scope.hasMoreMessages;
+        };
 
         $scope.recipientName = function () {
             return $scope.recipient ? $scope.recipient.FirstName + ' ' + $scope.recipient.LastName : '';
@@ -2342,6 +2350,10 @@ ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
         };
 
         $scope.$on("launchChatWindow", function (ev, userData) {
+            if (!$scope.user || !$rootScope.user || !$scope.authData) return;
+
+            $scope.chatMessages = [];
+
             $scope.isActive = true;
 
             $scope.recipient = userData;
@@ -2350,7 +2362,13 @@ ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
 
             messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
                 if (response) {
-                    $scope.chatMessages = response;
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+
+                    if ($scope.chatMessages.length === 25) {
+                        $scope.hasMoreMessages = true;
+                    }
                 } else {
                     errorService.displayError({ Message: "No messages found! " });
                 }
@@ -2358,6 +2376,30 @@ ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });
+
+        $scope.getMoreChatMessages = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            messagingService.getMoreChatMessages($scope.user.Id, $scope.recipient.Id, $scope.chatMessages.length).then(function (response) {
+                $scope.isBusy = false;
+
+                if (response) {
+                    $scope.hasMoreMessages = response.length === 10;
+
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+                } else {
+                    errorService.displayError({ Message: "No messages found! " });
+                }
+            }, function () {
+                $scope.isBusy = false;
+                errorService.displayError({ Message: "Failed getting messages!" });
+            });
+        };
 
         $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
             if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
@@ -2406,7 +2448,7 @@ ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
-        $timeout(function() {
+        $timeout(function () {
             scope.elemHeight = ($(document).height()) + 'px';
 
             scope.bodyHeight = function () {
@@ -2558,6 +2600,24 @@ ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateH
 
                 $http({
                     url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreChatMessages: function (fromUserId, toUserId, skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId + "/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (a) {
@@ -4953,9 +5013,16 @@ ngUser.directive('userImage', [function () {
 }]);
 
 ///#source 1 1 /Scripts/modules/user/directives/userInfoPopup.js
-ngUser.directive('userInfoPopup', ["$popover", function ($popover) {
-    var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper) {
-        $scope.username = null;
+ngUser.directive('userInfoPopup', ["$popover", "$window", function ($popover, $window) {
+    var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper, snapRemote, localStorageService) {
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.showSendMessage = function () {
+            if (($scope.authData && $rootScope.user) && ($rootScope.user.UserName !== $scope.user.UserName)) {
+                return true;
+            }
+            return false;
+        };
                 
         $scope.fullName = function () {
             if ($scope.user) {
@@ -4977,17 +5044,19 @@ ngUser.directive('userInfoPopup', ["$popover", function ($popover) {
         };
 
         $scope.goToChat = function () {
+            $scope.hide();
+            snapRemote.open("right");
             $rootScope.$broadcast("launchChatWindow", $scope.user);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper", "snapRemote", "localStorageService"];
 
-    var linkFn = function (scope, el, attr) {
+    var linkFn = function (scope, el) {
         var popover = $popover(el, {
             title: scope.fullName(),
             animation: 'am-flip-x',
             scope: scope,
-            template: window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
+            template: $window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
             placement: 'bottom'
         });
 

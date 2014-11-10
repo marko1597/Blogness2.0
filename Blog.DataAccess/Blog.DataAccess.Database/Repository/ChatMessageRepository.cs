@@ -75,13 +75,28 @@ namespace Blog.DataAccess.Database.Repository
             return userChatMessages.OrderByDescending(a => a.Timestamp).ToList();
         }
 
-        public List<ChatMessage> GetChatMessages(int fromUserId, int toUserId)
+        public List<ChatMessage> GetChatMessages(int fromUserId, int toUserId, int threshold = 25)
         {
             var toRecipientMessages = Find(a => a.FromUserId == fromUserId && a.ToUserId == toUserId, true);
             var fromRecipientMessages = Find(a => a.FromUserId == toUserId && a.ToUserId == fromUserId, true);
             var chatMessages = toRecipientMessages
                 .Union(fromRecipientMessages)
-                .OrderBy(a => a.CreatedDate)
+                .OrderByDescending(a => a.CreatedDate)
+                .Take(threshold)
+                .ToList();
+
+            return chatMessages;
+        }
+
+        public List<ChatMessage> GetMoreChatMessages(int fromUserId, int toUserId, int skip = 25, int threshold = 10)
+        {
+            var toRecipientMessages = Find(a => a.FromUserId == fromUserId && a.ToUserId == toUserId, true);
+            var fromRecipientMessages = Find(a => a.FromUserId == toUserId && a.ToUserId == fromUserId, true);
+            var chatMessages = toRecipientMessages
+                .Union(fromRecipientMessages)
+                .OrderByDescending(a => a.CreatedDate)
+                .Skip(skip)
+                .Take(threshold)
                 .ToList();
 
             return chatMessages;

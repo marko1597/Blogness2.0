@@ -6,6 +6,7 @@
         </div>
     </div>
     <div class="body" scroll-glue ng-style="{ 'height' : bodyHeight() }">
+        <p ng-show="showViewMoreMessagesButton()" ng-click="getMoreChatMessages()">Show more messages</p>
         <div ng-repeat="chatMessage in chatMessages">
             <div class="chat-message animate fade-down" ng-class="isFromRecipient(chatMessage)">
                 <p>{{chatMessage.Text}}</p>

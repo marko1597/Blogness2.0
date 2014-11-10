@@ -6,7 +6,7 @@
     .messages-toggle {
         $message-toggle-y: unquote(round(($base-margin / 2)) + 'px');
         @include size(auto, 100%);
-        @include margin($message-toggle-y, $default-margin, $message-toggle-y, $default-margin);
+        @include margin($message-toggle-y, 0, $message-toggle-y, 0);
         display: inline-block;
         color: $default-color;
         cursor: pointer;
@@ -17,6 +17,11 @@
 
         &:hover {
             color: darken($default-color, $hover-darken-value);
+        }
+
+        i {
+            @include margin(0);
+            font-size: 1.5em;
         }
     }
 

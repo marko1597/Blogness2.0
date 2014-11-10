@@ -81,6 +81,38 @@ namespace Blog.Web.Api.Controllers
             }
         }
 
+        [HttpGet, Authorize]
+        [Route("api/chat/{fromUserId:int}/{toUserId:int}/more/{skip:int}")]
+        public IHttpActionResult GetMoreChatByIds(int fromUserId, int toUserId, int skip)
+        {
+            try
+            {
+                var result = _chatMessagesResource.GetMoreChatMessagesByUserIds(fromUserId, toUserId, skip);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet, Authorize]
+        [Route("api/chat/{fromUsername}/{toUsername}/more/{skip:int}")]
+        public IHttpActionResult GetMoreChatByNames(string fromUsername, string toUsername, int skip)
+        {
+            try
+            {
+                var result = _chatMessagesResource.GetMoreChatMessagesByUsernames(fromUsername, toUsername, skip);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
         [HttpPost, Authorize]
         [Route("api/chat/")]
         public IHttpActionResult Post([FromBody] ChatMessage chatMessage)

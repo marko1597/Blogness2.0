@@ -44,6 +44,24 @@
                 return deferred.promise;
             },
 
+            getMoreChatMessages: function (fromUserId, toUserId, skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId + "/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
             addChatMessage: function (chatMessage) {
                 var deferred = $q.defer();
 

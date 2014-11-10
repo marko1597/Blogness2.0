@@ -51,6 +51,22 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
+        public List<ChatMessage> GetMoreChatMessagesByUserIds(int fromUserId, int toUserId, int skip = 25)
+        {
+            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
+            {
+                return svc.Proxy.GetMoreChatMessagesByUserIds(fromUserId, toUserId, skip);
+            }
+        }
+
+        public List<ChatMessage> GetMoreChatMessagesByUsernames(string fromUsername, string toUsername, int skip = 25)
+        {
+            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
+            {
+                return svc.Proxy.GetMoreChatMessagesByUsernames(fromUsername, toUsername, skip);
+            }
+        }
+
         public ChatMessage AddChatMessage(ChatMessage chatMessage)
         {
             using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))

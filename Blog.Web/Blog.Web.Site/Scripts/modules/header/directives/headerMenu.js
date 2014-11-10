@@ -6,9 +6,9 @@
 
         $scope.addPostButtonVisible = true;
 
-        $scope.showAddPostButton = function () {
+        $scope.showAddPostButton = function() {
             return $scope.addPostButtonVisible;
-        }
+        };
 
         $scope.goAddNewPost = function () {
             $('#blog-header-collapsible').collapse("hide");

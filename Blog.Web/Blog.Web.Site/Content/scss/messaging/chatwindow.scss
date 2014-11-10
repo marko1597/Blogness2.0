@@ -12,6 +12,18 @@
         @include position(relative, null);
         overflow-y: scroll;
 
+        > p {
+            @include margin($default-margin);
+            color: $content-font-color;
+            cursor: pointer;
+            text-align: center;
+
+            &:hover {
+                color: darken($content-font-color, $hover-darken-value);
+                text-decoration: underline;
+            }
+        }
+
         .chat-message {
             $chat-message-space-big: unquote(($base-margin * 6) + 'px');
             $chat-message-space-min: unquote(($base-padding / 3) + 'px');

@@ -6,11 +6,19 @@
 
         $scope.authData = localStorageService.get("authorizationData");
 
+        $scope.isBusy = false;
+
         $scope.chatMessages = [];
 
         $scope.isActive = false;
 
         $scope.newMessage = "";
+
+        $scope.hasMoreMessages = true;
+
+        $scope.showViewMoreMessagesButton = function () {
+            return $scope.hasMoreMessages;
+        };
 
         $scope.recipientName = function () {
             return $scope.recipient ? $scope.recipient.FirstName + ' ' + $scope.recipient.LastName : '';
@@ -40,6 +48,10 @@
         };
 
         $scope.$on("launchChatWindow", function (ev, userData) {
+            if (!$scope.user || !$rootScope.user || !$scope.authData) return;
+
+            $scope.chatMessages = [];
+
             $scope.isActive = true;
 
             $scope.recipient = userData;
@@ -48,7 +60,13 @@
 
             messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
                 if (response) {
-                    $scope.chatMessages = response;
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+
+                    if ($scope.chatMessages.length === 25) {
+                        $scope.hasMoreMessages = true;
+                    }
                 } else {
                     errorService.displayError({ Message: "No messages found! " });
                 }
@@ -56,6 +74,30 @@
                 errorService.displayError({ Message: "Failed getting messages!" });
             });
         });
+
+        $scope.getMoreChatMessages = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            messagingService.getMoreChatMessages($scope.user.Id, $scope.recipient.Id, $scope.chatMessages.length).then(function (response) {
+                $scope.isBusy = false;
+
+                if (response) {
+                    $scope.hasMoreMessages = response.length === 10;
+
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+                } else {
+                    errorService.displayError({ Message: "No messages found! " });
+                }
+            }, function () {
+                $scope.isBusy = false;
+                errorService.displayError({ Message: "Failed getting messages!" });
+            });
+        };
 
         $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
             if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
@@ -104,7 +146,7 @@
     ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
-        $timeout(function() {
+        $timeout(function () {
             scope.elemHeight = ($(document).height()) + 'px';
 
             scope.bodyHeight = function () {

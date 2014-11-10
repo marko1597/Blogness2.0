@@ -11,6 +11,17 @@
   .chat-window .body {
     position: relative;
     overflow-y: scroll; }
+    .chat-window .body > p {
+      margin-top: 15px;
+      margin-right: 15px;
+      margin-bottom: 15px;
+      margin-left: 15px;
+      color: #4c4c4c;
+      cursor: pointer;
+      text-align: center; }
+      .chat-window .body > p:hover {
+        color: #3f3f3f;
+        text-decoration: underline; }
     .chat-window .body .chat-message {
       margin-top: 5px;
       margin-right: 90px;

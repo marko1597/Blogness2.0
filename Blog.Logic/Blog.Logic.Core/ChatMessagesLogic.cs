@@ -84,6 +84,38 @@ namespace Blog.Logic.Core
             }
         }
 
+        public List<ChatMessage> GetMoreChatMessagesByUser(int fromUserId, int toUserId, int skip = 25)
+        {
+            try
+            {
+                return GetMoreChatMessages(fromUserId, toUserId, skip);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
+        public List<ChatMessage> GetMoreChatMessagesByUser(string fromUsername, string toUsername, int skip = 25)
+        {
+            try
+            {
+                var fromUser = GetUserByUsername(fromUsername);
+                if (fromUser == null)
+                    throw new Exception(string.Format("No user found with username {0}", fromUsername));
+
+                var toUser = GetUserByUsername(toUsername);
+                if (toUser == null)
+                    throw new Exception(string.Format("No user found with username {0}", toUsername));
+
+                return GetMoreChatMessages(fromUser.Id, toUser.Id, skip);
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public ChatMessage Add(ChatMessage chatMessage)
         {
             try
@@ -108,6 +140,15 @@ namespace Blog.Logic.Core
             {
                 throw new BlogException(ex.Message, ex.InnerException);
             }
+        }
+
+        private List<ChatMessage> GetMoreChatMessages(int fromUserId, int toUserId, int skip = 25)
+        {
+            var dbChatMessages = _chatMessageRepository.GetMoreChatMessages(fromUserId, toUserId, skip);
+            var chatMessages = new List<ChatMessage>();
+            dbChatMessages.ForEach(a => chatMessages.Add(ChatMessageMapper.ToDto(a)));
+
+            return chatMessages;
         }
 
         private List<ChatMessage> GetChatMessages(int fromUserId, int toUserId)

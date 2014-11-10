@@ -16,6 +16,21 @@
   overflow-y: scroll;
 }
 /* line 15, ../../scss/messaging/chatwindow.scss */
+.chat-window .body > p {
+  margin-top: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  margin-left: 15px;
+  color: #4c4c4c;
+  cursor: pointer;
+  text-align: center;
+}
+/* line 21, ../../scss/messaging/chatwindow.scss */
+.chat-window .body > p:hover {
+  color: #3f3f3f;
+  text-decoration: underline;
+}
+/* line 27, ../../scss/messaging/chatwindow.scss */
 .chat-window .body .chat-message {
   margin-top: 5px;
   margin-right: 90px;
@@ -30,11 +45,11 @@
   background: white;
   color: #4c4c4c;
 }
-/* line 24, ../../scss/messaging/chatwindow.scss */
+/* line 36, ../../scss/messaging/chatwindow.scss */
 .chat-window .body .chat-message .details {
   font-size: 0.7em;
 }
-/* line 28, ../../scss/messaging/chatwindow.scss */
+/* line 40, ../../scss/messaging/chatwindow.scss */
 .chat-window .body .chat-message.recipient-message {
   margin-top: 5px;
   margin-right: 5px;
@@ -43,11 +58,11 @@
   background: #56c2e1;
   color: white;
 }
-/* line 34, ../../scss/messaging/chatwindow.scss */
+/* line 46, ../../scss/messaging/chatwindow.scss */
 .chat-window .body .chat-message p {
   margin-bottom: 0;
 }
-/* line 40, ../../scss/messaging/chatwindow.scss */
+/* line 52, ../../scss/messaging/chatwindow.scss */
 .chat-window .new-message {
   position: absolute;
   bottom: 0;
@@ -59,12 +74,12 @@
   height: 50px;
   background: #4c4c4c;
 }
-/* line 47, ../../scss/messaging/chatwindow.scss */
+/* line 59, ../../scss/messaging/chatwindow.scss */
 .chat-window .new-message textarea {
   width: 80%;
   height: 100%;
 }
-/* line 51, ../../scss/messaging/chatwindow.scss */
+/* line 63, ../../scss/messaging/chatwindow.scss */
 .chat-window .new-message button {
   width: auto;
   height: 100%;
