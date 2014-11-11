@@ -5,7 +5,7 @@
     @include margin(null, null, $default-margin);
     background: $default-color;
 
-    p {
+    > p {
         @include margin(0);
         @include padding(10px);
         @include borders(1px, solid, $light-border-color, false, true, true, true);
@@ -47,6 +47,14 @@
             @include position(absolute, $computed-top, null, null, null);
             display: inline-block;
             color: $main-font-color;
+
+            a {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
 
             span {
                 font-size: .7em;

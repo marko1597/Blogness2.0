@@ -2,7 +2,7 @@
   position: relative;
   margin-bottom: 15px;
   background: #fff; }
-  .comment-item p {
+  .comment-item > p {
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -48,6 +48,10 @@
       top: 3px;
       display: inline-block;
       color: #fff; }
+      .comment-item .header .details a {
+        cursor: pointer; }
+        .comment-item .header .details a:hover {
+          text-decoration: underline; }
       .comment-item .header .details span {
         font-size: 0.7em; }
     .comment-item .header .expand {

@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"userinfopopup.css","sources":["userinfopopup.scss"],"names":[],"mappings":"AAAA;EACI,WAAW"}
+﻿{"version":3,"file":"userinfopopup.css","sources":["userinfopopup.scss","../variables.scss"],"names":[],"mappings":"AAEA;EACI,WAAW"}

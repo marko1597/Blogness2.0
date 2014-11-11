@@ -5051,13 +5051,15 @@ ngUser.directive('userInfoPopup', ["$popover", "$window", function ($popover, $w
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$location", "messagingService", "dateHelper", "snapRemote", "localStorageService"];
 
-    var linkFn = function (scope, el) {
+    var linkFn = function (scope, el, attrs) {
+        var popoverPlacement = attrs.placement ? attrs.placement : 'bottom';
+
         var popover = $popover(el, {
             title: scope.fullName(),
             animation: 'am-flip-x',
             scope: scope,
             template: $window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
-            placement: 'bottom'
+            placement: popoverPlacement
         });
 
         scope.hide = function () {
