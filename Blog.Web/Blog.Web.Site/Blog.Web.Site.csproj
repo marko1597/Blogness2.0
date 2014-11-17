@@ -133,43 +133,43 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Common, Version=4.0.33.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Common.4.0.32\lib\net40\ServiceStack.Common.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Common.4.0.33\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.32\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.33\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Redis, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Redis, Version=4.0.33.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Redis.4.0.32\lib\net40\ServiceStack.Redis.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Redis.4.0.33\lib\net40\ServiceStack.Redis.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text, Version=4.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack.Text, Version=4.0.33.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Text.4.0.32\lib\net40\ServiceStack.Text.dll</HintPath>
+      <HintPath>..\..\packages\ServiceStack.Text.4.0.33\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.6.0\lib\net45\SimpleInjector.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.2.6.1\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Diagnostics, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector.Diagnostics, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.2.6.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.2.6.1\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.6.0\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Extensions.LifetimeScoping.2.6.1\lib\net40-client\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Web, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector.Integration.Web, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.6.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.2.6.1\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=2.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.2.6.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.2.6.1\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -282,6 +282,10 @@
     <Content Include="Content\appmodules.min.css">
       <DependentUpon>appmodules.css</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font.css" />
     <Content Include="Content\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.svg" />
     <Content Include="Content\fonts\OpenSans-Bold\OpenSans-Bold-webfont.svg" />
@@ -461,6 +465,8 @@
       <DependentUpon>angular-snap.css</DependentUpon>
     </Content>
     <Content Include="Content\scss\accountpage.scss" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Content\scss\extensions\ngtagsinput.scss" />
     <Content Include="Content\scss\extensions\ckeditor.css">
       <DependentUpon>ckeditor.scss</DependentUpon>
@@ -2600,15 +2606,12 @@
     <Content Include="Scripts\cssbundle.min.css">
       <DependentUpon>cssbundle.css</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jsbundle.js">
       <DependentUpon>jsbundle.js.bundle</DependentUpon>
     </Content>
     <Content Include="Scripts\jsbundle.min.js">
       <DependentUpon>jsbundle.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\modules\appmodules.js">
       <DependentUpon>appmodules.js.bundle</DependentUpon>
     </Content>
@@ -2661,9 +2664,6 @@
     <Content Include="Scripts\modules\user\directives\userInfoPopup.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
     <Content Include="Blog.Web.Site.nuspec" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\theme\default\fonts\Bazar.ttf" />
     <Content Include="Content\theme\default\fonts\CanterBold.otf" />
     <Content Include="Content\theme\default\fonts\CanterBold3D.otf" />
@@ -3226,6 +3226,7 @@
     <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbies.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbyItem.js" />
     <Content Include="Scripts\modules\user\directives\userProfileDetailsInfo.js" />
+    <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\plugins\ckeditor\build-config.js" />
     <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />
@@ -3813,6 +3814,9 @@
     <Content Include="Scripts\bower_components\slick.js\slick\fonts\slick.woff" />
     <Content Include="Scripts\bower_components\slick.js\slick\slick.css.map" />
     <Content Include="Scripts\bower_components\slick.js\slick\slick.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3828,7 +3832,9 @@
     <Folder Include="Scripts\modules\comments\controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
@@ -3891,10 +3897,10 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\..\packages\OctoPack.3.0.31\tools\OctoPack.targets" Condition="Exists('..\..\packages\OctoPack.3.0.31\tools\OctoPack.targets')" />
+  <Import Project="..\..\packages\OctoPack.3.0.33\tools\OctoPack.targets" Condition="Exists('..\..\packages\OctoPack.3.0.33\tools\OctoPack.targets')" />
   <Target Name="EnsureOctoPackImported" BeforeTargets="BeforeBuild" Condition="'$(OctoPackImported)' == ''">
-    <Error Condition="!Exists('..\..\packages\OctoPack.3.0.31\tools\OctoPack.targets') And ('$(RunOctoPack)' != '' And $(RunOctoPack))" Text="You are trying to build with OctoPack, but the NuGet targets file that OctoPack depends on is not available on this computer. This is probably because the OctoPack package has not been committed to source control, or NuGet Package Restore is not enabled. Please enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\..\packages\OctoPack.3.0.31\tools\OctoPack.targets') And ('$(RunOctoPack)' != '' And $(RunOctoPack))" Text="OctoPack cannot be run because NuGet packages were restored prior to the build running, and the targets file was unavailable when the build started. Please build the project again to include these packages in the build. You may also need to make sure that your build server does not delete packages prior to each build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+    <Error Condition="!Exists('..\..\packages\OctoPack.3.0.33\tools\OctoPack.targets') And ('$(RunOctoPack)' != '' And $(RunOctoPack))" Text="You are trying to build with OctoPack, but the NuGet targets file that OctoPack depends on is not available on this computer. This is probably because the OctoPack package has not been committed to source control, or NuGet Package Restore is not enabled. Please enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\..\packages\OctoPack.3.0.33\tools\OctoPack.targets') And ('$(RunOctoPack)' != '' And $(RunOctoPack))" Text="OctoPack cannot be run because NuGet packages were restored prior to the build running, and the targets file was unavailable when the build started. Please build the project again to include these packages in the build. You may also need to make sure that your build server does not delete packages prior to each build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
