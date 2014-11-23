@@ -9,20 +9,18 @@
     <title>Bloggity</title>
     <link rel="icon" href="~/favicon.ico" />
 
-    <!-- #region css bootstrap, fontawesome and font face -->
-    <link href="~/Content/font.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Scripts/bower_components/fontawesome/css/font-awesome.css" rel="stylesheet" />
-    <!-- #endregion -->
     <!-- #region css styles -->
     @if (UseBundle())
     {
-        <link href="~/Scripts/cssbundle.min.css" rel="stylesheet" />
-        <link href="~/Content/appmodules.min.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/cssbundle.min.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/appmodules.min.css" rel="stylesheet" />
     }
     else
     {
         <!-- css plugins -->
+        <link href="~/wwwroot/css/font.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/Scripts/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" />
         <link href="~/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css" rel="stylesheet" />
         <link href="~/Scripts/bower_components/angular-motion/dist/angular-motion.css" rel="stylesheet" />
         <link href="~/Scripts/bower_components/angular-snap/angular-snap.css" rel="stylesheet" />
@@ -36,87 +34,87 @@
         <link href="~/Scripts/bower_components/videogular-themes-default/videogular.css" rel="stylesheet" />
 
         <!-- main css and extensions -->
-        <link href="~/Content/modules/main.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/angular-snap.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/animations.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/blockui.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/bootstrap.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/ckeditor.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/isotope.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/ngtagsinput.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/slick.css" rel="stylesheet" />
-        <link href="~/Content/modules/extensions/videogular.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/main.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/angular-snap.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/animations.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/blockui.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/bootstrap.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/ckeditor.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/isotope.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/ngtagsinput.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/slick.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/extensions/videogular.css" rel="stylesheet" />
 
         <!-- blog pages styles -->
-        <link href="~/Content/modules/accountpage.css" rel="stylesheet" />
-        <link href="~/Content/modules/errorpage.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts.css" rel="stylesheet" />
-        <link href="~/Content/modules/viewpost.css" rel="stylesheet" />
-        <link href="~/Content/modules/users.css" rel="stylesheet" />
-        <link href="~/Content/modules/modifypost.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/accountpage.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/errorpage.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/viewpost.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/users.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/modifypost.css" rel="stylesheet" />
 
         <!-- blog media module styles -->
-        <link href="~/Content/modules/media/mediagallery.css" rel="stylesheet" />
-        <link href="~/Content/modules/media/mediagroupedlist.css" rel="stylesheet" />
-        <link href="~/Content/modules/media/albumgroup.css" rel="stylesheet" />
-        <link href="~/Content/modules/media/mediaitem.css" rel="stylesheet" />
-        <link href="~/Content/modules/media/mediaselectiondialog.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/media/mediagallery.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/media/mediagroupedlist.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/media/albumgroup.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/media/mediaitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/media/mediaselectiondialog.css" rel="stylesheet" />
 
         <!-- blog socket module styles -->
-        <link href="~/Content/modules/sockets/socketdebugger.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/sockets/socketdebugger.css" rel="stylesheet" />
 
         <!-- blog shared module styles -->
-        <link href="~/Content/modules/shared/fileupload.css" rel="stylesheet" />
-        <link href="~/Content/modules/shared/fileuploaditem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/shared/fileupload.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/shared/fileuploaditem.css" rel="stylesheet" />
 
         <!-- blog header module styles -->
-        <link href="~/Content/modules/header/headermenu.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/header/headermenu.css" rel="stylesheet" />
 
         <!-- blog login module styles -->
-        <link href="~/Content/modules/loginform/loggedUser.css" rel="stylesheet" />
-        <link href="~/Content/modules/loginform/loginform.css" rel="stylesheet" />
-        <link href="~/Content/modules/loginform/loginformmodal.css" rel="stylesheet" />
-        <link href="~/Content/modules/loginform/registerform.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/loginform/loggedUser.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/loginform/loginform.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/loginform/loginformmodal.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/loginform/registerform.css" rel="stylesheet" />
 
         <!-- blog navigation module styles -->
-        <link href="~/Content/modules/navigation/navigationmenu.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/navigation/navigationmenu.css" rel="stylesheet" />
 
         <!-- blog messaging module styles -->
-        <link href="~/Content/modules/messaging/messagespanel.css" rel="stylesheet" />
-        <link href="~/Content/modules/messaging/chatwindow.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/messaging/messagespanel.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/messaging/chatwindow.css" rel="stylesheet" />
 
         <!-- blog posts module styles -->
-        <link href="~/Content/modules/posts/postcontents.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postlikes.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postlistitem.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postlistitemcomment.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postrelateditem.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postrelateditems.css" rel="stylesheet" />
-        <link href="~/Content/modules/posts/postviewnavigator.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postcontents.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postlikes.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postlistitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postlistitemcomment.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postrelateditem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postrelateditems.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/posts/postviewnavigator.css" rel="stylesheet" />
 
         <!-- blog error module styles -->
-        <link href="~/Content/modules/error/errorDisplay.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/error/errorDisplay.css" rel="stylesheet" />
 
         <!-- blog comments module styles -->
-        <link href="~/Content/modules/comments/commentsaddnew.css" rel="stylesheet" />
-        <link href="~/Content/modules/comments/commentitem.css" rel="stylesheet" />
-        <link href="~/Content/modules/comments/commentscontainer.css" rel="stylesheet" />
-        <link href="~/Content/modules/comments/commentslist.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/comments/commentsaddnew.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/comments/commentitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/comments/commentscontainer.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/comments/commentslist.css" rel="stylesheet" />
 
         <!-- blog tags module styles -->
-        <link href="~/Content/modules/tags/tagitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/tags/tagitem.css" rel="stylesheet" />
 
         <!-- blog users module styles -->
-        <link href="~/Content/modules/user/userimage.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userinfopopup.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofilenavigation.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofiledetails.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofilecomments.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofilefavorites.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofilemedia.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userprofileposts.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/userpostitem.css" rel="stylesheet" />
-        <link href="~/Content/modules/user/usercommentitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userimage.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userinfopopup.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofilenavigation.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofiledetails.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofilecomments.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofilefavorites.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofilemedia.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userprofileposts.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/userpostitem.css" rel="stylesheet" />
+        <link href="~/wwwroot/css/modules/user/usercommentitem.css" rel="stylesheet" />
     }
     <!-- #endregion -->
 
@@ -172,9 +170,9 @@
     <!-- #region js plugins and app modules -->
     @if (UseBundle())
     {
-        <script src="~/Scripts/jsbundle.min.js"></script>
-        <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
-        <script src="~/Scripts/modules/appmodules.min.js"></script>
+        <script src="~/wwwroot/lib/jsbundle.min.js"></script>
+        <script src="~/wwwroot/lib/ckeditor/ckeditor.js"></script>
+        <script src="~/wwwroot/modules/appmodules.min.js"></script>
     }
     else
     {
@@ -183,9 +181,9 @@
         <script src="~/Scripts/bower_components/jqueryui/jquery-ui.js"></script>
         <script src="~/Scripts/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js"></script>
         <script src="~/Scripts/bower_components/isotope/jquery.isotope.js"></script>
-        <script src="~/Scripts/plugins/jquery.blockui.js"></script>
-        <script src="~/Scripts/plugins/jquery.newsTicker.js"></script>
         <script src="~/Scripts/bower_components/slick.js/slick/slick.js"></script>
+        <script src="~/wwwroot/lib/jquery.blockui.js"></script>
+        <script src="~/wwwroot/lib/jquery.newsTicker.js"></script>
 
         <!-- javascript plugins scripts -->
         <script src="~/Scripts/bower_components/classie/classie.js"></script>
@@ -193,11 +191,11 @@
         <script src="~/Scripts/bower_components/es5-shim/es5-shim.js"></script>
         <script src="~/Scripts/bower_components/moment/moment.js"></script>
         <script src="~/Scripts/bower_components/offline/offline.min.js"></script>
-        <script src="~/Scripts/bower_components/snapjs/snap.js"></script>
+        <script src="~/Scripts/bower_components/snap.js/snap.js"></script>
         <script src="~/Scripts/bower_components/respond/src/respond.js"></script>
         <script src="~/Scripts/bower_components/underscore/underscore.js"></script>
-        <script src="~/Scripts/bower_components/stacktrace/stacktrace.js"></script>
-        <script src="~/Scripts/plugins/ckeditor/ckeditor.js"></script>
+        <script src="~/Scripts/bower_components/stacktrace-js/stacktrace.js"></script>
+        <script src="~/wwwroot/lib/ckeditor/ckeditor.js"></script>
 
         if (IsDebug())
         {
@@ -237,130 +235,130 @@
         <script src="~/Scripts/bower_components/videogular-ima-ads/ima-ads.js"></script>
 
         <!-- blog main module -->
-        <script src="~/Scripts/modules/main/app.js"></script>
-        <script src="~/Scripts/modules/main/config/blogConfig.js"></script>
-        <script src="~/Scripts/modules/main/controllers/blogMainController.js"></script>
-        <script src="~/Scripts/modules/main/directives/windowResize.js"></script>
+        <script src="~/wwwroot/modules/main/app.js"></script>
+        <script src="~/wwwroot/modules/main/config/blogConfig.js"></script>
+        <script src="~/wwwroot/modules/main/controllers/blogMainController.js"></script>
+        <script src="~/wwwroot/modules/main/directives/windowResize.js"></script>
 
         <!-- blog config module -->
-        <script src="~/Scripts/modules/config/config.js"></script>
-        <script src="~/Scripts/modules/config/provider/configProvider.js"></script>
+        <script src="~/wwwroot/modules/config/config.js"></script>
+        <script src="~/wwwroot/modules/config/provider/configProvider.js"></script>
 
         <!-- blog error module -->
-        <script src="~/Scripts/modules/error/error.js"></script>
-        <script src="~/Scripts/modules/error/services/errorService.js"></script>
-        <script src="~/Scripts/modules/error/controllers/errorPageController.js"></script>
-        <script src="~/Scripts/modules/error/directives/errorDisplay.js"></script>
+        <script src="~/wwwroot/modules/error/error.js"></script>
+        <script src="~/wwwroot/modules/error/services/errorService.js"></script>
+        <script src="~/wwwroot/modules/error/controllers/errorPageController.js"></script>
+        <script src="~/wwwroot/modules/error/directives/errorDisplay.js"></script>
 
         <!-- blog shared helpers module -->
-        <script src="~/Scripts/modules/shared/shared.js"></script>
-        <script src="~/Scripts/modules/shared/services/blockUi.js"></script>
-        <script src="~/Scripts/modules/shared/services/dateHelper.js"></script>
-        <script src="~/Scripts/modules/shared/directives/ellipsis.js"></script>
-        <script src="~/Scripts/modules/shared/directives/emptyRecordMessage.js"></script>
-        <script src="~/Scripts/modules/shared/directives/fileUpload.js"></script>
-        <script src="~/Scripts/modules/shared/directives/fileUploadItem.js"></script>
-        <script src="~/Scripts/modules/shared/directives/fileUploadThumbnail.js"></script>
-        <script src="~/Scripts/modules/shared/directives/isotopeItemResize.js"></script>
-        <script src="~/Scripts/modules/shared/directives/keypress.js"></script>
-        <script src="~/Scripts/modules/shared/directives/videoPlayer.js"></script>
-        <script src="~/Scripts/modules/shared/directives/scrollTrigger.js"></script>
-        <script src="~/Scripts/modules/shared/directives/ticker.js"></script>
+        <script src="~/wwwroot/modules/shared/shared.js"></script>
+        <script src="~/wwwroot/modules/shared/services/blockUi.js"></script>
+        <script src="~/wwwroot/modules/shared/services/dateHelper.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/ellipsis.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/emptyRecordMessage.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/fileUpload.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/fileUploadItem.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/fileUploadThumbnail.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/isotopeItemResize.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/keypress.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/videoPlayer.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/scrollTrigger.js"></script>
+        <script src="~/wwwroot/modules/shared/directives/ticker.js"></script>
 
         <!-- blog logger module -->
-        <script src="~/Scripts/modules/logger/logger.js"></script>
-        <script src="~/Scripts/modules/logger/services/errorLogService.js"></script>
-        <script src="~/Scripts/modules/logger/services/stacktraceService.js"></script>
+        <script src="~/wwwroot/modules/logger/logger.js"></script>
+        <script src="~/wwwroot/modules/logger/services/errorLogService.js"></script>
+        <script src="~/wwwroot/modules/logger/services/stacktraceService.js"></script>
 
         <!-- blog header module -->
-        <script src="~/Scripts/modules/header/header.js"></script>
-        <script src="~/Scripts/modules/header/directives/headerMenu.js"></script>
+        <script src="~/wwwroot/modules/header/header.js"></script>
+        <script src="~/wwwroot/modules/header/directives/headerMenu.js"></script>
 
         <!-- blog tags module -->
-        <script src="~/Scripts/modules/tags/tags.js"></script>
-        <script src="~/Scripts/modules/tags/services/tagsService.js"></script>
-        <script src="~/Scripts/modules/tags/directives/tagItem.js"></script>
+        <script src="~/wwwroot/modules/tags/tags.js"></script>
+        <script src="~/wwwroot/modules/tags/services/tagsService.js"></script>
+        <script src="~/wwwroot/modules/tags/directives/tagItem.js"></script>
 
         <!-- blog login module -->
-        <script src="~/Scripts/modules/login/login.js"></script>
-        <script src="~/Scripts/modules/login/services/authenticationService.js"></script>
-        <script src="~/Scripts/modules/login/services/authenticationInterceptorService.js"></script>
-        <script src="~/Scripts/modules/login/directives/loggedUser.js"></script>
-        <script src="~/Scripts/modules/login/directives/loginForm.js"></script>
-        <script src="~/Scripts/modules/login/directives/registerForm.js"></script>
-        <script src="~/Scripts/modules/login/directives/loginFormModal.js"></script>
+        <script src="~/wwwroot/modules/login/login.js"></script>
+        <script src="~/wwwroot/modules/login/services/authenticationService.js"></script>
+        <script src="~/wwwroot/modules/login/services/authenticationInterceptorService.js"></script>
+        <script src="~/wwwroot/modules/login/directives/loggedUser.js"></script>
+        <script src="~/wwwroot/modules/login/directives/loginForm.js"></script>
+        <script src="~/wwwroot/modules/login/directives/registerForm.js"></script>
+        <script src="~/wwwroot/modules/login/directives/loginFormModal.js"></script>
 
         <!-- blog media module -->
-        <script src="~/Scripts/modules/media/media.js"></script>
-        <script src="~/Scripts/modules/media/controllers/mediaGalleryController.js"></script>
-        <script src="~/Scripts/modules/media/services/mediaService.js"></script>
-        <script src="~/Scripts/modules/media/services/albumService.js"></script>
-        <script src="~/Scripts/modules/media/directives/mediaGroupedList.js"></script>
-        <script src="~/Scripts/modules/media/directives/mediaGalleryView.js"></script>
-        <script src="~/Scripts/modules/media/directives/albumGroup.js"></script>
-        <script src="~/Scripts/modules/media/directives/mediaItem.js"></script>
+        <script src="~/wwwroot/modules/media/media.js"></script>
+        <script src="~/wwwroot/modules/media/controllers/mediaGalleryController.js"></script>
+        <script src="~/wwwroot/modules/media/services/mediaService.js"></script>
+        <script src="~/wwwroot/modules/media/services/albumService.js"></script>
+        <script src="~/wwwroot/modules/media/directives/mediaGroupedList.js"></script>
+        <script src="~/wwwroot/modules/media/directives/mediaGalleryView.js"></script>
+        <script src="~/wwwroot/modules/media/directives/albumGroup.js"></script>
+        <script src="~/wwwroot/modules/media/directives/mediaItem.js"></script>
 
         <!-- blog user module -->
-        <script src="~/Scripts/modules/user/user.js"></script>
-        <script src="~/Scripts/modules/user/controllers/userProfileController.js"></script>
-        <script src="~/Scripts/modules/user/controllers/userProfileCommentsController.js"></script>
-        <script src="~/Scripts/modules/user/controllers/userProfileFavoritesController.js"></script>
-        <script src="~/Scripts/modules/user/controllers/userProfileMediaController.js"></script>
-        <script src="~/Scripts/modules/user/controllers/userProfilePostsController.js"></script>
-        <script src="~/Scripts/modules/user/services/userService.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetails.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsInfo.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsAddress.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbies.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsHobbyItem.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducation.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationGroup.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileDetailsEducationItem.js"></script>
-        <script src="~/Scripts/modules/user/directives/userProfileNavigation.js"></script>
-        <script src="~/Scripts/modules/user/directives/userImage.js"></script>
-        <script src="~/Scripts/modules/user/directives/userInfoPopup.js"></script>
+        <script src="~/wwwroot/modules/user/user.js"></script>
+        <script src="~/wwwroot/modules/user/controllers/userProfileController.js"></script>
+        <script src="~/wwwroot/modules/user/controllers/userProfileCommentsController.js"></script>
+        <script src="~/wwwroot/modules/user/controllers/userProfileFavoritesController.js"></script>
+        <script src="~/wwwroot/modules/user/controllers/userProfileMediaController.js"></script>
+        <script src="~/wwwroot/modules/user/controllers/userProfilePostsController.js"></script>
+        <script src="~/wwwroot/modules/user/services/userService.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetails.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsInfo.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsAddress.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsHobbies.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsHobbyItem.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsEducation.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsEducationGroup.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileDetailsEducationItem.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userProfileNavigation.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userImage.js"></script>
+        <script src="~/wwwroot/modules/user/directives/userInfoPopup.js"></script>
 
         <!-- blog sockets module -->
-        <script src="~/Scripts/modules/sockets/socket.js"></script>
-        <script src="~/Scripts/modules/sockets/services/socketsService.js"></script>
-        <script src="~/Scripts/modules/sockets/directives/socketDebugger.js"></script>
+        <script src="~/wwwroot/modules/sockets/socket.js"></script>
+        <script src="~/wwwroot/modules/sockets/services/socketsService.js"></script>
+        <script src="~/wwwroot/modules/sockets/directives/socketDebugger.js"></script>
 
         <!-- blog navigation module -->
-        <script src="~/Scripts/modules/navigation/navigation.js"></script>
-        <script src="~/Scripts/modules/navigation/directives/navigationMenu.js"></script>
+        <script src="~/wwwroot/modules/navigation/navigation.js"></script>
+        <script src="~/wwwroot/modules/navigation/directives/navigationMenu.js"></script>
 
         <!-- blog messaging module -->
-        <script src="~/Scripts/modules/messaging/messaging.js"></script>
-        <script src="~/Scripts/modules/messaging/directives/messagesPanel.js"></script>
-        <script src="~/Scripts/modules/messaging/directives/chatWindow.js"></script>
-        <script src="~/Scripts/modules/messaging/services/messagingService.js"></script>
+        <script src="~/wwwroot/modules/messaging/messaging.js"></script>
+        <script src="~/wwwroot/modules/messaging/directives/messagesPanel.js"></script>
+        <script src="~/wwwroot/modules/messaging/directives/chatWindow.js"></script>
+        <script src="~/wwwroot/modules/messaging/services/messagingService.js"></script>
 
         <!-- blog posts module -->
-        <script src="~/Scripts/modules/posts/posts.js"></script>
-        <script src="~/Scripts/modules/posts/services/postsService.js"></script>
-        <script src="~/Scripts/modules/posts/controllers/postsController.js"></script>
-        <script src="~/Scripts/modules/posts/controllers/postsModifyController.js"></script>
-        <script src="~/Scripts/modules/posts/controllers/postsViewController.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postHeader.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postContents.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postLikes.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postViewCount.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postListItem.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postListItemComment.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postRelatedItem.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postRelatedItems.js"></script>
-        <script src="~/Scripts/modules/posts/directives/postViewNavigator.js"></script>
+        <script src="~/wwwroot/modules/posts/posts.js"></script>
+        <script src="~/wwwroot/modules/posts/services/postsService.js"></script>
+        <script src="~/wwwroot/modules/posts/controllers/postsController.js"></script>
+        <script src="~/wwwroot/modules/posts/controllers/postsModifyController.js"></script>
+        <script src="~/wwwroot/modules/posts/controllers/postsViewController.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postHeader.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postContents.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postLikes.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postViewCount.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postListItem.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postListItemComment.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postRelatedItem.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postRelatedItems.js"></script>
+        <script src="~/wwwroot/modules/posts/directives/postViewNavigator.js"></script>
 
         <!-- blog comments module -->
-        <script src="~/Scripts/modules/comments/comments.js"></script>
-        <script src="~/Scripts/modules/comments/services/commentsService.js"></script>
-        <script src="~/Scripts/modules/comments/directives/commentItem.js"></script>
-        <script src="~/Scripts/modules/comments/directives/commentsAddNew.js"></script>
-        <script src="~/Scripts/modules/comments/directives/commentsContainer.js"></script>
-        <script src="~/Scripts/modules/comments/directives/commentsList.js"></script>
+        <script src="~/wwwroot/modules/comments/comments.js"></script>
+        <script src="~/wwwroot/modules/comments/services/commentsService.js"></script>
+        <script src="~/wwwroot/modules/comments/directives/commentItem.js"></script>
+        <script src="~/wwwroot/modules/comments/directives/commentsAddNew.js"></script>
+        <script src="~/wwwroot/modules/comments/directives/commentsContainer.js"></script>
+        <script src="~/wwwroot/modules/comments/directives/commentsList.js"></script>
 
         <!-- application initialize script -->
-        <script src="~/Scripts/modules/init.js"></script>
+        <script src="~/wwwroot/modules/init.js"></script>
     }
     <!-- #endregion -->
     <!-- #region initializes configProvider in application and triggers events if online/offline-->
@@ -408,7 +406,7 @@
     /// <returns>Server side location of the templates</returns>
     public string GetTemplatesPath()
     {
-        return GetBlogRoot() + "/scripts/templates/";
+        return GetBlogRoot() + "/wwwroot/templates/";
     }
 
     /// <summary>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>false</runOnBuild>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/wwwroot/modules/init.js</file>
+
+    <file>/wwwroot/modules/comments/comments.js</file>
+    <file>/wwwroot/modules/comments/directives/commentItem.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsAddNew.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsContainer.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsList.js</file>
+    <file>/wwwroot/modules/comments/services/commentsService.js</file>
+
+    <file>/wwwroot/modules/config/config.js</file>
+    <file>/wwwroot/modules/config/provider/configProvider.js</file>
+
+    <file>/wwwroot/modules/error/error.js</file>
+    <file>/wwwroot/modules/error/controllers/errorPageController.js</file>
+    <file>/wwwroot/modules/error/directives/errorDisplay.js</file>
+    <file>/wwwroot/modules/error/services/errorService.js</file>
+
+    <file>/wwwroot/modules/header/header.js</file>
+    <file>/wwwroot/modules/header/directives/headerMenu.js</file>
+
+    <file>/wwwroot/modules/logger/logger.js</file>
+    <file>/wwwroot/modules/logger/services/errorLogService.js</file>
+    <file>/wwwroot/modules/logger/services/stacktraceService.js</file>
+
+    <file>/wwwroot/modules/login/login.js</file>
+    <file>/wwwroot/modules/login/directives/loggedUser.js</file>
+    <file>/wwwroot/modules/login/directives/loginForm.js</file>
+    <file>/wwwroot/modules/login/directives/loginFormModal.js</file>
+    <file>/wwwroot/modules/login/directives/registerForm.js</file>
+    <file>/wwwroot/modules/login/services/authenticationInterceptorService.js</file>
+    <file>/wwwroot/modules/login/services/authenticationService.js</file>
+    <file>/wwwroot/modules/login/services/loginService.js</file>
+
+    <file>/wwwroot/modules/main/app.js</file>
+    <file>/wwwroot/modules/main/config/blogConfig.js</file>
+    <file>/wwwroot/modules/main/controllers/blogMainController.js</file>
+    <file>/wwwroot/modules/main/directives/windowResize.js</file>
+
+    <file>/wwwroot/modules/media/media.js</file>
+    <file>/wwwroot/modules/media/controllers/mediaGalleryController.js</file>
+    <file>/wwwroot/modules/media/directives/albumGroup.js</file>
+    <file>/wwwroot/modules/media/directives/mediaGalleryView.js</file>
+    <file>/wwwroot/modules/media/directives/mediaGroupedList.js</file>
+    <file>/wwwroot/modules/media/directives/mediaItem.js</file>
+    <file>/wwwroot/modules/media/services/albumService.js</file>
+    <file>/wwwroot/modules/media/services/mediaService.js</file>
+
+    <file>/wwwroot/modules/messaging/messaging.js</file>
+    <file>/wwwroot/modules/messaging/directives/chatWindow.js</file>
+    <file>/wwwroot/modules/messaging/directives/messagesPanel.js</file>
+    <file>/wwwroot/modules/messaging/services/messagingService.js</file>
+
+    <file>/wwwroot/modules/navigation/navigation.js</file>
+    <file>/wwwroot/modules/navigation/directives/navigationMenu.js</file>
+
+    <file>/wwwroot/modules/posts/posts.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsController.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsModifyController.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsViewController.js</file>
+    <file>/wwwroot/modules/posts/directives/postHeader.js</file>
+    <file>/wwwroot/modules/posts/directives/postContents.js</file>
+    <file>/wwwroot/modules/posts/directives/postLikes.js</file>
+    <file>/wwwroot/modules/posts/directives/postViewCount.js</file>
+    <file>/wwwroot/modules/posts/directives/postListItem.js</file>
+    <file>/wwwroot/modules/posts/directives/postListItemComment.js</file>
+    <file>/wwwroot/modules/posts/directives/postRelatedItem.js</file>
+    <file>/wwwroot/modules/posts/directives/postRelatedItems.js</file>
+    <file>/wwwroot/modules/posts/directives/postViewNavigator.js</file>
+    <file>/wwwroot/modules/posts/services/postsService.js</file>
+
+    <file>/wwwroot/modules/shared/shared.js</file>
+    <file>/wwwroot/modules/shared/directives/ellipsis.js</file>
+    <file>/wwwroot/modules/shared/directives/emptyRecordMessage.js</file>
+    <file>/wwwroot/modules/shared/directives/fileUpload.js</file>
+    <file>/wwwroot/modules/shared/directives/fileUploadItem.js</file>
+    <file>/wwwroot/modules/shared/directives/fileUploadThumbnail.js</file>
+    <file>/wwwroot/modules/shared/directives/isotopeItemResize.js</file>
+    <file>/wwwroot/modules/shared/directives/keypress.js</file>
+    <file>/wwwroot/modules/shared/directives/scrollTrigger.js</file>
+    <file>/wwwroot/modules/shared/directives/ticker.js</file>
+    <file>/wwwroot/modules/shared/directives/videoPlayer.js</file>
+    <file>/wwwroot/modules/shared/services/blockUi.js</file>
+    <file>/wwwroot/modules/shared/services/dateHelper.js</file>
+
+    <file>/wwwroot/modules/sockets/socket.js</file>
+    <file>/wwwroot/modules/sockets/directives/socketDebugger.js</file>
+    <file>/wwwroot/modules/sockets/services/socketsService.js</file>
+
+    <file>/wwwroot/modules/tags/tags.js</file>
+    <file>/wwwroot/modules/tags/directives/tagItem.js</file>
+    <file>/wwwroot/modules/tags/services/tagsService.js</file>
+
+    <file>/wwwroot/modules/user/user.js</file>
+    <file>/wwwroot/modules/user/controllers/userProfileCommentsController.js</file>
+    <file>/wwwroot/modules/user/controllers/userProfileController.js</file>
+    <file>/wwwroot/modules/user/controllers/userProfileFavoritesController.js</file>
+    <file>/wwwroot/modules/user/controllers/userProfileMediaController.js</file>
+    <file>/wwwroot/modules/user/controllers/userProfilePostsController.js</file>
+    <file>/wwwroot/modules/user/directives/userImage.js</file>
+    <file>/wwwroot/modules/user/directives/userInfoPopup.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetails.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsAddress.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsEducation.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsEducationGroup.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsEducationItem.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsHobbies.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsHobbyItem.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileDetailsInfo.js</file>
+    <file>/wwwroot/modules/user/directives/userProfileNavigation.js</file>
+    <file>/wwwroot/modules/user/services/userService.js</file>
+  </files>
+</bundle>

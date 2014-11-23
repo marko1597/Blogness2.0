@@ -1,0 +1,100 @@
+/* line 3, ../../scss/comments/commentitem.scss */
+.comment-item {
+  position: relative;
+  margin-bottom: 15px;
+  background: white;
+}
+/* line 8, ../../scss/comments/commentitem.scss */
+.comment-item > p {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #4c4c4c;
+}
+/* line 16, ../../scss/comments/commentitem.scss */
+.comment-item .header {
+  position: relative;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: auto;
+  height: 25px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background: #56c2e1;
+  color: white;
+}
+/* line 24, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header {
+  position: static;
+  display: inline-block;
+  position: static;
+}
+/* line 33, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.left {
+  padding-top: 3px;
+  padding-left: 6px;
+  margin-right: 5px;
+}
+/* line 38, ../../scss/comments/commentitem.scss */
+.comment-item .header .btn-header.right {
+  padding-top: 3px;
+  padding-right: 6px;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  float: right;
+}
+/* line 44, ../../scss/comments/commentitem.scss */
+.comment-item .header .details {
+  position: absolute;
+  top: 3px;
+  display: inline-block;
+  color: white;
+}
+/* line 51, ../../scss/comments/commentitem.scss */
+.comment-item .header .details a {
+  cursor: pointer;
+}
+/* line 54, ../../scss/comments/commentitem.scss */
+.comment-item .header .details a:hover {
+  text-decoration: underline;
+}
+/* line 59, ../../scss/comments/commentitem.scss */
+.comment-item .header .details span {
+  font-size: .7em;
+}
+/* line 64, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand {
+  width: 25px;
+  height: 25px;
+}
+/* line 67, ../../scss/comments/commentitem.scss */
+.comment-item .header .expand .fa {
+  font-size: .8em;
+  cursor: pointer;
+}
+/* line 73, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes {
+  width: 50px;
+  height: 25px;
+}
+/* line 76, ../../scss/comments/commentitem.scss */
+.comment-item .header .likes i {
+  padding-right: 3px;
+}
+/* line 82, ../../scss/comments/commentitem.scss */
+.comment-item .header .reply {
+  width: 51px;
+  height: 25px;
+}

@@ -276,537 +276,599 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
-    <Content Include="Content\appmodules.css">
+    <Content Include="Scripts\bower_components\font-awesome\.gitignore" />
+    <Content Include="Scripts\bower_components\font-awesome\css\font-awesome.css" />
+    <Content Include="Scripts\bower_components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Scripts\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\bower_components\Snap.js\.gitignore" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\classNames.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\default.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\dragElement.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\expand.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\hyperextend.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\noDrag.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\ratchet\ratchet.css" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\ratchet\ratchet.js" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\ratchet\template.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\rightDisabled.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\settings.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\skinnyThreshold.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\apps\toggles.html" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\assets\demo.css" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\assets\demo.js" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\assets\drag.png" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\assets\graph.png" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\assets\open.png" />
+    <Content Include="Scripts\bower_components\Snap.js\demo\index.html" />
+    <Content Include="Scripts\bower_components\Snap.js\snap.css" />
+    <Content Include="Scripts\bower_components\Snap.js\snap.js" />
+    <Content Include="Scripts\bower_components\Snap.js\snap.min.js" />
+    <Content Include="wwwroot\css\appmodules.css">
       <DependentUpon>appmodules.css.bundle</DependentUpon>
     </Content>
-    <Content Include="Content\appmodules.min.css">
+    <Content Include="wwwroot\css\appmodules.min.css">
       <DependentUpon>appmodules.css</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\font.css" />
-    <Content Include="Content\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-Bold\OpenSans-Bold-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-Italic\OpenSans-Italic-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-Light\OpenSans-Light-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-Regular\OpenSans-Regular-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.svg" />
-    <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.svg" />
-    <Content Include="Content\images\bg-noise.png" />
-    <Content Include="Content\images\bg.jpg" />
-    <Content Include="Content\images\brand-logo.png" />
-    <Content Include="Content\images\edit-post.png" />
-    <Content Include="Content\images\error-pages\pagenotfound_bg.png" />
-    <Content Include="Content\images\error-pages\servererror_bg.png" />
-    <Content Include="Content\images\error-pages\servererror_bg2.png" />
-    <Content Include="Content\images\error-pages\serviceunavailable_bg.png" />
-    <Content Include="Content\images\img-next.png" />
-    <Content Include="Content\images\img-prev.png" />
-    <Content Include="Content\images\loader-girl.gif" />
-    <Content Include="Content\images\login-main.jpg" />
-    <Content Include="Content\images\login-pass-icon.png" />
-    <Content Include="Content\images\login-pattern.png" />
-    <Content Include="Content\images\login-user-icon.png" />
-    <Content Include="Content\images\nav-groups.png" />
-    <Content Include="Content\images\nav-events.png" />
-    <Content Include="Content\images\nav-friends.png" />
-    <Content Include="Content\images\nav-home.png" />
-    <Content Include="Content\images\nav-profile.png" />
-    <Content Include="Content\images\warning.png" />
-    <Content Include="Content\modules\accountpage.css" />
-    <Content Include="Content\modules\comments\commentitem.css" />
-    <Content Include="Content\modules\comments\commentsaddnew.css" />
-    <Content Include="Content\modules\comments\commentscontainer.css" />
-    <Content Include="Content\modules\comments\commentslist.css" />
-    <Content Include="Content\modules\errorpage.css" />
-    <Content Include="Content\modules\error\errorDisplay.css" />
-    <Content Include="Content\modules\extensions\angular-snap.css" />
-    <Content Include="Content\modules\extensions\animations.css" />
-    <Content Include="Content\modules\extensions\blockui.css" />
-    <Content Include="Content\modules\extensions\bootstrap.css" />
-    <Content Include="Content\modules\extensions\ckeditor.css" />
-    <Content Include="Content\modules\extensions\isotope.css" />
-    <Content Include="Content\modules\extensions\ngtagsinput.css" />
-    <Content Include="Content\modules\extensions\slick.css" />
-    <Content Include="Content\modules\extensions\videogular.css" />
-    <Content Include="Content\modules\header\headermenu.css" />
-    <Content Include="Content\modules\loginform\loggeduser.css" />
-    <Content Include="Content\modules\loginform\loginform.css" />
-    <Content Include="Content\modules\loginform\loginformmodal.css" />
-    <Content Include="Content\modules\loginform\registerform.css" />
-    <Content Include="Content\modules\main.css" />
-    <Content Include="Content\modules\media\albumgroup.css" />
-    <Content Include="Content\modules\media\mediagallery.css" />
-    <Content Include="Content\modules\media\mediagroupedlist.css" />
-    <Content Include="Content\modules\media\mediaitem.css" />
-    <Content Include="Content\modules\media\mediaselectiondialog.css" />
-    <Content Include="Content\modules\messaging\chatwindow.css" />
-    <Content Include="Content\modules\messaging\messagespanel.css" />
-    <Content Include="Content\modules\modifypost.css" />
-    <Content Include="Content\modules\navigation\navigationmenu.css" />
-    <Content Include="Content\modules\posts\postcontents.css" />
-    <Content Include="Content\modules\posts\postlikes.css" />
-    <Content Include="Content\modules\posts\postlistitem.css" />
-    <Content Include="Content\modules\posts\postlistitemcomment.css" />
-    <Content Include="Content\modules\posts\postrelateditem.css" />
-    <Content Include="Content\modules\posts\postrelateditems.css" />
-    <Content Include="Content\modules\posts.css" />
-    <Content Include="Content\modules\posts\postviewnavigator.css" />
-    <Content Include="Content\modules\shared\fileupload.css" />
-    <Content Include="Content\modules\shared\fileuploaditem.css" />
-    <Content Include="Content\modules\sockets\socketdebugger.css" />
-    <Content Include="Content\modules\tags\tagitem.css" />
-    <Content Include="Content\modules\users.css" />
-    <Content Include="Content\modules\user\usercommentitem.css" />
-    <Content Include="Content\modules\user\userimage.css" />
-    <Content Include="Content\modules\user\userinfopopup.css" />
-    <Content Include="Content\modules\user\userpostitem.css" />
-    <Content Include="Content\modules\user\userprofilecomments.css" />
-    <Content Include="Content\modules\user\userprofiledetails.css" />
-    <Content Include="Content\modules\user\userprofilefavorites.css" />
-    <Content Include="Content\modules\user\userprofilemedia.css" />
-    <Content Include="Content\modules\user\userprofilenavigation.css" />
-    <Content Include="Content\modules\user\userprofileposts.css" />
-    <Content Include="Content\modules\variables.css" />
-    <Content Include="Content\modules\viewpost.css" />
-    <Content Include="Content\scss\comments\commentitem.css">
+    <Content Include="wwwroot\css\font.css" />
+    <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-Italic\OpenSans-Italic-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-Light\OpenSans-Light-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-Regular\OpenSans-Regular-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.svg" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.svg" />
+    <Content Include="wwwroot\css\images\bg-noise.png" />
+    <Content Include="wwwroot\css\images\bg.jpg" />
+    <Content Include="wwwroot\css\images\brand-logo.png" />
+    <Content Include="wwwroot\css\images\edit-post.png" />
+    <Content Include="wwwroot\css\images\error-pages\pagenotfound_bg.png" />
+    <Content Include="wwwroot\css\images\error-pages\servererror_bg.png" />
+    <Content Include="wwwroot\css\images\error-pages\servererror_bg2.png" />
+    <Content Include="wwwroot\css\images\error-pages\serviceunavailable_bg.png" />
+    <Content Include="wwwroot\css\images\img-next.png" />
+    <Content Include="wwwroot\css\images\img-prev.png" />
+    <Content Include="wwwroot\css\images\loader-girl.gif" />
+    <Content Include="wwwroot\css\images\login-main.jpg" />
+    <Content Include="wwwroot\css\images\login-pass-icon.png" />
+    <Content Include="wwwroot\css\images\login-pattern.png" />
+    <Content Include="wwwroot\css\images\login-user-icon.png" />
+    <Content Include="wwwroot\css\images\nav-groups.png" />
+    <Content Include="wwwroot\css\images\nav-events.png" />
+    <Content Include="wwwroot\css\images\nav-friends.png" />
+    <Content Include="wwwroot\css\images\nav-home.png" />
+    <Content Include="wwwroot\css\images\nav-profile.png" />
+    <Content Include="wwwroot\css\images\warning.png" />
+    <Content Include="wwwroot\css\modules\accountpage.css" />
+    <Content Include="wwwroot\css\modules\comments\commentitem.css" />
+    <Content Include="wwwroot\css\modules\comments\commentsaddnew.css" />
+    <Content Include="wwwroot\css\modules\comments\commentscontainer.css" />
+    <Content Include="wwwroot\css\modules\comments\commentslist.css" />
+    <Content Include="wwwroot\css\modules\errorpage.css" />
+    <Content Include="wwwroot\css\modules\error\errorDisplay.css" />
+    <Content Include="wwwroot\css\modules\extensions\angular-snap.css" />
+    <Content Include="wwwroot\css\modules\extensions\animations.css" />
+    <Content Include="wwwroot\css\modules\extensions\blockui.css" />
+    <Content Include="wwwroot\css\modules\extensions\bootstrap.css" />
+    <Content Include="wwwroot\css\modules\extensions\ckeditor.css" />
+    <Content Include="wwwroot\css\modules\extensions\isotope.css" />
+    <Content Include="wwwroot\css\modules\extensions\ngtagsinput.css" />
+    <Content Include="wwwroot\css\modules\extensions\slick.css" />
+    <Content Include="wwwroot\css\modules\extensions\videogular.css" />
+    <Content Include="wwwroot\css\modules\header\headermenu.css" />
+    <Content Include="wwwroot\css\modules\loginform\loggeduser.css" />
+    <Content Include="wwwroot\css\modules\loginform\loginform.css" />
+    <Content Include="wwwroot\css\modules\loginform\loginformmodal.css" />
+    <Content Include="wwwroot\css\modules\loginform\registerform.css" />
+    <Content Include="wwwroot\css\modules\main.css" />
+    <Content Include="wwwroot\css\modules\media\albumgroup.css" />
+    <Content Include="wwwroot\css\modules\media\mediagallery.css" />
+    <Content Include="wwwroot\css\modules\media\mediagroupedlist.css" />
+    <Content Include="wwwroot\css\modules\media\mediaitem.css" />
+    <Content Include="wwwroot\css\modules\media\mediaselectiondialog.css" />
+    <Content Include="wwwroot\css\modules\messaging\chatwindow.css" />
+    <Content Include="wwwroot\css\modules\messaging\messagespanel.css" />
+    <Content Include="wwwroot\css\modules\modifypost.css" />
+    <Content Include="wwwroot\css\modules\navigation\navigationmenu.css" />
+    <Content Include="wwwroot\css\modules\posts\postcontents.css" />
+    <Content Include="wwwroot\css\modules\posts\postlikes.css" />
+    <Content Include="wwwroot\css\modules\posts\postlistitem.css" />
+    <Content Include="wwwroot\css\modules\posts\postlistitemcomment.css" />
+    <Content Include="wwwroot\css\modules\posts\postrelateditem.css" />
+    <Content Include="wwwroot\css\modules\posts\postrelateditems.css" />
+    <Content Include="wwwroot\css\modules\posts.css" />
+    <Content Include="wwwroot\css\modules\posts\postviewnavigator.css" />
+    <Content Include="wwwroot\css\modules\shared\fileupload.css" />
+    <Content Include="wwwroot\css\modules\shared\fileuploaditem.css" />
+    <Content Include="wwwroot\css\modules\sockets\socketdebugger.css" />
+    <Content Include="wwwroot\css\modules\tags\tagitem.css" />
+    <Content Include="wwwroot\css\modules\users.css" />
+    <Content Include="wwwroot\css\modules\user\usercommentitem.css" />
+    <Content Include="wwwroot\css\modules\user\userimage.css" />
+    <Content Include="wwwroot\css\modules\user\userinfopopup.css" />
+    <Content Include="wwwroot\css\modules\user\userpostitem.css" />
+    <Content Include="wwwroot\css\modules\user\userprofilecomments.css" />
+    <Content Include="wwwroot\css\modules\user\userprofiledetails.css" />
+    <Content Include="wwwroot\css\modules\user\userprofilefavorites.css" />
+    <Content Include="wwwroot\css\modules\user\userprofilemedia.css" />
+    <Content Include="wwwroot\css\modules\user\userprofilenavigation.css" />
+    <Content Include="wwwroot\css\modules\user\userprofileposts.css" />
+    <Content Include="wwwroot\css\modules\variables.css" />
+    <Content Include="wwwroot\css\modules\viewpost.css" />
+    <Content Include="wwwroot\css\scss\comments\commentitem.css">
       <DependentUpon>commentitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentitem.min.css">
+    <Content Include="wwwroot\css\scss\comments\commentitem.min.css">
       <DependentUpon>commentitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentsaddnew.css">
+    <Content Include="wwwroot\css\scss\comments\commentsaddnew.css">
       <DependentUpon>commentsaddnew.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentsaddnew.min.css">
+    <Content Include="wwwroot\css\scss\comments\commentsaddnew.min.css">
       <DependentUpon>commentsaddnew.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentscontainer.css">
+    <Content Include="wwwroot\css\scss\comments\commentscontainer.css">
       <DependentUpon>commentscontainer.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentslist.css">
+    <Content Include="wwwroot\css\scss\comments\commentslist.css">
       <DependentUpon>commentslist.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentslist.min.css">
+    <Content Include="wwwroot\css\scss\comments\commentslist.min.css">
       <DependentUpon>commentslist.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\errorpage.css">
+    <Content Include="wwwroot\css\scss\errorpage.css">
       <DependentUpon>errorpage.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\errorpage.min.css">
+    <Content Include="wwwroot\css\scss\errorpage.min.css">
       <DependentUpon>errorpage.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\error\errordisplay.css">
+    <Content Include="wwwroot\css\scss\error\errordisplay.css">
       <DependentUpon>errordisplay.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\error\errordisplay.min.css">
+    <Content Include="wwwroot\css\scss\error\errordisplay.min.css">
       <DependentUpon>errordisplay.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\angular-snap.css">
+    <Content Include="wwwroot\css\scss\extensions\angular-snap.css">
       <DependentUpon>angular-snap.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\angular-snap.min.css">
+    <Content Include="wwwroot\css\scss\extensions\angular-snap.min.css">
       <DependentUpon>angular-snap.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\animations.css">
+    <Content Include="wwwroot\css\scss\extensions\animations.css">
       <DependentUpon>animations.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\animations.min.css">
+    <Content Include="wwwroot\css\scss\extensions\animations.min.css">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\blockui.css">
+    <Content Include="wwwroot\css\scss\extensions\blockui.css">
       <DependentUpon>blockui.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\blockui.min.css">
+    <Content Include="wwwroot\css\scss\extensions\blockui.min.css">
       <DependentUpon>blockui.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\bootstrap.css">
+    <Content Include="wwwroot\css\scss\extensions\bootstrap.css">
       <DependentUpon>bootstrap.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\bootstrap.min.css">
+    <Content Include="wwwroot\css\scss\extensions\bootstrap.min.css">
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\ckeditor.css.map">
+    <Content Include="wwwroot\css\scss\extensions\ckeditor.css.map">
       <DependentUpon>ckeditor.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\angular-snap.scss" />
-    <Content Include="Content\scss\extensions\ckeditor.min.css">
+    <Content Include="wwwroot\css\scss\extensions\angular-snap.scss" />
+    <Content Include="wwwroot\css\scss\extensions\ckeditor.min.css">
       <DependentUpon>ckeditor.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\isotope.css">
+    <Content Include="wwwroot\css\scss\extensions\isotope.css">
       <DependentUpon>isotope.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\isotope.min.css">
+    <Content Include="wwwroot\css\scss\extensions\isotope.min.css">
       <DependentUpon>isotope.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\isotope.scss" />
-    <Content Include="Content\scss\extensions\bootstrap.scss" />
-    <Content Include="Content\scss\extensions\animations.css.map">
+    <Content Include="wwwroot\css\scss\extensions\isotope.scss" />
+    <Content Include="wwwroot\css\scss\extensions\bootstrap.scss" />
+    <Content Include="wwwroot\css\scss\extensions\animations.css.map">
       <DependentUpon>animations.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\isotope.css.map">
+    <Content Include="wwwroot\css\scss\extensions\isotope.css.map">
       <DependentUpon>isotope.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\ngtagsinput.css.map">
+    <Content Include="wwwroot\css\scss\extensions\ngtagsinput.css.map">
       <DependentUpon>ngtagsinput.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\bootstrap.css.map">
+    <Content Include="wwwroot\css\scss\extensions\bootstrap.css.map">
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\blockui.css.map">
+    <Content Include="wwwroot\css\scss\extensions\blockui.css.map">
       <DependentUpon>blockui.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\angular-snap.css.map">
+    <Content Include="wwwroot\css\scss\extensions\angular-snap.css.map">
       <DependentUpon>angular-snap.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\accountpage.scss" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <None Include="Content\scss\extensions\ngtagsinput.scss" />
-    <Content Include="Content\scss\extensions\ckeditor.css">
+    <Content Include="wwwroot\css\scss\accountpage.scss" />
+    <Content Include="Scripts\bower_components\stacktrace-js\dist\stacktrace.js" />
+    <Content Include="Scripts\bower_components\stacktrace-js\dist\stacktrace.min.js" />
+    <Content Include="Scripts\bower_components\stacktrace-js\gradle\wrapper\gradle-wrapper.jar" />
+    <Content Include="Scripts\bower_components\stacktrace-js\LICENSE.txt" />
+    <Content Include="Scripts\bower_components\stacktrace-js\stacktrace-bookmarklet.js" />
+    <Content Include="Scripts\bower_components\stacktrace-js\stacktrace.js" />
+    <Content Include="Scripts\bower_components\Snap.js\.bower.json" />
+    <Content Include="Scripts\bower_components\Snap.js\component.json" />
+    <Content Include="Scripts\bower_components\Snap.js\README.md" />
+    <Content Include="Scripts\bower_components\font-awesome\.bower.json" />
+    <Content Include="Scripts\bower_components\font-awesome\.npmignore" />
+    <Content Include="Scripts\bower_components\font-awesome\bower.json" />
+    <Content Include="Scripts\bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Scripts\bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Scripts\bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Scripts\bower_components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Scripts\bower_components\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\core.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\extras.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\fixed-width.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\font-awesome.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\icons.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\larger.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\list.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\mixins.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\path.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\spinning.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\stacked.less" />
+    <Content Include="Scripts\bower_components\font-awesome\less\variables.less" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_core.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_extras.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_icons.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_larger.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_list.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_mixins.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_path.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_spinning.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_stacked.scss" />
+    <Content Include="Scripts\bower_components\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
+    <Content Include="wwwroot\css\scss\extensions\ckeditor.css">
       <DependentUpon>ckeditor.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\ngtagsinput.css">
+    <Content Include="wwwroot\css\scss\extensions\ngtagsinput.css">
       <DependentUpon>ngtagsinput.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\ngtagsinput.min.css">
+    <Content Include="wwwroot\css\scss\extensions\ngtagsinput.min.css">
       <DependentUpon>ngtagsinput.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\slick.css">
+    <Content Include="wwwroot\css\scss\extensions\slick.css">
       <DependentUpon>slick.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\slick.min.css">
+    <Content Include="wwwroot\css\scss\extensions\slick.min.css">
       <DependentUpon>slick.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\videogular.css">
+    <Content Include="wwwroot\css\scss\extensions\videogular.css">
       <DependentUpon>videogular.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\videogular.min.css">
+    <Content Include="wwwroot\css\scss\extensions\videogular.min.css">
       <DependentUpon>videogular.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\header\headermenu.css">
+    <Content Include="wwwroot\css\scss\header\headermenu.css">
       <DependentUpon>headermenu.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\header\headermenu.min.css">
+    <Content Include="wwwroot\css\scss\header\headermenu.min.css">
       <DependentUpon>headermenu.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loggeduser.css">
+    <Content Include="wwwroot\css\scss\loginform\loggeduser.css">
       <DependentUpon>loggeduser.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loggeduser.min.css">
+    <Content Include="wwwroot\css\scss\loginform\loggeduser.min.css">
       <DependentUpon>loggeduser.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginform.css">
+    <Content Include="wwwroot\css\scss\loginform\loginform.css">
       <DependentUpon>loginform.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginform.min.css">
+    <Content Include="wwwroot\css\scss\loginform\loginform.min.css">
       <DependentUpon>loginform.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginformmodal.css">
+    <Content Include="wwwroot\css\scss\loginform\loginformmodal.css">
       <DependentUpon>loginformmodal.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginformmodal.min.css">
+    <Content Include="wwwroot\css\scss\loginform\loginformmodal.min.css">
       <DependentUpon>loginformmodal.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\registerform.css">
+    <Content Include="wwwroot\css\scss\loginform\registerform.css">
       <DependentUpon>registerform.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\registerform.min.css">
+    <Content Include="wwwroot\css\scss\loginform\registerform.min.css">
       <DependentUpon>registerform.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\main.css">
+    <Content Include="wwwroot\css\scss\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\main.min.css">
+    <Content Include="wwwroot\css\scss\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\albumgroup.css">
+    <Content Include="wwwroot\css\scss\media\albumgroup.css">
       <DependentUpon>albumgroup.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\albumgroup.min.css">
+    <Content Include="wwwroot\css\scss\media\albumgroup.min.css">
       <DependentUpon>albumgroup.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediagallery.css">
+    <Content Include="wwwroot\css\scss\media\mediagallery.css">
       <DependentUpon>mediagallery.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediagallery.min.css">
+    <Content Include="wwwroot\css\scss\media\mediagallery.min.css">
       <DependentUpon>mediagallery.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediagroupedlist.css.map">
+    <Content Include="wwwroot\css\scss\media\mediagroupedlist.css.map">
       <DependentUpon>mediagroupedlist.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\errorpage.scss" />
-    <Content Include="Content\scss\errorpage.css.map">
+    <Content Include="wwwroot\css\scss\errorpage.scss" />
+    <Content Include="wwwroot\css\scss\errorpage.css.map">
       <DependentUpon>errorpage.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\animations.scss" />
-    <Content Include="Content\scss\extensions\blockui.scss" />
-    <Content Include="Content\scss\extensions\videogular.scss" />
-    <Content Include="Content\scss\extensions\videogular.css.map">
+    <Content Include="wwwroot\css\scss\extensions\animations.scss" />
+    <Content Include="wwwroot\css\scss\extensions\blockui.scss" />
+    <Content Include="wwwroot\css\scss\extensions\videogular.scss" />
+    <Content Include="wwwroot\css\scss\extensions\videogular.css.map">
       <DependentUpon>videogular.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\slick.scss" />
-    <Content Include="Content\scss\extensions\slick.css.map">
+    <Content Include="wwwroot\css\scss\extensions\slick.scss" />
+    <Content Include="wwwroot\css\scss\extensions\slick.css.map">
       <DependentUpon>slick.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediagallery.scss" />
-    <Content Include="Content\scss\media\mediagallery.css.map">
+    <Content Include="wwwroot\css\scss\media\mediagallery.scss" />
+    <Content Include="wwwroot\css\scss\media\mediagallery.css.map">
       <DependentUpon>mediagallery.css</DependentUpon>
     </Content>
-    <None Include="Content\scss\media\mediagroupedlist.scss" />
-    <Content Include="Content\scss\media\mediagroupedlist.css">
+    <None Include="wwwroot\css\scss\media\mediagroupedlist.scss" />
+    <Content Include="wwwroot\css\scss\media\mediagroupedlist.css">
       <DependentUpon>mediagroupedlist.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediagroupedlist.min.css">
+    <Content Include="wwwroot\css\scss\media\mediagroupedlist.min.css">
       <DependentUpon>mediagroupedlist.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaitem.css">
+    <Content Include="wwwroot\css\scss\media\mediaitem.css">
       <DependentUpon>mediaitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaitem.min.css">
+    <Content Include="wwwroot\css\scss\media\mediaitem.min.css">
       <DependentUpon>mediaitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaselectiondialog.css">
+    <Content Include="wwwroot\css\scss\media\mediaselectiondialog.css">
       <DependentUpon>mediaselectiondialog.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaselectiondialog.min.css">
+    <Content Include="wwwroot\css\scss\media\mediaselectiondialog.min.css">
       <DependentUpon>mediaselectiondialog.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\chatwindow.css">
+    <Content Include="wwwroot\css\scss\messaging\chatwindow.css">
       <DependentUpon>chatwindow.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\chatwindow.min.css">
+    <Content Include="wwwroot\css\scss\messaging\chatwindow.min.css">
       <DependentUpon>chatwindow.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\messagespanel.css">
+    <Content Include="wwwroot\css\scss\messaging\messagespanel.css">
       <DependentUpon>messagespanel.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\messagespanel.min.css">
+    <Content Include="wwwroot\css\scss\messaging\messagespanel.min.css">
       <DependentUpon>messagespanel.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\modifypost.css">
+    <Content Include="wwwroot\css\scss\modifypost.css">
       <DependentUpon>modifypost.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\modifypost.min.css">
+    <Content Include="wwwroot\css\scss\modifypost.min.css">
       <DependentUpon>modifypost.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\navigation\navigationmenu.css.map">
+    <Content Include="wwwroot\css\scss\navigation\navigationmenu.css.map">
       <DependentUpon>navigationmenu.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\modifypost.scss" />
-    <Content Include="Content\scss\modifypost.css.map">
+    <Content Include="wwwroot\css\scss\modifypost.scss" />
+    <Content Include="wwwroot\css\scss\modifypost.css.map">
       <DependentUpon>modifypost.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\messagespanel.scss" />
-    <Content Include="Content\scss\messaging\messagespanel.css.map">
+    <Content Include="wwwroot\css\scss\messaging\messagespanel.scss" />
+    <Content Include="wwwroot\css\scss\messaging\messagespanel.css.map">
       <DependentUpon>messagespanel.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\messaging\chatwindow.scss" />
-    <Content Include="Content\scss\messaging\chatwindow.css.map">
+    <Content Include="wwwroot\css\scss\messaging\chatwindow.scss" />
+    <Content Include="wwwroot\css\scss\messaging\chatwindow.css.map">
       <DependentUpon>chatwindow.css</DependentUpon>
     </Content>
-    <None Include="Content\scss\navigation\navigationmenu.scss" />
-    <Content Include="Content\scss\navigation\navigationmenu.css">
+    <None Include="wwwroot\css\scss\navigation\navigationmenu.scss" />
+    <Content Include="wwwroot\css\scss\navigation\navigationmenu.css">
       <DependentUpon>navigationmenu.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\navigation\navigationmenu.min.css">
+    <Content Include="wwwroot\css\scss\navigation\navigationmenu.min.css">
       <DependentUpon>navigationmenu.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts.css">
+    <Content Include="wwwroot\css\scss\posts.css">
       <DependentUpon>posts.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts.min.css">
+    <Content Include="wwwroot\css\scss\posts.min.css">
       <DependentUpon>posts.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postcontents.css">
+    <Content Include="wwwroot\css\scss\posts\postcontents.css">
       <DependentUpon>postcontents.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postcontents.min.css">
+    <Content Include="wwwroot\css\scss\posts\postcontents.min.css">
       <DependentUpon>postcontents.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlikes.css">
+    <Content Include="wwwroot\css\scss\posts\postlikes.css">
       <DependentUpon>postlikes.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlikes.min.css">
+    <Content Include="wwwroot\css\scss\posts\postlikes.min.css">
       <DependentUpon>postlikes.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlistitem.css">
+    <Content Include="wwwroot\css\scss\posts\postlistitem.css">
       <DependentUpon>postlistitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlistitem.min.css">
+    <Content Include="wwwroot\css\scss\posts\postlistitem.min.css">
       <DependentUpon>postlistitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlistitemcomment.css">
+    <Content Include="wwwroot\css\scss\posts\postlistitemcomment.css">
       <DependentUpon>postlistitemcomment.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlistitemcomment.min.css">
+    <Content Include="wwwroot\css\scss\posts\postlistitemcomment.min.css">
       <DependentUpon>postlistitemcomment.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postrelateditem.css.map">
+    <Content Include="wwwroot\css\scss\posts\postrelateditem.css.map">
       <DependentUpon>postrelateditem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts.scss" />
-    <Content Include="Content\scss\posts.css.map">
+    <Content Include="wwwroot\css\scss\posts.scss" />
+    <Content Include="wwwroot\css\scss\posts.css.map">
       <DependentUpon>posts.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlikes.css.map">
+    <Content Include="wwwroot\css\scss\posts\postlikes.css.map">
       <DependentUpon>postlikes.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\extensions\ckeditor.scss" />
-    <None Include="Content\scss\posts\postrelateditem.scss" />
-    <Content Include="Content\scss\posts\postrelateditem.css">
+    <Content Include="wwwroot\css\scss\extensions\ckeditor.scss" />
+    <None Include="wwwroot\css\scss\posts\postrelateditem.scss" />
+    <Content Include="wwwroot\css\scss\posts\postrelateditem.css">
       <DependentUpon>postrelateditem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postrelateditem.min.css">
+    <Content Include="wwwroot\css\scss\posts\postrelateditem.min.css">
       <DependentUpon>postrelateditem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postrelateditems.css.map">
+    <Content Include="wwwroot\css\scss\posts\postrelateditems.css.map">
       <DependentUpon>postrelateditems.css</DependentUpon>
     </Content>
-    <None Include="Content\scss\posts\postrelateditems.scss" />
-    <Content Include="Content\scss\posts\postrelateditems.css">
+    <None Include="wwwroot\css\scss\posts\postrelateditems.scss" />
+    <Content Include="wwwroot\css\scss\posts\postrelateditems.css">
       <DependentUpon>postrelateditems.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postrelateditems.min.css">
+    <Content Include="wwwroot\css\scss\posts\postrelateditems.min.css">
       <DependentUpon>postrelateditems.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postviewnavigator.css">
+    <Content Include="wwwroot\css\scss\posts\postviewnavigator.css">
       <DependentUpon>postviewnavigator.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postviewnavigator.min.css">
+    <Content Include="wwwroot\css\scss\posts\postviewnavigator.min.css">
       <DependentUpon>postviewnavigator.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileupload.css">
+    <Content Include="wwwroot\css\scss\shared\fileupload.css">
       <DependentUpon>fileupload.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileupload.min.css">
+    <Content Include="wwwroot\css\scss\shared\fileupload.min.css">
       <DependentUpon>fileupload.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileuploaditem.css">
+    <Content Include="wwwroot\css\scss\shared\fileuploaditem.css">
       <DependentUpon>fileuploaditem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileuploaditem.min.css">
+    <Content Include="wwwroot\css\scss\shared\fileuploaditem.min.css">
       <DependentUpon>fileuploaditem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\sockets\socketdebugger.css">
+    <Content Include="wwwroot\css\scss\sockets\socketdebugger.css">
       <DependentUpon>socketdebugger.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\sockets\socketdebugger.min.css">
+    <Content Include="wwwroot\css\scss\sockets\socketdebugger.min.css">
       <DependentUpon>socketdebugger.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\tags\tagitem.css">
+    <Content Include="wwwroot\css\scss\tags\tagitem.css">
       <DependentUpon>tagitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\tags\tagitem.min.css">
+    <Content Include="wwwroot\css\scss\tags\tagitem.min.css">
       <DependentUpon>tagitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\users.css">
+    <Content Include="wwwroot\css\scss\users.css">
       <DependentUpon>users.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\usercommentitem.css">
+    <Content Include="wwwroot\css\scss\user\usercommentitem.css">
       <DependentUpon>usercommentitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\usercommentitem.min.css">
+    <Content Include="wwwroot\css\scss\user\usercommentitem.min.css">
       <DependentUpon>usercommentitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userimage.css">
+    <Content Include="wwwroot\css\scss\user\userimage.css">
       <DependentUpon>userimage.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userimage.min.css">
+    <Content Include="wwwroot\css\scss\user\userimage.min.css">
       <DependentUpon>userimage.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userinfopopup.css.map">
+    <Content Include="wwwroot\css\scss\user\userinfopopup.css.map">
       <DependentUpon>userinfopopup.css</DependentUpon>
     </Content>
-    <None Include="Content\scss\user\userinfopopup.scss" />
-    <Content Include="Content\scss\user\userinfopopup.css">
+    <None Include="wwwroot\css\scss\user\userinfopopup.scss" />
+    <Content Include="wwwroot\css\scss\user\userinfopopup.css">
       <DependentUpon>userinfopopup.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userinfopopup.min.css">
+    <Content Include="wwwroot\css\scss\user\userinfopopup.min.css">
       <DependentUpon>userinfopopup.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userpostitem.css">
+    <Content Include="wwwroot\css\scss\user\userpostitem.css">
       <DependentUpon>userpostitem.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userpostitem.min.css">
+    <Content Include="wwwroot\css\scss\user\userpostitem.min.css">
       <DependentUpon>userpostitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilecomments.css">
+    <Content Include="wwwroot\css\scss\user\userprofilecomments.css">
       <DependentUpon>userprofilecomments.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilecomments.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofilecomments.min.css">
       <DependentUpon>userprofilecomments.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofiledetails.css">
+    <Content Include="wwwroot\css\scss\user\userprofiledetails.css">
       <DependentUpon>userprofiledetails.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofiledetails.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofiledetails.min.css">
       <DependentUpon>userprofiledetails.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilefavorites.css">
+    <Content Include="wwwroot\css\scss\user\userprofilefavorites.css">
       <DependentUpon>userprofilefavorites.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilefavorites.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofilefavorites.min.css">
       <DependentUpon>userprofilefavorites.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilemedia.css">
+    <Content Include="wwwroot\css\scss\user\userprofilemedia.css">
       <DependentUpon>userprofilemedia.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilemedia.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofilemedia.min.css">
       <DependentUpon>userprofilemedia.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilenavigation.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofilenavigation.css.map">
       <DependentUpon>userprofilenavigation.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilemedia.scss" />
-    <Content Include="Content\scss\user\userprofilemedia.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofilemedia.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofilemedia.css.map">
       <DependentUpon>userprofilemedia.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofiledetails.scss" />
-    <Content Include="Content\scss\user\userprofiledetails.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofiledetails.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofiledetails.css.map">
       <DependentUpon>userprofiledetails.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\users.scss" />
-    <Content Include="Content\scss\users.css.map">
+    <Content Include="wwwroot\css\scss\users.scss" />
+    <Content Include="wwwroot\css\scss\users.css.map">
       <DependentUpon>users.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postviewnavigator.scss" />
-    <Content Include="Content\scss\posts\postviewnavigator.css.map">
+    <Content Include="wwwroot\css\scss\posts\postviewnavigator.scss" />
+    <Content Include="wwwroot\css\scss\posts\postviewnavigator.css.map">
       <DependentUpon>postviewnavigator.css</DependentUpon>
     </Content>
-    <None Include="Content\scss\user\userprofilenavigation.scss" />
-    <Content Include="Content\scss\user\userprofilenavigation.css">
+    <None Include="wwwroot\css\scss\user\userprofilenavigation.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofilenavigation.css">
       <DependentUpon>userprofilenavigation.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilenavigation.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofilenavigation.min.css">
       <DependentUpon>userprofilenavigation.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofileposts.css">
+    <Content Include="wwwroot\css\scss\user\userprofileposts.css">
       <DependentUpon>userprofileposts.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofileposts.min.css">
+    <Content Include="wwwroot\css\scss\user\userprofileposts.min.css">
       <DependentUpon>userprofileposts.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\variables.css">
+    <Content Include="wwwroot\css\scss\variables.css">
       <DependentUpon>variables.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\variables.min.css">
+    <Content Include="wwwroot\css\scss\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\viewpost.css">
+    <Content Include="wwwroot\css\scss\viewpost.css">
       <DependentUpon>viewpost.scss</DependentUpon>
     </Content>
-    <Content Include="Content\scss\viewpost.min.css">
+    <Content Include="wwwroot\css\scss\viewpost.min.css">
       <DependentUpon>viewpost.css</DependentUpon>
     </Content>
-    <Content Include="Content\theme\default\blog-bootstrap.css" />
-    <Content Include="Content\theme\default\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\theme\default\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\bower_components\angular-animate\angular-animate.js" />
     <Content Include="Scripts\bower_components\angular-animate\angular-animate.min.js" />
@@ -1153,10 +1215,6 @@
     <Content Include="Scripts\bower_components\eventEmitter\EventEmitter.min.js" />
     <Content Include="Scripts\bower_components\eventie\eventie.js" />
     <Content Include="Scripts\bower_components\eventie\test.html" />
-    <Content Include="Scripts\bower_components\fontawesome\.gitignore" />
-    <Content Include="Scripts\bower_components\fontawesome\css\font-awesome.css" />
-    <Content Include="Scripts\bower_components\fontawesome\css\font-awesome.min.css" />
-    <Content Include="Scripts\bower_components\fontawesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\bower_components\get-size\.gitignore" />
     <Content Include="Scripts\bower_components\get-size\get-size.js" />
     <Content Include="Scripts\bower_components\get-size\index.html" />
@@ -2538,35 +2596,6 @@
     <Content Include="Scripts\bower_components\slick.js\slick\slick.css" />
     <Content Include="Scripts\bower_components\slick.js\slick\slick.js" />
     <Content Include="Scripts\bower_components\slick.js\slick\slick.min.js" />
-    <Content Include="Scripts\bower_components\snapjs\.gitignore" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\classNames.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\default.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\dragElement.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\expand.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\hyperextend.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\noDrag.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\ratchet\ratchet.css" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\ratchet\ratchet.js" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\ratchet\template.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\rightDisabled.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\settings.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\skinnyThreshold.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\apps\toggles.html" />
-    <Content Include="Scripts\bower_components\snapjs\demo\assets\demo.css" />
-    <Content Include="Scripts\bower_components\snapjs\demo\assets\demo.js" />
-    <Content Include="Scripts\bower_components\snapjs\demo\assets\drag.png" />
-    <Content Include="Scripts\bower_components\snapjs\demo\assets\graph.png" />
-    <Content Include="Scripts\bower_components\snapjs\demo\assets\open.png" />
-    <Content Include="Scripts\bower_components\snapjs\demo\index.html" />
-    <Content Include="Scripts\bower_components\snapjs\snap.css" />
-    <Content Include="Scripts\bower_components\snapjs\snap.js" />
-    <Content Include="Scripts\bower_components\snapjs\snap.min.js" />
-    <Content Include="Scripts\bower_components\stacktrace\dist\stacktrace.js" />
-    <Content Include="Scripts\bower_components\stacktrace\dist\stacktrace.min.js" />
-    <Content Include="Scripts\bower_components\stacktrace\gradle\wrapper\gradle-wrapper.jar" />
-    <Content Include="Scripts\bower_components\stacktrace\LICENSE.txt" />
-    <Content Include="Scripts\bower_components\stacktrace\stacktrace-bookmarklet.js" />
-    <Content Include="Scripts\bower_components\stacktrace\stacktrace.js" />
     <Content Include="Scripts\bower_components\underscore\.gitignore" />
     <Content Include="Scripts\bower_components\underscore\underscore-min.js" />
     <Content Include="Scripts\bower_components\underscore\underscore.js" />
@@ -2600,84 +2629,262 @@
     <Content Include="Scripts\bower_components\videogular\Gruntfile.js" />
     <Content Include="Scripts\bower_components\videogular\videogular.js" />
     <Content Include="Scripts\bower_components\videogular\videogular.min.js" />
-    <Content Include="Scripts\cssbundle.css">
+    <Content Include="wwwroot\css\cssbundle.css">
       <DependentUpon>cssbundle.css.bundle</DependentUpon>
     </Content>
-    <Content Include="Scripts\cssbundle.min.css">
+    <Content Include="wwwroot\css\cssbundle.min.css">
       <DependentUpon>cssbundle.css</DependentUpon>
     </Content>
-    <Content Include="Scripts\jsbundle.js">
+    <Content Include="Scripts\gruntfile.js" />
+    <Content Include="wwwroot\lib\ckeditor\adapters\jquery.js" />
+    <Content Include="wwwroot\lib\ckeditor\build-config.js" />
+    <Content Include="wwwroot\lib\ckeditor\ckeditor.js" />
+    <Content Include="wwwroot\lib\ckeditor\config.js" />
+    <Content Include="wwwroot\lib\ckeditor\contents.css" />
+    <Content Include="wwwroot\lib\ckeditor\lang\en.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\icons.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\preview\preview.html" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="wwwroot\lib\ckeditor\plugins\youtube\images\icon.png" />
+    <Content Include="wwwroot\lib\ckeditor\samples\ajax.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\api.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\appendto.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\inlineall\logo.png" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\sample.css" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\sample.jpg" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\uilanguages\languages.js" />
+    <Content Include="wwwroot\lib\ckeditor\samples\datafiltering.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\divreplace.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\index.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\inlineall.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\inlinebycode.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\inlinetextarea.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\jquery.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\autogrow\autogrow.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\dialog\dialog.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\magicline\magicline.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\readonly.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\replacebyclass.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\replacebycode.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\sample.css" />
+    <Content Include="wwwroot\lib\ckeditor\samples\sample.js" />
+    <Content Include="wwwroot\lib\ckeditor\samples\tabindex.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\uicolor.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\uilanguages.html" />
+    <Content Include="wwwroot\lib\ckeditor\samples\xhtmlstyle.html" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog_ie.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog_ie7.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog_ie8.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\dialog_opera.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor_gecko.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor_ie.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor_ie7.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor_ie8.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\.temp\css\editor_iequirks.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog_ie.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog_ie7.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog_ie8.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog_iequirks.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\dialog_opera.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor_gecko.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor_ie.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor_ie7.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor_ie8.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\editor_iequirks.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\icons.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\icons_hidpi.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\arrow.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\close.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\hidpi\close.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\hidpi\lock-open.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\hidpi\lock.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\hidpi\refresh.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\lock-open.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\lock.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\images\refresh.png" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\sample\bootstrapck-sample.html" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
+    <Content Include="wwwroot\lib\ckeditor\styles.js" />
+    <Content Include="wwwroot\lib\jquery.blockui.js" />
+    <Content Include="wwwroot\lib\jquery.blockui.min.js" />
+    <Content Include="wwwroot\lib\jquery.newsTicker.js" />
+    <Content Include="wwwroot\lib\jsbundle.js">
       <DependentUpon>jsbundle.js.bundle</DependentUpon>
     </Content>
-    <Content Include="Scripts\jsbundle.min.js">
+    <Content Include="wwwroot\lib\jsbundle.min.js">
       <DependentUpon>jsbundle.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\modules\appmodules.js">
+    <Content Include="wwwroot\modules\appmodules.js">
       <DependentUpon>appmodules.js.bundle</DependentUpon>
     </Content>
-    <Content Include="Scripts\modules\appmodules.min.js">
+    <Content Include="wwwroot\modules\appmodules.min.js">
       <DependentUpon>appmodules.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\modules\comments\comments.js" />
-    <Content Include="Scripts\modules\comments\directives\commentItem.js" />
-    <Content Include="Scripts\modules\comments\directives\commentsAddNew.js" />
-    <Content Include="Scripts\modules\comments\directives\commentsContainer.js" />
-    <Content Include="Scripts\modules\comments\directives\commentsList.js" />
-    <Content Include="Scripts\modules\comments\services\commentsService.js" />
-    <Content Include="Scripts\modules\init.js" />
-    <Content Include="Scripts\modules\login\directives\loggedUser.js" />
-    <Content Include="Scripts\modules\login\directives\loginFormModal.js" />
-    <Content Include="Scripts\modules\login\directives\registerForm.js" />
-    <Content Include="Scripts\modules\login\services\authenticationInterceptorService.js" />
-    <Content Include="Scripts\modules\login\services\authenticationService.js" />
-    <Content Include="Scripts\modules\main\app.js" />
-    <Content Include="Scripts\modules\main\config\blogConfig.js" />
-    <Content Include="Scripts\modules\main\controllers\blogMainController.js" />
-    <Content Include="Scripts\modules\main\directives\windowResize.js" />
-    <Content Include="Scripts\modules\media\controllers\mediaGalleryController.js" />
-    <Content Include="Scripts\modules\media\directives\albumGroup.js" />
-    <Content Include="Scripts\modules\media\directives\mediaGalleryView.js" />
-    <Content Include="Scripts\modules\media\directives\mediaGroupedList.js" />
-    <Content Include="Scripts\modules\media\directives\mediaItem.js" />
-    <Content Include="Scripts\modules\media\media.js" />
-    <Content Include="Scripts\modules\media\services\albumService.js" />
-    <Content Include="Scripts\modules\media\services\mediaService.js" />
-    <Content Include="Scripts\modules\messaging\directives\chatWindow.js" />
-    <Content Include="Scripts\modules\messaging\directives\messagesPanel.js" />
-    <Content Include="Scripts\modules\messaging\services\messagingService.js" />
-    <Content Include="Scripts\modules\posts\directives\postHeader.js" />
-    <Content Include="Scripts\modules\posts\directives\postRelatedItem.js" />
-    <Content Include="Scripts\modules\posts\directives\postRelatedItems.js" />
-    <Content Include="Scripts\modules\posts\directives\postViewCount.js" />
-    <Content Include="Scripts\modules\posts\directives\postViewNavigator.js" />
-    <Content Include="Scripts\modules\shared\directives\emptyRecordMessage.js" />
-    <Content Include="Scripts\modules\shared\directives\videoPlayer.js" />
-    <Content Include="Scripts\modules\sockets\services\socketsService.js" />
-    <Content Include="Scripts\modules\sockets\socket.js" />
-    <Content Include="Scripts\modules\sockets\directives\socketDebugger.js" />
-    <Content Include="Scripts\modules\user\controllers\userProfileCommentsController.js" />
-    <Content Include="Scripts\modules\user\controllers\userProfileController.js" />
-    <Content Include="Scripts\modules\user\controllers\userProfileFavoritesController.js" />
-    <Content Include="Scripts\modules\user\controllers\userProfileMediaController.js" />
-    <Content Include="Scripts\modules\user\controllers\userProfilePostsController.js" />
-    <Content Include="Scripts\modules\user\directives\userImage.js" />
-    <Content Include="Scripts\modules\user\directives\userInfoPopup.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetails.js" />
+    <Content Include="wwwroot\modules\comments\comments.js" />
+    <Content Include="wwwroot\modules\comments\directives\commentItem.js" />
+    <Content Include="wwwroot\modules\comments\directives\commentsAddNew.js" />
+    <Content Include="wwwroot\modules\comments\directives\commentsContainer.js" />
+    <Content Include="wwwroot\modules\comments\directives\commentsList.js" />
+    <Content Include="wwwroot\modules\comments\services\commentsService.js" />
+    <Content Include="wwwroot\modules\init.js" />
+    <Content Include="wwwroot\modules\login\directives\loggedUser.js" />
+    <Content Include="wwwroot\modules\login\directives\loginFormModal.js" />
+    <Content Include="wwwroot\modules\login\directives\registerForm.js" />
+    <Content Include="wwwroot\modules\login\services\authenticationInterceptorService.js" />
+    <Content Include="wwwroot\modules\login\services\authenticationService.js" />
+    <Content Include="wwwroot\modules\main\app.js" />
+    <Content Include="wwwroot\modules\main\config\blogConfig.js" />
+    <Content Include="wwwroot\modules\main\controllers\blogMainController.js" />
+    <Content Include="wwwroot\modules\main\directives\windowResize.js" />
+    <Content Include="wwwroot\modules\media\controllers\mediaGalleryController.js" />
+    <Content Include="wwwroot\modules\media\directives\albumGroup.js" />
+    <Content Include="wwwroot\modules\media\directives\mediaGalleryView.js" />
+    <Content Include="wwwroot\modules\media\directives\mediaGroupedList.js" />
+    <Content Include="wwwroot\modules\media\directives\mediaItem.js" />
+    <Content Include="wwwroot\modules\media\media.js" />
+    <Content Include="wwwroot\modules\media\services\albumService.js" />
+    <Content Include="wwwroot\modules\media\services\mediaService.js" />
+    <Content Include="wwwroot\modules\messaging\directives\chatWindow.js" />
+    <Content Include="wwwroot\modules\messaging\directives\messagesPanel.js" />
+    <Content Include="wwwroot\modules\messaging\services\messagingService.js" />
+    <Content Include="wwwroot\modules\posts\directives\postHeader.js" />
+    <Content Include="wwwroot\modules\posts\directives\postRelatedItem.js" />
+    <Content Include="wwwroot\modules\posts\directives\postRelatedItems.js" />
+    <Content Include="wwwroot\modules\posts\directives\postViewCount.js" />
+    <Content Include="wwwroot\modules\posts\directives\postViewNavigator.js" />
+    <Content Include="wwwroot\modules\shared\directives\emptyRecordMessage.js" />
+    <Content Include="wwwroot\modules\shared\directives\videoPlayer.js" />
+    <Content Include="wwwroot\modules\sockets\services\socketsService.js" />
+    <Content Include="wwwroot\modules\sockets\socket.js" />
+    <Content Include="wwwroot\modules\sockets\directives\socketDebugger.js" />
+    <Content Include="wwwroot\modules\user\controllers\userProfileCommentsController.js" />
+    <Content Include="wwwroot\modules\user\controllers\userProfileController.js" />
+    <Content Include="wwwroot\modules\user\controllers\userProfileFavoritesController.js" />
+    <Content Include="wwwroot\modules\user\controllers\userProfileMediaController.js" />
+    <Content Include="wwwroot\modules\user\controllers\userProfilePostsController.js" />
+    <Content Include="wwwroot\modules\user\directives\userImage.js" />
+    <Content Include="wwwroot\modules\user\directives\userInfoPopup.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetails.js" />
     <Content Include="Blog.Web.Site.nuspec" />
-    <Content Include="Content\theme\default\fonts\Bazar.ttf" />
-    <Content Include="Content\theme\default\fonts\CanterBold.otf" />
-    <Content Include="Content\theme\default\fonts\CanterBold3D.otf" />
-    <Content Include="Content\theme\default\fonts\CanterBoldShadow.otf" />
-    <Content Include="Content\theme\default\fonts\CanterBoldStrips.otf" />
-    <Content Include="Content\theme\default\fonts\CanterLight.otf" />
-    <Content Include="Content\theme\default\fonts\CanterOutline.otf" />
-    <Content Include="Content\theme\default\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\theme\default\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\theme\default\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\theme\default\fonts\FontAwesome.otf" />
-    <Content Include="Content\theme\default\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\theme\default\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\theme\default\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Scripts\bower_components\angular-animate\.bower.json" />
     <Content Include="Scripts\bower_components\angular-animate\angular-animate.min.js.map" />
     <Content Include="Scripts\bower_components\angular-animate\bower.json" />
@@ -2967,41 +3174,6 @@
     <Content Include="Scripts\bower_components\eventie\.bower.json" />
     <Content Include="Scripts\bower_components\eventie\bower.json" />
     <Content Include="Scripts\bower_components\eventie\README.md" />
-    <Content Include="Scripts\bower_components\fontawesome\.bower.json" />
-    <Content Include="Scripts\bower_components\fontawesome\.npmignore" />
-    <Content Include="Scripts\bower_components\fontawesome\bower.json" />
-    <Content Include="Scripts\bower_components\fontawesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="Scripts\bower_components\fontawesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Scripts\bower_components\fontawesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="Scripts\bower_components\fontawesome\fonts\FontAwesome.otf" />
-    <Content Include="Scripts\bower_components\fontawesome\less\bordered-pulled.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\core.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\extras.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\fixed-width.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\font-awesome.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\icons.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\larger.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\list.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\mixins.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\path.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\rotated-flipped.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\spinning.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\stacked.less" />
-    <Content Include="Scripts\bower_components\fontawesome\less\variables.less" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\font-awesome.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_bordered-pulled.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_core.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_extras.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_fixed-width.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_icons.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_larger.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_list.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_mixins.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_path.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_rotated-flipped.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_spinning.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_stacked.scss" />
-    <Content Include="Scripts\bower_components\fontawesome\scss\_variables.scss" />
     <Content Include="Scripts\bower_components\get-size\.bower.json" />
     <Content Include="Scripts\bower_components\get-size\bower.json" />
     <Content Include="Scripts\bower_components\get-size\component.json" />
@@ -3087,21 +3259,6 @@
     <Content Include="Scripts\bower_components\signalr\bower.json" />
     <Content Include="Scripts\bower_components\signalr\LICENSE.md" />
     <Content Include="Scripts\bower_components\signalr\README.md" />
-    <Content Include="Scripts\bower_components\snapjs\.bower.json" />
-    <Content Include="Scripts\bower_components\snapjs\component.json" />
-    <Content Include="Scripts\bower_components\snapjs\README.md" />
-    <Content Include="Scripts\bower_components\stacktrace\.bower.json" />
-    <Content Include="Scripts\bower_components\stacktrace\bower.json" />
-    <Content Include="Scripts\bower_components\stacktrace\build.gradle" />
-    <Content Include="Scripts\bower_components\stacktrace\CHANGELOG.md" />
-    <Content Include="Scripts\bower_components\stacktrace\component.json" />
-    <Content Include="Scripts\bower_components\stacktrace\CONTRIBUTING.md" />
-    <Content Include="Scripts\bower_components\stacktrace\gradlew" />
-    <Content Include="Scripts\bower_components\stacktrace\gradlew.bat" />
-    <Content Include="Scripts\bower_components\stacktrace\gradle\wrapper\gradle-wrapper.properties" />
-    <Content Include="Scripts\bower_components\stacktrace\jshint.json" />
-    <Content Include="Scripts\bower_components\stacktrace\package.json" />
-    <Content Include="Scripts\bower_components\stacktrace\README.md" />
     <Content Include="Scripts\bower_components\underscore\.bower.json" />
     <Content Include="Scripts\bower_components\underscore\.eslintrc" />
     <Content Include="Scripts\bower_components\underscore\bower.json" />
@@ -3203,352 +3360,128 @@
     <Content Include="Scripts\bower_components\isotope\_posts\docs\2011-06-16-hash-history-jquery-bbq.mdown" />
     <Content Include="Scripts\bower_components\isotope\_posts\docs\2011-12-11-help.mdown" />
     <Content Include="Scripts\bower_components\isotope\_posts\docs\2011-12-20-license.mdown" />
-    <Content Include="Scripts\modules\error\controllers\errorPageController.js" />
-    <Content Include="Scripts\modules\error\directives\errorDisplay.js" />
-    <Content Include="Scripts\modules\error\error.js" />
-    <Content Include="Scripts\modules\error\services\errorService.js" />
-    <Content Include="Scripts\modules\shared\directives\ellipsis.js" />
-    <Content Include="Scripts\modules\shared\directives\isotopeItemResize.js" />
-    <Content Include="Scripts\modules\shared\directives\fileUploadThumbnail.js" />
-    <Content Include="Scripts\modules\shared\directives\scrollTrigger.js" />
-    <Content Include="Scripts\modules\logger\logger.js" />
-    <Content Include="Scripts\modules\logger\services\errorLogService.js" />
-    <Content Include="Scripts\modules\logger\services\stacktraceService.js" />
-    <Content Include="Scripts\modules\posts\controllers\postsModifyController.js" />
-    <Content Include="Scripts\modules\posts\controllers\postsViewController.js" />
-    <Content Include="Scripts\modules\posts\directives\postContents.js" />
-    <Content Include="Scripts\modules\shared\directives\fileUpload.js" />
-    <Content Include="Scripts\modules\tags\services\tagsService.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsAddress.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducation.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducationGroup.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsEducationItem.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbies.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsHobbyItem.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileDetailsInfo.js" />
-    <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\plugins\ckeditor\adapters\jquery.js" />
-    <Content Include="Scripts\plugins\ckeditor\build-config.js" />
-    <Content Include="Scripts\plugins\ckeditor\CHANGES.md" />
-    <Content Include="Scripts\plugins\ckeditor\ckeditor.js" />
-    <Content Include="Scripts\plugins\ckeditor\config.js" />
-    <Content Include="Scripts\plugins\ckeditor\contents.css" />
-    <Content Include="Scripts\plugins\ckeditor\lang\en.js" />
-    <Content Include="Scripts\plugins\ckeditor\LICENSE.md" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\icons.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\icons_hidpi.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\link\dialogs\anchor.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\link\dialogs\link.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\link\images\anchor.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\link\images\hidpi\anchor.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\magicline\images\hidpi\icon.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\magicline\images\icon.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\preview\preview.html" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\dialogs\smiley.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\angel_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\angel_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\angry_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\angry_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\broken_heart.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\broken_heart.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\confused_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\confused_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\cry_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\cry_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\devil_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\devil_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\envelope.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\envelope.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\heart.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\heart.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\kiss.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\kiss.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\lightbulb.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\lightbulb.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\omg_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\omg_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\regular_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\regular_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\sad_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\sad_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\shades_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\shades_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\teeth_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\teeth_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\thumbs_down.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\thumbs_down.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\thumbs_up.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\thumbs_up.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\tongue_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\tongue_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\tounge_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\wink_smile.gif" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\smiley\images\wink_smile.png" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\table\dialogs\table.js" />
-    <Content Include="Scripts\plugins\ckeditor\plugins\youtube\images\icon.png" />
-    <Content Include="Scripts\plugins\ckeditor\README.md" />
-    <Content Include="Scripts\plugins\ckeditor\samples\ajax.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\api.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\appendto.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\inlineall\logo.png" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\posteddata.php" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\sample.css" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\sample.jpg" />
-    <Content Include="Scripts\plugins\ckeditor\samples\assets\uilanguages\languages.js" />
-    <Content Include="Scripts\plugins\ckeditor\samples\datafiltering.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\divreplace.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\index.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\inlineall.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\inlinebycode.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\inlinetextarea.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\jquery.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\autogrow\autogrow.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\dialog\assets\my_dialog.js" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\dialog\dialog.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\enterkey\enterkey.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\htmlwriter\outputforflash.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\htmlwriter\outputhtml.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\magicline\magicline.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\toolbar\toolbar.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\plugins\wysiwygarea\fullpage.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\readonly.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\replacebyclass.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\replacebycode.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\sample.css" />
-    <Content Include="Scripts\plugins\ckeditor\samples\sample.js" />
-    <Content Include="Scripts\plugins\ckeditor\samples\sample_posteddata.php" />
-    <Content Include="Scripts\plugins\ckeditor\samples\tabindex.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\uicolor.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\uilanguages.html" />
-    <Content Include="Scripts\plugins\ckeditor\samples\xhtmlstyle.html" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie7.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_ie8.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_iequirks.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\dialog_opera.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_gecko.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie7.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_ie8.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\.temp\css\editor_iequirks.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog_ie.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog_ie7.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog_ie8.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog_iequirks.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\dialog_opera.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor_gecko.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor_ie.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor_ie7.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor_ie8.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\editor_iequirks.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\icons.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\icons_hidpi.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\arrow.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\close.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\hidpi\close.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\hidpi\lock-open.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\hidpi\lock.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\hidpi\refresh.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\lock-open.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\lock.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\images\refresh.png" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\readme.md" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\sample\bootstrapck-sample.html" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\sample\css\bootstrapck-sample.css" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\sample\js\analytics.js" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\sample\js\jquery-1.11.0.min.js" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\editor.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_colorpanel.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_elementspath.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_mainui.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_menu.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_panel.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_presets.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_reset.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_richcombo.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\components\_toolbar.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_colors.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
-    <Content Include="Scripts\plugins\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
-    <Content Include="Scripts\plugins\ckeditor\styles.js" />
-    <Content Include="Scripts\plugins\jquery.blockui.js" />
-    <Content Include="Scripts\plugins\jquery.blockui.min.js" />
-    <Content Include="Scripts\plugins\jquery.newsTicker.js" />
-    <Content Include="Scripts\templates\modifypost.html" />
-    <Content Include="Scripts\modules\shared\services\dateHelper.js" />
-    <Content Include="Scripts\modules\tags\directives\tagItem.js" />
-    <Content Include="Scripts\modules\tags\tags.js" />
-    <Content Include="Scripts\modules\user\directives\userProfileNavigation.js" />
-    <Content Include="Scripts\modules\user\services\userService.js" />
-    <Content Include="Scripts\modules\user\user.js" />
+    <Content Include="wwwroot\modules\error\controllers\errorPageController.js" />
+    <Content Include="wwwroot\modules\error\directives\errorDisplay.js" />
+    <Content Include="wwwroot\modules\error\error.js" />
+    <Content Include="wwwroot\modules\error\services\errorService.js" />
+    <Content Include="wwwroot\modules\shared\directives\ellipsis.js" />
+    <Content Include="wwwroot\modules\shared\directives\isotopeItemResize.js" />
+    <Content Include="wwwroot\modules\shared\directives\fileUploadThumbnail.js" />
+    <Content Include="wwwroot\modules\shared\directives\scrollTrigger.js" />
+    <Content Include="wwwroot\modules\logger\logger.js" />
+    <Content Include="wwwroot\modules\logger\services\errorLogService.js" />
+    <Content Include="wwwroot\modules\logger\services\stacktraceService.js" />
+    <Content Include="wwwroot\modules\posts\controllers\postsModifyController.js" />
+    <Content Include="wwwroot\modules\posts\controllers\postsViewController.js" />
+    <Content Include="wwwroot\modules\posts\directives\postContents.js" />
+    <Content Include="wwwroot\modules\shared\directives\fileUpload.js" />
+    <Content Include="wwwroot\modules\tags\services\tagsService.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsAddress.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsEducation.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsEducationGroup.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsEducationItem.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbies.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbyItem.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileDetailsInfo.js" />
+    <Content Include="wwwroot\templates\modifypost.html" />
+    <Content Include="wwwroot\modules\shared\services\dateHelper.js" />
+    <Content Include="wwwroot\modules\tags\directives\tagItem.js" />
+    <Content Include="wwwroot\modules\tags\tags.js" />
+    <Content Include="wwwroot\modules\user\directives\userProfileNavigation.js" />
+    <Content Include="wwwroot\modules\user\services\userService.js" />
+    <Content Include="wwwroot\modules\user\user.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\modules\posts\directives\postListItem.js" />
-    <Content Include="Scripts\modules\posts\directives\postListItemComment.js" />
-    <Content Include="Scripts\modules\posts\controllers\postsController.js" />
-    <Content Include="Scripts\modules\shared\directives\ticker.js" />
-    <Content Include="Scripts\modules\shared\services\blockUi.js" />
-    <Content Include="Scripts\modules\shared\shared.js" />
-    <Content Include="Scripts\modules\config\config.js" />
-    <Content Include="Scripts\modules\config\provider\configProvider.js" />
-    <Content Include="Scripts\modules\header\directives\headerMenu.js" />
-    <Content Include="Scripts\modules\header\header.js" />
-    <Content Include="Scripts\modules\login\directives\loginForm.js" />
-    <Content Include="Scripts\modules\login\login.js" />
-    <Content Include="Scripts\modules\login\services\loginService.js" />
-    <Content Include="Scripts\modules\messaging\messaging.js" />
-    <Content Include="Scripts\modules\navigation\directives\navigationMenu.js" />
-    <Content Include="Scripts\modules\navigation\navigation.js" />
-    <Content Include="Scripts\modules\posts\directives\postLikes.js" />
-    <Content Include="Scripts\modules\posts\posts.js" />
-    <Content Include="Scripts\modules\posts\services\postsService.js" />
-    <Content Include="Scripts\modules\shared\directives\keypress.js" />
-    <Content Include="Scripts\templates\events.html" />
-    <Content Include="Scripts\templates\groups.html" />
-    <Content Include="Scripts\templates\modules\comments\commentItem.html" />
-    <Content Include="Scripts\templates\modules\comments\commentsAddNew.html" />
-    <Content Include="Scripts\templates\modules\comments\commentsContainer.html" />
-    <Content Include="Scripts\templates\modules\comments\commentsList.html" />
-    <Content Include="Scripts\templates\modules\error\errorDisplay.html" />
-    <Content Include="Scripts\templates\modules\header\headerMenu.html" />
-    <Content Include="Scripts\templates\modules\login\loggedUser.html" />
-    <Content Include="Scripts\templates\modules\login\loginForm.html" />
-    <Content Include="Scripts\templates\modules\login\loginFormModal.html" />
-    <Content Include="Scripts\templates\modules\login\registerForm.html" />
-    <Content Include="Scripts\templates\modules\media\albumGroup.html" />
-    <Content Include="Scripts\templates\modules\media\mediaDeleteDialog.html" />
-    <Content Include="Scripts\templates\modules\media\mediaGallery.html" />
-    <Content Include="Scripts\templates\modules\media\mediaGroupedList.html" />
-    <Content Include="Scripts\templates\modules\media\mediaItem.html" />
-    <Content Include="Scripts\templates\modules\media\mediaSelectionDialog.html" />
-    <Content Include="Scripts\templates\modules\messaging\chatWindow.html" />
-    <Content Include="Scripts\templates\modules\messaging\messagesPanel.html" />
-    <Content Include="Scripts\templates\modules\navigation\navigationMenu.html" />
-    <Content Include="Scripts\modules\shared\directives\fileUploadItem.js" />
-    <Content Include="Scripts\templates\modules\posts\postContents.html" />
-    <Content Include="Scripts\templates\modules\posts\postHeader.html" />
-    <Content Include="Scripts\templates\modules\posts\postRelatedItem.html" />
-    <Content Include="Scripts\templates\modules\posts\postRelatedItems.html" />
-    <Content Include="Scripts\templates\modules\posts\postViewCount.html" />
-    <Content Include="Scripts\templates\modules\posts\postViewNavigator.html" />
-    <Content Include="Scripts\templates\modules\shared\emptyRecordMessage.html" />
-    <Content Include="Scripts\templates\modules\shared\fileUploadItem.html" />
-    <Content Include="Scripts\templates\modules\posts\postListItem.html" />
-    <Content Include="Scripts\templates\modules\posts\postListItemComment.html" />
-    <Content Include="Scripts\templates\modules\posts\postLikes.html" />
-    <Content Include="Scripts\templates\modules\shared\fileUpload.html" />
-    <Content Include="Scripts\templates\modules\shared\videoPlayer.html" />
-    <Content Include="Scripts\templates\modules\sockets\socketDebugger.html" />
-    <Content Include="Scripts\templates\modules\tags\tagItem.html" />
-    <Content Include="Scripts\templates\errorpage.html" />
-    <Content Include="Scripts\templates\modules\user\userImage.html" />
-    <Content Include="Scripts\templates\modules\user\userInfoPopup.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileComments.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetails.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsAddress.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducation.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducationGroup.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsEducationItem.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsHobbies.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsHobbyItem.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileDetailsInfo.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileFavorites.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileMedia.html" />
-    <Content Include="Scripts\templates\modules\user\userProfileNavigation.html" />
-    <Content Include="Scripts\templates\modules\user\userProfilePosts.html" />
-    <Content Include="Scripts\templates\users.html" />
-    <Content Include="Scripts\templates\friends.html" />
-    <Content Include="Scripts\templates\posts.html" />
-    <Content Include="Scripts\templates\viewpost.html" />
+    <Content Include="wwwroot\modules\posts\directives\postListItem.js" />
+    <Content Include="wwwroot\modules\posts\directives\postListItemComment.js" />
+    <Content Include="wwwroot\modules\posts\controllers\postsController.js" />
+    <Content Include="wwwroot\modules\shared\directives\ticker.js" />
+    <Content Include="wwwroot\modules\shared\services\blockUi.js" />
+    <Content Include="wwwroot\modules\shared\shared.js" />
+    <Content Include="wwwroot\modules\config\config.js" />
+    <Content Include="wwwroot\modules\config\provider\configProvider.js" />
+    <Content Include="wwwroot\modules\header\directives\headerMenu.js" />
+    <Content Include="wwwroot\modules\header\header.js" />
+    <Content Include="wwwroot\modules\login\directives\loginForm.js" />
+    <Content Include="wwwroot\modules\login\login.js" />
+    <Content Include="wwwroot\modules\login\services\loginService.js" />
+    <Content Include="wwwroot\modules\messaging\messaging.js" />
+    <Content Include="wwwroot\modules\navigation\directives\navigationMenu.js" />
+    <Content Include="wwwroot\modules\navigation\navigation.js" />
+    <Content Include="wwwroot\modules\posts\directives\postLikes.js" />
+    <Content Include="wwwroot\modules\posts\posts.js" />
+    <Content Include="wwwroot\modules\posts\services\postsService.js" />
+    <Content Include="wwwroot\modules\shared\directives\keypress.js" />
+    <Content Include="wwwroot\templates\events.html" />
+    <Content Include="wwwroot\templates\groups.html" />
+    <Content Include="wwwroot\templates\modules\comments\commentItem.html" />
+    <Content Include="wwwroot\templates\modules\comments\commentsAddNew.html" />
+    <Content Include="wwwroot\templates\modules\comments\commentsContainer.html" />
+    <Content Include="wwwroot\templates\modules\comments\commentsList.html" />
+    <Content Include="wwwroot\templates\modules\error\errorDisplay.html" />
+    <Content Include="wwwroot\templates\modules\header\headerMenu.html" />
+    <Content Include="wwwroot\templates\modules\login\loggedUser.html" />
+    <Content Include="wwwroot\templates\modules\login\loginForm.html" />
+    <Content Include="wwwroot\templates\modules\login\loginFormModal.html" />
+    <Content Include="wwwroot\templates\modules\login\registerForm.html" />
+    <Content Include="wwwroot\templates\modules\media\albumGroup.html" />
+    <Content Include="wwwroot\templates\modules\media\mediaDeleteDialog.html" />
+    <Content Include="wwwroot\templates\modules\media\mediaGallery.html" />
+    <Content Include="wwwroot\templates\modules\media\mediaGroupedList.html" />
+    <Content Include="wwwroot\templates\modules\media\mediaItem.html" />
+    <Content Include="wwwroot\templates\modules\media\mediaSelectionDialog.html" />
+    <Content Include="wwwroot\templates\modules\messaging\chatWindow.html" />
+    <Content Include="wwwroot\templates\modules\messaging\messagesPanel.html" />
+    <Content Include="wwwroot\templates\modules\navigation\navigationMenu.html" />
+    <Content Include="wwwroot\modules\shared\directives\fileUploadItem.js" />
+    <Content Include="wwwroot\templates\modules\posts\postContents.html" />
+    <Content Include="wwwroot\templates\modules\posts\postHeader.html" />
+    <Content Include="wwwroot\templates\modules\posts\postRelatedItem.html" />
+    <Content Include="wwwroot\templates\modules\posts\postRelatedItems.html" />
+    <Content Include="wwwroot\templates\modules\posts\postViewCount.html" />
+    <Content Include="wwwroot\templates\modules\posts\postViewNavigator.html" />
+    <Content Include="wwwroot\templates\modules\shared\emptyRecordMessage.html" />
+    <Content Include="wwwroot\templates\modules\shared\fileUploadItem.html" />
+    <Content Include="wwwroot\templates\modules\posts\postListItem.html" />
+    <Content Include="wwwroot\templates\modules\posts\postListItemComment.html" />
+    <Content Include="wwwroot\templates\modules\posts\postLikes.html" />
+    <Content Include="wwwroot\templates\modules\shared\fileUpload.html" />
+    <Content Include="wwwroot\templates\modules\shared\videoPlayer.html" />
+    <Content Include="wwwroot\templates\modules\sockets\socketDebugger.html" />
+    <Content Include="wwwroot\templates\modules\tags\tagItem.html" />
+    <Content Include="wwwroot\templates\errorpage.html" />
+    <Content Include="wwwroot\templates\modules\user\userImage.html" />
+    <Content Include="wwwroot\templates\modules\user\userInfoPopup.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileComments.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetails.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsAddress.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsEducation.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsEducationGroup.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsEducationItem.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsHobbies.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsHobbyItem.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileDetailsInfo.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileFavorites.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileMedia.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfileNavigation.html" />
+    <Content Include="wwwroot\templates\modules\user\userProfilePosts.html" />
+    <Content Include="wwwroot\templates\users.html" />
+    <Content Include="wwwroot\templates\friends.html" />
+    <Content Include="wwwroot\templates\posts.html" />
+    <Content Include="wwwroot\templates\viewpost.html" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Content\fonts\CanterBold3D.otf" />
-    <Content Include="Content\fonts\CanterBoldShadow.otf" />
-    <Content Include="Content\fonts\CanterBoldStrips.otf" />
-    <Content Include="Content\fonts\CanterBold.otf" />
-    <Content Include="Content\fonts\CanterLight.otf" />
-    <Content Include="Content\fonts\CanterOutline.otf" />
-    <Content Include="Content\fonts\Bazar.ttf" />
-    <Content Include="Scripts\plugins\jquery.blockui.min.js.map" />
+    <Content Include="wwwroot\fonts\CanterBold3D.otf" />
+    <Content Include="wwwroot\fonts\CanterBoldShadow.otf" />
+    <Content Include="wwwroot\fonts\CanterBoldStrips.otf" />
+    <Content Include="wwwroot\fonts\CanterBold.otf" />
+    <Content Include="wwwroot\fonts\CanterLight.otf" />
+    <Content Include="wwwroot\fonts\CanterOutline.otf" />
+    <Content Include="wwwroot\fonts\Bazar.ttf" />
     <Content Include="Scripts\bower_components\anijs\.bower.json" />
     <Content Include="Scripts\bower_components\anijs\bower.json" />
     <Content Include="Scripts\bower_components\anijs\component.json" />
@@ -3562,46 +3495,48 @@
     <Content Include="Scripts\bower_components\animate.css\bower.json" />
     <Content Include="Scripts\bower_components\animate.css\package.json" />
     <Content Include="Scripts\bower_components\animate.css\README.md" />
-    <Content Include="Scripts\jsbundle.js.bundle" />
-    <Content Include="Scripts\jsbundle.min.js.map">
+    <Content Include="wwwroot\lib\jsbundle.js.bundle">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="wwwroot\lib\jsbundle.min.js.map">
       <DependentUpon>jsbundle.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\modules\appmodules.js.bundle" />
-    <Content Include="Scripts\modules\appmodules.min.js.map">
+    <Content Include="wwwroot\modules\appmodules.js.bundle" />
+    <Content Include="wwwroot\modules\appmodules.min.js.map">
       <DependentUpon>appmodules.min.js</DependentUpon>
     </Content>
-    <Content Include="Content\appmodules.css.bundle" />
-    <Content Include="Scripts\cssbundle.css.bundle" />
-    <Content Include="Content\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-Bold\OpenSans-Bold-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-Bold\OpenSans-Bold-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-Bold\OpenSans-Bold-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-Italic\OpenSans-Italic-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-Italic\OpenSans-Italic-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-Italic\OpenSans-Italic-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-Light\OpenSans-Light-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-Light\OpenSans-Light-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-Light\OpenSans-Light-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-Regular\OpenSans-Regular-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-Regular\OpenSans-Regular-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-Regular\OpenSans-Regular-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.woff" />
-    <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.eot" />
-    <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.ttf" />
-    <Content Include="Content\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.woff" />
+    <Content Include="wwwroot\css\appmodules.css.bundle" />
+    <Content Include="wwwroot\css\cssbundle.css.bundle" />
+    <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-ExtraBold\OpenSans-ExtraBold-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-Italic\OpenSans-Italic-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-Italic\OpenSans-Italic-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-Italic\OpenSans-Italic-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-LightItalic\OpenSans-LightItalic-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-Light\OpenSans-Light-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-Light\OpenSans-Light-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-Light\OpenSans-Light-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-Regular\OpenSans-Regular-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-Regular\OpenSans-Regular-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-Regular\OpenSans-Regular-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBoldItalic\OpenSans-SemiboldItalic-webfont.woff" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.eot" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.ttf" />
+    <Content Include="wwwroot\fonts\OpenSans-SemiBold\OpenSans-Semibold-webfont.woff" />
     <Content Include="Scripts\bower_components\offline\.bower.json" />
     <Content Include="Scripts\bower_components\offline\bower.json" />
     <Content Include="Scripts\bower_components\offline\Gruntfile.coffee" />
@@ -3671,121 +3606,121 @@
     <Content Include="Scripts\bower_components\angular-route\bower.json" />
     <Content Include="Scripts\bower_components\angular-route\README.md" />
     <Content Include="Views\Home\UnsupportedBrowser.cshtml" />
-    <Content Include="Content\scss\main.scss" />
-    <Content Include="Content\scss\variables.scss" />
-    <Content Include="Content\scss\main.css.map">
+    <Content Include="wwwroot\css\scss\main.scss" />
+    <Content Include="wwwroot\css\scss\variables.scss" />
+    <Content Include="wwwroot\css\scss\main.css.map">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\variables.css.map">
+    <Content Include="wwwroot\css\scss\variables.css.map">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlistitem.scss" />
-    <Content Include="Content\scss\posts\postlistitem.css.map">
+    <Content Include="wwwroot\css\scss\posts\postlistitem.scss" />
+    <Content Include="wwwroot\css\scss\posts\postlistitem.css.map">
       <DependentUpon>postlistitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentscontainer.scss" />
-    <Content Include="Content\scss\comments\commentscontainer.css.map">
+    <Content Include="wwwroot\css\scss\comments\commentscontainer.scss" />
+    <Content Include="wwwroot\css\scss\comments\commentscontainer.css.map">
       <DependentUpon>commentscontainer.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentslist.scss" />
-    <Content Include="Content\scss\comments\commentslist.css.map">
+    <Content Include="wwwroot\css\scss\comments\commentslist.scss" />
+    <Content Include="wwwroot\css\scss\comments\commentslist.css.map">
       <DependentUpon>commentslist.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\viewpost.scss" />
-    <Content Include="Content\scss\viewpost.css.map">
+    <Content Include="wwwroot\css\scss\viewpost.scss" />
+    <Content Include="wwwroot\css\scss\viewpost.css.map">
       <DependentUpon>viewpost.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentsaddnew.scss" />
-    <Content Include="Content\scss\comments\commentsaddnew.css.map">
+    <Content Include="wwwroot\css\scss\comments\commentsaddnew.scss" />
+    <Content Include="wwwroot\css\scss\comments\commentsaddnew.css.map">
       <DependentUpon>commentsaddnew.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\comments\commentitem.scss" />
-    <Content Include="Content\scss\comments\commentitem.css.map">
+    <Content Include="wwwroot\css\scss\comments\commentitem.scss" />
+    <Content Include="wwwroot\css\scss\comments\commentitem.css.map">
       <DependentUpon>commentitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\error\errordisplay.scss" />
-    <Content Include="Content\scss\error\errordisplay.css.map">
+    <Content Include="wwwroot\css\scss\error\errordisplay.scss" />
+    <Content Include="wwwroot\css\scss\error\errordisplay.css.map">
       <DependentUpon>errordisplay.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\header\headermenu.scss" />
-    <Content Include="Content\scss\header\headermenu.css.map">
+    <Content Include="wwwroot\css\scss\header\headermenu.scss" />
+    <Content Include="wwwroot\css\scss\header\headermenu.css.map">
       <DependentUpon>headermenu.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loggeduser.scss" />
-    <Content Include="Content\scss\loginform\loggeduser.css.map">
+    <Content Include="wwwroot\css\scss\loginform\loggeduser.scss" />
+    <Content Include="wwwroot\css\scss\loginform\loggeduser.css.map">
       <DependentUpon>loggeduser.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginform.scss" />
-    <Content Include="Content\scss\loginform\loginform.css.map">
+    <Content Include="wwwroot\css\scss\loginform\loginform.scss" />
+    <Content Include="wwwroot\css\scss\loginform\loginform.css.map">
       <DependentUpon>loginform.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\loginformmodal.scss" />
-    <Content Include="Content\scss\loginform\loginformmodal.css.map">
+    <Content Include="wwwroot\css\scss\loginform\loginformmodal.scss" />
+    <Content Include="wwwroot\css\scss\loginform\loginformmodal.css.map">
       <DependentUpon>loginformmodal.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\loginform\registerform.scss" />
-    <Content Include="Content\scss\loginform\registerform.css.map">
+    <Content Include="wwwroot\css\scss\loginform\registerform.scss" />
+    <Content Include="wwwroot\css\scss\loginform\registerform.css.map">
       <DependentUpon>registerform.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\albumgroup.scss" />
-    <Content Include="Content\scss\media\albumgroup.css.map">
+    <Content Include="wwwroot\css\scss\media\albumgroup.scss" />
+    <Content Include="wwwroot\css\scss\media\albumgroup.css.map">
       <DependentUpon>albumgroup.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaitem.scss" />
-    <Content Include="Content\scss\media\mediaitem.css.map">
+    <Content Include="wwwroot\css\scss\media\mediaitem.scss" />
+    <Content Include="wwwroot\css\scss\media\mediaitem.css.map">
       <DependentUpon>mediaitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\media\mediaselectiondialog.scss" />
-    <Content Include="Content\scss\media\mediaselectiondialog.css.map">
+    <Content Include="wwwroot\css\scss\media\mediaselectiondialog.scss" />
+    <Content Include="wwwroot\css\scss\media\mediaselectiondialog.css.map">
       <DependentUpon>mediaselectiondialog.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\tags\tagitem.scss" />
-    <Content Include="Content\scss\tags\tagitem.css.map">
+    <Content Include="wwwroot\css\scss\tags\tagitem.scss" />
+    <Content Include="wwwroot\css\scss\tags\tagitem.css.map">
       <DependentUpon>tagitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileupload.scss" />
-    <Content Include="Content\scss\shared\fileupload.css.map">
+    <Content Include="wwwroot\css\scss\shared\fileupload.scss" />
+    <Content Include="wwwroot\css\scss\shared\fileupload.css.map">
       <DependentUpon>fileupload.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\shared\fileuploaditem.scss" />
-    <Content Include="Content\scss\shared\fileuploaditem.css.map">
+    <Content Include="wwwroot\css\scss\shared\fileuploaditem.scss" />
+    <Content Include="wwwroot\css\scss\shared\fileuploaditem.css.map">
       <DependentUpon>fileuploaditem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\sockets\socketdebugger.scss" />
-    <Content Include="Content\scss\sockets\socketdebugger.css.map">
+    <Content Include="wwwroot\css\scss\sockets\socketdebugger.scss" />
+    <Content Include="wwwroot\css\scss\sockets\socketdebugger.css.map">
       <DependentUpon>socketdebugger.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postcontents.scss" />
-    <Content Include="Content\scss\posts\postcontents.css.map">
+    <Content Include="wwwroot\css\scss\posts\postcontents.scss" />
+    <Content Include="wwwroot\css\scss\posts\postcontents.css.map">
       <DependentUpon>postcontents.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\posts\postlikes.scss" />
-    <Content Include="Content\scss\posts\postlistitemcomment.scss" />
-    <Content Include="Content\scss\posts\postlistitemcomment.css.map">
+    <Content Include="wwwroot\css\scss\posts\postlikes.scss" />
+    <Content Include="wwwroot\css\scss\posts\postlistitemcomment.scss" />
+    <Content Include="wwwroot\css\scss\posts\postlistitemcomment.css.map">
       <DependentUpon>postlistitemcomment.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\usercommentitem.scss" />
-    <Content Include="Content\scss\user\usercommentitem.css.map">
+    <Content Include="wwwroot\css\scss\user\usercommentitem.scss" />
+    <Content Include="wwwroot\css\scss\user\usercommentitem.css.map">
       <DependentUpon>usercommentitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userimage.scss" />
-    <Content Include="Content\scss\user\userimage.css.map">
+    <Content Include="wwwroot\css\scss\user\userimage.scss" />
+    <Content Include="wwwroot\css\scss\user\userimage.css.map">
       <DependentUpon>userimage.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userpostitem.scss" />
-    <Content Include="Content\scss\user\userpostitem.css.map">
+    <Content Include="wwwroot\css\scss\user\userpostitem.scss" />
+    <Content Include="wwwroot\css\scss\user\userpostitem.css.map">
       <DependentUpon>userpostitem.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilecomments.scss" />
-    <Content Include="Content\scss\user\userprofilecomments.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofilecomments.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofilecomments.css.map">
       <DependentUpon>userprofilecomments.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofilefavorites.scss" />
-    <Content Include="Content\scss\user\userprofilefavorites.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofilefavorites.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofilefavorites.css.map">
       <DependentUpon>userprofilefavorites.css</DependentUpon>
     </Content>
-    <Content Include="Content\scss\user\userprofileposts.scss" />
-    <Content Include="Content\scss\user\userprofileposts.css.map">
+    <Content Include="wwwroot\css\scss\user\userprofileposts.scss" />
+    <Content Include="wwwroot\css\scss\user\userprofileposts.css.map">
       <DependentUpon>userprofileposts.css</DependentUpon>
     </Content>
     <Content Include="Scripts\bower_components\angularjs-scroll-glue\.bower.json" />
@@ -3793,7 +3728,6 @@
     <Content Include="Scripts\bower_components\angularjs-scroll-glue\package.json" />
     <Content Include="Scripts\bower_components\angularjs-scroll-glue\README.md" />
     <Content Include="Scripts\bower_components\angularjs-scroll-glue\src\LICENSE" />
-    <Content Include="Scripts\bower_components\stacktrace\dist\stacktrace.js.map" />
     <Content Include="Scripts\bower_components\slick-carousel\bower.json" />
     <Content Include="Scripts\bower_components\slick-carousel\component.json" />
     <Content Include="Scripts\bower_components\slick-carousel\CONTRIBUTING.markdown" />
@@ -3817,6 +3751,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\package.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\.bower.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\bower.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\build.gradle" />
+    <Content Include="Scripts\bower_components\stacktrace-js\CHANGELOG.md" />
+    <Content Include="Scripts\bower_components\stacktrace-js\component.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\CONTRIBUTING.md" />
+    <Content Include="Scripts\bower_components\stacktrace-js\dist\stacktrace.js.map" />
+    <Content Include="Scripts\bower_components\stacktrace-js\gradlew" />
+    <Content Include="Scripts\bower_components\stacktrace-js\gradlew.bat" />
+    <Content Include="Scripts\bower_components\stacktrace-js\gradle\wrapper\gradle-wrapper.properties" />
+    <Content Include="Scripts\bower_components\stacktrace-js\jshint.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\package.json" />
+    <Content Include="Scripts\bower_components\stacktrace-js\README.md" />
     <None Include="Web.Home.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3826,10 +3774,42 @@
     <None Include="Web.Remote.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="wwwroot\lib\ckeditor\CHANGES.md" />
+    <Content Include="wwwroot\lib\ckeditor\LICENSE.md" />
+    <Content Include="wwwroot\lib\ckeditor\README.md" />
+    <Content Include="wwwroot\lib\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="wwwroot\lib\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="wwwroot\lib\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\readme.md" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\gecko\editor_gecko.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\dialog_ie7.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie7\editor_ie7.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\dialog_ie8.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie8\editor_ie8.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\dialog_iequirks.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\iequirks\editor_iequirks.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie\dialog_ie.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\ie\editor_ie.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\browser-specific\opera\dialog_opera.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\editor.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_colorpanel.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_elementspath.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_mainui.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_menu.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_panel.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_presets.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_reset.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_richcombo.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\components\_toolbar.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\config\_colors.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\config\_config.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
+    <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
+    <Content Include="wwwroot\lib\jquery.blockui.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\modules\comments\controllers\" />
+    <Folder Include="wwwroot\modules\comments\controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

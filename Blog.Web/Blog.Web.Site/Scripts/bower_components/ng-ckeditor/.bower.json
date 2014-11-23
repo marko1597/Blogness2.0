@@ -1,7 +1,10 @@
 {
   "name": "ng-ckeditor",
   "version": "0.2.1",
-  "main": "ng-ckeditor.js",
+  "main": [
+        "ng-ckeditor.js",
+        "ng-ckeditor.css"
+    ],
   "dependencies": {
     "angular": "~1.2.9"
   },
