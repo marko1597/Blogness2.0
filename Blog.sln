@@ -55,6 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.SolutionItems", "Blog.
 		Blog.SolutionItems\applicationPoolsStartStop.bat = Blog.SolutionItems\applicationPoolsStartStop.bat
 		Blog.SolutionItems\iisInstallationScript.ps1 = Blog.SolutionItems\iisInstallationScript.ps1
 		Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql = Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql
+		readme.txt = readme.txt
 		Blog.SolutionItems\storedProcedure - mapIdentityUsersToBlogUsers.sql = Blog.SolutionItems\storedProcedure - mapIdentityUsersToBlogUsers.sql
 		Blog.SolutionItems\WebEssentials-Settings.json = Blog.SolutionItems\WebEssentials-Settings.json
 	EndProjectSection
