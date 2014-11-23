@@ -32,7 +32,6 @@ namespace Blog.Web.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FormatConfig.RegisterFormats(GlobalConfiguration.Configuration.Formatters);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // Allow Any Certificates
             // This should not be the same in Production

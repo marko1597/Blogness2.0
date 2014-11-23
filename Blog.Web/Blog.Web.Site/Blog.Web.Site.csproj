@@ -4504,6 +4504,9 @@
     <Content Include="node_modules\grunt\node_modules\which\LICENSE" />
     <Content Include="node_modules\grunt\node_modules\which\package.json" />
     <Content Include="node_modules\grunt\package.json" />
+    <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.js.map">
+      <DependentUpon>static.js</DependentUpon>
+    </Content>
     <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
     <Content Include="wwwroot\css\scss\extensions\ckeditor.css">
       <DependentUpon>ckeditor.scss</DependentUpon>

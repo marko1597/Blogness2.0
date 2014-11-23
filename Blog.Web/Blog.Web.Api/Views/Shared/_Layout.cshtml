@@ -4,19 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
+    <header>
+        Bloggity REST API
+    </header>
     @RenderBody()
-    <h2>Blog Rest API</h2>
-    <hr />
     <footer>
         <p>&copy; @DateTime.Now.Year - Jason Magpantay</p>
     </footer>
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>
