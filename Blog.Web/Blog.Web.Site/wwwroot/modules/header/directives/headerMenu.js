@@ -1,4 +1,4 @@
-﻿ngHeader.directive('headerMenu', function () {
+﻿ngHeader.directive('headerMenu', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $location, $rootScope, snapRemote, $http, $window, configProvider, authenticationService) {
         $scope.userLoggedIn = false;
 
@@ -80,7 +80,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "header/headerMenu.html",
+        template: $templateCache.get("header/headerMenu.html"),
         controller: ctrlFn
     };
-});
+}]);

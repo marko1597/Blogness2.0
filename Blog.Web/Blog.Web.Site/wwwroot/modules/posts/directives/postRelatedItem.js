@@ -1,8 +1,8 @@
-﻿ngPosts.directive('postRelatedItem', [function () {
+﻿ngPosts.directive('postRelatedItem', ["$templateCache", function ($templateCache) {
     return {
         restrict: 'EA',
         scope: { post: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditem.html"
+        template: $templateCache.get("posts/postRelatedItem.html")
     };
 }]);

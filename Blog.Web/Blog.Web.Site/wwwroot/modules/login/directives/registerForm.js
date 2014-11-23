@@ -1,4 +1,4 @@
-﻿ngLogin.directive('registerForm', function () {
+﻿ngLogin.directive('registerForm', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $timeout, $window, errorService, configProvider, authenticationService, blockUiService) {
         $scope.username = "";
         $scope.password = "";
@@ -127,7 +127,7 @@
         scope: { modal: '=' },
         replace: true,
         link: linkFn,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "login/registerform.html",
+        template: $templateCache.get("login/registerForm.html"),
         controller: ctrlFn
     };
-});
+}]);

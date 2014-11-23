@@ -1,4 +1,4 @@
-﻿ngMedia.directive('mediaGroupedList', function () {
+﻿ngMedia.directive('mediaGroupedList', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
         $scope.isAdding = false;
 
@@ -32,7 +32,7 @@
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaGroupedList.html",
+        template: $templateCache.get("media/mediaGroupedList.html"),
         controller: ctrlFn
     };
-});
+}]);

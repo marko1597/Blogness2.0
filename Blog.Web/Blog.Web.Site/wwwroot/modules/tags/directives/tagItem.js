@@ -1,4 +1,4 @@
-﻿ngTags.directive('tagItem', [function () {
+﻿ngTags.directive('tagItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
         
     };
@@ -8,7 +8,7 @@
         restrict: 'EA',
         scope: { tag: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "tags/tagItem.html",
+        template: $templateCache.get("tags/tagItem.html"),
         controller: ctrlFn
     };
 }]);

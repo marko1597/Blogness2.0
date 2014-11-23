@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postHeader', [function () {
+﻿ngPosts.directive('postHeader', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
         $scope.username = localStorageService.get("username");
 
@@ -34,7 +34,7 @@
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postHeader.html",
+        template: $templateCache.get("posts/postHeader.html"),
         controller: ctrlFn
     };
 }]);

@@ -1,4 +1,4 @@
-﻿ngComments.directive('commentItem', [function () {
+﻿ngComments.directive('commentItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if (!$scope.allowExpand) {
@@ -98,7 +98,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentItem.html",
+        template: $templateCache.get("comments/commentItem.html"),
         controller: ctrlFn,
         link: linkFn
     };

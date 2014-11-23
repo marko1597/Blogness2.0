@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postListItemComment', [function () {
+﻿ngPosts.directive('postListItemComment', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
         $scope.user = {
             "name": $scope.comment.User.FirstName + " " + $scope.comment.User.LastName,
@@ -16,7 +16,7 @@
         restrict: 'EA',
         scope: { comment: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postListItemComment.html",
+        template: $templateCache.get("posts/postListItemComment.html"),
         controller: ctrlFn
     };
 }]);

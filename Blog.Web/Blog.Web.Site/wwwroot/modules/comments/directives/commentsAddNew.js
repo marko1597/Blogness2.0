@@ -1,4 +1,4 @@
-﻿ngComments.directive('commentsAddNew', [function () {
+﻿ngComments.directive('commentsAddNew', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, commentsService, errorService) {
         $scope.comment = {
             CommentMessage: "",
@@ -72,7 +72,7 @@
             parentpostid: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsAddNew.html",
+        template: $templateCache.get("comments/commentsAddNew.html"),
         controller: ctrlFn
     };
 }]);

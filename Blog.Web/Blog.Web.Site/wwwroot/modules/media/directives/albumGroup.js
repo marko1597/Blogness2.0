@@ -1,6 +1,6 @@
 ﻿// ReSharper disable InconsistentNaming
 
-ngMedia.directive('albumGroup', function () {
+ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $window, albumService, mediaService, errorService, dateHelper, configProvider,
         $modal, FileUploader, localStorageService) {
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
@@ -53,7 +53,7 @@ ngMedia.directive('albumGroup', function () {
         };
 
         $scope.deleteAlbum = function () {
-            mediaDeleteDialog.$promise.then(mediaDeleteDialog.show);
+            mediaDeleteDialog.show();
         };
 
         $scope.confirmDelete = function () {
@@ -87,7 +87,7 @@ ngMedia.directive('albumGroup', function () {
             title: 'Delete?',
             content: "Are you sure you want to delete this album? Doing so will also delete all the media in it.",
             scope: $scope,
-            template: $window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
+            template: "media/mediaDeleteDialog.html",
             show: false
         });
 
@@ -155,9 +155,9 @@ ngMedia.directive('albumGroup', function () {
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/albumGroup.html",
+        template: $templateCache.get("media/albumGroup.html"),
         controller: ctrlFn
     };
-});
+}]);
 
 // ReSharper restore InconsistentNaming

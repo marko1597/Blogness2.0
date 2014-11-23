@@ -11,13 +11,37 @@ module.exports = function (grunt) {
                     cleanTargetDir: false
                 }
             }
+        },
+        ngtemplates: {
+            blog: {
+                src: ['wwwroot/templates/*.html', 'wwwroot/templates/**/*.html'],
+                dest: 'wwwroot/modules/templates.js',
+                options: {
+                    //htmlmin: {
+                    //    collapseBooleanAttributes: true,
+                    //    collapseWhitespace: true,
+                    //    removeAttributeQuotes: true,
+                    //    removeComments: true,
+                    //    removeEmptyAttributes: true,
+                    //    removeRedundantAttributes: true,
+                    //    removeScriptTypeAttributes: true,
+                    //    removeStyleLinkTypeAttributes: true
+                    //},
+                    url: function (url) {
+                        url = url.replace('wwwroot/templates/', '');
+                        url = url.replace('modules/', '');
+                        return url;
+                    }
+                }
+            }
         }
     });
 
-    // This command registers the default task which will install bower packages into wwwroot/lib
-    grunt.registerTask("default", ["bower:install"]);
+    grunt.registerTask("default", [
+        "ngtemplates"
+        //, "bower:install"
+    ]);
 
-    // The following line loads the grunt plugins.
-    // This line needs to be at the end of this this file.
     grunt.loadNpmTasks("grunt-bower-task");
+    grunt.loadNpmTasks('grunt-angular-templates');
 };

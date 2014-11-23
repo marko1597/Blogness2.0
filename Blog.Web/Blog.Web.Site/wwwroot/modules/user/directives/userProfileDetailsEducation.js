@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsEducation', [function () {
+﻿ngUser.directive('userProfileDetailsEducation', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, dateHelper) {
         $scope.$on("viewedUserLoaded", function (ev, data) {
             $scope.educationGroups = data.EducationGroups;
@@ -19,7 +19,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducation.html",
+        template: $templateCache.get("user/userProfileDetailsEducation.html"),
         controller: ctrlFn
     };
 }]);

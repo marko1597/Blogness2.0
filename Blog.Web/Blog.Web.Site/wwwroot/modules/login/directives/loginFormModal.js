@@ -1,7 +1,7 @@
-﻿ngLogin.directive('loginFormModal', function () {
+﻿ngLogin.directive('loginFormModal', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $modal) {
         $scope.loginModal = $modal({
-            template: window.blogConfiguration.templatesModulesUrl + "login/loginformmodal.html",
+            template: "login/loginFormModal.html",
             show: false,
             keyboard: false,
             backdrop: 'static'
@@ -22,7 +22,7 @@
             } catch (ex) {
                 $scope.loginModal.$options.keyboard = false;
                 $scope.loginModal.$options.backdrop = 'static';
-                $scope.loginModal.$promise.then($scope.loginModal.show);
+                $scope.loginModal.show();
             }
         });
 
@@ -38,4 +38,4 @@
         replace: true,
         controller: ctrlFn
     };
-});
+}]);

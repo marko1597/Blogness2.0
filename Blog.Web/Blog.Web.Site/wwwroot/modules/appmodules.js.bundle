@@ -11,6 +11,7 @@
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
     <file>/wwwroot/modules/init.js</file>
+    <file>/wwwroot/modules/templates.js</file>
 
     <file>/wwwroot/modules/comments/comments.js</file>
     <file>/wwwroot/modules/comments/directives/commentItem.js</file>

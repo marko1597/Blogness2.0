@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postViewNavigator', [function () {
+﻿ngPosts.directive('postViewNavigator', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $location, $rootScope, postsService) {
         $scope.nextPost = function () {
             if (!$rootScope.$stateParams.postId) return;
@@ -46,7 +46,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postViewNavigator.html",
+        template: $templateCache.get("posts/postViewNavigator.html"),
         controller: ctrlFn
     };
 }]);

@@ -2,7 +2,7 @@
     var windowDimensions = {
         width: 0,
         height: 0,
-        mode: ""
+        mode: "desktop"
     };
 
     var settings = {
@@ -25,7 +25,13 @@
         backgroundPictureUrl: ""
     };
 
-    var navigationItems = [];
+    var navigationItems = [
+        { text: "Home", icon: "fa-home", href: "/#/" },
+        { text: "People", icon: "fa-user", href: "/#/user" },
+        { text: "Friends", icon: "fa-comments", href: "/#/friends" },
+        { text: "Groups", icon: "fa-users", href: "/#/groups" },
+        { text: "Events", icon: "fa-calendar", href: "/#/events" }
+    ];
 
     var socketClientFunctions = {};
 

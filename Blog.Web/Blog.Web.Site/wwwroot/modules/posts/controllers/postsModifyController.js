@@ -1,16 +1,16 @@
 ﻿// ReSharper disable InconsistentNaming
 
-ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window", "$modal",
-    "FileUploader", "localStorageService", "postsService", "userService", "albumService", "tagsService", "errorService",
-    "dateHelper", "configProvider", "authenticationService",
-    function ($scope, $rootScope, $location, $timeout, $window, $modal, FileUploader, localStorageService,
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
+    "$templateCache", "$modal", "FileUploader", "localStorageService", "postsService", "userService",
+    "albumService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService",
+    function ($scope, $rootScope, $location, $timeout, $window, $templateCache, $modal, FileUploader, localStorageService,
         postsService, userService, albumService, tagsService, errorService, dateHelper, configProvider,
         authenticationService) {
 
         var mediaSelectionDialog = $modal({
             title: 'Select media to add',
             scope: $scope,
-            template: window.blogConfiguration.templatesModulesUrl + "media/mediaSelectionDialog.html",
+            template: "media/mediaSelectionDialog.html",
             show: false
         });
 
@@ -160,12 +160,12 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
                     });
 
                     $scope.albums = resp;
-                    mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+                    mediaSelectionDialog.show();
                 }, function (e) {
                     errorService.displayError(e);
                 });
             } else {
-                mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+                mediaSelectionDialog.show();
             }
         };
 

@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileNavigation', [function () {
+﻿ngUser.directive('userProfileNavigation', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
         $scope.aboutUrl = ($scope.username == null || $scope.username === "undefined") ?
             "/#/user" : "#/user/" + $scope.username;
@@ -21,7 +21,7 @@
         restrict: 'EA',
         scope: { username: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileNavigation.html",
+        template: $templateCache.get("user/userProfileNavigation.html"),
         controller: ctrlFn
     };
 }]);

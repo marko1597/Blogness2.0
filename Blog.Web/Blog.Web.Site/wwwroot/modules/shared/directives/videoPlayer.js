@@ -1,5 +1,5 @@
-﻿ngShared.directive("videoPlayer", [
-    function () {
+﻿ngShared.directive("videoPlayer", ["$templateCache",
+    function ($templateCache) {
         var ctrlFn = function ($scope, $sce) {
             $scope.currentTime = 0;
             $scope.totalTime = 0;
@@ -73,7 +73,7 @@
             scope: { media: '=' },
             controller: ctrlFn,
             replace: true,
-            templateUrl: window.blogConfiguration.templatesModulesUrl + "shared/videoPlayer.html"
+            template: $templateCache.get("shared/videoPlayer.html")
         };
     }
 ]);

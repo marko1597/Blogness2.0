@@ -1,10 +1,10 @@
-﻿ngShared.directive("fileUpload", [
-    function () {
+﻿ngShared.directive("fileUpload", ["$templateCache",
+    function ($templateCache) {
         return {
             restrict: 'EA',
             scope: { uploader: '='},
             replace: true,
-            templateUrl: window.blogConfiguration.templatesModulesUrl + "shared/fileUpload.html"
+            template: $templateCache.get("shared/fileUpload.html")
         };
     }
 ]);

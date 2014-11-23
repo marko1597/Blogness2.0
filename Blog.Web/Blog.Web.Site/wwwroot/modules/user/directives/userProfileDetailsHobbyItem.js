@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsHobbyItem', [function () {
+﻿ngUser.directive('userProfileDetailsHobbyItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, blockUiService, errorService, userService, localStorageService) {
         $scope.isEditing = false;
         $scope.error = {};
@@ -77,7 +77,7 @@
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsHobbyItem.html",
+        template: $templateCache.get("user/userProfileDetailsHobbyItem.html"),
         controller: ctrlFn
     };
 }]);

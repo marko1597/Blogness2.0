@@ -1,4 +1,4 @@
-﻿ngLogin.directive('loggedUser', function () {
+﻿ngLogin.directive('loggedUser', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, $window, userService, configProvider, localStorageService, authenticationService) {
         $scope.user = {};
 
@@ -42,6 +42,6 @@
         scope: { data: '=' },
         replace: true,
         controller: ctrlFn,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "login/loggedUser.html",
+        template: $templateCache.get("login/loggedUser.html")
     };
-});
+}]);

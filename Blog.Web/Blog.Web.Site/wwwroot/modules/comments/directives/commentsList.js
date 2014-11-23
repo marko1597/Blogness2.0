@@ -1,4 +1,4 @@
-﻿ngComments.directive('commentsList', [function () {
+﻿ngComments.directive('commentsList', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, postsService, commentsService, userService, errorService, configProvider) {
         $scope.comments = [];
 
@@ -71,7 +71,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsList.html",
+        template: $templateCache.get("comments/commentsList.html"),
         controller: ctrlFn
     };
 }]);

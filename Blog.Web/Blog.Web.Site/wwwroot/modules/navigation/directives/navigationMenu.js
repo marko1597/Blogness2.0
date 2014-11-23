@@ -1,4 +1,4 @@
-﻿ngNavigation.directive('navigationMenu', function () {
+﻿ngNavigation.directive('navigationMenu', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
         $scope.navigationItems = configProvider.getNavigationItems();
 
@@ -43,7 +43,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "navigation/navigationMenu.html",
+        template: $templateCache.get("navigation/navigationMenu.html"),
         controller: ctrlFn
     };
-});
+}]);

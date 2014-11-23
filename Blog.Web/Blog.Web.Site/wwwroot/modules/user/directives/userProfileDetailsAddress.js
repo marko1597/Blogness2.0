@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsAddress', [function () {
+﻿ngUser.directive('userProfileDetailsAddress', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, errorService, userService, localStorageService) {
         $scope.isEditing = false;
 
@@ -68,7 +68,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsAddress.html",
+        template: $templateCache.get("user/userProfileDetailsAddress.html"),
         controller: ctrlFn
     };
 }]);

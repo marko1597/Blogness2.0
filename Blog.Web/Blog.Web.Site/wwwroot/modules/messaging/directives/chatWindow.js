@@ -1,4 +1,4 @@
-﻿ngMessaging.directive('chatWindow', ["$timeout", function ($timeout) {
+﻿ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($timeout, $templateCache) {
     var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
@@ -159,7 +159,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "messaging/chatwindow.html",
+        template: $templateCache.get("messaging/chatWindow.html"),
         controller: ctrlFn,
         link: linkFn
     };

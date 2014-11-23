@@ -1,4 +1,5 @@
-﻿blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
+﻿blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider",
+    "$urlRouterProvider",
     function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
         $provide.factory('httpInterceptor', ["$q", "$location", "blockUiService", function ($q, $location, blockUiService) {
             return {
@@ -35,13 +36,17 @@
         $stateProvider
             .state('posts', {
                 url: "/",
-                templateUrl: window.blogConfiguration.templatesUrl + 'posts.html',
-                controller: 'postsController'
+                controller: 'postsController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('posts.html');
+                }
             })
             .state('viewpost', {
                 url: "/post/:postId",
-                templateUrl: window.blogConfiguration.templatesUrl + 'viewpost.html',
-                controller: 'postsViewController'
+                controller: 'postsViewController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('viewpost.html');
+                }
             })
                 .state('viewpost.gallery', {
                     url: "/gallery",
@@ -49,56 +54,78 @@
                 })
             .state('friends', {
                 url: "/friends",
-                templateUrl: window.blogConfiguration.templatesUrl + 'friends.html'
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('friends.html');
+                }
             })
             .state('groups', {
                 url: "/groups",
-                templateUrl: window.blogConfiguration.templatesUrl + 'groups.html'
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('groups.html');
+                }
             })
             .state('events', {
                 url: "/events",
-                templateUrl: window.blogConfiguration.templatesUrl + 'events.html'
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('events.html');
+                }
             })
             .state('newpost', {
                 url: "/post/create/new",
-                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
-                controller: 'postsModifyController'
+                controller: 'postsModifyController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('modifypost.html');
+                }
             })
             .state('editpost', {
                 url: "/post/edit/:postId",
-                templateUrl: window.blogConfiguration.templatesUrl + 'modifypost.html',
-                controller: 'postsModifyController'
+                controller: 'postsModifyController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('modifypost.html');
+                }
             })
             .state('ownprofile', {
                 url: "/user",
-                templateUrl: window.blogConfiguration.templatesUrl + 'users.html',
                 controller: 'userProfileController',
-                'abstract': true
+                'abstract': true,
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('users.html');
+                }
             })
                 .state('ownprofile.details', {
                     url: '',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofiledetails.html',
-                    controller: 'userProfileController'
+                    controller: 'userProfileController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileDetails.html');
+                    }
                 })
                 .state('ownprofile.posts', {
                     url: '/posts',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofileposts.html',
-                    controller: 'userProfilePostsController'
+                    controller: 'userProfilePostsController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfilePosts.html');
+                    }
                 })
                 .state('ownprofile.comments', {
                     url: '/comments',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
-                    controller: 'userProfileCommentsController'
+                    controller: 'userProfileCommentsController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileComments.html');
+                    }
                 })
                 .state('ownprofile.favorites', {
                     url: '/favorites',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
-                    controller: 'userProfileFavoritesController'
+                    controller: 'userProfileFavoritesController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileFavorites.html');
+                    }
                 })
                 .state('ownprofile.media', {
                     url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
+                    controller: 'userProfileMediaController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileMedia.html');
+                    }
                 })
                     .state('ownprofile.media.gallery', {
                         url: '/gallery/:albumName',
@@ -106,33 +133,45 @@
                     })
             .state('othersprofile', {
                 url: "/user/:username",
-                templateUrl: window.blogConfiguration.templatesUrl + 'users.html',
                 controller: 'userProfileController',
-                'abstract': true
+                'abstract': true,
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('users.html');
+                }
             })
                 .state('othersprofile.details', {
                     url: '',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofiledetails.html',
-                    controller: 'userProfileController'
+                    controller: 'userProfileController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileDetails.html');
+                    }
                 })
                 .state('othersprofile.posts', {
                     url: '/posts',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofileposts.html',
-                    controller: 'userProfilePostsController'
+                    controller: 'userProfilePostsController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfilePosts.html');
+                    }
                 })
                 .state('othersprofile.comments', {
                     url: '/comments',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilecomments.html',
-                    controller: 'userProfileCommentsController'
+                    controller: 'userProfileCommentsController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileComments.html');
+                    }
                 })
                 .state('othersprofile.favorites', {
                     url: '/favorites',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilefavorites.html',
-                    controller: 'userProfileFavoritesController'
+                    controller: 'userProfileFavoritesController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileFavorites.html');
+                    }
                 }).state('othersprofile.media', {
                     url: '/media',
-                    templateUrl: window.blogConfiguration.templatesUrl + 'modules/user/userprofilemedia.html',
-                    controller: 'userProfileMediaController'
+                    controller: 'userProfileMediaController',
+                    templateProvider: function ($templateCache) {
+                        return $templateCache.get('user/userProfileMedia.html');
+                    }
                 })
                     .state('othersprofile.media.gallery', {
                         url: '/gallery/:albumName',
@@ -140,8 +179,10 @@
                     })
             .state('error', {
                 url: "/error",
-                templateUrl: window.blogConfiguration.templatesUrl + 'errorpage.html',
-                controller: 'errorPageController'
+                controller: 'errorPageController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('errorpage.html');
+                }
             });
     }
 ]);

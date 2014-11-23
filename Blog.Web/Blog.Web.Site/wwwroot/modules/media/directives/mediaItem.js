@@ -1,10 +1,10 @@
-﻿ngMedia.directive('mediaItem', function () {
+﻿ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, localStorageService, $modal, mediaService, errorService) {
         var mediaDeleteDialog = $modal({
             title: 'Delete?',
             content: "Are you sure you want to delete this item?",
             scope: $scope,
-            template: window.blogConfiguration.templatesModulesUrl + "media/mediaDeleteDialog.html",
+            template: "media/mediaDeleteDialog.html",
             show: false
         });
 
@@ -43,7 +43,7 @@
         };
 
         $scope.deleteMedia = function () {
-            mediaDeleteDialog.$promise.then(mediaDeleteDialog.show);
+            mediaDeleteDialog.show();
         };
 
         $scope.toggleGallery = function () {
@@ -136,8 +136,8 @@
             albumName: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaItem.html",
+        template: $templateCache.get("media/mediaItem.html"),
         controller: ctrlFn,
         link: linkFn
     };
-});
+}]);

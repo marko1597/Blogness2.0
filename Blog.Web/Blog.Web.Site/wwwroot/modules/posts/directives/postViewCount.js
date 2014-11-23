@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postViewCount', [function () {
+﻿ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, configProvider) {
         $scope.viewCount = $scope.list;
 
@@ -21,7 +21,7 @@
             postId: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postViewCount.html",
+        template: $templateCache.get("posts/postViewCount.html"),
         controller: ctrlFn
     };
 }]);

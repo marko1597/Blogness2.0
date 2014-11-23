@@ -1,5 +1,5 @@
-﻿ngError.directive('errorDisplay', [
-    function () {
+﻿ngError.directive('errorDisplay', ["$templateCache",
+    function ($templateCache) {
         var ctrlFn = function ($scope, errorService) {
             $scope.errorMessage = "";
 
@@ -25,7 +25,7 @@
             restrict: 'EA',
             scope: { data: '=' },
             replace: true,
-            templateUrl: window.blogConfiguration.templatesModulesUrl + "error/errorDisplay.html",
+            template: $templateCache.get("error/errorDisplay.html"),
             controller: ctrlFn,
             link: linkFn
         };

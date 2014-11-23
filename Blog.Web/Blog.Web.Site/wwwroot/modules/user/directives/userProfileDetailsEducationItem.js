@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsEducationItem', [function () {
+﻿ngUser.directive('userProfileDetailsEducationItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, userService, dateHelper, blockUiService, errorService, localStorageService) {
         $scope.username = localStorageService.get("username");
 
@@ -101,7 +101,7 @@
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducationItem.html",
+        template: $templateCache.get("user/userProfileDetailsEducationItem.html"),
         controller: ctrlFn
     };
 }]);

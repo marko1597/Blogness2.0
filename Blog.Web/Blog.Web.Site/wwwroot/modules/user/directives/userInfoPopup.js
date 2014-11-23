@@ -1,4 +1,4 @@
-﻿ngUser.directive('userInfoPopup', ["$popover", "$window", function ($popover, $window) {
+﻿ngUser.directive('userInfoPopup', ["$templateCache", "$popover", function ($templateCache, $popover) {
     var ctrlFn = function ($scope, $rootScope, $location, messagingService, dateHelper, snapRemote, localStorageService) {
         $scope.authData = localStorageService.get("authorizationData");
 
@@ -43,7 +43,7 @@
             title: scope.fullName(),
             animation: 'am-flip-x',
             scope: scope,
-            template: $window.blogConfiguration.templatesModulesUrl + "user/userInfoPopup.html",
+            template: "user/userInfoPopup.html",
             placement: popoverPlacement
         });
 

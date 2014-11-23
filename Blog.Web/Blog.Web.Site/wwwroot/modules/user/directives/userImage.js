@@ -1,4 +1,4 @@
-﻿ngUser.directive('userImage', [function () {
+﻿ngUser.directive('userImage', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, userService, configProvider, FileUploader, localStorageService) {
         $scope.authData = null;
 
@@ -92,7 +92,7 @@
             fullname: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userImage.html",
+        template: $templateCache.get("user/userImage.html"),
         controller: ctrlFn
     };
 }]);

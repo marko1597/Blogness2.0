@@ -1,5 +1,5 @@
-﻿ngBlogSockets.directive("socketDebugger", [
-    function () {
+﻿ngBlogSockets.directive("socketDebugger", ["$templateCache",
+    function ($templateCache) {
         var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
             $scope.messages = [];
 
@@ -63,7 +63,7 @@
             controller: ctrlFn,
             restrict: 'EA',
             replace: true,
-            templateUrl: window.blogConfiguration.templatesModulesUrl + "sockets/socketDebugger.html"
+            template: $templateCache.get("sockets/socketDebugger.html")
         };
     }
 ]);

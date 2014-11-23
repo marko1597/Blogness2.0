@@ -1,4 +1,4 @@
-﻿ngMessaging.directive('messagesPanel', function () {
+﻿ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, configProvider,
         localStorageService) {
 
@@ -90,8 +90,8 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "messaging/messagesPanel.html",
+        template: $templateCache.get("messaging/messagesPanel.html"),
         controller: ctrlFn,
         link: linkFn
     };
-});
+}]);

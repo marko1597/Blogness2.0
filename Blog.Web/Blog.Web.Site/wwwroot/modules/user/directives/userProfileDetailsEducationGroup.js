@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsEducationGroup', [function () {
+﻿ngUser.directive('userProfileDetailsEducationGroup', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, localStorageService) {
         $scope.username = localStorageService.get("username");
 
@@ -87,7 +87,7 @@
             user: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsEducationGroup.html",
+        template: $templateCache.get("user/userProfileDetailsEducationGroup.html"),
         controller: ctrlFn
     };
 }]);

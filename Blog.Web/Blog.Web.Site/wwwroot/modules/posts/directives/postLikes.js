@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postLikes', [function () {
+﻿ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
     var linkFn = function (scope, elem) {
         scope.highlight = function() {
             $(elem).effect("highlight", { color: "#B3C833" }, 1500);
@@ -73,7 +73,7 @@
             postId: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postlikes.html",
+        template: $templateCache.get("posts/postLikes.html"),
         controller: ctrlFn,
         link: linkFn
     };

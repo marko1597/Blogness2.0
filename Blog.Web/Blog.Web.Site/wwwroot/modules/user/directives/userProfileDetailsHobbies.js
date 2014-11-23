@@ -1,4 +1,4 @@
-﻿ngUser.directive('userProfileDetailsHobbies', [function () {
+﻿ngUser.directive('userProfileDetailsHobbies', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, blockUiService, errorService, userService, localStorageService) {
         $scope.isAdding = false;
 
@@ -88,7 +88,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "user/userProfileDetailsHobbies.html",
+        template: $templateCache.get("user/userProfileDetailsHobbies.html"),
         controller: ctrlFn
     };
 }]);

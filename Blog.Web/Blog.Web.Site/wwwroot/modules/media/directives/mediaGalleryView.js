@@ -1,4 +1,4 @@
-﻿ngMedia.directive('mediaGalleryView', function () {
+﻿ngMedia.directive('mediaGalleryView', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $window, $location, $modal, mediaService, localStorageService) {
         $scope.mediaList = [];
 
@@ -7,7 +7,7 @@
         var mediaSelectionDialog = $modal({
             title: 'Gallery view',
             scope: $scope,
-            template: window.blogConfiguration.templatesModulesUrl + "media/mediaGallery.html",
+            template: "media/mediaGallery.html",
             show: false
         });
 
@@ -52,7 +52,7 @@
                 }
             }
 
-            mediaSelectionDialog.$promise.then(mediaSelectionDialog.show);
+            mediaSelectionDialog.show();
         });
 
         $scope.getWindowHeight = function () {
@@ -71,7 +71,7 @@
     return {
         restrict: 'EA',
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "media/mediaGallery.html",
+        template: $templateCache.get("media/mediaGallery.html"),
         controller: ctrlFn
     };
-});
+}]);

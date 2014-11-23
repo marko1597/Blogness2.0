@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postContents', function () {
+﻿ngPosts.directive('postContents', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
     };
     ctrlFn.$inject = ["$scope"];
@@ -7,7 +7,7 @@
         restrict: 'EA',
         scope: { contents: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postContents.html",
+        template: $templateCache.get("posts/postContents.html"),
         controller: ctrlFn
     };
-});
+}]);

@@ -1,4 +1,4 @@
-﻿ngComments.directive('commentsContainer', [function () {
+﻿ngComments.directive('commentsContainer', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope) {
         $scope.showAddComment = false;
 
@@ -20,7 +20,7 @@
             poster: '='
         },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "comments/commentsContainer.html",
+        template: $templateCache.get("comments/commentsContainer.html"),
         controller: ctrlFn
     };
 }]);

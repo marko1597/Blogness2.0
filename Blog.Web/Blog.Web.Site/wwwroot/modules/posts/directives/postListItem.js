@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postListItem', [function () {
+﻿ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, localStorageService, configProvider) {
 
         $scope.post = $scope.data.Post;
@@ -73,7 +73,7 @@
         restrict: 'EA',
         scope: { data: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postListItem.html",
+        template: $templateCache.get("posts/postListItem.html"),
         controller: ctrlFn
     };
 }]);

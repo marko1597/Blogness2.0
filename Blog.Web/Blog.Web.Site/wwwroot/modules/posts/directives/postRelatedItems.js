@@ -1,4 +1,4 @@
-﻿ngPosts.directive('postRelatedItems', [function () {
+﻿ngPosts.directive('postRelatedItems', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, postsService, errorService) {
         $scope.hasError = false;
 
@@ -82,7 +82,7 @@
         restrict: 'EA',
         scope: { parentpostid: '=' },
         replace: true,
-        templateUrl: window.blogConfiguration.templatesModulesUrl + "posts/postrelateditems.html",
+        template: $templateCache.get("posts/postRelatedItems.html"),
         controller: ctrlFn
     };
 }]);
