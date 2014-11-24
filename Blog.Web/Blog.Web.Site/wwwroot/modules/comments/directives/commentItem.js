@@ -74,7 +74,7 @@
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
                     if ($scope.comment.Id == d.commentId) {
                         $scope.comment.CommentLikes = d.commentLikes;
                         $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);

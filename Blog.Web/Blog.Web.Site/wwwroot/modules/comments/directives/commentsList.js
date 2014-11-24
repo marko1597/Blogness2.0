@@ -41,7 +41,7 @@
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().commentAdded && configProvider.getSocketClientFunctions().wsConnect) {
-                $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
                     d.comment = commentsService.addViewProperties(d.comment);
 
                     if (d.commentId !== null && d.commentId != undefined) {

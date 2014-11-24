@@ -19,7 +19,7 @@
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().postLikesUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
                     if (d.postId == $scope.postId) {
                         $scope.postLikes = d.postLikes;
                         $scope.highlight();

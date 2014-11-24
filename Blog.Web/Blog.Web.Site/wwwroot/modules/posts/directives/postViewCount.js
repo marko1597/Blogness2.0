@@ -5,7 +5,7 @@
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().viewCountUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
                     if (d.postId == $scope.postId) {
                         $scope.viewCount = d.viewCount;
                     }

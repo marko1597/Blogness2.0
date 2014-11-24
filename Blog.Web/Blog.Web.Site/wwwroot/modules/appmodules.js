@@ -2793,7 +2793,7 @@ ngComments.directive('commentItem', ["$templateCache", function ($templateCache)
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
                     if ($scope.comment.Id == d.commentId) {
                         $scope.comment.CommentLikes = d.commentLikes;
                         $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
@@ -2983,7 +2983,7 @@ ngComments.directive('commentsList', ["$templateCache", function ($templateCache
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().commentAdded && configProvider.getSocketClientFunctions().wsConnect) {
-                $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
                     d.comment = commentsService.addViewProperties(d.comment);
 
                     if (d.commentId !== null && d.commentId != undefined) {
@@ -6094,7 +6094,7 @@ ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().postLikesUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
                     if (d.postId == $scope.postId) {
                         $scope.postLikes = d.postLikes;
                         $scope.highlight();
@@ -6169,7 +6169,7 @@ ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) 
         var stop;
         stop = $interval(function () {
             if (configProvider.getSocketClientFunctions().viewCountUpdate) {
-                $scope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
                     if (d.postId == $scope.postId) {
                         $scope.viewCount = d.viewCount;
                     }
