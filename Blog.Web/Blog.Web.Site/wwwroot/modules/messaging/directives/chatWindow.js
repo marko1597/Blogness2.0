@@ -1,5 +1,5 @@
 ﻿ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($timeout, $templateCache) {
-    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $interval, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
         $scope.recipient = null;
@@ -99,12 +99,20 @@
             });
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-            if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
-                d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                $scope.chatMessages.push(d);
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
+                        d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                        $scope.chatMessages.push(d);
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         $scope.sendChatMessage = function () {
             var chatMessage = {
@@ -143,7 +151,7 @@
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         $timeout(function () {

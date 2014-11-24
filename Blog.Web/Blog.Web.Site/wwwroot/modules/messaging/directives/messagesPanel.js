@@ -1,5 +1,5 @@
 ﻿ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, configProvider,
+    var ctrlFn = function ($scope, $rootScope, $interval, messagingService, dateHelper, errorService, configProvider,
         localStorageService) {
 
         $scope.user = null;
@@ -34,29 +34,37 @@
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-            if (d && d.FromUser) {
-                var messageItem = null;
-                var messageItemIndex = -1;
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser) {
+                        var messageItem = null;
+                        var messageItemIndex = -1;
 
-                for (var i = 0; i < $scope.messagesList.length; i++) {
-                    if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
-                        messageItem = $scope.messagesList[i];
-                        messageItemIndex = i;
-                        break;
+                        for (var i = 0; i < $scope.messagesList.length; i++) {
+                            if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
+                                messageItem = $scope.messagesList[i];
+                                messageItemIndex = i;
+                                break;
+                            }
+                        }
+
+                        if (messageItem && messageItemIndex > -1) {
+                            messageItem.LastChatMessage.Text = d.Text;
+                            messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                            $scope.messagesList.splice(messageItemIndex, 1);
+                            $scope.messagesList.unshift(messageItem);
+
+                            $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        }
                     }
-                }
+                });
 
-                if (messageItem && messageItemIndex > -1) {
-                    messageItem.LastChatMessage.Text = d.Text;
-                    messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                    $scope.messagesList.splice(messageItemIndex, 1);
-                    $scope.messagesList.unshift(messageItem);
-
-                    $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                }
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         var getUserChatMessageList = function () {
             if ($scope.authData && $rootScope.user) {
@@ -76,7 +84,7 @@
 
         $scope.init();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';

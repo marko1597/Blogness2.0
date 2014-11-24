@@ -5,7 +5,7 @@
         };
     };
 
-    var ctrlFn = function ($scope, $rootScope, postsService, userService, errorService, localStorageService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, postsService, userService, errorService, localStorageService, configProvider) {
         $scope.postLikes = $scope.list;
 
         $scope.user = null;
@@ -16,14 +16,21 @@
 
         $scope.tooltip = { "title": "Click to favorite this post." };
 
-        $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
-            if (d.postId == $scope.postId) {
-                $scope.postLikes = d.postLikes;
-                $scope.highlight();
-                $scope.isUserLiked();
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().postLikesUpdate) {
+                $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                    if (d.postId == $scope.postId) {
+                        $scope.postLikes = d.postLikes;
+                        $scope.highlight();
+                        $scope.isUserLiked();
+                    }
+                });
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
-        
+        }, 250);
+
         $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.isUserLiked();
@@ -64,7 +71,7 @@
             return isLiked ? "fa-star" : "fa-star-o";
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',

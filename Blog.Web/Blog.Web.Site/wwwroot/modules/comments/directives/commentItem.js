@@ -1,5 +1,5 @@
 ﻿ngComments.directive('commentItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if (!$scope.allowExpand) {
                 return false;
@@ -71,19 +71,27 @@
                 });;
         };
 
-        $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
-            if ($scope.comment.Id == d.commentId) {
-                $scope.comment.CommentLikes = d.commentLikes;
-                $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                $scope.isUserLiked();
-            }
-        });
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
+                $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+                    if ($scope.comment.Id == d.commentId) {
+                        $scope.comment.CommentLikes = d.commentLikes;
+                        $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $scope.isUserLiked();
+                    }
+                });
 
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+        
         $rootScope.$on("hideAddReply", function () {
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "commentsService", "errorService", "configProvider"];
 
     var linkFn = function(scope, elem, attrs) {
         scope.allowReply = attrs.allowReply === 'true' ? true : false;

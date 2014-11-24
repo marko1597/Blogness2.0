@@ -16,7 +16,6 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
 
         var broadcastMessage = function(topic, data) {
             var stop;
-
             stop = $interval(function () {
                 if ($rootScope.$$listeners[topic] && $rootScope.$$listeners[topic].length > 0) {
                     $rootScope.$broadcast(topic, data);

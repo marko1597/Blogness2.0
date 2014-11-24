@@ -381,6 +381,9 @@
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\sort.js" />
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\spinner.js" />
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.js" />
+    <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.min.js">
+      <DependentUpon>static.js</DependentUpon>
+    </Content>
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\index.js" />
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\node_modules\exit\Gruntfile.js" />
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\node_modules\exit\lib\exit.js" />
@@ -4506,6 +4509,9 @@
     <Content Include="node_modules\grunt\package.json" />
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.js.map">
       <DependentUpon>static.js</DependentUpon>
+    </Content>
+    <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.min.js.map">
+      <DependentUpon>static.min.js</DependentUpon>
     </Content>
     <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
     <Content Include="wwwroot\css\scss\extensions\ckeditor.css">

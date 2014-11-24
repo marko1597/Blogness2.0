@@ -2718,7 +2718,7 @@ var ngComments = angular.module("ngComments",
     ]);
 ///#source 1 1 /wwwroot/modules/comments/directives/commentItem.js
 ngComments.directive('commentItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, commentsService, errorService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, commentsService, errorService, configProvider) {
         $scope.canExpandComment = function () {
             if (!$scope.allowExpand) {
                 return false;
@@ -2790,19 +2790,27 @@ ngComments.directive('commentItem', ["$templateCache", function ($templateCache)
                 });;
         };
 
-        $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
-            if ($scope.comment.Id == d.commentId) {
-                $scope.comment.CommentLikes = d.commentLikes;
-                $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                $scope.isUserLiked();
-            }
-        });
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
+                $scope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+                    if ($scope.comment.Id == d.commentId) {
+                        $scope.comment.CommentLikes = d.commentLikes;
+                        $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $scope.isUserLiked();
+                    }
+                });
 
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+        
         $rootScope.$on("hideAddReply", function () {
             $scope.comment.ShowAddReply = false;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "commentsService", "errorService", "configProvider"];
 
     var linkFn = function(scope, elem, attrs) {
         scope.allowReply = attrs.allowReply === 'true' ? true : false;
@@ -2933,7 +2941,7 @@ ngComments.directive('commentsContainer', ["$templateCache", function ($template
 
 ///#source 1 1 /wwwroot/modules/comments/directives/commentsList.js
 ngComments.directive('commentsList', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, postsService, commentsService, userService, errorService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, postsService, commentsService, userService, errorService, configProvider) {
         $scope.comments = [];
 
         $scope.emptyCommentsMessage = "";
@@ -2972,30 +2980,38 @@ ngComments.directive('commentsList', ["$templateCache", function ($templateCache
                 "There are no comments yet.";
         };
 
-        $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
-            d.comment = commentsService.addViewProperties(d.comment);
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().commentAdded && configProvider.getSocketClientFunctions().wsConnect) {
+                $scope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
+                    d.comment = commentsService.addViewProperties(d.comment);
 
-            if (d.commentId !== null && d.commentId != undefined) {
-                var comment = _.where($scope.comments, { Id: d.commentId })[0];
-                if (comment.Comments === null) comment.Comments = [];
+                    if (d.commentId !== null && d.commentId != undefined) {
+                        var comment = _.where($scope.comments, { Id: d.commentId })[0];
+                        if (comment.Comments === null) comment.Comments = [];
 
-                comment.Comments.unshift(d.comment);
+                        comment.Comments.unshift(d.comment);
 
-                $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-            } else {
-                $scope.comments.unshift(d.comment);
-                $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                    } else {
+                        $scope.comments.unshift(d.comment);
+                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                    }
+                });
+
+                $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
+                    postsService.subscribeToPost($scope.postid);
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
-
-        $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
-            postsService.subscribeToPost($scope.postid);
-        });
+        }, 250);
 
         $scope.getComments();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "commentsService", "userService", "errorService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "commentsService", "userService", "errorService", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -5025,7 +5041,7 @@ var ngMessaging = angular.module("ngMessaging",
     ]);
 ///#source 1 1 /wwwroot/modules/messaging/directives/chatWindow.js
 ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($timeout, $templateCache) {
-    var ctrlFn = function ($scope, $rootScope, dateHelper, messagingService, errorService, configProvider, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $interval, dateHelper, messagingService, errorService, configProvider, localStorageService) {
         $scope.user = null;
 
         $scope.recipient = null;
@@ -5125,12 +5141,20 @@ ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($ti
             });
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-            if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
-                d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                $scope.chatMessages.push(d);
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
+                        d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                        $scope.chatMessages.push(d);
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         $scope.sendChatMessage = function () {
             var chatMessage = {
@@ -5169,7 +5193,7 @@ ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($ti
             }
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         $timeout(function () {
@@ -5193,7 +5217,7 @@ ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($ti
 
 ///#source 1 1 /wwwroot/modules/messaging/directives/messagesPanel.js
 ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, messagingService, dateHelper, errorService, configProvider,
+    var ctrlFn = function ($scope, $rootScope, $interval, messagingService, dateHelper, errorService, configProvider,
         localStorageService) {
 
         $scope.user = null;
@@ -5228,29 +5252,37 @@ ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCac
             $scope.authData = localStorageService.get("authorizationData");
         });
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-            if (d && d.FromUser) {
-                var messageItem = null;
-                var messageItemIndex = -1;
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser) {
+                        var messageItem = null;
+                        var messageItemIndex = -1;
 
-                for (var i = 0; i < $scope.messagesList.length; i++) {
-                    if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
-                        messageItem = $scope.messagesList[i];
-                        messageItemIndex = i;
-                        break;
+                        for (var i = 0; i < $scope.messagesList.length; i++) {
+                            if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
+                                messageItem = $scope.messagesList[i];
+                                messageItemIndex = i;
+                                break;
+                            }
+                        }
+
+                        if (messageItem && messageItemIndex > -1) {
+                            messageItem.LastChatMessage.Text = d.Text;
+                            messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                            $scope.messagesList.splice(messageItemIndex, 1);
+                            $scope.messagesList.unshift(messageItem);
+
+                            $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        }
                     }
-                }
+                });
 
-                if (messageItem && messageItemIndex > -1) {
-                    messageItem.LastChatMessage.Text = d.Text;
-                    messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                    $scope.messagesList.splice(messageItemIndex, 1);
-                    $scope.messagesList.unshift(messageItem);
-
-                    $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                }
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         var getUserChatMessageList = function () {
             if ($scope.authData && $rootScope.user) {
@@ -5270,7 +5302,7 @@ ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCac
 
         $scope.init();
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
 
     var linkFn = function (scope, elem) {
         scope.elemHeight = ($(document).height()) + 'px';
@@ -6048,7 +6080,7 @@ ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
         };
     };
 
-    var ctrlFn = function ($scope, $rootScope, postsService, userService, errorService, localStorageService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, postsService, userService, errorService, localStorageService, configProvider) {
         $scope.postLikes = $scope.list;
 
         $scope.user = null;
@@ -6059,14 +6091,21 @@ ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
 
         $scope.tooltip = { "title": "Click to favorite this post." };
 
-        $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
-            if (d.postId == $scope.postId) {
-                $scope.postLikes = d.postLikes;
-                $scope.highlight();
-                $scope.isUserLiked();
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().postLikesUpdate) {
+                $scope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                    if (d.postId == $scope.postId) {
+                        $scope.postLikes = d.postLikes;
+                        $scope.highlight();
+                        $scope.isUserLiked();
+                    }
+                });
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
-        
+        }, 250);
+
         $scope.$on("loggedInUserInfo", function (ev, data) {
             $scope.user = data;
             $scope.isUserLiked();
@@ -6107,7 +6146,7 @@ ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
             return isLiked ? "fa-star" : "fa-star-o";
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -6124,20 +6163,27 @@ ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
 
 ///#source 1 1 /wwwroot/modules/posts/directives/postViewCount.js
 ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $interval, configProvider) {
         $scope.viewCount = $scope.list;
 
-        $scope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
-            if (d.postId == $scope.postId) {
-                $scope.viewCount = d.viewCount;
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().viewCountUpdate) {
+                $scope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+                    if (d.postId == $scope.postId) {
+                        $scope.viewCount = d.viewCount;
+                    }
+                });
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
         
         $scope.$watch('list', function () {
             $scope.viewCount = $scope.list;
         });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -6153,7 +6199,7 @@ ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) 
 
 ///#source 1 1 /wwwroot/modules/posts/directives/postListItem.js
 ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
 
         $scope.post = $scope.data.Post;
 
@@ -6190,18 +6236,26 @@ ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
             $scope.isEditable = false;
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.comments = d.comments;
-                $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
-            }
-        });
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().getPostTopComments && configProvider.getSocketClientFunctions().getPostLikes) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.comments = d.comments;
+                        $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
+                    }
+                });
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.postLikes = d.postLikes;
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.postLikes = d.postLikes;
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         $scope.$on("loggedInUserInfo", function (ev, data) {
             if (data) {
@@ -6221,7 +6275,7 @@ ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$interval", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',
@@ -7233,7 +7287,6 @@ ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interva
 
         var broadcastMessage = function(topic, data) {
             var stop;
-
             stop = $interval(function () {
                 if ($rootScope.$$listeners[topic] && $rootScope.$$listeners[topic].length > 0) {
                     $rootScope.$broadcast(topic, data);

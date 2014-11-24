@@ -1,5 +1,5 @@
 ﻿ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, configProvider) {
+    var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
 
         $scope.post = $scope.data.Post;
 
@@ -36,18 +36,26 @@
             $scope.isEditable = false;
         };
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.comments = d.comments;
-                $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
-            }
-        });
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().getPostTopComments && configProvider.getSocketClientFunctions().getPostLikes) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.comments = d.comments;
+                        $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
+                    }
+                });
 
-        $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
-            if (d.postId == $scope.post.Id) {
-                $scope.postLikes = d.postLikes;
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.postLikes = d.postLikes;
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
             }
-        });
+        }, 250);
 
         $scope.$on("loggedInUserInfo", function (ev, data) {
             if (data) {
@@ -67,7 +75,7 @@
             $location.path("/post/edit/" + $scope.post.Id);
         };
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "configProvider"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$interval", "localStorageService", "configProvider"];
 
     return {
         restrict: 'EA',
