@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using Blog.Admin.Web.Models;
-using Blog.Common.Identity.Models;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils;
