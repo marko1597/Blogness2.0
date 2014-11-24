@@ -29,25 +29,61 @@
                 $scope.show = !$scope.show;
             });
 
-            $rootScope.$on(configProvider.getSocketClientFunctions().publishMessage, function (ev, data) {
-                $scope.addToMessages(configProvider.getSocketClientFunctions().publishMessage, data);
-            });
+            var stopPublishMessage;
+            stopPublishMessage = $interval(function () {
+                if (configProvider.getSocketClientFunctions().publishMessage) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().publishMessage, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().publishMessage, data);
+                    });
 
-            $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (ev, data) {
-                $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
-            });
+                    $interval.cancel(stopPublishMessage);
+                    stopPublishMessage = undefined;
+                }
+            }, 250);
 
-            $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
-                $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
-            });
+            var stopCommentLikesUpdate;
+            stopCommentLikesUpdate = $interval(function () {
+                if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
+                    });
+                    $interval.cancel(stopCommentLikesUpdate);
+                    stopCommentLikesUpdate = undefined;
+                }
+            }, 250);
 
-            $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
-                $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
-            });
+            var stopPostTopComments;
+            stopPostTopComments = $interval(function () {
+                if (configProvider.getSocketClientFunctions().postTopComments) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
+                    });
+                    $interval.cancel(stopPostTopComments);
+                    stopPostTopComments = undefined;
+                }
+            }, 250);
 
-            $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (ev, data) {
-                $scope.addToMessages(configProvider.getSocketClientFunctions().postLikesUpdate, data);
-            });
+            var stopCommentAdded;
+            stopCommentAdded = $interval(function () {
+                if (configProvider.getSocketClientFunctions().commentAdded) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
+                    });
+                    $interval.cancel(stopCommentAdded);
+                    stopCommentAdded = undefined;
+                }
+            }, 250);
+
+            var stopPostLikesUpdate;
+            stopPostLikesUpdate = $interval(function () {
+                if (configProvider.getSocketClientFunctions().postLikesUpdate) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().postLikesUpdate, data);
+                    });
+                    $interval.cancel(stopPostLikesUpdate);
+                    stopPostLikesUpdate = undefined;
+                }
+            }, 250);
 
             $scope.addToMessages = function(fn, data) {
                 var message = {

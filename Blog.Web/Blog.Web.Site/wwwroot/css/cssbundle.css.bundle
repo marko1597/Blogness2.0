@@ -12,14 +12,14 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/Scripts/bower_components/angular-motion/dist/angular-motion.css</file>
-    <file>/Scripts/bower_components/angular-snap/angular-snap.css</file>
-    <file>/Scripts/bower_components/animate.css/animate.css</file>
-    <file>/Scripts/bower_components/videogular-themes-default/videogular.css</file>
-    <file>/Scripts/bower_components/bootstrap-additions/dist/bootstrap-additions.css</file>
-    <file>/Scripts/bower_components/ng-ckeditor/ng-ckeditor.css</file>
-    <file>/Scripts/bower_components/offline/themes/offline-theme-chrome.css</file>
-    <file>/Scripts/bower_components/offline/themes/offline-language-english.css</file>
-    <file>/Scripts/bower_components/slick.js/slick/slick.css</file>
+    <file>/bower_components/angular-motion/dist/angular-motion.css</file>
+    <file>/bower_components/angular-snap/angular-snap.css</file>
+    <file>/bower_components/animate.css/animate.css</file>
+    <file>/bower_components/videogular-themes-default/videogular.css</file>
+    <file>/bower_components/bootstrap-additions/dist/bootstrap-additions.css</file>
+    <file>/bower_components/ng-ckeditor/ng-ckeditor.css</file>
+    <file>/bower_components/offline/themes/offline-theme-chrome.css</file>
+    <file>/bower_components/offline/themes/offline-language-english.css</file>
+    <file>/bower_components/slick.js/slick/slick.css</file>
   </files>
 </bundle>
