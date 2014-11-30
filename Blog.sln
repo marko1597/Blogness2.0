@@ -38,8 +38,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Web.Site", "Blog.Web\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Contracts", "Blog.Common\Blog.Common.Contracts\Blog.Common.Contracts.csproj", "{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DataAccess.Seed", "Blog.DataAccess\Blog.DataAccess.Seed\Blog.DataAccess.Seed.csproj", "{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Common.Web", "Blog.Common\Blog.Common.Web\Blog.Common.Web.csproj", "{A591CF4A-F004-4D92-ADE8-8937FF290B63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Logic.Core.Tests", "Blog.Logic\Blog.Logic.Core.Tests\Blog.Logic.Core.Tests.csproj", "{36A4328A-BF39-4080-8D22-00971679532B}"
@@ -53,6 +51,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.SolutionItems", "Blog.SolutionItems", "{57EEC164-D018-4634-8394-37C848028310}"
 	ProjectSection(SolutionItems) = preProject
 		Blog.SolutionItems\applicationPoolsStartStop.bat = Blog.SolutionItems\applicationPoolsStartStop.bat
+		Blog.SolutionItems\createDbUser.ps1 = Blog.SolutionItems\createDbUser.ps1
 		Blog.SolutionItems\iisInstallationScript.ps1 = Blog.SolutionItems\iisInstallationScript.ps1
 		Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql = Blog.SolutionItems\mapIdentityUsersToBlogUsers.sql
 		readme.txt = readme.txt
@@ -85,6 +84,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Admin.Web", "Blog.Admin\Blog.Admin.Web\Blog.Admin.Web.csproj", "{DB89763E-B984-4D46-A08C-3469EA0653D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.LogCleaner", "Blog.Services\Blog.Services.LogCleaner\Blog.Services.LogCleaner.csproj", "{497A2BC7-E94A-44FA-925B-EFE69457C5B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Tools", "Blog.Tools", "{D4E301FE-9C89-49F5-96DC-0838F70F0F8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Tools.ApplicationSetup", "Blog.Tools\Blog.Tools.ApplicationSetup\Blog.Tools.ApplicationSetup.csproj", "{E4E60713-D7ED-49BC-A2F5-7488817B25DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,12 +138,6 @@ Global
 		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
 		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A}.Remote|Any CPU.Build.0 = Remote|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Home|Any CPU.ActiveCfg = Home|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Home|Any CPU.Build.0 = Home|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2}.Remote|Any CPU.Build.0 = Remote|Any CPU
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Home|Any CPU.ActiveCfg = Home|Any CPU
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Home|Any CPU.Build.0 = Home|Any CPU
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -234,6 +231,12 @@ Global
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Remote|Any CPU.ActiveCfg = Remote|Any CPU
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1}.Remote|Any CPU.Build.0 = Remote|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Home|Any CPU.ActiveCfg = Home|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Home|Any CPU.Build.0 = Home|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Remote|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC}.Remote|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -248,7 +251,6 @@ Global
 		{E332015C-24B5-48FA-9ED4-12F5310FCE7C} = {7E179C90-40E2-4C2B-BF8A-0AF95FB69631}
 		{E7D70C50-D915-476F-9B4B-147EF0E7F5C2} = {EB64D71D-6ED3-4BC2-8A9D-E630CD84C804}
 		{C1CD2C2A-C6A0-4531-8513-938FC474FF1A} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
-		{043F2216-C8BD-4D5A-90C4-7CCFC57586F2} = {15E7A4F1-3700-4903-BB7D-CD65608956E0}
 		{A591CF4A-F004-4D92-ADE8-8937FF290B63} = {C1F87FD1-058F-4DD1-B6AD-1D8D1DCE0BD4}
 		{36A4328A-BF39-4080-8D22-00971679532B} = {A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}
 		{B7B41254-99CC-439C-B40B-6C0CD4978ADF} = {A29F66C0-7E32-4317-B7F4-488BEC3BCDBC}
@@ -266,5 +268,6 @@ Global
 		{34F5B0DE-5584-48BE-AAAE-0D041F6267F4} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
 		{DB89763E-B984-4D46-A08C-3469EA0653D8} = {F3FE5CEB-3D88-4F73-8240-51A924AC789C}
 		{497A2BC7-E94A-44FA-925B-EFE69457C5B1} = {1B741FFC-1D1F-4C08-846E-0F69FFBEF492}
+		{E4E60713-D7ED-49BC-A2F5-7488817B25DC} = {D4E301FE-9C89-49F5-96DC-0838F70F0F8F}
 	EndGlobalSection
 EndGlobal

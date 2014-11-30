@@ -7199,8 +7199,8 @@ var ngBlogSockets = angular.module("ngBlogSockets",
         "ngAnimate"
     ]);
 ///#source 1 1 /wwwroot/modules/sockets/directives/socketDebugger.js
-ngBlogSockets.directive("socketDebugger", ["$templateCache",
-    function ($templateCache) {
+ngBlogSockets.directive("socketDebugger", ["$templateCache", "$interval",
+    function ($templateCache, $interval) {
         var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
             $scope.messages = [];
 

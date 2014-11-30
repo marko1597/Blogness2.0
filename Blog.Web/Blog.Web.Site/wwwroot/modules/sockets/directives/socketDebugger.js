@@ -1,5 +1,5 @@
-﻿ngBlogSockets.directive("socketDebugger", ["$templateCache",
-    function ($templateCache) {
+﻿ngBlogSockets.directive("socketDebugger", ["$templateCache", "$interval",
+    function ($templateCache, $interval) {
         var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
             $scope.messages = [];
 
