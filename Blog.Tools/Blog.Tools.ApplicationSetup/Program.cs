@@ -17,7 +17,7 @@ using Nito.AsyncEx;
 
 namespace Blog.Tools.ApplicationSetup
 {
-    [ExcludeFromCodeCoverage]
+	[ExcludeFromCodeCoverage]
 	class Program
 	{
 		#region External properties
@@ -52,12 +52,12 @@ namespace Blog.Tools.ApplicationSetup
 
 		static void Main(string[] args)
 		{
-            _localIpAddress = ConfigurationManager.AppSettings.Get("BlogServer");
+			_localIpAddress = ConfigurationManager.AppSettings.Get("BlogServer");
 
 			if (args == null || args.Length == 0)
 			{
-			    InitializeApp();
-                AddConsoleMessage("Successfully initialized app with an admin user");
+				InitializeApp();
+				AddConsoleMessage("Successfully initialized app with an admin user");
 			}
 			else
 			{
@@ -69,56 +69,56 @@ namespace Blog.Tools.ApplicationSetup
 				}
 				else if (tArgs.Contains("--seed"))
 				{
-				    AsyncContext.Run(() => SeedData());
+					AsyncContext.Run(() => SeedData());
 				}
-                else if (tArgs.Contains("--help"))
-                {
-                    ShowHelp();
-                }
-                else if (tArgs.Count > 1)
-                {
-                    AddConsoleMessage("Invalid number or usage of arguments");
-                    ShowHelp();
-                }
-                else
-                {
-                    AddConsoleMessage("Invalid number or usage of arguments");
-                    ShowHelp();
-                }
+				else if (tArgs.Contains("--help"))
+				{
+					ShowHelp();
+				}
+				else if (tArgs.Count > 1)
+				{
+					AddConsoleMessage("Invalid number or usage of arguments");
+					ShowHelp();
+				}
+				else
+				{
+					AddConsoleMessage("Invalid number or usage of arguments");
+					ShowHelp();
+				}
 			}
 		}
 
 		#region Load Data Stuff
 
-	    private static async void SeedData()
-	    {
-            Rollback();
-            Console.Clear();
-            AddConsoleMessage("<================ START ================>");
-            CopyImages();
-            await LoadRoles();
-            LoadUsers();
-            await LoadIdentities();
-            LoadChatMessages();
-            LoadAddress();
-            LoadEducationType();
-            LoadEducation();
-            LoadHobbies();
-            LoadAlbums();
-            LoadMedia();
-            LoadTags();
-            LoadPosts();
-            LoadPostContents();
-            LoadPostLikes();
-            LoadComments();
-            LoadCommentLikes();
-            MapUsersToIdentity();
-            AddConsoleMessage("Successfully initialized app with seeded test data");
-	    }
+		private static async void SeedData()
+		{
+			Rollback();
+			Console.Clear();
+			AddConsoleMessage("<================ START ================>");
+			CopyImages();
+			await LoadRoles();
+			LoadUsers();
+			await LoadIdentities();
+			LoadChatMessages();
+			LoadAddress();
+			LoadEducationType();
+			LoadEducation();
+			LoadHobbies();
+			LoadAlbums();
+			LoadMedia();
+			LoadTags();
+			LoadPosts();
+			LoadPostContents();
+			LoadPostLikes();
+			LoadComments();
+			LoadCommentLikes();
+			MapUsersToIdentity();
+			AddConsoleMessage("Successfully initialized app with seeded test data");
+		}
 
 		private static async void InitializeApp()
 		{
-		    Rollback();
+			Rollback();
 
 			await LoadRoles();
 
@@ -147,7 +147,7 @@ namespace Blog.Tools.ApplicationSetup
 				LastName = "Magpantay",
 				UserName = "admin",
 				IdentityId = Guid.NewGuid().ToString(),
-                EmailAddress = "admin@bloggity",
+				EmailAddress = "admin@bloggity",
 				BirthDate = DateTime.Now.AddYears(-25)
 			});
 		}
@@ -671,17 +671,17 @@ namespace Blog.Tools.ApplicationSetup
 
 		#endregion
 
-        #region Events
+		#region Events
 
-        private static void ShowHelp()
-        {
-            AddConsoleMessage("Usage:");
-            AddConsoleMessage("\t --help \t Displays this info");
-            AddConsoleMessage("\t --drop \t Drops all database associated with the app");
-            AddConsoleMessage("\t --seed \t Initializes the app and creates test data");
-        }
+		private static void ShowHelp()
+		{
+			AddConsoleMessage("Usage:");
+			AddConsoleMessage("\t --help \t Displays this info");
+			AddConsoleMessage("\t --drop \t Drops all database associated with the app");
+			AddConsoleMessage("\t --seed \t Initializes the app and creates test data");
+		}
 
-        private static void Rollback()
+		private static void Rollback()
 		{
 			try
 			{
@@ -812,8 +812,8 @@ namespace Blog.Tools.ApplicationSetup
 			}
 
 			AddConsoleMessage("Successfully moved sample images...");
-        }
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
+using Blog.Common.Contracts;
 using Blog.Services.Helpers.Wcf;
 using Blog.Services.Helpers.Wcf.Interfaces;
 
@@ -33,7 +35,7 @@ namespace Blog.Common.Web.Attributes
 
                 if (userIdProperty != null && userIdProperty != 0)
                 {
-                    var username = actionContext.RequestContext.Principal.Identity.Name;
+                    var username = actionContext.ControllerContext.RequestContext.Principal.Identity.Name;
                     if (string.IsNullOrEmpty(username))
                         throw new HttpResponseException(HttpStatusCode.InternalServerError);
 
@@ -59,6 +61,12 @@ namespace Blog.Common.Web.Attributes
         {
             var properties = src.GetType().GetProperties();
 
+            if (src.GetType() == typeof (User))
+            {
+                var userIdAsProperty = GetPropValue(src, "Id");
+                return (int)userIdAsProperty;
+            }
+
             foreach (var property in properties)
             {
                 if (property.Name == "User")
@@ -79,7 +87,8 @@ namespace Blog.Common.Web.Attributes
 
                 var propertyValue = GetPropValue(src, property.Name);
                 if (propertyValue == null 
-                    ||propertyValue is string
+                    || propertyValue is string
+                    || propertyValue is DateTime
                     || propertyValue.GetType().IsPrimitive
                     || propertyValue is IEnumerable
                     || propertyValue.GetType().IsArray) continue;
