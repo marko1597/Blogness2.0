@@ -29,6 +29,7 @@ namespace Blog.Tools.ApplicationSetup
 		private static readonly IEducationTypeRepository EducationTypeRepository = new EducationTypeRepository();
 		private static readonly IHobbyRepository HobbyRepository = new HobbyRepository();
 		private static readonly IAlbumRepository AlbumRepository = new AlbumRepository();
+		private static readonly ICommunityRepository CommunityRepository = new CommunityRepository();
 		private static readonly IMediaRepository MediaRepository = new MediaRepository();
 		private static readonly IPostContentRepository PostContentRepository = new PostContentRepository();
 		private static readonly IPostLikeRepository PostLikeRepository = new PostLikeRepository();
@@ -99,6 +100,7 @@ namespace Blog.Tools.ApplicationSetup
 			await LoadRoles();
 			LoadUsers();
 			await LoadIdentities();
+			LoadCommunities();
 			LoadChatMessages();
 			LoadAddress();
 			LoadEducationType();
@@ -191,10 +193,48 @@ namespace Blog.Tools.ApplicationSetup
 
 			_users = UserRepository.Find(
 					a => a.UserId > 0,
-					b => b.OrderBy(c => c.UserId),
-					"Address,Education,Hobbies").ToList();
+					b => b.OrderBy(c => c.UserId), null).ToList();
 
 			AddConsoleMessage("Successfully added users...");
+		}
+
+		private static void LoadCommunities()
+		{
+			CommunityRepository.Add(new Community
+			{
+				Name = "jamaness",
+				Description = "Lorem ipsum dolor sit amet",
+				LeaderUserId = 1,
+				Members = _users.ToList(),
+				CreatedBy = 1,
+				CreatedDate = DateTime.Now,
+				ModifiedBy = 1,
+				ModifiedDate = DateTime.Now
+			});
+			CommunityRepository.Add(new Community
+			{
+				Name = "jaavness",
+				Description = "Lorem ipsum dolor sit amet",
+				LeaderUserId = 2,
+				Members = _users.ToList(),
+				CreatedBy = 2,
+				CreatedDate = DateTime.Now,
+				ModifiedBy = 2,
+				ModifiedDate = DateTime.Now
+			});
+			CommunityRepository.Add(new Community
+			{
+				Name = "avmaness",
+				Description = "Lorem ipsum dolor sit amet",
+				LeaderUserId = 3,
+				Members = _users.ToList(),
+				CreatedBy = 3,
+				CreatedDate = DateTime.Now,
+				ModifiedBy = 3,
+				ModifiedDate = DateTime.Now
+			});
+
+			AddConsoleMessage("Successfully added communities...");
 		}
 
 		private static async Task LoadIdentities()
@@ -430,8 +470,8 @@ namespace Blog.Tools.ApplicationSetup
 
 			foreach (var u in _users)
 			{
-				var u1 = u;
-				var albums = AlbumRepository.Find(a => a.UserId == u1.UserId).ToList();
+				// ReSharper disable once AccessToForEachVariableInClosure
+				var albums = AlbumRepository.Find(a => a.UserId == u.UserId).ToList();
 
 				for (var i = 1; i < 18; i++)
 				{
@@ -444,17 +484,38 @@ namespace Blog.Tools.ApplicationSetup
 					{
 						albumId = albums[1].AlbumId;
 					}
-					else if (i == 2)
+					else switch (i)
 					{
-						albumId = albums[2].AlbumId;
-						u1.PictureId = mediaId;
-						UserRepository.Edit(u1);
-					}
-					else if (i == 1)
-					{
-						albumId = albums[3].AlbumId;
-						u1.BackgroundId = mediaId;
-						UserRepository.Edit(u1);
+						case 2:
+							albumId = albums[2].AlbumId;
+							u.PictureId = mediaId;
+							UserRepository.Edit(new User
+												{
+													UserId = u.UserId,
+													FirstName = u.FirstName,
+													LastName = u.LastName,
+													EmailAddress = u.EmailAddress,
+													BirthDate = u.BirthDate,
+													UserName = u.UserName,
+													PictureId = mediaId,
+													IdentityId = u.IdentityId
+												});
+							break;
+						case 1:
+							albumId = albums[3].AlbumId;
+							u.BackgroundId = mediaId;
+							UserRepository.Edit(new User
+												{
+													UserId = u.UserId,
+													FirstName = u.FirstName,
+													LastName = u.LastName,
+													EmailAddress = u.EmailAddress,
+													BirthDate = u.BirthDate,
+													UserName = u.UserName,
+													BackgroundId = mediaId,
+													IdentityId = u.IdentityId
+												});
+							break;
 					}
 
 					var mediaPath = "C:\\Temp\\SampleImages\\" + u.UserId + "\\";
@@ -523,6 +584,8 @@ namespace Blog.Tools.ApplicationSetup
 		{
 			foreach (var u in _users)
 			{
+				var communities = CommunityRepository.GetCommunitiesByUser(u.UserId);
+
 				for (var j = 1; j < 16; j++)
 				{
 					PostRepository.Add(new Post
@@ -530,6 +593,7 @@ namespace Blog.Tools.ApplicationSetup
 						CreatedBy = u.UserId,
 						CreatedDate = DateTime.Now.AddHours(-j),
 						ModifiedBy = u.UserId,
+						Communities = communities,
 						ModifiedDate = DateTime.Now.AddHours(-j),
 						PostMessage = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 						PostTitle = "Lorem ipsum dolor",

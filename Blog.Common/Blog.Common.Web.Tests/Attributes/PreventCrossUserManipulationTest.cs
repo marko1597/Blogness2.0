@@ -77,19 +77,6 @@ namespace Blog.Common.Web.Tests.Attributes
         [Test]
         public void ShouldSuccessfullyGetUserIdInUserObject()
         {
-            var complexDummyObject = new DummyComplexObject
-            {
-                SomeValue = 1,
-                DummyObject = new DummyObject
-                {
-                    Name = "foobar",
-                    User = new User
-                    {
-                        Id = 1
-                    }
-                }
-            };
-
             _controller.ControllerContext.RequestContext.Principal =
                 new GenericPrincipal(new GenericIdentity("foo", "bar"), new[] { "user" });
             _userResource.Setup(a => a.GetByUserName(It.IsAny<string>())).Returns(new User { Id = 1 });

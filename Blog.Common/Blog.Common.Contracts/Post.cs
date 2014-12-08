@@ -34,6 +34,9 @@ namespace Blog.Common.Contracts
         public List<Tag> Tags { get; set; }
 
         [DataMember]
+        public List<Community> Communities { get; set; }
+
+        [DataMember]
         public List<Comment> Comments { get; set; }
 
         [DataMember]

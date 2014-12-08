@@ -16,6 +16,7 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public int CreatedBy { get; set; }
         public DateTime ModifiedDate { get; set; }
         public int ModifiedBy { get; set; }
+        public virtual ICollection<Community> Communities { get; set; } 
         public virtual ICollection<ViewCount> ViewCounts { get; set; } 
         public virtual ICollection<PostContent> PostContents { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }

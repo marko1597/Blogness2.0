@@ -55,6 +55,23 @@ namespace Blog.DataAccess.Database.Repository
             return orderBy != null ? orderBy(query).ToList() : query.ToList();
         }
 
+        public IList<T> Find(int skip, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        {
+            var query = Find(filter, orderBy, includeProperties)
+                .Skip(skip)
+                .ToList();
+            return query;
+        }
+
+        public IList<T> Find(int threshold, int skip, Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        {
+            var query = Find(filter, orderBy, includeProperties)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
         public IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren)
         {
             _context.Configuration.ProxyCreationEnabled = loadChildren;
@@ -153,21 +170,14 @@ namespace Blog.DataAccess.Database.Repository
 
         public int GetUserId(T entity)
         {
+            var result = PropertyReflection.GetPropertyValue(entity, "UserId", true) ??
+                         PropertyReflection.GetPropertyValue(entity, "Id", true);
+
+            if (result == null) return 0;
+
             int userId;
-
-            var result = PropertyReflection.GetPropertyValue(entity, "UserId", true);
-            if (result == null)
-            {
-                result = PropertyReflection.GetPropertyValue(entity, "Id", true);
-            }
-
-            if (result != null)
-            {
-                int.TryParse(result.ToString(), out userId);
-                return userId;
-            }
-
-            return 0;
+            int.TryParse(result.ToString(), out userId);
+            return userId;
         }
 
         #endregion

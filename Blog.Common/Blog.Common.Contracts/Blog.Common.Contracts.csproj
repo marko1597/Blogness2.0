@@ -63,6 +63,7 @@
     <Compile Include="ChatMessage.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommentLike.cs" />
+    <Compile Include="Community.cs" />
     <Compile Include="Education.cs" />
     <Compile Include="EducationType.cs" />
     <Compile Include="Error.cs" />

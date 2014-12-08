@@ -45,6 +45,8 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public virtual ICollection<Education> Education { get; set; }
         public virtual ICollection<Hobby> Hobbies { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Community> CreatedCommunities { get; set; }
+        public virtual ICollection<Community> JoinedCommunities { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<CommentLike> CommentLikes { get; set; }

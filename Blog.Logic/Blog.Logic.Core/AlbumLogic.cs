@@ -94,7 +94,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var checkAlbum = IsAlbumNameInUse(album.AlbumName);
+                var checkAlbum = IsAlbumNameInUse(album.AlbumName, album.User.Id);
                 if (checkAlbum)
                 {
                     return new Album().GenerateError<Album>((int)Constants.Error.ValidationError,
@@ -113,7 +113,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var checkAlbum = IsAlbumNameInUse(album.AlbumName);
+                var checkAlbum = IsAlbumNameInUse(album.AlbumName, album.User.Id);
                 if (checkAlbum)
                 {
                     return new Album().GenerateError<Album>((int) Constants.Error.ValidationError,
@@ -128,14 +128,11 @@ namespace Blog.Logic.Core
             }
         }
 
-        private bool IsAlbumNameInUse(string albumName)
+        private bool IsAlbumNameInUse(string albumName, int userId)
         {
-            var dbAlbum = _albumRepository.Find(a => a.AlbumName == albumName, null, null).FirstOrDefault();
-            if (dbAlbum != null)
-            {
-                return true;
-            }
-            return false;
+            var dbAlbum = _albumRepository.Find(a => a.AlbumName == albumName && a.UserId == userId, 
+                null, null).FirstOrDefault();
+            return dbAlbum != null;
         }
     }
 }

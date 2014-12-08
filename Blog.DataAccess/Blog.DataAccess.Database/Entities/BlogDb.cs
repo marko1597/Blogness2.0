@@ -7,8 +7,7 @@ namespace Blog.DataAccess.Database.Entities
     [ExcludeFromCodeCoverage]
     public class BlogDb : DbContext
     {
-        public BlogDb()
-            : base("name=BlogDb")
+        public BlogDb() : base("name=BlogDb")
         {
             System.Data.Entity.Database.SetInitializer(new BlogDbInitializer());
         }
@@ -61,6 +60,7 @@ namespace Blog.DataAccess.Database.Entities
                 .HasOptional<Address>(a => a.Address)
                 .WithOptionalPrincipal()
                 .WillCascadeOnDelete(false);
+            
 
             // Chat Message
             mb.Entity<ChatMessage>()
@@ -98,6 +98,22 @@ namespace Blog.DataAccess.Database.Entities
                 .WithOptional(a => a.ParentComment)
                 .HasForeignKey(a => a.ParentCommentId);
 
+            // Communities
+            mb.Entity<Community>()
+                .HasMany<User>(a => a.Members)
+                .WithMany(a => a.JoinedCommunities)
+                .Map(x =>
+                {
+                    x.ToTable("UserCommunities");
+                    x.MapLeftKey("CommunityId");
+                    x.MapRightKey("UserId");
+                });
+            mb.Entity<Community>()
+                .HasRequired<User>(a => a.Leader)
+                .WithMany(a => a.CreatedCommunities)
+                .HasForeignKey(a => a.LeaderUserId)
+                .WillCascadeOnDelete(false);
+
             //Posts
             mb.Entity<Post>()
                 .HasMany<Comment>(a => a.Comments)
@@ -128,6 +144,15 @@ namespace Blog.DataAccess.Database.Entities
                     x.MapLeftKey("PostId");
                     x.MapRightKey("TagId");
                 });
+            mb.Entity<Post>()
+                .HasMany<Community>(a => a.Communities)
+                .WithMany(a => a.Posts)
+                .Map(x =>
+                {
+                    x.ToTable("CommunityPosts");
+                    x.MapLeftKey("PostId");
+                    x.MapRightKey("CommunityId");
+                });
         }
 
         public DbSet<Comment> Comments { get; set; }
@@ -145,6 +170,7 @@ namespace Blog.DataAccess.Database.Entities
         public DbSet<Media> Media { get; set; }
         public DbSet<PostContent> PostContents { get; set; }
         public DbSet<ChatMessage> ChatMessages { get; set; }
+        public DbSet<Community> Communities { get; set; }
 
         public class BlogDbInitializer : CreateDatabaseIfNotExists<BlogDb>
         {

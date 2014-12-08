@@ -54,6 +54,7 @@
     <Compile Include="ChatMessageMapper.cs" />
     <Compile Include="CommentLikeMapper.cs" />
     <Compile Include="CommentMapper.cs" />
+    <Compile Include="CommunityMapper.cs" />
     <Compile Include="EducationMapper.cs" />
     <Compile Include="EducationTypeMapper.cs" />
     <Compile Include="HobbyMapper.cs" />

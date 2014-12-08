@@ -12,7 +12,14 @@ namespace Blog.DataAccess.Database.Repository.Interfaces
         IList<T> GetAll();
         IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren);
         IList<T> Find(Expression<Func<T, bool>> predicate, bool loadChildren, int threshold);
-        IList<T> Find(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
+        IList<T> Find(Expression<Func<T, bool>> filter = null, 
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
+        IList<T> Find(int skip, Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "");
+        IList<T> Find(int threshold, int skip, Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            string includeProperties = "");
         T Add(T entity);
         void Delete(T entity);
         T Edit(T entity);

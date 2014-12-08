@@ -94,6 +94,7 @@ namespace Blog.DataAccess.Database.Repository
 
         public override Post Add(Post post)
         {
+            #region Tags
             // Add tags included in this entity to DB
             if (post.Tags != null)
             {
@@ -123,7 +124,9 @@ namespace Blog.DataAccess.Database.Repository
                     }
                 }
             }
+            #endregion
 
+            #region Contents
             // Add post contents included in this entity to DB
             if (post.PostContents != null)
             {
@@ -140,6 +143,24 @@ namespace Blog.DataAccess.Database.Repository
                     post.PostContents.Add(postContent);
                 }
             }
+            #endregion
+
+            #region Communities
+            // Add communities included in this entity to DB
+            if (post.Communities != null)
+            {
+                var communities = post.Communities;
+                post.Communities = new List<Community>();
+
+                foreach (var q in communities.Select(c => Context.Communities.Where(a =>
+                    a.Name.ToLower() == c.Name.ToLower()).ToList()).Where(q => q.Count > 0))
+                {
+                    Context.Communities.Attach(q.FirstOrDefault());
+                    Context.Entry(q.FirstOrDefault()).State = EntityState.Unchanged;
+                    post.Communities.Add(q.FirstOrDefault());
+                }
+            }
+            #endregion
 
             post.CreatedDate = DateTime.Now;
             post.CreatedBy = post.UserId;
@@ -159,114 +180,104 @@ namespace Blog.DataAccess.Database.Repository
                 .Include(a => a.PostLikes)
                 .Include(a => a.Tags)
                 .Include(a => a.Comments)
+                .Include(a => a.Communities)
                 .FirstOrDefault(a => a.PostId == post.PostId);
 
-            if (db != null)
+            if (db == null) throw new Exception("Record not found!");
+
+            db.PostTitle = post.PostTitle;
+            db.PostMessage = post.PostMessage;
+
+            #region Tags
+
+            var tempTags = db.Tags.ToList();
+            foreach (var t in tempTags)
             {
-                db.PostTitle = post.PostTitle;
-                db.PostMessage = post.PostMessage;
-
-                var tempTags = db.Tags.ToList();
-                foreach (var t in tempTags)
-                {
-                    Context.Entry(t).State = GetTagState(t, post.Tags);
-                }
-
-                var newtags = GetNewTags(db.Tags, post.Tags, post.UserId);
-                newtags.ForEach(a =>
-                                {
-                                    Context.Tags.Attach(a);
-                                    Context.Entry(a).State = EntityState.Added;
-                                    db.Tags.Add(a);
-                                });
-
-                var tempContents = db.PostContents.ToList();
-                foreach (var c in tempContents)
-                {
-                    var tContent = post.PostContents
-                        .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
-
-                    if (tContent != null)
-                    {
-                        var tmpContent = post.PostContents
-                            .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
-                        if (tmpContent != null)
-                        {
-                            c.PostContentTitle = tmpContent.PostContentTitle;
-                            c.PostContentText = tmpContent.PostContentText;
-                        }
-
-                        Context.Entry(c).State = EntityState.Modified;
-                    }
-                    else
-                    {
-                        Context.Entry(c).State = EntityState.Deleted;
-                    }
-                }
-
-                var newcontents = GetNewContents(db.PostContents, post.PostContents, post.UserId);
-                newcontents.ForEach(a =>
-                {
-                    Context.PostContents.Attach(a);
-                    Context.Entry(a).State = EntityState.Added;
-                    db.PostContents.Add(a);
-                });
-
-                db.ModifiedDate = DateTime.Now;
-                db.ModifiedBy = post.UserId;
-
-                Context.Entry(db).State = EntityState.Modified;
-                Context.SaveChanges();
-
-                return post;
+                Context.Entry(t).State = GetTagState(t, post.Tags);
             }
 
-            throw new Exception("Record not found!");
+            var newtags = RepositoryHelper.GetNewTags(db.Tags, post.Tags, post.UserId);
+            newtags.ForEach(a =>
+                            {
+                                Context.Tags.Attach(a);
+                                Context.Entry(a).State = EntityState.Added;
+                                db.Tags.Add(a);
+                            });
+
+            #endregion
+
+            #region Contents
+
+            var tempContents = db.PostContents.ToList();
+            foreach (var c in tempContents)
+            {
+                var tContent = post.PostContents
+                    .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
+
+                if (tContent != null)
+                {
+                    var tmpContent = post.PostContents
+                        .FirstOrDefault(a => a.PostId == c.PostId && a.MediaId == c.MediaId);
+                    if (tmpContent != null)
+                    {
+                        c.PostContentTitle = tmpContent.PostContentTitle;
+                        c.PostContentText = tmpContent.PostContentText;
+                    }
+
+                    Context.Entry(c).State = EntityState.Modified;
+                }
+                else
+                {
+                    Context.Entry(c).State = EntityState.Deleted;
+                }
+            }
+
+            var newcontents = RepositoryHelper.GetNewContents(db.PostContents, post.PostContents, post.UserId);
+            newcontents.ForEach(a =>
+                                {
+                                    Context.PostContents.Attach(a);
+                                    Context.Entry(a).State = EntityState.Added;
+                                    db.PostContents.Add(a);
+                                });
+
+            #endregion
+
+            #region Communities
+
+            var tempCommunities = db.Communities.ToList();
+            foreach (var c in tempCommunities)
+            {
+                var tempCommunity = post.Communities.FirstOrDefault(a => a.Id == c.Id);
+                Context.Entry(c).State = tempCommunity != null ? EntityState.Modified : EntityState.Deleted;
+            }
+
+            var newCommunities = RepositoryHelper.GetNewCommunities(db.Communities, post.Communities, post.UserId);
+            newCommunities.ForEach(a =>
+            {
+                Context.Communities.Attach(a);
+                Context.Entry(a).State = EntityState.Added;
+                db.Communities.Add(a);
+            });
+
+            #endregion
+
+            db.ModifiedDate = DateTime.Now;
+            db.ModifiedBy = post.UserId;
+
+            Context.Entry(db).State = EntityState.Modified;
+            Context.SaveChanges();
+
+            return post;
         }
 
         #region Private methods
 
-        private EntityState GetTagState(Tag tag, IEnumerable<Tag> tags)
+        private static EntityState GetTagState(Tag tag, IEnumerable<Tag> tags)
         {
             var tagNames = tags.Select(a => a.TagName.ToLower()).ToList();
 
             return tagNames.Contains(tag.TagName.ToLower()) ?
                 EntityState.Unchanged : EntityState.Deleted;
-        }
-
-        private List<Tag> GetNewTags(IEnumerable<Tag> dbTags, IEnumerable<Tag> clientTags, int userId)
-        {
-            var dbTagNames = dbTags.Select(a => a.TagName.ToLower()).ToList();
-            var newTags = (from t in clientTags
-                           where dbTagNames.All(a => a != t.TagName)
-                           select t).ToList();
-
-            foreach(var t in newTags)
-            {
-                t.CreatedDate = DateTime.Now;
-                t.CreatedBy = userId;
-                t.ModifiedDate = DateTime.Now;
-                t.ModifiedBy = userId;
-            }
-
-            return newTags;
-        }
-
-        private List<PostContent> GetNewContents(IEnumerable<PostContent> dbContents, IEnumerable<PostContent> clientContents, int userId)
-        {
-            var newContents = (from c in clientContents
-                               where dbContents.All(a => a.MediaId != c.MediaId)
-                               select c).ToList();
-
-            foreach (var pc in newContents)
-            {
-                pc.CreatedDate = DateTime.Now;
-                pc.CreatedBy = userId;
-                pc.ModifiedDate = DateTime.Now;
-                pc.ModifiedBy = userId;
-            }
-
-            return newContents;
         }
 
         #endregion
