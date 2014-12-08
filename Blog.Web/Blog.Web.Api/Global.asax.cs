@@ -43,6 +43,7 @@ namespace Blog.Web.Api
 
             // SI Controllers registry
             container.Register<ICommentsResource, CommentsResource>(Lifestyle.Singleton);
+            container.Register<ICommunityResource, CommunityResource>(Lifestyle.Singleton);
             container.Register<ICommentLikesResource, CommentLikesResource>(Lifestyle.Singleton);
             container.Register<IPostsResource, PostsResource>(Lifestyle.Singleton);
             container.Register<IUsersResource, UsersResource>(Lifestyle.Singleton);

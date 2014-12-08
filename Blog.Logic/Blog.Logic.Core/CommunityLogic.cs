@@ -44,7 +44,7 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.Find(10, 0, a => a.IsDeleted == false, 
-                    c => c.OrderByDescending(a => a.CreatedDate), "Members,Posts").ToList();
+                    c => c.OrderByDescending(a => a.CreatedDate), "Members").ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -60,7 +60,7 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.Find(5, skip, a => a.IsDeleted == false,
-                    c => c.OrderByDescending(a => a.CreatedDate), "Members,Posts").ToList();
+                    c => c.OrderByDescending(a => a.CreatedDate), "Members").ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -70,12 +70,12 @@ namespace Blog.Logic.Core
             return communities;
         }
 
-        public List<Community> GetByUser(int userId)
+        public List<Community> GetJoinedByUser(int userId)
         {
             var communities = new List<Community>();
             try
             {
-                var db = _communityRepository.GetCommunitiesByUser(userId).ToList();
+                var db = _communityRepository.GetJoinedCommunitiesByUser(userId).ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -85,12 +85,42 @@ namespace Blog.Logic.Core
             return communities;
         }
 
-        public List<Community> GetMoreByUser(int userId, int skip)
+        public List<Community> GetMoreJoinedByUser(int userId, int skip)
         {
             var communities = new List<Community>();
             try
             {
-                var db = _communityRepository.GetMoreCommunitiesByUser(userId, 5, skip).ToList();
+                var db = _communityRepository.GetMoreJoinedCommunitiesByUser(userId, 5, skip).ToList();
+                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return communities;
+        }
+
+        public List<Community> GetCreatedByUser(int userId)
+        {
+            var communities = new List<Community>();
+            try
+            {
+                var db = _communityRepository.GetCreatedCommunitiesByUser(userId).ToList();
+                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return communities;
+        }
+
+        public List<Community> GetMoreCreatedByUser(int userId, int skip)
+        {
+            var communities = new List<Community>();
+            try
+            {
+                var db = _communityRepository.GetMoreCreatedCommunitiesByUser(userId, 5, skip).ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -104,8 +134,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var checkAlbum = IsCommunityNameInUse(community.Name);
-                if (checkAlbum)
+                var checkCommunity = IsCommunityNameInUse(community.Name);
+                if (checkCommunity)
                 {
                     return new Community().GenerateError<Community>((int)Constants.Error.ValidationError,
                         string.Format("Community name {0} is already in use.", community.Name));
@@ -123,8 +153,8 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var checkAlbum = IsCommunityNameInUse(community.Name);
-                if (checkAlbum)
+                var checkCommunity = IsCommunityNameInUse(community.Name);
+                if (checkCommunity)
                 {
                     return new Community().GenerateError<Community>((int)Constants.Error.ValidationError,
                         string.Format("Community name {0} is already in use.", community.Name));

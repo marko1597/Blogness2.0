@@ -32,6 +32,7 @@ namespace Blog.Services.Web
             container.Register<IChatMessagesLogic, ChatMessagesLogic>();
             container.Register<ICommentLikesLogic, CommentLikesLogic>();
             container.Register<ICommentsLogic, CommentsLogic>();
+            container.Register<ICommunityLogic, CommunityLogic>();
             container.Register<IEducationLogic, EducationLogic>();
             container.Register<IHobbyLogic, HobbyLogic>();
             container.Register<IMediaLogic, MediaLogic>();
@@ -49,6 +50,7 @@ namespace Blog.Services.Web
             container.Register<IChatMessageRepository, ChatMessageRepository>();
             container.Register<ICommentLikeRepository, CommentLikeRepository>();
             container.Register<ICommentRepository, CommentRepository>();
+            container.Register<ICommunityRepository, CommunityRepository>();
             container.Register<IEducationRepository, EducationRepository>();
             container.Register<IEducationTypeRepository, EducationTypeRepository>();
             container.Register<IHobbyRepository, HobbyRepository>();

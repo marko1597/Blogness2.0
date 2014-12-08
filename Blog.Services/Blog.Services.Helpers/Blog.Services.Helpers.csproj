@@ -56,6 +56,7 @@
     <Compile Include="Wcf\ChatMessagesResource.cs" />
     <Compile Include="Wcf\CommentLikesResource.cs" />
     <Compile Include="Wcf\CommentsResource.cs" />
+    <Compile Include="Wcf\CommunityResource.cs" />
     <Compile Include="Wcf\EducationResource.cs" />
     <Compile Include="Wcf\HobbyResource.cs" />
     <Compile Include="Wcf\Interfaces\IAddressResource.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Wcf\Interfaces\IChatMessagesResource.cs" />
     <Compile Include="Wcf\Interfaces\ICommentLikesResource.cs" />
     <Compile Include="Wcf\Interfaces\ICommentsResource.cs" />
+    <Compile Include="Wcf\Interfaces\ICommunityResource.cs" />
     <Compile Include="Wcf\Interfaces\IEducationResource.cs" />
     <Compile Include="Wcf\Interfaces\IHobbyResource.cs" />
     <Compile Include="Wcf\Interfaces\IMediaResource.cs" />

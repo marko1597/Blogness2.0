@@ -74,6 +74,7 @@
     <Compile Include="AlbumLogicTest.cs" />
     <Compile Include="CommentLikesLogicTest.cs" />
     <Compile Include="CommentsLogicTest.cs" />
+    <Compile Include="CommunityLogicTest.cs" />
     <Compile Include="EducationLogicTest.cs" />
     <Compile Include="MediaLogicTest.cs" />
     <Compile Include="PostContentsLogicTest.cs" />

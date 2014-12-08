@@ -10,18 +10,37 @@ namespace Blog.DataAccess.Database.Repository
 {
     public class CommunityRepository : GenericRepository<BlogDb, Community>, ICommunityRepository
     {
-        public IList<Community> GetCommunitiesByUser(int userId, int threshold = 10)
+        public IList<Community> GetJoinedCommunitiesByUser(int userId, int threshold = 10)
         {
-            var query = Find(a => a.Members.Any(u => u.UserId == userId), null, "Members,Posts")
+            var query = Find(a => a.Members.Any(u => u.UserId == userId), null, "Members")
                 .OrderByDescending(a => a.CreatedDate)
                 .Take(threshold)
                 .ToList();
             return query;
         }
 
-        public IList<Community> GetMoreCommunitiesByUser(int userId, int threshold = 5, int skip = 10)
+        public IList<Community> GetMoreJoinedCommunitiesByUser(int userId, int threshold = 5, int skip = 10)
         {
-            var query = Find(a => a.Members.Any(u => u.UserId == userId), null, "Members,Posts")
+            var query = Find(a => a.Members.Any(u => u.UserId == userId), null, "Members")
+                .OrderByDescending(a => a.CreatedDate)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Community> GetCreatedCommunitiesByUser(int userId, int threshold = 10)
+        {
+            var query = Find(a => a.LeaderUserId == userId, null, "Members")
+                .OrderByDescending(a => a.CreatedDate)
+                .Take(threshold)
+                .ToList();
+            return query;
+        }
+
+        public IList<Community> GetMoreCreatedCommunitiesByUser(int userId, int threshold = 5, int skip = 10)
+        {
+            var query = Find(a => a.LeaderUserId == userId, null, "Members")
                 .OrderByDescending(a => a.CreatedDate)
                 .Skip(skip)
                 .Take(threshold)

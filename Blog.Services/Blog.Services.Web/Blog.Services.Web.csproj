@@ -94,6 +94,7 @@
     <Content Include="ChatMessagesService.svc" />
     <Content Include="CommentLikesService.svc" />
     <Content Include="CommentsService.svc" />
+    <Content Include="CommunityService.svc" />
     <Content Include="EducationService.svc" />
     <Content Include="Global.asax" />
     <Content Include="HobbyService.svc" />

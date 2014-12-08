@@ -246,6 +246,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChatMessagesController.cs" />
+    <Compile Include="Controllers\CommunityController.cs" />
     <Compile Include="Controllers\ViewCountController.cs" />
     <Compile Include="Models\Account\Binding\RemoveLoginBindingModel.cs" />
     <Compile Include="Controllers\AddressController.cs" />

@@ -584,7 +584,7 @@ namespace Blog.Tools.ApplicationSetup
 		{
 			foreach (var u in _users)
 			{
-				var communities = CommunityRepository.GetCommunitiesByUser(u.UserId);
+                var communities = CommunityRepository.GetJoinedCommunitiesByUser(u.UserId);
 
 				for (var j = 1; j < 16; j++)
 				{

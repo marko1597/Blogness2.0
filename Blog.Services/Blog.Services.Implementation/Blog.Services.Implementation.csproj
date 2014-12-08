@@ -84,6 +84,7 @@
     <Compile Include="ChatMessagesService.cs" />
     <Compile Include="CommentLikesService.cs" />
     <Compile Include="CommentsService.cs" />
+    <Compile Include="CommunityService.cs" />
     <Compile Include="EducationService.cs" />
     <Compile Include="Handlers\HttpErrorHandler.cs" />
     <Compile Include="HobbyService.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Interfaces\IChatMessagesService.cs" />
     <Compile Include="Interfaces\ICommentLikesService.cs" />
     <Compile Include="Interfaces\ICommentsService.cs" />
+    <Compile Include="Interfaces\ICommunityService.cs" />
     <Compile Include="Interfaces\IEducationService.cs" />
     <Compile Include="Interfaces\IHobbyService.cs" />
     <Compile Include="Interfaces\IMediaService.cs" />
