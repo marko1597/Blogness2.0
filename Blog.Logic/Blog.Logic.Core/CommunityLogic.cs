@@ -23,13 +23,13 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _communityRepository.Find(a => a.Id == communityId, true).FirstOrDefault();
+                var db = _communityRepository.Get(communityId);
                 if (db == null)
                 {
                     return new Community().GenerateError<Community>((int)Constants.Error.RecordNotFound,
                         string.Format("Cannot find community with Id {0}", communityId));
                 }
-
+                
                 return CommunityMapper.ToDto(db);
             }
             catch (Exception ex)

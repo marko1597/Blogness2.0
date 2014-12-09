@@ -79,21 +79,17 @@ namespace Blog.Logic.Core.Tests
         [Test]
         public void ShouldGetCommunityId()
         {
-            var communitySearch = new List<Community> 
-            {
-                new Community
-                {
-                    Id = 1,
-                    LeaderUserId = 1,
-                    Leader = _members.FirstOrDefault(a => a.UserId == 1),
-                    Members = _members.ToList(),
-                    Posts = new List<Post> { new Post { PostId = 1 } }
-                }
-            };
+            var communitySearch = new Community
+                                  {
+                                      Id = 1,
+                                      LeaderUserId = 1,
+                                      Leader = _members.FirstOrDefault(a => a.UserId == 1),
+                                      Members = _members.ToList(),
+                                      Posts = new List<Post> {new Post {PostId = 1}}
+                                  };
 
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Community, bool>>>(),
-                true)).Returns(communitySearch);
+            _communityRepository.Setup(a => a.Get(It.IsAny<int>())).Returns(communitySearch);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.Get(1);
@@ -107,8 +103,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldReturnErrorWhenGetCommunityIdFoundNoRecords()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Community, bool>>>(),
-                true)).Returns(new List<Community>());
+            _communityRepository.Setup(a => a.Get(It.IsAny<int>())).Returns((Community)null);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.Get(1);
@@ -122,8 +117,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetCommunityByIdFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Community, bool>>>(),
-                true)).Throws(new Exception("Hooha!"));
+            _communityRepository.Setup(a => a.Get(It.IsAny<int>())).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
 

@@ -10,6 +10,46 @@ namespace Blog.DataAccess.Database.Repository
 {
     public class CommunityRepository : GenericRepository<BlogDb, Community>, ICommunityRepository
     {
+        public Community Get(int id)
+        {
+            var db = Find(a => a.LeaderUserId == id, null, "Members,Leader,Posts").FirstOrDefault();
+            if (db == null) return null;
+
+            db.Leader.Posts = null;
+            db.Leader.PostLikes = null;
+            db.Leader.Albums = null;
+            db.Leader.Comments = null;
+            db.Leader.CommentLikes = null;
+            db.Leader.CreatedCommunities = null;
+            db.Leader.JoinedCommunities = null;
+            db.Leader.SentChatMessages = null;
+            db.Leader.ReceivedChatMessages = null;
+            db.Leader.Education = null;
+            db.Leader.Hobbies = null;
+
+            foreach (var post in db.Posts)
+            {
+                post.Communities = null;
+            }
+
+            foreach (var member in db.Members)
+            {
+                member.Posts = null;
+                member.PostLikes = null;
+                member.Albums = null;
+                member.Comments = null;
+                member.CommentLikes = null;
+                member.CreatedCommunities = null;
+                member.JoinedCommunities = null;
+                member.SentChatMessages = null;
+                member.ReceivedChatMessages = null;
+                member.Education = null;
+                member.Hobbies = null;
+            }
+
+            return db;
+        }
+
         public IList<Community> GetJoinedCommunitiesByUser(int userId, int threshold = 10)
         {
             var query = Find(a => a.Members.Any(u => u.UserId == userId), null, "Members")
