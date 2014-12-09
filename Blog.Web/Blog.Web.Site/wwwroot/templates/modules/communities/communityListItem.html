@@ -1,0 +1,17 @@
+﻿<div id="community-item-{{community.Id}}" ng-class="getItemSize()" class="community-list-item card default">
+    <div community-header community="community"></div>
+    <div class="community-members">
+        <div ng-repeat="member in community.Members">
+            <div class="member-item">
+                <div>
+                    <img ng-src="{{member.Picture.MediaUrl}}" />
+                </div>
+                <div>
+                    <h5>{{member.FirstName}} {{member.LastName}}</h5>
+                    <span user-info-popup user="member" data-placement="bottom-left">@{{member.UserName}}</span>
+                    <p>{{member.Description}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

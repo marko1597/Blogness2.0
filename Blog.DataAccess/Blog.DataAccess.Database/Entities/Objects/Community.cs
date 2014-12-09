@@ -13,6 +13,8 @@ namespace Blog.DataAccess.Database.Entities.Objects
         public bool IsDeleted { get; set; }
         public int LeaderUserId { get; set; }
         public virtual User Leader { get; set; }
+        public int? EmblemId { get; set; }
+        public virtual Media Emblem { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
         public DateTime ModifiedDate { get; set; }

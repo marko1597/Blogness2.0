@@ -3185,6 +3185,26 @@
       <DependentUpon>appmodules.css</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\font.css" />
+    <Content Include="wwwroot\css\modules\communities.css" />
+    <Content Include="wwwroot\css\modules\communities\communitylistitem.css" />
+    <Content Include="wwwroot\css\scss\communities.css">
+      <DependentUpon>communities.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities.min.css">
+      <DependentUpon>communities.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityheader.css">
+      <DependentUpon>communityheader.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityheader.min.css">
+      <DependentUpon>communityheader.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communitylistitem.css">
+      <DependentUpon>communitylistitem.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communitylistitem.min.css">
+      <DependentUpon>communitylistitem.css</DependentUpon>
+    </Content>
     <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.svg" />
     <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.svg" />
     <Content Include="wwwroot\fonts\OpenSans-ExtraBoldItalic\OpenSans-ExtraBoldItalic-webfont.svg" />
@@ -4455,6 +4475,18 @@
     </Content>
     <Content Include="node_modules\grunt-angular-templates\node_modules\html-minifier\node_modules\cli\examples\static.min.js.map">
       <DependentUpon>static.min.js</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities.scss" />
+    <Content Include="wwwroot\css\scss\communities\communitylistitem.scss" />
+    <Content Include="wwwroot\css\scss\communities\communitylistitem.css.map">
+      <DependentUpon>communitylistitem.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities.css.map">
+      <DependentUpon>communities.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityheader.scss" />
+    <Content Include="wwwroot\css\scss\communities\communityheader.css.map">
+      <DependentUpon>communityheader.css</DependentUpon>
     </Content>
     <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
     <Content Include="wwwroot\css\scss\extensions\ckeditor.css">
@@ -6768,6 +6800,11 @@
     <Content Include="wwwroot\modules\comments\directives\commentsContainer.js" />
     <Content Include="wwwroot\modules\comments\directives\commentsList.js" />
     <Content Include="wwwroot\modules\comments\services\commentsService.js" />
+    <Content Include="wwwroot\modules\communities\communities.js" />
+    <Content Include="wwwroot\modules\communities\controllers\communitiesListController.js" />
+    <Content Include="wwwroot\modules\communities\directives\communityHeader.js" />
+    <Content Include="wwwroot\modules\communities\directives\communityListItem.js" />
+    <Content Include="wwwroot\modules\communities\services\communitiesService.js" />
     <Content Include="wwwroot\modules\init.js" />
     <Content Include="wwwroot\modules\login\directives\loggedUser.js" />
     <Content Include="wwwroot\modules\login\directives\loginFormModal.js" />
@@ -7337,11 +7374,13 @@
     <Content Include="wwwroot\modules\posts\services\postsService.js" />
     <Content Include="wwwroot\modules\shared\directives\keypress.js" />
     <Content Include="wwwroot\templates\events.html" />
-    <Content Include="wwwroot\templates\groups.html" />
+    <Content Include="wwwroot\templates\communities.html" />
     <Content Include="wwwroot\templates\modules\comments\commentItem.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsAddNew.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsContainer.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsList.html" />
+    <Content Include="wwwroot\templates\modules\communities\communityHeader.html" />
+    <Content Include="wwwroot\templates\modules\communities\communityListItem.html" />
     <Content Include="wwwroot\templates\modules\error\errorDisplay.html" />
     <Content Include="wwwroot\templates\modules\header\headerMenu.html" />
     <Content Include="wwwroot\templates\modules\login\loggedUser.html" />

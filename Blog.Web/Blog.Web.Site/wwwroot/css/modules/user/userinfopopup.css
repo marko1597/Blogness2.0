@@ -2,3 +2,12 @@
 #user-info-popup {
   min-width: 200px;
 }
+
+/* line 13, ../../scss/user/userinfopopup.scss */
+*[user-info-popup] {
+  cursor: pointer;
+}
+/* line 16, ../../scss/user/userinfopopup.scss */
+*[user-info-popup]:hover {
+  text-decoration: underline;
+}

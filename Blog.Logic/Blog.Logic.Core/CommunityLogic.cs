@@ -43,8 +43,7 @@ namespace Blog.Logic.Core
             var communities = new List<Community>();
             try
             {
-                var db = _communityRepository.Find(10, 0, a => a.IsDeleted == false, 
-                    c => c.OrderByDescending(a => a.CreatedDate), "Members").ToList();
+                var db = _communityRepository.GetList(10).ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)
@@ -59,8 +58,7 @@ namespace Blog.Logic.Core
             var communities = new List<Community>();
             try
             {
-                var db = _communityRepository.Find(5, skip, a => a.IsDeleted == false,
-                    c => c.OrderByDescending(a => a.CreatedDate), "Members").ToList();
+                var db = _communityRepository.GetMore(5, 10).ToList();
                 db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
             }
             catch (Exception ex)

@@ -1,0 +1,39 @@
+﻿@import '../variables.scss';
+
+.community-list-item {
+    @include margin(5px, 5px, 5px, 5px);
+    @include size(340px, auto);
+    @include position(relative, null, null, null, null);
+
+    .community-members {
+        @include padding($default-padding);
+
+        .member-item {
+            @include padding($default-padding);
+            @include margin(null, null, $default-margin);
+            @include borders(1px, solid, $light-border-color, true);
+
+            > div:first-child {
+                @include size(60px, auto);
+                @include margin(0, 10px);
+                float: left;
+
+                img {
+                    @include size(60px, 60px);
+                    @include border-radius(round, false);
+                    @include borders(3px, solid, $default-color, true);
+                }
+            }
+
+            > div:last-child {
+                @include size(100%, auto);
+
+                > h4 {
+                    @include padding(null, null, null, 90px);
+                    @include margin(0, 0, 5px);
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}

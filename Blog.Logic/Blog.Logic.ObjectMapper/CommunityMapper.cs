@@ -16,6 +16,9 @@ namespace Blog.Logic.ObjectMapper
             var posts = community.Posts != null
                 ? community.Posts.Select(PostMapper.ToDto).ToList()
                 : null;
+            var emblem = community.Emblem != null
+                    ? MediaMapper.ToDto(community.Emblem)
+                    : null;
 
             return new Community
                 {
@@ -26,6 +29,7 @@ namespace Blog.Logic.ObjectMapper
                     IsDeleted = community.IsDeleted,
                     Members = members,
                     Posts = posts,
+                    Emblem = emblem,
                     CreatedBy = community.CreatedBy,
                     CreatedDate = community.CreatedDate,
                     ModifiedBy = community.ModifiedBy,
@@ -43,6 +47,9 @@ namespace Blog.Logic.ObjectMapper
             var posts = community.Posts != null
                 ? community.Posts.Select(PostMapper.ToEntity).ToList()
                 : null;
+            var emblem = community.Emblem != null
+                    ? (int?)community.Emblem.Id
+                    : null;
 
             return new Db.Community
                 {
@@ -54,6 +61,7 @@ namespace Blog.Logic.ObjectMapper
                     IsDeleted = community.IsDeleted,
                     LeaderUserId = community.Leader != null ? community.Leader.Id : 0,
                     Leader = null,
+                    EmblemId = emblem,
                     CreatedBy = community.CreatedBy,
                     CreatedDate = community.CreatedDate,
                     ModifiedBy = community.ModifiedBy,

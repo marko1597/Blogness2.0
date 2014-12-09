@@ -1,0 +1,54 @@
+﻿.community-list-item {
+  margin-top: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  width: 340px;
+  height: auto;
+  position: relative; }
+  .community-list-item .community-members {
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px; }
+    .community-list-item .community-members .member-item {
+      padding-top: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      margin-bottom: 15px;
+      border-top: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-left: 1px solid #cccccc; }
+      .community-list-item .community-members .member-item > div:first-child {
+        width: 60px;
+        height: auto;
+        margin-top: 0;
+        margin-right: 10px;
+        margin-bottom: 0;
+        margin-left: 0;
+        float: left; }
+        .community-list-item .community-members .member-item > div:first-child img {
+          width: 60px;
+          height: 60px;
+          border-top-left-radius: 100%;
+          border-top-right-radius: 100%;
+          border-bottom-left-radius: 100%;
+          border-bottom-right-radius: 100%;
+          border-top: 3px solid #fff;
+          border-right: 3px solid #fff;
+          border-bottom: 3px solid #fff;
+          border-left: 3px solid #fff; }
+      .community-list-item .community-members .member-item > div:last-child {
+        width: 100%;
+        height: auto; }
+        .community-list-item .community-members .member-item > div:last-child > h4 {
+          padding-left: 90px;
+          margin-top: 0;
+          margin-right: 0;
+          margin-bottom: 5px;
+          margin-left: 0;
+          font-weight: bold; }
+
+/*# sourceMappingURL=communitylistitem.css.map */

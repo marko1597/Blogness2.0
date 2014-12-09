@@ -2,10 +2,18 @@
 
 #user-info-popup {
     min-width: 200px;
-
+    
     .popover-content {
         p {
             @include borders(0, empty, empty, null);
         }
+    }
+}
+
+*[user-info-popup] {
+    cursor: pointer;
+    
+    &:hover {
+        text-decoration: underline;
     }
 }

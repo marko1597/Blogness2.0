@@ -27,6 +27,9 @@ namespace Blog.Common.Contracts
         public bool IsDeleted { get; set; }
 
         [DataMember]
+        public Media Emblem { get; set; }
+
+        [DataMember]
         public List<User> Members { get; set; }
 
         [DataMember]

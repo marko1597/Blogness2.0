@@ -15,6 +15,8 @@ namespace Blog.DataAccess.Database.Repository
             var db = Find(a => a.LeaderUserId == id, null, "Members,Leader,Posts").FirstOrDefault();
             if (db == null) return null;
 
+            db.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == db.Leader.PictureId);
+            db.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == db.Leader.BackgroundId);
             db.Leader.Posts = null;
             db.Leader.PostLikes = null;
             db.Leader.Albums = null;
@@ -30,6 +32,8 @@ namespace Blog.DataAccess.Database.Repository
             foreach (var post in db.Posts)
             {
                 post.Communities = null;
+                post.User.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.PictureId);
+                post.User.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.BackgroundId);
             }
 
             foreach (var member in db.Members)
@@ -45,9 +49,60 @@ namespace Blog.DataAccess.Database.Repository
                 member.ReceivedChatMessages = null;
                 member.Education = null;
                 member.Hobbies = null;
+                member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
             }
 
             return db;
+        }
+
+        public IList<Community> GetList(int threshold = 10)
+        {
+            Context.Configuration.ProxyCreationEnabled = false;
+
+            var query = Context.Communities
+                .Include(a => a.Members)
+                .OrderByDescending(a => a.CreatedDate)
+                .Take(threshold)
+                .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+
+            return query;
+        }
+
+        public IList<Community> GetMore(int threshold = 5, int skip = 10)
+        {
+            Context.Configuration.ProxyCreationEnabled = false;
+
+            var query = Context.Communities
+                .Include(a => a.Members)
+                .OrderByDescending(a => a.CreatedDate)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+
+            return query;
         }
 
         public IList<Community> GetJoinedCommunitiesByUser(int userId, int threshold = 10)
@@ -56,6 +111,18 @@ namespace Blog.DataAccess.Database.Repository
                 .OrderByDescending(a => a.CreatedDate)
                 .Take(threshold)
                 .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+            
             return query;
         }
 
@@ -66,6 +133,18 @@ namespace Blog.DataAccess.Database.Repository
                 .Skip(skip)
                 .Take(threshold)
                 .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+
             return query;
         }
 
@@ -75,6 +154,18 @@ namespace Blog.DataAccess.Database.Repository
                 .OrderByDescending(a => a.CreatedDate)
                 .Take(threshold)
                 .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+
             return query;
         }
 
@@ -85,12 +176,23 @@ namespace Blog.DataAccess.Database.Repository
                 .Skip(skip)
                 .Take(threshold)
                 .ToList();
+
+            foreach (var community in query)
+            {
+                community.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.PictureId);
+                community.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.Leader.BackgroundId);
+                foreach (var member in community.Members)
+                {
+                    member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
+                    member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
+                }
+            }
+
             return query;
         }
 
         public override Community Add(Community community)
         {
-            // Set user members as unchanged state
             if (community.Members != null)
             {
                 var members = community.Members;

@@ -28,8 +28,8 @@
     var navigationItems = [
         { text: "Home", icon: "fa-home", href: "/#/" },
         { text: "People", icon: "fa-user", href: "/#/user" },
+        { text: "Communities", icon: "fa-users", href: "/#/communities" },
         { text: "Friends", icon: "fa-comments", href: "/#/friends" },
-        { text: "Groups", icon: "fa-users", href: "/#/groups" },
         { text: "Events", icon: "fa-calendar", href: "/#/events" }
     ];
 

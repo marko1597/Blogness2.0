@@ -49,6 +49,16 @@ a {
     border-bottom: 1px solid #cccccc; }
     .card .content:last-child, .card .success, .card .warning, .card .danger, .card .info, .card .default, .card .masonry {
       border-bottom: 0; }
+  .card.large, .large.success, .large.warning, .large.danger, .large.info, .large.default, .large.masonry {
+    width: 24%; }
+  .card.xlarge, .xlarge.success, .xlarge.warning, .xlarge.danger, .xlarge.info, .xlarge.default, .xlarge.masonry {
+    width: 19%; }
+  .card.medium, .medium.success, .medium.warning, .medium.danger, .medium.info, .medium.default, .medium.masonry {
+    width: 31.5%; }
+  .card.small, .small.success, .small.warning, .small.danger, .small.info, .small.default, .small.masonry {
+    width: 48%; }
+  .card.xsmall, .xsmall.success, .xsmall.warning, .xsmall.danger, .xsmall.info, .xsmall.default, .xsmall.masonry {
+    width: 98%; }
 
 .success {
   color: #fff;

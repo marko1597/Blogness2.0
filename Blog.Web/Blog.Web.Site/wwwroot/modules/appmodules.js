@@ -25,6 +25,25 @@ window.blogInit =
 angular.module('blog').run(['$templateCache', function($templateCache) {
   'use strict';
 
+  $templateCache.put('communities.html',
+    "<div class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-12\">\r" +
+    "\n" +
+    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
+    "\n" +
+    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
+    "\n" +
+    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('errorpage.html',
     "<div id=\"error-page\">\r" +
     "\n" +
@@ -93,29 +112,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "<div class=\"jumbotron card\">\r" +
     "\n" +
     "    <h1>Friends</h1>\r" +
-    "\n" +
-    "    <p>\r" +
-    "\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\r" +
-    "\n" +
-    "        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor\r" +
-    "\n" +
-    "        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,\r" +
-    "\n" +
-    "        sunt in culpa qui officia deserunt mollit anim id est laborum.\r" +
-    "\n" +
-    "    </p>\r" +
-    "\n" +
-    "    <p><a class=\"btn btn-primary btn-lg\" role=\"button\">Clicking me does nothing</a></p>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('groups.html',
-    "<div class=\"jumbotron card\">\r" +
-    "\n" +
-    "    <h1>Groups</h1>\r" +
     "\n" +
     "    <p>\r" +
     "\n" +
@@ -438,6 +434,66 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "</div>\r" +
     "\n"
+  );
+
+
+  $templateCache.put('communities/communityHeader.html',
+    "<div class=\"header big row\">\r" +
+    "\n" +
+    "    <h4>\r" +
+    "\n" +
+    "        <i class=\"fa fa-edit edit\" ng-show=\"isEditable()\" ng-click=\"edit()\"></i>\r" +
+    "\n" +
+    "        <a href=\"{{community.Url}}\">{{community.Name}}</a>\r" +
+    "\n" +
+    "    </h4>\r" +
+    "\n" +
+    "    <p>{{community.Description}}</p>\r" +
+    "\n" +
+    "    <p>\r" +
+    "\n" +
+    "        Created by <a user-info-popup user=\"community.Leader\" data-placement=\"bottom-left\">@{{community.Leader.UserName}}</a> at {{community.DateDisplay}}\r" +
+    "\n" +
+    "    </p>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('communities/communityListItem.html',
+    "<div id=\"community-item-{{community.Id}}\" ng-class=\"getItemSize()\" class=\"community-list-item card default\">\r" +
+    "\n" +
+    "    <div community-header community=\"community\"></div>\r" +
+    "\n" +
+    "    <div class=\"community-members\">\r" +
+    "\n" +
+    "        <div ng-repeat=\"member in community.Members\">\r" +
+    "\n" +
+    "            <div class=\"member-item\">\r" +
+    "\n" +
+    "                <div>\r" +
+    "\n" +
+    "                    <img ng-src=\"{{member.Picture.MediaUrl}}\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div>\r" +
+    "\n" +
+    "                    <h5>{{member.FirstName}} {{member.LastName}}</h5>\r" +
+    "\n" +
+    "                    <span user-info-popup user=\"member\" data-placement=\"bottom-left\">@{{member.UserName}}</span>\r" +
+    "\n" +
+    "                    <p>{{member.Description}}</p>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
@@ -3166,8 +3222,8 @@ ngConfig.provider('configProvider', [function () {
     var navigationItems = [
         { text: "Home", icon: "fa-home", href: "/#/" },
         { text: "People", icon: "fa-user", href: "/#/user" },
+        { text: "Communities", icon: "fa-users", href: "/#/communities" },
         { text: "Friends", icon: "fa-comments", href: "/#/friends" },
-        { text: "Groups", icon: "fa-users", href: "/#/groups" },
         { text: "Events", icon: "fa-calendar", href: "/#/events" }
     ];
 
@@ -3248,6 +3304,320 @@ ngConfig.provider('configProvider', [function () {
         };
     }];
 }]);
+///#source 1 1 /wwwroot/modules/communities/communities.js
+var ngCommunities = angular.module("ngCommunities",
+    [
+        "ngShared",
+        "iso.directives",
+        "LocalStorageModule",
+        "ngConfig",
+    ]);
+///#source 1 1 /wwwroot/modules/communities/controllers/communitiesListController.js
+ngCommunities.controller('communitiesListController', ["$scope", "$rootScope", "$location",
+    "localStorageService", "communitiesService",  "errorService",
+    function ($scope, $rootScope, $location, localStorageService, communitiesService, errorService) {
+        $scope.communities = [];
+        $scope.size = "";
+        $scope.isBusy = false;
+
+        $scope.init = function () {
+            $scope.getList();
+            $rootScope.$broadcast("updateScrollTriggerWatch", "communities-list");
+        };
+
+        $scope.getList = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            communitiesService.getList().then(function (resp) {
+                $scope.communities = resp;
+                $scope.isBusy = false;
+                $scope.$broadcast("resizeIsotopeItems");
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.getMoreList = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            communitiesService.getMoreList($scope.posts.length).then(function (resp) {
+                _.each(resp, function (p) {
+                    $scope.posts.push(p);
+                });
+                $scope.isBusy = false;
+                $scope.$broadcast("resizeIsotopeItems");
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+        
+        $scope.$on("updateCommunityItemSize", function (ev, size) {
+            $scope.size = size;
+        });
+
+        $scope.$on("scrollBottom", function () {
+            $scope.getMoreList();
+        });
+
+        $scope.init();
+    }
+]);
+///#source 1 1 /wwwroot/modules/communities/directives/communityHeader.js
+ngCommunities.directive('communityHeader', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+        $scope.username = localStorageService.get("username");
+
+        $scope.isEditable = function () {
+            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+            }
+        });
+
+        $scope.edit = function () {
+            $location.path("/community/edit/" + $scope.community.Id);
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            community: '='
+        },
+        replace: true,
+        template: $templateCache.get("communities/communityHeader.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/communities/directives/communityListItem.js
+ngCommunities.directive('communityListItem', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
+        $scope.username = localStorageService.get("username");
+
+        $scope.isEditable = ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) ? true : false;
+
+        $scope.getItemSize = function () {
+            return $scope.size;
+        };
+
+        $scope.toggleIsEditable = function () {
+            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+                $scope.isEditable = true;
+            }
+            $scope.isEditable = false;
+        };
+        
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$interval", "localStorageService", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            community: '=',
+            size: '='
+        },
+        replace: true,
+        template: $templateCache.get("communities/communityListItem.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/communities/services/communitiesService.js
+ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
+    function ($http, $q, configProvider) {
+        var baseApi = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getById: function (id) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + id,
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getList: function () {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/",
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreList: function (skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/more/" + skip,
+                    method: "POST",
+                    data: comment
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getCreatedByUser: function (userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "user/" + userId + "/communities/created",
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreCreatedByUser: function (userId, skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "user/" + userId + "/communities/created/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getJoinedByUser: function (userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "user/" + userId + "/communities/joined",
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreJoinedByUser: function (userId, skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "user/" + userId + "/communities/joined/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            deleteCommunity: function (communityId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + communityId,
+                    method: "DELETE",
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (error) {
+                    deferred.reject(error);
+                });
+
+                return deferred.promise;
+            },
+
+            addCommunity: function (community) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community",
+                    method: "POST",
+                    data: community
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            updateCommunity: function (community) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community",
+                    method: "PUT",
+                    data: community
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            }
+        };
+    }
+]);
 ///#source 1 1 /wwwroot/modules/error/error.js
 var ngError = angular.module("ngError", ["ngConfig", "ngLogin"]);
 ///#source 1 1 /wwwroot/modules/error/controllers/errorPageController.js
@@ -4008,6 +4378,7 @@ var blog = angular.module("blog",
         "ngHeader",
         "ngLogin",
         "ngPosts",
+        "ngCommunities",
         "ngComments",
         "ngError",
         "ngNavigation",
@@ -4085,10 +4456,11 @@ blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider",
                     return $templateCache.get('friends.html');
                 }
             })
-            .state('groups', {
-                url: "/groups",
+            .state('communities', {
+                url: "/communities",
+                controller: 'communitiesListController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('groups.html');
+                    return $templateCache.get('communities.html');
                 }
             })
             .state('events', {

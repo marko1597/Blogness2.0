@@ -55,6 +55,26 @@ a {
             @include borders(0, empty, empty, false, false, true);
         }
     }
+
+    &.large {
+        width: 24%;
+    }
+
+    &.xlarge {
+        width: 19%;
+    }
+
+    &.medium {
+        width: 31.5%;
+    }
+
+    &.small {
+        width: 48%;
+    }
+
+    &.xsmall {
+        width: 98%;
+    }
 }
 
 .success {

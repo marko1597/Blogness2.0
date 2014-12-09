@@ -6,26 +6,6 @@
     @include position(relative, null, null, null, null);
     @include header-edit-icon;
 
-    &.large {
-        width: 24%;
-    }
-
-    &.xlarge {
-        width: 19%;
-    }
-
-    &.medium {
-        width: 31.5%;
-    }
-
-    &.small {
-        width: 48%;
-    }
-
-    &.xsmall {
-        width: 98%;
-    }
-
     .comments {
         ul {
             @include size(100%, 40px);

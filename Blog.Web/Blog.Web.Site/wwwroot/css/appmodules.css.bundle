@@ -35,6 +35,9 @@
     <file>/wwwroot/css/modules/comments/commentscontainer.css</file>
     <file>/wwwroot/css/modules/comments/commentslist.css</file>
     
+    <file>/wwwroot/css/modules/communities.css</file>
+    <file>/wwwroot/css/modules/communities/communitylistitem.css</file>
+    
     <file>/wwwroot/css/modules/error/errorDisplay.css</file>
     
     <file>/wwwroot/css/modules/header/headermenu.css</file>

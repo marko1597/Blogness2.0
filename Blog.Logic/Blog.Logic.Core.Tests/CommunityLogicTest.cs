@@ -85,7 +85,7 @@ namespace Blog.Logic.Core.Tests
                                       LeaderUserId = 1,
                                       Leader = _members.FirstOrDefault(a => a.UserId == 1),
                                       Members = _members.ToList(),
-                                      Posts = new List<Post> {new Post {PostId = 1}}
+                                      Posts = new List<Post> { new Post { PostId = 1 } }
                                   };
 
             _communityRepository = new Mock<ICommunityRepository>();
@@ -128,10 +128,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldGetCommunityList()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<int>(), It.IsAny<int>(), 
-                It.IsAny<Expression<Func<Community, bool>>>(),
-                It.IsAny<Func<IQueryable<Community>, IOrderedQueryable<Community>>>(), It.IsAny<string>()))
-                    .Returns(_communities);
+            _communityRepository.Setup(a => a.GetList(It.IsAny<int>()).Returns(_communities);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetList();
@@ -145,9 +142,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetCommunityListFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Community, bool>>>(),
-                It.IsAny<Func<IQueryable<Community>, IOrderedQueryable<Community>>>(), It.IsAny<string>()))
-                    .Throws(new Exception("Hooha!"));
+            _communityRepository.Setup(a => a.GetList(It.IsAny<int>()).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
 
@@ -158,10 +153,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldGetMoreCommunityList()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<int>(), It.IsAny<int>(), 
-                It.IsAny<Expression<Func<Community, bool>>>(),
-                It.IsAny<Func<IQueryable<Community>, IOrderedQueryable<Community>>>(), It.IsAny<string>()))
-                    .Returns(_communities);
+            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>()).Returns(_communities);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetList();
@@ -175,10 +167,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetMoreCommunityListFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.Find(It.IsAny<int>(), It.IsAny<int>(),
-                It.IsAny<Expression<Func<Community, bool>>>(),
-                It.IsAny<Func<IQueryable<Community>, IOrderedQueryable<Community>>>(), It.IsAny<string>()))
-                    .Throws(new Exception("Hooha!"));
+            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>()).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
 
@@ -231,7 +220,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetMoreJoinedCommunityListFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.GetMoreJoinedCommunitiesByUser(It.IsAny<int>(), 
+            _communityRepository.Setup(a => a.GetMoreJoinedCommunitiesByUser(It.IsAny<int>(),
                 It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
@@ -486,7 +475,7 @@ namespace Blog.Logic.Core.Tests
             _communityRepository.Setup(a => a.Delete(It.IsAny<Community>())).Throws(new Exception("Hooha!"));
             _communityRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Community, bool>>>(), false))
                 .Returns(new List<Community> { community });
-            
+
             var logic = new CommunityLogic(_communityRepository.Object);
 
             Assert.Throws<BlogException>(() => logic.Delete(1));

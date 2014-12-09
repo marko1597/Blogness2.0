@@ -58,10 +58,11 @@
                     return $templateCache.get('friends.html');
                 }
             })
-            .state('groups', {
-                url: "/groups",
+            .state('communities', {
+                url: "/communities",
+                controller: 'communitiesListController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('groups.html');
+                    return $templateCache.get('communities.html');
                 }
             })
             .state('events', {

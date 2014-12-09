@@ -23,6 +23,12 @@
     <file>/wwwroot/modules/config/config.js</file>
     <file>/wwwroot/modules/config/provider/configProvider.js</file>
 
+    <file>/wwwroot/modules/communities/communities.js</file>
+    <file>/wwwroot/modules/communities/controllers/communitiesListController.js</file>
+    <file>/wwwroot/modules/communities/directives/communityHeader.js</file>
+    <file>/wwwroot/modules/communities/directives/communityListItem.js</file>
+    <file>/wwwroot/modules/communities/services/communitiesService.js</file>
+
     <file>/wwwroot/modules/error/error.js</file>
     <file>/wwwroot/modules/error/controllers/errorPageController.js</file>
     <file>/wwwroot/modules/error/directives/errorDisplay.js</file>

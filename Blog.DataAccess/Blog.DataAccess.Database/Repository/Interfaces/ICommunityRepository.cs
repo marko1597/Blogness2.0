@@ -6,6 +6,8 @@ namespace Blog.DataAccess.Database.Repository.Interfaces
     public interface ICommunityRepository : IGenericRepository<Community>
     {
         Community Get(int id);
+        IList<Community> GetList(int threshold = 10);
+        IList<Community> GetMore(int threshold = 5, int skip = 10);
         IList<Community> GetJoinedCommunitiesByUser(int userId, int threshold = 10);
         IList<Community> GetMoreJoinedCommunitiesByUser(int userId, int threshold = 5, int skip = 10);
         IList<Community> GetCreatedCommunitiesByUser(int userId, int threshold = 10);

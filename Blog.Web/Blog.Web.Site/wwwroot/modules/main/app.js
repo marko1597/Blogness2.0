@@ -10,6 +10,7 @@
         "ngHeader",
         "ngLogin",
         "ngPosts",
+        "ngCommunities",
         "ngComments",
         "ngError",
         "ngNavigation",

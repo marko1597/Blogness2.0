@@ -1,4 +1,9 @@
 ﻿#user-info-popup {
   min-width: 200px; }
 
+*[user-info-popup] {
+  cursor: pointer; }
+  *[user-info-popup]:hover {
+    text-decoration: underline; }
+
 /*# sourceMappingURL=userinfopopup.css.map */

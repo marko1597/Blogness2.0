@@ -1,6 +1,25 @@
 angular.module('blog').run(['$templateCache', function($templateCache) {
   'use strict';
 
+  $templateCache.put('communities.html',
+    "<div class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-12\">\r" +
+    "\n" +
+    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
+    "\n" +
+    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
+    "\n" +
+    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('errorpage.html',
     "<div id=\"error-page\">\r" +
     "\n" +
@@ -69,29 +88,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "<div class=\"jumbotron card\">\r" +
     "\n" +
     "    <h1>Friends</h1>\r" +
-    "\n" +
-    "    <p>\r" +
-    "\n" +
-    "        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\r" +
-    "\n" +
-    "        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor\r" +
-    "\n" +
-    "        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,\r" +
-    "\n" +
-    "        sunt in culpa qui officia deserunt mollit anim id est laborum.\r" +
-    "\n" +
-    "    </p>\r" +
-    "\n" +
-    "    <p><a class=\"btn btn-primary btn-lg\" role=\"button\">Clicking me does nothing</a></p>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('groups.html',
-    "<div class=\"jumbotron card\">\r" +
-    "\n" +
-    "    <h1>Groups</h1>\r" +
     "\n" +
     "    <p>\r" +
     "\n" +
@@ -414,6 +410,66 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "</div>\r" +
     "\n"
+  );
+
+
+  $templateCache.put('communities/communityHeader.html',
+    "<div class=\"header big row\">\r" +
+    "\n" +
+    "    <h4>\r" +
+    "\n" +
+    "        <i class=\"fa fa-edit edit\" ng-show=\"isEditable()\" ng-click=\"edit()\"></i>\r" +
+    "\n" +
+    "        <a href=\"{{community.Url}}\">{{community.Name}}</a>\r" +
+    "\n" +
+    "    </h4>\r" +
+    "\n" +
+    "    <p>{{community.Description}}</p>\r" +
+    "\n" +
+    "    <p>\r" +
+    "\n" +
+    "        Created by <a user-info-popup user=\"community.Leader\" data-placement=\"bottom-left\">@{{community.Leader.UserName}}</a> at {{community.DateDisplay}}\r" +
+    "\n" +
+    "    </p>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('communities/communityListItem.html',
+    "<div id=\"community-item-{{community.Id}}\" ng-class=\"getItemSize()\" class=\"community-list-item card default\">\r" +
+    "\n" +
+    "    <div community-header community=\"community\"></div>\r" +
+    "\n" +
+    "    <div class=\"community-members\">\r" +
+    "\n" +
+    "        <div ng-repeat=\"member in community.Members\">\r" +
+    "\n" +
+    "            <div class=\"member-item\">\r" +
+    "\n" +
+    "                <div>\r" +
+    "\n" +
+    "                    <img ng-src=\"{{member.Picture.MediaUrl}}\" />\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div>\r" +
+    "\n" +
+    "                    <h5>{{member.FirstName}} {{member.LastName}}</h5>\r" +
+    "\n" +
+    "                    <span user-info-popup user=\"member\" data-placement=\"bottom-left\">@{{member.UserName}}</span>\r" +
+    "\n" +
+    "                    <p>{{member.Description}}</p>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
