@@ -128,7 +128,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldGetCommunityList()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.GetList(It.IsAny<int>()).Returns(_communities);
+            _communityRepository.Setup(a => a.GetList(It.IsAny<int>())).Returns(_communities);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetList();
@@ -142,7 +142,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetCommunityListFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.GetList(It.IsAny<int>()).Throws(new Exception("Hooha!"));
+            _communityRepository.Setup(a => a.GetList(It.IsAny<int>())).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
 
@@ -153,7 +153,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldGetMoreCommunityList()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>()).Returns(_communities);
+            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>())).Returns(_communities);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetList();
@@ -167,7 +167,7 @@ namespace Blog.Logic.Core.Tests
         public void ShouldThrowExceptionWhenGetMoreCommunityListFails()
         {
             _communityRepository = new Mock<ICommunityRepository>();
-            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>()).Throws(new Exception("Hooha!"));
+            _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception("Hooha!"));
 
             var logic = new CommunityLogic(_communityRepository.Object);
 
