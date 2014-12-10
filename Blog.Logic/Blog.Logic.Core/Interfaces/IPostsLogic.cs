@@ -16,6 +16,7 @@ namespace Blog.Logic.Core.Interfaces
         List<Post> GetRecentPosts(int postsCount);
         List<Post> GetMoreRecentPosts(int postsCount, int skip);
         RelatedPosts GetRelatedPosts(int postId);
+        List<Post> GetPostsByCommunity(int communityId, int threshold = 10, int skip = 10);
         Post AddPost(Post post);
         Post UpdatePost(Post post);
         bool DeletePost(int postId);

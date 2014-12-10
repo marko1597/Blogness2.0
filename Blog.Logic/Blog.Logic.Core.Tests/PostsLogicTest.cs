@@ -421,6 +421,65 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
+        public void ShouldGetPostsByCommunity()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetByCommunity(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(_posts);
+
+            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
+                .Returns(postContents);
+
+            _mediaRepository = new Mock<IMediaRepository>();
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.GetPostsByCommunity(1, 10, 10);
+
+            Assert.NotNull(result);
+            Assert.IsInstanceOf(typeof(List<Common.Contracts.Post>), result);
+        }
+
+        [Test]
+        public void ShouldReturnEmptyListWhenGetPostsByCommunityFoundNoRecords()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetByCommunity(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(new List<Post>());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.GetPostsByCommunity(1, 10, 10);
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenGetPostsByCommunityFails()
+        {
+            _postRepository = new Mock<IPostRepository>();
+            _postRepository.Setup(a => a.GetByCommunity(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Throws(new Exception());
+
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            Assert.Throws<BlogException>(() => _postsLogic.GetPostsByCommunity(1, 10, 10));
+        }
+
+        [Test]
         public void ShouldGetMorePostsByUser()
         {
             var post = new Post

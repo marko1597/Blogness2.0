@@ -17,6 +17,14 @@ namespace Blog.Services.Helpers.Wcf
                 return svc.Proxy.GetUsers(threshold, skip);
             }
         }
+        public List<User> GetUsersByCommunity(int communityId, int threshold = 5, int skip = 10)
+        {
+            using (var svc = new ServiceProxyHelper<IUsersService>("UsersService"))
+            {
+                return svc.Proxy.GetUsersByCommunity(communityId, threshold, skip);
+            }
+        }
+
 
         public List<User> GetUsersWithNoIdentityId()
         {

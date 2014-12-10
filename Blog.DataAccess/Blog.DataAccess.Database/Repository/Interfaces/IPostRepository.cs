@@ -13,6 +13,7 @@ namespace Blog.DataAccess.Database.Repository.Interfaces
         IList<Post> GetMorePopularPosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10);
         IList<Post> GetRecent(Expression<Func<Post, bool>> predicate, int threshold = 10);
         IList<Post> GetMoreRecentPosts(Expression<Func<Post, bool>> predicate, int threshold = 5, int skip = 10);
+        IList<Post> GetByCommunity(int communityId, int threshold = 10, int skip = 10);
         IList<Post> GetByUser(int userId, int threshold = 10);
         IList<Post> GetMorePostsByUser(int userId, int threshold = 5, int skip = 10);
     }

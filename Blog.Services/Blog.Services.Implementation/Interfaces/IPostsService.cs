@@ -15,6 +15,9 @@ namespace Blog.Services.Implementation.Interfaces
         RelatedPosts GetRelatedPosts(int postId);
 
         [OperationContract]
+        List<Post> GetPostsByCommunity(int communityId, int threshold = 10, int skip = 10);
+
+        [OperationContract]
         List<Post> GetPostsByTag(string tagName);
 
         [OperationContract]

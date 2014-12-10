@@ -27,6 +27,14 @@ namespace Blog.Services.Helpers.Wcf
             }
         }
 
+        public List<Post> GetPostsByCommunity(int communityId, int threshold = 10, int skip = 10)
+        {
+            using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))
+            {
+                return svc.Proxy.GetPostsByCommunity(communityId, threshold, skip);
+            }
+        }
+
         public List<Post> GetPostsByTag(string tagName)
         {
             using (var svc = new ServiceProxyHelper<IPostsService>("PostsService"))

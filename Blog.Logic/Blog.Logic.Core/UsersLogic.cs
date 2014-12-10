@@ -85,6 +85,19 @@ namespace Blog.Logic.Core
             }
         }
 
+        public List<User> GetUsersByCommunity(int communityId, int threshold = 5, int skip = 10)
+        {
+            try
+            {
+                var db = _userRepository.GetUsersByCommunity(communityId, threshold, skip);
+                return db.Select(UserMapper.ToDto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+        }
+
         public User Get(int userId)
         {
             try

@@ -80,6 +80,14 @@ namespace Blog.Services.Implementation
             return posts;
         }
 
+        public List<Post> GetPostsByCommunity(int communityId, int threshold = 10, int skip = 10)
+        {
+            var dbPosts = _postsLogic.GetPostsByCommunity(communityId, threshold, skip);
+            var posts = SetPostProperties(dbPosts);
+
+            return posts;
+        }
+
         public List<Post> GetPostsByTag(string tagName)
         {
             var dbPosts = _postsLogic.GetPostsByTag(tagName);

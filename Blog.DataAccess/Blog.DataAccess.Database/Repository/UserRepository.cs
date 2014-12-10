@@ -20,6 +20,24 @@ namespace Blog.DataAccess.Database.Repository
             return query;
         }
 
+        public IList<User> GetUsersByCommunity(int communityId, int threshold = 10, int skip = 10)
+        {
+            var query = Find(a => a.JoinedCommunities.Any(c => c.Id == communityId), false)
+                .Distinct()
+                .OrderByDescending(b => b.UserId)
+                .Skip(skip)
+                .Take(threshold)
+                .ToList();
+
+            foreach (var user in query)
+            {
+                user.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == user.PictureId);
+                user.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == user.BackgroundId);
+            }
+
+            return query;
+        }
+
         public override User Edit(User user)
         {
             using (var context = new BlogDb())

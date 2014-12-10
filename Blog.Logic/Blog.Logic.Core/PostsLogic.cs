@@ -60,6 +60,22 @@ namespace Blog.Logic.Core
             }
         }
 
+        public List<Post> GetPostsByCommunity(int communityId, int threshold = 10, int skip = 10)
+        {
+            var posts = new List<Post>();
+            try
+            {
+                var db = _postRepository.GetByCommunity(communityId, threshold, skip).ToList();
+                db.ForEach(a => posts.Add(PostMapper.ToDto(a)));
+                posts.ForEach(a => GetPostProperties(a));
+            }
+            catch (Exception ex)
+            {
+                throw new BlogException(ex.Message, ex.InnerException);
+            }
+            return posts;
+        }
+
         public List<Post> GetPostsByTag(string tagName)
         {
             var posts = new List<Post>();

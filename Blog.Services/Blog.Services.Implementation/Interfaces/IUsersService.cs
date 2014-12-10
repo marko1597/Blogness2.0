@@ -11,6 +11,9 @@ namespace Blog.Services.Implementation.Interfaces
         List<User> GetUsers(int threshold = 10, int skip = 10);
 
         [OperationContract]
+        List<User> GetUsersByCommunity(int communityId, int threshold = 5, int skip = 10);
+
+        [OperationContract]
         List<User> GetUsersWithNoIdentityId();
 
         [OperationContract]

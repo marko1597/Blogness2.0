@@ -39,7 +39,7 @@ namespace Blog.Web.Api.Controllers
             _user = user;
             _errorSignaler = errorSignaler;
         }
-
+        
         [HttpGet]
         [CacheOutput(ClientTimeSpan = 60, ServerTimeSpan = 60)]
         [Route("api/users/{userId:int}")]

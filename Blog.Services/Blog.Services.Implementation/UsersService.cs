@@ -24,6 +24,11 @@ namespace Blog.Services.Implementation
             return _usersLogic.GetUsers(threshold, skip);
         }
 
+        public List<User> GetUsersByCommunity(int communityId, int threshold = 5, int skip = 10)
+        {
+            return _usersLogic.GetUsersByCommunity(communityId, threshold, skip);
+        }
+
         public List<User> GetUsersWithNoIdentityId()
         {
             return _usersLogic.GetUsersWithNoIdentityId();

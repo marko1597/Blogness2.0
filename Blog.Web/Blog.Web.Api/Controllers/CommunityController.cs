@@ -12,11 +12,16 @@ namespace Blog.Web.Api.Controllers
     public class CommunityController : ApiController
     {
         private readonly ICommunityResource _communityResource;
+        private readonly IUsersResource _usersResource;
+        private readonly IPostsResource _postsResource;
         private readonly IErrorSignaler _errorSignaler;
 
-        public CommunityController(ICommunityResource communityResource, IErrorSignaler errorSignaler)
+        public CommunityController(ICommunityResource communityResource, IUsersResource usersResource, 
+            IPostsResource postsResource, IErrorSignaler errorSignaler)
         {
             _communityResource = communityResource;
+            _postsResource = postsResource;
+            _usersResource = usersResource;
             _errorSignaler = errorSignaler;
         }
 
@@ -28,6 +33,74 @@ namespace Blog.Web.Api.Controllers
             {
                 var community = _communityResource.Get(id);
                 return Ok(community);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/community/{id}/members")]
+        public IHttpActionResult GetMembers(int id)
+        {
+            try
+            {
+                var members = _usersResource.GetUsersByCommunity(id, 10, 0);
+                return Ok(members);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/community/{id}/members/more/{skip:int?}")]
+        public IHttpActionResult GetMoreMembers(int id, int skip)
+        {
+            try
+            {
+                var members = _usersResource.GetUsersByCommunity(id, 5, skip);
+                return Ok(members);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/community/{id}/posts")]
+        public IHttpActionResult GetPosts(int id)
+        {
+            try
+            {
+                var posts = _postsResource.GetPostsByCommunity(id, 10, 0);
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        [CacheOutput(ClientTimeSpan = 5, ServerTimeSpan = 5)]
+        [Route("api/community/{id}/posts/more/{skip:int?}")]
+        public IHttpActionResult GetMorePosts(int id, int skip)
+        {
+            try
+            {
+                var posts = _postsResource.GetPostsByCommunity(id, 5, skip);
+                return Ok(posts);
             }
             catch (Exception ex)
             {

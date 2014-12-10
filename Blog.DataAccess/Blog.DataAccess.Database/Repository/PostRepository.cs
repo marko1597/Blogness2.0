@@ -92,6 +92,23 @@ namespace Blog.DataAccess.Database.Repository
             return query;
         }
 
+        public IList<Post> GetByCommunity(int communityId, int threshold = 10, int skip = 10)
+        {
+            var query = Find(a => a.Communities.Any(c => c.Id == communityId), null, "Tags,User")
+                .Distinct()
+                .OrderByDescending(a => a.ModifiedDate)
+                .Take(threshold)
+                .Skip(skip)
+                .ToList();
+
+            foreach (var post in query)
+            {
+                post.Communities = null;
+            }
+
+            return query;
+        }
+
         public override Post Add(Post post)
         {
             #region Tags

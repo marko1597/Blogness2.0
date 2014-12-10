@@ -3346,7 +3346,7 @@ ngCommunities.controller('communitiesListController', ["$scope", "$rootScope", "
             }
             $scope.isBusy = true;
 
-            communitiesService.getMoreList($scope.posts.length).then(function (resp) {
+            communitiesService.getMoreList($scope.communities.length).then(function (resp) {
                 _.each(resp, function (p) {
                     $scope.posts.push(p);
                 });
