@@ -3186,6 +3186,7 @@
     </Content>
     <Content Include="wwwroot\css\font.css" />
     <Content Include="wwwroot\css\modules\communities.css" />
+    <Content Include="wwwroot\css\modules\communities\communityheader.css" />
     <Content Include="wwwroot\css\modules\communities\communitylistitem.css" />
     <Content Include="wwwroot\css\scss\communities.css">
       <DependentUpon>communities.scss</DependentUpon>

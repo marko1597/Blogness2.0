@@ -1,10 +1,19 @@
-﻿<div class="header big row">
-    <h4>
-        <i class="fa fa-edit edit" ng-show="isEditable()" ng-click="edit()"></i>
-        <a href="{{community.Url}}">{{community.Name}}</a>
-    </h4>
-    <p>{{community.Description}}</p>
-    <p>
-        Created by <a user-info-popup user="community.Leader" data-placement="bottom-left">@{{community.Leader.UserName}}</a> at {{community.DateDisplay}}
-    </p>
+﻿<div class="header big row community-header">
+    <div>
+        <img ng-src="{{community.Emblem.MediaUrl}}" />
+    </div>
+    <div>
+        <h4>
+            <i class="fa fa-edit edit" ng-show="isEditable()" ng-click="edit()"></i>
+            <a href="{{community.Url}}">{{community.Name}}</a>
+        </h4>
+        <p>{{community.Description}}</p>
+        <p>
+            Created by
+            <a user-info-popup user="community.Leader" data-placement="bottom-left">
+                @{{community.Leader.UserName}}
+            </a>
+            at {{community.DateDisplay}}
+        </p>
+    </div>
 </div>

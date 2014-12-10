@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"communityheader.css","sources":["communityheader.scss"],"names":[],"mappings":""}
+﻿{"version":3,"file":"communityheader.css","sources":["communityheader.scss","../variables.scss"],"names":[],"mappings":"AAEA,kBAAkB;ECiHV,YD/GgB;ECmHhB,cDnHgB;ECuHhB,eDvHgB;EC2HhB,aD3HgB;EAChB,WAAW"}

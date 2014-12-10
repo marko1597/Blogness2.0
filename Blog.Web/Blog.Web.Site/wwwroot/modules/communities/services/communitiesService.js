@@ -1,8 +1,15 @@
-﻿ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
-    function ($http, $q, configProvider) {
+﻿ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "dateHelper", 
+    function ($http, $q, configProvider, dateHelper) {
         var baseApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
+
+        var addCommunityViewData = function (community) {
+            community.DateDisplay = dateHelper.getDateDisplay(community.CreatedDate);
+            community.Url = "/#/community/" + community.Id;
+
+            return community;
+        };
 
         return {
             getById: function (id) {
@@ -27,6 +34,9 @@
                     url: baseApi + "community/",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -43,6 +53,9 @@
                     method: "POST",
                     data: comment
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -58,6 +71,9 @@
                     url: baseApi + "user/" + userId + "/communities/created",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -73,6 +89,9 @@
                     url: baseApi + "user/" + userId + "/communities/created/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -88,6 +107,9 @@
                     url: baseApi + "user/" + userId + "/communities/joined",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -103,6 +125,9 @@
                     url: baseApi + "user/" + userId + "/communities/joined/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);

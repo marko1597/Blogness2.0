@@ -438,56 +438,56 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('communities/communityHeader.html',
-    "<div class=\"header big row\">\r" +
+    "<div class=\"header big row community-header\">\r" +
     "\n" +
-    "    <h4>\r" +
+    "    <div>\r" +
     "\n" +
-    "        <i class=\"fa fa-edit edit\" ng-show=\"isEditable()\" ng-click=\"edit()\"></i>\r" +
+    "        <img ng-src=\"{{community.Emblem.MediaUrl}}\" />\r" +
     "\n" +
-    "        <a href=\"{{community.Url}}\">{{community.Name}}</a>\r" +
+    "    </div>\r" +
     "\n" +
-    "    </h4>\r" +
+    "    <div>\r" +
     "\n" +
-    "    <p>{{community.Description}}</p>\r" +
+    "        <h4>\r" +
     "\n" +
-    "    <p>\r" +
+    "            <i class=\"fa fa-edit edit\" ng-show=\"isEditable()\" ng-click=\"edit()\"></i>\r" +
     "\n" +
-    "        Created by <a user-info-popup user=\"community.Leader\" data-placement=\"bottom-left\">@{{community.Leader.UserName}}</a> at {{community.DateDisplay}}\r" +
+    "            <a href=\"{{community.Url}}\">{{community.Name}}</a>\r" +
     "\n" +
-    "    </p>\r" +
+    "        </h4>\r" +
+    "\n" +
+    "        <p>{{community.Description}}</p>\r" +
+    "\n" +
+    "        <p>\r" +
+    "\n" +
+    "            Created by\r" +
+    "\n" +
+    "            <a user-info-popup user=\"community.Leader\" data-placement=\"bottom-left\">\r" +
+    "\n" +
+    "                @{{community.Leader.UserName}}\r" +
+    "\n" +
+    "            </a>\r" +
+    "\n" +
+    "            at {{community.DateDisplay}}\r" +
+    "\n" +
+    "        </p>\r" +
+    "\n" +
+    "    </div>\r" +
     "\n" +
     "</div>"
   );
 
 
   $templateCache.put('communities/communityListItem.html',
-    "<div id=\"community-item-{{community.Id}}\" ng-class=\"getItemSize()\" class=\"community-list-item card default\">\r" +
+    "<div id=\"community-item-{{community.Id}}\" ng-class=\"getItemSize()\" class=\"community-list-item card default darken\">\r" +
     "\n" +
     "    <div community-header community=\"community\"></div>\r" +
     "\n" +
     "    <div class=\"community-members\">\r" +
     "\n" +
-    "        <div ng-repeat=\"member in community.Members\">\r" +
+    "        <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
     "\n" +
-    "            <div class=\"member-item\">\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <img ng-src=\"{{member.Picture.MediaUrl}}\" />\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div>\r" +
-    "\n" +
-    "                    <h5>{{member.FirstName}} {{member.LastName}}</h5>\r" +
-    "\n" +
-    "                    <span user-info-popup user=\"member\" data-placement=\"bottom-left\">@{{member.UserName}}</span>\r" +
-    "\n" +
-    "                    <p>{{member.Description}}</p>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
+    "            <img ng-src=\"{{member.Picture.MediaUrl}}\" user-info-popup user=\"member\" data-placement=\"bottom-left\" />\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -3456,11 +3456,18 @@ ngCommunities.directive('communityListItem', ["$templateCache", function ($templ
 }]);
 
 ///#source 1 1 /wwwroot/modules/communities/services/communitiesService.js
-ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
-    function ($http, $q, configProvider) {
+ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "dateHelper", 
+    function ($http, $q, configProvider, dateHelper) {
         var baseApi = configProvider.getSettings().BlogApi == "" ?
             window.blogConfiguration.blogApi :
             configProvider.getSettings().BlogApi;
+
+        var addCommunityViewData = function (community) {
+            community.DateDisplay = dateHelper.getDateDisplay(community.CreatedDate);
+            community.Url = "/#/community/" + community.Id;
+
+            return community;
+        };
 
         return {
             getById: function (id) {
@@ -3485,6 +3492,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     url: baseApi + "community/",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3501,6 +3511,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     method: "POST",
                     data: comment
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3516,6 +3529,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     url: baseApi + "user/" + userId + "/communities/created",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3531,6 +3547,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     url: baseApi + "user/" + userId + "/communities/created/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3546,6 +3565,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     url: baseApi + "user/" + userId + "/communities/joined",
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -3561,6 +3583,9 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider",
                     url: baseApi + "user/" + userId + "/communities/joined/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
+                    _.each(response, function (r) {
+                        addCommunityViewData(r);
+                    });
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);

@@ -1,1 +1,8 @@
-﻿
+﻿@import '../variables';
+
+.community-header {
+    p {
+        @include margin(0);
+        font-size: 0.8em;
+    }
+}
