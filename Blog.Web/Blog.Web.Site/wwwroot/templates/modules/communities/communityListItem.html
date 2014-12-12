@@ -1,8 +1,12 @@
 ﻿<div id="community-item-{{community.Id}}" ng-class="getItemSize()" class="community-list-item card default darken">
     <div community-header community="community"></div>
-    <div class="community-members">
-        <div class="member-item" ng-repeat="member in community.Members">
-            <img ng-src="{{member.Picture.MediaUrl}}" user-info-popup user="member" data-placement="bottom-left" />
+    <div class="community-members-container">
+        <div class="community-members">
+            <div class="member-item" ng-repeat="member in community.Members">
+                <a href="{{member.Url}}">
+                    <img ng-src="{{member.Picture.MediaUrl}}" />
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -483,11 +483,19 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div community-header community=\"community\"></div>\r" +
     "\n" +
-    "    <div class=\"community-members\">\r" +
+    "    <div class=\"community-members-container\">\r" +
     "\n" +
-    "        <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
+    "        <div class=\"community-members\">\r" +
     "\n" +
-    "            <img ng-src=\"{{member.Picture.MediaUrl}}\" user-info-popup user=\"member\" data-placement=\"bottom-left\" />\r" +
+    "            <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
+    "\n" +
+    "                <a href=\"{{member.Url}}\">\r" +
+    "\n" +
+    "                    <img ng-src=\"{{member.Picture.MediaUrl}}\" />\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -3466,6 +3474,10 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "d
             community.DateDisplay = dateHelper.getDateDisplay(community.CreatedDate);
             community.Url = "/#/community/" + community.Id;
 
+            _.each(community.Members, function (member) {
+                member.Url = "#/user/" + member.UserName;
+            });
+
             return community;
         };
 
@@ -3508,8 +3520,7 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "d
 
                 $http({
                     url: baseApi + "community/more/" + skip,
-                    method: "POST",
-                    data: comment
+                    method: "GET"
                 }).success(function (response) {
                     _.each(response, function (r) {
                         addCommunityViewData(r);
@@ -7937,7 +7948,7 @@ ngUser.controller('userProfileController', ["$scope", "$location", "$rootScope",
         $scope.username = null;
 
         $scope.init = function () {
-            if ($rootScope.$stateParams.username || $rootScope.$stateParams.username == null || $rootScope.$stateParams.username === "") {
+            if (!$rootScope.$stateParams.username) {
                 $scope.username = localStorageService.get("username");
 
                 if ($scope.username == undefined || $scope.username == null) {

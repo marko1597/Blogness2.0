@@ -459,11 +459,19 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div community-header community=\"community\"></div>\r" +
     "\n" +
-    "    <div class=\"community-members\">\r" +
+    "    <div class=\"community-members-container\">\r" +
     "\n" +
-    "        <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
+    "        <div class=\"community-members\">\r" +
     "\n" +
-    "            <img ng-src=\"{{member.Picture.MediaUrl}}\" user-info-popup user=\"member\" data-placement=\"bottom-left\" />\r" +
+    "            <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
+    "\n" +
+    "                <a href=\"{{member.Url}}\">\r" +
+    "\n" +
+    "                    <img ng-src=\"{{member.Picture.MediaUrl}}\" />\r" +
+    "\n" +
+    "                </a>\r" +
+    "\n" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +

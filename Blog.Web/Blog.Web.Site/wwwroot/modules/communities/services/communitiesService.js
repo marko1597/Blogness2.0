@@ -8,6 +8,10 @@
             community.DateDisplay = dateHelper.getDateDisplay(community.CreatedDate);
             community.Url = "/#/community/" + community.Id;
 
+            _.each(community.Members, function (member) {
+                member.Url = "#/user/" + member.UserName;
+            });
+
             return community;
         };
 
@@ -50,8 +54,7 @@
 
                 $http({
                     url: baseApi + "community/more/" + skip,
-                    method: "POST",
-                    data: comment
+                    method: "GET"
                 }).success(function (response) {
                     _.each(response, function (r) {
                         addCommunityViewData(r);
