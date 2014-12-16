@@ -1,6 +1,7 @@
 ﻿<div id="community-item-{{community.Id}}" ng-class="getItemSize()" class="community-list-item card default darken">
     <div community-header community="community"></div>
     <div class="community-members-container">
+        <p>{{community.Description}}</p>
         <div class="community-members">
             <div class="member-item" ng-repeat="member in community.Members">
                 <a href="{{member.Url}}">
@@ -8,5 +9,8 @@
                 </a>
             </div>
         </div>
+        <a href="{{community.Url}}" type="button" data-trigger="hover" data-type="success" data-title="Click here to view community members" bs-tooltip>
+            <label class="label label-primary">{{community.MemberCount}} members</label>
+        </a>
     </div>
 </div>

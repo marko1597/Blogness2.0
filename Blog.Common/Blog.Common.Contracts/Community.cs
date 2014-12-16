@@ -34,5 +34,8 @@ namespace Blog.Common.Contracts
 
         [DataMember]
         public List<Post> Posts { get; set; }
+
+        [DataMember]
+        public int MemberCount { get; set; }
     }
 }

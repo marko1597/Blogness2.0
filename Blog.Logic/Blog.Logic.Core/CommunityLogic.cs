@@ -29,8 +29,11 @@ namespace Blog.Logic.Core
                     return new Community().GenerateError<Community>((int)Constants.Error.RecordNotFound,
                         string.Format("Cannot find community with Id {0}", communityId));
                 }
-                
-                return CommunityMapper.ToDto(db);
+
+                var result = CommunityMapper.ToDto(db);
+                result.MemberCount = GetCommunityMemberCount(result.Id);
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -44,7 +47,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetList(10).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -59,7 +67,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetMore(5, 10).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -74,7 +87,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetJoinedCommunitiesByUser(userId).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -89,7 +107,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetMoreJoinedCommunitiesByUser(userId, 5, skip).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -104,7 +127,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetCreatedCommunitiesByUser(userId).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -119,7 +147,12 @@ namespace Blog.Logic.Core
             try
             {
                 var db = _communityRepository.GetMoreCreatedCommunitiesByUser(userId, 5, skip).ToList();
-                db.ForEach(a => communities.Add(CommunityMapper.ToDto(a)));
+                db.ForEach(a =>
+                {
+                    var result = CommunityMapper.ToDto(a);
+                    result.MemberCount = GetCommunityMemberCount(result.Id);
+                    communities.Add(result);
+                });
             }
             catch (Exception ex)
             {
@@ -186,6 +219,19 @@ namespace Blog.Logic.Core
         {
             var dbCommunity = _communityRepository.Find(a => a.Name == name, null, null).FirstOrDefault();
             return dbCommunity != null;
+        }
+
+        private int GetCommunityMemberCount(int communityId)
+        {
+            try
+            {
+                var count = _communityRepository.GetMemberCountByCommunity(communityId);
+                return count;
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }

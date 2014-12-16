@@ -259,6 +259,16 @@ namespace Blog.DataAccess.Database.Repository
             return community;
         }
 
+        public int GetMemberCountByCommunity(int id)
+        {
+            var query = Find(a => a.Id == id, null, "Members")
+                .Select(a => a.Members)
+                .FirstOrDefault()
+                .Count;
+
+            return query;
+        }
+
         #region Private methods
 
         private static EntityState GetMemberState(User user, IEnumerable<User> users)

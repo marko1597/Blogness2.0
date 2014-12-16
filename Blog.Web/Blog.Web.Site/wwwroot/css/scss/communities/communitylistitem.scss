@@ -9,12 +9,13 @@
         @include padding($default-padding);
 
         .community-members {
+            @include margin(null, null, $default-padding);
             max-height: unquote(($base-margin * 4) + 'px');
             overflow: hidden;
 
             .member-item {
                 $img-margin: unquote(($base-margin / 3) + 'px');
-                @include margin(0, $img-margin, $img-margin, $img-margin);
+                @include margin(0, $img-margin, $img-margin, null);
                 @include position(relative, null);
                 display: inline-block;
 

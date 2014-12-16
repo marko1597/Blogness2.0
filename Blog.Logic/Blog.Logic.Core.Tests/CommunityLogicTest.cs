@@ -90,6 +90,7 @@ namespace Blog.Logic.Core.Tests
 
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.Get(It.IsAny<int>())).Returns(communitySearch);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.Get(1);
@@ -97,6 +98,7 @@ namespace Blog.Logic.Core.Tests
             Assert.NotNull(result);
             Assert.NotNull(result.Posts);
             Assert.IsNull(result.Error);
+            Assert.AreEqual(5, result.MemberCount);
         }
 
         [Test]
@@ -129,6 +131,7 @@ namespace Blog.Logic.Core.Tests
         {
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetList(It.IsAny<int>())).Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetList();
@@ -154,9 +157,10 @@ namespace Blog.Logic.Core.Tests
         {
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetMore(It.IsAny<int>(), It.IsAny<int>())).Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
-            var result = logic.GetList();
+            var result = logic.GetMore(5);
 
             Assert.NotNull(result);
             CollectionAssert.AllItemsAreInstancesOfType(result, typeof(Common.Contracts.Community));
@@ -180,6 +184,7 @@ namespace Blog.Logic.Core.Tests
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetJoinedCommunitiesByUser(It.IsAny<int>(), It.IsAny<int>()))
                     .Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetJoinedByUser(1);
@@ -207,6 +212,7 @@ namespace Blog.Logic.Core.Tests
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetMoreJoinedCommunitiesByUser(It.IsAny<int>(),
                 It.IsAny<int>(), It.IsAny<int>())).Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetMoreJoinedByUser(1, 5);
@@ -234,6 +240,7 @@ namespace Blog.Logic.Core.Tests
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetCreatedCommunitiesByUser(It.IsAny<int>(), It.IsAny<int>()))
                     .Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetCreatedByUser(1);
@@ -261,6 +268,7 @@ namespace Blog.Logic.Core.Tests
             _communityRepository = new Mock<ICommunityRepository>();
             _communityRepository.Setup(a => a.GetMoreCreatedCommunitiesByUser(It.IsAny<int>(),
                 It.IsAny<int>(), It.IsAny<int>())).Returns(_communities);
+            _communityRepository.Setup(a => a.GetMemberCountByCommunity(It.IsAny<int>())).Returns(5);
 
             var logic = new CommunityLogic(_communityRepository.Object);
             var result = logic.GetMoreCreatedByUser(1, 5);

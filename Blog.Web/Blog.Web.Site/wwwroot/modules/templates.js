@@ -432,8 +432,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </h4>\r" +
     "\n" +
-    "        <p>{{community.Description}}</p>\r" +
-    "\n" +
     "        <p>\r" +
     "\n" +
     "            Created by\r" +
@@ -461,6 +459,8 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"community-members-container\">\r" +
     "\n" +
+    "        <p>{{community.Description}}</p>\r" +
+    "\n" +
     "        <div class=\"community-members\">\r" +
     "\n" +
     "            <div class=\"member-item\" ng-repeat=\"member in community.Members\">\r" +
@@ -474,6 +474,12 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "            </div>\r" +
     "\n" +
     "        </div>\r" +
+    "\n" +
+    "        <a href=\"{{community.Url}}\" type=\"button\" data-trigger=\"hover\" data-type=\"success\" data-title=\"Click here to view community members\" bs-tooltip>\r" +
+    "\n" +
+    "            <label class=\"label label-primary\">{{community.MemberCount}} members</label>\r" +
+    "\n" +
+    "        </a>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +

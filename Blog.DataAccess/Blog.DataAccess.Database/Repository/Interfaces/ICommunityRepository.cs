@@ -12,5 +12,6 @@ namespace Blog.DataAccess.Database.Repository.Interfaces
         IList<Community> GetMoreJoinedCommunitiesByUser(int userId, int threshold = 5, int skip = 10);
         IList<Community> GetCreatedCommunitiesByUser(int userId, int threshold = 10);
         IList<Community> GetMoreCreatedCommunitiesByUser(int userId, int threshold = 5, int skip = 10);
+        int GetMemberCountByCommunity(int id);
     }
 }
