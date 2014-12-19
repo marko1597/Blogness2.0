@@ -498,6 +498,7 @@ namespace Blog.Tools.ApplicationSetup
 													BirthDate = u.BirthDate,
 													UserName = u.UserName,
 													PictureId = mediaId,
+                                                    BackgroundId = u.BackgroundId,
 													IdentityId = u.IdentityId
 												});
 							break;
@@ -512,6 +513,7 @@ namespace Blog.Tools.ApplicationSetup
 													EmailAddress = u.EmailAddress,
 													BirthDate = u.BirthDate,
 													UserName = u.UserName,
+                                                    PictureId = u.PictureId,
 													BackgroundId = mediaId,
 													IdentityId = u.IdentityId
 												});
