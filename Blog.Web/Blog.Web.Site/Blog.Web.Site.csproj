@@ -3188,6 +3188,7 @@
     <Content Include="wwwroot\css\modules\communities.css" />
     <Content Include="wwwroot\css\modules\communities\communityheader.css" />
     <Content Include="wwwroot\css\modules\communities\communitylistitem.css" />
+    <Content Include="wwwroot\css\modules\communities\communityview.css" />
     <Content Include="wwwroot\css\scss\communities.css">
       <DependentUpon>communities.scss</DependentUpon>
     </Content>
@@ -3205,6 +3206,12 @@
     </Content>
     <Content Include="wwwroot\css\scss\communities\communitylistitem.min.css">
       <DependentUpon>communitylistitem.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityview.css">
+      <DependentUpon>communityview.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityview.min.css">
+      <DependentUpon>communityview.css</DependentUpon>
     </Content>
     <Content Include="wwwroot\fonts\OpenSans-BoldItalic\OpenSans-BoldItalic-webfont.svg" />
     <Content Include="wwwroot\fonts\OpenSans-Bold\OpenSans-Bold-webfont.svg" />
@@ -4488,6 +4495,10 @@
     <Content Include="wwwroot\css\scss\communities\communityheader.scss" />
     <Content Include="wwwroot\css\scss\communities\communityheader.css.map">
       <DependentUpon>communityheader.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityview.scss" />
+    <Content Include="wwwroot\css\scss\communities\communityview.css.map">
+      <DependentUpon>communityview.css</DependentUpon>
     </Content>
     <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
     <Content Include="wwwroot\css\scss\extensions\ckeditor.css">
@@ -6803,6 +6814,7 @@
     <Content Include="wwwroot\modules\comments\services\commentsService.js" />
     <Content Include="wwwroot\modules\communities\communities.js" />
     <Content Include="wwwroot\modules\communities\controllers\communitiesListController.js" />
+    <Content Include="wwwroot\modules\communities\controllers\communityViewController.js" />
     <Content Include="wwwroot\modules\communities\directives\communityHeader.js" />
     <Content Include="wwwroot\modules\communities\directives\communityListItem.js" />
     <Content Include="wwwroot\modules\communities\services\communitiesService.js" />
@@ -7345,7 +7357,7 @@
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbies.js" />
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbyItem.js" />
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsInfo.js" />
-    <Content Include="wwwroot\templates\modifypost.html" />
+    <Content Include="wwwroot\templates\modules\posts\postUpdate.html" />
     <Content Include="wwwroot\modules\shared\services\dateHelper.js" />
     <Content Include="wwwroot\modules\tags\directives\tagItem.js" />
     <Content Include="wwwroot\modules\tags\tags.js" />
@@ -7375,13 +7387,14 @@
     <Content Include="wwwroot\modules\posts\services\postsService.js" />
     <Content Include="wwwroot\modules\shared\directives\keypress.js" />
     <Content Include="wwwroot\templates\events.html" />
-    <Content Include="wwwroot\templates\communities.html" />
+    <Content Include="wwwroot\templates\modules\communities\communities.html" />
     <Content Include="wwwroot\templates\modules\comments\commentItem.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsAddNew.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsContainer.html" />
     <Content Include="wwwroot\templates\modules\comments\commentsList.html" />
     <Content Include="wwwroot\templates\modules\communities\communityHeader.html" />
     <Content Include="wwwroot\templates\modules\communities\communityListItem.html" />
+    <Content Include="wwwroot\templates\modules\communities\communityView.html" />
     <Content Include="wwwroot\templates\modules\error\errorDisplay.html" />
     <Content Include="wwwroot\templates\modules\header\headerMenu.html" />
     <Content Include="wwwroot\templates\modules\login\loggedUser.html" />
@@ -7429,10 +7442,10 @@
     <Content Include="wwwroot\templates\modules\user\userProfileMedia.html" />
     <Content Include="wwwroot\templates\modules\user\userProfileNavigation.html" />
     <Content Include="wwwroot\templates\modules\user\userProfilePosts.html" />
-    <Content Include="wwwroot\templates\users.html" />
+    <Content Include="wwwroot\templates\modules\user\userView.html" />
     <Content Include="wwwroot\templates\friends.html" />
-    <Content Include="wwwroot\templates\posts.html" />
-    <Content Include="wwwroot\templates\viewpost.html" />
+    <Content Include="wwwroot\templates\modules\posts\mainPagePosts.html" />
+    <Content Include="wwwroot\templates\modules\posts\postView.html" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

@@ -1,25 +1,6 @@
 angular.module('blog').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('communities.html',
-    "<div class=\"row\">\r" +
-    "\n" +
-    "    <div class=\"col-xs-12\">\r" +
-    "\n" +
-    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
   $templateCache.put('errorpage.html',
     "<div id=\"error-page\">\r" +
     "\n" +
@@ -104,187 +85,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    <p><a class=\"btn btn-primary btn-lg\" role=\"button\">Clicking me does nothing</a></p>\r" +
     "\n" +
     "</div>"
-  );
-
-
-  $templateCache.put('modifypost.html',
-    "<div id=\"modify-post-main\">\r" +
-    "\n" +
-    "    <div class=\"modify-post-title\">\r" +
-    "\n" +
-    "        <h5>Title</h5>\r" +
-    "\n" +
-    "        <input ng-model=\"post.PostTitle\" />\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modify-post-message\">\r" +
-    "\n" +
-    "        <h5>Message</h5>\r" +
-    "\n" +
-    "        <div ng-switch on=\"dimensionMode\">\r" +
-    "\n" +
-    "            <textarea ng-switch-when=\"mobile\" ng-model=\"post.PostMessage\" id=\"post-message-editor\"></textarea>\r" +
-    "\n" +
-    "            <textarea ng-switch-default id=\"post-message-editor\" ckeditor=\"editorOptions\" ck-editor-helper ng-model=\"post.PostMessage\"\r" +
-    "\n" +
-    "                      data-browse-url=\"http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1\" data-upload-url=\"{{uploadUrl}}\"\r" +
-    "\n" +
-    "                      data-image-window-width=\"640\" data-image-window-height=\"480\"></textarea>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modify-post-contents\">\r" +
-    "\n" +
-    "        <div class=\"btn btn-primary\" ng-click=\"launchMediaSelectionDialog()\">Add existing media</div>\r" +
-    "\n" +
-    "        <div file-upload uploader=\"uploader\"></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modify-post-tags\">\r" +
-    "\n" +
-    "        <tags-input ng-model=\"Tags\" add-on-enter=\"true\" add-on-comma=\"true\" add-on-space=\"true\"\r" +
-    "\n" +
-    "                    on-tag-added=\"onTagAdded($tag)\" on-tag-removed=\"onTagRemoved($tag)\">\r" +
-    "\n" +
-    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\" debounce-delay=\"1500\"></auto-complete>\r" +
-    "\n" +
-    "        </tags-input>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "    <div class=\"modify-post-buttons\">\r" +
-    "\n" +
-    "        <button class=\"btn btn-primary\" ng-click=\"savePost()\">Save</button>\r" +
-    "\n" +
-    "        <button class=\"btn btn-danger\" ng-click=\"cancelPost()\">Cancel</button>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('posts.html',
-    "<div class=\"row\">\r" +
-    "\n" +
-    "    <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r" +
-    "\n" +
-    "        <div id=\"posts-main\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"posts-main\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updatePostsSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('users.html',
-    "<div id=\"user-profile-page\">\r" +
-    "\n" +
-    "    <div user-image user=\"user\" fullname=\"userFullName\"></div>\r" +
-    "\n" +
-    "    <div user-profile-navigation username=\"username\"></div>\r" +
-    "\n" +
-    "    \r" +
-    "\n" +
-    "    <div ui-view></div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('viewpost.html',
-    "<div class=\"row\">\r" +
-    "\n" +
-    "    <div class=\"col-xs-12 col-sm-8 col-md-9 col-lg-9\">\r" +
-    "\n" +
-    "        <div id=\"post-{{post.Id}}\" class=\"card default view-post ng-cloak\">\r" +
-    "\n" +
-    "            <div post-header post=\"post\" user=\"post.User\" />\r" +
-    "\n" +
-    "            <div class=\"content\">\r" +
-    "\n" +
-    "                <p ng-bind-html=\"post.PostMessage\" ellipsis></p>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"content\">\r" +
-    "\n" +
-    "                <div post-likes list=\"postLikes\" post-id=\"postId\"></div>\r" +
-    "\n" +
-    "                <div post-view-count list=\"viewCount\" post-id=\"postId\"></div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div class=\"content\">\r" +
-    "\n" +
-    "                <div tag-item tag=\"tag\" ng-repeat=\"tag in post.Tags\"></div>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div id=\"post-contents-{{post.Id}}\" class=\"card masonry ng-cloak\" ng-show=\"hasContents()\">\r" +
-    "\n" +
-    "            <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
-    "\n" +
-    "                resize-large=\"48%\" resize-medium=\"96%\" resize-small=\"96%\">\r" +
-    "\n" +
-    "                <li ng-repeat=\"content in post.PostContents\" isotope-item class=\"post-item-content card\">\r" +
-    "\n" +
-    "                    <div media-item media=\"content.Media\" data-gallery-mode=\"true\"></div>\r" +
-    "\n" +
-    "                    <div class=\"captions\">\r" +
-    "\n" +
-    "                        <p>{{content.PostContentTitle}}</p>\r" +
-    "\n" +
-    "                        <p>{{content.PostContentText}}</p>\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </li>\r" +
-    "\n" +
-    "            </ul>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div id=\"post-comments-{{post.Id}}\" class=\"comments\">\r" +
-    "\n" +
-    "            <div comments-container user=\"user\" postid=\"postId\" poster=\"post.User.UserName\"></div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"col-xs-12 col-sm-4 col-md-3 col-lg-3\">\r" +
-    "\n" +
-    "        <div class=\"card default hidden-xs\" post-view-navigator></div>\r" +
-    "\n" +
-    "        <div post-related-items parentpostid=\"postId\"></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div ui-view class=\"sticky top\"></div>\r" +
-    "\n" +
-    "</div>\r" +
-    "\n"
   );
 
 
@@ -413,6 +213,25 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('communities/communities.html',
+    "<div class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-12\">\r" +
+    "\n" +
+    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
+    "\n" +
+    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
+    "\n" +
+    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('communities/communityHeader.html',
     "<div class=\"header big row community-header\">\r" +
     "\n" +
@@ -480,6 +299,41 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "            <label class=\"label label-primary\">{{community.MemberCount}} members</label>\r" +
     "\n" +
     "        </a>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('communities/communityView.html',
+    "<div id=\"community-view\" class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-sm-12 col-md-9\">\r" +
+    "\n" +
+    "        <div class=\"card default ng-cloak\">\r" +
+    "\n" +
+    "            <div community-header community=\"community\"></div>\r" +
+    "\n" +
+    "            <div class=\"community-description content\">\r" +
+    "\n" +
+    "                <label>Description</label>\r" +
+    "\n" +
+    "                <p>{{community.Description}}</p>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div id=\"community-posts-container\" isotope-container isotope-item-resize resize-layout-only=\"false\"\r" +
+    "\n" +
+    "             resize-container=\"community-posts-container\" resize-broadcast=\"updatePostsSize\" \r" +
+    "\n" +
+    "             resize-large=\"31.5%\" resize-medium=\"48%\" resize-small=\"98%\">\r" +
+    "\n" +
+    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: postSize }\"></div>\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -1332,6 +1186,25 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('posts/mainPagePosts.html',
+    "<div class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r" +
+    "\n" +
+    "        <div id=\"posts-main\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"posts-main\"\r" +
+    "\n" +
+    "             resize-broadcast=\"updatePostsSize\">\r" +
+    "\n" +
+    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('posts/postContents.html',
     "<div>\r" +
     "\n" +
@@ -1538,6 +1411,153 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    </div>\r" +
     "\n" +
     "</div>"
+  );
+
+
+  $templateCache.put('posts/postUpdate.html',
+    "<div id=\"modify-post-main\">\r" +
+    "\n" +
+    "    <div class=\"modify-post-title\">\r" +
+    "\n" +
+    "        <h5>Title</h5>\r" +
+    "\n" +
+    "        <input ng-model=\"post.PostTitle\" />\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modify-post-message\">\r" +
+    "\n" +
+    "        <h5>Message</h5>\r" +
+    "\n" +
+    "        <div ng-switch on=\"dimensionMode\">\r" +
+    "\n" +
+    "            <textarea ng-switch-when=\"mobile\" ng-model=\"post.PostMessage\" id=\"post-message-editor\"></textarea>\r" +
+    "\n" +
+    "            <textarea ng-switch-default id=\"post-message-editor\" ckeditor=\"editorOptions\" ck-editor-helper ng-model=\"post.PostMessage\"\r" +
+    "\n" +
+    "                      data-browse-url=\"http://localhost/oldblog/Media/Browse?CKEditorFuncNum=1\" data-upload-url=\"{{uploadUrl}}\"\r" +
+    "\n" +
+    "                      data-image-window-width=\"640\" data-image-window-height=\"480\"></textarea>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modify-post-contents\">\r" +
+    "\n" +
+    "        <div class=\"btn btn-primary\" ng-click=\"launchMediaSelectionDialog()\">Add existing media</div>\r" +
+    "\n" +
+    "        <div file-upload uploader=\"uploader\"></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modify-post-tags\">\r" +
+    "\n" +
+    "        <tags-input ng-model=\"Tags\" add-on-enter=\"true\" add-on-comma=\"true\" add-on-space=\"true\"\r" +
+    "\n" +
+    "                    on-tag-added=\"onTagAdded($tag)\" on-tag-removed=\"onTagRemoved($tag)\">\r" +
+    "\n" +
+    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\" debounce-delay=\"1500\"></auto-complete>\r" +
+    "\n" +
+    "        </tags-input>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"modify-post-buttons\">\r" +
+    "\n" +
+    "        <button class=\"btn btn-primary\" ng-click=\"savePost()\">Save</button>\r" +
+    "\n" +
+    "        <button class=\"btn btn-danger\" ng-click=\"cancelPost()\">Cancel</button>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('posts/postView.html',
+    "<div class=\"row\">\r" +
+    "\n" +
+    "    <div class=\"col-xs-12 col-sm-8 col-md-9 col-lg-9\">\r" +
+    "\n" +
+    "        <div id=\"post-{{post.Id}}\" class=\"card default view-post ng-cloak\">\r" +
+    "\n" +
+    "            <div post-header post=\"post\" user=\"post.User\" />\r" +
+    "\n" +
+    "            <div class=\"content\">\r" +
+    "\n" +
+    "                <p ng-bind-html=\"post.PostMessage\" ellipsis></p>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"content\">\r" +
+    "\n" +
+    "                <div post-likes list=\"postLikes\" post-id=\"postId\"></div>\r" +
+    "\n" +
+    "                <div post-view-count list=\"viewCount\" post-id=\"postId\"></div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"content\">\r" +
+    "\n" +
+    "                <div tag-item tag=\"tag\" ng-repeat=\"tag in post.Tags\"></div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div id=\"post-contents-{{post.Id}}\" class=\"card masonry ng-cloak\" ng-show=\"hasContents()\">\r" +
+    "\n" +
+    "            <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
+    "\n" +
+    "                resize-large=\"48%\" resize-medium=\"96%\" resize-small=\"96%\">\r" +
+    "\n" +
+    "                <li ng-repeat=\"content in post.PostContents\" isotope-item class=\"post-item-content card\">\r" +
+    "\n" +
+    "                    <div media-item media=\"content.Media\" data-gallery-mode=\"true\"></div>\r" +
+    "\n" +
+    "                    <div class=\"captions\">\r" +
+    "\n" +
+    "                        <p>{{content.PostContentTitle}}</p>\r" +
+    "\n" +
+    "                        <p>{{content.PostContentText}}</p>\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </li>\r" +
+    "\n" +
+    "            </ul>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div id=\"post-comments-{{post.Id}}\" class=\"comments\">\r" +
+    "\n" +
+    "            <div comments-container user=\"user\" postid=\"postId\" poster=\"post.User.UserName\"></div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"col-xs-12 col-sm-4 col-md-3 col-lg-3\">\r" +
+    "\n" +
+    "        <div class=\"card default hidden-xs\" post-view-navigator></div>\r" +
+    "\n" +
+    "        <div post-related-items parentpostid=\"postId\"></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div ui-view class=\"sticky top\"></div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
@@ -2748,6 +2768,21 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "             data=\"{ Post: post, Width: size, User: user }\"></div>\r" +
     "\n" +
     "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('user/userView.html',
+    "<div id=\"user-profile-page\">\r" +
+    "\n" +
+    "    <div user-image user=\"user\" fullname=\"userFullName\"></div>\r" +
+    "\n" +
+    "    <div user-profile-navigation username=\"username\"></div>\r" +
+    "\n" +
+    "    \r" +
+    "\n" +
+    "    <div ui-view></div>\r" +
     "\n" +
     "</div>"
   );

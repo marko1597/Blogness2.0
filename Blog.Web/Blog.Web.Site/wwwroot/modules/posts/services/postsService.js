@@ -1,8 +1,8 @@
 ﻿ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configProvider", "dateHelper",
     function ($http, $q, blogSocketsService, configProvider, dateHelper) {
-        var postsApi = configProvider.getSettings().BlogApi == "" ?
-            window.blogConfiguration.blogApi + "Posts/" :
-            configProvider.getSettings().BlogApi + "Posts/";
+        var baseApi = configProvider.getSettings().BlogApi === "" ?
+            window.blogConfiguration.blogApi : configProvider.getSettings().BlogApi;
+        var postsApi = baseApi + "Posts/";
 
         var addPostViewData = function (post) {
             post.DateDisplay = dateHelper.getDateDisplay(post.CreatedDate);
@@ -102,6 +102,46 @@
 
                 $http({
                     url: postsApi + "recent",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getByCommunity: function (id) {
+                var self = this;
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + id + "/posts",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreByCommunity: function (id, skip) {
+                var self = this;
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + id + "/posts/more/" + skip,
                     method: "GET"
                 }).success(function (response) {
                     _.each(response, function (p) {

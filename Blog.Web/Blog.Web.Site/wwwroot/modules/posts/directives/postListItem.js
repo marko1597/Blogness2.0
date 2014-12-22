@@ -26,7 +26,7 @@
         };
 
         $scope.getPostSize = function() {
-            return $scope.data.Width;
+            return $scope.data.Width ? '' : $scope.data.Width;
         };
 
         $scope.toggleIsEditable = function () {

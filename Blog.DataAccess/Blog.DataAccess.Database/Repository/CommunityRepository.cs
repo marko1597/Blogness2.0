@@ -15,6 +15,13 @@ namespace Blog.DataAccess.Database.Repository
             var db = Find(a => a.LeaderUserId == id, null, "Members,Leader,Posts").FirstOrDefault();
             if (db == null) return null;
 
+            var members = db.Members
+                .OrderByDescending(b => b.UserId)
+                .Take(10)
+                .ToList();
+
+            db.Members = members;
+
             db.Leader.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == db.Leader.PictureId);
             db.Leader.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == db.Leader.BackgroundId);
             db.Leader.Posts = null;

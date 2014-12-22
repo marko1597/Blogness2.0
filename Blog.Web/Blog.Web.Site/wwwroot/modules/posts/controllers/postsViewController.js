@@ -97,7 +97,7 @@
                     errorService.displayError({ Message: e });
                 });
             } else {
-                errorService.displayErrorRedirect({ Message: "You're missing the post to edit bruh! Don't be stupid!" });
+                errorService.displayErrorRedirect({ Message: "You're missing the post to view bruh! Don't be stupid!" });
             }
         };
 

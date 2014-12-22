@@ -2005,6 +2005,14 @@ html, body {
   border-left: 3px solid white;
 }
 
+/* line 7, ../../scss/communities/communityview.scss */
+#community-posts-container {
+  margin-top: 0;
+  margin-right: -5px;
+  margin-bottom: 0;
+  margin-left: -5px;
+}
+
 /* line 3, ../../scss/error/errordisplay.scss */
 #blog-error-global {
   position: absolute;

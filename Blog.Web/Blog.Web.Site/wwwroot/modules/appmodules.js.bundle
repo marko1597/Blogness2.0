@@ -25,6 +25,7 @@
 
     <file>/wwwroot/modules/communities/communities.js</file>
     <file>/wwwroot/modules/communities/controllers/communitiesListController.js</file>
+    <file>/wwwroot/modules/communities/controllers/communityViewController.js</file>
     <file>/wwwroot/modules/communities/directives/communityHeader.js</file>
     <file>/wwwroot/modules/communities/directives/communityListItem.js</file>
     <file>/wwwroot/modules/communities/services/communitiesService.js</file>

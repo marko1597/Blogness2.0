@@ -38,14 +38,14 @@
                 url: "/",
                 controller: 'postsController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('posts.html');
+                    return $templateCache.get('posts/mainPagePosts.html');
                 }
             })
             .state('viewpost', {
                 url: "/post/:postId",
                 controller: 'postsViewController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('viewpost.html');
+                    return $templateCache.get('posts/postView.html');
                 }
             })
                 .state('viewpost.gallery', {
@@ -62,7 +62,14 @@
                 url: "/communities",
                 controller: 'communitiesListController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('communities.html');
+                    return $templateCache.get('communities/communities.html');
+                }
+            })
+            .state('viewcommunity', {
+                url: "/community/:communityId",
+                controller: 'communityViewController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('communities/communityView.html');
                 }
             })
             .state('events', {
@@ -75,14 +82,14 @@
                 url: "/post/create/new",
                 controller: 'postsModifyController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('modifypost.html');
+                    return $templateCache.get('posts/postUpdate.html');
                 }
             })
             .state('editpost', {
                 url: "/post/edit/:postId",
                 controller: 'postsModifyController',
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('modifypost.html');
+                    return $templateCache.get('posts/postUpdate.html');
                 }
             })
             .state('ownprofile', {
@@ -90,7 +97,7 @@
                 controller: 'userProfileController',
                 'abstract': true,
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('users.html');
+                    return $templateCache.get('user/userView.html');
                 }
             })
                 .state('ownprofile.details', {
@@ -137,7 +144,7 @@
                 controller: 'userProfileController',
                 'abstract': true,
                 templateProvider: function ($templateCache) {
-                    return $templateCache.get('users.html');
+                    return $templateCache.get('user/userView.html');
                 }
             })
                 .state('othersprofile.details', {
