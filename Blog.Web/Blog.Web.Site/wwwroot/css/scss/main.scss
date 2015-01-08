@@ -131,10 +131,10 @@ a {
     @include padding(10px);
     background: $default-color-darken;
 
-    ul.isotope {
+    *[isotope-container] {
         @include clean-list;
 
-        li.isotope-item {
+        *[isotope-item] {
             background: $default-color;
             @include margin(5px);
 

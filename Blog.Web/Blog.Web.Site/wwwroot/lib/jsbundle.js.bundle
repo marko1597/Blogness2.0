@@ -13,7 +13,7 @@
     <file>/bower_components/jquery/dist/jquery.js</file>
     <file>/bower_components/jqueryui/jquery-ui.js</file>
     <file>/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js</file>
-    <file>/bower_components/isotope/jquery.isotope.js</file>
+    <file>/bower_components/isotope/dist/isotope.pkgd.js</file>
     <file>/bower_components/slick.js/slick/slick.js</file>
     <file>/wwwroot/lib/jquery.blockui.js</file>
     <file>/wwwroot/lib/jquery.newsTicker.js</file>

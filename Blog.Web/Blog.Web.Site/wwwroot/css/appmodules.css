@@ -1130,13 +1130,13 @@ a:hover {
   background: #e6e6e6;
 }
 /* line 134, ../scss/main.scss */
-.masonry ul.isotope {
+.masonry *[isotope-container] {
   list-style-type: none;
   padding: 0 !important;
   margin: 0 !important;
 }
 /* line 137, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item {
+.masonry *[isotope-container] *[isotope-item] {
   background: white;
   margin-top: 5px;
   margin-right: 5px;
@@ -1144,14 +1144,14 @@ a:hover {
   margin-left: 5px;
 }
 /* line 141, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions {
+.masonry *[isotope-container] *[isotope-item] .captions {
   padding-top: 15px;
   padding-right: 15px;
   padding-bottom: 15px;
   padding-left: 15px;
 }
 /* line 144, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions p {
+.masonry *[isotope-container] *[isotope-item] .captions p {
   padding-top: 0;
   padding-right: 0;
   padding-bottom: 0;
@@ -1162,7 +1162,7 @@ a:hover {
   margin-left: 0;
 }
 /* line 148, ../scss/main.scss */
-.masonry ul.isotope li.isotope-item .captions p:first-of-type {
+.masonry *[isotope-container] *[isotope-item] .captions p:first-of-type {
   font-weight: bold;
   margin-top: 0;
   margin-right: 0;
