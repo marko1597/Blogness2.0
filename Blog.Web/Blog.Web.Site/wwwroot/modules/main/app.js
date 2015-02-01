@@ -5,6 +5,7 @@
         "ngCookies",
         "mgcrea.ngStrap",
         "snap",
+        "ngBlockUi",
         "ngConfig",
         "ngLogger",
         "ngHeader",

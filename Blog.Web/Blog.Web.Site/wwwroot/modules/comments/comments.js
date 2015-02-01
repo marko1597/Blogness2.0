@@ -1,7 +1,7 @@
 ﻿var ngComments = angular.module("ngComments",
     [
-        "ngShared",
-        "iso.directives",
+        "ngDateHelper",
+        "blogIsotope",
         "ngConfig",
         "LocalStorageModule"
     ]);

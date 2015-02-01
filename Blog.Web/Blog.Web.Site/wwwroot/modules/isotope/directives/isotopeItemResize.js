@@ -1,4 +1,4 @@
-﻿ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
+﻿blogIsotope.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
     function ($window, $timeout, $interval) {
         var linkFn = function (scope, elem, attrs) {
             scope.columnCount = 0;

@@ -1,12 +1,13 @@
 ﻿var ngUser = angular.module("ngUser",
     [
         "LocalStorageModule",
+        "ngDateHelper",
         "ngSanitize",
-        "ngShared",
+        "ngBlockUi",
         "ngComments",
         "ngPosts",
         "ngLogin",
         "ngConfig",
         "ngMessaging",
-        "angularFileUpload"
+        "blogIsotope"
     ]);

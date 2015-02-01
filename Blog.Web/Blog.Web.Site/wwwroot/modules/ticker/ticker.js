@@ -1,0 +1,1 @@
+﻿var blogTicker = angular.module("blogTicker", []);

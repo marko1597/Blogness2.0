@@ -1,4 +1,4 @@
-﻿ngShared.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
+﻿blogFileUpload.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
     function ($window, $rootScope, blockUiService) {
         var helper = {
             support: !!($window.FileReader && $window.CanvasRenderingContext2D),

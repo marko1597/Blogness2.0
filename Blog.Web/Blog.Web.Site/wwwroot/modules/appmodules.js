@@ -365,6 +365,15 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('empty/emptyRecordMessage.html',
+    "<div class=\"empty-record-message\">\r" +
+    "\n" +
+    "    <p>{{message}}</p>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('error/errorDisplay.html',
     "<div id=\"blog-error-global\" class=\"hidden\">\r" +
     "\n" +
@@ -379,6 +388,154 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    </div>\r" +
     "\n" +
     "</div>s"
+  );
+
+
+  $templateCache.put('fileUpload/fileUpload.html',
+    "<div>\r" +
+    "\n" +
+    "    <div class=\"file-upload\" ng-file-drop>\r" +
+    "\n" +
+    "        <label class=\"btn btn-primary\">\r" +
+    "\n" +
+    "            Choose from your computer..\r" +
+    "\n" +
+    "            <input nv-file-select type=\"file\" uploader=\"uploader\" multiple />\r" +
+    "\n" +
+    "        </label>\r" +
+    "\n" +
+    "        <div class=\"well dropzone\" nv-file-over=\"\" uploader=\"uploader\">\r" +
+    "\n" +
+    "            <h4>Drag files here...</h4>\r" +
+    "\n" +
+    "            <p>You have {{ uploader.queue.length }} items</p>\r" +
+    "\n" +
+    "            <div class=\"btn btn-primary upload-all\" ng-click=\"uploader.uploadAll()\">\r" +
+    "\n" +
+    "                <i class=\"fa fa-upload\"></i>Upload all\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div>\r" +
+    "\n" +
+    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
+    "\n" +
+    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
+    "\n" +
+    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('fileUpload/fileUploadItem.html',
+    "<div>\r" +
+    "\n" +
+    "    <div class=\"upload-details\">\r" +
+    "\n" +
+    "        <p class=\"filename\" bs-popover data-placement=\"bottom\" data-animation=\"am-flip-x\"\r" +
+    "\n" +
+    "           title=\"File Name\" data-content=\"{{item.file.name}}\">\r" +
+    "\n" +
+    "            {{ item.file.name }}\r" +
+    "\n" +
+    "        </p>\r" +
+    "\n" +
+    "        <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"buttons\" nowrap>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-success btn-xs\" ng-click=\"item.upload()\" ng-disabled=\"item.isReady || item.isUploading || item.isSuccess\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-upload\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-warning btn-xs\" ng-click=\"item.cancel()\" ng-disabled=\"!item.isUploading\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-ban\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"item.remove()\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-trash-o\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"status\">\r" +
+    "\n" +
+    "            <span ng-show=\"item.isSuccess\"><i class=\"fa fa-check\"></i></span>\r" +
+    "\n" +
+    "            <span ng-show=\"item.isCancel\"><i class=\"fa fa-stop\"></i></span>\r" +
+    "\n" +
+    "            <span ng-show=\"item.isError\"><i class=\"fa fa-exclamation-triangle\"></i></span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"thumbnail\" ng-switch=\"isNewContent(item.isExisting)\">\r" +
+    "\n" +
+    "        <div ng-switch-when=\"true\" file-upload-thumbnail=\"{ file: item._file, height: 100 }\"></div>\r" +
+    "\n" +
+    "        <div ng-switch-default>\r" +
+    "\n" +
+    "            <img ng-src=\"{{item.url}}\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"progress\" style=\"margin-bottom: 0;\">\r" +
+    "\n" +
+    "        <div class=\"progress-bar\" role=\"progressbar\" ng-style=\"{ 'width': item.progress + '%' }\"></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"captions\" ng-switch on=\"item.allowCaptions\">\r" +
+    "\n" +
+    "        <div ng-switch-when=\"true\">\r" +
+    "\n" +
+    "            <h5>Content Title</h5>\r" +
+    "\n" +
+    "            <input ng-model=\"item.postContentTitle\" placeholder=\"Enter content title here...\" maxlength=\"50\" />\r" +
+    "\n" +
+    "            <h5>Content Description</h5>\r" +
+    "\n" +
+    "            <textarea ng-model=\"item.postContentText\" placeholder=\"Enter a brief description of this content here...\" \r" +
+    "\n" +
+    "                      maxlength=\"140\"></textarea>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div ng-switch-default></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
@@ -1613,212 +1770,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('shared/emptyRecordMessage.html',
-    "<div class=\"empty-record-message\">\r" +
-    "\n" +
-    "    <p>{{message}}</p>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/fileUpload.html',
-    "<div>\r" +
-    "\n" +
-    "    <div class=\"file-upload\" ng-file-drop>\r" +
-    "\n" +
-    "        <label class=\"btn btn-primary\">\r" +
-    "\n" +
-    "            Choose from your computer..\r" +
-    "\n" +
-    "            <input nv-file-select type=\"file\" uploader=\"uploader\" multiple />\r" +
-    "\n" +
-    "        </label>\r" +
-    "\n" +
-    "        <div class=\"well dropzone\" nv-file-over=\"\" uploader=\"uploader\">\r" +
-    "\n" +
-    "            <h4>Drag files here...</h4>\r" +
-    "\n" +
-    "            <p>You have {{ uploader.queue.length }} items</p>\r" +
-    "\n" +
-    "            <div class=\"btn btn-primary upload-all\" ng-click=\"uploader.uploadAll()\">\r" +
-    "\n" +
-    "                <i class=\"fa fa-upload\"></i>Upload all\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div>\r" +
-    "\n" +
-    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
-    "\n" +
-    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
-    "\n" +
-    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/fileUploadItem.html',
-    "<div>\r" +
-    "\n" +
-    "    <div class=\"upload-details\">\r" +
-    "\n" +
-    "        <p class=\"filename\" bs-popover data-placement=\"bottom\" data-animation=\"am-flip-x\"\r" +
-    "\n" +
-    "           title=\"File Name\" data-content=\"{{item.file.name}}\">\r" +
-    "\n" +
-    "            {{ item.file.name }}\r" +
-    "\n" +
-    "        </p>\r" +
-    "\n" +
-    "        <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"buttons\" nowrap>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-success btn-xs\" ng-click=\"item.upload()\" ng-disabled=\"item.isReady || item.isUploading || item.isSuccess\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-upload\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-warning btn-xs\" ng-click=\"item.cancel()\" ng-disabled=\"!item.isUploading\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-ban\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"item.remove()\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-trash-o\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"status\">\r" +
-    "\n" +
-    "            <span ng-show=\"item.isSuccess\"><i class=\"fa fa-check\"></i></span>\r" +
-    "\n" +
-    "            <span ng-show=\"item.isCancel\"><i class=\"fa fa-stop\"></i></span>\r" +
-    "\n" +
-    "            <span ng-show=\"item.isError\"><i class=\"fa fa-exclamation-triangle\"></i></span>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"thumbnail\" ng-switch=\"isNewContent(item.isExisting)\">\r" +
-    "\n" +
-    "        <div ng-switch-when=\"true\" file-upload-thumbnail=\"{ file: item._file, height: 100 }\"></div>\r" +
-    "\n" +
-    "        <div ng-switch-default>\r" +
-    "\n" +
-    "            <img ng-src=\"{{item.url}}\" />\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"progress\" style=\"margin-bottom: 0;\">\r" +
-    "\n" +
-    "        <div class=\"progress-bar\" role=\"progressbar\" ng-style=\"{ 'width': item.progress + '%' }\"></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"captions\" ng-switch on=\"item.allowCaptions\">\r" +
-    "\n" +
-    "        <div ng-switch-when=\"true\">\r" +
-    "\n" +
-    "            <h5>Content Title</h5>\r" +
-    "\n" +
-    "            <input ng-model=\"item.postContentTitle\" placeholder=\"Enter content title here...\" maxlength=\"50\" />\r" +
-    "\n" +
-    "            <h5>Content Description</h5>\r" +
-    "\n" +
-    "            <textarea ng-model=\"item.postContentText\" placeholder=\"Enter a brief description of this content here...\" \r" +
-    "\n" +
-    "                      maxlength=\"140\"></textarea>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div ng-switch-default></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/videoPlayer.html',
-    "<div>\r" +
-    "\n" +
-    "    <videogular vg-player-ready=\"onPlayerReady\" vg-complete=\"onCompleteVideo\" vg-update-time=\"onUpdateTime\"\r" +
-    "\n" +
-    "                vg-update-size=\"onUpdateSize\" vg-update-volume=\"onUpdateVolume\" vg-update-state=\"onUpdateState\"\r" +
-    "\n" +
-    "                vg-width=\"config.width\" vg-height=\"config.height\" vg-theme=\"config.theme.url\"\r" +
-    "\n" +
-    "                vg-autoplay=\"config.autoPlay\" vg-stretch=\"config.stretch.value\" vg-responsive=\"true\">\r" +
-    "\n" +
-    "        <vg-video vg-src=\"config.sources\" preload='metadata'></vg-video>\r" +
-    "\n" +
-    "        <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch=\"config.stretch.value\"></vg-poster-image>\r" +
-    "\n" +
-    "        <vg-buffering></vg-buffering>\r" +
-    "\n" +
-    "        <vg-overlay-play vg-play-icon=\"config.theme.playIcon\"></vg-overlay-play>\r" +
-    "\n" +
-    "        <vg-controls vg-autohide=\"config.autoHide\" vg-autohide-time=\"config.autoHideTime\" style=\"height: 50px;\">\r" +
-    "\n" +
-    "            <vg-play-pause-button></vg-play-pause-button>\r" +
-    "\n" +
-    "            <vg-scrubbar>\r" +
-    "\n" +
-    "                <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>\r" +
-    "\n" +
-    "            </vg-scrubbar>\r" +
-    "\n" +
-    "            <!--<vg-timedisplay>{{ currentTime }} / {{ totalTime }}</vg-timedisplay>-->\r" +
-    "\n" +
-    "            <vg-volume>\r" +
-    "\n" +
-    "                <vg-mutebutton></vg-mutebutton>\r" +
-    "\n" +
-    "                <vg-volumebar></vg-volumebar>\r" +
-    "\n" +
-    "            </vg-volume>\r" +
-    "\n" +
-    "            <vg-fullscreenbutton vg-enter-full-screen-icon=\"config.theme.enterFullScreenIcon\" vg-exit-full-screen-icon=\"config.theme.exitFullScreenIcon\"></vg-fullscreenbutton>\r" +
-    "\n" +
-    "        </vg-controls>\r" +
-    "\n" +
-    "    </videogular>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
   $templateCache.put('sockets/socketDebugger.html',
     "<div id=\"socket-debugger\" class=\"card animate rotate-in-right ng-cloak\" ng-show=\"show\">\r" +
     "\n" +
@@ -2793,7 +2744,8 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </div>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n"
   );
 
 
@@ -2811,13 +2763,577 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "</div>"
   );
 
+
+  $templateCache.put('videoPlayer/videoPlayer.html',
+    "<div>\r" +
+    "\n" +
+    "    <videogular vg-player-ready=\"onPlayerReady\" vg-complete=\"onCompleteVideo\" vg-update-time=\"onUpdateTime\"\r" +
+    "\n" +
+    "                vg-update-size=\"onUpdateSize\" vg-update-volume=\"onUpdateVolume\" vg-update-state=\"onUpdateState\"\r" +
+    "\n" +
+    "                vg-width=\"config.width\" vg-height=\"config.height\" vg-theme=\"config.theme.url\"\r" +
+    "\n" +
+    "                vg-autoplay=\"config.autoPlay\" vg-stretch=\"config.stretch.value\" vg-responsive=\"true\">\r" +
+    "\n" +
+    "        <vg-video vg-src=\"config.sources\" preload='metadata'></vg-video>\r" +
+    "\n" +
+    "        <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch=\"config.stretch.value\"></vg-poster-image>\r" +
+    "\n" +
+    "        <vg-buffering></vg-buffering>\r" +
+    "\n" +
+    "        <vg-overlay-play vg-play-icon=\"config.theme.playIcon\"></vg-overlay-play>\r" +
+    "\n" +
+    "        <vg-controls vg-autohide=\"config.autoHide\" vg-autohide-time=\"config.autoHideTime\" style=\"height: 50px;\">\r" +
+    "\n" +
+    "            <vg-play-pause-button></vg-play-pause-button>\r" +
+    "\n" +
+    "            <vg-scrubbar>\r" +
+    "\n" +
+    "                <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>\r" +
+    "\n" +
+    "            </vg-scrubbar>\r" +
+    "\n" +
+    "            <!--<vg-timedisplay>{{ currentTime }} / {{ totalTime }}</vg-timedisplay>-->\r" +
+    "\n" +
+    "            <vg-volume>\r" +
+    "\n" +
+    "                <vg-mutebutton></vg-mutebutton>\r" +
+    "\n" +
+    "                <vg-volumebar></vg-volumebar>\r" +
+    "\n" +
+    "            </vg-volume>\r" +
+    "\n" +
+    "            <vg-fullscreenbutton vg-enter-full-screen-icon=\"config.theme.enterFullScreenIcon\" vg-exit-full-screen-icon=\"config.theme.exitFullScreenIcon\"></vg-fullscreenbutton>\r" +
+    "\n" +
+    "        </vg-controls>\r" +
+    "\n" +
+    "    </videogular>\r" +
+    "\n" +
+    "</div>"
+  );
+
+}]);
+
+///#source 1 1 /wwwroot/modules/ellipsis/ellipsis.js
+var ngEllipsis = angular.module("ngEllipsis", []);
+///#source 1 1 /wwwroot/modules/ellipsis/directives/ellipsis.js
+ngEllipsis.directive('ellipsis', [function () {
+    var filterFn;
+    filterFn = function (scope, element, attrs) {
+        scope.$on("reapplyEllipsis", function () {
+            scope.applyEllipsis();
+        });
+
+        scope.applyEllipsis = function() {
+            var height = parseInt(attrs.wrapHeight == undefined ? 180 : attrs.wrapHeight);
+            $(element).dotdotdot({
+                ellipsis: "...",
+                height: height
+            });
+        };
+
+        scope.applyEllipsis();
+    };
+
+    return {
+        restrict: 'EA',
+        link: filterFn
+    };
+}]);
+///#source 1 1 /wwwroot/modules/date/dateHelper.js
+var ngDateHelper = angular.module("ngDateHelper", []);
+///#source 1 1 /wwwroot/modules/date/services/dateHelper.js
+ngDateHelper.factory('dateHelper', [function () {
+    return {
+        getJsFullDate: function (jsonDate) {
+            return moment(jsonDate);
+        },
+
+        getYearsDifference: function (jsonDate) {
+            return moment().diff(jsonDate, 'years');
+        },
+        
+        getJsDate: function (jsonDate) {
+            var date = moment(jsonDate).format("MMM D, YYYY");
+            return date;
+        },
+
+        getMonthYear: function(jsonDate) {
+            var date = moment(jsonDate).format("MMMM YYYY");
+            return date;
+        },
+
+        getJsTime: function (jsonDate) {
+            var time = moment(jsonDate).format("hh:mm A");
+            return time;
+        },
+
+        getDateDisplay: function (jsonDate) {
+            var itemDate = moment(jsonDate);
+            var currDate = moment();
+            
+            return itemDate.from(currDate) + " at " + this.getJsTime(jsonDate);
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/blockUi/blockUi.js
+var ngBlockUi = angular.module("ngBlockUi", []);
+///#source 1 1 /wwwroot/modules/blockUi/services/blockUi.js
+ngBlockUi.factory('blockUiService', [function () {
+    return {
+        blockIt: function (properties) {
+            if (properties == undefined) properties = {};
+
+            if (properties.html == undefined) {
+                properties.html = '<h4><img src="wwwroot/css/images/loader-girl.gif" height="128" /></h4>';
+            }
+
+            if (properties.css == undefined) {
+                properties.css = {
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: '#000',
+                    opacity: .5,
+                    color: '#fff'
+                };
+            }
+
+            if (properties.elem == undefined) {
+                $.blockUI({
+                    message: properties.html,
+                    css: properties.css
+                });
+            } else {
+                $(properties.elem).block({
+                    message: properties.html,
+                    css: properties.css
+                });
+            }
+        },
+
+        unblockIt: function (elem) {
+            if (elem == undefined) {
+                $.unblockUI();
+            } else {
+                $(elem).unblock();
+            }
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/isotope/isotope.js
+var blogIsotope = angular.module("blogIsotope", ["iso.directives"]);
+///#source 1 1 /wwwroot/modules/isotope/directives/isotopeItemResize.js
+blogIsotope.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
+    function ($window, $timeout, $interval) {
+        var linkFn = function (scope, elem, attrs) {
+            scope.columnCount = 0;
+            scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
+
+            scope.applyLayout = function () {
+                $interval(function () {
+                    resizeItems($window.innerWidth);
+                    scope.$broadcast('iso-method', { name: 'layout', params: null });
+
+                    // TODO: temporarily removed and to be verified if it works!
+                    //var isotopeElements = elem.children();
+                    //for (var i = 0; i < isotopeElements.length; i++) {
+                    //    if ((i + 1) % scope.columnCount == 0) {
+                    //        $(isotopeElements[i]).css({ "margin-right": "0"});
+                    //    }
+                    //}
+                }, 500, 5);
+            };
+
+            scope.$on("windowSizeChanged", function (e, d) {
+                if (attrs.resizeLayoutOnly == undefined || attrs.resizeLayoutOnly === "false") {
+                    resizeItems(d.width);
+                }
+                scope.applyLayout();
+            });
+
+            scope.$on("resizeIsotopeItems", function () {
+                scope.applyLayout();
+            });
+
+            var getColumnCount = function(containerWidth, columnSize, defaultSize) {
+                var columnPercentage = columnSize == undefined ? parseFloat(defaultSize) : parseFloat(columnSize);
+                var columnWidth = (containerWidth / 100) * columnPercentage;
+                var columnCount = parseInt(containerWidth / columnWidth);
+
+                return columnCount;
+            };
+
+            var resizeItems = function (w) {
+                if (attrs.resizeContainer == undefined) {
+                    if (w >= 992) {
+                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "32%");
+                        _.each($(elem).children(), function (a) {
+                            var large = attrs.resizeLarge == undefined ? "32%" : attrs.resizeLarge;
+                            $(a).width(large);
+                        });
+                    } else if (w >= 767 && w < 992) {
+                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "48%");
+                        _.each($(elem).children(), function (a) {
+                            var medium = attrs.resizeMedium == undefined ? "48%" : attrs.resizeMedium;
+                            $(a).width(medium);
+                        });
+                    } else {
+                        scope.columnCount = getColumnCount(w, attrs.resizeSmall, "96%");
+                        _.each($(elem).children(), function (a) {
+                            var small = attrs.resizeSmall == undefined ? "96%" : attrs.resizeSmall;
+                            $(a).width(small);
+                        });
+                    }
+                } else {
+                    var container = $("#" + attrs.resizeContainer);
+                    var containerWidth = container.outerWidth();
+
+                    if (containerWidth > 1200) {
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXlarge, "19%");
+                        _.each($(elem).children(), function (a) {
+                            var xlarge = attrs.resizeXlarge == undefined ? "19%" : attrs.resizeXlarge;
+                            $(a).width(xlarge);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "xlarge");
+                    } else if (containerWidth > 992) {
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "23.5%");
+                        _.each($(elem).children(), function (a) {
+                            var large = attrs.resizeLarge == undefined ? "23.5%" : attrs.resizeLarge;
+                            $(a).width(large);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "large");
+                    } else if (containerWidth > 768) {
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeMedium, "31.5%");
+                        _.each($(elem).children(), function (a) {
+                            var medium = attrs.resizeMedium == undefined ? "31.5%" : attrs.resizeMedium;
+                            $(a).width(medium);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "medium");
+                    } else if (containerWidth > 568) {
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeSmall, "48%");
+                        _.each($(elem).children(), function (a) {
+                            var medium = attrs.resizeSmall == undefined ? "48%" : attrs.resizeSmall;
+                            $(a).width(medium);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "small");
+                    } else {
+                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXsmall, "98%");
+                        _.each($(elem).children(), function (a) {
+                            var xsmall = attrs.resizeXsmall == undefined ? "98%" : attrs.resizeXsmall;
+                            $(a).width(xsmall);
+                        });
+                        if (attrs.resizeBroadcast != undefined)
+                            scope.$emit(attrs.resizeBroadcast, "xsmall");
+                    }
+                }
+            };
+
+            scope.applyLayout();
+        };
+
+        return {
+            restrict: 'EA',
+            link: linkFn
+        };
+    }
+]);
+
+///#source 1 1 /wwwroot/modules/fileUpload/fileUpload.js
+var blogFileUpload = angular.module("blogFileUpload", ['angularFileUpload']);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUpload.js
+blogFileUpload.directive("fileUpload", ["$templateCache",
+    function ($templateCache) {
+        return {
+            restrict: 'EA',
+            scope: { uploader: '='},
+            replace: true,
+            template: $templateCache.get("fileUpload/fileUpload.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadItem.js
+blogFileUpload.directive("fileUploadItem", ["$templateCache",
+    function ($templateCache) {
+        var linkFn = function(scope) {
+            scope.isNewContent = function (exists) {
+                var response = true;
+                if (exists) {
+                    response = false;
+                }
+                return response;
+            };
+        };
+
+        return {
+            link: linkFn,
+            restrict: 'EA',
+            scope: {
+                item: '=',
+                uploader: '='
+            },
+            replace: true,
+            template: $templateCache.get("fileUpload/fileUploadItem.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js
+blogFileUpload.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
+    function ($window, $rootScope, blockUiService) {
+        var helper = {
+            support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+            isFile: function (item) {
+                return angular.isObject(item) && item instanceof $window.File;
+            },
+            isImage: function (file) {
+                var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        };
+
+        return {
+            restrict: 'A',
+            template: '<canvas/>',
+            link: function (scope, element, attributes) {
+                if (!helper.support) return;
+
+                var params = scope.$eval(attributes.fileUploadThumbnail);
+
+                if (!helper.isFile(params.file)) return;
+                if (!helper.isImage(params.file)) return;
+
+                var canvas = element.find('canvas');
+                var reader = new FileReader();
+
+                reader.onload = onLoadFile;
+                reader.readAsDataURL(params.file);
+
+                function onLoadFile(event) {
+                    var img = new Image();
+                    img.onload = onLoadImage;
+                    img.src = event.target.result;
+                }
+
+                function onLoadImage() {
+                    blockUiService.blockIt();
+                    var width = params.width || this.width / this.height * params.height;
+                    var height = params.height || this.height / this.width * params.width;
+                    canvas.attr({ width: width, height: height });
+                    canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+                    $rootScope.$broadcast("resizeIsotopeItems", {});
+                    blockUiService.unblockIt();
+                }
+            }
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/videoPlayer/videoPlayer.js
+var blogVideoPlayer = angular.module("blogVideoPlayer",
+    [
+        "com.2fdevs.videogular",
+		"com.2fdevs.videogular.plugins.controls",
+		"com.2fdevs.videogular.plugins.overlayplay",
+		"com.2fdevs.videogular.plugins.buffering",
+		"com.2fdevs.videogular.plugins.poster",
+		"com.2fdevs.videogular.plugins.imaads"
+    ]);
+///#source 1 1 /wwwroot/modules/videoPlayer/directives/videoPlayer.js
+blogVideoPlayer.directive("videoPlayer", ["$templateCache",
+    function ($templateCache) {
+        var ctrlFn = function ($scope, $sce) {
+            $scope.currentTime = 0;
+            $scope.totalTime = 0;
+            $scope.state = null;
+            $scope.volume = 1;
+            $scope.isCompleted = false;
+            $scope.API = null;
+
+            $scope.onPlayerReady = function (API) {
+                $scope.API = API;
+            };
+
+            $scope.onCompleteVideo = function () {
+                $scope.currentTime = 0;
+                $scope.isCompleted = true;
+            };
+
+            $scope.onUpdateState = function (state) {
+                $scope.state = state;
+            };
+
+            $scope.onUpdateTime = function (currentTime, totalTime) {
+                $scope.currentTime = currentTime;
+                $scope.totalTime = totalTime;
+            };
+
+            $scope.onUpdateVolume = function (newVol) {
+                $scope.volume = newVol;
+            };
+
+            $scope.onUpdateSize = function (width, height) {
+                $scope.config.width = width;
+                $scope.config.height = height;
+            };
+
+            $scope.stretchModes = [
+                { label: "None", value: "none" },
+                { label: "Fit", value: "fit" },
+                { label: "Fill", value: "fill" }
+            ];
+
+            $scope.config = {
+                width: 740,
+                height: 380,
+                autoHide: false,
+                autoHideTime: 3000,
+                autoPlay: false,
+                responsive: false,
+                stretch: $scope.stretchModes[2],
+                sources: [
+                    {
+                        src: $sce.trustAsResourceUrl($scope.media.MediaUrl),
+                        type: $scope.media.MediaType
+                    }
+                ],
+                transclude: true,
+                theme: {
+                    url: window.blogConfiguration.blogRoot + "/bower_components/videogular-themes-default/videogular.css"
+                },
+                plugins: {
+                    poster: {
+                        url: $scope.media.ThumbnailUrl
+                    }
+                }
+            };
+        };
+        ctrlFn.$inject = ["$scope", "$sce"];
+
+        return {
+            restrict: 'EA',
+            scope: { media: '=' },
+            controller: ctrlFn,
+            replace: true,
+            template: $templateCache.get("videoPlayer/videoPlayer.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/ticker/ticker.js
+var blogTicker = angular.module("blogTicker", []);
+///#source 1 1 /wwwroot/modules/ticker/directives/ticker.js
+blogTicker.directive('ticker', function () {
+    var filterFn;
+    filterFn = function (scope, element, attrs) {
+        var ticker = $(element).newsTicker({
+            row_height: 40,
+            max_rows: 1,
+            duration: 5000
+        });
+
+        if (attrs.enablePause) {
+            $(element).on("click", $(element).find("[data-pause-trigger]"), function (ev) {
+                ticker.newsTicker('toggle');
+            });
+        }
+    };
+
+    return {
+        restrict: 'EA',
+        link: filterFn
+    };
+});
+///#source 1 1 /wwwroot/modules/keypress/keypress.js
+var blogKeyPress = angular.module("blogKeyPress", []);
+///#source 1 1 /wwwroot/modules/keypress/directives/keypress.js
+blogKeyPress.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+///#source 1 1 /wwwroot/modules/empty/empty.js
+var blogEmpty = angular.module("blogEmpty", []);
+///#source 1 1 /wwwroot/modules/empty/directives/emptyRecordMessage.js
+blogEmpty.directive("emptyRecordMessage", ["$templateCache",
+    function ($templateCache) {
+        var ctrlFn = function ($scope) {
+        };
+        ctrlFn.$inject = ["$scope"];
+
+        return {
+            restrict: 'EA',
+            scope: { message: '=' },
+            replace: true,
+            template: $templateCache.get("empty/emptyRecordMessage.html"),
+            controller: ctrlFn
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/scrollTrigger/scrollTrigger.js
+var blogScrollTrigger = angular.module("blogScrollTrigger", []);
+///#source 1 1 /wwwroot/modules/scrollTrigger/directives/scrollTrigger.js
+blogScrollTrigger.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
+    return {
+        link: function (scope, element, attrs) {
+            scope.scrollTriggerWatch = null;
+
+            $rootScope.$on("updateScrollTriggerWatch", function (event, data) {
+                scope.scrollTriggerWatch = "#" + data;
+            });
+
+            angular.element(element).bind("scroll", function () {
+                if (scope.scrollTriggerWatch != null) {
+                    var scroll = $(element).scrollTop();
+                    if (scroll + $(window).height() >= $(scope.scrollTriggerWatch).outerHeight()) {
+                        $rootScope.$broadcast("scrollBottom");
+                    }
+                }
+            });
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/windowResize/windowResize.js
+var windowResize = angular.module("windowResize", []);
+///#source 1 1 /wwwroot/modules/windowResize/directives/windowResize.js
+windowResize.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
+    return {
+        restrict: 'EA',
+        link: function postLink(scope) {
+            scope.onResizeFunction = function () {
+                scope.windowHeight = $window.innerHeight;
+                scope.windowWidth = $window.innerWidth;
+                $rootScope.$broadcast("windowSizeChanged", {
+                    height: scope.windowHeight,
+                    width: scope.windowWidth
+                });
+            };
+
+            scope.onResizeFunction();
+
+            angular.element($window).bind('resize', function () {
+                $timeout(function () {
+                    scope.onResizeFunction();
+                    scope.$apply();
+                }, 500);
+            });
+        }
+    };
 }]);
 
 ///#source 1 1 /wwwroot/modules/comments/comments.js
 var ngComments = angular.module("ngComments",
     [
-        "ngShared",
-        "iso.directives",
+        "ngDateHelper",
+        "blogIsotope",
         "ngConfig",
         "LocalStorageModule"
     ]);
@@ -3356,11 +3872,11 @@ ngConfig.provider('configProvider', [function () {
 ///#source 1 1 /wwwroot/modules/communities/communities.js
 var ngCommunities = angular.module("ngCommunities",
     [
-        "ngShared",
+        "ngDateHelper",
         "ngPosts",
-        "iso.directives",
+        "blogIsotope",
         "LocalStorageModule",
-        "ngConfig",
+        "ngConfig"
     ]);
 ///#source 1 1 /wwwroot/modules/communities/controllers/communitiesListController.js
 ngCommunities.controller('communitiesListController', ["$scope", "$rootScope", "$location",
@@ -3983,6 +4499,7 @@ var ngLogin = angular.module("ngLogin",
     [
         "ngRoute",
         "ngConfig",
+        "ngBlockUi",
         "LocalStorageModule",
         "mgcrea.ngStrap"
     ]);
@@ -4506,6 +5023,7 @@ var blog = angular.module("blog",
         "ngCookies",
         "mgcrea.ngStrap",
         "snap",
+        "ngBlockUi",
         "ngConfig",
         "ngLogger",
         "ngHeader",
@@ -4789,38 +5307,13 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
         $scope.init();
     }
 ]);
-///#source 1 1 /wwwroot/modules/main/directives/windowResize.js
-blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
-    return {
-        restrict: 'EA',
-        link: function postLink(scope) {
-            scope.onResizeFunction = function () {
-                scope.windowHeight = $window.innerHeight;
-                scope.windowWidth = $window.innerWidth;
-                $rootScope.$broadcast("windowSizeChanged", {
-                    height: scope.windowHeight,
-                    width: scope.windowWidth
-                });
-            };
-
-            scope.onResizeFunction();
-
-            angular.element($window).bind('resize', function () {
-                $timeout(function () {
-                    scope.onResizeFunction();
-                    scope.$apply();
-                }, 500);
-            });
-        }
-    };
-}]);
-
 ///#source 1 1 /wwwroot/modules/media/media.js
 var ngMedia = angular.module("ngMedia",
     [
-        "ngShared",
-        "iso.directives",
-        "angularFileUpload",
+        "blogFileUpload",
+        "blogIsotope",
+        "blogVideoPlayer",
+        "ngDateHelper",
         "slick"
     ]);
 ///#source 1 1 /wwwroot/modules/media/controllers/mediaGalleryController.js
@@ -5545,7 +6038,7 @@ ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
 ///#source 1 1 /wwwroot/modules/messaging/messaging.js
 var ngMessaging = angular.module("ngMessaging",
     [
-        "ngShared",
+        "ngDateHelper",
         "ngError",
         "ngBlogSockets",
         "ngConfig",
@@ -5984,6 +6477,8 @@ var ngPosts = angular.module("ngPosts",
     [
         "ngSanitize",
         "ngComments",
+        "ngEllipsis",
+        "ngDateHelper",
         "ngTags",
         "ngUser",
         "ngMedia",
@@ -5992,10 +6487,12 @@ var ngPosts = angular.module("ngPosts",
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
-        "iso.directives",
+        "blogFileUpload",
+        "blogIsotope",
+        "blogVideoPlayer",
+        "blogTicker",
         "ngConfig",
         "LocalStorageModule",
-        "angularFileUpload",
         "slick"
     ]);
 ///#source 1 1 /wwwroot/modules/posts/controllers/postsController.js
@@ -7274,476 +7771,6 @@ ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configPro
         };
     }
 ]);
-///#source 1 1 /wwwroot/modules/shared/shared.js
-var ngShared = angular.module("ngShared",
-    [
-        'angularFileUpload',
-        "com.2fdevs.videogular",
-		"com.2fdevs.videogular.plugins.controls",
-		"com.2fdevs.videogular.plugins.overlayplay",
-		"com.2fdevs.videogular.plugins.buffering",
-		"com.2fdevs.videogular.plugins.poster",
-		"com.2fdevs.videogular.plugins.imaads"
-    ]);
-///#source 1 1 /wwwroot/modules/shared/directives/ellipsis.js
-ngShared.directive('ellipsis', [function () {
-    var filterFn;
-    filterFn = function (scope, element, attrs) {
-        scope.$on("reapplyEllipsis", function () {
-            scope.applyEllipsis();
-        });
-
-        scope.applyEllipsis = function() {
-            var height = parseInt(attrs.wrapHeight == undefined ? 180 : attrs.wrapHeight);
-            $(element).dotdotdot({
-                ellipsis: "...",
-                height: height
-            });
-        };
-
-        scope.applyEllipsis();
-    };
-
-    return {
-        restrict: 'EA',
-        link: filterFn
-    };
-}]);
-///#source 1 1 /wwwroot/modules/shared/directives/emptyRecordMessage.js
-ngShared.directive("emptyRecordMessage", ["$templateCache",
-    function ($templateCache) {
-        var ctrlFn = function ($scope) {
-        };
-        ctrlFn.$inject = ["$scope"];
-
-        return {
-            restrict: 'EA',
-            scope: { message: '=' },
-            replace: true,
-            template: $templateCache.get("shared/emptyRecordMessage.html"),
-            controller: ctrlFn
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/shared/directives/fileUpload.js
-ngShared.directive("fileUpload", ["$templateCache",
-    function ($templateCache) {
-        return {
-            restrict: 'EA',
-            scope: { uploader: '='},
-            replace: true,
-            template: $templateCache.get("shared/fileUpload.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/shared/directives/fileUploadItem.js
-ngShared.directive("fileUploadItem", ["$templateCache",
-    function ($templateCache) {
-        var linkFn = function(scope) {
-            scope.isNewContent = function (exists) {
-                var response = true;
-                if (exists) {
-                    response = false;
-                }
-                return response;
-            };
-        };
-
-        return {
-            link: linkFn,
-            restrict: 'EA',
-            scope: {
-                item: '=',
-                uploader: '='
-            },
-            replace: true,
-            template: $templateCache.get("shared/fileUploadItem.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/shared/directives/fileUploadThumbnail.js
-ngShared.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
-    function ($window, $rootScope, blockUiService) {
-        var helper = {
-            support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-            isFile: function (item) {
-                return angular.isObject(item) && item instanceof $window.File;
-            },
-            isImage: function (file) {
-                var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        };
-
-        return {
-            restrict: 'A',
-            template: '<canvas/>',
-            link: function (scope, element, attributes) {
-                if (!helper.support) return;
-
-                var params = scope.$eval(attributes.fileUploadThumbnail);
-
-                if (!helper.isFile(params.file)) return;
-                if (!helper.isImage(params.file)) return;
-
-                var canvas = element.find('canvas');
-                var reader = new FileReader();
-
-                reader.onload = onLoadFile;
-                reader.readAsDataURL(params.file);
-
-                function onLoadFile(event) {
-                    var img = new Image();
-                    img.onload = onLoadImage;
-                    img.src = event.target.result;
-                }
-
-                function onLoadImage() {
-                    blockUiService.blockIt();
-                    var width = params.width || this.width / this.height * params.height;
-                    var height = params.height || this.height / this.width * params.width;
-                    canvas.attr({ width: width, height: height });
-                    canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
-                    $rootScope.$broadcast("resizeIsotopeItems", {});
-                    blockUiService.unblockIt();
-                }
-            }
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/shared/directives/isotopeItemResize.js
-ngShared.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
-    function ($window, $timeout, $interval) {
-        var linkFn = function (scope, elem, attrs) {
-            scope.columnCount = 0;
-            scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
-
-            scope.applyLayout = function () {
-                $interval(function () {
-                    resizeItems($window.innerWidth);
-                    scope.$broadcast('iso-method', { name: 'layout', params: null });
-
-                    // TODO: temporarily removed and to be verified if it works!
-                    //var isotopeElements = elem.children();
-                    //for (var i = 0; i < isotopeElements.length; i++) {
-                    //    if ((i + 1) % scope.columnCount == 0) {
-                    //        $(isotopeElements[i]).css({ "margin-right": "0"});
-                    //    }
-                    //}
-                }, 500, 5);
-            };
-
-            scope.$on("windowSizeChanged", function (e, d) {
-                if (attrs.resizeLayoutOnly == undefined || attrs.resizeLayoutOnly === "false") {
-                    resizeItems(d.width);
-                }
-                scope.applyLayout();
-            });
-
-            scope.$on("resizeIsotopeItems", function () {
-                scope.applyLayout();
-            });
-
-            var getColumnCount = function(containerWidth, columnSize, defaultSize) {
-                var columnPercentage = columnSize == undefined ? parseFloat(defaultSize) : parseFloat(columnSize);
-                var columnWidth = (containerWidth / 100) * columnPercentage;
-                var columnCount = parseInt(containerWidth / columnWidth);
-
-                return columnCount;
-            };
-
-            var resizeItems = function (w) {
-                if (attrs.resizeContainer == undefined) {
-                    if (w >= 992) {
-                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "32%");
-                        _.each($(elem).children(), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "32%" : attrs.resizeLarge;
-                            $(a).width(large);
-                        });
-                    } else if (w >= 767 && w < 992) {
-                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "48%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeMedium == undefined ? "48%" : attrs.resizeMedium;
-                            $(a).width(medium);
-                        });
-                    } else {
-                        scope.columnCount = getColumnCount(w, attrs.resizeSmall, "96%");
-                        _.each($(elem).children(), function (a) {
-                            var small = attrs.resizeSmall == undefined ? "96%" : attrs.resizeSmall;
-                            $(a).width(small);
-                        });
-                    }
-                } else {
-                    var container = $("#" + attrs.resizeContainer);
-                    var containerWidth = container.outerWidth();
-
-                    if (containerWidth > 1200) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXlarge, "19%");
-                        _.each($(elem).children(), function (a) {
-                            var xlarge = attrs.resizeXlarge == undefined ? "19%" : attrs.resizeXlarge;
-                            $(a).width(xlarge);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "xlarge");
-                    } else if (containerWidth > 992) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "23.5%");
-                        _.each($(elem).children(), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "23.5%" : attrs.resizeLarge;
-                            $(a).width(large);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "large");
-                    } else if (containerWidth > 768) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeMedium, "31.5%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeMedium == undefined ? "31.5%" : attrs.resizeMedium;
-                            $(a).width(medium);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "medium");
-                    } else if (containerWidth > 568) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeSmall, "48%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeSmall == undefined ? "48%" : attrs.resizeSmall;
-                            $(a).width(medium);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "small");
-                    } else {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXsmall, "98%");
-                        _.each($(elem).children(), function (a) {
-                            var xsmall = attrs.resizeXsmall == undefined ? "98%" : attrs.resizeXsmall;
-                            $(a).width(xsmall);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "xsmall");
-                    }
-                }
-            };
-
-            scope.applyLayout();
-        };
-
-        return {
-            restrict: 'EA',
-            link: linkFn
-        };
-    }
-]);
-
-///#source 1 1 /wwwroot/modules/shared/directives/keypress.js
-ngShared.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if (event.which === 13) {
-                scope.$apply(function () {
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
-});
-///#source 1 1 /wwwroot/modules/shared/directives/scrollTrigger.js
-ngShared.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
-    return {
-        link: function (scope, element, attrs) {
-            scope.scrollTriggerWatch = null;
-
-            $rootScope.$on("updateScrollTriggerWatch", function (event, data) {
-                scope.scrollTriggerWatch = "#" + data;
-            });
-
-            angular.element(element).bind("scroll", function () {
-                if (scope.scrollTriggerWatch != null) {
-                    var scroll = $(element).scrollTop();
-                    if (scroll + $(window).height() >= $(scope.scrollTriggerWatch).outerHeight()) {
-                        $rootScope.$broadcast("scrollBottom");
-                    }
-                }
-            });
-        }
-    };
-}]);
-///#source 1 1 /wwwroot/modules/shared/directives/ticker.js
-ngShared.directive('ticker', function () {
-    var filterFn;
-    filterFn = function (scope, element, attrs) {
-        var ticker = $(element).newsTicker({
-            row_height: 40,
-            max_rows: 1,
-            duration: 5000
-        });
-
-        if (attrs.enablePause) {
-            $(element).on("click", $(element).find("[data-pause-trigger]"), function (ev) {
-                ticker.newsTicker('toggle');
-            });
-        }
-    };
-
-    return {
-        restrict: 'EA',
-        link: filterFn
-    };
-});
-///#source 1 1 /wwwroot/modules/shared/directives/videoPlayer.js
-ngShared.directive("videoPlayer", ["$templateCache",
-    function ($templateCache) {
-        var ctrlFn = function ($scope, $sce) {
-            $scope.currentTime = 0;
-            $scope.totalTime = 0;
-            $scope.state = null;
-            $scope.volume = 1;
-            $scope.isCompleted = false;
-            $scope.API = null;
-
-            $scope.onPlayerReady = function (API) {
-                $scope.API = API;
-            };
-
-            $scope.onCompleteVideo = function () {
-                $scope.currentTime = 0;
-                $scope.isCompleted = true;
-            };
-
-            $scope.onUpdateState = function (state) {
-                $scope.state = state;
-            };
-
-            $scope.onUpdateTime = function (currentTime, totalTime) {
-                $scope.currentTime = currentTime;
-                $scope.totalTime = totalTime;
-            };
-
-            $scope.onUpdateVolume = function (newVol) {
-                $scope.volume = newVol;
-            };
-
-            $scope.onUpdateSize = function (width, height) {
-                $scope.config.width = width;
-                $scope.config.height = height;
-            };
-
-            $scope.stretchModes = [
-                { label: "None", value: "none" },
-                { label: "Fit", value: "fit" },
-                { label: "Fill", value: "fill" }
-            ];
-
-            $scope.config = {
-                width: 740,
-                height: 380,
-                autoHide: false,
-                autoHideTime: 3000,
-                autoPlay: false,
-                responsive: false,
-                stretch: $scope.stretchModes[2],
-                sources: [
-                    {
-                        src: $sce.trustAsResourceUrl($scope.media.MediaUrl),
-                        type: $scope.media.MediaType
-                    }
-                ],
-                transclude: true,
-                theme: {
-                    url: window.blogConfiguration.blogRoot + "/scripts/bower_components/videogular-themes-default/videogular.css"
-                },
-                plugins: {
-                    poster: {
-                        url: $scope.media.ThumbnailUrl
-                    }
-                }
-            };
-        };
-        ctrlFn.$inject = ["$scope", "$sce"];
-
-        return {
-            restrict: 'EA',
-            scope: { media: '=' },
-            controller: ctrlFn,
-            replace: true,
-            template: $templateCache.get("shared/videoPlayer.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/shared/services/blockUi.js
-ngShared.factory('blockUiService', [function () {
-    return {
-        blockIt: function (properties) {
-            if (properties == undefined) properties = {};
-
-            if (properties.html == undefined) {
-                properties.html = '<h4><img src="wwwroot/css/images/loader-girl.gif" height="128" /></h4>';
-            }
-
-            if (properties.css == undefined) {
-                properties.css = {
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: '#000',
-                    opacity: .5,
-                    color: '#fff'
-                };
-            }
-
-            if (properties.elem == undefined) {
-                $.blockUI({
-                    message: properties.html,
-                    css: properties.css
-                });
-            } else {
-                $(properties.elem).block({
-                    message: properties.html,
-                    css: properties.css
-                });
-            }
-        },
-
-        unblockIt: function (elem) {
-            if (elem == undefined) {
-                $.unblockUI();
-            } else {
-                $(elem).unblock();
-            }
-        }
-    };
-}]);
-///#source 1 1 /wwwroot/modules/shared/services/dateHelper.js
-ngShared.factory('dateHelper', [function () {
-    return {
-        getJsFullDate: function (jsonDate) {
-            return moment(jsonDate);
-        },
-
-        getYearsDifference: function (jsonDate) {
-            return moment().diff(jsonDate, 'years');
-        },
-        
-        getJsDate: function (jsonDate) {
-            var date = moment(jsonDate).format("MMM D, YYYY");
-            return date;
-        },
-
-        getMonthYear: function(jsonDate) {
-            var date = moment(jsonDate).format("MMMM YYYY");
-            return date;
-        },
-
-        getJsTime: function (jsonDate) {
-            var time = moment(jsonDate).format("hh:mm A");
-            return time;
-        },
-
-        getDateDisplay: function (jsonDate) {
-            var itemDate = moment(jsonDate);
-            var currDate = moment();
-            
-            return itemDate.from(currDate) + " at " + this.getJsTime(jsonDate);
-        }
-    };
-}]);
 ///#source 1 1 /wwwroot/modules/sockets/socket.js
 var ngBlogSockets = angular.module("ngBlogSockets",
     [
@@ -8014,14 +8041,15 @@ ngTags.factory('tagsService', ["$http", "$q", "configProvider", function ($http,
 var ngUser = angular.module("ngUser",
     [
         "LocalStorageModule",
+        "ngDateHelper",
         "ngSanitize",
-        "ngShared",
+        "ngBlockUi",
         "ngComments",
         "ngPosts",
         "ngLogin",
         "ngConfig",
         "ngMessaging",
-        "angularFileUpload"
+        "blogIsotope"
     ]);
 ///#source 1 1 /wwwroot/modules/user/controllers/userProfileCommentsController.js
 ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",

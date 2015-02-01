@@ -1,4 +1,4 @@
-﻿blog.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
+﻿windowResize.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
     return {
         restrict: 'EA',
         link: function postLink(scope) {

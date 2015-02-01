@@ -12,6 +12,41 @@
   <files>
     <file>/wwwroot/modules/init.js</file>
     <file>/wwwroot/modules/templates.js</file>
+    
+    <file>/wwwroot/modules/ellipsis/ellipsis.js</file>
+    <file>/wwwroot/modules/ellipsis/directives/ellipsis.js</file>
+    
+    <file>/wwwroot/modules/date/dateHelper.js</file>
+    <file>/wwwroot/modules/date/services/dateHelper.js</file>
+    
+    <file>/wwwroot/modules/blockUi/blockUi.js</file>
+    <file>/wwwroot/modules/blockUi/services/blockUi.js</file>
+    
+    <file>/wwwroot/modules/isotope/isotope.js</file>
+    <file>/wwwroot/modules/isotope/directives/isotopeItemResize.js</file>
+    
+    <file>/wwwroot/modules/fileUpload/fileUpload.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUpload.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUploadItem.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js</file>
+    
+    <file>/wwwroot/modules/videoPlayer/videoPlayer.js</file>
+    <file>/wwwroot/modules/videoPlayer/directives/videoPlayer.js</file>
+
+    <file>/wwwroot/modules/ticker/ticker.js</file>
+    <file>/wwwroot/modules/ticker/directives/ticker.js</file>
+
+    <file>/wwwroot/modules/keypress/keypress.js</file>
+    <file>/wwwroot/modules/keypress/directives/keypress.js</file>
+
+    <file>/wwwroot/modules/empty/empty.js</file>
+    <file>/wwwroot/modules/empty/directives/emptyRecordMessage.js</file>
+    
+    <file>/wwwroot/modules/scrollTrigger/scrollTrigger.js</file>
+    <file>/wwwroot/modules/scrollTrigger/directives/scrollTrigger.js</file>
+    
+    <file>/wwwroot/modules/windowResize/windowResize.js</file>
+    <file>/wwwroot/modules/windowResize/directives/windowResize.js</file>
 
     <file>/wwwroot/modules/comments/comments.js</file>
     <file>/wwwroot/modules/comments/directives/commentItem.js</file>
@@ -41,7 +76,7 @@
     <file>/wwwroot/modules/logger/logger.js</file>
     <file>/wwwroot/modules/logger/services/errorLogService.js</file>
     <file>/wwwroot/modules/logger/services/stacktraceService.js</file>
-
+    
     <file>/wwwroot/modules/login/login.js</file>
     <file>/wwwroot/modules/login/directives/loggedUser.js</file>
     <file>/wwwroot/modules/login/directives/loginForm.js</file>
@@ -54,7 +89,6 @@
     <file>/wwwroot/modules/main/app.js</file>
     <file>/wwwroot/modules/main/config/blogConfig.js</file>
     <file>/wwwroot/modules/main/controllers/blogMainController.js</file>
-    <file>/wwwroot/modules/main/directives/windowResize.js</file>
 
     <file>/wwwroot/modules/media/media.js</file>
     <file>/wwwroot/modules/media/controllers/mediaGalleryController.js</file>
@@ -87,20 +121,6 @@
     <file>/wwwroot/modules/posts/directives/postRelatedItems.js</file>
     <file>/wwwroot/modules/posts/directives/postViewNavigator.js</file>
     <file>/wwwroot/modules/posts/services/postsService.js</file>
-
-    <file>/wwwroot/modules/shared/shared.js</file>
-    <file>/wwwroot/modules/shared/directives/ellipsis.js</file>
-    <file>/wwwroot/modules/shared/directives/emptyRecordMessage.js</file>
-    <file>/wwwroot/modules/shared/directives/fileUpload.js</file>
-    <file>/wwwroot/modules/shared/directives/fileUploadItem.js</file>
-    <file>/wwwroot/modules/shared/directives/fileUploadThumbnail.js</file>
-    <file>/wwwroot/modules/shared/directives/isotopeItemResize.js</file>
-    <file>/wwwroot/modules/shared/directives/keypress.js</file>
-    <file>/wwwroot/modules/shared/directives/scrollTrigger.js</file>
-    <file>/wwwroot/modules/shared/directives/ticker.js</file>
-    <file>/wwwroot/modules/shared/directives/videoPlayer.js</file>
-    <file>/wwwroot/modules/shared/services/blockUi.js</file>
-    <file>/wwwroot/modules/shared/services/dateHelper.js</file>
 
     <file>/wwwroot/modules/sockets/socket.js</file>
     <file>/wwwroot/modules/sockets/directives/socketDebugger.js</file>

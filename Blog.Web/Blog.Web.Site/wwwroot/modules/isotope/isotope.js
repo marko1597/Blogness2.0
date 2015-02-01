@@ -1,0 +1,1 @@
+﻿var blogIsotope = angular.module("blogIsotope", ["iso.directives"]);

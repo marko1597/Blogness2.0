@@ -2,6 +2,8 @@
     [
         "ngSanitize",
         "ngComments",
+        "ngEllipsis",
+        "ngDateHelper",
         "ngTags",
         "ngUser",
         "ngMedia",
@@ -10,9 +12,11 @@
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
-        "iso.directives",
+        "blogFileUpload",
+        "blogIsotope",
+        "blogVideoPlayer",
+        "blogTicker",
         "ngConfig",
         "LocalStorageModule",
-        "angularFileUpload",
         "slick"
     ]);

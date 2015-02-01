@@ -1,4 +1,4 @@
-﻿ngShared.directive("emptyRecordMessage", ["$templateCache",
+﻿blogEmpty.directive("emptyRecordMessage", ["$templateCache",
     function ($templateCache) {
         var ctrlFn = function ($scope) {
         };
@@ -8,7 +8,7 @@
             restrict: 'EA',
             scope: { message: '=' },
             replace: true,
-            template: $templateCache.get("shared/emptyRecordMessage.html"),
+            template: $templateCache.get("empty/emptyRecordMessage.html"),
             controller: ctrlFn
         };
     }

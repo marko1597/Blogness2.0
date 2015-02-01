@@ -1,8 +1,8 @@
 ﻿var ngCommunities = angular.module("ngCommunities",
     [
-        "ngShared",
+        "ngDateHelper",
         "ngPosts",
-        "iso.directives",
+        "blogIsotope",
         "LocalStorageModule",
-        "ngConfig",
+        "ngConfig"
     ]);

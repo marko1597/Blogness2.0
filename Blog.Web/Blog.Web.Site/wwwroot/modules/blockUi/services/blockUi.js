@@ -1,4 +1,4 @@
-﻿ngShared.factory('blockUiService', [function () {
+﻿ngBlockUi.factory('blockUiService', [function () {
     return {
         blockIt: function (properties) {
             if (properties == undefined) properties = {};

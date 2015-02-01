@@ -1,4 +1,4 @@
-﻿ngShared.directive('ticker', function () {
+﻿blogTicker.directive('ticker', function () {
     var filterFn;
     filterFn = function (scope, element, attrs) {
         var ticker = $(element).newsTicker({

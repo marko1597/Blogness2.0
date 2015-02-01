@@ -2,6 +2,7 @@
     [
         "ngRoute",
         "ngConfig",
+        "ngBlockUi",
         "LocalStorageModule",
         "mgcrea.ngStrap"
     ]);

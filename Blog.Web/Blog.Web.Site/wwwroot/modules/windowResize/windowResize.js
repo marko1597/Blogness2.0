@@ -1,0 +1,1 @@
+﻿var windowResize = angular.module("windowResize", []);

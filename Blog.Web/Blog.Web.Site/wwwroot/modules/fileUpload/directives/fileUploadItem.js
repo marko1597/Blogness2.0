@@ -1,4 +1,4 @@
-﻿ngShared.directive("fileUploadItem", ["$templateCache",
+﻿blogFileUpload.directive("fileUploadItem", ["$templateCache",
     function ($templateCache) {
         var linkFn = function(scope) {
             scope.isNewContent = function (exists) {
@@ -18,7 +18,7 @@
                 uploader: '='
             },
             replace: true,
-            template: $templateCache.get("shared/fileUploadItem.html")
+            template: $templateCache.get("fileUpload/fileUploadItem.html")
         };
     }
 ]);

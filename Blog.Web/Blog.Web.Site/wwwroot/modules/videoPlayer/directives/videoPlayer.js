@@ -1,4 +1,4 @@
-﻿ngShared.directive("videoPlayer", ["$templateCache",
+﻿blogVideoPlayer.directive("videoPlayer", ["$templateCache",
     function ($templateCache) {
         var ctrlFn = function ($scope, $sce) {
             $scope.currentTime = 0;
@@ -57,7 +57,7 @@
                 ],
                 transclude: true,
                 theme: {
-                    url: window.blogConfiguration.blogRoot + "/scripts/bower_components/videogular-themes-default/videogular.css"
+                    url: window.blogConfiguration.blogRoot + "/bower_components/videogular-themes-default/videogular.css"
                 },
                 plugins: {
                     poster: {
@@ -73,7 +73,7 @@
             scope: { media: '=' },
             controller: ctrlFn,
             replace: true,
-            template: $templateCache.get("shared/videoPlayer.html")
+            template: $templateCache.get("videoPlayer/videoPlayer.html")
         };
     }
 ]);

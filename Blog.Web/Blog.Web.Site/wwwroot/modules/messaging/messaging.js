@@ -1,6 +1,6 @@
 ﻿var ngMessaging = angular.module("ngMessaging",
     [
-        "ngShared",
+        "ngDateHelper",
         "ngError",
         "ngBlogSockets",
         "ngConfig",

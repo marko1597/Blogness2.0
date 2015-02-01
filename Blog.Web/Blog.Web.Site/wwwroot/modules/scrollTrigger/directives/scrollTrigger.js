@@ -1,4 +1,4 @@
-﻿ngShared.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
+﻿blogScrollTrigger.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
     return {
         link: function (scope, element, attrs) {
             scope.scrollTriggerWatch = null;

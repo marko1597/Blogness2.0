@@ -1,4 +1,4 @@
-﻿ngShared.factory('dateHelper', [function () {
+﻿ngDateHelper.factory('dateHelper', [function () {
     return {
         getJsFullDate: function (jsonDate) {
             return moment(jsonDate);

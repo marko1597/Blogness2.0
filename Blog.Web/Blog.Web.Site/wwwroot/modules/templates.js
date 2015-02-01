@@ -341,6 +341,15 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('empty/emptyRecordMessage.html',
+    "<div class=\"empty-record-message\">\r" +
+    "\n" +
+    "    <p>{{message}}</p>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('error/errorDisplay.html',
     "<div id=\"blog-error-global\" class=\"hidden\">\r" +
     "\n" +
@@ -355,6 +364,154 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    </div>\r" +
     "\n" +
     "</div>s"
+  );
+
+
+  $templateCache.put('fileUpload/fileUpload.html',
+    "<div>\r" +
+    "\n" +
+    "    <div class=\"file-upload\" ng-file-drop>\r" +
+    "\n" +
+    "        <label class=\"btn btn-primary\">\r" +
+    "\n" +
+    "            Choose from your computer..\r" +
+    "\n" +
+    "            <input nv-file-select type=\"file\" uploader=\"uploader\" multiple />\r" +
+    "\n" +
+    "        </label>\r" +
+    "\n" +
+    "        <div class=\"well dropzone\" nv-file-over=\"\" uploader=\"uploader\">\r" +
+    "\n" +
+    "            <h4>Drag files here...</h4>\r" +
+    "\n" +
+    "            <p>You have {{ uploader.queue.length }} items</p>\r" +
+    "\n" +
+    "            <div class=\"btn btn-primary upload-all\" ng-click=\"uploader.uploadAll()\">\r" +
+    "\n" +
+    "                <i class=\"fa fa-upload\"></i>Upload all\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div>\r" +
+    "\n" +
+    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
+    "\n" +
+    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
+    "\n" +
+    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
+    "\n" +
+    "                    </li>\r" +
+    "\n" +
+    "                </ul>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('fileUpload/fileUploadItem.html',
+    "<div>\r" +
+    "\n" +
+    "    <div class=\"upload-details\">\r" +
+    "\n" +
+    "        <p class=\"filename\" bs-popover data-placement=\"bottom\" data-animation=\"am-flip-x\"\r" +
+    "\n" +
+    "           title=\"File Name\" data-content=\"{{item.file.name}}\">\r" +
+    "\n" +
+    "            {{ item.file.name }}\r" +
+    "\n" +
+    "        </p>\r" +
+    "\n" +
+    "        <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"buttons\" nowrap>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-success btn-xs\" ng-click=\"item.upload()\" ng-disabled=\"item.isReady || item.isUploading || item.isSuccess\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-upload\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-warning btn-xs\" ng-click=\"item.cancel()\" ng-disabled=\"!item.isUploading\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-ban\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"item.remove()\">\r" +
+    "\n" +
+    "                <span class=\"fa fa-trash-o\"></span>\r" +
+    "\n" +
+    "            </button>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        <div class=\"status\">\r" +
+    "\n" +
+    "            <span ng-show=\"item.isSuccess\"><i class=\"fa fa-check\"></i></span>\r" +
+    "\n" +
+    "            <span ng-show=\"item.isCancel\"><i class=\"fa fa-stop\"></i></span>\r" +
+    "\n" +
+    "            <span ng-show=\"item.isError\"><i class=\"fa fa-exclamation-triangle\"></i></span>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"thumbnail\" ng-switch=\"isNewContent(item.isExisting)\">\r" +
+    "\n" +
+    "        <div ng-switch-when=\"true\" file-upload-thumbnail=\"{ file: item._file, height: 100 }\"></div>\r" +
+    "\n" +
+    "        <div ng-switch-default>\r" +
+    "\n" +
+    "            <img ng-src=\"{{item.url}}\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"progress\" style=\"margin-bottom: 0;\">\r" +
+    "\n" +
+    "        <div class=\"progress-bar\" role=\"progressbar\" ng-style=\"{ 'width': item.progress + '%' }\"></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <div class=\"captions\" ng-switch on=\"item.allowCaptions\">\r" +
+    "\n" +
+    "        <div ng-switch-when=\"true\">\r" +
+    "\n" +
+    "            <h5>Content Title</h5>\r" +
+    "\n" +
+    "            <input ng-model=\"item.postContentTitle\" placeholder=\"Enter content title here...\" maxlength=\"50\" />\r" +
+    "\n" +
+    "            <h5>Content Description</h5>\r" +
+    "\n" +
+    "            <textarea ng-model=\"item.postContentText\" placeholder=\"Enter a brief description of this content here...\" \r" +
+    "\n" +
+    "                      maxlength=\"140\"></textarea>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div ng-switch-default></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>"
   );
 
 
@@ -1589,212 +1746,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
-  $templateCache.put('shared/emptyRecordMessage.html',
-    "<div class=\"empty-record-message\">\r" +
-    "\n" +
-    "    <p>{{message}}</p>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/fileUpload.html',
-    "<div>\r" +
-    "\n" +
-    "    <div class=\"file-upload\" ng-file-drop>\r" +
-    "\n" +
-    "        <label class=\"btn btn-primary\">\r" +
-    "\n" +
-    "            Choose from your computer..\r" +
-    "\n" +
-    "            <input nv-file-select type=\"file\" uploader=\"uploader\" multiple />\r" +
-    "\n" +
-    "        </label>\r" +
-    "\n" +
-    "        <div class=\"well dropzone\" nv-file-over=\"\" uploader=\"uploader\">\r" +
-    "\n" +
-    "            <h4>Drag files here...</h4>\r" +
-    "\n" +
-    "            <p>You have {{ uploader.queue.length }} items</p>\r" +
-    "\n" +
-    "            <div class=\"btn btn-primary upload-all\" ng-click=\"uploader.uploadAll()\">\r" +
-    "\n" +
-    "                <i class=\"fa fa-upload\"></i>Upload all\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "            <div>\r" +
-    "\n" +
-    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
-    "\n" +
-    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
-    "\n" +
-    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
-    "\n" +
-    "            </div>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/fileUploadItem.html',
-    "<div>\r" +
-    "\n" +
-    "    <div class=\"upload-details\">\r" +
-    "\n" +
-    "        <p class=\"filename\" bs-popover data-placement=\"bottom\" data-animation=\"am-flip-x\"\r" +
-    "\n" +
-    "           title=\"File Name\" data-content=\"{{item.file.name}}\">\r" +
-    "\n" +
-    "            {{ item.file.name }}\r" +
-    "\n" +
-    "        </p>\r" +
-    "\n" +
-    "        <p nowrap>{{ item.file.size/1024/1024|number:2 }} MB</p>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"buttons\" nowrap>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-success btn-xs\" ng-click=\"item.upload()\" ng-disabled=\"item.isReady || item.isUploading || item.isSuccess\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-upload\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-warning btn-xs\" ng-click=\"item.cancel()\" ng-disabled=\"!item.isUploading\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-ban\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "            <button type=\"button\" class=\"btn btn-danger btn-xs\" ng-click=\"item.remove()\">\r" +
-    "\n" +
-    "                <span class=\"fa fa-trash-o\"></span>\r" +
-    "\n" +
-    "            </button>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "        <div class=\"status\">\r" +
-    "\n" +
-    "            <span ng-show=\"item.isSuccess\"><i class=\"fa fa-check\"></i></span>\r" +
-    "\n" +
-    "            <span ng-show=\"item.isCancel\"><i class=\"fa fa-stop\"></i></span>\r" +
-    "\n" +
-    "            <span ng-show=\"item.isError\"><i class=\"fa fa-exclamation-triangle\"></i></span>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"thumbnail\" ng-switch=\"isNewContent(item.isExisting)\">\r" +
-    "\n" +
-    "        <div ng-switch-when=\"true\" file-upload-thumbnail=\"{ file: item._file, height: 100 }\"></div>\r" +
-    "\n" +
-    "        <div ng-switch-default>\r" +
-    "\n" +
-    "            <img ng-src=\"{{item.url}}\" />\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"progress\" style=\"margin-bottom: 0;\">\r" +
-    "\n" +
-    "        <div class=\"progress-bar\" role=\"progressbar\" ng-style=\"{ 'width': item.progress + '%' }\"></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "\r" +
-    "\n" +
-    "    <div class=\"captions\" ng-switch on=\"item.allowCaptions\">\r" +
-    "\n" +
-    "        <div ng-switch-when=\"true\">\r" +
-    "\n" +
-    "            <h5>Content Title</h5>\r" +
-    "\n" +
-    "            <input ng-model=\"item.postContentTitle\" placeholder=\"Enter content title here...\" maxlength=\"50\" />\r" +
-    "\n" +
-    "            <h5>Content Description</h5>\r" +
-    "\n" +
-    "            <textarea ng-model=\"item.postContentText\" placeholder=\"Enter a brief description of this content here...\" \r" +
-    "\n" +
-    "                      maxlength=\"140\"></textarea>\r" +
-    "\n" +
-    "        </div>\r" +
-    "\n" +
-    "        <div ng-switch-default></div>\r" +
-    "\n" +
-    "    </div>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
-  $templateCache.put('shared/videoPlayer.html',
-    "<div>\r" +
-    "\n" +
-    "    <videogular vg-player-ready=\"onPlayerReady\" vg-complete=\"onCompleteVideo\" vg-update-time=\"onUpdateTime\"\r" +
-    "\n" +
-    "                vg-update-size=\"onUpdateSize\" vg-update-volume=\"onUpdateVolume\" vg-update-state=\"onUpdateState\"\r" +
-    "\n" +
-    "                vg-width=\"config.width\" vg-height=\"config.height\" vg-theme=\"config.theme.url\"\r" +
-    "\n" +
-    "                vg-autoplay=\"config.autoPlay\" vg-stretch=\"config.stretch.value\" vg-responsive=\"true\">\r" +
-    "\n" +
-    "        <vg-video vg-src=\"config.sources\" preload='metadata'></vg-video>\r" +
-    "\n" +
-    "        <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch=\"config.stretch.value\"></vg-poster-image>\r" +
-    "\n" +
-    "        <vg-buffering></vg-buffering>\r" +
-    "\n" +
-    "        <vg-overlay-play vg-play-icon=\"config.theme.playIcon\"></vg-overlay-play>\r" +
-    "\n" +
-    "        <vg-controls vg-autohide=\"config.autoHide\" vg-autohide-time=\"config.autoHideTime\" style=\"height: 50px;\">\r" +
-    "\n" +
-    "            <vg-play-pause-button></vg-play-pause-button>\r" +
-    "\n" +
-    "            <vg-scrubbar>\r" +
-    "\n" +
-    "                <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>\r" +
-    "\n" +
-    "            </vg-scrubbar>\r" +
-    "\n" +
-    "            <!--<vg-timedisplay>{{ currentTime }} / {{ totalTime }}</vg-timedisplay>-->\r" +
-    "\n" +
-    "            <vg-volume>\r" +
-    "\n" +
-    "                <vg-mutebutton></vg-mutebutton>\r" +
-    "\n" +
-    "                <vg-volumebar></vg-volumebar>\r" +
-    "\n" +
-    "            </vg-volume>\r" +
-    "\n" +
-    "            <vg-fullscreenbutton vg-enter-full-screen-icon=\"config.theme.enterFullScreenIcon\" vg-exit-full-screen-icon=\"config.theme.exitFullScreenIcon\"></vg-fullscreenbutton>\r" +
-    "\n" +
-    "        </vg-controls>\r" +
-    "\n" +
-    "    </videogular>\r" +
-    "\n" +
-    "</div>"
-  );
-
-
   $templateCache.put('sockets/socketDebugger.html',
     "<div id=\"socket-debugger\" class=\"card animate rotate-in-right ng-cloak\" ng-show=\"show\">\r" +
     "\n" +
@@ -2769,7 +2720,8 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    </div>\r" +
     "\n" +
-    "</div>"
+    "</div>\r" +
+    "\n"
   );
 
 
@@ -2783,6 +2735,55 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    \r" +
     "\n" +
     "    <div ui-view></div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
+  $templateCache.put('videoPlayer/videoPlayer.html',
+    "<div>\r" +
+    "\n" +
+    "    <videogular vg-player-ready=\"onPlayerReady\" vg-complete=\"onCompleteVideo\" vg-update-time=\"onUpdateTime\"\r" +
+    "\n" +
+    "                vg-update-size=\"onUpdateSize\" vg-update-volume=\"onUpdateVolume\" vg-update-state=\"onUpdateState\"\r" +
+    "\n" +
+    "                vg-width=\"config.width\" vg-height=\"config.height\" vg-theme=\"config.theme.url\"\r" +
+    "\n" +
+    "                vg-autoplay=\"config.autoPlay\" vg-stretch=\"config.stretch.value\" vg-responsive=\"true\">\r" +
+    "\n" +
+    "        <vg-video vg-src=\"config.sources\" preload='metadata'></vg-video>\r" +
+    "\n" +
+    "        <vg-poster-image vg-url='config.plugins.poster.url' vg-stretch=\"config.stretch.value\"></vg-poster-image>\r" +
+    "\n" +
+    "        <vg-buffering></vg-buffering>\r" +
+    "\n" +
+    "        <vg-overlay-play vg-play-icon=\"config.theme.playIcon\"></vg-overlay-play>\r" +
+    "\n" +
+    "        <vg-controls vg-autohide=\"config.autoHide\" vg-autohide-time=\"config.autoHideTime\" style=\"height: 50px;\">\r" +
+    "\n" +
+    "            <vg-play-pause-button></vg-play-pause-button>\r" +
+    "\n" +
+    "            <vg-scrubbar>\r" +
+    "\n" +
+    "                <vg-scrubbarcurrenttime></vg-scrubbarcurrenttime>\r" +
+    "\n" +
+    "            </vg-scrubbar>\r" +
+    "\n" +
+    "            <!--<vg-timedisplay>{{ currentTime }} / {{ totalTime }}</vg-timedisplay>-->\r" +
+    "\n" +
+    "            <vg-volume>\r" +
+    "\n" +
+    "                <vg-mutebutton></vg-mutebutton>\r" +
+    "\n" +
+    "                <vg-volumebar></vg-volumebar>\r" +
+    "\n" +
+    "            </vg-volume>\r" +
+    "\n" +
+    "            <vg-fullscreenbutton vg-enter-full-screen-icon=\"config.theme.enterFullScreenIcon\" vg-exit-full-screen-icon=\"config.theme.exitFullScreenIcon\"></vg-fullscreenbutton>\r" +
+    "\n" +
+    "        </vg-controls>\r" +
+    "\n" +
+    "    </videogular>\r" +
     "\n" +
     "</div>"
   );

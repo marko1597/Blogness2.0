@@ -1,6 +1,5 @@
-﻿var ngShared = angular.module("ngShared",
+﻿var blogVideoPlayer = angular.module("blogVideoPlayer",
     [
-        'angularFileUpload',
         "com.2fdevs.videogular",
 		"com.2fdevs.videogular.plugins.controls",
 		"com.2fdevs.videogular.plugins.overlayplay",
