@@ -16,6 +16,7 @@
         "blogIsotope",
         "blogVideoPlayer",
         "blogTicker",
+        "blogScrollTrigger",
         "ngConfig",
         "LocalStorageModule",
         "slick"
