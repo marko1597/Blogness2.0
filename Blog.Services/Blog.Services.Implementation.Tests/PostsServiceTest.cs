@@ -1,5 +1,4 @@
-﻿using Blog.Logic.Core;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Blog.Services.Implementation.Tests
 {

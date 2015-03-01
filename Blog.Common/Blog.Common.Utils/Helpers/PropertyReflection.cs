@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Linq;
 using Blog.Common.Utils.Helpers.Interfaces;
 
 namespace Blog.Common.Utils.Helpers

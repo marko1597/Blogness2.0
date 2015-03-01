@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
-using Blog.Common.Contracts;
 
 namespace Blog.Admin.Web.Models
 {

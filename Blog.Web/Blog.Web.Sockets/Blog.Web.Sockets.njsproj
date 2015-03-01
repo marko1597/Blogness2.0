@@ -23,14 +23,11 @@
     <NodejsPort>1337</NodejsPort>
     <StartWebBrowser>true</StartWebBrowser>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Home' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Dev' ">
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Remote' ">
-    <OutputPath>bin\Remote\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="blogsockets.js" />

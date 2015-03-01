@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
-using System.Web;
 using Blog.Common.Utils.Helpers.Elmah;
 
 namespace Blog.Services.Implementation.Handlers

@@ -26,16 +26,7 @@
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Home|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Remote|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -4532,6 +4523,9 @@
     <Content Include="wwwroot\css\scss\communities\communityview.css.map">
       <DependentUpon>communityview.css</DependentUpon>
     </Content>
+    <None Include="Web.Dev.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="wwwroot\css\scss\extensions\ngtagsinput.scss" />
     <Content Include="wwwroot\css\scss\extensions\ckeditor.css">
       <DependentUpon>ckeditor.scss</DependentUpon>
@@ -7781,13 +7775,7 @@
     <Content Include="bower_components\stacktrace-js\jshint.json" />
     <Content Include="bower_components\stacktrace-js\package.json" />
     <Content Include="bower_components\stacktrace-js\README.md" />
-    <None Include="Web.Home.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Remote.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="wwwroot\lib\ckeditor\CHANGES.md" />
