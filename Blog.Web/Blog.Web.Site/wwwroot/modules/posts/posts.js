@@ -9,6 +9,7 @@
         "ngMedia",
         "ngError",
         "ngMedia",
+        "ngConfig",
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
@@ -17,7 +18,6 @@
         "blogVideoPlayer",
         "blogTicker",
         "blogScrollTrigger",
-        "ngConfig",
         "LocalStorageModule",
         "slick"
     ]);
