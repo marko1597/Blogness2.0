@@ -3875,6 +3875,7 @@ var ngCommunities = angular.module("ngCommunities",
         "ngDateHelper",
         "ngPosts",
         "blogIsotope",
+        "blogScrollTrigger",
         "LocalStorageModule",
         "ngConfig"
     ]);
@@ -6491,6 +6492,7 @@ var ngPosts = angular.module("ngPosts",
         "blogIsotope",
         "blogVideoPlayer",
         "blogTicker",
+        "blogScrollTrigger",
         "ngConfig",
         "LocalStorageModule",
         "slick"
@@ -8049,7 +8051,8 @@ var ngUser = angular.module("ngUser",
         "ngLogin",
         "ngConfig",
         "ngMessaging",
-        "blogIsotope"
+        "blogIsotope",
+        "blogScrollTrigger"
     ]);
 ///#source 1 1 /wwwroot/modules/user/controllers/userProfileCommentsController.js
 ngUser.controller('userProfileCommentsController', ["$scope", "$rootScope", "$stateParams", "commentsService", "userService", "errorService", "localStorageService",

@@ -3,6 +3,7 @@
         "ngDateHelper",
         "ngPosts",
         "blogIsotope",
+        "blogScrollTrigger",
         "LocalStorageModule",
         "ngConfig"
     ]);
