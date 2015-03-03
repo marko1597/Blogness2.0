@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Extensions;
 using Blog.Common.Web.Attributes;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 using Moq;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;

@@ -3,7 +3,7 @@ using System.Net;
 using System.Web.Http;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {

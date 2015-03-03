@@ -13,7 +13,7 @@ using Blog.Common.Identity.Models;
 using Blog.Common.Identity.OAuth;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 using Blog.Web.Api.Models.Account;
 using Blog.Web.Api.Models.Account.Binding;
 using Blog.Web.Api.Results;

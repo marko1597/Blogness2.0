@@ -53,7 +53,7 @@ namespace Blog.Mobile.Views.Home
             };
 
             Icon = "slideout.png";
-			IsLoggedIn ();
+			//IsLoggedIn ();
         }
 
 		async void IsLoggedIn()

@@ -5,7 +5,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Identity.Role;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Blog.Admin.Web.Controllers

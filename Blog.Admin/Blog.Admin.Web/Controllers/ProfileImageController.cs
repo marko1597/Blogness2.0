@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using Blog.Admin.Web.Models;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Admin.Web.Controllers
 {

@@ -6,7 +6,6 @@ namespace Blog.Mobile.Components
 	{
 		public BaseStackLayout ()
 		{
-			BackgroundColor = Color.White;
             Padding = new Thickness(10);
 			VerticalOptions = LayoutOptions.FillAndExpand;
 			HorizontalOptions = LayoutOptions.FillAndExpand;

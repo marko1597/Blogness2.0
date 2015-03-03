@@ -3,8 +3,8 @@ using System.Web;
 using Blog.Common.Contracts;
 using Blog.Common.Identity.Models;
 using Blog.Common.Identity.User;
+using Blog.Services.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf;
-using Blog.Services.Helpers.Wcf.Interfaces;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Blog.Admin.Web.Helpers

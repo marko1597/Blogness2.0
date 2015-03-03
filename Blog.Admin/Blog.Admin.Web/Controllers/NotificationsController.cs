@@ -4,7 +4,7 @@ using Blog.Admin.Web.Models;
 using Blog.Common.Contracts;
 using Blog.Common.Contracts.ViewModels.SocketViewModels;
 using Blog.Common.Utils;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Admin.Web.Controllers
 {

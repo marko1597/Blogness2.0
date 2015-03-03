@@ -12,7 +12,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Utils.Helpers.Interfaces;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 using WebApi.OutputCache.V2;
 
 namespace Blog.Web.Api.Controllers

@@ -9,6 +9,18 @@ namespace Blog.Mobile.Components
 		{
 			SetBinding(TitleProperty, new Binding(BaseViewModel.TitlePropertyName));
 			SetBinding(IconProperty, new Binding(BaseViewModel.IconPropertyName));
+
+			Device.OnPlatform (
+				iOS: () => {
+					BackgroundImage = "background.png";
+				},
+				Android: () => {
+					BackgroundImage = "@drawable/background";
+				},
+				WinPhone: () => {
+					BackgroundImage = "Images/background.png";
+				}
+			);
 		}
     }
 }

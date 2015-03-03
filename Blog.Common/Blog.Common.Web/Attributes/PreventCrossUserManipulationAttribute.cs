@@ -6,8 +6,8 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using Blog.Common.Contracts;
+using Blog.Services.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf;
-using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Common.Web.Attributes
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Blog.Common.Utils.Extensions;
+using Blog.Services.Helpers.Interfaces;
 using Blog.Services.Helpers.Wcf;
-using Blog.Services.Helpers.Wcf.Interfaces;
 
 namespace Blog.Common.Web.Attributes
 {

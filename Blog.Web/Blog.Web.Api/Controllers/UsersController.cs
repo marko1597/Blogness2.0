@@ -8,7 +8,7 @@ using Blog.Common.Contracts;
 using Blog.Common.Identity.User;
 using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 using Blog.Web.Api.Models;
 using Microsoft.AspNet.Identity.Owin;
 using WebApi.OutputCache.V2;

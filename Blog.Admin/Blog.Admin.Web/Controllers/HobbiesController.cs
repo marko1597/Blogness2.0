@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Blog.Common.Contracts;
 using Blog.Common.Utils.Helpers.Elmah;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Admin.Web.Controllers
 {

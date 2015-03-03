@@ -4,6 +4,7 @@ namespace Blog.Common.Utils
 {
     public static class Constants
     {
+        public static string BlogRestUrl = "https://localhost:4414/api/";
         public static int DefaultPostsThreshold = 10;
         public static double SessionValidityLength = 15.0;
         public static string FileMediaLocation = @"C:\Temp\SampleImages\";

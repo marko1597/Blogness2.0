@@ -37,6 +37,7 @@ namespace Blog.Mobile.Views.Home
             
 			var layout = new BaseStackLayout 
 			{ 
+
 				BackgroundColor = Color.DarkGray.ToFormsColor(),
 				Spacing = 0,
 				Padding = new Thickness(0)

@@ -4,7 +4,7 @@ using Blog.Common.Utils.Helpers.Elmah;
 using Blog.Common.Web.Attributes;
 using System;
 using System.Web.Http;
-using Blog.Services.Helpers.Wcf.Interfaces;
+using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Web.Api.Controllers
 {
