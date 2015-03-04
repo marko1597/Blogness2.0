@@ -1,53 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class HobbyRestResource : IHobbyResource
+    public class HobbyRestResource : IHobbyRestResource
     {
         public List<Hobby> GetByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
-            {
-                return svc.Proxy.GetByUser(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Hobby Add(Hobby hobby)
+        public Hobby Add(Hobby hobby, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
-            {
-                return svc.Proxy.Add(hobby);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Hobby Update(Hobby hobby)
+        public Hobby Update(Hobby hobby, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
-            {
-                return svc.Proxy.Update(hobby);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool Delete(int hobbyId)
+        public bool Delete(int hobbyId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
-            {
-                return svc.Proxy.Delete(hobbyId);
-            }
-        }
-
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<IHobbyService>("HobbyService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

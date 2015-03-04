@@ -9,70 +9,41 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class ChatMessagesRestResource : IChatMessagesResource
+    public class ChatMessagesRestResource : IChatMessagesRestResource
     {
-        public bool GetHeartBeat()
+        public ChatMessagesList GetChatMessagesListByUserId(int userId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
 
-        public ChatMessagesList GetChatMessagesListByUserId(int userId)
+        public ChatMessagesList GetChatMessagesListByUsername(string username, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetChatMessagesListByUserId(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public ChatMessagesList GetChatMessagesListByUsername(string username)
+        public List<ChatMessage> GetChatMessagesByUserIds(int fromUserId, int toUserId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetChatMessagesListByUsername(username);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<ChatMessage> GetChatMessagesByUserIds(int fromUserId, int toUserId)
+        public List<ChatMessage> GetChatMessagesByUsernames(string fromUsername, string toUsername, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetChatMessagesByUserIds(fromUserId, toUserId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<ChatMessage> GetChatMessagesByUsernames(string fromUsername, string toUsername)
+        public List<ChatMessage> GetMoreChatMessagesByUserIds(int fromUserId, int toUserId, string authenticationToken, int skip = 25)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetChatMessagesByUsernames(fromUsername, toUsername);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<ChatMessage> GetMoreChatMessagesByUserIds(int fromUserId, int toUserId, int skip = 25)
+        public List<ChatMessage> GetMoreChatMessagesByUsernames(string fromUsername, string toUsername, string authenticationToken, int skip = 25)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetMoreChatMessagesByUserIds(fromUserId, toUserId, skip);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<ChatMessage> GetMoreChatMessagesByUsernames(string fromUsername, string toUsername, int skip = 25)
+        public ChatMessage AddChatMessage(ChatMessage chatMessage, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.GetMoreChatMessagesByUsernames(fromUsername, toUsername, skip);
-            }
-        }
-
-        public ChatMessage AddChatMessage(ChatMessage chatMessage)
-        {
-            using (var svc = new ServiceProxyHelper<IChatMessagesService>("ChatMessagesService"))
-            {
-                return svc.Proxy.AddChatMessage(chatMessage);
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

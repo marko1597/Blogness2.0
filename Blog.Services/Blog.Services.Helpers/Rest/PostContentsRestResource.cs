@@ -1,53 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class PostContentsRestResource : IPostContentsResource
+    public class PostContentsRestResource : IPostContentsRestResource
     {
         public List<PostContent> GetByPostId(int postId)
         {
-            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
-            {
-                return svc.Proxy.GetByPostId(postId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public PostContent Get(int postContentId)
         {
-            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
-            {
-                return svc.Proxy.Get(postContentId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public PostContent Add(PostContent postImage)
+        public PostContent Add(PostContent postContent, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
-            {
-                return svc.Proxy.Add(postImage);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool Delete(int postContentId)
+        public bool Delete(int postContentId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
-            {
-                return svc.Proxy.Delete(postContentId);
-            }
-        }
-
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<IPostContentsService>("PostContentsService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

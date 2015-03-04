@@ -1,53 +1,31 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class EducationRestResource : IEducationResource
+    public class EducationRestResource : IEducationRestResource
     {
         public List<Education> GetByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
-            {
-                return svc.Proxy.GetByUser(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Education Add(Education education)
+        public Education Add(Education education, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
-            {
-                return svc.Proxy.Add(education);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Education Update(Education education)
+        public Education Update(Education education, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
-            {
-                return svc.Proxy.Update(education);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool Delete(int educationId)
+        public bool Delete(int educationId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
-            {
-                return svc.Proxy.Delete(educationId);
-            }
-        }
-
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<IEducationService>("EducationService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

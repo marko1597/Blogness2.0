@@ -1,101 +1,61 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class CommunityRestResource : ICommunityResource
+    public class CommunityRestResource : ICommunityRestResource
     {
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
-        }
-
         public Community Get(int communityId)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.Get(communityId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetList()
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetList();
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetMore(int skip)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetMore(skip);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetJoinedByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetJoinedByUser(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetMoreJoinedByUser(int userId, int skip)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetMoreJoinedByUser(userId, skip);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetCreatedByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetCreatedByUser(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Community> GetMoreCreatedByUser(int userId, int skip)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.GetMoreCreatedByUser(userId, skip);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Community Add(Community community)
+        public Community Add(Community community, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.Add(community);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Community Update(Community community)
+        public Community Update(Community community, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.Update(community);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool Delete(int communityId)
+        public bool Delete(int communityId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<ICommunityService>("CommunityService"))
-            {
-                return svc.Proxy.Delete(communityId);
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

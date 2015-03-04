@@ -1,77 +1,51 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
     public class MediaRestResource : IMediaResource
     {
-        public List<Media> GetByUser(int userId)
+        public bool GetHeartBeat()
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.GetByUser(userId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Media Get(int mediaId)
+        public List<Media> GetByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.Get(mediaId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public List<Media> GetByGroup(int albumId)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.GetByGroup(albumId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public Media GetByName(string customName)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.GetByName(customName);
-            }
+            throw new System.NotImplementedException();
+        }
+
+        public Media Get(int mediaId)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Media Add(Media media, int userId)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.Add(media, userId);
-            }
+            throw new System.NotImplementedException();
         }
 
         public Media AddAsContent(User user, string albumName, string filename, string path, string contentType)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.AddAsContent(user, albumName, filename, path, contentType);
-            }
-        }
-        
-        public bool Delete(int mediaId)
-        {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.Delete(mediaId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool GetHeartBeat()
+        public bool Delete(int mediaId)
         {
-            using (var svc = new ServiceProxyHelper<IMediaService>("MediaService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

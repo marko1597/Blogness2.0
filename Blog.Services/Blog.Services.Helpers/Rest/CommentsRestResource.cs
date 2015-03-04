@@ -1,69 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
-using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
-using Blog.Services.Implementation.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class CommentsRestResource : ICommentsResource
+    public class CommentsRestResource : ICommentsRestResource
     {
         public Comment Get(int commentId)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.Get(commentId);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<Comment> GetByPostId(int id)
+        public List<Comment> GetByPostId(int postId)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.GetByPostId(id);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<Comment> GetByUser(int id)
+        public List<Comment> GetByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.GetByUser(id);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public List<Comment> GetReplies(int id)
+        public List<Comment> GetReplies(int commentId)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.GetReplies(id);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public Comment Add(Comment comment)
+        public Comment Add(Comment comment, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.Add(comment);
-            }
+            throw new System.NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(int commentId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.Delete(id);
-            }
-        }
-
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<ICommentsService>("CommentsService"))
-            {
-                return svc.Proxy.GetHeartBeat();
-            }
+            throw new System.NotImplementedException();
         }
     }
 }
