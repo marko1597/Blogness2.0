@@ -31,6 +31,22 @@ namespace Blog.Common.Utils.Tests.Helpers
         }
 
         [Test]
+        public void ShouldHaveAuthenticationHeaderOnGet()
+        {
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("{ Test: Message }")
+            };
+            var fakeHandler = new FakeHttpMessageHandler(fakeResponse);
+            var httpClient = new HttpClient(fakeHandler) { BaseAddress = new Uri("http://localhost/") };
+
+            var httpClientHelper = new HttpClientHelper { HttpClientObj = httpClient };
+            httpClientHelper.Get("http://localhost/", "foo", "bar");
+
+            Assert.AreEqual(httpClientHelper.AuthenticationToken, "bar");
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenHttpClientFromGetResponseIsNull()
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted) { Content = null };
@@ -55,6 +71,22 @@ namespace Blog.Common.Utils.Tests.Helpers
             var result = httpClientHelper.HttpGet("http://localhost/", "foo");
 
             Assert.AreEqual(fakeResponse, result);
+        }
+
+        [Test]
+        public void ShouldHaveAuthenticationHeaderOnHttpGet()
+        {
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("{ Test: Message }")
+            };
+            var fakeHandler = new FakeHttpMessageHandler(fakeResponse);
+            var httpClient = new HttpClient(fakeHandler) { BaseAddress = new Uri("http://localhost/") };
+
+            var httpClientHelper = new HttpClientHelper { HttpClientObj = httpClient };
+            httpClientHelper.HttpGet("http://localhost/", "foo", "bar");
+
+            Assert.AreEqual(httpClientHelper.AuthenticationToken, "bar");
         }
 
         [Test]
@@ -85,6 +117,23 @@ namespace Blog.Common.Utils.Tests.Helpers
         }
 
         [Test]
+        public void ShouldHaveAuthenticationHeaderOnPost()
+        {
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("{ Test: Message }")
+            };
+            var fakeHandler = new FakeHttpMessageHandler(fakeResponse);
+            var httpClient = new HttpClient(fakeHandler) { BaseAddress = new Uri("http://localhost/") };
+
+            var testObj = new { Id = 1, Name = "foobar" };
+            var httpClientHelper = new HttpClientHelper { HttpClientObj = httpClient };
+            httpClientHelper.Post("http://localhost/", "foo", testObj, "bar");
+
+            Assert.AreEqual(httpClientHelper.AuthenticationToken, "bar");
+        }
+
+        [Test]
         public void ShouldThrowExceptionWhenHttpClientFromPostResponseIsNull()
         {
             var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted) { Content = null };
@@ -111,6 +160,23 @@ namespace Blog.Common.Utils.Tests.Helpers
             var result = httpClientHelper.Put("http://localhost/", "foo", testObj);
 
             Assert.AreEqual("{ Test: Message }", result);
+        }
+
+        [Test]
+        public void ShouldHaveAuthenticationHeaderOnPut()
+        {
+            var fakeResponse = new HttpResponseMessage(HttpStatusCode.Accepted)
+            {
+                Content = new StringContent("{ Test: Message }")
+            };
+            var fakeHandler = new FakeHttpMessageHandler(fakeResponse);
+            var httpClient = new HttpClient(fakeHandler) { BaseAddress = new Uri("http://localhost/") };
+
+            var testObj = new { Id = 1, Name = "foobar" };
+            var httpClientHelper = new HttpClientHelper { HttpClientObj = httpClient };
+            httpClientHelper.Put("http://localhost/", "foo", testObj, "bar");
+
+            Assert.AreEqual(httpClientHelper.AuthenticationToken, "bar");
         }
 
         [Test]

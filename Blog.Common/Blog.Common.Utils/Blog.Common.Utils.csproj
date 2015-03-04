@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\BlogHttpClient.cs" />
     <Compile Include="Helpers\Elmah\ErrorSignaler.cs" />
     <Compile Include="Helpers\Elmah\IErrorSignaler.cs" />
     <Compile Include="Extensions\BlogException.cs" />

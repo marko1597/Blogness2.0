@@ -7,7 +7,7 @@ using Blog.Services.Helpers.Interfaces;
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class AddressRestResource : IAddressResource
+    public class AddressRestResource : IAddressRestResource
     {
         public Address GetByUser(int userId)
         {
@@ -18,36 +18,31 @@ namespace Blog.Services.Helpers.Rest
             }
         }
 
-        public Address Add(Address address)
+        public Address Add(Address address, string authenticationToken)
         {
             using (var svc = new HttpClientHelper())
             {
-                var result = JsonHelper.DeserializeJson<Address>(svc.Post(Constants.BlogRestUrl, "address", address));
+                var result = JsonHelper.DeserializeJson<Address>(svc.Post(Constants.BlogRestUrl, "address", address, authenticationToken));
                 return result;
             }
         }
 
-        public Address Update(Address address)
+        public Address Update(Address address, string authenticationToken)
         {
             using (var svc = new HttpClientHelper())
             {
-                var result = JsonHelper.DeserializeJson<Address>(svc.Put(Constants.BlogRestUrl, "address", address));
+                var result = JsonHelper.DeserializeJson<Address>(svc.Put(Constants.BlogRestUrl, "address", address, authenticationToken));
                 return result;
             }
         }
 
-        public bool Delete(int addressId)
+        public bool Delete(int addressId, string authenticationToken)
         {
             using (var svc = new HttpClientHelper())
             {
-                var result = JsonHelper.DeserializeJson<bool>(svc.Delete(Constants.BlogRestUrl, string.Format("address/{0}", addressId)));
+                var result = JsonHelper.DeserializeJson<bool>(svc.Delete(Constants.BlogRestUrl, string.Format("address/{0}", addressId), authenticationToken));
                 return result;
             }
-        }
-
-        public bool GetHeartBeat()
-        {
-            return false;
         }
     }
 }

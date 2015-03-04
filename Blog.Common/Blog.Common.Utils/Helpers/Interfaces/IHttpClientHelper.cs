@@ -6,6 +6,7 @@ namespace Blog.Common.Utils.Helpers.Interfaces
     {
         string Get(string baseUri, string url);
         HttpResponseMessage HttpGet(string baseUri, string url);
+
         string Get(string baseUri, string url, string authenticationToken);
         HttpResponseMessage HttpGet(string baseUri, string url, string authenticationToken);
 

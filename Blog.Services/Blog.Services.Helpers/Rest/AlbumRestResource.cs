@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
 using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
 using Blog.Services.Implementation.Interfaces;
@@ -8,61 +9,59 @@ using Blog.Services.Implementation.Interfaces;
 namespace Blog.Services.Helpers.Rest
 {
     [ExcludeFromCodeCoverage]
-    public class AlbumRestResource : IAlbumResource
+    public class AlbumRestResource : IAlbumRestResource
     {
         public Album Get(int id)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.Get(id);
+                var result = JsonHelper.DeserializeJson<Album>(svc.Get(Constants.BlogRestUrl, string.Format("album/{0}", id)));
+                return result;
             }
         }
 
         public List<Album> GetByUser(int userId)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.GetByUser(userId);
+                var result = JsonHelper.DeserializeJson<List<Album>>(svc.Get(Constants.BlogRestUrl, string.Format("users/{0}/albums", userId)));
+                return result;
             }
         }
 
-        public Album GetUserDefaultGroup(int userId)
+        public Album GetUserDefaultGroup(int userId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.GetUserDefaultGroup(userId);
+                var result = JsonHelper.DeserializeJson<Album>(svc.Get(Constants.BlogRestUrl, string.Format("users/{0}/albums/default", userId), authenticationToken));
+                return result;
             }
         }
 
-        public Album Add(Album album)
+        public Album Add(Album album, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.Add(album);
+                var result = JsonHelper.DeserializeJson<Album>(svc.Post(Constants.BlogRestUrl, "/album", album, authenticationToken));
+                return result;
             }
         }
 
-        public Album Update(Album album)
+        public Album Update(Album album, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.Update(album);
+                var result = JsonHelper.DeserializeJson<Album>(svc.Put(Constants.BlogRestUrl, "/album", album, authenticationToken));
+                return result;
             }
         }
 
-        public bool Delete(int albumId)
+        public bool Delete(int albumId, string authenticationToken)
         {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
+            using (var svc = new HttpClientHelper())
             {
-                return svc.Proxy.Delete(albumId);
-            }
-        }
-
-        public bool GetHeartBeat()
-        {
-            using (var svc = new ServiceProxyHelper<IAlbumService>("AlbumService"))
-            {
-                return svc.Proxy.GetHeartBeat();
+                var result = JsonHelper.DeserializeJson<bool>(svc.Delete(Constants.BlogRestUrl, string.Format("/album/{0}", albumId), authenticationToken));
+                return result;
             }
         }
     }
