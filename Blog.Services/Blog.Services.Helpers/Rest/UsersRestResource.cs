@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Blog.Common.Contracts;
+using Blog.Common.Utils;
+using Blog.Common.Utils.Helpers;
 using Blog.Services.Helpers.Interfaces;
 
 namespace Blog.Services.Helpers.Rest
@@ -8,44 +9,44 @@ namespace Blog.Services.Helpers.Rest
     [ExcludeFromCodeCoverage]
     public class UsersRestResource : IUsersRestResource
     {
-        public List<User> GetUsers(int threshold = 10, int skip = 10)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public List<User> GetUsersByCommunity(int communityId, int threshold = 5, int skip = 10)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public List<User> GetUsersWithNoIdentityId()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public User GetByUserName(string username)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public User GetByIdentityId(string identityId)
-        {
-            throw new System.NotImplementedException();
+            using (var svc = new HttpClientHelper())
+            {
+                var result = JsonHelper.DeserializeJson<User>(
+                    svc.Get(Constants.BlogRestUrl, string.Format("users/{0}", username)));
+                return result;
+            }
         }
 
         public User Get(int userId)
         {
-            throw new System.NotImplementedException();
+            using (var svc = new HttpClientHelper())
+            {
+                var result = JsonHelper.DeserializeJson<User>(
+                    svc.Get(Constants.BlogRestUrl, string.Format("users/{0}", userId)));
+                return result;
+            }
         }
 
         public User Add(User user, string authenticationToken)
         {
-            throw new System.NotImplementedException();
+            using (var svc = new HttpClientHelper())
+            {
+                var result = JsonHelper.DeserializeJson<User>(
+                    svc.Post(Constants.BlogRestUrl, "users", user, authenticationToken));
+                return result;
+            }
         }
 
         public User Update(User user, string authenticationToken)
         {
-            throw new System.NotImplementedException();
+            using (var svc = new HttpClientHelper())
+            {
+                var result = JsonHelper.DeserializeJson<User>(
+                    svc.Put(Constants.BlogRestUrl, "users", user, authenticationToken));
+                return result;
+            }
         }
     }
 }

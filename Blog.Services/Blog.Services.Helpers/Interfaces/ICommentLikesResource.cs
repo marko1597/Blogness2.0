@@ -11,6 +11,6 @@ namespace Blog.Services.Helpers.Interfaces
     public interface ICommentLikesRestResource
     {
         List<CommentLike> Get(int commentId);
-        void Add(CommentLike commentLike, string authenticationToken);
+        void Add(int commentId, string username, string authenticationToken);
     }
 }

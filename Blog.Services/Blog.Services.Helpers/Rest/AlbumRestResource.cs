@@ -41,7 +41,7 @@ namespace Blog.Services.Helpers.Rest
         {
             using (var svc = new HttpClientHelper())
             {
-                var result = JsonHelper.DeserializeJson<Album>(svc.Post(Constants.BlogRestUrl, "/album", album, authenticationToken));
+                var result = JsonHelper.DeserializeJson<Album>(svc.Post(Constants.BlogRestUrl, "album", album, authenticationToken));
                 return result;
             }
         }
@@ -50,7 +50,7 @@ namespace Blog.Services.Helpers.Rest
         {
             using (var svc = new HttpClientHelper())
             {
-                var result = JsonHelper.DeserializeJson<Album>(svc.Put(Constants.BlogRestUrl, "/album", album, authenticationToken));
+                var result = JsonHelper.DeserializeJson<Album>(svc.Put(Constants.BlogRestUrl, "album", album, authenticationToken));
                 return result;
             }
         }
