@@ -2,7 +2,7 @@
 .user-profile-details {
   overflow: visible !important;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 27, ../../scss/user/userprofiledetails.scss */
   .user-profile-details .header > .btn-header {
     width: 40px;
@@ -23,7 +23,7 @@
   max-width: 100%;
   width: 100%;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 45, ../../scss/user/userprofiledetails.scss */
   .user-profile-details .card {
     margin-top: 0;
@@ -144,14 +144,14 @@
   max-width: 100%;
   width: 100%;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 142, ../../scss/user/userprofiledetails.scss */
   .user-profile-details .user-form .form-group label[data-display] {
     position: static;
     display: block;
   }
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 151, ../../scss/user/userprofiledetails.scss */
   .user-profile-details .user-form .form-group input[type='text'] {
     position: static;

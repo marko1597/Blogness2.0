@@ -40,6 +40,10 @@
             $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
 
+        $scope.showCommunitySelection = function () {
+            $rootScope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
+        };
+
         $scope.logout = function() {
             authenticationService.logout();
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
@@ -48,6 +52,10 @@
         $scope.toggleSocketDebugger = function() {
             $rootScope.$broadcast("toggleSocketDebugger");
         };
+
+        $scope.$on("doneSelectingCommunities", function(ev, data) {
+            console.log(data);
+        });
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {

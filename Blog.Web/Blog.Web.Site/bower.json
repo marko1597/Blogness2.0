@@ -59,6 +59,7 @@
     "videogular-overlay-play": "~0.5.1",
     "videogular-poster": "~0.5.1",
     "videogular-themes-default": "~0.5.1",
-    "angular-isotope": "~0.1.14"
+    "angular-isotope": "~0.1.14",
+    "angular-deckgrid": "~0.5.0"
   }
 }

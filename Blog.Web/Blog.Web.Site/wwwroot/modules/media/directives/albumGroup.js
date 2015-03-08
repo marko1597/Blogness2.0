@@ -3,6 +3,7 @@
 ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $window, albumService, mediaService, errorService, dateHelper, configProvider,
         $modal, FileUploader, localStorageService) {
+
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
            configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
@@ -10,6 +11,10 @@ ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
         $scope.isExpanded = !$scope.album.IsNew ? true : false;
 
         $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.media = $scope.album ? $scope.album.Media : null;
+
+        $scope.albumName = $scope.album ? $scope.album.AlbumName : '';
 
         $scope.toggleExpandClass = function () {
             if ($scope.isExpanded) {
@@ -75,6 +80,20 @@ ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
         $scope.$on("successDeletingMedia", function(ev, data) {
             var index = $scope.album.Media.indexOf(data);
             $scope.album.Media.splice(index, 1);
+        });
+
+        $scope.$watch('album', function(oldValue, newValue) {
+            if (newValue) {
+                $scope.albumName = newValue.AlbumName;
+                $scope.$broadcast("albumNameDoneLoading", { albumName: $scope.albumName });
+            }
+        });
+
+        $scope.$watch('user', function (oldValue, newValue) {
+            if (newValue) {
+                $scope.user = newValue;
+                $scope.$broadcast("albumUserDoneLoading", { user: $scope.user });
+            }
         });
 
         $scope.init = function() {

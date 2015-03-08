@@ -1,0 +1,101 @@
+﻿@import '../variables.scss';
+
+#community-list-selection-dialog {
+    .modal-body {
+        background: $default-color-darken;
+
+        .community-list-items {
+            @include clean-list;
+            @include padding($default-padding);
+            @include size(100%, auto);
+            color: $content-font-color;
+            
+            > li {
+                @include position(relative, null);
+                @include padding($default-padding);
+                @include margin(0, 0, $default-margin);
+                background: $default-color;
+
+                $img-size: unquote(($img-header-size / 2) + 'px');
+                $img-border-size: (($base-margin / 5) + 'px'); 
+                $img-margin: (($base-margin / 3) * 2);
+                $header-details-padding: unquote((($img-header-size / 2) + $img-margin) + 'px');
+
+                .selected-overlay {
+                    @include position(absolute, 0, null, null, null);
+                    @include padding($default-padding);
+                    @include margin(0, -$default-margin, 0, -$default-margin);
+                    @include size(100%);
+                    background: rgba(0, 0, 0, 0.7);
+
+                    i {
+                        color: $primary-color;
+                        font-size: 3em;
+                    }
+
+                    label {
+                        $label-position: unquote(($base-margin / 2) + 'px');
+                        @include margin(0, $default-margin, 0, $default-margin);
+                        @include position(relative, -$label-position, null, null, null);
+                        color: $main-font-color;
+                        font-size: 1.5em;
+                    }
+                }
+
+                .community-item-emblem {
+                    @include size($img-size);
+                    @include margin(0, unquote($img-margin + 'px'));
+                    float: left;
+
+                    img {
+                        @include size($img-size);
+                        @include border-radius(round, false);
+                        @include borders($img-border-size, solid, $dark-border-color, true);
+                    }
+                }
+
+                .community-item-details {
+                    @include size(100%, auto);
+
+                    > h4 {
+                        @include padding(null, null, null, $header-details-padding);
+                        @include margin(0);
+                        cursor: pointer;
+                        
+                        &:hover {
+                            @include opacity(0.7);
+                        }
+                    }
+
+                    > p {
+                        @include padding(null, null, null, $header-details-padding);
+                        @include margin(0);
+
+                        i {
+                            @include margin(0, 0, unquote($img-margin + 'px'));
+                            color: $main-color;
+                            cursor: pointer;
+
+                            &.fa-user {
+                                @include  margin(0, 0, 0, unquote($img-margin + 'px'));
+                            }
+                        }
+
+                        a {
+                            @include margin(0, 0, unquote($img-margin + 'px'));
+                            cursor: pointer;
+
+                            &:hover {
+                                color: darken($default-color, $hover-darken-value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modal-footer {
+        background: $main-color;
+    }
+}

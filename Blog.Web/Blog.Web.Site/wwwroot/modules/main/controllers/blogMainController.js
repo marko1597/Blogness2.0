@@ -8,8 +8,6 @@
         $scope.username = null;
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            //$log.info("location changing from " + current + " to " + next);
-
             if (current !== configProvider.getSettings().BlogRoot + "/#/") {
                 postsService.getRecentPosts();
             }
@@ -20,7 +18,7 @@
         });
 
         $scope.init = function() {
-            if ($scope.authData != null) {
+            if ($scope.authData !== null) {
                 $scope.username = localStorageService.get('username');
 
                 authenticationService.getUserInfo().then(function(response) {
@@ -37,13 +35,13 @@
 
         $scope.getUserInfo = function (username) {
             userService.getUserInfo(username).then(function (user) {
-                if (user.Error == null) {
+                if (user.Error === null) {
                     $rootScope.user = user;
                     $rootScope.authData = $scope.authData;
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
                         messagingService.userChatOnline(user.Id);
-                        console.log("Conneted to chat (userChat_" + user.Id + ")");
+                        console.log("Connected to chat (userChat_" + user.Id + ")");
                     }, 1500);
                 }
             });

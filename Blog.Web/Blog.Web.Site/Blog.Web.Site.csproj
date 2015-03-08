@@ -206,6 +206,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="bower_components\angular-deckgrid\angular-deckgrid.js" />
+    <Content Include="bower_components\angular-deckgrid\specs\deckgrid.spec.js" />
     <Content Include="bower_components\font-awesome\.gitignore" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
@@ -3198,6 +3200,11 @@
     <Content Include="bower_components\snapjs\.bower.json" />
     <Content Include="bower_components\snapjs\component.json" />
     <Content Include="bower_components\snapjs\README.md" />
+    <Content Include="bower_components\angular-deckgrid\.bower.json" />
+    <Content Include="bower_components\angular-deckgrid\bower.json" />
+    <Content Include="bower_components\angular-deckgrid\CONTRIBUTORS.md" />
+    <Content Include="bower_components\angular-deckgrid\LICENSE" />
+    <Content Include="bower_components\angular-deckgrid\README.md" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -3229,6 +3236,13 @@
     </Content>
     <Content Include="wwwroot\css\scss\communities\communitylistitem.min.css">
       <DependentUpon>communitylistitem.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityselectiondialog.css.map">
+      <DependentUpon>communityselectiondialog.css</DependentUpon>
+    </Content>
+    <None Include="wwwroot\css\scss\communities\communityselectiondialog.scss" />
+    <Content Include="wwwroot\css\scss\communities\communityselectiondialog.css">
+      <DependentUpon>communityselectiondialog.scss</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\scss\communities\communityview.css">
       <DependentUpon>communityview.scss</DependentUpon>
@@ -6843,6 +6857,7 @@
     <Content Include="wwwroot\modules\communities\controllers\communitiesListController.js" />
     <Content Include="wwwroot\modules\communities\controllers\communityViewController.js" />
     <Content Include="wwwroot\modules\communities\directives\communityHeader.js" />
+    <Content Include="wwwroot\modules\communities\directives\communitySelectionDialog.js" />
     <Content Include="wwwroot\modules\communities\directives\communityListItem.js" />
     <Content Include="wwwroot\modules\communities\services\communitiesService.js" />
     <Content Include="wwwroot\modules\date\dateHelper.js" />
@@ -7393,6 +7408,7 @@
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbyItem.js" />
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsInfo.js" />
     <Content Include="wwwroot\modules\windowResize\windowResize.js" />
+    <Content Include="wwwroot\templates\modules\communities\communitySelectionDialog.html" />
     <Content Include="wwwroot\templates\modules\posts\postUpdate.html" />
     <Content Include="wwwroot\modules\date\services\dateHelper.js" />
     <Content Include="wwwroot\modules\tags\directives\tagItem.js" />

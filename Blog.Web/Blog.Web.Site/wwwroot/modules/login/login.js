@@ -3,6 +3,7 @@
         "ngRoute",
         "ngConfig",
         "ngBlockUi",
+        "blogKeyPress",
         "LocalStorageModule",
         "mgcrea.ngStrap"
     ]);

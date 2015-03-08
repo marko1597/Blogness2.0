@@ -1,4 +1,4 @@
-﻿@media (min-width: 992px) {
+﻿@media screen and (min-width: 992px) and (max-width: 1199px) {
   #login-form-modal .modal-dialog {
     width: 35%; } }
 #login-form-modal .modal-dialog .modal-content .modal-body {

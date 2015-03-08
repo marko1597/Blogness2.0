@@ -33,7 +33,7 @@
 
     img {
         @include size(100%, auto);
-        @include borders(1px, solid, $light-border-color, true);
+        @include borders(1px, solid, $light-border-color, false, false, true);
         @include border-radius(null, false);
         max-width: 100%;
     }
@@ -41,17 +41,5 @@
     .btn-danger {
         @include position(absolute, $default-margin, $default-margin, null, null);
         @include margin(0);
-    }
-}
-
-.isotope-item {
-    .media-item {
-        border-bottom-left-radius: 0 !important;
-        border-bottom-right-radius: 0 !important;
-
-        img {
-            border-bottom-left-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
-        }
     }
 }

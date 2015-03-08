@@ -1,85 +1,99 @@
 /* line 3, ../../scss/header/headermenu.scss */
 #blog-header {
-  overflow: hidden; }
+  overflow: hidden;
+}
+/* line 6, ../../scss/header/headermenu.scss */
+#blog-header .messages-toggle {
+  width: auto;
+  height: 100%;
+  margin-top: 8px;
+  margin-right: 0;
+  margin-bottom: 8px;
+  margin-left: 0;
+  display: inline-block;
+  color: white;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
   /* line 6, ../../scss/header/headermenu.scss */
   #blog-header .messages-toggle {
-    width: auto;
-    height: 100%;
-    margin-top: 8px;
-    margin-right: 0;
-    margin-bottom: 8px;
-    margin-left: 0;
-    display: inline-block;
-    color: white;
-    cursor: pointer; }
-    @media (max-width: 767px) {
-      /* line 6, ../../scss/header/headermenu.scss */
-      #blog-header .messages-toggle {
-        margin-top: 15px;
-        margin-right: 15px;
-        margin-bottom: 15px;
-        margin-left: 15px; } }
-    /* line 18, ../../scss/header/headermenu.scss */
-    #blog-header .messages-toggle:hover {
-      color: #f2f2f2; }
-    /* line 22, ../../scss/header/headermenu.scss */
-    #blog-header .messages-toggle i, #blog-header .messages-toggle .add-post a, #blog-header .add-post .messages-toggle a {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 0;
-      margin-left: 0;
-      font-size: 1.5em; }
-  /* line 28, ../../scss/header/headermenu.scss */
-  #blog-header i, #blog-header .add-post a {
-    margin-right: 7px; }
-  /* line 32, ../../scss/header/headermenu.scss */
-  #blog-header .header-dropdown-item {
-    cursor: pointer; }
-    /* line 35, ../../scss/header/headermenu.scss */
-    #blog-header .header-dropdown-item:hover {
-      text-decoration: underline; }
-  /* line 40, ../../scss/header/headermenu.scss */
-  #blog-header .add-post {
-    width: 45px;
-    height: 45px;
-    position: absolute;
-    right: 30px;
-    bottom: 10px;
-    margin: 0 auto;
-    text-align: center;
-    border-top: 1px solid #40badd;
-    border-right: 1px solid #40badd;
-    border-bottom: 1px solid #40badd;
-    border-left: 1px solid #40badd;
-    box-shadow: 0 2px 4px 0 #cccccc;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    border-top-left-radius: 100%;
-    border-top-right-radius: 100%;
-    border-bottom-left-radius: 100%;
-    border-bottom-right-radius: 100%;
-    cursor: pointer;
-    background: #56c2e1;
-    z-index: 50;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
-    /* line 57, ../../scss/header/headermenu.scss */
-    #blog-header .add-post:hover {
-      background: #40badd; }
-    /* line 61, ../../scss/header/headermenu.scss */
-    #blog-header .add-post i, #blog-header .add-post a, #blog-header .add-post a {
-      color: white; }
-    /* line 65, ../../scss/header/headermenu.scss */
-    #blog-header .add-post i, #blog-header .add-post a {
-      margin-top: 0;
-      margin-right: 0;
-      margin-bottom: 0;
-      margin-left: 0;
-      font-size: 1.2em; }
-    /* line 70, ../../scss/header/headermenu.scss */
-    #blog-header .add-post a {
-      position: relative;
-      top: 13px; }
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+  }
+}
+/* line 18, ../../scss/header/headermenu.scss */
+#blog-header .messages-toggle:hover {
+  color: #f2f2f2;
+}
+/* line 22, ../../scss/header/headermenu.scss */
+#blog-header .messages-toggle i, #blog-header .messages-toggle .add-post a, #blog-header .add-post .messages-toggle a {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-size: 1.5em;
+}
+/* line 28, ../../scss/header/headermenu.scss */
+#blog-header i, #blog-header .add-post a {
+  margin-right: 7px;
+}
+/* line 32, ../../scss/header/headermenu.scss */
+#blog-header .header-dropdown-item {
+  cursor: pointer;
+}
+/* line 35, ../../scss/header/headermenu.scss */
+#blog-header .header-dropdown-item:hover {
+  text-decoration: underline;
+}
+/* line 40, ../../scss/header/headermenu.scss */
+#blog-header .add-post {
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  right: 30px;
+  bottom: 10px;
+  margin: 0 auto;
+  text-align: center;
+  border-top: 1px solid #40badd;
+  border-right: 1px solid #40badd;
+  border-bottom: 1px solid #40badd;
+  border-left: 1px solid #40badd;
+  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  cursor: pointer;
+  background: #56c2e1;
+  z-index: 50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* line 57, ../../scss/header/headermenu.scss */
+#blog-header .add-post:hover {
+  background: #40badd;
+}
+/* line 61, ../../scss/header/headermenu.scss */
+#blog-header .add-post i, #blog-header .add-post a, #blog-header .add-post a {
+  color: white;
+}
+/* line 65, ../../scss/header/headermenu.scss */
+#blog-header .add-post i, #blog-header .add-post a {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  font-size: 1.2em;
+}
+/* line 70, ../../scss/header/headermenu.scss */
+#blog-header .add-post a {
+  position: relative;
+  top: 13px;
+}

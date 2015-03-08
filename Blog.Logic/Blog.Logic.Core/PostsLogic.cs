@@ -250,6 +250,7 @@ namespace Blog.Logic.Core
 
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
+                post.Communities = post.Communities ?? new List<Community>();
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);
@@ -269,6 +270,7 @@ namespace Blog.Logic.Core
 
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
+                post.Communities = post.Communities ?? new List<Community>();
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
                 return GetPost(tPost.PostId);

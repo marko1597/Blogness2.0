@@ -1,10 +1,6 @@
 ﻿@import '../variables.scss';
 
 .community-list-item {
-    @include margin(5px, 5px, 5px, 5px);
-    @include size(340px, auto);
-    @include position(relative, null, null, null, null);
-
     .community-members-container {
         @include padding($default-padding);
 

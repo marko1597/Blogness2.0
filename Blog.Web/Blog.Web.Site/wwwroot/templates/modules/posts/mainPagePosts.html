@@ -1,8 +1,7 @@
-﻿<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div id="posts-main" isotope-container isotope-item-resize resize-layout-only="false" resize-container="posts-main"
-             resize-broadcast="updatePostsSize">
-            <div ng-repeat="post in posts track by $index" isotope-item post-list-item data="{ Post: post, Width: size }"></div>
-        </div>
+﻿<div id="posts-main">
+    <div deckgrid source="posts" class="deckgrid clearfix">
+        <div post-list-item post="card" width="size"></div>
     </div>
+
+    <!--<div ng-repeat="post in posts track by $index" isotope-item post-list-item data="{ Post: post, Width: size }"></div>-->
 </div>

@@ -32,6 +32,7 @@
     <file>/bower_components/angular/angular.js</file>
     <file>/bower_components/angular-animate/angular-animate.js</file>
     <file>/bower_components/angular-cookies/angular-cookies.js</file>
+    <file>/bower_components/angular-deckgrid/angular-deckgrid.js</file>
     <file>/bower_components/angular-file-upload/angular-file-upload.js</file>
     <file>/bower_components/angular-isotope/dist/angular-isotope.js</file>
     <file>/bower_components/angular-local-storage/angular-local-storage.js</file>

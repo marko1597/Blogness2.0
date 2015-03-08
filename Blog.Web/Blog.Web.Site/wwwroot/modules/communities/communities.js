@@ -2,8 +2,8 @@
     [
         "ngDateHelper",
         "ngPosts",
-        "blogIsotope",
         "blogScrollTrigger",
         "LocalStorageModule",
+        "akoenig.deckgrid",
         "ngConfig"
     ]);

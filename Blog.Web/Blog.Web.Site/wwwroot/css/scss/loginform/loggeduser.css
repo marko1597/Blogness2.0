@@ -8,7 +8,7 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   display: inline-block; }
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     #logged-user-info {
       margin-top: 0;
       margin-right: 0;
@@ -19,7 +19,7 @@
   #logged-user-info .btn-group, #logged-user-info button, #logged-user-info ul {
     width: 100%;
     height: auto; }
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     #logged-user-info button {
       padding-top: 15px;
       padding-right: 15px;

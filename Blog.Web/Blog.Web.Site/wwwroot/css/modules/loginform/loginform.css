@@ -55,7 +55,7 @@
   padding-left: 30px;
   color: #4c4c4c;
 }
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 991px) {
   /* line 43, ../../scss/loginform/loginform.scss */
   .login-form .content .input:focus + div {
     left: -47px !important;

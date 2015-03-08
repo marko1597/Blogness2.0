@@ -56,24 +56,19 @@ a {
         }
     }
 
-    &.large {
-        width: 24%;
-    }
+    .captions {
+        @include padding($default-padding);
 
-    &.xlarge {
-        width: 19%;
-    }
+        p {
+            @include padding(0);
+            @include margin(0);
 
-    &.medium {
-        width: 31.5%;
-    }
-
-    &.small {
-        width: 48%;
-    }
-
-    &.xsmall {
-        width: 98%;
+            &:first-of-type {
+                $header-margin: unquote(($base-margin / 3) + 'px');
+                font-weight: bold;
+                @include margin(0, 0, $header-margin);
+            }
+        }
     }
 }
 
@@ -128,31 +123,8 @@ a {
 
 .masonry {
     @extend .card;
-    @include padding(10px);
+    @include padding($default-padding);
     background: $default-color-darken;
-
-    *[isotope-container] {
-        @include clean-list;
-
-        *[isotope-item] {
-            background: $default-color;
-            @include margin(5px);
-
-            .captions {
-                @include padding($default-padding);
-
-                p {
-                    @include padding(0);
-                    @include margin(0);
-
-                    &:first-of-type {
-                        font-weight: bold;
-                        @include margin(0, 0, 5px);
-                    }
-                }
-            }
-        }
-    }
 }
 
 /* #endregion */
@@ -171,15 +143,19 @@ a {
         @include margin(0);
         @include size(100%, auto);
 
+        $img-size: unquote($img-header-size + 'px');
+        $img-border-size: unquote(($base-margin / 5) + 'px'); 
+        $img-margin: (($base-margin / 3) * 2);
+        $header-details-padding: unquote(($img-header-size + $img-margin) + 'px');
+
         > div:first-child {
-            @include size(80px, auto);
-            @include margin(0, 10px);
+            @include margin(0, unquote($img-margin + 'px'));
             float: left;
 
             img {
-                @include size(80px, 80px);
+                @include size($img-size);
                 @include border-radius(round, false);
-                @include borders(3px, solid, $default-color, true);
+                @include borders($img-border-size, solid, $default-color, true);
             }
         }
 
@@ -187,16 +163,16 @@ a {
             @include size(100%, auto);
 
             > h4 {
-                @include padding(null, null, null, 90px);
-                @include margin(0, 0, 5px);
+                @include padding(null, null, null, $header-details-padding);
+                @include margin(0, 0, unquote($img-margin + 'px'));
                 font-weight: bold;
             }
 
             > p {
-                @include padding(null, null, null, 90px);
+                @include padding(null, null, null, $header-details-padding);
 
                 a {
-                    @include margin(0, 0, 5px);
+                    @include margin(0, 0, unquote($img-margin + 'px'));
                     cursor: pointer;
 
                     &:hover {
@@ -214,8 +190,11 @@ a {
     }
 
     .btn-header {
+        $header-left-button-margin: unquote(($base-margin / 3) + 'px');
+        $header-padding: unquote((($base-padding / 3) * 2) + 'px');
+
         @include size(auto, 100%);
-        @include padding(10px);
+        @include padding($header-padding);
         @include position(inherit, 0, 0, null, null);
         cursor: pointer;
         color: inherit;
@@ -228,7 +207,7 @@ a {
         &.left {
             border-right: 1px solid $light-border-color;
             display: inline-block;
-            @include margin(null, 5px);
+            @include margin(null, $header-left-button-margin);
         }
 
         &.right {
@@ -394,6 +373,82 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+/* #endregion */
+
+/* #region deckgrid */
+
+.deckgrid {
+    @include size(auto, 100%);
+    @include clear-fix;
+    margin-right: -$default-margin !important;
+    overflow: auto;
+
+    .column {
+        float: left;
+
+        > div {
+            margin-right: $default-margin !important;
+            margin-bottom: $default-margin !important;
+        }
+    }
+
+    @include media(lg) {
+        &[deckgrid]::before {
+            display: none;
+            content: '5 .column.size-1-5';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-5 {
+                @include size(20%, auto);
+            }
+        }
+    }
+
+    @include media(md) {
+        &[deckgrid]::before {
+            display: none;
+            content: '4 .column.size-1-4';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-4 {
+                @include size(25%, auto);
+            }
+        }
+    }
+
+    @include media(sm) {
+        &[deckgrid]::before {
+            display: none;
+            content: '2 .column.size-1-2';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-2 {
+                @include size(50%, auto);
+            }
+        }
+    }
+
+    @include media(xs) {
+        &[deckgrid]::before {
+            display: none;
+            content: '1 .column.size-1-1';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-1 {
+                @include size(100%, auto);
+            }
+        }
+    }
 }
 
 /* #endregion */

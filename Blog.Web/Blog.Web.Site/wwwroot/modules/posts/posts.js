@@ -14,10 +14,10 @@
         "ngCkeditor",
         "ngTagsInput",
         "blogFileUpload",
-        "blogIsotope",
         "blogVideoPlayer",
         "blogTicker",
         "blogScrollTrigger",
         "LocalStorageModule",
+        "akoenig.deckgrid",
         "slick"
     ]);

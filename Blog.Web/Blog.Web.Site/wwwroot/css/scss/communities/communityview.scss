@@ -1,10 +1,7 @@
 ﻿@import '../variables';
 
 #community-view {
-
 }
 
 #community-posts-container {
-    $post-container-margin-x: unquote(-(($base-margin) / 3) + 'px');
-    @include margin(0, $post-container-margin-x, 0, $post-container-margin-x);
 }

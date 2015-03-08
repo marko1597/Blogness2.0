@@ -35,15 +35,14 @@
         </div>
     </div>
     <div class="body" ng-show="isExpanded">
-        <ul isotope-container isotope-item-resize reapply-layout-only="false"
-            resize-large="24%" resize-medium="48%" resize-small="96%">
-            <li ng-repeat="media in album.Media" isotope-item class="media-item-container">
-                <div class="animate fade-up" media-item media="media" user="user" album-name="album.AlbumName" 
+        <div deckgrid source="media" class="deckgrid">
+            <div class="media-item-container">
+                <div class="animate fade-up" media-item media="card" user="user" album-name="albumName"
                      data-mode="thumbnail" data-allow-delete="true" data-gallery-mode="true"></div>
                 <p class="details">
-                    Uploaded on {{media.CreatedDateDisplay}}
+                    Uploaded on {{card.CreatedDateDisplay}}
                 </p>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
   .user-image .user-background-image {
     min-width: 100%;
     min-height: 350px; }
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
       .user-image .user-background-image {
         width: auto;
         height: 100%;
@@ -24,7 +24,7 @@
       margin-right: 0;
       margin-bottom: 0;
       margin-left: 0; }
-      @media (max-width: 767px) {
+      @media screen and (max-width: 767px) {
         .user-image .user-background-image .edit {
           display: inline-block;
           visibility: visible;
@@ -69,7 +69,7 @@
     padding-left: 40px;
     background: #4c4c4c;
     text-align: center; }
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
       .user-image .details {
         width: 100%;
         height: auto;

@@ -10,7 +10,7 @@
     display: inline-block;
     color: #fff;
     cursor: pointer; }
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
       #blog-header .messages-toggle {
         margin-top: 15px;
         margin-right: 15px;

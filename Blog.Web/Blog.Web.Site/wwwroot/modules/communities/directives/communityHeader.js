@@ -3,7 +3,7 @@
         $scope.username = localStorageService.get("username");
 
         $scope.isEditable = function () {
-            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+            if ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
                 return true;
             }
             return false;

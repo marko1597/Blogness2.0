@@ -1,7 +1,7 @@
 ﻿<div class="user-profile-posts">
-    <div id="user-profile-posts-list" isotope-container isotope-item-resize resize-layout-only="false" resize-container="user-profile-posts-list"
-         resize-broadcast="updateUserPostsSize">
-        <div ng-repeat="post in posts track by $index" isotope-item post-list-item 
-             data="{ Post: post, Width: size, User: user }"></div>
+    <div id="user-profile-posts-list">
+        <div deckgrid source="posts" class="deckgrid">
+            <div post-list-item post="card" width="size"></div>
+        </div>
     </div>
 </div>

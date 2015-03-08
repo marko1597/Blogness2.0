@@ -1,0 +1,42 @@
+﻿<div id="community-list-selection-dialog" class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header" ng-show="title">
+				<button type="button" class="close" ng-click="$hide()">&times;</button>
+				<h4 class="modal-title" ng-bind="title"></h4>
+			</div>
+			<div class="modal-body">
+				<ul class="community-list-items">
+					<li ng-repeat="community in communities" class="card default"
+						ng-click="toggleCommunitySelected(community)">
+						<div class="selected-overlay animate fade-in" ng-show="community.isSelected">
+							<i class="fa fa-check-circle"></i>
+							<label>{{community.Name}}</label>
+						</div>
+						<div class="community-item-emblem">
+							<img ng-src="{{community.Emblem.MediaUrl}}" />
+						</div>
+						<div class="community-item-details">
+							<h4>
+								<i class="community-item-toggle fa" ng-class="communitySelectedIcon(community)"></i>
+								<label>{{community.Name}}</label>
+							</h4>
+							<p>
+								Created by @{{community.Leader.UserName}}
+								<i class="fa" ng-class="isCreatedByLoggedUser(community)" data-placement="bottom"
+								   title="Community Leader" data-content="You're the leader of this community. Yay!"
+								   data-trigger="click" data-animation="am-flip-x" data-auto-close="1" bs-popover></i>
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+				<div class='btn btn-primary' ng-click="closeCommunitySelectionDialog()">
+					<i class="fa fa-thumbs-up"></i>
+					Finished
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

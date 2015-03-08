@@ -65,10 +65,14 @@
         };
 
         $scope.likeComment = function () {
+            if (!$scope.user) {
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
+            }
+
             commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
                 function (err) {
                     errorService.displayError(err);
-                });;
+                });
         };
 
         var stop;

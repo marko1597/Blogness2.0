@@ -31,6 +31,7 @@
             albums: '=',
             user: '='
         },
+        transclude: true,
         replace: true,
         template: $templateCache.get("media/mediaGroupedList.html"),
         controller: ctrlFn

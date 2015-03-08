@@ -31,7 +31,7 @@
           border-right: 1px solid #cccccc;
           border-bottom: 1px solid #cccccc;
           border-left: 1px solid #cccccc; }
-          @media (max-width: 767px) {
+          @media screen and (max-width: 767px) {
             #media-selection-dialog .modal-body ul > li .body .center-cropped {
               width: 47%;
               height: 150px; } }

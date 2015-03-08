@@ -15,6 +15,7 @@ $base-margin: 15;
 $base-border-radius: 0;
 $default-border-radius: 0;
 $can-round-element: true;
+$img-header-size: 80;
 
 $default-padding: 15px;
 $default-margin: 15px;
@@ -167,22 +168,22 @@ $link-font-color: #fff;
 // mixin mediaqueries: breakpoint value;
 @mixin media($point) {
     @if $point == lg {
-        @media (min-width: 1200px) {
+        @media screen and (min-width: 1200px) {
             @content;
         }
     }
     @else if $point == md {
-        @media (min-width: 992px) {
+        @media screen and (min-width: 992px) and (max-width: 1199px) {
             @content;
         }
     }
     @else if $point == sm {
-        @media (min-width: 768px) {
+        @media screen and (min-width: 768px) and (max-width: 991px) {
             @content;
         }
     }
     @else if $point == xs {
-        @media (max-width: 767px) {
+        @media screen and (max-width: 767px) {
             @content;
         }
     }
@@ -320,6 +321,19 @@ $link-font-color: #fff;
         @if ($bottom-right != null and $bottom-right) {
             border-bottom-right-radius: $border-radius-value !important;
         }
+    }
+}
+
+// mixin clear fix floats
+@mixin clear-fix {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
     }
 }
 

@@ -214,17 +214,11 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('communities/communities.html',
-    "<div class=\"row\">\r" +
+    "<div id=\"communities-list\">\r" +
     "\n" +
-    "    <div class=\"col-xs-12\">\r" +
+    "    <div deckgrid source=\"communities\" class=\"deckgrid\">\r" +
     "\n" +
-    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "        <div community-list-item community=\"card\"></div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -306,32 +300,115 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('communities/communitySelectionDialog.html',
+    "<div id=\"community-list-selection-dialog\" class=\"modal\" tabindex=\"-1\" role=\"dialog\">\r" +
+    "\n" +
+    "\t<div class=\"modal-dialog\">\r" +
+    "\n" +
+    "\t\t<div class=\"modal-content\">\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-header\" ng-show=\"title\">\r" +
+    "\n" +
+    "\t\t\t\t<button type=\"button\" class=\"close\" ng-click=\"$hide()\">&times;</button>\r" +
+    "\n" +
+    "\t\t\t\t<h4 class=\"modal-title\" ng-bind=\"title\"></h4>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-body\">\r" +
+    "\n" +
+    "\t\t\t\t<ul class=\"community-list-items\">\r" +
+    "\n" +
+    "\t\t\t\t\t<li ng-repeat=\"community in communities\" class=\"card default\"\r" +
+    "\n" +
+    "\t\t\t\t\t\tng-click=\"toggleCommunitySelected(community)\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"selected-overlay animate fade-in\" ng-show=\"community.isSelected\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<i class=\"fa fa-check-circle\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<label>{{community.Name}}</label>\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"community-item-emblem\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<img ng-src=\"{{community.Emblem.MediaUrl}}\" />\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"community-item-details\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<h4>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<i class=\"community-item-toggle fa\" ng-class=\"communitySelectedIcon(community)\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<label>{{community.Name}}</label>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t</h4>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<p>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\tCreated by @{{community.Leader.UserName}}\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<i class=\"fa\" ng-class=\"isCreatedByLoggedUser(community)\" data-placement=\"bottom\"\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t   title=\"Community Leader\" data-content=\"You're the leader of this community. Yay!\"\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t   data-trigger=\"click\" data-animation=\"am-flip-x\" data-auto-close=\"1\" bs-popover></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t</p>\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t</li>\r" +
+    "\n" +
+    "\t\t\t\t</ul>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-footer\">\r" +
+    "\n" +
+    "\t\t\t\t<div class='btn btn-primary' ng-click=\"closeCommunitySelectionDialog()\">\r" +
+    "\n" +
+    "\t\t\t\t\t<i class=\"fa fa-thumbs-up\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\tFinished\r" +
+    "\n" +
+    "\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t</div>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('communities/communityView.html',
-    "<div id=\"community-view\" class=\"row\">\r" +
+    "<div id=\"community-view\">\r" +
     "\n" +
-    "    <div class=\"col-sm-12 col-md-9\">\r" +
+    "    <div class=\"card default ng-cloak\">\r" +
     "\n" +
-    "        <div class=\"card default ng-cloak\">\r" +
+    "        <div community-header community=\"community\"></div>\r" +
     "\n" +
-    "            <div community-header community=\"community\"></div>\r" +
+    "        <div class=\"community-description content\">\r" +
     "\n" +
-    "            <div class=\"community-description content\">\r" +
+    "            <label>Description</label>\r" +
     "\n" +
-    "                <label>Description</label>\r" +
-    "\n" +
-    "                <p>{{community.Description}}</p>\r" +
-    "\n" +
-    "            </div>\r" +
+    "            <p>{{community.Description}}</p>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div id=\"community-posts-container\" isotope-container isotope-item-resize resize-layout-only=\"false\"\r" +
+    "    </div>\r" +
     "\n" +
-    "             resize-container=\"community-posts-container\" resize-broadcast=\"updatePostsSize\" \r" +
+    "    <div id=\"community-posts-container\">\r" +
     "\n" +
-    "             resize-large=\"31.5%\" resize-medium=\"48%\" resize-small=\"98%\">\r" +
+    "        <div deckgrid source=\"posts\" class=\"deckgrid\">\r" +
     "\n" +
-    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: postSize }\"></div>\r" +
+    "            <div post-list-item post=\"card\"></div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -392,17 +469,13 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div>\r" +
+    "            <div class=\"upload-items\">\r" +
     "\n" +
-    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
+    "                <div deckgrid source=\"uploader.queue\" class=\"deckgrid\">\r" +
     "\n" +
-    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
+    "                    <div class=\"card\" data-media-id=\"{{card.mediaId}}\" file-upload-item item=\"card\" uploader=\"uploader\"></div>\r" +
     "\n" +
-    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -592,6 +665,12 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        </li>\r" +
     "\n" +
+    "                        <li class=\"header-dropdown-item\">\r" +
+    "\n" +
+    "                            <a ng-click=\"showCommunitySelection()\">Show community selection</a>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
     "                    </ul>\r" +
     "\n" +
     "                </li>\r" +
@@ -609,6 +688,8 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "                <div logged-user></div>\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            <div community-selection-dialog></div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -963,25 +1044,23 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"body\" ng-show=\"isExpanded\">\r" +
     "\n" +
-    "        <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
+    "        <div deckgrid source=\"media\" class=\"deckgrid\">\r" +
     "\n" +
-    "            resize-large=\"24%\" resize-medium=\"48%\" resize-small=\"96%\">\r" +
+    "            <div class=\"media-item-container\">\r" +
     "\n" +
-    "            <li ng-repeat=\"media in album.Media\" isotope-item class=\"media-item-container\">\r" +
-    "\n" +
-    "                <div class=\"animate fade-up\" media-item media=\"media\" user=\"user\" album-name=\"album.AlbumName\" \r" +
+    "                <div class=\"animate fade-up\" media-item media=\"card\" user=\"user\" album-name=\"albumName\"\r" +
     "\n" +
     "                     data-mode=\"thumbnail\" data-allow-delete=\"true\" data-gallery-mode=\"true\"></div>\r" +
     "\n" +
     "                <p class=\"details\">\r" +
     "\n" +
-    "                    Uploaded on {{media.CreatedDateDisplay}}\r" +
+    "                    Uploaded on {{card.CreatedDateDisplay}}\r" +
     "\n" +
     "                </p>\r" +
     "\n" +
-    "            </li>\r" +
+    "            </div>\r" +
     "\n" +
-    "        </ul>\r" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -1078,19 +1157,31 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('media/mediaItem.html',
-    "<div class=\"media-item\" ng-switch on=\"viewMode()\">\r" +
+    "<div class=\"media-item\">\r" +
     "\n" +
-    "    <div ng-switch-when=\"thumbnail\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\">\r" +
+    "    <div ng-if=\"isThumbnail()\">\r" +
     "\n" +
-    "        <img ng-src=\"{{media.ThumbnailUrl}}\" />\r" +
+    "        <div ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\">\r" +
+    "\n" +
+    "            <img ng-src=\"{{media.ThumbnailUrl}}\" />\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div ng-switch-default ng-switch=\"getContentType(media.MediaType)\">\r" +
+    "    <div ng-if=\"!isThumbnail()\">\r" +
     "\n" +
-    "        <video-player ng-switch-when=\"video\" media=\"media\"></video-player>\r" +
+    "        <div ng-if=\"isVideo()\">\r" +
     "\n" +
-    "        <img ng-switch-default ng-src=\"{{media.MediaUrl}}\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\" />\r" +
+    "            <video-player media=\"media\"></video-player>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div ng-if=\"!isVideo()\">\r" +
+    "\n" +
+    "            <img ng-src=\"{{media.MediaUrl}}\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\" />\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -1344,19 +1435,17 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/mainPagePosts.html',
-    "<div class=\"row\">\r" +
+    "<div id=\"posts-main\">\r" +
     "\n" +
-    "    <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r" +
+    "    <div deckgrid source=\"posts\" class=\"deckgrid clearfix\">\r" +
     "\n" +
-    "        <div id=\"posts-main\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"posts-main\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updatePostsSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "        <div post-list-item post=\"card\" width=\"size\"></div>\r" +
     "\n" +
     "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <!--<div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>-->\r" +
     "\n" +
     "</div>"
   );
@@ -1667,25 +1756,23 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div id=\"post-contents-{{post.Id}}\" class=\"card masonry ng-cloak\" ng-show=\"hasContents()\">\r" +
     "\n" +
-    "            <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
+    "            <div deckgrid source=\"post.PostContents\" class=\"deckgrid post-content-items\">\r" +
     "\n" +
-    "                resize-large=\"48%\" resize-medium=\"96%\" resize-small=\"96%\">\r" +
+    "                <div class=\"post-item-content card default\">\r" +
     "\n" +
-    "                <li ng-repeat=\"content in post.PostContents\" isotope-item class=\"post-item-content card\">\r" +
-    "\n" +
-    "                    <div media-item media=\"content.Media\" data-gallery-mode=\"true\"></div>\r" +
+    "                    <div media-item media=\"card.Media\" data-gallery-mode=\"true\"></div>\r" +
     "\n" +
     "                    <div class=\"captions\">\r" +
     "\n" +
-    "                        <p>{{content.PostContentTitle}}</p>\r" +
+    "                        <p>{{card.PostContentTitle}}</p>\r" +
     "\n" +
-    "                        <p>{{content.PostContentText}}</p>\r" +
+    "                        <p>{{card.PostContentText}}</p>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </li>\r" +
+    "                </div>\r" +
     "\n" +
-    "            </ul>\r" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -2710,13 +2797,13 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   $templateCache.put('user/userProfilePosts.html',
     "<div class=\"user-profile-posts\">\r" +
     "\n" +
-    "    <div id=\"user-profile-posts-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"user-profile-posts-list\"\r" +
+    "    <div id=\"user-profile-posts-list\">\r" +
     "\n" +
-    "         resize-broadcast=\"updateUserPostsSize\">\r" +
+    "        <div deckgrid source=\"posts\" class=\"deckgrid\">\r" +
     "\n" +
-    "        <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item \r" +
+    "            <div post-list-item post=\"card\" width=\"size\"></div>\r" +
     "\n" +
-    "             data=\"{ Post: post, Width: size, User: user }\"></div>\r" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +

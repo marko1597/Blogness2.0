@@ -1,1 +1,2 @@
-﻿var blogFileUpload = angular.module("blogFileUpload", ['angularFileUpload']);
+﻿var blogFileUpload = angular.module("blogFileUpload", [
+    'angularFileUpload', "akoenig.deckgrid"]);

@@ -39,7 +39,7 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     background: #fff; }
-    @media (max-width: 767px) {
+    @media screen and (max-width: 767px) {
       .comment-item-new div {
         padding-top: 0;
         padding-right: 0;
@@ -52,7 +52,7 @@
       margin-right: 0;
       margin-bottom: 5px;
       margin-left: 0; }
-      @media (max-width: 767px) {
+      @media screen and (max-width: 767px) {
         .comment-item-new div button {
           width: 100%;
           height: 50%;

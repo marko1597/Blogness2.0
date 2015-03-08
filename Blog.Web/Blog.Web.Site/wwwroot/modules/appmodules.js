@@ -238,17 +238,11 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('communities/communities.html',
-    "<div class=\"row\">\r" +
+    "<div id=\"communities-list\">\r" +
     "\n" +
-    "    <div class=\"col-xs-12\">\r" +
+    "    <div deckgrid source=\"communities\" class=\"deckgrid\">\r" +
     "\n" +
-    "        <div id=\"communities-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"communities-list\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updateCommunityItemSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"community in communities track by $index\" isotope-item community-list-item community=\"community\" ></div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "        <div community-list-item community=\"card\"></div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -330,32 +324,115 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   );
 
 
+  $templateCache.put('communities/communitySelectionDialog.html',
+    "<div id=\"community-list-selection-dialog\" class=\"modal\" tabindex=\"-1\" role=\"dialog\">\r" +
+    "\n" +
+    "\t<div class=\"modal-dialog\">\r" +
+    "\n" +
+    "\t\t<div class=\"modal-content\">\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-header\" ng-show=\"title\">\r" +
+    "\n" +
+    "\t\t\t\t<button type=\"button\" class=\"close\" ng-click=\"$hide()\">&times;</button>\r" +
+    "\n" +
+    "\t\t\t\t<h4 class=\"modal-title\" ng-bind=\"title\"></h4>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-body\">\r" +
+    "\n" +
+    "\t\t\t\t<ul class=\"community-list-items\">\r" +
+    "\n" +
+    "\t\t\t\t\t<li ng-repeat=\"community in communities\" class=\"card default\"\r" +
+    "\n" +
+    "\t\t\t\t\t\tng-click=\"toggleCommunitySelected(community)\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"selected-overlay animate fade-in\" ng-show=\"community.isSelected\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<i class=\"fa fa-check-circle\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<label>{{community.Name}}</label>\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"community-item-emblem\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<img ng-src=\"{{community.Emblem.MediaUrl}}\" />\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t\t<div class=\"community-item-details\">\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<h4>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<i class=\"community-item-toggle fa\" ng-class=\"communitySelectedIcon(community)\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<label>{{community.Name}}</label>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t</h4>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t<p>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\tCreated by @{{community.Leader.UserName}}\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t<i class=\"fa\" ng-class=\"isCreatedByLoggedUser(community)\" data-placement=\"bottom\"\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t   title=\"Community Leader\" data-content=\"You're the leader of this community. Yay!\"\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t\t   data-trigger=\"click\" data-animation=\"am-flip-x\" data-auto-close=\"1\" bs-popover></i>\r" +
+    "\n" +
+    "\t\t\t\t\t\t\t</p>\r" +
+    "\n" +
+    "\t\t\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t\t\t</li>\r" +
+    "\n" +
+    "\t\t\t\t</ul>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t<div class=\"modal-footer\">\r" +
+    "\n" +
+    "\t\t\t\t<div class='btn btn-primary' ng-click=\"closeCommunitySelectionDialog()\">\r" +
+    "\n" +
+    "\t\t\t\t\t<i class=\"fa fa-thumbs-up\"></i>\r" +
+    "\n" +
+    "\t\t\t\t\tFinished\r" +
+    "\n" +
+    "\t\t\t\t</div>\r" +
+    "\n" +
+    "\t\t\t</div>\r" +
+    "\n" +
+    "\t\t</div>\r" +
+    "\n" +
+    "\t</div>\r" +
+    "\n" +
+    "</div>"
+  );
+
+
   $templateCache.put('communities/communityView.html',
-    "<div id=\"community-view\" class=\"row\">\r" +
+    "<div id=\"community-view\">\r" +
     "\n" +
-    "    <div class=\"col-sm-12 col-md-9\">\r" +
+    "    <div class=\"card default ng-cloak\">\r" +
     "\n" +
-    "        <div class=\"card default ng-cloak\">\r" +
+    "        <div community-header community=\"community\"></div>\r" +
     "\n" +
-    "            <div community-header community=\"community\"></div>\r" +
+    "        <div class=\"community-description content\">\r" +
     "\n" +
-    "            <div class=\"community-description content\">\r" +
+    "            <label>Description</label>\r" +
     "\n" +
-    "                <label>Description</label>\r" +
-    "\n" +
-    "                <p>{{community.Description}}</p>\r" +
-    "\n" +
-    "            </div>\r" +
+    "            <p>{{community.Description}}</p>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div id=\"community-posts-container\" isotope-container isotope-item-resize resize-layout-only=\"false\"\r" +
+    "    </div>\r" +
     "\n" +
-    "             resize-container=\"community-posts-container\" resize-broadcast=\"updatePostsSize\" \r" +
+    "    <div id=\"community-posts-container\">\r" +
     "\n" +
-    "             resize-large=\"31.5%\" resize-medium=\"48%\" resize-small=\"98%\">\r" +
+    "        <div deckgrid source=\"posts\" class=\"deckgrid\">\r" +
     "\n" +
-    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: postSize }\"></div>\r" +
+    "            <div post-list-item post=\"card\"></div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -416,17 +493,13 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "            </div>\r" +
     "\n" +
-    "            <div>\r" +
+    "            <div class=\"upload-items\">\r" +
     "\n" +
-    "                <ul class=\"upload-items\" isotope-container isotope-item-resize>\r" +
+    "                <div deckgrid source=\"uploader.queue\" class=\"deckgrid\">\r" +
     "\n" +
-    "                    <li ng-repeat=\"item in uploader.queue\" isotope-item class=\"card\">\r" +
+    "                    <div class=\"card\" data-media-id=\"{{card.mediaId}}\" file-upload-item item=\"card\" uploader=\"uploader\"></div>\r" +
     "\n" +
-    "                        <div data-media-id=\"{{item.mediaId}}\" file-upload-item item=\"item\" uploader=\"uploader\"></div>\r" +
-    "\n" +
-    "                    </li>\r" +
-    "\n" +
-    "                </ul>\r" +
+    "                </div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -616,6 +689,12 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "                        </li>\r" +
     "\n" +
+    "                        <li class=\"header-dropdown-item\">\r" +
+    "\n" +
+    "                            <a ng-click=\"showCommunitySelection()\">Show community selection</a>\r" +
+    "\n" +
+    "                        </li>\r" +
+    "\n" +
     "                    </ul>\r" +
     "\n" +
     "                </li>\r" +
@@ -633,6 +712,8 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "                <div logged-user></div>\r" +
     "\n" +
     "            </div>\r" +
+    "\n" +
+    "            <div community-selection-dialog></div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -987,25 +1068,23 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"body\" ng-show=\"isExpanded\">\r" +
     "\n" +
-    "        <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
+    "        <div deckgrid source=\"media\" class=\"deckgrid\">\r" +
     "\n" +
-    "            resize-large=\"24%\" resize-medium=\"48%\" resize-small=\"96%\">\r" +
+    "            <div class=\"media-item-container\">\r" +
     "\n" +
-    "            <li ng-repeat=\"media in album.Media\" isotope-item class=\"media-item-container\">\r" +
-    "\n" +
-    "                <div class=\"animate fade-up\" media-item media=\"media\" user=\"user\" album-name=\"album.AlbumName\" \r" +
+    "                <div class=\"animate fade-up\" media-item media=\"card\" user=\"user\" album-name=\"albumName\"\r" +
     "\n" +
     "                     data-mode=\"thumbnail\" data-allow-delete=\"true\" data-gallery-mode=\"true\"></div>\r" +
     "\n" +
     "                <p class=\"details\">\r" +
     "\n" +
-    "                    Uploaded on {{media.CreatedDateDisplay}}\r" +
+    "                    Uploaded on {{card.CreatedDateDisplay}}\r" +
     "\n" +
     "                </p>\r" +
     "\n" +
-    "            </li>\r" +
+    "            </div>\r" +
     "\n" +
-    "        </ul>\r" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -1102,19 +1181,31 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('media/mediaItem.html',
-    "<div class=\"media-item\" ng-switch on=\"viewMode()\">\r" +
+    "<div class=\"media-item\">\r" +
     "\n" +
-    "    <div ng-switch-when=\"thumbnail\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\">\r" +
+    "    <div ng-if=\"isThumbnail()\">\r" +
     "\n" +
-    "        <img ng-src=\"{{media.ThumbnailUrl}}\" />\r" +
+    "        <div ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\">\r" +
+    "\n" +
+    "            <img ng-src=\"{{media.ThumbnailUrl}}\" />\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div ng-switch-default ng-switch=\"getContentType(media.MediaType)\">\r" +
+    "    <div ng-if=\"!isThumbnail()\">\r" +
     "\n" +
-    "        <video-player ng-switch-when=\"video\" media=\"media\"></video-player>\r" +
+    "        <div ng-if=\"isVideo()\">\r" +
     "\n" +
-    "        <img ng-switch-default ng-src=\"{{media.MediaUrl}}\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\" />\r" +
+    "            <video-player media=\"media\"></video-player>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div ng-if=\"!isVideo()\">\r" +
+    "\n" +
+    "            <img ng-src=\"{{media.MediaUrl}}\" ng-class=\"isCropped()\" ng-style=\"getThumbnailUrl()\" />\r" +
+    "\n" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -1368,19 +1459,17 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/mainPagePosts.html',
-    "<div class=\"row\">\r" +
+    "<div id=\"posts-main\">\r" +
     "\n" +
-    "    <div class=\"col-xs-12 col-sm-12 col-md-12 col-lg-12\">\r" +
+    "    <div deckgrid source=\"posts\" class=\"deckgrid clearfix\">\r" +
     "\n" +
-    "        <div id=\"posts-main\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"posts-main\"\r" +
-    "\n" +
-    "             resize-broadcast=\"updatePostsSize\">\r" +
-    "\n" +
-    "            <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>\r" +
-    "\n" +
-    "        </div>\r" +
+    "        <div post-list-item post=\"card\" width=\"size\"></div>\r" +
     "\n" +
     "    </div>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "    <!--<div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item data=\"{ Post: post, Width: size }\"></div>-->\r" +
     "\n" +
     "</div>"
   );
@@ -1691,25 +1780,23 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <div id=\"post-contents-{{post.Id}}\" class=\"card masonry ng-cloak\" ng-show=\"hasContents()\">\r" +
     "\n" +
-    "            <ul isotope-container isotope-item-resize reapply-layout-only=\"false\"\r" +
+    "            <div deckgrid source=\"post.PostContents\" class=\"deckgrid post-content-items\">\r" +
     "\n" +
-    "                resize-large=\"48%\" resize-medium=\"96%\" resize-small=\"96%\">\r" +
+    "                <div class=\"post-item-content card default\">\r" +
     "\n" +
-    "                <li ng-repeat=\"content in post.PostContents\" isotope-item class=\"post-item-content card\">\r" +
-    "\n" +
-    "                    <div media-item media=\"content.Media\" data-gallery-mode=\"true\"></div>\r" +
+    "                    <div media-item media=\"card.Media\" data-gallery-mode=\"true\"></div>\r" +
     "\n" +
     "                    <div class=\"captions\">\r" +
     "\n" +
-    "                        <p>{{content.PostContentTitle}}</p>\r" +
+    "                        <p>{{card.PostContentTitle}}</p>\r" +
     "\n" +
-    "                        <p>{{content.PostContentText}}</p>\r" +
+    "                        <p>{{card.PostContentText}}</p>\r" +
     "\n" +
     "                    </div>\r" +
     "\n" +
-    "                </li>\r" +
+    "                </div>\r" +
     "\n" +
-    "            </ul>\r" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -2734,13 +2821,13 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   $templateCache.put('user/userProfilePosts.html',
     "<div class=\"user-profile-posts\">\r" +
     "\n" +
-    "    <div id=\"user-profile-posts-list\" isotope-container isotope-item-resize resize-layout-only=\"false\" resize-container=\"user-profile-posts-list\"\r" +
+    "    <div id=\"user-profile-posts-list\">\r" +
     "\n" +
-    "         resize-broadcast=\"updateUserPostsSize\">\r" +
+    "        <div deckgrid source=\"posts\" class=\"deckgrid\">\r" +
     "\n" +
-    "        <div ng-repeat=\"post in posts track by $index\" isotope-item post-list-item \r" +
+    "            <div post-list-item post=\"card\" width=\"size\"></div>\r" +
     "\n" +
-    "             data=\"{ Post: post, Width: size, User: user }\"></div>\r" +
+    "        </div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -3043,7 +3130,8 @@ blogIsotope.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
 ]);
 
 ///#source 1 1 /wwwroot/modules/fileUpload/fileUpload.js
-var blogFileUpload = angular.module("blogFileUpload", ['angularFileUpload']);
+var blogFileUpload = angular.module("blogFileUpload", [
+    'angularFileUpload', "akoenig.deckgrid"]);
 ///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUpload.js
 blogFileUpload.directive("fileUpload", ["$templateCache",
     function ($templateCache) {
@@ -3405,10 +3493,14 @@ ngComments.directive('commentItem', ["$templateCache", function ($templateCache)
         };
 
         $scope.likeComment = function () {
+            if (!$scope.user) {
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
+            }
+
             commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
                 function (err) {
                     errorService.displayError(err);
-                });;
+                });
         };
 
         var stop;
@@ -3874,9 +3966,9 @@ var ngCommunities = angular.module("ngCommunities",
     [
         "ngDateHelper",
         "ngPosts",
-        "blogIsotope",
         "blogScrollTrigger",
         "LocalStorageModule",
+        "akoenig.deckgrid",
         "ngConfig"
     ]);
 ///#source 1 1 /wwwroot/modules/communities/controllers/communitiesListController.js
@@ -3996,7 +4088,7 @@ ngCommunities.directive('communityHeader', ["$templateCache", function ($templat
         $scope.username = localStorageService.get("username");
 
         $scope.isEditable = function () {
-            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+            if ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
                 return true;
             }
             return false;
@@ -4031,19 +4123,147 @@ ngCommunities.directive('communityHeader', ["$templateCache", function ($templat
     };
 }]);
 
+///#source 1 1 /wwwroot/modules/communities/directives/communitySelectionDialog.js
+ngCommunities.directive('communitySelectionDialog', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $modal, localStorageService,
+        communitiesService, errorService) {
+
+        $scope.isInitialized = false;
+
+        $scope.username = localStorageService.get("username");
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.user = $rootScope.user;
+
+        $scope.communities = [];
+
+        $scope.listDialog = $modal({
+            scope: $scope,
+            template: "communities/communitySelectionDialog.html",
+            show: false,
+            keyboard: false,
+            backdrop: 'static'
+        });
+
+        $scope.toggleCommunitySelected = function(community) {
+            community.isSelected = !community.isSelected;
+        };
+
+        $scope.communitySelectedIcon = function(community) {
+            return community.isSelected ? "fa-check-square-o" : "fa-square-o";
+        };
+
+        $scope.isCreatedByLoggedUser = function(community) {
+            if (community && community.Leader) {
+                return $scope.username === community.Leader.UserName ? "fa-user" : "";
+            }
+            return "";
+        };
+
+        $scope.loadMoreCommunities = function() {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            if ($scope.user) {
+                communitiesService.getMoreJoinedByUser($scope.user.Id, $scope.communities.length).then(function (resp) {
+                    _.each(resp, function (a) {
+                        a.isSelected = false;
+                        $scope.communities.push(a);
+                    });
+                    $scope.isBusy = false;
+                }, function (e) {
+                    errorService.displayError(e);
+                    $scope.isBusy = false;
+                });
+            } else {
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
+            }
+        };
+
+        $rootScope.$on("launchCommunitySelectionDialog", function (ev, data) {
+            try {
+                if ($scope.listDialog.$options.show) return;
+
+                if (data.canClose) {
+                    $scope.listDialog.$options.keyboard = true;
+                    $scope.listDialog.$options.backdrop = true;
+                } else {
+                    $scope.listDialog.$options.keyboard = false;
+                    $scope.listDialog.$options.backdrop = 'static';
+                }
+                $scope.listDialog.$promise.then($scope.listDialog.show);
+                getCommunities();
+            } catch (ex) {
+                $scope.listDialog.$options.keyboard = false;
+                $scope.listDialog.$options.backdrop = 'static';
+                $scope.listDialog.show();
+                getCommunities();
+            }
+        });
+
+        $rootScope.$on("hideCommunitySelectionDialog", function () {
+            $scope.listDialog.hide();
+        });
+
+        $rootScope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.user = data;
+            }
+        });
+
+        $scope.closeCommunitySelectionDialog = function() {
+            var selectedCommunities = _.where($scope.communities, { isSelected: true });
+            $scope.$emit("doneSelectingCommunities", { items: selectedCommunities });
+            $scope.listDialog.hide();
+        };
+
+        $scope.getEmblemUrl = function(community) {
+            if (community && community.Emblem) {
+                return community.Emblem.MediaUrl;
+            }
+            return "";
+        };
+
+        var getCommunities = function () {
+            if ($scope.user) {
+                communitiesService.getJoinedByUser($scope.user.Id).then(function (resp) {
+                    _.each(resp, function (a) {
+                        a.isSelected = false;
+                    });
+
+                    $scope.communities = resp;
+                    $scope.isInitialized = true;
+                }, function (e) {
+                    errorService.displayError(e);
+                    $scope.isInitialized = true;
+                });
+            } else {
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
+            }
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$modal", "localStorageService", "communitiesService", "errorService"];
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        controller: ctrlFn
+    };
+}]);
+
 ///#source 1 1 /wwwroot/modules/communities/directives/communityListItem.js
 ngCommunities.directive('communityListItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
         $scope.username = localStorageService.get("username");
 
-        $scope.isEditable = ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) ? true : false;
-
-        $scope.getItemSize = function () {
-            return $scope.size;
-        };
+        $scope.isEditable = ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) ? true : false;
 
         $scope.toggleIsEditable = function () {
-            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+            if ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
                 $scope.isEditable = true;
             }
             $scope.isEditable = false;
@@ -4068,8 +4288,7 @@ ngCommunities.directive('communityListItem', ["$templateCache", function ($templ
     return {
         restrict: 'EA',
         scope: {
-            community: '=',
-            size: '='
+            community: '='
         },
         replace: true,
         template: $templateCache.get("communities/communityListItem.html"),
@@ -4408,6 +4627,10 @@ ngHeader.directive('headerMenu', ["$templateCache", function ($templateCache) {
             $rootScope.$broadcast("launchLoginForm", { canClose: true });
         };
 
+        $scope.showCommunitySelection = function () {
+            $rootScope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
+        };
+
         $scope.logout = function() {
             authenticationService.logout();
             $window.location.href = configProvider.getSettings().BlogRoot + "/account";
@@ -4416,6 +4639,10 @@ ngHeader.directive('headerMenu', ["$templateCache", function ($templateCache) {
         $scope.toggleSocketDebugger = function() {
             $rootScope.$broadcast("toggleSocketDebugger");
         };
+
+        $scope.$on("doneSelectingCommunities", function(ev, data) {
+            console.log(data);
+        });
 
         snapRemote.getSnapper().then(function (snapper) {
             var checkNav = function () {
@@ -4501,6 +4728,7 @@ var ngLogin = angular.module("ngLogin",
         "ngRoute",
         "ngConfig",
         "ngBlockUi",
+        "blogKeyPress",
         "LocalStorageModule",
         "mgcrea.ngStrap"
     ]);
@@ -5255,8 +5483,6 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
         $scope.username = null;
 
         $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            //$log.info("location changing from " + current + " to " + next);
-
             if (current !== configProvider.getSettings().BlogRoot + "/#/") {
                 postsService.getRecentPosts();
             }
@@ -5267,7 +5493,7 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
         });
 
         $scope.init = function() {
-            if ($scope.authData != null) {
+            if ($scope.authData !== null) {
                 $scope.username = localStorageService.get('username');
 
                 authenticationService.getUserInfo().then(function(response) {
@@ -5284,13 +5510,13 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
 
         $scope.getUserInfo = function (username) {
             userService.getUserInfo(username).then(function (user) {
-                if (user.Error == null) {
+                if (user.Error === null) {
                     $rootScope.user = user;
                     $rootScope.authData = $scope.authData;
                     $timeout(function () {
                         $rootScope.$broadcast("loggedInUserInfo", user);
                         messagingService.userChatOnline(user.Id);
-                        console.log("Conneted to chat (userChat_" + user.Id + ")");
+                        console.log("Connected to chat (userChat_" + user.Id + ")");
                     }, 1500);
                 }
             });
@@ -5312,10 +5538,10 @@ blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$lo
 var ngMedia = angular.module("ngMedia",
     [
         "blogFileUpload",
-        "blogIsotope",
         "blogVideoPlayer",
         "ngDateHelper",
-        "slick"
+        "slick",
+        "akoenig.deckgrid"
     ]);
 ///#source 1 1 /wwwroot/modules/media/controllers/mediaGalleryController.js
 ngMedia.controller('mediaGalleryController', ["$scope", "$rootScope", "$interval", "$timeout",
@@ -5344,6 +5570,7 @@ ngMedia.controller('mediaGalleryController', ["$scope", "$rootScope", "$interval
 ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $window, albumService, mediaService, errorService, dateHelper, configProvider,
         $modal, FileUploader, localStorageService) {
+
         $scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
            $window.blogConfiguration.blogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName) :
            configProvider.getSettings().BlogApi + "media?username=" + $scope.user.UserName + "&album=" + encodeURIComponent($scope.album.AlbumName);
@@ -5351,6 +5578,10 @@ ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
         $scope.isExpanded = !$scope.album.IsNew ? true : false;
 
         $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.media = $scope.album ? $scope.album.Media : null;
+
+        $scope.albumName = $scope.album ? $scope.album.AlbumName : '';
 
         $scope.toggleExpandClass = function () {
             if ($scope.isExpanded) {
@@ -5416,6 +5647,20 @@ ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
         $scope.$on("successDeletingMedia", function(ev, data) {
             var index = $scope.album.Media.indexOf(data);
             $scope.album.Media.splice(index, 1);
+        });
+
+        $scope.$watch('album', function(oldValue, newValue) {
+            if (newValue) {
+                $scope.albumName = newValue.AlbumName;
+                $scope.$broadcast("albumNameDoneLoading", { albumName: $scope.albumName });
+            }
+        });
+
+        $scope.$watch('user', function (oldValue, newValue) {
+            if (newValue) {
+                $scope.user = newValue;
+                $scope.$broadcast("albumUserDoneLoading", { user: $scope.user });
+            }
         });
 
         $scope.init = function() {
@@ -5615,6 +5860,7 @@ ngMedia.directive('mediaGroupedList', ["$templateCache", function ($templateCach
             albums: '=',
             user: '='
         },
+        transclude: true,
         replace: true,
         template: $templateCache.get("media/mediaGroupedList.html"),
         controller: ctrlFn
@@ -5636,11 +5882,11 @@ ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
 
         $scope.deleteButtonVisible = false;
 
-        $scope.viewMode = function () {
+        $scope.isThumbnail = function() {
             if ($scope.mode && $scope.mode === 'thumbnail') {
-                return "thumbnail";
+                return true;
             }
-            return "";
+            return false;
         };
 
         $scope.getThumbnailUrl = function () {
@@ -5658,7 +5904,7 @@ ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
         };
 
         $scope.toggleDelete = function () {
-            if ($scope.allowDelete && $scope.allowDelete === 'true' && $rootScope.authData) {
+            if ($scope.allowDelete && $rootScope.authData) {
                 if ($scope.user && $scope.username === $scope.user.UserName) {
                     return true;
                 }
@@ -5681,13 +5927,25 @@ ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
             if ($rootScope.$stateParams.postId) {
                 $location.path("/post/" + $rootScope.$stateParams.postId + '/gallery');
             } else {
-                if ($rootScope.$stateParams.username) {
-                    $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                if ($scope.albumName) {
+                    if ($rootScope.$stateParams.username) {
+                        $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                    } else {
+                        $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                    }
                 } else {
-                    $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                    errorService.displayError("Oops! This album's name seems to be invalid.");
                 }
             }
         };
+
+        $scope.$on("albumNameDoneLoading", function (ev, data) {
+            $scope.albumName = data.albumName;
+        });
+
+        $scope.$on("albumUserDoneLoading", function (ev, data) {
+            $scope.user = data.user;
+        });
 
         $scope.confirmDelete = function () {
             mediaService.deleteMedia($scope.media.Id).then(function (response) {
@@ -5709,17 +5967,6 @@ ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
             });
         };
 
-        $scope.getContentType = function (content) {
-            if (content == undefined) return "image";
-
-            var contentType = content.split('/');
-            if (contentType[0] == "video") {
-                return "video";
-            } else {
-                return "image";
-            }
-        };
-
         $scope.isVideo = function () {
             var supportedVideos = [
                "video/avi",
@@ -5729,8 +5976,12 @@ ngMedia.directive('mediaItem', ["$templateCache", function ($templateCache) {
                "video/x-flv"
             ];
 
-            var isVideo = _.contains(supportedVideos, $scope.media.MediaType);
-            return isVideo ? "hidden" : "";
+            if (!$scope.media || !$scope.media.MediaType) {
+                return false;
+            } else {
+                var isVideo = _.contains(supportedVideos, $scope.media.MediaType);
+                return isVideo;
+            }
         };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "$modal", "mediaService", "errorService"];
@@ -6490,18 +6741,18 @@ var ngPosts = angular.module("ngPosts",
         "ngCkeditor",
         "ngTagsInput",
         "blogFileUpload",
-        "blogIsotope",
         "blogVideoPlayer",
         "blogTicker",
         "blogScrollTrigger",
         "LocalStorageModule",
+        "akoenig.deckgrid",
         "slick"
     ]);
 ///#source 1 1 /wwwroot/modules/posts/controllers/postsController.js
 ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
     function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, errorService) {
         $scope.posts = [];
-        $scope.size = "";
+
         $scope.isBusy = false;
 
         $scope.init = function() {
@@ -7212,23 +7463,19 @@ ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) 
 ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
 
-        $scope.post = $scope.data.Post;
-
-        $scope.user = $scope.data.Post.User;
-
-        $scope.comments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? 
-            $scope.data.Post.Comments : [];
-
-        $scope.postLikes = $scope.data.Post.PostLikes && $scope.data.Post.PostLikes.length > 0 ?
-            $scope.data.Post.PostLikes : [];
-
         $scope.username = localStorageService.get("username");
 
-        $scope.hasComments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? true : false;
+        $scope.user = $scope.post && $scope.post.User ? $scope.post.User : null;
 
-        $scope.hasTags = $scope.data.Post.Tags && $scope.data.Post.Tags.length > 0 ? true : false;
+        $scope.comments = $scope.post && $scope.post.Comments ? $scope.post.Comments : [];
 
-        $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
+        $scope.postLikes = $scope.post && $scope.post.PostLikes ? $scope.post.PostLikes : [];
+
+        $scope.hasComments = $scope.post && $scope.post.Comments && $scope.post.Comments.length > 0 ? true : false;
+
+        $scope.hasTags = $scope.post && $scope.post.Tags && $scope.post.Tags.length > 0 ? true : false;
+
+        $scope.isEditable = $scope.user && $scope.user.UserName === $scope.username ? true : false;
         
         $scope.getCommentPopover = function(commentId) {
             var comment = _.where($scope.comments, { CommentId: commentId });
@@ -7237,7 +7484,7 @@ ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
         };
 
         $scope.getPostSize = function() {
-            return $scope.data.Width ? '' : $scope.data.Width;
+            return $scope.width ? $scope.width : '';
         };
 
         $scope.toggleIsEditable = function () {
@@ -7290,7 +7537,10 @@ ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: {
+            post: '=',
+            width: '='
+        },
         replace: true,
         template: $templateCache.get("posts/postListItem.html"),
         controller: ctrlFn

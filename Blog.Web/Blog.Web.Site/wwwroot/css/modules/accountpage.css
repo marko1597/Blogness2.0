@@ -36,7 +36,7 @@ html, body {
   margin-bottom: 30%;
   margin-left: auto;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 26, ../scss/accountpage.scss */
   .main-wrapper #wrapper {
     margin-top: 10%;
@@ -45,7 +45,7 @@ html, body {
     margin-left: auto;
   }
 }
-@media (min-width: 992px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   /* line 26, ../scss/accountpage.scss */
   .main-wrapper #wrapper {
     margin-top: 50%;

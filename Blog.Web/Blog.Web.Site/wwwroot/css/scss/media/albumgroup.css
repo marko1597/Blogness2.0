@@ -36,39 +36,35 @@
     border-right: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
     border-left: 1px solid #cccccc;
-    padding-top: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background: #e6e6e6; }
-    .album-group .body > ul {
-      list-style-type: none;
-      padding: 0 !important;
-      margin: 0 !important; }
-      .album-group .body > ul .media-item-container {
-        margin-top: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        margin-left: 5px; }
-        .album-group .body > ul .media-item-container .details {
-          border-right: 1px solid #cccccc;
-          border-bottom: 1px solid #cccccc;
-          border-left: 1px solid #cccccc;
-          border-bottom-left-radius: 0;
-          border-bottom-right-radius: 0;
-          padding-top: 15px;
-          padding-right: 15px;
-          padding-bottom: 15px;
-          padding-left: 15px;
-          background: #fff;
-          overflow: hidden;
-          color: #4c4c4c; }
-          @media (max-width: 767px) {
-            .album-group .body > ul .media-item-container .details .btn {
-              width: 100%; }
-              .album-group .body > ul .media-item-container .details .btn > span > i {
-                margin-right: 5px; } }
+    .album-group .body .media-item-container {
+      margin-top: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      margin-left: 5px; }
+      .album-group .body .media-item-container .details {
+        border-right: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+        border-left: 1px solid #cccccc;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding-top: 15px;
+        padding-right: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        background: #fff;
+        overflow: hidden;
+        color: #4c4c4c; }
+        @media screen and (max-width: 767px) {
+          .album-group .body .media-item-container .details .btn {
+            width: 100%; }
+            .album-group .body .media-item-container .details .btn > span > i {
+              margin-right: 5px; } }
 
 /*# sourceMappingURL=albumgroup.css.map */

@@ -12,11 +12,11 @@
 
         $scope.deleteButtonVisible = false;
 
-        $scope.viewMode = function () {
+        $scope.isThumbnail = function() {
             if ($scope.mode && $scope.mode === 'thumbnail') {
-                return "thumbnail";
+                return true;
             }
-            return "";
+            return false;
         };
 
         $scope.getThumbnailUrl = function () {
@@ -34,7 +34,7 @@
         };
 
         $scope.toggleDelete = function () {
-            if ($scope.allowDelete && $scope.allowDelete === 'true' && $rootScope.authData) {
+            if ($scope.allowDelete && $rootScope.authData) {
                 if ($scope.user && $scope.username === $scope.user.UserName) {
                     return true;
                 }
@@ -57,13 +57,25 @@
             if ($rootScope.$stateParams.postId) {
                 $location.path("/post/" + $rootScope.$stateParams.postId + '/gallery');
             } else {
-                if ($rootScope.$stateParams.username) {
-                    $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                if ($scope.albumName) {
+                    if ($rootScope.$stateParams.username) {
+                        $location.path("/user/" + $scope.user.UserName + "/media/gallery/" + $scope.albumName.toLowerCase());
+                    } else {
+                        $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                    }
                 } else {
-                    $location.path("/user/media/gallery/" + $scope.albumName.toLowerCase());
+                    errorService.displayError("Oops! This album's name seems to be invalid.");
                 }
             }
         };
+
+        $scope.$on("albumNameDoneLoading", function (ev, data) {
+            $scope.albumName = data.albumName;
+        });
+
+        $scope.$on("albumUserDoneLoading", function (ev, data) {
+            $scope.user = data.user;
+        });
 
         $scope.confirmDelete = function () {
             mediaService.deleteMedia($scope.media.Id).then(function (response) {
@@ -85,17 +97,6 @@
             });
         };
 
-        $scope.getContentType = function (content) {
-            if (content == undefined) return "image";
-
-            var contentType = content.split('/');
-            if (contentType[0] == "video") {
-                return "video";
-            } else {
-                return "image";
-            }
-        };
-
         $scope.isVideo = function () {
             var supportedVideos = [
                "video/avi",
@@ -105,8 +106,12 @@
                "video/x-flv"
             ];
 
-            var isVideo = _.contains(supportedVideos, $scope.media.MediaType);
-            return isVideo ? "hidden" : "";
+            if (!$scope.media || !$scope.media.MediaType) {
+                return false;
+            } else {
+                var isVideo = _.contains(supportedVideos, $scope.media.MediaType);
+                return isVideo;
+            }
         };
     };
     ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "$modal", "mediaService", "errorService"];

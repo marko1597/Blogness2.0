@@ -1,23 +1,19 @@
 ﻿ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
 
-        $scope.post = $scope.data.Post;
-
-        $scope.user = $scope.data.Post.User;
-
-        $scope.comments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? 
-            $scope.data.Post.Comments : [];
-
-        $scope.postLikes = $scope.data.Post.PostLikes && $scope.data.Post.PostLikes.length > 0 ?
-            $scope.data.Post.PostLikes : [];
-
         $scope.username = localStorageService.get("username");
 
-        $scope.hasComments = $scope.data.Post.Comments && $scope.data.Post.Comments.length > 0 ? true : false;
+        $scope.user = $scope.post && $scope.post.User ? $scope.post.User : null;
 
-        $scope.hasTags = $scope.data.Post.Tags && $scope.data.Post.Tags.length > 0 ? true : false;
+        $scope.comments = $scope.post && $scope.post.Comments ? $scope.post.Comments : [];
 
-        $scope.isEditable = ($scope.user && $scope.user.UserName === $scope.username) ? true : false;
+        $scope.postLikes = $scope.post && $scope.post.PostLikes ? $scope.post.PostLikes : [];
+
+        $scope.hasComments = $scope.post && $scope.post.Comments && $scope.post.Comments.length > 0 ? true : false;
+
+        $scope.hasTags = $scope.post && $scope.post.Tags && $scope.post.Tags.length > 0 ? true : false;
+
+        $scope.isEditable = $scope.user && $scope.user.UserName === $scope.username ? true : false;
         
         $scope.getCommentPopover = function(commentId) {
             var comment = _.where($scope.comments, { CommentId: commentId });
@@ -26,7 +22,7 @@
         };
 
         $scope.getPostSize = function() {
-            return $scope.data.Width ? '' : $scope.data.Width;
+            return $scope.width ? $scope.width : '';
         };
 
         $scope.toggleIsEditable = function () {
@@ -79,7 +75,10 @@
 
     return {
         restrict: 'EA',
-        scope: { data: '=' },
+        scope: {
+            post: '=',
+            width: '='
+        },
         replace: true,
         template: $templateCache.get("posts/postListItem.html"),
         controller: ctrlFn

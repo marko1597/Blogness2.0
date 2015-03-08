@@ -9,7 +9,7 @@
   min-width: 100%;
   min-height: 350px;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 16, ../../scss/user/userimage.scss */
   .user-image .user-background-image {
     width: auto;
@@ -35,7 +35,7 @@
   margin-bottom: 0;
   margin-left: 0;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 30, ../../scss/user/userimage.scss */
   .user-image .user-background-image .edit {
     display: inline-block;
@@ -95,7 +95,7 @@
   background: #4c4c4c;
   text-align: center;
 }
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   /* line 74, ../../scss/user/userimage.scss */
   .user-image .details {
     width: 100%;

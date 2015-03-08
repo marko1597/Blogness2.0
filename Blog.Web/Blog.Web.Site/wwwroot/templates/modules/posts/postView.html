@@ -15,16 +15,15 @@
         </div>
 
         <div id="post-contents-{{post.Id}}" class="card masonry ng-cloak" ng-show="hasContents()">
-            <ul isotope-container isotope-item-resize reapply-layout-only="false"
-                resize-large="48%" resize-medium="96%" resize-small="96%">
-                <li ng-repeat="content in post.PostContents" isotope-item class="post-item-content card">
-                    <div media-item media="content.Media" data-gallery-mode="true"></div>
+            <div deckgrid source="post.PostContents" class="deckgrid post-content-items">
+                <div class="post-item-content card default">
+                    <div media-item media="card.Media" data-gallery-mode="true"></div>
                     <div class="captions">
-                        <p>{{content.PostContentTitle}}</p>
-                        <p>{{content.PostContentText}}</p>
+                        <p>{{card.PostContentTitle}}</p>
+                        <p>{{card.PostContentText}}</p>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
 
         <div id="post-comments-{{post.Id}}" class="comments">

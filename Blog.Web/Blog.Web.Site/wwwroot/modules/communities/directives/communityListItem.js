@@ -2,14 +2,10 @@
     var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
         $scope.username = localStorageService.get("username");
 
-        $scope.isEditable = ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) ? true : false;
-
-        $scope.getItemSize = function () {
-            return $scope.size;
-        };
+        $scope.isEditable = ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) ? true : false;
 
         $scope.toggleIsEditable = function () {
-            if ($scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
+            if ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
                 $scope.isEditable = true;
             }
             $scope.isEditable = false;
@@ -34,8 +30,7 @@
     return {
         restrict: 'EA',
         scope: {
-            community: '=',
-            size: '='
+            community: '='
         },
         replace: true,
         template: $templateCache.get("communities/communityListItem.html"),

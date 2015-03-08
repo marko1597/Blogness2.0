@@ -1,9 +1,7 @@
 ﻿@import '../variables.scss';
 
 .post-list-item {
-    @include margin(5px, 5px, 5px, 5px);
-    @include size(340px, auto);
-    @include position(relative, null, null, null, null);
+    @include margin(0, 0, 10px, 0);
     @include header-edit-icon;
 
     .comments {
@@ -16,7 +14,7 @@
 
     .content {
         [post-contents] {
-            @include margin(-15px, -15px, 0, -15px);
+            @include margin(-$default-margin, -$default-margin, 0, -$default-margin);
         }
     }
 

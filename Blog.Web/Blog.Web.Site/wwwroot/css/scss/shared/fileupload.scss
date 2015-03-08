@@ -20,11 +20,6 @@
             @include clean-list;
             @include margin($base-margin, null, null, null);
 
-            > li {
-                @include margin($dropzone-margin);
-                @include size(100%, auto);
-            }
-
             .thumbnail {
                 @include margin(0);
                 @include padding(0);

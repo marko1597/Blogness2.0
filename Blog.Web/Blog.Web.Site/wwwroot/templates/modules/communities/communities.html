@@ -1,8 +1,5 @@
-﻿<div class="row">
-    <div class="col-xs-12">
-        <div id="communities-list" isotope-container isotope-item-resize resize-layout-only="false" resize-container="communities-list"
-             resize-broadcast="updateCommunityItemSize">
-            <div ng-repeat="community in communities track by $index" isotope-item community-list-item community="community" ></div>
-        </div>
+﻿<div id="communities-list">
+    <div deckgrid source="communities" class="deckgrid">
+        <div community-list-item community="card"></div>
     </div>
 </div>

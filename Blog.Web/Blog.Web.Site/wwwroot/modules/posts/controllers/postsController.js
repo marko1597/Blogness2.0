@@ -1,7 +1,7 @@
 ﻿ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
     function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, errorService) {
         $scope.posts = [];
-        $scope.size = "";
+
         $scope.isBusy = false;
 
         $scope.init = function() {

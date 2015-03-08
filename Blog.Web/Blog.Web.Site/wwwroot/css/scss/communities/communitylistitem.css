@@ -1,32 +1,24 @@
-﻿.community-list-item {
-  margin-top: 5px;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  width: 340px;
-  height: auto;
-  position: relative; }
-  .community-list-item .community-members-container {
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px; }
-    .community-list-item .community-members-container .community-members {
-      margin-bottom: 15px;
-      max-height: 60px;
-      overflow: hidden; }
-      .community-list-item .community-members-container .community-members .member-item {
-        margin-top: 0;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        position: relative;
-        display: inline-block; }
-        .community-list-item .community-members-container .community-members .member-item img {
-          width: 60px;
-          height: 60px;
-          border-top: 3px solid #fff;
-          border-right: 3px solid #fff;
-          border-bottom: 3px solid #fff;
-          border-left: 3px solid #fff; }
+﻿.community-list-item .community-members-container {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px; }
+  .community-list-item .community-members-container .community-members {
+    margin-bottom: 15px;
+    max-height: 60px;
+    overflow: hidden; }
+    .community-list-item .community-members-container .community-members .member-item {
+      margin-top: 0;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      position: relative;
+      display: inline-block; }
+      .community-list-item .community-members-container .community-members .member-item img {
+        width: 60px;
+        height: 60px;
+        border-top: 3px solid #fff;
+        border-right: 3px solid #fff;
+        border-bottom: 3px solid #fff;
+        border-left: 3px solid #fff; }
 
 /*# sourceMappingURL=communitylistitem.css.map */

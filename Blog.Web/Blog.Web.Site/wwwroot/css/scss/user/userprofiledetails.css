@@ -1,6 +1,6 @@
 ﻿.user-profile-details {
   overflow: visible !important; }
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .user-profile-details .header > .btn-header {
       width: 40px;
       height: auto; } }
@@ -12,7 +12,7 @@
     font-weight: normal;
     max-width: 100%;
     width: 100%; }
-  @media (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     .user-profile-details .card {
       margin-top: 0;
       margin-right: 0;
@@ -90,11 +90,11 @@
           font-weight: normal;
           max-width: 100%;
           width: 100%; }
-          @media (max-width: 767px) {
+          @media screen and (max-width: 767px) {
             .user-profile-details .user-form .form-group label[data-display] {
               position: static;
               display: block; } }
-      @media (max-width: 767px) {
+      @media screen and (max-width: 767px) {
         .user-profile-details .user-form .form-group input[type='text'] {
           position: static;
           display: block; } }

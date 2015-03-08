@@ -1,16 +1,14 @@
-﻿<div id="community-view" class="row">
-    <div class="col-sm-12 col-md-9">
-        <div class="card default ng-cloak">
-            <div community-header community="community"></div>
-            <div class="community-description content">
-                <label>Description</label>
-                <p>{{community.Description}}</p>
-            </div>
+﻿<div id="community-view">
+    <div class="card default ng-cloak">
+        <div community-header community="community"></div>
+        <div class="community-description content">
+            <label>Description</label>
+            <p>{{community.Description}}</p>
         </div>
-        <div id="community-posts-container" isotope-container isotope-item-resize resize-layout-only="false"
-             resize-container="community-posts-container" resize-broadcast="updatePostsSize" 
-             resize-large="31.5%" resize-medium="48%" resize-small="98%">
-            <div ng-repeat="post in posts track by $index" isotope-item post-list-item data="{ Post: post, Width: postSize }"></div>
+    </div>
+    <div id="community-posts-container">
+        <div deckgrid source="posts" class="deckgrid">
+            <div post-list-item post="card"></div>
         </div>
     </div>
 </div>

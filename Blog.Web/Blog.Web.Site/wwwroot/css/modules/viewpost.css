@@ -1,4 +1,4 @@
-/* line 330, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/variables.scss */
+/* line 344, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/variables.scss */
 .view-post .header h4 .edit {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -9,15 +9,48 @@
   -o-transition: opacity .25s ease-in-out;
   transition: opacity .25s ease-in-out;
 }
-/* line 339, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/Content/scss/variables.scss */
+/* line 353, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/variables.scss */
 .view-post .header h4 .edit:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);
 }
 
-/* line 8, ../scss/viewpost.scss */
-.card.masonry > ul {
-  list-style-type: none;
-  padding: 0 !important;
-  margin: 0 !important;
+@media screen and (min-width: 992px) {
+  /* line 9, ../scss/viewpost.scss */
+  .post-content-items.deckgrid[deckgrid]::before {
+    display: none;
+    content: '3 .column.size-1-3';
+    visibility: hidden;
+  }
+  /* line 16, ../scss/viewpost.scss */
+  .post-content-items.deckgrid .column.size-1-3 {
+    width: 33.33%;
+    height: auto;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  /* line 23, ../scss/viewpost.scss */
+  .post-content-items.deckgrid[deckgrid]::before {
+    display: none;
+    content: '2 .column.size-1-2';
+    visibility: hidden;
+  }
+  /* line 30, ../scss/viewpost.scss */
+  .post-content-items.deckgrid .column.size-1-2 {
+    width: 50%;
+    height: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  /* line 37, ../scss/viewpost.scss */
+  .post-content-items.deckgrid[deckgrid]::before {
+    display: none;
+    content: '1 .column.size-1-1';
+    visibility: hidden;
+  }
+  /* line 44, ../scss/viewpost.scss */
+  .post-content-items.deckgrid .column.size-1-1 {
+    width: 100%;
+    height: auto;
+  }
 }

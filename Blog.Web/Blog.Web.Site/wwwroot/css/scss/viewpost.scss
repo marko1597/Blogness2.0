@@ -4,8 +4,46 @@
     @include header-edit-icon;
 }
 
-.card.masonry {
-    > ul {
-        @include clean-list;
+.post-content-items.deckgrid {
+    @media screen and (min-width: 992px) {
+        &[deckgrid]::before {
+            display: none;
+            content: '3 .column.size-1-3';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-3 {
+                @include size(33.33%, auto);
+            }
+        }
+    }
+
+    @include media(sm) {
+        &[deckgrid]::before {
+            display: none;
+            content: '2 .column.size-1-2';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-2 {
+                @include size(50%, auto);
+            }
+        }
+    }
+
+    @include media(xs) {
+        &[deckgrid]::before {
+            display: none;
+            content: '1 .column.size-1-1';
+            visibility: hidden;
+        }
+
+        .column {
+            &.size-1-1 {
+                @include size(100%, auto);
+            }
+        }
     }
 }
