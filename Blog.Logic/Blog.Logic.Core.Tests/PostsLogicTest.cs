@@ -439,7 +439,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            var result = _postsLogic.GetPostsByCommunity(1, 10, 10);
+            var result = _postsLogic.GetPostsByCommunity(1);
 
             Assert.NotNull(result);
             Assert.IsInstanceOf(typeof(List<Common.Contracts.Post>), result);
@@ -458,7 +458,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            var result = _postsLogic.GetPostsByCommunity(1, 10, 10);
+            var result = _postsLogic.GetPostsByCommunity(1);
 
             Assert.AreEqual(0, result.Count);
         }
@@ -476,7 +476,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.GetPostsByCommunity(1, 10, 10));
+            Assert.Throws<BlogException>(() => _postsLogic.GetPostsByCommunity(1));
         }
 
         [Test]
@@ -1279,134 +1279,186 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldAddPostWhenTagsNull()
+        public void ShouldSetCommunitiesToListPostWhenNullOnPostCleanUp()
         {
-            #region Variables
-
-            var dbResult = new Post
-            {
-                PostId = 3,
-                PostLikes = null,
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = null,
-                Tags = null,
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User { UserId = 1, UserName = "Lorem" }
-            };
             var param = new Common.Contracts.Post
             {
-                PostContents = new List<Common.Contracts.PostContent>
-                {
-                    new Common.Contracts.PostContent
-                    {
-                        Id = 1,
-                        PostContentTitle = "Foo",
-                        PostContentText = "Lorem Ipsum Dolor",
-                        PostId = 1,
-                        Media = new Common.Contracts.Media()
-                    },
-                    new Common.Contracts.PostContent
-                    {
-                        Id = 2,
-                        PostContentTitle = "Bar",
-                        PostContentText = "Lorem Ipsum Dolor",
-                        PostId = 1,
-                        Media = new Common.Contracts.Media()
-                    }
-                },
-                Tags = null,
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
+                Communities = null
             };
 
-            #endregion
-
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Add(It.IsAny<Post>())).Returns(new Post { PostId = 3 });
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
-                .Returns(new List<Post> { dbResult });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
             _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
             _mediaRepository = new Mock<IMediaRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            var result = _postsLogic.AddPost(param);
+            var result = _postsLogic.PostCleanUp(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Id);
+            Assert.IsInstanceOf(typeof(List<Common.Contracts.Community>), result.Communities);
         }
 
         [Test]
-        public void ShouldAddPostWhenPostContentsNull()
+        public void ShouldSetTagsToNullWhenEmptyOnPostCleanUp()
         {
-            #region Variables
-
-            var dbResult = new Post
-            {
-                PostId = 3,
-                PostLikes = null,
-                PostContents = null,
-                Comments = null,
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User { UserId = 1, UserName = "Lorem" }
-            };
             var param = new Common.Contracts.Post
             {
-                PostContents = null,
-                Tags = new List<Common.Contracts.Tag>
-                {
-                    new Common.Contracts.Tag
-                    {
-                        TagId = 1,
-                        TagName = "lorem"
-                    },
-                    new Common.Contracts.Tag
-                    {
-                        TagId = 2,
-                        TagName = "ipsum"
-                    }
-                },
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
+                Tags = null
             };
 
-            #endregion
-
             _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Add(It.IsAny<Post>())).Returns(new Post { PostId = 3 });
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
-                .Returns(new List<Post> { dbResult });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
             _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            
             _mediaRepository = new Mock<IMediaRepository>();
 
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            var result = _postsLogic.AddPost(param);
+            var result = _postsLogic.PostCleanUp(param);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Id);
+            Assert.IsNull(result.Tags);
+        }
+
+        [Test]
+        public void ShouldSetPostContentsToNullWhenEmptyOnPostCleanUp()
+        {
+            var param = new Common.Contracts.Post
+            {
+                PostContents = null
+            };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.PostCleanUp(param);
+
+            Assert.IsNotNull(result);
+            Assert.IsNull(result.PostContents);
+        }
+
+        [Test]
+        public void ShouldReturnCleanCommunitiesOnPrepareCommunities()
+        {
+            var param = new List<Common.Contracts.Community>
+                        {
+                            new Common.Contracts.Community
+                            {
+                                Leader = new Common.Contracts.User(),
+                                Members = new List<Common.Contracts.User>(),
+                                Posts = new List<Common.Contracts.Post>()
+                            },
+                            new Common.Contracts.Community
+                            {
+                                Leader = new Common.Contracts.User(),
+                                Members = new List<Common.Contracts.User>(),
+                                Posts = new List<Common.Contracts.Post>()
+                            }
+                        };
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.PrepareCommunities(param);
+
+            Assert.IsNotNull(result);
+
+            Assert.IsNull(result[0].Leader);
+            Assert.IsNull(result[0].Members);
+            Assert.IsNull(result[0].Posts);
+
+            Assert.IsNull(result[1].Leader);
+            Assert.IsNull(result[1].Members);
+            Assert.IsNull(result[1].Posts);
+        }
+
+        [Test]
+        public void ShouldReturnCleanPostFromEntity()
+        {
+            #region param
+
+            var param = new Post
+            {
+                Communities = new List<Community>
+                              {
+                                  new Community
+                                  {
+                                      Leader = new User(),
+                                      Members = new List<User>(),
+                                      Posts = new List<Post>()
+                                  }
+
+                              },
+                User = new User
+                       {
+                           BackgroundId = 1,
+                           PictureId = 2,
+                           CreatedCommunities = new List<Community>(),
+                           JoinedCommunities = new List<Community>(),
+                           Posts = new List<Post>()
+                       },
+                PostContents = new List<PostContent>
+                               {
+                                   new PostContent
+                                   {
+                                       Media = new Media
+                                               {
+                                                   MediaPath = "foo",
+                                                   ThumbnailPath = "foo"
+                                               }
+                                   }
+                               }
+            };
+
+            #endregion
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>(); 
+            _mediaRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Media, bool>>>(), false))
+                 .Returns(new List<Media> { new Media { MediaId = 1 } });
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.EntityToDtoPostCleanUp(param, 1);
+
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Communities);
+            Assert.IsNotNull(result.User);
+            Assert.IsNotNull(result.PostContents);
+
+            Assert.IsNull(result.Communities[0].Leader);
+            Assert.IsNull(result.Communities[0].Members);
+            Assert.IsNull(result.Communities[0].Posts);
+
+            Assert.IsNull(result.PostContents[0].Media.MediaPath);
+            Assert.IsNull(result.PostContents[0].Media.ThumbnailPath);
+        }
+
+        [Test]
+        public void ShouldReturnTrueOnValidatePostContentsIfEmpty()
+        {
+            var param = new List<Common.Contracts.PostContent>();
+
+            _postRepository = new Mock<IPostRepository>();
+            _postContentRepository = new Mock<IPostContentRepository>();
+            _mediaRepository = new Mock<IMediaRepository>();
+
+            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
+                _mediaRepository.Object);
+
+            var result = _postsLogic.ValidatePostContents(param);
+
+            Assert.IsTrue(result);
         }
 
         [Test]
@@ -1562,137 +1614,6 @@ namespace Blog.Logic.Core.Tests
         }
 
         [Test]
-        public void ShouldUpdatePostWhenTagsNull()
-        {
-            #region Variables
-
-            var dbResult = new Post
-            {
-                PostId = 3,
-                PostLikes = null,
-                PostContents = _postContents.Where(a => a.PostId == 1).ToList(),
-                Comments = null,
-                Tags = null,
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User { UserId = 1, UserName = "Lorem" }
-            };
-            var param = new Common.Contracts.Post
-            {
-                PostContents = new List<Common.Contracts.PostContent>
-                {
-                    new Common.Contracts.PostContent
-                    {
-                        Id = 1,
-                        PostContentTitle = "Foo",
-                        PostContentText = "Lorem Ipsum Dolor",
-                        PostId = 1,
-                        Media = new Common.Contracts.Media()
-                    },
-                    new Common.Contracts.PostContent
-                    {
-                        Id = 2,
-                        PostContentTitle = "Bar",
-                        PostContentText = "Lorem Ipsum Dolor",
-                        PostId = 1,
-                        Media = new Common.Contracts.Media()
-                    }
-                },
-                Tags = null,
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
-            };
-
-            #endregion
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Edit(It.IsAny<Post>())).Returns(new Post { PostId = 3 });
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
-                .Returns(new List<Post> { dbResult });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _mediaRepository.Object);
-
-            var result = _postsLogic.UpdatePost(param);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Id);
-        }
-
-        [Test]
-        public void ShouldUpdatePostWhenPostContentsNull()
-        {
-            #region Variables
-
-            var dbResult = new Post
-            {
-                PostId = 3,
-                PostLikes = null,
-                PostContents = null,
-                Comments = null,
-                Tags = _tags.Where(a => a.TagId != 3).ToList(),
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                UserId = 1,
-                User = new User { UserId = 1, UserName = "Lorem" }
-            };
-            var param = new Common.Contracts.Post
-            {
-                PostContents = null,
-                Tags = new List<Common.Contracts.Tag>
-                {
-                    new Common.Contracts.Tag
-                    {
-                        TagId = 1,
-                        TagName = "lorem"
-                    },
-                    new Common.Contracts.Tag
-                    {
-                        TagId = 2,
-                        TagName = "ipsum"
-                    }
-                },
-                PostTitle = "Foo",
-                PostMessage = "Lorem Ipsum Dolor",
-                User = new Common.Contracts.User { Id = 1, UserName = "Lorem" }
-            };
-
-            #endregion
-
-            _postRepository = new Mock<IPostRepository>();
-            _postRepository.Setup(a => a.Edit(It.IsAny<Post>())).Returns(new Post { PostId = 3 });
-            _postRepository.Setup(a => a.Find(It.IsAny<Expression<Func<Post, bool>>>(),
-                It.IsAny<Func<IQueryable<Post>, IOrderedQueryable<Post>>>(), It.IsAny<string>()))
-                .Returns(new List<Post> { dbResult });
-
-            var postContents = _postContents.Where(a => a.PostId == 1).ToList();
-            _postContentRepository = new Mock<IPostContentRepository>();
-            _postContentRepository.Setup(a => a.Find(It.IsAny<Expression<Func<PostContent, bool>>>(), true))
-                .Returns(postContents);
-
-            _mediaRepository = new Mock<IMediaRepository>();
-
-            _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
-                _mediaRepository.Object);
-
-            var result = _postsLogic.UpdatePost(param);
-
-            Assert.IsNotNull(result);
-            Assert.AreEqual(3, result.Id);
-        }
-
-        [Test]
         public void ShouldThrowExceptionWhenUpdatePostFails()
         {
             #region Variables
@@ -1759,7 +1680,7 @@ namespace Blog.Logic.Core.Tests
             _postsLogic = new PostsLogic(_postRepository.Object, _postContentRepository.Object,
                 _mediaRepository.Object);
 
-            Assert.Throws<BlogException>(() => _postsLogic.AddPost(param));
+            Assert.Throws<BlogException>(() => _postsLogic.UpdatePost(param));
         }
         
         [Test]

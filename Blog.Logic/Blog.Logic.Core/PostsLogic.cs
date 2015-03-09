@@ -35,7 +35,7 @@ namespace Blog.Logic.Core
                         string.Format("Cannot find post with Id {0}", postId));
                 }
 
-                return PostItemCleanUp(db, postId);
+                return EntityToDtoPostCleanUp(db, postId);
             }
             catch (Exception ex)
             {
@@ -231,12 +231,10 @@ namespace Blog.Logic.Core
                 if (!ValidatePostContents(post.PostContents))
                     throw new Exception("Cannot upload more than one video.");
 
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
-                post.Communities = post.Communities != null ? PrepareCommunities(post.Communities) : new List<Community>();
+                post = PostCleanUp(post);
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
-                return PostItemCleanUp(tPost, tPost.PostId);
+                return EntityToDtoPostCleanUp(tPost, tPost.PostId);
             }
             catch (Exception ex)
             {
@@ -251,12 +249,10 @@ namespace Blog.Logic.Core
                 if (!ValidatePostContents(post.PostContents))
                     throw new Exception("Cannot upload more than one video.");
 
-                post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
-                post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
-                post.Communities = post.Communities != null ? PrepareCommunities(post.Communities) : new List<Community>();
-
+                post = PostCleanUp(post);
+                
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
-                return PostItemCleanUp(tPost, tPost.PostId);
+                return EntityToDtoPostCleanUp(tPost, tPost.PostId);
             }
             catch (Exception ex)
             {
@@ -280,7 +276,7 @@ namespace Blog.Logic.Core
             }
         }
 
-        private static List<Tag> PrepareTags(IEnumerable<Tag> tags)
+        public List<Tag> PrepareTags(IEnumerable<Tag> tags)
         {
             var enumerable = tags as Tag[] ?? tags.ToArray();
             foreach (var tag in enumerable)
@@ -291,7 +287,31 @@ namespace Blog.Logic.Core
             return enumerable.ToList();
         }
 
-        private static bool ValidatePostContents(IEnumerable<PostContent> contents)
+        public List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int postId)
+        {
+            var postContents = contents as PostContent[] ?? contents.ToArray();
+            foreach (var postContent in postContents)
+            {
+                postContent.PostId = postId;
+            }
+
+            return postContents.ToList();
+        }
+
+        public List<Community> PrepareCommunities(IEnumerable<Community> communities)
+        {
+            var postCommunities = communities as Community[] ?? communities.ToArray();
+            foreach (var community in postCommunities)
+            {
+                community.Leader = null;
+                community.Members = null;
+                community.Posts = null;
+            }
+
+            return postCommunities.ToList();
+        }
+
+        public bool ValidatePostContents(IEnumerable<PostContent> contents)
         {
             if (contents == null) return true;
 
@@ -307,39 +327,15 @@ namespace Blog.Logic.Core
                 "video/x-flv"
             };
 
-            var videoContents = postContents.Where(content => 
-                content.Media != null && 
+            var videoContents = postContents.Where(content =>
+                content.Media != null &&
                 supportedMedia.Contains(content.Media.MediaType))
                 .ToList();
 
             return !(videoContents.Count > 1);
         }
 
-        private static List<PostContent> PreparePostContents(IEnumerable<PostContent> contents, int postId)
-        {
-            var postContents = contents as PostContent[] ?? contents.ToArray();
-            foreach (var postContent in postContents)
-            {
-                postContent.PostId = postId;
-            }
-
-            return postContents.ToList();
-        }
-
-        private static List<Community> PrepareCommunities(IEnumerable<Community> communities)
-        {
-            var postCommunities = communities as Community[] ?? communities.ToArray();
-            foreach (var community in postCommunities)
-            {
-                community.Leader = null;
-                community.Members = null;
-                community.Posts = null;
-            }
-
-            return postCommunities.ToList();
-        }
-
-        private Post GetPostProperties(Post post)
+        public Post GetPostProperties(Post post)
         {
             var contents = new List<PostContent>();
             var dbContents = _postContentRepository.Find(b => b.PostId == post.Id, true).ToList();
@@ -359,7 +355,16 @@ namespace Blog.Logic.Core
             return post;
         }
 
-        private Post PostItemCleanUp(DataAccess.Database.Entities.Objects.Post db, int postId)
+        public Post PostCleanUp(Post post)
+        {
+            post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
+            post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
+            post.Communities = post.Communities != null ? PrepareCommunities(post.Communities) : new List<Community>();
+
+            return post;
+        }
+
+        public Post EntityToDtoPostCleanUp(DataAccess.Database.Entities.Objects.Post db, int postId)
         {
             // clean up the data fetched from db to avoid stack overflow
             if (db.Communities != null)
