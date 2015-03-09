@@ -170,7 +170,7 @@ namespace Blog.DataAccess.Database.Repository
                 post.Communities = new List<Community>();
 
                 foreach (var q in communities.Select(c => Context.Communities.Where(a =>
-                    a.Name.ToLower() == c.Name.ToLower()).ToList()).Where(q => q.Count > 0))
+                    a.Id == c.Id).ToList()).Where(q => q.Count > 0))
                 {
                     Context.Communities.Attach(q.FirstOrDefault());
                     Context.Entry(q.FirstOrDefault()).State = EntityState.Unchanged;
@@ -186,6 +186,7 @@ namespace Blog.DataAccess.Database.Repository
 
             Context.Entry(post).State = EntityState.Added;
             Context.SaveChanges();
+            Context.Entry(post).State = EntityState.Detached;
 
             return post;
         }
@@ -215,11 +216,11 @@ namespace Blog.DataAccess.Database.Repository
 
             var newtags = RepositoryHelper.GetNewTags(db.Tags, post.Tags, post.UserId);
             newtags.ForEach(a =>
-                            {
-                                Context.Tags.Attach(a);
-                                Context.Entry(a).State = EntityState.Added;
-                                db.Tags.Add(a);
-                            });
+            {
+                Context.Tags.Attach(a);
+                Context.Entry(a).State = EntityState.Added;
+                db.Tags.Add(a);
+            });
 
             #endregion
 
@@ -251,30 +252,24 @@ namespace Blog.DataAccess.Database.Repository
 
             var newcontents = RepositoryHelper.GetNewContents(db.PostContents, post.PostContents, post.UserId);
             newcontents.ForEach(a =>
-                                {
-                                    Context.PostContents.Attach(a);
-                                    Context.Entry(a).State = EntityState.Added;
-                                    db.PostContents.Add(a);
-                                });
+            {
+                Context.PostContents.Attach(a);
+                Context.Entry(a).State = EntityState.Added;
+                db.PostContents.Add(a);
+            });
 
             #endregion
 
             #region Communities
 
-            var tempCommunities = db.Communities.ToList();
-            foreach (var c in tempCommunities)
+            if (post.Communities != null)
             {
-                var tempCommunity = post.Communities.FirstOrDefault(a => a.Id == c.Id);
-                Context.Entry(c).State = tempCommunity != null ? EntityState.Modified : EntityState.Deleted;
+                var tempCommunities = db.Communities.ToList();
+                foreach (var t in tempCommunities)
+                {
+                    Context.Entry(t).State = GetCommunityState(t, post.Communities);
+                }
             }
-
-            var newCommunities = RepositoryHelper.GetNewCommunities(db.Communities, post.Communities, post.UserId);
-            newCommunities.ForEach(a =>
-            {
-                Context.Communities.Attach(a);
-                Context.Entry(a).State = EntityState.Added;
-                db.Communities.Add(a);
-            });
 
             #endregion
 
@@ -283,6 +278,7 @@ namespace Blog.DataAccess.Database.Repository
 
             Context.Entry(db).State = EntityState.Modified;
             Context.SaveChanges();
+            Context.Entry(post).State = EntityState.Detached;
 
             return post;
         }
@@ -295,6 +291,13 @@ namespace Blog.DataAccess.Database.Repository
 
             return tagNames.Contains(tag.TagName.ToLower()) ?
                 EntityState.Unchanged : EntityState.Deleted;
+        }
+
+        private static EntityState GetCommunityState(Community community, IEnumerable<Community> communities)
+        {
+            var communityIds = communities.Select(a => a.Id).ToList();
+
+            return communityIds.Contains(community.Id) ? EntityState.Unchanged : EntityState.Deleted;
         }
 
         #endregion

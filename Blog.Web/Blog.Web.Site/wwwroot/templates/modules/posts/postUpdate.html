@@ -13,10 +13,17 @@
         </div>
     </div>
     <div class="modify-post-contents">
+        <h5>Media</h5>
         <div class="btn btn-primary" ng-click="launchMediaSelectionDialog()">Add existing media</div>
         <div file-upload uploader="uploader"></div>
     </div>
+    <div class="modify-post-communities">
+        <h5>Communities</h5>
+        <button class="btn btn-primary" ng-click="showCommunitySelection()">Select communities you this post to appear</button>
+        <div community-selection-dialog></div>
+    </div>
     <div class="modify-post-tags">
+        <h5>Tags</h5>
         <tags-input ng-model="Tags" add-on-enter="true" add-on-comma="true" add-on-space="true"
                     on-tag-added="onTagAdded($tag)" on-tag-removed="onTagRemoved($tag)">
             <auto-complete source="getTagsSource($query)" highlight-matched-text="true" debounce-delay="1500"></auto-complete>

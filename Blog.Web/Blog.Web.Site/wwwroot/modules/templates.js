@@ -609,7 +609,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "                <span class=\"blog-brand-icon\"></span>\r" +
     "\n" +
-    "                Bloggity Blog\r" +
+    "                Bloggity\r" +
     "\n" +
     "            </a>\r" +
     "\n" +
@@ -1691,13 +1691,27 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"modify-post-contents\">\r" +
     "\n" +
+    "        <h5>Media</h5>\r" +
+    "\n" +
     "        <div class=\"btn btn-primary\" ng-click=\"launchMediaSelectionDialog()\">Add existing media</div>\r" +
     "\n" +
     "        <div file-upload uploader=\"uploader\"></div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
+    "    <div class=\"modify-post-communities\">\r" +
+    "\n" +
+    "        <h5>Communities</h5>\r" +
+    "\n" +
+    "        <button class=\"btn btn-primary\" ng-click=\"showCommunitySelection()\">Select communities you this post to appear</button>\r" +
+    "\n" +
+    "        <div community-selection-dialog></div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "    <div class=\"modify-post-tags\">\r" +
+    "\n" +
+    "        <h5>Tags</h5>\r" +
     "\n" +
     "        <tags-input ng-model=\"Tags\" add-on-enter=\"true\" add-on-comma=\"true\" add-on-space=\"true\"\r" +
     "\n" +

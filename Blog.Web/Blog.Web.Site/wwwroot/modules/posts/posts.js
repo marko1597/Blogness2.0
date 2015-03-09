@@ -10,6 +10,7 @@
         "ngError",
         "ngMedia",
         "ngConfig",
+        "ngCommunities",
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",

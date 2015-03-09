@@ -57,7 +57,7 @@
             }
         };
 
-        $rootScope.$on("launchCommunitySelectionDialog", function (ev, data) {
+        $scope.$on("launchCommunitySelectionDialog", function (ev, data) {
             try {
                 if ($scope.listDialog.$options.show) return;
 

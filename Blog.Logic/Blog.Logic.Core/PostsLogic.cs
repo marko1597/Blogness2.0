@@ -28,31 +28,14 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User").FirstOrDefault();
-
+                var db = _postRepository.Find(a => a.PostId == postId, null, "Tags,User,Communities").FirstOrDefault();
                 if (db == null)
                 {
                     return new Post().GenerateError<Post>((int)Constants.Error.RecordNotFound,
                         string.Format("Cannot find post with Id {0}", postId));
                 }
 
-                var post = PostMapper.ToDto(db);
-                if (post.User.PictureId != null)
-                    post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());
-                if (post.User.BackgroundId != null)
-                    post.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.BackgroundId, false).FirstOrDefault());
-
-                var dbContents = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
-                var postContents = new List<PostContent>();
-                dbContents.ForEach(a =>
-                {
-                    a.Media.MediaPath = null;
-                    a.Media.ThumbnailPath = null;
-                    postContents.Add(PostContentMapper.ToDto(a));
-                });
-                post.PostContents = postContents;
-
-                return post;
+                return PostItemCleanUp(db, postId);
             }
             catch (Exception ex)
             {
@@ -250,10 +233,10 @@ namespace Blog.Logic.Core
 
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
-                post.Communities = post.Communities ?? new List<Community>();
+                post.Communities = post.Communities != null ? PrepareCommunities(post.Communities) : new List<Community>();
 
                 var tPost = _postRepository.Add(PostMapper.ToEntity(post));
-                return GetPost(tPost.PostId);
+                return PostItemCleanUp(tPost, tPost.PostId);
             }
             catch (Exception ex)
             {
@@ -270,10 +253,10 @@ namespace Blog.Logic.Core
 
                 post.Tags = post.Tags != null ? PrepareTags(post.Tags) : null;
                 post.PostContents = post.PostContents != null ? PreparePostContents(post.PostContents, post.Id) : null;
-                post.Communities = post.Communities ?? new List<Community>();
+                post.Communities = post.Communities != null ? PrepareCommunities(post.Communities) : new List<Community>();
 
                 var tPost = _postRepository.Edit(PostMapper.ToEntity(post));
-                return GetPost(tPost.PostId);
+                return PostItemCleanUp(tPost, tPost.PostId);
             }
             catch (Exception ex)
             {
@@ -343,6 +326,19 @@ namespace Blog.Logic.Core
             return postContents.ToList();
         }
 
+        private static List<Community> PrepareCommunities(IEnumerable<Community> communities)
+        {
+            var postCommunities = communities as Community[] ?? communities.ToArray();
+            foreach (var community in postCommunities)
+            {
+                community.Leader = null;
+                community.Members = null;
+                community.Posts = null;
+            }
+
+            return postCommunities.ToList();
+        }
+
         private Post GetPostProperties(Post post)
         {
             var contents = new List<PostContent>();
@@ -359,6 +355,70 @@ namespace Blog.Logic.Core
                 post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());
             if (post.User.BackgroundId != null)
                 post.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.BackgroundId, false).FirstOrDefault());
+
+            return post;
+        }
+
+        private Post PostItemCleanUp(DataAccess.Database.Entities.Objects.Post db, int postId)
+        {
+            // clean up the data fetched from db to avoid stack overflow
+            if (db.Communities != null)
+            {
+                foreach (var community in db.Communities)
+                {
+                    community.Leader = null;
+                    community.Members = null;
+                    community.Posts = null;
+                }
+            }
+
+            if (db.User != null)
+            {
+                db.User.CreatedCommunities = null;
+                db.User.JoinedCommunities = null;
+                db.User.Posts = null;
+            }
+
+            var postContents = new List<PostContent>();
+            if (db.PostContents != null)
+            {
+                foreach (var content in db.PostContents)
+                {
+                    content.Post = null;
+                    if (content.Media != null)
+                    {
+                        content.Media.MediaPath = null;
+                        content.Media.ThumbnailPath = null;
+                    }
+                    postContents.Add(PostContentMapper.ToDto(content));
+                }
+            }
+            else
+            {
+                var dbContents = _postContentRepository.Find(a => a.PostId == postId, true).ToList();
+                dbContents.ForEach(a =>
+                {
+                    a.Post = null;
+                    if (a.Media != null)
+                    {
+                        a.Media.MediaPath = null;
+                        a.Media.ThumbnailPath = null;
+                    }
+                    postContents.Add(PostContentMapper.ToDto(a));
+                });
+            }
+
+            var post = PostMapper.ToDto(db);
+
+            if (post.User != null)
+            {
+                if (post.User.PictureId != null)
+                    post.User.Picture = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.PictureId, false).FirstOrDefault());
+                if (post.User.BackgroundId != null)
+                    post.User.Background = MediaMapper.ToDto(_mediaRepository.Find(b => b.MediaId == (int)post.User.BackgroundId, false).FirstOrDefault());
+            }
+           
+            post.PostContents = postContents;
 
             return post;
         }

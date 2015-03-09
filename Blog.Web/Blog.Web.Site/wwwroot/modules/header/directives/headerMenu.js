@@ -41,7 +41,7 @@
         };
 
         $scope.showCommunitySelection = function () {
-            $rootScope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
+            $scope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
         };
 
         $scope.logout = function() {
