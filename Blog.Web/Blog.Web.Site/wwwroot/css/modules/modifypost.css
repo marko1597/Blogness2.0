@@ -68,3 +68,11 @@
 #modify-post-main .modify-post-contents .btn-primary {
   margin-bottom: 15px;
 }
+/* line 64, ../scss/modifypost.scss */
+#modify-post-main .modify-post-communities > .btn {
+  margin-bottom: 15px;
+}
+/* line 68, ../scss/modifypost.scss */
+#modify-post-main .modify-post-communities .communities-list {
+  margin-bottom: 15px;
+}

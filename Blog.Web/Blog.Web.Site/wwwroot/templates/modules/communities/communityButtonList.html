@@ -1,0 +1,10 @@
+﻿<ul class="communities-list" ng-show="hasCommunities()">
+    <li class="community-item card btn" ng-repeat="community in communities" ng-click="removeFromList(community)">
+        <span>
+            <i class="fa fa-users"></i>
+            <i class="fa fa-user" ng-show="communityCreatedByLoggedUser(community)"></i>
+            {{community.Name}}
+        </span>
+        <i class="fa fa-times" ng-show="allowDelete"></i>
+    </li>
+</ul>

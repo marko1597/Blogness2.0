@@ -14,6 +14,7 @@
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
+        "blogEmpty",
         "blogFileUpload",
         "blogVideoPlayer",
         "blogTicker",

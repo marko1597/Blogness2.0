@@ -37,9 +37,11 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 			Tags: []
 		};
 
+	    $scope.emptyCommunitiesMessage = "No communities selected for this post to show..";
+
 		$scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
 			window.blogConfiguration.blogApi + "media?username=" + $scope.username + "&album=default" :
-			configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+			configProvider.getSettings().BlogApi + "media?username=getTagsSource" + $scope.username + "&album=default";
 
 		$scope.onTagAdded = function (t) {
 			var tag = { TagName: t.text };
@@ -55,6 +57,22 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 		$scope.getTagsSource = function (t) {
 			return tagsService.getTagsByName(t);
 		};
+
+	    $scope.hasCommunities = function() {
+	        return $scope.post.Communities && $scope.post.Communities.length > 0;
+	    };
+
+	    $scope.communityCreatedByLoggedUser = function (community) {
+	        if (community && community.Leader) {
+	            return $scope.username === community.Leader.UserName;
+	        }
+	        return false;
+	    };
+
+	    $scope.removeCommunityFromPost = function(community) {
+	        var index = $scope.post.Communities.indexOf(community);
+	        $scope.post.Communities.splice(index);
+	    };
 
 		$scope.showCommunitySelection = function () {
 			$scope.$broadcast("launchCommunitySelectionDialog", { canClose: true });

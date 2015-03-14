@@ -1,4 +1,4 @@
-﻿<div id="modify-post-main">
+﻿    <div id="modify-post-main">
     <div class="modify-post-title">
         <h5>Title</h5>
         <input ng-model="post.PostTitle" />
@@ -20,13 +20,15 @@
     <div class="modify-post-communities">
         <h5>Communities</h5>
         <button class="btn btn-primary" ng-click="showCommunitySelection()">Select communities you this post to appear</button>
+        <div community-button-list communities="post.Communities" allow-delete="true"></div>
+        <div empty-record-message message="emptyCommunitiesMessage" ng-show="!hasCommunities()"></div>
         <div community-selection-dialog></div>
     </div>
     <div class="modify-post-tags">
         <h5>Tags</h5>
         <tags-input ng-model="Tags" add-on-enter="true" add-on-comma="true" add-on-space="true"
                     on-tag-added="onTagAdded($tag)" on-tag-removed="onTagRemoved($tag)">
-            <auto-complete source="getTagsSource($query)" highlight-matched-text="true" debounce-delay="1500"></auto-complete>
+            <auto-complete source="getTagsSource($query)" highlight-matched-text="true"></auto-complete>
         </tags-input>
     </div>
     <div class="modify-post-buttons">

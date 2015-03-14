@@ -178,7 +178,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   $templateCache.put('comments/commentsList.html',
     "<div class=\"comment-items-list\">\r" +
     "\n" +
-    "    <div class=\"comments-empty-message alert\" ng-class=\"emptyMessageStyle()\" ng-show=\"showEmptyCommentsMessage()\">\r" +
+    "    <div class=\"empty-record-message alert\" ng-class=\"emptyMessageStyle()\" ng-show=\"showEmptyCommentsMessage()\">\r" +
     "\n" +
     "        <p>\r" +
     "\n" +
@@ -223,6 +223,29 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    </div>\r" +
     "\n" +
     "</div>"
+  );
+
+
+  $templateCache.put('communities/communityButtonList.html',
+    "<ul class=\"communities-list\" ng-show=\"hasCommunities()\">\r" +
+    "\n" +
+    "    <li class=\"community-item card btn\" ng-repeat=\"community in communities\" ng-click=\"removeFromList(community)\">\r" +
+    "\n" +
+    "        <span>\r" +
+    "\n" +
+    "            <i class=\"fa fa-users\"></i>\r" +
+    "\n" +
+    "            <i class=\"fa fa-user\" ng-show=\"communityCreatedByLoggedUser(community)\"></i>\r" +
+    "\n" +
+    "            {{community.Name}}\r" +
+    "\n" +
+    "        </span>\r" +
+    "\n" +
+    "        <i class=\"fa fa-times\" ng-show=\"allowDelete\"></i>\r" +
+    "\n" +
+    "    </li>\r" +
+    "\n" +
+    "</ul>"
   );
 
 
@@ -419,7 +442,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('empty/emptyRecordMessage.html',
-    "<div class=\"empty-record-message\">\r" +
+    "<div class=\"empty-record-message alert alert-warning\">\r" +
     "\n" +
     "    <p>{{message}}</p>\r" +
     "\n" +
@@ -1661,7 +1684,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/postUpdate.html',
-    "<div id=\"modify-post-main\">\r" +
+    "    <div id=\"modify-post-main\">\r" +
     "\n" +
     "    <div class=\"modify-post-title\">\r" +
     "\n" +
@@ -1705,6 +1728,10 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <button class=\"btn btn-primary\" ng-click=\"showCommunitySelection()\">Select communities you this post to appear</button>\r" +
     "\n" +
+    "        <div community-button-list communities=\"post.Communities\" allow-delete=\"true\"></div>\r" +
+    "\n" +
+    "        <div empty-record-message message=\"emptyCommunitiesMessage\" ng-show=\"!hasCommunities()\"></div>\r" +
+    "\n" +
     "        <div community-selection-dialog></div>\r" +
     "\n" +
     "    </div>\r" +
@@ -1717,7 +1744,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    on-tag-added=\"onTagAdded($tag)\" on-tag-removed=\"onTagRemoved($tag)\">\r" +
     "\n" +
-    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\" debounce-delay=\"1500\"></auto-complete>\r" +
+    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\"></auto-complete>\r" +
     "\n" +
     "        </tags-input>\r" +
     "\n" +
@@ -1740,13 +1767,37 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"col-xs-12 col-sm-8 col-md-9 col-lg-9\">\r" +
     "\n" +
-    "        <div id=\"post-{{post.Id}}\" class=\"card default view-post ng-cloak\">\r" +
+    "        <div class=\"empty-record-message alert\" ng-class=\"emptyMessageStyle()\" ng-show=\"showEmptyMessage()\">\r" +
+    "\n" +
+    "            <p>\r" +
+    "\n" +
+    "                {{getEmptyMessage()}}\r" +
+    "\n" +
+    "                <i class=\"fa fa-spinner fa-spin\" ng-show=\"!hasError\"></i>\r" +
+    "\n" +
+    "                <div ng-show=\"hasError\">\r" +
+    "\n" +
+    "                    <span class=\"reload\" ng-click=\"getViewedPost()\">Click here</span> to reload\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </p>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div id=\"post-{{post.Id}}\" class=\"card default view-post ng-cloak\" ng-show=\"!showEmptyMessage()\">\r" +
     "\n" +
     "            <div post-header post=\"post\" user=\"post.User\" />\r" +
     "\n" +
     "            <div class=\"content\">\r" +
     "\n" +
     "                <p ng-bind-html=\"post.PostMessage\" ellipsis></p>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"content\">\r" +
+    "\n" +
+    "                <div community-button-list communities=\"post.Communities\" allow-delete=\"false\"></div>\r" +
     "\n" +
     "            </div>\r" +
     "\n" +
@@ -1899,7 +1950,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('tags/tagItem.html',
-    "<div class=\"tag-item\" data-tag-id=\"{{tag.TagId}}\">\r" +
+    "<div class=\"tag-item btn\" data-tag-id=\"{{tag.TagId}}\">\r" +
     "\n" +
     "    <i class=\"fa fa-tags\"></i>\r" +
     "\n" +

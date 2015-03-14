@@ -247,3 +247,44 @@
 }
 
 /* #endregion */
+
+/* #region alert overrides */
+
+.alert {
+    @include border-radius(0, true);
+    @include box-shadow(false);
+}
+
+.alert-warning {
+    @extend .alert;
+
+    color: darken($warning-color, 40%);
+    background: $warning-color;
+    @include borders(1px, solid, darken($warning-color, 10%), true);
+}
+
+.alert-danger {
+    @extend .alert;
+
+    color: $main-font-color;
+    background: $danger-color;
+    @include borders(1px, solid, darken($danger-color, 10%), true);
+}
+
+.alert-success {
+    @extend .alert;
+
+    color: $main-font-color;
+    background: $success-color;
+    @include borders(1px, solid, darken($success-color, 10%), true);
+}
+
+.alert-info {
+    @extend .alert;
+
+    color: $content-font-color;
+    background: $default-color;
+    @include borders(1px, solid, $light-border-color, true);
+}
+
+/* #endregion */

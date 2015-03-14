@@ -72,9 +72,9 @@ tags-input .tags {
     -webkit-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
     -moz-box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
     box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6); }
-tags-input.ng-invalid .tags {
+tags-input .ng-invalid .tags {
   box-shadow: 0 0 0 1px #d9534f; }
-tags-input.autocomplete {
+tags-input .autocomplete {
   margin-top: 5px;
   padding-top: 5px;
   padding-right: 0;
@@ -90,11 +90,11 @@ tags-input.autocomplete {
   z-index: 999;
   background-color: #fff;
   box-shadow: 0 5px 10px #cccccc; }
-  tags-input.autocomplete .suggestion-list {
+  tags-input .autocomplete .suggestion-list {
     list-style-type: none;
     padding: 0 !important;
     margin: 0 !important; }
-  tags-input.autocomplete .suggestion-item {
+  tags-input .autocomplete .suggestion-item {
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -107,13 +107,13 @@ tags-input.autocomplete {
     cursor: pointer;
     color: #4c4c4c;
     background-color: #fff; }
-    tags-input.autocomplete .suggestion-item.selected {
+    tags-input .autocomplete .suggestion-item.selected {
       color: #fff;
       background-color: #56c2e1; }
-      tags-input.autocomplete .suggestion-item.selected em {
+      tags-input .autocomplete .suggestion-item.selected em {
         color: #fff;
         background-color: #56c2e1; }
-    tags-input.autocomplete .suggestion-item em {
+    tags-input .autocomplete .suggestion-item em {
       color: #4c4c4c;
       background-color: #fff; }
 

@@ -61,14 +61,18 @@
     }
 
     .modify-post-communities {
+        > .btn {
+            @include margin(null, null, $default-margin);
+        }
 
+        .communities-list {
+            @include margin(null, null, $default-margin);
+        }
     }
 
     .modify-post-tags {
-
     }
 
     .modify-post-buttons {
-
     }
 }

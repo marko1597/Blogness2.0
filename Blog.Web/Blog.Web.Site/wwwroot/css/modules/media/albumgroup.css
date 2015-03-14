@@ -33,12 +33,12 @@
   width: 40px;
   height: 40px;
 }
-/* line 213, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/media/../variables.scss */
+/* line 213, ../../scss/variables.scss */
 .album-group .header > .btn-header.right label {
   margin-right: 0;
   cursor: pointer;
 }
-/* line 217, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/media/../variables.scss */
+/* line 217, ../../scss/variables.scss */
 .album-group .header > .btn-header.right label > input[type='file'] {
   position: fixed;
   top: -1000px;

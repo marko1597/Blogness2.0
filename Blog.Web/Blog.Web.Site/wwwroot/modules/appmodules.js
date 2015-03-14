@@ -443,7 +443,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('empty/emptyRecordMessage.html',
-    "<div class=\"empty-record-message\">\r" +
+    "<div class=\"empty-record-message alert alert-warning\">\r" +
     "\n" +
     "    <p>{{message}}</p>\r" +
     "\n" +
@@ -1685,7 +1685,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/postUpdate.html',
-    "<div id=\"modify-post-main\">\r" +
+    "    <div id=\"modify-post-main\">\r" +
     "\n" +
     "    <div class=\"modify-post-title\">\r" +
     "\n" +
@@ -1729,6 +1729,26 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <button class=\"btn btn-primary\" ng-click=\"showCommunitySelection()\">Select communities you this post to appear</button>\r" +
     "\n" +
+    "        <ul class=\"communities-list\" ng-show=\"hasCommunities()\">\r" +
+    "\n" +
+    "            <li class=\"community-item card\" ng-repeat=\"community in post.Communities\" ng-click=\"removeCommunityFromPost(community)\">\r" +
+    "\n" +
+    "                <label>\r" +
+    "\n" +
+    "                    <i class=\"fa fa-user\" ng-show=\"communityCreatedByLoggedUser(community)\"></i>\r" +
+    "\n" +
+    "                    {{community.Name}}\r" +
+    "\n" +
+    "                </label>\r" +
+    "\n" +
+    "                <i class=\"fa fa-times\"></i>\r" +
+    "\n" +
+    "            </li>\r" +
+    "\n" +
+    "        </ul>\r" +
+    "\n" +
+    "        <div empty-record-message message=\"emptyCommunitiesMessage\" ng-show=\"!hasCommunities()\"></div>\r" +
+    "\n" +
     "        <div community-selection-dialog></div>\r" +
     "\n" +
     "    </div>\r" +
@@ -1741,7 +1761,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "                    on-tag-added=\"onTagAdded($tag)\" on-tag-removed=\"onTagRemoved($tag)\">\r" +
     "\n" +
-    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\" debounce-delay=\"1500\"></auto-complete>\r" +
+    "            <auto-complete source=\"getTagsSource($query)\" highlight-matched-text=\"true\"></auto-complete>\r" +
     "\n" +
     "        </tags-input>\r" +
     "\n" +
@@ -4137,6 +4157,39 @@ ngCommunities.directive('communityHeader', ["$templateCache", function ($templat
     };
 }]);
 
+///#source 1 1 /wwwroot/modules/communities/directives/communityButtonList.js
+ngCommunities.directive("communityButtonList", ["$templateCache",
+    function ($templateCache) {
+        var ctrlFn = function ($scope, localStorageService) {
+            $scope.username = localStorageService.get("username");
+
+            $scope.hasCommunities = function () {
+                return $scope.communities && $scope.communities.length > 0;
+            };
+
+            $scope.communityCreatedByLoggedUser = function (community) {
+                if (community && community.Leader) {
+                    return $scope.username === community.Leader.UserName;
+                }
+                return false;
+            };
+
+            $scope.removeFromList = function (community) {
+                var index = $scope.communities.indexOf(community);
+                $scope.communities.splice(index);
+            };
+        };
+        ctrlFn.$inject = ["$scope", "localStorageService"];
+
+        return {
+            restrict: 'EA',
+            scope: { communities: '=' },
+            replace: true,
+            template: $templateCache.get("communities/communityButtonList.html"),
+            controller: ctrlFn
+        };
+    }
+]);
 ///#source 1 1 /wwwroot/modules/communities/directives/communitySelectionDialog.js
 ngCommunities.directive('communitySelectionDialog', ["$templateCache", function ($templateCache) {
     var ctrlFn = function ($scope, $rootScope, $modal, localStorageService,
@@ -6755,6 +6808,7 @@ var ngPosts = angular.module("ngPosts",
         "ngBlogSockets",
         "ngCkeditor",
         "ngTagsInput",
+        "blogEmpty",
         "blogFileUpload",
         "blogVideoPlayer",
         "blogTicker",
@@ -6858,9 +6912,11 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 			Tags: []
 		};
 
+	    $scope.emptyCommunitiesMessage = "No communities selected for this post to show..";
+
 		$scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
 			window.blogConfiguration.blogApi + "media?username=" + $scope.username + "&album=default" :
-			configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+			configProvider.getSettings().BlogApi + "media?username=getTagsSource" + $scope.username + "&album=default";
 
 		$scope.onTagAdded = function (t) {
 			var tag = { TagName: t.text };
@@ -6877,9 +6933,29 @@ ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location"
 			return tagsService.getTagsByName(t);
 		};
 
+	    $scope.hasCommunities = function() {
+	        return $scope.post.Communities && $scope.post.Communities.length > 0;
+	    };
+
+	    $scope.communityCreatedByLoggedUser = function (community) {
+	        if (community && community.Leader) {
+	            return $scope.username === community.Leader.UserName;
+	        }
+	        return false;
+	    };
+
+	    $scope.removeCommunityFromPost = function(community) {
+	        var index = $scope.post.Communities.indexOf(community);
+	        $scope.post.Communities.splice(index);
+	    };
+
 		$scope.showCommunitySelection = function () {
 			$scope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
 		};
+
+	    $scope.$watch("post", function(value) {
+	        console.log(value);
+	    }, true);
 
 		$scope.$on("doneSelectingCommunities", function (ev, data) {
 		    $scope.post.Communities = [];

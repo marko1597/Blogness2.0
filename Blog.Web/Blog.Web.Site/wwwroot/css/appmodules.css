@@ -591,11 +591,11 @@ tags-input .tags.focused {
   box-shadow: 0 0 3px 1px rgba(5, 139, 242, 0.6);
 }
 /* line 88, ../../scss/extensions/ngtagsinput.scss */
-tags-input.ng-invalid .tags {
+tags-input .ng-invalid .tags {
   box-shadow: 0 0 0 1px #d9534f;
 }
 /* line 92, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete {
+tags-input .autocomplete {
   margin-top: 5px;
   padding-top: 5px;
   padding-right: 0;
@@ -613,13 +613,13 @@ tags-input.autocomplete {
   box-shadow: 0 5px 10px #cccccc;
 }
 /* line 103, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-list {
+tags-input .autocomplete .suggestion-list {
   list-style-type: none;
   padding: 0 !important;
   margin: 0 !important;
 }
 /* line 107, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item {
+tags-input .autocomplete .suggestion-item {
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
@@ -634,17 +634,17 @@ tags-input.autocomplete .suggestion-item {
   background-color: white;
 }
 /* line 116, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item.selected {
+tags-input .autocomplete .suggestion-item.selected {
   color: white;
   background-color: #56c2e1;
 }
 /* line 120, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item.selected em {
+tags-input .autocomplete .suggestion-item.selected em {
   color: white;
   background-color: #56c2e1;
 }
 /* line 126, ../../scss/extensions/ngtagsinput.scss */
-tags-input.autocomplete .suggestion-item em {
+tags-input .autocomplete .suggestion-item em {
   color: #4c4c4c;
   background-color: white;
 }
@@ -1396,66 +1396,75 @@ ui-view, *[ui-view] {
   bottom: 0;
 }
 
+/* line 300, ../scss/main.scss */
+.empty-record-message {
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  text-align: center;
+}
+
 /* #endregion */
 /* #region field validation errors */
-/* line 304, ../scss/main.scss */
+/* line 309, ../scss/main.scss */
 .field-error {
   border: 1px solid #d43f3a;
   color: #d9534f;
 }
 
-/* line 309, ../scss/main.scss */
+/* line 314, ../scss/main.scss */
 .field-validation-error {
   color: #d9534f;
 }
 
-/* line 313, ../scss/main.scss */
+/* line 318, ../scss/main.scss */
 .field-validation-valid {
   display: none;
 }
 
-/* line 317, ../scss/main.scss */
+/* line 322, ../scss/main.scss */
 input.input-validation-error {
   border: 1px solid #d43f3a;
 }
 
-/* line 321, ../scss/main.scss */
+/* line 326, ../scss/main.scss */
 input[type="checkbox"].input-validation-error {
   border: 0 none;
 }
 
-/* line 325, ../scss/main.scss */
+/* line 330, ../scss/main.scss */
 .validation-summary-errors {
   color: #d9534f;
 }
 
-/* line 329, ../scss/main.scss */
+/* line 334, ../scss/main.scss */
 .has-error {
   background: #d9534f !important;
   color: white !important;
 }
 
-/* line 334, ../scss/main.scss */
+/* line 339, ../scss/main.scss */
 .input.has-error::-webkit-input-placeholder {
   /* WebKit browsers */
   color: white;
 }
 
-/* line 339, ../scss/main.scss */
+/* line 344, ../scss/main.scss */
 .input.has-error:hover::-webkit-input-placeholder,
 .input.has-error:focus::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #4c4c4c;
 }
 
-/* line 343, ../scss/main.scss */
+/* line 348, ../scss/main.scss */
 .input.has-error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: white;
   opacity: 1;
 }
 
-/* line 349, ../scss/main.scss */
+/* line 354, ../scss/main.scss */
 .input.has-error:hover:-moz-placeholder,
 .input.has-error:focus:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -1464,14 +1473,14 @@ input[type="checkbox"].input-validation-error {
   filter: alpha(opacity=100);
 }
 
-/* line 354, ../scss/main.scss */
+/* line 359, ../scss/main.scss */
 .input.has-error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: white;
   opacity: 1;
 }
 
-/* line 360, ../scss/main.scss */
+/* line 365, ../scss/main.scss */
 .input.has-error:hover::-moz-placeholder,
 .input.has-error:focus::-moz-placeholder {
   /* Mozilla Firefox 19+ */
@@ -1479,27 +1488,27 @@ input[type="checkbox"].input-validation-error {
   opacity: 1;
 }
 
-/* line 365, ../scss/main.scss */
+/* line 370, ../scss/main.scss */
 .input.has-error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: white;
 }
 
-/* line 370, ../scss/main.scss */
+/* line 375, ../scss/main.scss */
 .input.has-error:hover:-ms-input-placeholder,
 .input.has-error:focus:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #4c4c4c;
 }
 
-/* line 374, ../scss/main.scss */
+/* line 379, ../scss/main.scss */
 .validation-summary-valid {
   display: none;
 }
 
 /* #endregion */
 /* #region deckgrid */
-/* line 382, ../scss/main.scss */
+/* line 387, ../scss/main.scss */
 .deckgrid {
   width: auto;
   height: 100%;
@@ -1515,62 +1524,62 @@ input[type="checkbox"].input-validation-error {
 .deckgrid:after {
   clear: both;
 }
-/* line 388, ../scss/main.scss */
+/* line 393, ../scss/main.scss */
 .deckgrid .column {
   float: left;
 }
-/* line 391, ../scss/main.scss */
+/* line 396, ../scss/main.scss */
 .deckgrid .column > div {
   margin-right: 15px !important;
   margin-bottom: 15px !important;
 }
 @media screen and (min-width: 1200px) {
-  /* line 398, ../scss/main.scss */
+  /* line 403, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '5 .column.size-1-5';
     visibility: hidden;
   }
-  /* line 405, ../scss/main.scss */
+  /* line 410, ../scss/main.scss */
   .deckgrid .column.size-1-5 {
     width: 20%;
     height: auto;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
-  /* line 412, ../scss/main.scss */
+  /* line 417, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '4 .column.size-1-4';
     visibility: hidden;
   }
-  /* line 419, ../scss/main.scss */
+  /* line 424, ../scss/main.scss */
   .deckgrid .column.size-1-4 {
     width: 25%;
     height: auto;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
-  /* line 426, ../scss/main.scss */
+  /* line 431, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '2 .column.size-1-2';
     visibility: hidden;
   }
-  /* line 433, ../scss/main.scss */
+  /* line 438, ../scss/main.scss */
   .deckgrid .column.size-1-2 {
     width: 50%;
     height: auto;
   }
 }
 @media screen and (max-width: 767px) {
-  /* line 440, ../scss/main.scss */
+  /* line 445, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '1 .column.size-1-1';
     visibility: hidden;
   }
-  /* line 447, ../scss/main.scss */
+  /* line 452, ../scss/main.scss */
   .deckgrid .column.size-1-1 {
     width: 100%;
     height: auto;
@@ -1765,6 +1774,10 @@ html, body {
 }
 /* line 58, ../scss/modifypost.scss */
 #modify-post-main .modify-post-contents .btn-primary {
+  margin-bottom: 15px;
+}
+/* line 64, ../scss/modifypost.scss */
+#modify-post-main .modify-post-communities > .btn {
   margin-bottom: 15px;
 }
 
@@ -2063,6 +2076,196 @@ html, body {
 /* line 1, ../scss/communities.scss */
 #communities-list {
   overflow: visible !important;
+}
+
+/* line 3, ../../scss/communities/communitybuttonlist.scss */
+.communities-list {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  list-style-type: none;
+}
+/* line 8, ../../scss/communities/communitybuttonlist.scss */
+.communities-list .community-item {
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  margin-top: 0;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 0;
+  display: inline-block;
+  cursor: pointer;
+}
+/* line 18, ../../scss/communities/communitybuttonlist.scss */
+.communities-list .community-item:hover {
+  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+/* line 22, ../../scss/communities/communitybuttonlist.scss */
+.communities-list .community-item label {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  cursor: pointer;
+}
+/* line 26, ../../scss/communities/communitybuttonlist.scss */
+.communities-list .community-item label i {
+  margin-right: 5px;
+}
+
+/* line 4, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body {
+  background: #e6e6e6;
+}
+/* line 7, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items {
+  list-style-type: none;
+  padding: 0 !important;
+  margin: 0 !important;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  width: 100%;
+  height: auto;
+  color: #4c4c4c;
+}
+/* line 13, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li {
+  position: relative;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
+  background: white;
+}
+/* line 24, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .selected-overlay {
+  position: absolute;
+  top: 0;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  margin-top: 0;
+  margin-right: -15px;
+  margin-bottom: 0;
+  margin-left: -15px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+/* line 31, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .selected-overlay i {
+  color: #56c2e1;
+  font-size: 3em;
+}
+/* line 36, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .selected-overlay label {
+  margin-top: 0;
+  margin-right: 15px;
+  margin-bottom: 0;
+  margin-left: 15px;
+  position: relative;
+  top: -7.5px;
+  color: white;
+  font-size: 1.5em;
+}
+/* line 45, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-emblem {
+  width: 40px;
+  height: 40px;
+  margin-top: 0;
+  margin-right: 10px;
+  margin-bottom: 0;
+  margin-left: 0;
+  float: left;
+}
+/* line 50, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-emblem img {
+  width: 40px;
+  height: 40px;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-bottom-right-radius: 100%;
+  border-top: "3px" solid #666666;
+  border-right: "3px" solid #666666;
+  border-bottom: "3px" solid #666666;
+  border-left: "3px" solid #666666;
+}
+/* line 57, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details {
+  width: 100%;
+  height: auto;
+}
+/* line 60, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > h4 {
+  padding-left: 50px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  cursor: pointer;
+}
+/* line 65, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > h4:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+}
+/* line 70, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > p {
+  padding-left: 50px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+}
+/* line 74, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > p i {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  margin-left: 0;
+  color: #4c4c4c;
+  cursor: pointer;
+}
+/* line 79, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > p i.fa-user {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 10px;
+}
+/* line 84, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > p a {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  margin-left: 0;
+  cursor: pointer;
+}
+/* line 88, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-body .community-list-items > li .community-item-details > p a:hover {
+  color: #f2f2f2;
+}
+/* line 98, ../../scss/communities/communityselectiondialog.scss */
+#community-list-selection-dialog .modal-footer {
+  background: #4c4c4c;
 }
 
 /* line 4, ../../scss/communities/communityheader.scss */

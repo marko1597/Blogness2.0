@@ -1,4 +1,4 @@
-/* line 344, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/variables.scss */
+/* line 344, ../scss/variables.scss */
 .view-post .header h4 .edit {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -9,7 +9,7 @@
   -o-transition: opacity .25s ease-in-out;
   transition: opacity .25s ease-in-out;
 }
-/* line 353, C:/Users/Avel/Documents/GitHub/Blogness2.0/Blog.Web/Blog.Web.Site/wwwroot/css/scss/variables.scss */
+/* line 353, ../scss/variables.scss */
 .view-post .header h4 .edit:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);

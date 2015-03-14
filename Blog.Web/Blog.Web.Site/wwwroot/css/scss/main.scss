@@ -297,6 +297,19 @@ ui-view, *[ui-view] {
     }
 }
 
+.empty-record-message {
+    @include margin(0, auto, $default-margin , auto);
+    text-align: center;
+
+    .reload {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 /* #endregion */
 
 /* #region field validation errors */

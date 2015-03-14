@@ -85,11 +85,11 @@ tags-input {
         }
     }
 
-    &.ng-invalid .tags {
+    .ng-invalid .tags {
         box-shadow: 0 0 0 1px $danger-color;
     }
 
-    &.autocomplete {
+    .autocomplete {
         $autocomplete-space: unquote(($base-margin / 3) + 'px');
         @include margin($autocomplete-space, null, null, null);
         @include padding($autocomplete-space, 0, $autocomplete-space, 0);

@@ -78,9 +78,9 @@ a {
 
 .warning {
   color: #fff;
-  background: #f0ad4e; }
+  background: #e8d370; }
   .warning .content {
-    border-bottom: 1px solid #eea236; }
+    border-bottom: 1px solid #e4cb5a; }
 
 .danger {
   color: #fff;
@@ -278,6 +278,17 @@ ui-view, *[ui-view] {
   .sticky.bottom {
     position: fixed;
     bottom: 0; }
+
+.empty-record-message {
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 15px;
+  margin-left: auto;
+  text-align: center; }
+  .empty-record-message .reload {
+    cursor: pointer; }
+    .empty-record-message .reload:hover {
+      text-decoration: underline; }
 
 /* #endregion */
 /* #region field validation errors */

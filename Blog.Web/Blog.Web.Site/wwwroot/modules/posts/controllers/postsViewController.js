@@ -9,6 +9,8 @@
 
         $scope.user = null;
 
+        $scope.hasError = false;
+
         $scope.viewCount = [];
 
         $scope.postsList = [];
@@ -29,6 +31,24 @@
                 return;
             }
             $scope.isEditable = false;
+        };
+
+        $scope.showEmptyMessage = function () {
+            if ($scope.post && !$scope.hasError) {
+                return false;
+            }
+            return true;
+        };
+
+        $scope.emptyMessageStyle = function () {
+            return $scope.hasError ? "alert-danger" : 
+                ($scope.isBusy ? "alert-info" : "alert-warning");
+        };
+
+        $scope.getEmptyMessage = function () {
+            return $scope.hasError ?
+                "Something went wrong with loading the post! :(" :
+                "Loading post..";
         };
 
         $scope.$on("loggedInUserInfo", function (ev, data) {
@@ -77,8 +97,6 @@
                         $scope.isBusy = false;
                         $scope.toggleIsEditable();
 
-                        $scope.$broadcast("resizeIsotopeItems");
-
                         // update post likes and view counts directive
                         $scope.postLikes = $scope.post.PostLikes;
                         $scope.viewCount = $scope.post.ViewCounts;
@@ -92,9 +110,11 @@
                         $rootScope.$broadcast("updateMediaGalleryFromPost", {});
                     } else {
                         errorService.displayError({ Message: e });
+                        $scope.hasError = true;
                     }
                 }, function (e) {
                     errorService.displayError({ Message: e });
+                    $scope.hasError = true;
                 });
             } else {
                 errorService.displayErrorRedirect({ Message: "You're missing the post to view bruh! Don't be stupid!" });

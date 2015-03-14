@@ -1,9 +1,21 @@
 ﻿<div class="row">
     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-        <div id="post-{{post.Id}}" class="card default view-post ng-cloak">
+        <div class="empty-record-message alert" ng-class="emptyMessageStyle()" ng-show="showEmptyMessage()">
+            <p>
+                {{getEmptyMessage()}}
+                <i class="fa fa-spinner fa-spin" ng-show="!hasError"></i>
+                <div ng-show="hasError">
+                    <span class="reload" ng-click="getViewedPost()">Click here</span> to reload
+                </div>
+            </p>
+        </div>
+        <div id="post-{{post.Id}}" class="card default view-post ng-cloak" ng-show="!showEmptyMessage()">
             <div post-header post="post" user="post.User" />
             <div class="content">
                 <p ng-bind-html="post.PostMessage" ellipsis></p>
+            </div>
+            <div class="content">
+                <div community-button-list communities="post.Communities" allow-delete="false"></div>
             </div>
             <div class="content">
                 <div post-likes list="postLikes" post-id="postId"></div>

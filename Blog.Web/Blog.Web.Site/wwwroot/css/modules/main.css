@@ -109,11 +109,11 @@ a:hover {
 /* line 85, ../scss/main.scss */
 .warning {
   color: white;
-  background: #f0ad4e;
+  background: #e8d370;
 }
 /* line 90, ../scss/main.scss */
 .warning .content {
-  border-bottom: 1px solid #eea236;
+  border-bottom: 1px solid #e4cc5a;
 }
 
 /* line 95, ../scss/main.scss */
@@ -381,66 +381,83 @@ ui-view, *[ui-view] {
   bottom: 0;
 }
 
+/* line 300, ../scss/main.scss */
+.empty-record-message {
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 15px;
+  margin-left: auto;
+  text-align: center;
+}
+/* line 304, ../scss/main.scss */
+.empty-record-message .reload {
+  cursor: pointer;
+}
+/* line 307, ../scss/main.scss */
+.empty-record-message .reload:hover {
+  text-decoration: underline;
+}
+
 /* #endregion */
 /* #region field validation errors */
-/* line 304, ../scss/main.scss */
+/* line 317, ../scss/main.scss */
 .field-error {
   border: 1px solid #d43f3a;
   color: #d9534f;
 }
 
-/* line 309, ../scss/main.scss */
+/* line 322, ../scss/main.scss */
 .field-validation-error {
   color: #d9534f;
 }
 
-/* line 313, ../scss/main.scss */
+/* line 326, ../scss/main.scss */
 .field-validation-valid {
   display: none;
 }
 
-/* line 317, ../scss/main.scss */
+/* line 330, ../scss/main.scss */
 input.input-validation-error {
   border: 1px solid #d43f3a;
 }
 
-/* line 321, ../scss/main.scss */
+/* line 334, ../scss/main.scss */
 input[type="checkbox"].input-validation-error {
   border: 0 none;
 }
 
-/* line 325, ../scss/main.scss */
+/* line 338, ../scss/main.scss */
 .validation-summary-errors {
   color: #d9534f;
 }
 
-/* line 329, ../scss/main.scss */
+/* line 342, ../scss/main.scss */
 .has-error {
   background: #d9534f !important;
   color: white !important;
 }
 
-/* line 334, ../scss/main.scss */
+/* line 347, ../scss/main.scss */
 .input.has-error::-webkit-input-placeholder {
   /* WebKit browsers */
   color: white;
 }
 
-/* line 339, ../scss/main.scss */
+/* line 352, ../scss/main.scss */
 .input.has-error:hover::-webkit-input-placeholder,
 .input.has-error:focus::-webkit-input-placeholder {
   /* WebKit browsers */
   color: #4c4c4c;
 }
 
-/* line 343, ../scss/main.scss */
+/* line 356, ../scss/main.scss */
 .input.has-error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: white;
   opacity: 1;
 }
 
-/* line 349, ../scss/main.scss */
+/* line 362, ../scss/main.scss */
 .input.has-error:hover:-moz-placeholder,
 .input.has-error:focus:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -449,14 +466,14 @@ input[type="checkbox"].input-validation-error {
   filter: alpha(opacity=100);
 }
 
-/* line 354, ../scss/main.scss */
+/* line 367, ../scss/main.scss */
 .input.has-error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: white;
   opacity: 1;
 }
 
-/* line 360, ../scss/main.scss */
+/* line 373, ../scss/main.scss */
 .input.has-error:hover::-moz-placeholder,
 .input.has-error:focus::-moz-placeholder {
   /* Mozilla Firefox 19+ */
@@ -464,27 +481,27 @@ input[type="checkbox"].input-validation-error {
   opacity: 1;
 }
 
-/* line 365, ../scss/main.scss */
+/* line 378, ../scss/main.scss */
 .input.has-error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: white;
 }
 
-/* line 370, ../scss/main.scss */
+/* line 383, ../scss/main.scss */
 .input.has-error:hover:-ms-input-placeholder,
 .input.has-error:focus:-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #4c4c4c;
 }
 
-/* line 374, ../scss/main.scss */
+/* line 387, ../scss/main.scss */
 .validation-summary-valid {
   display: none;
 }
 
 /* #endregion */
 /* #region deckgrid */
-/* line 382, ../scss/main.scss */
+/* line 395, ../scss/main.scss */
 .deckgrid {
   width: auto;
   height: 100%;
@@ -500,62 +517,62 @@ input[type="checkbox"].input-validation-error {
 .deckgrid:after {
   clear: both;
 }
-/* line 388, ../scss/main.scss */
+/* line 401, ../scss/main.scss */
 .deckgrid .column {
   float: left;
 }
-/* line 391, ../scss/main.scss */
+/* line 404, ../scss/main.scss */
 .deckgrid .column > div {
   margin-right: 15px !important;
   margin-bottom: 15px !important;
 }
 @media screen and (min-width: 1200px) {
-  /* line 398, ../scss/main.scss */
+  /* line 411, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '5 .column.size-1-5';
     visibility: hidden;
   }
-  /* line 405, ../scss/main.scss */
+  /* line 418, ../scss/main.scss */
   .deckgrid .column.size-1-5 {
     width: 20%;
     height: auto;
   }
 }
 @media screen and (min-width: 992px) and (max-width: 1199px) {
-  /* line 412, ../scss/main.scss */
+  /* line 425, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '4 .column.size-1-4';
     visibility: hidden;
   }
-  /* line 419, ../scss/main.scss */
+  /* line 432, ../scss/main.scss */
   .deckgrid .column.size-1-4 {
     width: 25%;
     height: auto;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 991px) {
-  /* line 426, ../scss/main.scss */
+  /* line 439, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '2 .column.size-1-2';
     visibility: hidden;
   }
-  /* line 433, ../scss/main.scss */
+  /* line 446, ../scss/main.scss */
   .deckgrid .column.size-1-2 {
     width: 50%;
     height: auto;
   }
 }
 @media screen and (max-width: 767px) {
-  /* line 440, ../scss/main.scss */
+  /* line 453, ../scss/main.scss */
   .deckgrid[deckgrid]::before {
     display: none;
     content: '1 .column.size-1-1';
     visibility: hidden;
   }
-  /* line 447, ../scss/main.scss */
+  /* line 460, ../scss/main.scss */
   .deckgrid .column.size-1-1 {
     width: 100%;
     height: auto;

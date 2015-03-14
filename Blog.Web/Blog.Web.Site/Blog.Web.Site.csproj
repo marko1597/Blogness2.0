@@ -3216,14 +3216,23 @@
     </Content>
     <Content Include="wwwroot\css\font.css" />
     <Content Include="wwwroot\css\modules\communities.css" />
+    <Content Include="wwwroot\css\modules\communities\communitybuttonlist.css" />
     <Content Include="wwwroot\css\modules\communities\communityheader.css" />
     <Content Include="wwwroot\css\modules\communities\communitylistitem.css" />
+    <Content Include="wwwroot\css\modules\communities\communityselectiondialog.css" />
     <Content Include="wwwroot\css\modules\communities\communityview.css" />
     <Content Include="wwwroot\css\scss\communities.css">
       <DependentUpon>communities.scss</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\scss\communities.min.css">
       <DependentUpon>communities.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communitybuttonlist.css.map">
+      <DependentUpon>communitybuttonlist.css</DependentUpon>
+    </Content>
+    <None Include="wwwroot\css\scss\communities\communitybuttonlist.scss" />
+    <Content Include="wwwroot\css\scss\communities\communitybuttonlist.css">
+      <DependentUpon>communitybuttonlist.scss</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\scss\communities\communityheader.css">
       <DependentUpon>communityheader.scss</DependentUpon>
@@ -6856,6 +6865,7 @@
     <Content Include="wwwroot\modules\communities\communities.js" />
     <Content Include="wwwroot\modules\communities\controllers\communitiesListController.js" />
     <Content Include="wwwroot\modules\communities\controllers\communityViewController.js" />
+    <Content Include="wwwroot\modules\communities\directives\communityButtonList.js" />
     <Content Include="wwwroot\modules\communities\directives\communityHeader.js" />
     <Content Include="wwwroot\modules\communities\directives\communitySelectionDialog.js" />
     <Content Include="wwwroot\modules\communities\directives\communityListItem.js" />
@@ -7408,6 +7418,7 @@
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsHobbyItem.js" />
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsInfo.js" />
     <Content Include="wwwroot\modules\windowResize\windowResize.js" />
+    <Content Include="wwwroot\templates\modules\communities\communityButtonList.html" />
     <Content Include="wwwroot\templates\modules\communities\communitySelectionDialog.html" />
     <Content Include="wwwroot\templates\modules\posts\postUpdate.html" />
     <Content Include="wwwroot\modules\date\services\dateHelper.js" />

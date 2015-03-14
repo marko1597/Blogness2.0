@@ -138,11 +138,11 @@
 }
 /* line 136, ../../scss/extensions/bootstrap.scss */
 .btn.btn-warning {
-  border-top: 1px solid #f0ad4e;
-  border-right: 1px solid #f0ad4e;
-  border-bottom: 1px solid #f0ad4e;
-  border-left: 1px solid #f0ad4e;
-  background: #f0ad4e;
+  border-top: 1px solid #e8d370;
+  border-right: 1px solid #e8d370;
+  border-bottom: 1px solid #e8d370;
+  border-left: 1px solid #e8d370;
+  background: #e8d370;
 }
 /* line 141, ../../scss/extensions/bootstrap.scss */
 .btn.btn-danger {
@@ -263,6 +263,58 @@
   border-top-right-radius: 0;
   background: #4c4c4c;
   color: white;
+}
+
+/* #endregion */
+/* #region alert overrides */
+/* line 253, ../../scss/extensions/bootstrap.scss */
+.alert, .alert-warning, .alert-danger, .alert-success, .alert-info {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* line 258, ../../scss/extensions/bootstrap.scss */
+.alert-warning {
+  color: #796713;
+  background: #e8d370;
+  border-top: 1px solid #e1c544;
+  border-right: 1px solid #e1c544;
+  border-bottom: 1px solid #e1c544;
+  border-left: 1px solid #e1c544;
+}
+
+/* line 266, ../../scss/extensions/bootstrap.scss */
+.alert-danger {
+  color: white;
+  background: #d9534f;
+  border-top: 1px solid #c9302c;
+  border-right: 1px solid #c9302c;
+  border-bottom: 1px solid #c9302c;
+  border-left: 1px solid #c9302c;
+}
+
+/* line 274, ../../scss/extensions/bootstrap.scss */
+.alert-success {
+  color: white;
+  background: #5cb85c;
+  border-top: 1px solid #449d44;
+  border-right: 1px solid #449d44;
+  border-bottom: 1px solid #449d44;
+  border-left: 1px solid #449d44;
+}
+
+/* line 282, ../../scss/extensions/bootstrap.scss */
+.alert-info {
+  color: #4c4c4c;
+  background: white;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
 }
 
 /* #endregion */

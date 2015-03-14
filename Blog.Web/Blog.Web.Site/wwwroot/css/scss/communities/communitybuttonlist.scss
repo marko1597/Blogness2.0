@@ -1,0 +1,27 @@
+﻿@import '../variables';
+
+.communities-list {
+    @include clean-list;
+
+    .community-item {
+        $list-item-margin: unquote(($base-margin / 3) + 'px');
+
+        @include borders(1px, solid, $light-border-color, true);
+        @include margin(0, $list-item-margin, $list-item-margin);
+        display: inline-block;
+        cursor: pointer;
+
+        &:hover {
+            @include box-shadow(true);
+        }
+
+        label {
+            @include margin(0);
+            cursor: pointer;
+
+            i {
+                @include margin(null, $list-item-margin);
+            }
+        }
+    }
+}

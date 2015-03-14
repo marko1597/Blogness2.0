@@ -1,12 +1,8 @@
 ﻿.tag-item {
   margin-top: 0;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   margin-left: 0;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  padding-left: 5px;
   border-top: 1px solid #40bbdd;
   border-right: 1px solid #40bbdd;
   border-bottom: 1px solid #40bbdd;
@@ -24,6 +20,7 @@
   .tag-item:hover {
     box-shadow: inset 0 0 10px 0 #aaa;
     box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    color: #fff;
     background: #40bbdd;
     border-color: #2bb3d9; }
   .tag-item > i {
