@@ -31,6 +31,38 @@ ngMedia.directive('albumGroup', ["$templateCache", function ($templateCache) {
             $scope.album.IsEditing = true;
         };
 
+        $scope.isOwnedByLoggedUser = function () {
+            if ($scope.album && $scope.album.User && $rootScope.user) {
+                if ($scope.album.User.UserName === $rootScope.user.UserName) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        };
+
+        $scope.isEditControlsVisible = function () {
+            if ($scope.album && $scope.album.User && $rootScope.user) {
+                if ($scope.album.User.UserName !== $rootScope.user.UserName) {
+                    return false;
+                }
+
+                return !$scope.album.IsEditing;
+            }
+            return false;
+        };
+
+        $scope.isSaveUpdatesControlsVisible = function () {
+            if ($scope.album && $scope.album.User && $rootScope.user) {
+                if ($scope.album.User.UserName !== $rootScope.user.UserName) {
+                    return false;
+                }
+
+                return $scope.album.IsEditing;
+            }
+            return false;
+        };
+
         $scope.cancelEditAlbum = function () {
             if ($scope.album.IsNew) {
                 $scope.$emit('cancelledAddingOfAlbum', $scope.album);

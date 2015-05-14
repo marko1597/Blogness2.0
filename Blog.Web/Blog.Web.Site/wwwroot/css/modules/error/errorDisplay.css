@@ -5,7 +5,7 @@
   width: 100%;
   height: auto;
   z-index: 1051;
-  color: white;
+  color: #fff;
 }
 /* line 9, ../../scss/error/errordisplay.scss */
 #blog-error-global .close-error {

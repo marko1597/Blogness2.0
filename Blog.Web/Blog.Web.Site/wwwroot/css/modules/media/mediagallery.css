@@ -33,7 +33,7 @@
   top: 0;
   right: 0;
   font-size: 3em;
-  color: white;
+  color: #fff;
   cursor: pointer;
   background: none;
   border: none;
@@ -64,11 +64,11 @@
 }
 /* line 46, ../../scss/media/mediagallery.scss */
 #media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li button:before {
-  color: white;
+  color: #fff;
 }
 /* line 53, ../../scss/media/mediagallery.scss */
 #media-gallery > .modal-dialog > .modal-content > .modal-body slick .slick-dots li.slick-active button:before {
-  color: white;
+  color: #fff;
 }
 /* line 65, ../../scss/media/mediagallery.scss */
 #media-gallery img {

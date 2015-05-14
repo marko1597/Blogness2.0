@@ -11,7 +11,7 @@
   margin-bottom: 8px;
   margin-left: 0;
   display: inline-block;
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
@@ -60,7 +60,7 @@
   border-right: 1px solid #40badd;
   border-bottom: 1px solid #40badd;
   border-left: 1px solid #40badd;
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   border-top-left-radius: 100%;
   border-top-right-radius: 100%;
@@ -82,7 +82,7 @@
 }
 /* line 61, ../../scss/header/headermenu.scss */
 #blog-header .add-post i, #blog-header .add-post a, #blog-header .add-post a {
-  color: white;
+  color: #fff;
 }
 /* line 65, ../../scss/header/headermenu.scss */
 #blog-header .add-post i, #blog-header .add-post a {

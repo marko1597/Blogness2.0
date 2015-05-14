@@ -1,4 +1,4 @@
-/* line 344, ../scss/variables.scss */
+/* line 345, ../scss/variables.scss */
 .view-post .header h4 .edit {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -9,7 +9,7 @@
   -o-transition: opacity .25s ease-in-out;
   transition: opacity .25s ease-in-out;
 }
-/* line 353, ../scss/variables.scss */
+/* line 354, ../scss/variables.scss */
 .view-post .header h4 .edit:hover {
   opacity: 0.5;
   filter: alpha(opacity=50);

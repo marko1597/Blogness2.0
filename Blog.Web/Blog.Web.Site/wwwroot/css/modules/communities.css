@@ -1,4 +1,11 @@
-/* line 1, ../scss/communities.scss */
+/* line 3, ../scss/communities.scss */
 #communities-list {
   overflow: visible !important;
+}
+/* line 6, ../scss/communities.scss */
+#communities-list .btn {
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 15px;
+  margin-left: 0;
 }

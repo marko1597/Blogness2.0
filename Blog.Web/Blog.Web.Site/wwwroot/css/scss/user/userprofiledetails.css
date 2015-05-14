@@ -3,7 +3,8 @@
   @media screen and (max-width: 767px) {
     .user-profile-details .header > .btn-header {
       width: 40px;
-      height: auto; } }
+      height: auto; }
+ }
   .user-profile-details .fa {
     cursor: pointer; }
     .user-profile-details .fa:hover {

@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   padding-top: 50px;
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 0;
@@ -40,9 +40,9 @@
   padding-right: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  background: white;
+  background: #fff;
   color: #4c4c4c;
 }
 /* line 36, ../../scss/messaging/chatwindow.scss */
@@ -56,7 +56,7 @@
   margin-bottom: 5px;
   margin-left: 90px;
   background: #56c2e1;
-  color: white;
+  color: #fff;
 }
 /* line 46, ../../scss/messaging/chatwindow.scss */
 .chat-window .body .chat-message p {

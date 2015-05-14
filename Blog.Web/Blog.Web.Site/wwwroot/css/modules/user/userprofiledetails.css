@@ -62,7 +62,7 @@
 .user-profile-details .body .panel {
   margin-bottom: 15px;
   border-color: #cccccc;
-  background: white;
+  background: #fff;
 }
 /* line 76, ../../scss/user/userprofiledetails.scss */
 .user-profile-details .body .panel .panel-heading {
@@ -78,7 +78,7 @@
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
-  background: white;
+  background: #fff;
 }
 /* line 89, ../../scss/user/userprofiledetails.scss */
 .user-profile-details .body .education-item label[data-display] {

@@ -209,7 +209,8 @@ namespace Blog.Tools.ApplicationSetup
 				CreatedBy = 1,
 				CreatedDate = DateTime.Now,
 				ModifiedBy = 1,
-				ModifiedDate = DateTime.Now
+				ModifiedDate = DateTime.Now,
+
 			});
 			CommunityRepository.Add(new Community
 			{
@@ -501,6 +502,14 @@ namespace Blog.Tools.ApplicationSetup
                                                     BackgroundId = u.BackgroundId,
 													IdentityId = u.IdentityId
 												});
+
+                            var community = CommunityRepository.Find(a => a.LeaderUserId == u.UserId).FirstOrDefault();
+                            if (community != null)
+                            {
+                                community.EmblemId = mediaId;
+                                CommunityRepository.Edit(community);
+                            }
+
 							break;
 						case 1:
 							albumId = albums[3].AlbumId;

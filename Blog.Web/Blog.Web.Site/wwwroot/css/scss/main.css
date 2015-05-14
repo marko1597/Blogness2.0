@@ -41,20 +41,20 @@ a {
   font-size: 1em;
   color: #333333;
   margin-bottom: 15px; }
-  .card .content, .card .success, .card .warning, .card .danger, .card .info, .card .default, .card .masonry {
+  .card .content, .success .content, .warning .content, .danger .content, .info .content, .default .content, .masonry .content {
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
     border-bottom: 1px solid #cccccc; }
-    .card .content:last-child, .card .success, .card .warning, .card .danger, .card .info, .card .default, .card .masonry {
+    .card .content:last-child, .success .content:last-child, .warning .content:last-child, .danger .content:last-child, .info .content:last-child, .default .content:last-child, .masonry .content:last-child {
       border-bottom: 0; }
-  .card .captions, .card .success, .card .warning, .card .danger, .card .info, .card .default, .card .masonry {
+  .card .captions, .success .captions, .warning .captions, .danger .captions, .info .captions, .default .captions, .masonry .captions {
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px; }
-    .card .captions p, .card .captions .success, .card .captions .warning, .card .captions .danger, .card .captions .info, .card .captions .default, .card .captions .masonry {
+    .card .captions p, .success .captions p, .warning .captions p, .danger .captions p, .info .captions p, .default .captions p, .masonry .captions p {
       padding-top: 0;
       padding-right: 0;
       padding-bottom: 0;
@@ -63,7 +63,7 @@ a {
       margin-right: 0;
       margin-bottom: 0;
       margin-left: 0; }
-      .card .captions p:first-of-type, .card .captions .success, .card .captions .warning, .card .captions .danger, .card .captions .info, .card .captions .default, .card .captions .masonry {
+      .card .captions p:first-of-type, .success .captions p:first-of-type, .warning .captions p:first-of-type, .danger .captions p:first-of-type, .info .captions p:first-of-type, .default .captions p:first-of-type, .masonry .captions p:first-of-type {
         font-weight: bold;
         margin-top: 0;
         margin-right: 0;
@@ -74,25 +74,25 @@ a {
   color: #fff;
   background: #5cb85c; }
   .success .content {
-    border-bottom: 1px solid #4eae4c; }
+    border-bottom: 1px solid #4cae4c; }
 
 .warning {
   color: #fff;
   background: #e8d370; }
   .warning .content {
-    border-bottom: 1px solid #e4cb5a; }
+    border-bottom: 1px solid #e4cc5a; }
 
 .danger {
   color: #fff;
   background: #d9534f; }
   .danger .content {
-    border-bottom: 1px solid #d43d3a; }
+    border-bottom: 1px solid #d43f3a; }
 
 .info {
   color: #fff;
   background: #428bca; }
   .info .content {
-    border-bottom: 1px solid #3580bd; }
+    border-bottom: 1px solid #357ebd; }
 
 .default {
   background: #fff; }
@@ -293,7 +293,7 @@ ui-view, *[ui-view] {
 /* #endregion */
 /* #region field validation errors */
 .field-error {
-  border: 1px solid #d43d3a;
+  border: 1px solid #d43f3a;
   color: #d9534f; }
 
 .field-validation-error {
@@ -303,7 +303,7 @@ ui-view, *[ui-view] {
   display: none; }
 
 input.input-validation-error {
-  border: 1px solid #d43d3a; }
+  border: 1px solid #d43f3a; }
 
 input[type="checkbox"].input-validation-error {
   border: 0 none; }
@@ -377,33 +377,41 @@ input[type="checkbox"].input-validation-error {
       display: none;
       content: '5 .column.size-1-5';
       visibility: hidden; }
+
     .deckgrid .column.size-1-5 {
       width: 20%;
-      height: auto; } }
+      height: auto; }
+ }
   @media screen and (min-width: 992px) and (max-width: 1199px) {
     .deckgrid[deckgrid]::before {
       display: none;
       content: '4 .column.size-1-4';
       visibility: hidden; }
+
     .deckgrid .column.size-1-4 {
       width: 25%;
-      height: auto; } }
+      height: auto; }
+ }
   @media screen and (min-width: 768px) and (max-width: 991px) {
     .deckgrid[deckgrid]::before {
       display: none;
       content: '2 .column.size-1-2';
       visibility: hidden; }
+
     .deckgrid .column.size-1-2 {
       width: 50%;
-      height: auto; } }
+      height: auto; }
+ }
   @media screen and (max-width: 767px) {
     .deckgrid[deckgrid]::before {
       display: none;
       content: '1 .column.size-1-1';
       visibility: hidden; }
+
     .deckgrid .column.size-1-1 {
       width: 100%;
-      height: auto; } }
+      height: auto; }
+ }
 
 /* #endregion */
 /*# sourceMappingURL=main.css.map */

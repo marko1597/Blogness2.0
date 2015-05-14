@@ -153,7 +153,6 @@
 }
 
 @-moz-keyframes bounceInLeft {
-  /* line 159, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
@@ -162,8 +161,6 @@
     -o-transform: translateX(-2000px);
     transform: translateX(-2000px);
   }
-
-  /* line 168, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
@@ -172,8 +169,6 @@
     -o-transform: translateX(30px);
     transform: translateX(30px);
   }
-
-  /* line 177, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
@@ -181,8 +176,6 @@
     -o-transform: translateX(-10px);
     transform: translateX(-10px);
   }
-
-  /* line 185, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
@@ -191,9 +184,7 @@
     transform: translateX(0);
   }
 }
-
 @-webkit-keyframes bounceInLeft {
-  /* line 195, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
@@ -202,8 +193,6 @@
     -o-transform: translateX(-2000px);
     transform: translateX(-2000px);
   }
-
-  /* line 204, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
@@ -212,8 +201,6 @@
     -o-transform: translateX(30px);
     transform: translateX(30px);
   }
-
-  /* line 213, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
@@ -221,8 +208,6 @@
     -o-transform: translateX(-10px);
     transform: translateX(-10px);
   }
-
-  /* line 221, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
@@ -231,9 +216,7 @@
     transform: translateX(0);
   }
 }
-
 @keyframes bounceInLeft {
-  /* line 231, ../../scss/extensions/animations.scss */
   0% {
     opacity: 0;
     -webkit-transform: translateX(-2000px);
@@ -242,8 +225,6 @@
     -o-transform: translateX(-2000px);
     transform: translateX(-2000px);
   }
-
-  /* line 240, ../../scss/extensions/animations.scss */
   60% {
     opacity: 1;
     -webkit-transform: translateX(30px);
@@ -252,8 +233,6 @@
     -o-transform: translateX(30px);
     transform: translateX(30px);
   }
-
-  /* line 249, ../../scss/extensions/animations.scss */
   80% {
     -webkit-transform: translateX(-10px);
     -moz-transform: translateX(-10px);
@@ -261,8 +240,6 @@
     -o-transform: translateX(-10px);
     transform: translateX(-10px);
   }
-
-  /* line 257, ../../scss/extensions/animations.scss */
   100% {
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);

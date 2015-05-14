@@ -44,7 +44,7 @@
 }
 /* line 43, ../../scss/extensions/bootstrap.scss */
 .dropdown-menu > li > a:hover {
-  color: white;
+  color: #fff;
   background-color: #56c2e1;
 }
 
@@ -63,7 +63,7 @@
 }
 /* line 69, ../../scss/extensions/bootstrap.scss */
 .navbar > .navbar-header .navbar-brand {
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 /* line 73, ../../scss/extensions/bootstrap.scss */
@@ -85,7 +85,7 @@
 .navbar > .navbar-header > .navmenu-toggle > span {
   width: 22px;
   height: 2px;
-  background: white;
+  background: #fff;
   display: block;
   margin-top: 4px;
 }
@@ -100,7 +100,7 @@
 
 /* line 106, ../../scss/extensions/bootstrap.scss */
 .navbar-nav > li > a {
-  color: white;
+  color: #fff;
   cursor: pointer;
 }
 /* line 110, ../../scss/extensions/bootstrap.scss */
@@ -162,11 +162,11 @@
 }
 /* line 151, ../../scss/extensions/bootstrap.scss */
 .btn.btn-default {
-  border-top: 1px solid white;
-  border-right: 1px solid white;
-  border-bottom: 1px solid white;
-  border-left: 1px solid white;
-  background: white;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+  background: #fff;
 }
 
 /* #endregion */
@@ -222,7 +222,7 @@
   border-left: 1px solid #3f3f3f;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  color: white;
+  color: #fff;
   background-color: #4c4c4c;
   border-bottom: #3f3f3f;
 }
@@ -234,7 +234,7 @@
   border-left: 1px solid #cccccc;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  background: white;
+  background: #fff;
   color: #4c4c4c;
 }
 
@@ -262,7 +262,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background: #4c4c4c;
-  color: white;
+  color: #fff;
 }
 
 /* #endregion */
@@ -273,7 +273,7 @@
   border-top-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -289,7 +289,7 @@
 
 /* line 266, ../../scss/extensions/bootstrap.scss */
 .alert-danger {
-  color: white;
+  color: #fff;
   background: #d9534f;
   border-top: 1px solid #c9302c;
   border-right: 1px solid #c9302c;
@@ -299,7 +299,7 @@
 
 /* line 274, ../../scss/extensions/bootstrap.scss */
 .alert-success {
-  color: white;
+  color: #fff;
   background: #5cb85c;
   border-top: 1px solid #449d44;
   border-right: 1px solid #449d44;
@@ -310,7 +310,7 @@
 /* line 282, ../../scss/extensions/bootstrap.scss */
 .alert-info {
   color: #4c4c4c;
-  background: white;
+  background: #fff;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;

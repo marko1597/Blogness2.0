@@ -1,4 +1,8 @@
 ﻿<div id="communities-list">
+    <a href="/#/community/create/new" class="btn btn-primary" ng-show="isLoggedIn()">
+        <i class="fa fa-plus-circle"></i>
+        <span>Create a community</span>
+    </a>
     <div deckgrid source="communities" class="deckgrid">
         <div community-list-item community="card"></div>
     </div>

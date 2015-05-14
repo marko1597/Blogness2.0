@@ -11,9 +11,9 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   margin-right: 15px;
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  background: white;
+  background: #fff;
   color: #4c4c4c;
   display: inline-block;
   line-height: 28px;

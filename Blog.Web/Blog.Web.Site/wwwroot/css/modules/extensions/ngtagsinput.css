@@ -25,7 +25,7 @@ tags-input .tags {
   -ms-word-wrap: break-word;
   word-wrap: break-word;
   cursor: text;
-  background-color: white;
+  background-color: #fff;
 }
 /* line 28, ../../scss/extensions/ngtagsinput.scss */
 tags-input .tags .tag-list {
@@ -58,7 +58,7 @@ tags-input .tags .tag-item .remove-button {
   background: none;
   cursor: pointer;
   vertical-align: middle;
-  color: white;
+  color: #fff;
 }
 /* line 53, ../../scss/extensions/ngtagsinput.scss */
 tags-input .tags .tag-item .remove-button:active {
@@ -117,7 +117,7 @@ tags-input .autocomplete {
   border-bottom: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
   z-index: 999;
-  background-color: white;
+  background-color: #fff;
   box-shadow: 0 5px 10px #cccccc;
 }
 /* line 103, ../../scss/extensions/ngtagsinput.scss */
@@ -139,20 +139,20 @@ tags-input .autocomplete .suggestion-item {
   padding-left: 10px;
   cursor: pointer;
   color: #4c4c4c;
-  background-color: white;
+  background-color: #fff;
 }
 /* line 116, ../../scss/extensions/ngtagsinput.scss */
 tags-input .autocomplete .suggestion-item.selected {
-  color: white;
+  color: #fff;
   background-color: #56c2e1;
 }
 /* line 120, ../../scss/extensions/ngtagsinput.scss */
 tags-input .autocomplete .suggestion-item.selected em {
-  color: white;
+  color: #fff;
   background-color: #56c2e1;
 }
 /* line 126, ../../scss/extensions/ngtagsinput.scss */
 tags-input .autocomplete .suggestion-item em {
   color: #4c4c4c;
-  background-color: white;
+  background-color: #fff;
 }

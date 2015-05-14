@@ -69,9 +69,10 @@ namespace Blog.Common.Web.Attributes
 
             foreach (var property in properties)
             {
-                if (property.Name == "User")
+                if (property.Name == "User" || property.Name == "Leader")
                 {
-                    var userValue = GetPropValue(src, "User");
+                    var userPropName = property.Name;
+                    var userValue = GetPropValue(src, userPropName);
                     if (userValue == null) return null;
 
                     var userIdFromObject = GetPropValue(userValue, "Id");
@@ -84,7 +85,7 @@ namespace Blog.Common.Web.Attributes
                     var userIdAsProperty = GetPropValue(src, "UserId");
                     return (int) userIdAsProperty;
                 }
-
+                
                 var propertyValue = GetPropValue(src, property.Name);
                 if (propertyValue == null 
                     || propertyValue is string

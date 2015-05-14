@@ -60,6 +60,8 @@ namespace Blog.DataAccess.Database.Repository
                 member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
             }
 
+            db.Emblem = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == db.EmblemId);
+
             return db;
         }
 
@@ -82,6 +84,8 @@ namespace Blog.DataAccess.Database.Repository
                     member.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.PictureId);
                     member.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == member.BackgroundId);
                 }
+
+                community.Emblem = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == community.EmblemId);
             }
 
             return query;

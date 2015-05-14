@@ -5,6 +5,8 @@
         $scope.size = "";
         $scope.isBusy = false;
 
+        $scope.authData = localStorageService.get("authorizationData");
+
         $scope.init = function () {
             $scope.getList();
             $rootScope.$broadcast("updateScrollTriggerWatch", "communities-list");
@@ -33,13 +35,20 @@
 
             communitiesService.getMoreList($scope.communities.length).then(function (resp) {
                 _.each(resp, function (p) {
-                    $scope.posts.push(p);
+                    $scope.communities.push(p);
                 });
                 $scope.isBusy = false;
                 $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayError(e);
             });
+        };
+
+        $scope.isLoggedIn = function () {
+            if ($scope.authData) {
+                return true;
+            }
+            return false;
         };
         
         $scope.$on("updateCommunityItemSize", function (ev, size) {

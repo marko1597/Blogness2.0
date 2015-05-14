@@ -7,7 +7,7 @@
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;
   background: #4c4c4c;
-  color: white;
+  color: #fff;
 }
 /* line 9, ../../scss/shared/fileuploaditem.scss */
 .upload-details .popover {

@@ -216,6 +216,14 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
   $templateCache.put('communities/communities.html',
     "<div id=\"communities-list\">\r" +
     "\n" +
+    "    <a href=\"/#/community/create/new\" class=\"btn btn-primary\" ng-show=\"isLoggedIn()\">\r" +
+    "\n" +
+    "        <i class=\"fa fa-plus-circle\"></i>\r" +
+    "\n" +
+    "        <span>Create a community</span>\r" +
+    "\n" +
+    "    </a>\r" +
+    "\n" +
     "    <div deckgrid source=\"communities\" class=\"deckgrid\">\r" +
     "\n" +
     "        <div community-list-item community=\"card\"></div>\r" +
@@ -246,6 +254,70 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "    </li>\r" +
     "\n" +
     "</ul>"
+  );
+
+
+  $templateCache.put('communities/communityEdit.html',
+    "<div id=\"community-edit\">\r" +
+    "\n" +
+    "    <div class=\"card default\">\r" +
+    "\n" +
+    "        <div class=\"content\">\r" +
+    "\n" +
+    "            <h5>Title</h5>\r" +
+    "\n" +
+    "            <input ng-model=\"community.Name\" />\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"content\">\r" +
+    "\n" +
+    "            <div class=\"row\">\r" +
+    "\n" +
+    "                <div class=\"col-sm-8\">\r" +
+    "\n" +
+    "                    <h5>Description</h5>\r" +
+    "\n" +
+    "                    <textarea ng-model=\"community.Description\"></textarea>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "                <div class=\"col-sm-4 community-emblem-select\">\r" +
+    "\n" +
+    "                    <div class=\"btn btn-primary\" ng-click=\"launchMediaSelectionDialog()\">Select emblem for this community..</div>\r" +
+    "\n" +
+    "                    <div class=\"center-block\">\r" +
+    "\n" +
+    "                        <img ng-show=\"selectedEmblemUrl\" src=\"{{selectedEmblemUrl}}\" />\r" +
+    "\n" +
+    "                    </div>\r" +
+    "\n" +
+    "                </div>\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "        <div class=\"content\">\r" +
+    "\n" +
+    "            <div class=\"btn btn-primary\" ng-click=\"saveCommunity()\">\r" +
+    "\n" +
+    "                Save\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div class=\"btn btn-danger\" ng-click=\"cancelCommunity()\">\r" +
+    "\n" +
+    "                Cancel\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "</div>\r" +
+    "\n"
   );
 
 
@@ -1017,9 +1089,9 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        <label class=\"label label-info hidden-xs\" ng-show=\"album.IsUserDefault\">Default Album</label>\r" +
     "\n" +
-    "        \r" +
+    "\r" +
     "\n" +
-    "        <div class=\"btn-header right pull-right\" ng-show=\"album.IsEditing\" ng-click=\"cancelEditAlbum()\"\r" +
+    "        <div class=\"btn-header right pull-right\" ng-show=\"isSaveUpdatesControlsVisible()\" ng-click=\"cancelEditAlbum()\"\r" +
     "\n" +
     "             data-placement=\"left\" data-type=\"info\" data-trigger=\"hover\" data-title=\"Cancel editing\" bs-tooltip=\"tooltip\">\r" +
     "\n" +
@@ -1027,7 +1099,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"btn-header right pull-right\" ng-show=\"album.IsEditing\" ng-click=\"saveAlbum()\"\r" +
+    "        <div class=\"btn-header right pull-right\" ng-show=\"isSaveUpdatesControlsVisible()\" ng-click=\"saveAlbum()\"\r" +
     "\n" +
     "             data-placement=\"left\" data-type=\"info\" data-trigger=\"hover\" data-title=\"Save changes\" bs-tooltip=\"tooltip\">\r" +
     "\n" +
@@ -1035,7 +1107,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"btn-header right pull-right\" ng-show=\"!album.IsEditing\" ng-click=\"editAlbum()\"\r" +
+    "        <div class=\"btn-header right pull-right\" ng-show=\"isEditControlsVisible()\" ng-click=\"editAlbum()\"\r" +
     "\n" +
     "             data-placement=\"left\" data-type=\"info\" data-trigger=\"hover\" data-title=\"Edit name of this album\" bs-tooltip=\"tooltip\">\r" +
     "\n" +
@@ -1043,7 +1115,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"btn-header right pull-right\" ng-show=\"!album.IsEditing\" ng-click=\"deleteAlbum()\"\r" +
+    "        <div class=\"btn-header right pull-right\" ng-show=\"isEditControlsVisible()\" ng-click=\"deleteAlbum()\"\r" +
     "\n" +
     "             data-placement=\"left\" data-type=\"info\" data-trigger=\"hover\" data-title=\"Delete this album\" bs-tooltip=\"tooltip\">\r" +
     "\n" +
@@ -1051,7 +1123,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div class=\"btn-header right pull-right\" ng-show=\"!album.IsEditing\"\r" +
+    "        <div class=\"btn-header right pull-right\" ng-show=\"isEditControlsVisible()\"\r" +
     "\n" +
     "             data-placement=\"left\" data-type=\"info\" data-trigger=\"hover\" data-title=\"Add new media to this album\" bs-tooltip=\"tooltip\">\r" +
     "\n" +
@@ -1684,7 +1756,7 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('posts/postUpdate.html',
-    "    <div id=\"modify-post-main\">\r" +
+    "<div id=\"modify-post-main\">\r" +
     "\n" +
     "    <div class=\"modify-post-title\">\r" +
     "\n" +

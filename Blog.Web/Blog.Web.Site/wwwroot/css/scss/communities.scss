@@ -1,3 +1,9 @@
-﻿#communities-list {
+﻿@import 'variables';
+
+#communities-list {
     overflow: visible !important;
+
+    .btn {
+        @include margin(0, 0, $default-margin);
+    }
 }

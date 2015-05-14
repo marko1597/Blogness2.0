@@ -19,7 +19,7 @@
 }
 /* line 14, ../../scss/communities/communitybuttonlist.scss */
 .communities-list .community-item:hover {
-  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 #aaa;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 /* line 18, ../../scss/communities/communitybuttonlist.scss */

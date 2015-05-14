@@ -10,24 +10,24 @@
 
         <label class="label label-primary hidden-xs">{{album.CreatedDateDisplay}}</label>
         <label class="label label-info hidden-xs" ng-show="album.IsUserDefault">Default Album</label>
-        
-        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="cancelEditAlbum()"
+
+        <div class="btn-header right pull-right" ng-show="isSaveUpdatesControlsVisible()" ng-click="cancelEditAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Cancel editing" bs-tooltip="tooltip">
             <i class="fa fa-times"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="album.IsEditing" ng-click="saveAlbum()"
+        <div class="btn-header right pull-right" ng-show="isSaveUpdatesControlsVisible()" ng-click="saveAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Save changes" bs-tooltip="tooltip">
             <i class="fa fa-save"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="!album.IsEditing" ng-click="editAlbum()"
+        <div class="btn-header right pull-right" ng-show="isEditControlsVisible()" ng-click="editAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Edit name of this album" bs-tooltip="tooltip">
             <i class="fa fa-edit"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="!album.IsEditing" ng-click="deleteAlbum()"
+        <div class="btn-header right pull-right" ng-show="isEditControlsVisible()" ng-click="deleteAlbum()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Delete this album" bs-tooltip="tooltip">
             <i class="fa fa-trash"></i>
         </div>
-        <div class="btn-header right pull-right" ng-show="!album.IsEditing"
+        <div class="btn-header right pull-right" ng-show="isEditControlsVisible()"
              data-placement="left" data-type="info" data-trigger="hover" data-title="Add new media to this album" bs-tooltip="tooltip">
             <label class="fa fa-picture-o">
                 <input nv-file-select type="file" uploader="uploader" />

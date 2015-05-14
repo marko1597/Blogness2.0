@@ -2,7 +2,7 @@
 #modify-post-main {
   margin-bottom: 20px;
   min-height: 600px;
-  background: white;
+  background: #fff;
 }
 /* line 9, ../scss/modifypost.scss */
 #modify-post-main > div {

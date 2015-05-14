@@ -69,11 +69,11 @@
 /* line 60, ../../scss/user/userimage.scss */
 .user-image .edit {
   position: absolute;
-  color: white;
+  color: #fff;
   visibility: hidden;
   display: none;
   font-size: 2em;
-  text-shadow: -1px -1px 0 #666666, 1px -1px 0 #666666, -1px 1px 0 #666666, 1px 1px 0 #666666;
+  text-shadow: -1px -1px 0 #666, 1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666;
 }
 /* line 68, ../../scss/user/userimage.scss */
 .user-image .edit input[type='file'] {
@@ -119,10 +119,10 @@
 .user-image .details > .user-profile-image > img {
   width: 120px;
   height: 120px;
-  border-top: 3px solid white;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
   border-top-left-radius: 100%;
   border-top-right-radius: 100%;
   border-bottom-left-radius: 100%;
@@ -134,11 +134,11 @@
 }
 /* line 107, ../../scss/user/userimage.scss */
 .user-image .details h4 {
-  color: white;
+  color: #fff;
 }
 /* line 112, ../../scss/user/userimage.scss */
 .user-image .details p a {
-  color: white;
+  color: #fff;
   font-size: 1em;
   cursor: pointer;
 }

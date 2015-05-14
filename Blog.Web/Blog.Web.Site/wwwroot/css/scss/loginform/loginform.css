@@ -47,7 +47,8 @@
     color: #4c4c4c; }
     @media screen and (min-width: 768px) and (max-width: 991px) {
       .login-form .content .input:focus + div {
-        left: -47px !important; } }
+        left: -47px !important; }
+ }
     .login-form .content .error-message {
       margin-top: 15px;
       margin-right: 0;
@@ -127,7 +128,7 @@
     border-bottom-right-radius: 0;
     background: #595959;
     overflow: auto; }
-    .login-form .footer .button, .login-form .footer .login-form .footer .register, .login-form .footer .login-form .footer .register, .login-form .footer .login-form .footer .back, .login-form .footer .login-form .footer .back {
+    .login-form .footer .button, .login-form .footer .register, .login-form .footer .back {
       padding-top: 0;
       padding-right: 25px;
       padding-bottom: 5px;
@@ -136,10 +137,10 @@
       -o-transition: all 0.5s ease !important;
       -webkit-transition: all 0.5s ease !important;
       transition: all 0.5s ease !important;
-      border-top: 1px solid #40bbdd;
-      border-right: 1px solid #40bbdd;
-      border-bottom: 1px solid #40bbdd;
-      border-left: 1px solid #40bbdd;
+      border-top: 1px solid #40badd;
+      border-right: 1px solid #40badd;
+      border-bottom: 1px solid #40badd;
+      border-left: 1px solid #40badd;
       box-shadow: none;
       background: #56c2e1;
       color: #fff;
@@ -149,12 +150,12 @@
       font-size: 2.5em;
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
       cursor: pointer; }
-      .login-form .footer .button:hover, .login-form .footer .login-form .footer .register:hover, .login-form .footer .login-form .footer .register:hover, .login-form .footer .login-form .footer .back:hover, .login-form .footer .login-form .footer .back:hover {
+      .login-form .footer .button:hover, .login-form .footer .register:hover, .login-form .footer .back:hover {
         box-shadow: inset 0 0 10px 0 #aaa;
         box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
-        background: #40bbdd;
-        border: 1px solid #2bb3d9; }
-      .login-form .footer .button:focus, .login-form .footer .login-form .footer .register:focus, .login-form .footer .login-form .footer .register:focus, .login-form .footer .login-form .footer .back:focus, .login-form .footer .login-form .footer .back:focus {
+        background: #40badd;
+        border: 1px solid #2bb2d9; }
+      .login-form .footer .button:focus, .login-form .footer .register:focus, .login-form .footer .back:focus {
         position: relative;
         bottom: -1px;
         box-shadow: inset 0 0 10px 0 #aaa;
@@ -169,14 +170,14 @@
       background: none;
       box-shadow: none; }
       .login-form .footer .register:hover, .login-form .footer .back:hover {
-        color: #40bbdd;
+        color: #40badd;
         background: none;
         box-shadow: none;
         border: none; }
       .login-form .footer .register:focus, .login-form .footer .back:focus {
         position: relative;
         bottom: -1px;
-        color: #40bbdd;
+        color: #40badd;
         background: none;
         box-shadow: none;
         border: none; }

@@ -22,7 +22,7 @@
     </JavaMaximumHeapSize>
     <JavaOptions />
     <NuGetPackageImportStamp>3037cddb</NuGetPackageImportStamp>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>

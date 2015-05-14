@@ -32,7 +32,7 @@ tags-input .tags {
     float: left; }
     tags-input .tags .tag-item.selected {
       background-color: #d9534f;
-      border-color: #d43d3a; }
+      border-color: #d43f3a; }
     tags-input .tags .tag-item .remove-button {
       margin-left: 5px;
       padding-top: 0;
@@ -45,7 +45,7 @@ tags-input .tags {
       vertical-align: middle;
       color: #fff; }
       tags-input .tags .tag-item .remove-button:active {
-        color: #de6664; }
+        color: #de6764; }
   tags-input .tags .input {
     border: none;
     margin-top: 5px;
@@ -63,7 +63,7 @@ tags-input .tags {
     float: left;
     min-width: 280px; }
     tags-input .tags .input.invalid-tag {
-      color: #de6664;
+      color: #de6764;
       border-bottom: 1px solid #d9534f; }
     tags-input .tags .input::-ms-clear {
       display: none; }

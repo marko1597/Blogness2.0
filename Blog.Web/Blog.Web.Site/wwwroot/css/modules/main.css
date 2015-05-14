@@ -22,23 +22,23 @@ textarea {
 
 /* line 19, ../scss/main.scss */
 a {
-  color: white;
+  color: #fff;
 }
 /* line 22, ../scss/main.scss */
 a:hover {
-  color: white;
+  color: #fff;
   text-decoration: underline;
 }
 
 /* line 28, ../scss/main.scss */
 ::selection {
-  color: white;
+  color: #fff;
   background: #56c2e1;
 }
 
 /* line 33, ../scss/main.scss */
 ::-moz-selection {
-  color: white;
+  color: #fff;
   background: #56c2e1;
 }
 
@@ -46,7 +46,7 @@ a:hover {
 /* #region card class */
 /* line 42, ../scss/main.scss */
 .card, .success, .warning, .danger, .info, .default, .masonry {
-  box-shadow: 0 2px 4px 0 #cccccc;
+  box-shadow: 0 2px 4px 0 #ccc;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -98,7 +98,7 @@ a:hover {
 
 /* line 75, ../scss/main.scss */
 .success {
-  color: white;
+  color: #fff;
   background: #5cb85c;
 }
 /* line 80, ../scss/main.scss */
@@ -108,7 +108,7 @@ a:hover {
 
 /* line 85, ../scss/main.scss */
 .warning {
-  color: white;
+  color: #fff;
   background: #e8d370;
 }
 /* line 90, ../scss/main.scss */
@@ -118,7 +118,7 @@ a:hover {
 
 /* line 95, ../scss/main.scss */
 .danger {
-  color: white;
+  color: #fff;
   background: #d9534f;
 }
 /* line 100, ../scss/main.scss */
@@ -128,7 +128,7 @@ a:hover {
 
 /* line 105, ../scss/main.scss */
 .info {
-  color: white;
+  color: #fff;
   background: #428bca;
 }
 /* line 110, ../scss/main.scss */
@@ -138,7 +138,7 @@ a:hover {
 
 /* line 115, ../scss/main.scss */
 .default {
-  background: white;
+  background: #fff;
 }
 /* line 119, ../scss/main.scss */
 .default.darken {
@@ -159,7 +159,7 @@ a:hover {
 /* line 134, ../scss/main.scss */
 .header {
   background: #4c4c4c;
-  color: white;
+  color: #fff;
   position: relative;
   width: 100%;
   height: 38px;
@@ -195,10 +195,10 @@ a:hover {
   border-top-right-radius: 100%;
   border-bottom-left-radius: 100%;
   border-bottom-right-radius: 100%;
-  border-top: 3px solid white;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
 }
 /* line 162, ../scss/main.scss */
 .header.big > div:last-child {
@@ -256,7 +256,7 @@ a:hover {
 }
 /* line 203, ../scss/main.scss */
 .header .btn-header:hover {
-  box-shadow: inset 0 0 10px 0 #aaaaaa;
+  box-shadow: inset 0 0 10px 0 #aaa;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 /* line 207, ../scss/main.scss */
@@ -434,16 +434,16 @@ input[type="checkbox"].input-validation-error {
 /* line 342, ../scss/main.scss */
 .has-error {
   background: #d9534f !important;
-  color: white !important;
+  color: #fff !important;
 }
 
 /* line 347, ../scss/main.scss */
 .input.has-error::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: white;
+  color: #fff;
 }
 
-/* line 352, ../scss/main.scss */
+/* line 351, ../scss/main.scss */
 .input.has-error:hover::-webkit-input-placeholder,
 .input.has-error:focus::-webkit-input-placeholder {
   /* WebKit browsers */
@@ -453,11 +453,11 @@ input[type="checkbox"].input-validation-error {
 /* line 356, ../scss/main.scss */
 .input.has-error:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
-  color: white;
+  color: #fff;
   opacity: 1;
 }
 
-/* line 362, ../scss/main.scss */
+/* line 361, ../scss/main.scss */
 .input.has-error:hover:-moz-placeholder,
 .input.has-error:focus:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -469,11 +469,11 @@ input[type="checkbox"].input-validation-error {
 /* line 367, ../scss/main.scss */
 .input.has-error::-moz-placeholder {
   /* Mozilla Firefox 19+ */
-  color: white;
+  color: #fff;
   opacity: 1;
 }
 
-/* line 373, ../scss/main.scss */
+/* line 372, ../scss/main.scss */
 .input.has-error:hover::-moz-placeholder,
 .input.has-error:focus::-moz-placeholder {
   /* Mozilla Firefox 19+ */
@@ -484,10 +484,10 @@ input[type="checkbox"].input-validation-error {
 /* line 378, ../scss/main.scss */
 .input.has-error:-ms-input-placeholder {
   /* Internet Explorer 10+ */
-  color: white;
+  color: #fff;
 }
 
-/* line 383, ../scss/main.scss */
+/* line 382, ../scss/main.scss */
 .input.has-error:hover:-ms-input-placeholder,
 .input.has-error:focus:-ms-input-placeholder {
   /* Internet Explorer 10+ */
@@ -513,7 +513,7 @@ input[type="checkbox"].input-validation-error {
   content: " ";
   display: table;
 }
-/* line 335, ../scss/variables.scss */
+/* line 336, ../scss/variables.scss */
 .deckgrid:after {
   clear: both;
 }

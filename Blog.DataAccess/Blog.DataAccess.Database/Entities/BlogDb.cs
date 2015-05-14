@@ -61,7 +61,6 @@ namespace Blog.DataAccess.Database.Entities
                 .WithOptionalPrincipal()
                 .WillCascadeOnDelete(false);
             
-
             // Chat Message
             mb.Entity<ChatMessage>()
                 .HasRequired(a => a.FromUser)
@@ -112,6 +111,10 @@ namespace Blog.DataAccess.Database.Entities
                 .HasRequired<User>(a => a.Leader)
                 .WithMany(a => a.CreatedCommunities)
                 .HasForeignKey(a => a.LeaderUserId)
+                .WillCascadeOnDelete(false);
+            mb.Entity<Community>()
+                .HasOptional<Media>(a => a.Emblem)
+               .WithOptionalPrincipal()
                 .WillCascadeOnDelete(false);
 
             //Posts

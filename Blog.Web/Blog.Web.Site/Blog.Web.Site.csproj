@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Blog.Web.Site</RootNamespace>
     <AssemblyName>Blog.Web.Site</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -3217,6 +3217,7 @@
     <Content Include="wwwroot\css\font.css" />
     <Content Include="wwwroot\css\modules\communities.css" />
     <Content Include="wwwroot\css\modules\communities\communitybuttonlist.css" />
+    <Content Include="wwwroot\css\modules\communities\communityedit.css" />
     <Content Include="wwwroot\css\modules\communities\communityheader.css" />
     <Content Include="wwwroot\css\modules\communities\communitylistitem.css" />
     <Content Include="wwwroot\css\modules\communities\communityselectiondialog.css" />
@@ -3234,6 +3235,15 @@
     <Content Include="wwwroot\css\scss\communities\communitybuttonlist.css">
       <DependentUpon>communitybuttonlist.scss</DependentUpon>
     </Content>
+    <Content Include="wwwroot\css\scss\communities\communitybuttonlist.min.css">
+      <DependentUpon>communitybuttonlist.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityedit.css">
+      <DependentUpon>communityedit.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityedit.min.css">
+      <DependentUpon>communityedit.css</DependentUpon>
+    </Content>
     <Content Include="wwwroot\css\scss\communities\communityheader.css">
       <DependentUpon>communityheader.scss</DependentUpon>
     </Content>
@@ -3246,12 +3256,19 @@
     <Content Include="wwwroot\css\scss\communities\communitylistitem.min.css">
       <DependentUpon>communitylistitem.css</DependentUpon>
     </Content>
+    <Content Include="wwwroot\css\scss\communities\communityedit.css.map">
+      <DependentUpon>communityedit.css</DependentUpon>
+    </Content>
+    <None Include="wwwroot\css\scss\communities\communityedit.scss" />
     <Content Include="wwwroot\css\scss\communities\communityselectiondialog.css.map">
       <DependentUpon>communityselectiondialog.css</DependentUpon>
     </Content>
     <None Include="wwwroot\css\scss\communities\communityselectiondialog.scss" />
     <Content Include="wwwroot\css\scss\communities\communityselectiondialog.css">
       <DependentUpon>communityselectiondialog.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\css\scss\communities\communityselectiondialog.min.css">
+      <DependentUpon>communityselectiondialog.css</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\scss\communities\communityview.css">
       <DependentUpon>communityview.scss</DependentUpon>
@@ -6864,6 +6881,7 @@
     <Content Include="wwwroot\modules\comments\services\commentsService.js" />
     <Content Include="wwwroot\modules\communities\communities.js" />
     <Content Include="wwwroot\modules\communities\controllers\communitiesListController.js" />
+    <Content Include="wwwroot\modules\communities\controllers\communityModifyController.js" />
     <Content Include="wwwroot\modules\communities\controllers\communityViewController.js" />
     <Content Include="wwwroot\modules\communities\directives\communityButtonList.js" />
     <Content Include="wwwroot\modules\communities\directives\communityHeader.js" />
@@ -7419,6 +7437,7 @@
     <Content Include="wwwroot\modules\user\directives\userProfileDetailsInfo.js" />
     <Content Include="wwwroot\modules\windowResize\windowResize.js" />
     <Content Include="wwwroot\templates\modules\communities\communityButtonList.html" />
+    <Content Include="wwwroot\templates\modules\communities\communityEdit.html" />
     <Content Include="wwwroot\templates\modules\communities\communitySelectionDialog.html" />
     <Content Include="wwwroot\templates\modules\posts\postUpdate.html" />
     <Content Include="wwwroot\modules\date\services\dateHelper.js" />
@@ -7509,7 +7528,9 @@
     <Content Include="wwwroot\templates\friends.html" />
     <Content Include="wwwroot\templates\modules\posts\mainPagePosts.html" />
     <Content Include="wwwroot\templates\modules\posts\postView.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />

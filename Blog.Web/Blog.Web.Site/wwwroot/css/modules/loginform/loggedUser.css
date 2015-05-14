@@ -45,7 +45,7 @@
   padding-right: 0;
   padding-bottom: 0;
   padding-left: 0;
-  background: white;
+  background: #fff;
 }
 /* line 31, ../../scss/loginform/loggeduser.scss */
 #logged-user-info ul li:first-child a {
@@ -65,5 +65,5 @@
 /* line 46, ../../scss/loginform/loggeduser.scss */
 #logged-user-info ul li a:hover {
   background: #56c2e1;
-  color: white;
+  color: #fff;
 }

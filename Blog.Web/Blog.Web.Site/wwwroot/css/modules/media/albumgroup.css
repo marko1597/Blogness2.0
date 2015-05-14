@@ -33,12 +33,12 @@
   width: 40px;
   height: 40px;
 }
-/* line 213, ../../scss/variables.scss */
+/* line 214, ../../scss/variables.scss */
 .album-group .header > .btn-header.right label {
   margin-right: 0;
   cursor: pointer;
 }
-/* line 217, ../../scss/variables.scss */
+/* line 218, ../../scss/variables.scss */
 .album-group .header > .btn-header.right label > input[type='file'] {
   position: fixed;
   top: -1000px;
@@ -81,7 +81,7 @@
   padding-right: 15px;
   padding-bottom: 15px;
   padding-left: 15px;
-  background: white;
+  background: #fff;
   overflow: hidden;
   color: #4c4c4c;
 }

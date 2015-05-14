@@ -51,10 +51,7 @@ namespace Blog.Mobile.Droid
 			public const int icon = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int monoandroidsplash = 2130837506;
-			
-			// aapt resource value: 0x7f020003
-			public const int slideout = 2130837507;
+			public const int slideout = 2130837506;
 			
 			static Drawable()
 			{
@@ -62,22 +59,6 @@ namespace Blog.Mobile.Droid
 			}
 			
 			private Drawable()
-			{
-			}
-		}
-		
-		public partial class Style
-		{
-			
-			// aapt resource value: 0x7f030000
-			public const int Mono_Android_Theme_Splash = 2130903040;
-			
-			static Style()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private Style()
 			{
 			}
 		}

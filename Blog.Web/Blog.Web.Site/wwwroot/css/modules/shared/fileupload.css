@@ -9,12 +9,12 @@
   border-bottom: 3px dotted #666666;
   border-left: 3px dotted #666666;
 }
-/* line 213, ../../scss/variables.scss */
+/* line 214, ../../scss/variables.scss */
 .file-upload .dropzone label {
   margin-right: 0;
   cursor: pointer;
 }
-/* line 217, ../../scss/variables.scss */
+/* line 218, ../../scss/variables.scss */
 .file-upload .dropzone label > input[type='file'] {
   position: fixed;
   top: -1000px;
@@ -69,7 +69,7 @@
   padding-left: 15px;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
-  background: white;
+  background: #fff;
   color: #4c4c4c;
 }
 /* line 43, ../../scss/shared/fileupload.scss */

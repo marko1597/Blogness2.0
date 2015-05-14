@@ -1,7 +1,7 @@
 /* line 3, ../../scss/posts/postrelateditem.scss */
 .post-related-item {
   margin-bottom: 15px;
-  background: white;
+  background: #fff;
 }
 /* line 7, ../../scss/posts/postrelateditem.scss */
 .post-related-item > div {
@@ -23,7 +23,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   background: #56c2e1;
-  color: white;
+  color: #fff;
 }
 /* line 21, ../../scss/posts/postrelateditem.scss */
 .post-related-item > .body {

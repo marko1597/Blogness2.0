@@ -23,8 +23,8 @@
 .community-list-item .community-members-container .community-members .member-item img {
   width: 60px;
   height: 60px;
-  border-top: 3px solid white;
-  border-right: 3px solid white;
-  border-bottom: 3px solid white;
-  border-left: 3px solid white;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
 }

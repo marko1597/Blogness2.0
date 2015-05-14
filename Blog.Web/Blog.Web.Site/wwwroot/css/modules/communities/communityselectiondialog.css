@@ -26,7 +26,7 @@
   margin-right: 0;
   margin-bottom: 15px;
   margin-left: 0;
-  background: white;
+  background: #fff;
 }
 /* line 24, ../../scss/communities/communityselectiondialog.scss */
 #community-list-selection-dialog .modal-body .community-list-items > li .selected-overlay {
@@ -57,7 +57,7 @@
   margin-left: 15px;
   position: relative;
   top: -7.5px;
-  color: white;
+  color: #fff;
   font-size: 1.5em;
 }
 /* line 45, ../../scss/communities/communityselectiondialog.scss */

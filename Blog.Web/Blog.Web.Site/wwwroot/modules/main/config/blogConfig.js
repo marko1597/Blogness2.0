@@ -72,6 +72,20 @@
                     return $templateCache.get('communities/communityView.html');
                 }
             })
+            .state('newcommunity', {
+                url: "/community/create/new",
+                controller: 'communityModifyController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('communities/communityEdit.html');
+                }
+            })
+            .state('editcommunity', {
+                url: "/community/edit/:communityId",
+                controller: 'communityModifyController',
+                templateProvider: function ($templateCache) {
+                    return $templateCache.get('communities/communityEdit.html');
+                }
+            })
             .state('events', {
                 url: "/events",
                 templateProvider: function ($templateCache) {

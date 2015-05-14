@@ -16,24 +16,30 @@
     display: none;
     content: '3 .column.size-1-3';
     visibility: hidden; }
+
   .post-content-items.deckgrid .column.size-1-3 {
     width: 33.33%;
-    height: auto; } }
+    height: auto; }
+ }
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .post-content-items.deckgrid[deckgrid]::before {
     display: none;
     content: '2 .column.size-1-2';
     visibility: hidden; }
+
   .post-content-items.deckgrid .column.size-1-2 {
     width: 50%;
-    height: auto; } }
+    height: auto; }
+ }
 @media screen and (max-width: 767px) {
   .post-content-items.deckgrid[deckgrid]::before {
     display: none;
     content: '1 .column.size-1-1';
     visibility: hidden; }
+
   .post-content-items.deckgrid .column.size-1-1 {
     width: 100%;
-    height: auto; } }
+    height: auto; }
+ }
 
 /*# sourceMappingURL=viewpost.css.map */
