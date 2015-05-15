@@ -23,6 +23,7 @@
                     url: baseApi + "community/" + id,
                     method: "GET"
                 }).success(function (response) {
+                    addCommunityViewData(response);
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -177,6 +178,38 @@
                     url: baseApi + "community",
                     method: "PUT",
                     data: community
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            joinCommunity: function (user, communityId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + communityId + "/join",
+                    method: "POST",
+                    data: user
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            leaveCommunity: function (user, communityId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + communityId + "/leave",
+                    method: "POST",
+                    data: user
                 }).success(function (response) {
                     deferred.resolve(response);
                 }).error(function (e) {

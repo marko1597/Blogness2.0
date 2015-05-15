@@ -21,7 +21,6 @@
             communitiesService.getList().then(function (resp) {
                 $scope.communities = resp;
                 $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayError(e);
             });
@@ -38,7 +37,6 @@
                     $scope.communities.push(p);
                 });
                 $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayError(e);
             });

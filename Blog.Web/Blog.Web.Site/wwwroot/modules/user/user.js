@@ -9,6 +9,5 @@
         "ngLogin",
         "ngConfig",
         "ngMessaging",
-        "blogIsotope",
         "blogScrollTrigger"
     ]);

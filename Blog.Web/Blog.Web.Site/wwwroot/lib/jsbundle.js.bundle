@@ -13,14 +13,12 @@
     <file>/bower_components/jquery/dist/jquery.js</file>
     <file>/bower_components/jqueryui/jquery-ui.js</file>
     <file>/bower_components/jquery.dotdotdot/src/js/jquery.dotdotdot.js</file>
-    <file>/bower_components/isotope/dist/isotope.pkgd.js</file>
     <file>/bower_components/slick.js/slick/slick.js</file>
     <file>/wwwroot/lib/jquery.blockui.js</file>
     <file>/wwwroot/lib/jquery.newsTicker.js</file>
-
-    <file>/bower_components/bootstrap/dist/js/bootstrap.js</file>
-    <file>/bower_components/json2/json2.js</file>
+    
     <file>/bower_components/classie/classie.js</file>
+    <file>/bower_components/json2/json2.js</file>
     <file>/bower_components/es5-shim/es5-shim.js</file>
     <file>/bower_components/moment/moment.js</file>
     <file>/bower_components/offline/offline.min.js</file>
@@ -28,25 +26,27 @@
     <file>/bower_components/respond/src/respond.js</file>
     <file>/bower_components/underscore/underscore.js</file>
     <file>/bower_components/stacktrace-js/stacktrace.js</file>
+    <file>/bower_components/bootstrap/dist/js/bootstrap.js</file>
     
     <file>/bower_components/angular/angular.js</file>
     <file>/bower_components/angular-animate/angular-animate.js</file>
     <file>/bower_components/angular-cookies/angular-cookies.js</file>
-    <file>/bower_components/angular-deckgrid/angular-deckgrid.js</file>
-    <file>/bower_components/angular-file-upload/angular-file-upload.js</file>
-    <file>/bower_components/angular-isotope/dist/angular-isotope.js</file>
-    <file>/bower_components/angular-local-storage/angular-local-storage.js</file>
     <file>/bower_components/angular-route/angular-route.js</file>
     <file>/bower_components/angular-sanitize/angular-sanitize.js</file>
+    <file>/bower_components/angular-touch/angular-touch.js</file>
+    <file>/bower_components/angular-deckgrid/angular-deckgrid.js</file>
+
+    <file>/bower_components/ng-ckeditor/ng-ckeditor.js</file>
+    <file>/bower_components/angular-file-upload/angular-file-upload.js</file>
+    <file>/bower_components/angular-local-storage/angular-local-storage.js</file>
     <file>/bower_components/angular-slick/dist/slick.js</file>
     <file>/bower_components/angularjs-scroll-glue/src/scrollglue.js</file>
     <file>/bower_components/angular-snap/angular-snap.js</file>
     <file>/bower_components/angular-strap/dist/angular-strap.js</file>
     <file>/bower_components/angular-strap/dist/angular-strap.tpl.js</file>
-    <file>/bower_components/angular-touch/angular-touch.js</file>
-    <file>/bower_components/angular-ui-router/release/angular-ui-router.js</file>
-    <file>/bower_components/ng-ckeditor/ng-ckeditor.js</file>
     <file>/bower_components/ng-tags-input/ng-tags-input.js</file>
+    <file>/bower_components/angular-ui-router/release/angular-ui-router.js</file>
+    
     <file>/bower_components/videogular/videogular.js</file>
     <file>/bower_components/videogular-buffering/buffering.js</file>
     <file>/bower_components/videogular-controls/controls.js</file>

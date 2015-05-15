@@ -14,5 +14,11 @@
             </a>
             at {{community.DateDisplay}}
         </p>
+        <a data-title="Click here to join this community" bs-tooltip ng-click="join()" ng-show="!isUserJoined">
+            <label class="label label-success">Join</label>
+        </a>
+        <a data-title="Click here to leave this community" bs-tooltip ng-click="leave()" ng-show="isUserJoined">
+            <label class="label label-danger">Leave</label>
+        </a>
     </div>
 </div>

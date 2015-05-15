@@ -26,7 +26,7 @@
         $scope.username = localStorageService.get("username");
 
         $scope.toggleIsEditable = function () {
-            if ($scope.user && $scope.post && $scope.post.User.UserName === $scope.username) {
+            if ($scope.user && $scope.post && $scope.post.User && $scope.post.User.UserName === $scope.username) {
                 $scope.isEditable = true;
                 return;
             }

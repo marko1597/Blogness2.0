@@ -208,6 +208,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="bower_components\angular-deckgrid\angular-deckgrid.js" />
     <Content Include="bower_components\angular-deckgrid\specs\deckgrid.spec.js" />
+    <Content Include="bower_components\fizzy-ui-utils\utils.js" />
     <Content Include="bower_components\font-awesome\.gitignore" />
     <Content Include="bower_components\font-awesome\css\font-awesome.css" />
     <Content Include="bower_components\font-awesome\css\font-awesome.min.css" />
@@ -3205,6 +3206,9 @@
     <Content Include="bower_components\angular-deckgrid\CONTRIBUTORS.md" />
     <Content Include="bower_components\angular-deckgrid\LICENSE" />
     <Content Include="bower_components\angular-deckgrid\README.md" />
+    <Content Include="bower_components\fizzy-ui-utils\.bower.json" />
+    <Content Include="bower_components\fizzy-ui-utils\bower.json" />
+    <Content Include="bower_components\fizzy-ui-utils\README.md" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -7559,9 +7563,6 @@
     <Content Include="wwwroot\lib\jsbundle.js.bundle">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="wwwroot\lib\jsbundle.min.js.map">
-      <DependentUpon>jsbundle.min.js</DependentUpon>
-    </Content>
     <Content Include="wwwroot\modules\appmodules.js.bundle" />
     <Content Include="wwwroot\modules\appmodules.min.js.map">
       <DependentUpon>appmodules.min.js</DependentUpon>
@@ -7858,6 +7859,9 @@
     <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\config\_defaults.scss" />
     <Content Include="wwwroot\lib\ckeditor\skins\bootstrapck\scss\dialog\dialog.scss" />
     <Content Include="wwwroot\lib\jquery.blockui.min.js.map" />
+    <Content Include="wwwroot\lib\jsbundle.min.js.map">
+      <DependentUpon>jsbundle.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="wwwroot\modules\comments\controllers\" />

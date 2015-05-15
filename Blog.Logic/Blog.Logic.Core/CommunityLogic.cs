@@ -23,6 +23,7 @@ namespace Blog.Logic.Core
         {
             try
             {
+                
                 var db = _communityRepository.Get(communityId);
                 if (db == null)
                 {
@@ -172,6 +173,9 @@ namespace Blog.Logic.Core
                         string.Format("Community name {0} is already in use.", community.Name));
                 }
 
+                community.Members = new List<User>();
+                community.Members.Add(community.Leader);
+
                 return CommunityMapper.ToDto(_communityRepository.Add(CommunityMapper.ToEntity(community)));
             }
             catch (Exception ex)
@@ -184,7 +188,7 @@ namespace Blog.Logic.Core
         {
             try
             {
-                var checkCommunity = IsCommunityNameInUse(community.Name);
+                var checkCommunity = IsCommunityNameInUse(community.Name, community.Id);
                 if (checkCommunity)
                 {
                     return new Community().GenerateError<Community>((int)Constants.Error.ValidationError,
@@ -218,6 +222,12 @@ namespace Blog.Logic.Core
         private bool IsCommunityNameInUse(string name)
         {
             var dbCommunity = _communityRepository.Find(a => a.Name == name, null, null).FirstOrDefault();
+            return dbCommunity != null;
+        }
+
+        private bool IsCommunityNameInUse(string name, int id)
+        {
+            var dbCommunity = _communityRepository.Find(a => a.Name == name && a.Id != id, null, null).FirstOrDefault();
             return dbCommunity != null;
         }
 

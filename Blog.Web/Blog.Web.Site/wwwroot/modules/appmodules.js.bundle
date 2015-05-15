@@ -10,57 +10,50 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/wwwroot/modules/init.js</file>
-    <file>/wwwroot/modules/templates.js</file>
-    
     <file>/wwwroot/modules/ellipsis/ellipsis.js</file>
     <file>/wwwroot/modules/ellipsis/directives/ellipsis.js</file>
-    
-    <file>/wwwroot/modules/date/dateHelper.js</file>
-    <file>/wwwroot/modules/date/services/dateHelper.js</file>
-    
+
     <file>/wwwroot/modules/blockUi/blockUi.js</file>
     <file>/wwwroot/modules/blockUi/services/blockUi.js</file>
     
-    <file>/wwwroot/modules/isotope/isotope.js</file>
-    <file>/wwwroot/modules/isotope/directives/isotopeItemResize.js</file>
-    
-    <file>/wwwroot/modules/fileUpload/fileUpload.js</file>
-    <file>/wwwroot/modules/fileUpload/directives/fileUpload.js</file>
-    <file>/wwwroot/modules/fileUpload/directives/fileUploadItem.js</file>
-    <file>/wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js</file>
-    
-    <file>/wwwroot/modules/videoPlayer/videoPlayer.js</file>
-    <file>/wwwroot/modules/videoPlayer/directives/videoPlayer.js</file>
+    <file>/wwwroot/modules/date/dateHelper.js</file>
+    <file>/wwwroot/modules/date/services/dateHelper.js</file>
 
-    <file>/wwwroot/modules/ticker/ticker.js</file>
-    <file>/wwwroot/modules/ticker/directives/ticker.js</file>
+    <file>/wwwroot/modules/windowResize/windowResize.js</file>
+    <file>/wwwroot/modules/windowResize/directives/windowResize.js</file>
+
+    <file>/wwwroot/modules/empty/empty.js</file>
+    <file>/wwwroot/modules/empty/directives/emptyRecordMessage.js</file>
 
     <file>/wwwroot/modules/keypress/keypress.js</file>
     <file>/wwwroot/modules/keypress/directives/keypress.js</file>
 
-    <file>/wwwroot/modules/empty/empty.js</file>
-    <file>/wwwroot/modules/empty/directives/emptyRecordMessage.js</file>
-    
+    <file>/wwwroot/modules/ticker/ticker.js</file>
+    <file>/wwwroot/modules/ticker/directives/ticker.js</file>
+
     <file>/wwwroot/modules/scrollTrigger/scrollTrigger.js</file>
     <file>/wwwroot/modules/scrollTrigger/directives/scrollTrigger.js</file>
-    
-    <file>/wwwroot/modules/windowResize/windowResize.js</file>
-    <file>/wwwroot/modules/windowResize/directives/windowResize.js</file>
 
-    <file>/wwwroot/modules/comments/comments.js</file>
-    <file>/wwwroot/modules/comments/directives/commentItem.js</file>
-    <file>/wwwroot/modules/comments/directives/commentsAddNew.js</file>
-    <file>/wwwroot/modules/comments/directives/commentsContainer.js</file>
-    <file>/wwwroot/modules/comments/directives/commentsList.js</file>
-    <file>/wwwroot/modules/comments/services/commentsService.js</file>
+    <file>/wwwroot/modules/videoPlayer/videoPlayer.js</file>
+    <file>/wwwroot/modules/videoPlayer/directives/videoPlayer.js</file>
+        
+    <file>/wwwroot/modules/fileUpload/fileUpload.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUpload.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUploadItem.js</file>
+    <file>/wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js</file>
+
+    <file>/wwwroot/modules/main/app.js</file>
+    <file>/wwwroot/modules/main/config/blogConfig.js</file>
+    <file>/wwwroot/modules/main/controllers/blogMainController.js</file>
+    
+    <file>/wwwroot/modules/templates.js</file>
 
     <file>/wwwroot/modules/config/config.js</file>
     <file>/wwwroot/modules/config/provider/configProvider.js</file>
 
     <file>/wwwroot/modules/communities/communities.js</file>
     <file>/wwwroot/modules/communities/controllers/communitiesListController.js</file>
-	  <file>/wwwroot/modules/communities/controllers/communityModifyController.js</file>
+    <file>/wwwroot/modules/communities/controllers/communityModifyController.js</file>
     <file>/wwwroot/modules/communities/controllers/communityViewController.js</file>
     <file>/wwwroot/modules/communities/directives/communityHeader.js</file>
     <file>/wwwroot/modules/communities/directives/communityButtonList.js</file>
@@ -73,13 +66,17 @@
     <file>/wwwroot/modules/error/directives/errorDisplay.js</file>
     <file>/wwwroot/modules/error/services/errorService.js</file>
 
-    <file>/wwwroot/modules/header/header.js</file>
-    <file>/wwwroot/modules/header/directives/headerMenu.js</file>
-
     <file>/wwwroot/modules/logger/logger.js</file>
     <file>/wwwroot/modules/logger/services/errorLogService.js</file>
     <file>/wwwroot/modules/logger/services/stacktraceService.js</file>
-    
+
+    <file>/wwwroot/modules/header/header.js</file>
+    <file>/wwwroot/modules/header/directives/headerMenu.js</file>
+
+    <file>/wwwroot/modules/tags/tags.js</file>
+    <file>/wwwroot/modules/tags/directives/tagItem.js</file>
+    <file>/wwwroot/modules/tags/services/tagsService.js</file>
+
     <file>/wwwroot/modules/login/login.js</file>
     <file>/wwwroot/modules/login/directives/loggedUser.js</file>
     <file>/wwwroot/modules/login/directives/loginForm.js</file>
@@ -89,10 +86,6 @@
     <file>/wwwroot/modules/login/services/authenticationService.js</file>
     <file>/wwwroot/modules/login/services/loginService.js</file>
 
-    <file>/wwwroot/modules/main/app.js</file>
-    <file>/wwwroot/modules/main/config/blogConfig.js</file>
-    <file>/wwwroot/modules/main/controllers/blogMainController.js</file>
-
     <file>/wwwroot/modules/media/media.js</file>
     <file>/wwwroot/modules/media/controllers/mediaGalleryController.js</file>
     <file>/wwwroot/modules/media/directives/albumGroup.js</file>
@@ -101,37 +94,6 @@
     <file>/wwwroot/modules/media/directives/mediaItem.js</file>
     <file>/wwwroot/modules/media/services/albumService.js</file>
     <file>/wwwroot/modules/media/services/mediaService.js</file>
-
-    <file>/wwwroot/modules/messaging/messaging.js</file>
-    <file>/wwwroot/modules/messaging/directives/chatWindow.js</file>
-    <file>/wwwroot/modules/messaging/directives/messagesPanel.js</file>
-    <file>/wwwroot/modules/messaging/services/messagingService.js</file>
-
-    <file>/wwwroot/modules/navigation/navigation.js</file>
-    <file>/wwwroot/modules/navigation/directives/navigationMenu.js</file>
-
-    <file>/wwwroot/modules/posts/posts.js</file>
-    <file>/wwwroot/modules/posts/controllers/postsController.js</file>
-    <file>/wwwroot/modules/posts/controllers/postsModifyController.js</file>
-    <file>/wwwroot/modules/posts/controllers/postsViewController.js</file>
-    <file>/wwwroot/modules/posts/directives/postHeader.js</file>
-    <file>/wwwroot/modules/posts/directives/postContents.js</file>
-    <file>/wwwroot/modules/posts/directives/postLikes.js</file>
-    <file>/wwwroot/modules/posts/directives/postViewCount.js</file>
-    <file>/wwwroot/modules/posts/directives/postListItem.js</file>
-    <file>/wwwroot/modules/posts/directives/postListItemComment.js</file>
-    <file>/wwwroot/modules/posts/directives/postRelatedItem.js</file>
-    <file>/wwwroot/modules/posts/directives/postRelatedItems.js</file>
-    <file>/wwwroot/modules/posts/directives/postViewNavigator.js</file>
-    <file>/wwwroot/modules/posts/services/postsService.js</file>
-
-    <file>/wwwroot/modules/sockets/socket.js</file>
-    <file>/wwwroot/modules/sockets/directives/socketDebugger.js</file>
-    <file>/wwwroot/modules/sockets/services/socketsService.js</file>
-
-    <file>/wwwroot/modules/tags/tags.js</file>
-    <file>/wwwroot/modules/tags/directives/tagItem.js</file>
-    <file>/wwwroot/modules/tags/services/tagsService.js</file>
 
     <file>/wwwroot/modules/user/user.js</file>
     <file>/wwwroot/modules/user/controllers/userProfileCommentsController.js</file>
@@ -151,5 +113,41 @@
     <file>/wwwroot/modules/user/directives/userProfileDetailsInfo.js</file>
     <file>/wwwroot/modules/user/directives/userProfileNavigation.js</file>
     <file>/wwwroot/modules/user/services/userService.js</file>
+
+    <file>/wwwroot/modules/sockets/socket.js</file>
+    <file>/wwwroot/modules/sockets/directives/socketDebugger.js</file>
+    <file>/wwwroot/modules/sockets/services/socketsService.js</file>
+
+    <file>/wwwroot/modules/navigation/navigation.js</file>
+    <file>/wwwroot/modules/navigation/directives/navigationMenu.js</file>
+
+    <file>/wwwroot/modules/messaging/messaging.js</file>
+    <file>/wwwroot/modules/messaging/directives/chatWindow.js</file>
+    <file>/wwwroot/modules/messaging/directives/messagesPanel.js</file>
+    <file>/wwwroot/modules/messaging/services/messagingService.js</file>
+
+    <file>/wwwroot/modules/posts/posts.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsController.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsModifyController.js</file>
+    <file>/wwwroot/modules/posts/controllers/postsViewController.js</file>
+    <file>/wwwroot/modules/posts/directives/postHeader.js</file>
+    <file>/wwwroot/modules/posts/directives/postContents.js</file>
+    <file>/wwwroot/modules/posts/directives/postLikes.js</file>
+    <file>/wwwroot/modules/posts/directives/postViewCount.js</file>
+    <file>/wwwroot/modules/posts/directives/postListItem.js</file>
+    <file>/wwwroot/modules/posts/directives/postListItemComment.js</file>
+    <file>/wwwroot/modules/posts/directives/postRelatedItem.js</file>
+    <file>/wwwroot/modules/posts/directives/postRelatedItems.js</file>
+    <file>/wwwroot/modules/posts/directives/postViewNavigator.js</file>
+    <file>/wwwroot/modules/posts/services/postsService.js</file>
+        
+    <file>/wwwroot/modules/comments/comments.js</file>
+    <file>/wwwroot/modules/comments/directives/commentItem.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsAddNew.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsContainer.js</file>
+    <file>/wwwroot/modules/comments/directives/commentsList.js</file>
+    <file>/wwwroot/modules/comments/services/commentsService.js</file>
+
+    <file>/wwwroot/modules/init.js</file>
   </files>
 </bundle>

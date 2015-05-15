@@ -354,6 +354,18 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </p>\r" +
     "\n" +
+    "        <a data-title=\"Click here to join this community\" bs-tooltip ng-click=\"join()\" ng-show=\"!isUserJoined\">\r" +
+    "\n" +
+    "            <label class=\"label label-success\">Join</label>\r" +
+    "\n" +
+    "        </a>\r" +
+    "\n" +
+    "        <a data-title=\"Click here to leave this community\" bs-tooltip ng-click=\"leave()\" ng-show=\"isUserJoined\">\r" +
+    "\n" +
+    "            <label class=\"label label-danger\">Leave</label>\r" +
+    "\n" +
+    "        </a>\r" +
+    "\n" +
     "    </div>\r" +
     "\n" +
     "</div>"

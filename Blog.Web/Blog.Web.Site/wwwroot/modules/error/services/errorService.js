@@ -3,7 +3,7 @@
         var error = {};
 
         var isAuthorized = function (d) {
-            if (d.error == "invalid_grant" || d.Message == "Authorization has been denied for this request.") {
+            if (d.error === "invalid_grant" || d.Message === "Authorization has been denied for this request.") {
                 return false;
             } else {
                 return true;
@@ -18,11 +18,29 @@
             });
         };
 
+        var getModelStateErrors = function (d) {
+            if (d.ModelState) {
+                var errorDisplayMessage = "";
+
+                for (var property in d.ModelState) {
+                    if (d.ModelState.hasOwnProperty(property)) {
+                        _.each(d.ModelState[property], function (err) {
+                            errorDisplayMessage += err + " ";
+                        });
+                    }
+                }
+
+                return errorDisplayMessage;
+            } else {
+                return d;
+            }
+        };
+
         return {
             displayError: function (d) {
                 error = d;
                 if (isAuthorized(d)) {
-                    $rootScope.$broadcast("displayError", d);
+                    $rootScope.$broadcast("displayError", getModelStateErrors(d));
                 }
             },
 

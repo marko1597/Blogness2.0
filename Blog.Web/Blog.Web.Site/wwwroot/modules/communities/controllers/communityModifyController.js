@@ -25,7 +25,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	        Description: "",
             Leader: $scope.user,
 	        LeaderUserId: $scope.user ? $scope.user.Id : null,
-            EmblemId: null
+            Emblem: null
 	    };
 
 	    $scope.selectedEmblemUrl = null;
@@ -36,8 +36,8 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 
 	    $scope.getCommunity = function () {
 	        communitiesService.getById($rootScope.$stateParams.communityId).then(function (resp) {
-	            if ($scope.username === resp.Leader.UserName) {
-	                if (resp.Error == undefined) {
+	            if (resp && $scope.user && resp.Leader && $scope.user.UserName === resp.Leader.UserName) {
+	                if (!resp.Error) {
 	                    $scope.isAdding = false;
 	                    $scope.community = resp;
 
@@ -60,7 +60,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            if ($scope.isAdding) {
 	                communitiesService.addCommunity($scope.community).then(function (resp) {
 	                    if (resp.Error == undefined) {
-	                        $location.path("/");
+	                        $location.path("/communities");
 	                    } else {
 	                        errorService.displayError(resp.Error);
 	                    }
@@ -70,7 +70,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            } else {
 	                communitiesService.updateCommunity($scope.community).then(function (resp) {
 	                    if (resp.Error == undefined) {
-	                        $location.path("/");
+	                        $location.path("/communities");
 	                    } else {
 	                        errorService.displayError(resp.Error);
 	                    }
@@ -90,6 +90,8 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            if (response.Message == undefined || response.Message == null) {
 	                if (!isNaN($rootScope.$stateParams.communityId)) {
 	                    $scope.getCommunity();
+	                } else {
+	                    $scope.isAdding = true;
 	                }
 	            } else {
 	                errorService.displayErrorRedirect(response.Message);
@@ -156,7 +158,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 
 	        media.IsSelected = isSelectedResult;
 	        if (isSelectedResult) {
-	            $scope.community.EmblemId = media.Id;
+	            $scope.community.Emblem = media;
 	            $scope.selectedEmblemUrl = media.MediaUrl;
 	        }
 	    };

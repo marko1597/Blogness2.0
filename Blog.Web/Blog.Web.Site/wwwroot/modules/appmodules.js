@@ -1,26 +1,701 @@
-﻿///#source 1 1 /wwwroot/modules/init.js
-window.blogInit = {};
+﻿///#source 1 1 /wwwroot/modules/ellipsis/ellipsis.js
+var ngEllipsis = angular.module("ngEllipsis", []);
+///#source 1 1 /wwwroot/modules/ellipsis/directives/ellipsis.js
+ngEllipsis.directive('ellipsis', [function () {
+    var filterFn;
+    filterFn = function (scope, element, attrs) {
+        scope.$on("reapplyEllipsis", function () {
+            scope.applyEllipsis();
+        });
 
-window.blogInit =
-{
-    start: function () {var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
-        settings.setBlogSockets(window.blogConfiguration.blogSockets);
-        settings.setBlogApiEndpoint(window.blogConfiguration.blogApi);
-        settings.setBlogRoot(window.blogConfiguration.blogRoot);
-        settings.setBlogSocketsAvailability(window.blogConfiguration.blogSocketsAvailable);
-        settings.setDimensions(window.innerWidth, window.innerHeight);
-        settings.setDefaultProfilePicture(window.blogConfiguration.blogApi + "media/defaultprofilepicture");
-        settings.setDefaultBackgroundPicture(window.blogConfiguration.blogApi + "media/defaultbackgroundpicture");
-        settings.setSocketClientFunctions(window.socketClientFunctions);
+        scope.applyEllipsis = function() {
+            var height = parseInt(attrs.wrapHeight == undefined ? 180 : attrs.wrapHeight);
+            $(element).dotdotdot({
+                ellipsis: "...",
+                height: height
+            });
+        };
 
-        // TODO: This is a temporary hack. It should be in its respective module
-        ngLogger.provider("$exceptionHandler", {
-            $get: function (errorLogService) {
-                return (errorLogService);
+        scope.applyEllipsis();
+    };
+
+    return {
+        restrict: 'EA',
+        link: filterFn
+    };
+}]);
+///#source 1 1 /wwwroot/modules/blockUi/blockUi.js
+var ngBlockUi = angular.module("ngBlockUi", []);
+///#source 1 1 /wwwroot/modules/blockUi/services/blockUi.js
+ngBlockUi.factory('blockUiService', [function () {
+    return {
+        blockIt: function (properties) {
+            if (properties == undefined) properties = {};
+
+            if (properties.html == undefined) {
+                properties.html = '<h4><img src="wwwroot/css/images/loader-girl.gif" height="128" /></h4>';
+            }
+
+            if (properties.css == undefined) {
+                properties.css = {
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: '#000',
+                    opacity: .5,
+                    color: '#fff'
+                };
+            }
+
+            if (properties.elem == undefined) {
+                $.blockUI({
+                    message: properties.html,
+                    css: properties.css
+                });
+            } else {
+                $(properties.elem).block({
+                    message: properties.html,
+                    css: properties.css
+                });
+            }
+        },
+
+        unblockIt: function (elem) {
+            if (elem == undefined) {
+                $.unblockUI();
+            } else {
+                $(elem).unblock();
+            }
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/date/dateHelper.js
+var ngDateHelper = angular.module("ngDateHelper", []);
+///#source 1 1 /wwwroot/modules/date/services/dateHelper.js
+ngDateHelper.factory('dateHelper', [function () {
+    return {
+        getJsFullDate: function (jsonDate) {
+            return moment(jsonDate);
+        },
+
+        getYearsDifference: function (jsonDate) {
+            return moment().diff(jsonDate, 'years');
+        },
+        
+        getJsDate: function (jsonDate) {
+            var date = moment(jsonDate).format("MMM D, YYYY");
+            return date;
+        },
+
+        getMonthYear: function(jsonDate) {
+            var date = moment(jsonDate).format("MMMM YYYY");
+            return date;
+        },
+
+        getJsTime: function (jsonDate) {
+            var time = moment(jsonDate).format("hh:mm A");
+            return time;
+        },
+
+        getDateDisplay: function (jsonDate) {
+            var itemDate = moment(jsonDate);
+            var currDate = moment();
+            
+            return itemDate.from(currDate) + " at " + this.getJsTime(jsonDate);
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/windowResize/windowResize.js
+var windowResize = angular.module("windowResize", []);
+///#source 1 1 /wwwroot/modules/windowResize/directives/windowResize.js
+windowResize.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
+    return {
+        restrict: 'EA',
+        link: function postLink(scope) {
+            scope.onResizeFunction = function () {
+                scope.windowHeight = $window.innerHeight;
+                scope.windowWidth = $window.innerWidth;
+                $rootScope.$broadcast("windowSizeChanged", {
+                    height: scope.windowHeight,
+                    width: scope.windowWidth
+                });
+            };
+
+            scope.onResizeFunction();
+
+            angular.element($window).bind('resize', function () {
+                $timeout(function () {
+                    scope.onResizeFunction();
+                    scope.$apply();
+                }, 500);
+            });
+        }
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/empty/empty.js
+var blogEmpty = angular.module("blogEmpty", []);
+///#source 1 1 /wwwroot/modules/empty/directives/emptyRecordMessage.js
+blogEmpty.directive("emptyRecordMessage", ["$templateCache",
+    function ($templateCache) {
+        var ctrlFn = function ($scope) {
+        };
+        ctrlFn.$inject = ["$scope"];
+
+        return {
+            restrict: 'EA',
+            scope: { message: '=' },
+            replace: true,
+            template: $templateCache.get("empty/emptyRecordMessage.html"),
+            controller: ctrlFn
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/keypress/keypress.js
+var blogKeyPress = angular.module("blogKeyPress", []);
+///#source 1 1 /wwwroot/modules/keypress/directives/keypress.js
+blogKeyPress.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
             }
         });
+    };
+});
+///#source 1 1 /wwwroot/modules/ticker/ticker.js
+var blogTicker = angular.module("blogTicker", []);
+///#source 1 1 /wwwroot/modules/ticker/directives/ticker.js
+blogTicker.directive('ticker', function () {
+    var filterFn;
+    filterFn = function (scope, element, attrs) {
+        var ticker = $(element).newsTicker({
+            row_height: 40,
+            max_rows: 1,
+            duration: 5000
+        });
+
+        if (attrs.enablePause) {
+            $(element).on("click", $(element).find("[data-pause-trigger]"), function (ev) {
+                ticker.newsTicker('toggle');
+            });
+        }
+    };
+
+    return {
+        restrict: 'EA',
+        link: filterFn
+    };
+});
+///#source 1 1 /wwwroot/modules/scrollTrigger/scrollTrigger.js
+var blogScrollTrigger = angular.module("blogScrollTrigger", []);
+///#source 1 1 /wwwroot/modules/scrollTrigger/directives/scrollTrigger.js
+blogScrollTrigger.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
+    return {
+        link: function (scope, element, attrs) {
+            scope.scrollTriggerWatch = null;
+
+            $rootScope.$on("updateScrollTriggerWatch", function (event, data) {
+                scope.scrollTriggerWatch = "#" + data;
+            });
+
+            angular.element(element).bind("scroll", function () {
+                if (scope.scrollTriggerWatch != null) {
+                    var scroll = $(element).scrollTop();
+                    if (scroll + $(window).height() >= $(scope.scrollTriggerWatch).outerHeight()) {
+                        $rootScope.$broadcast("scrollBottom");
+                    }
+                }
+            });
+        }
+    };
+}]);
+///#source 1 1 /wwwroot/modules/videoPlayer/videoPlayer.js
+var blogVideoPlayer = angular.module("blogVideoPlayer",
+    [
+        "com.2fdevs.videogular",
+		"com.2fdevs.videogular.plugins.controls",
+		"com.2fdevs.videogular.plugins.overlayplay",
+		"com.2fdevs.videogular.plugins.buffering",
+		"com.2fdevs.videogular.plugins.poster",
+		"com.2fdevs.videogular.plugins.imaads"
+    ]);
+///#source 1 1 /wwwroot/modules/videoPlayer/directives/videoPlayer.js
+blogVideoPlayer.directive("videoPlayer", ["$templateCache",
+    function ($templateCache) {
+        var ctrlFn = function ($scope, $sce) {
+            $scope.currentTime = 0;
+            $scope.totalTime = 0;
+            $scope.state = null;
+            $scope.volume = 1;
+            $scope.isCompleted = false;
+            $scope.API = null;
+
+            $scope.onPlayerReady = function (API) {
+                $scope.API = API;
+            };
+
+            $scope.onCompleteVideo = function () {
+                $scope.currentTime = 0;
+                $scope.isCompleted = true;
+            };
+
+            $scope.onUpdateState = function (state) {
+                $scope.state = state;
+            };
+
+            $scope.onUpdateTime = function (currentTime, totalTime) {
+                $scope.currentTime = currentTime;
+                $scope.totalTime = totalTime;
+            };
+
+            $scope.onUpdateVolume = function (newVol) {
+                $scope.volume = newVol;
+            };
+
+            $scope.onUpdateSize = function (width, height) {
+                $scope.config.width = width;
+                $scope.config.height = height;
+            };
+
+            $scope.stretchModes = [
+                { label: "None", value: "none" },
+                { label: "Fit", value: "fit" },
+                { label: "Fill", value: "fill" }
+            ];
+
+            $scope.config = {
+                width: 740,
+                height: 380,
+                autoHide: false,
+                autoHideTime: 3000,
+                autoPlay: false,
+                responsive: false,
+                stretch: $scope.stretchModes[2],
+                sources: [
+                    {
+                        src: $sce.trustAsResourceUrl($scope.media.MediaUrl),
+                        type: $scope.media.MediaType
+                    }
+                ],
+                transclude: true,
+                theme: {
+                    url: window.blogConfiguration.blogRoot + "/bower_components/videogular-themes-default/videogular.css"
+                },
+                plugins: {
+                    poster: {
+                        url: $scope.media.ThumbnailUrl
+                    }
+                }
+            };
+        };
+        ctrlFn.$inject = ["$scope", "$sce"];
+
+        return {
+            restrict: 'EA',
+            scope: { media: '=' },
+            controller: ctrlFn,
+            replace: true,
+            template: $templateCache.get("videoPlayer/videoPlayer.html")
+        };
     }
-}
+]);
+///#source 1 1 /wwwroot/modules/fileUpload/fileUpload.js
+var blogFileUpload = angular.module("blogFileUpload", [
+    'angularFileUpload', "akoenig.deckgrid"]);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUpload.js
+blogFileUpload.directive("fileUpload", ["$templateCache",
+    function ($templateCache) {
+        return {
+            restrict: 'EA',
+            scope: { uploader: '='},
+            replace: true,
+            template: $templateCache.get("fileUpload/fileUpload.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadItem.js
+blogFileUpload.directive("fileUploadItem", ["$templateCache",
+    function ($templateCache) {
+        var linkFn = function(scope) {
+            scope.isNewContent = function (exists) {
+                var response = true;
+                if (exists) {
+                    response = false;
+                }
+                return response;
+            };
+        };
+
+        return {
+            link: linkFn,
+            restrict: 'EA',
+            scope: {
+                item: '=',
+                uploader: '='
+            },
+            replace: true,
+            template: $templateCache.get("fileUpload/fileUploadItem.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js
+blogFileUpload.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
+    function ($window, $rootScope, blockUiService) {
+        var helper = {
+            support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+            isFile: function (item) {
+                return angular.isObject(item) && item instanceof $window.File;
+            },
+            isImage: function (file) {
+                var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+            }
+        };
+
+        return {
+            restrict: 'A',
+            template: '<canvas/>',
+            link: function (scope, element, attributes) {
+                if (!helper.support) return;
+
+                var params = scope.$eval(attributes.fileUploadThumbnail);
+
+                if (!helper.isFile(params.file)) return;
+                if (!helper.isImage(params.file)) return;
+
+                var canvas = element.find('canvas');
+                var reader = new FileReader();
+
+                reader.onload = onLoadFile;
+                reader.readAsDataURL(params.file);
+
+                function onLoadFile(event) {
+                    var img = new Image();
+                    img.onload = onLoadImage;
+                    img.src = event.target.result;
+                }
+
+                function onLoadImage() {
+                    blockUiService.blockIt();
+                    var width = params.width || this.width / this.height * params.height;
+                    var height = params.height || this.height / this.width * params.width;
+                    canvas.attr({ width: width, height: height });
+                    canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+                    $rootScope.$broadcast("resizeIsotopeItems", {});
+                    blockUiService.unblockIt();
+                }
+            }
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/main/app.js
+var blog = angular.module("blog",
+    [
+        "ngRoute",
+        "ngAnimate",
+        "ngCookies",
+        "mgcrea.ngStrap",
+        "snap",
+        "ngBlockUi",
+        "ngConfig",
+        "ngLogger",
+        "ngHeader",
+        "ngLogin",
+        "ngPosts",
+        "ngCommunities",
+        "ngComments",
+        "ngError",
+        "ngNavigation",
+        "ngMessaging",
+        "ngUser",
+        "ngTags",
+        "ui.router"
+    ]);
+
+blog.run([
+    '$rootScope', '$state', '$stateParams',
+    function ($rootScope, $state, $stateParams) {
+        $rootScope.$state = $state;
+        $rootScope.$stateParams = $stateParams;
+    }
+]);
+///#source 1 1 /wwwroot/modules/main/config/blogConfig.js
+blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider", "$urlRouterProvider",
+    function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
+        $provide.factory('httpInterceptor', ["$q", "$location", "blockUiService", function ($q, $location, blockUiService) {
+            return {
+                request: function (config) {
+                    blockUiService.blockIt();
+
+                    return config || $q.when(config);
+                },
+
+                requestError: function (rejection) {
+                    blockUiService.blockIt();
+                    return $q.reject(rejection);
+                },
+
+                response: function (response) {
+                    blockUiService.unblockIt();
+
+                    return response || $q.when(response);
+                },
+
+                responseError: function (rejection) {
+                    blockUiService.unblockIt();
+
+                    return $q.reject(rejection);
+                }
+            };
+        }]);
+
+        $httpProvider.interceptors.push('httpInterceptor');
+
+        $httpProvider.interceptors.push('authenticationInterceptorService');
+
+        $urlRouterProvider.otherwise("/");
+
+        $stateProvider
+            .state('posts', {
+                url: "/",
+                controller: 'postsController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('posts/mainPagePosts.html');
+                }]
+            })
+            .state('viewpost', {
+                url: "/post/:postId",
+                controller: 'postsViewController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('posts/postView.html');
+                }]
+            })
+                .state('viewpost.gallery', {
+                    url: "/gallery",
+                    controller: 'mediaGalleryController'
+                })
+            .state('friends', {
+                url: "/friends",
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('friends.html');
+                }]
+            })
+            .state('communities', {
+                url: "/communities",
+                controller: 'communitiesListController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('communities/communities.html');
+                }]
+            })
+            .state('viewcommunity', {
+                url: "/community/:communityId",
+                controller: 'communityViewController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('communities/communityView.html');
+                }]
+            })
+            .state('newcommunity', {
+                url: "/community/create/new",
+                controller: 'communityModifyController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('communities/communityEdit.html');
+                }]
+            })
+            .state('editcommunity', {
+                url: "/community/edit/:communityId",
+                controller: 'communityModifyController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('communities/communityEdit.html');
+                }]
+            })
+            .state('events', {
+                url: "/events",
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('events.html');
+                }]
+            })
+            .state('newpost', {
+                url: "/post/create/new",
+                controller: 'postsModifyController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('posts/postUpdate.html');
+                }]
+            })
+            .state('editpost', {
+                url: "/post/edit/:postId",
+                controller: 'postsModifyController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('posts/postUpdate.html');
+                }]
+            })
+            .state('ownprofile', {
+                url: "/user",
+                controller: 'userProfileController',
+                'abstract': true,
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('user/userView.html');
+                }]
+            })
+                .state('ownprofile.details', {
+                    url: '',
+                    controller: 'userProfileController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileDetails.html');
+                    }]
+                })
+                .state('ownprofile.posts', {
+                    url: '/posts',
+                    controller: 'userProfilePostsController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfilePosts.html');
+                    }]
+                })
+                .state('ownprofile.comments', {
+                    url: '/comments',
+                    controller: 'userProfileCommentsController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileComments.html');
+                    }]
+                })
+                .state('ownprofile.favorites', {
+                    url: '/favorites',
+                    controller: 'userProfileFavoritesController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileFavorites.html');
+                    }]
+                })
+                .state('ownprofile.media', {
+                    url: '/media',
+                    controller: 'userProfileMediaController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileMedia.html');
+                    }]
+                })
+                    .state('ownprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
+            .state('othersprofile', {
+                url: "/user/:username",
+                controller: 'userProfileController',
+                'abstract': true,
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('user/userView.html');
+                }]
+            })
+                .state('othersprofile.details', {
+                    url: '',
+                    controller: 'userProfileController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileDetails.html');
+                    }]
+                })
+                .state('othersprofile.posts', {
+                    url: '/posts',
+                    controller: 'userProfilePostsController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfilePosts.html');
+                    }]
+                })
+                .state('othersprofile.comments', {
+                    url: '/comments',
+                    controller: 'userProfileCommentsController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileComments.html');
+                    }]
+                })
+                .state('othersprofile.favorites', {
+                    url: '/favorites',
+                    controller: 'userProfileFavoritesController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileFavorites.html');
+                    }]
+                }).state('othersprofile.media', {
+                    url: '/media',
+                    controller: 'userProfileMediaController',
+                    templateProvider: ["$templateCache", function ($templateCache) {
+                        return $templateCache.get('user/userProfileMedia.html');
+                    }]
+                })
+                    .state('othersprofile.media.gallery', {
+                        url: '/gallery/:albumName',
+                        controller: 'mediaGalleryController'
+                    })
+            .state('error', {
+                url: "/error",
+                controller: 'errorPageController',
+                templateProvider: ["$templateCache", function ($templateCache) {
+                    return $templateCache.get('errorpage.html');
+                }]
+            });
+    }
+]);
+///#source 1 1 /wwwroot/modules/main/controllers/blogMainController.js
+blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
+    "localStorageService", "postsService", "userService", "authenticationService", "messagingService",
+    function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
+        userService, authenticationService, messagingService) {
+
+        $scope.authData = localStorageService.get('authorizationData');
+
+        $scope.username = null;
+
+        $rootScope.$on("$locationChangeStart", function (event, next, current) {
+            if (current !== configProvider.getSettings().BlogRoot + "/#/") {
+                postsService.getRecentPosts();
+            }
+
+            if ($rootScope.user) {
+                $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
+            }
+        });
+
+        $scope.init = function() {
+            if ($scope.authData !== null) {
+                $scope.username = localStorageService.get('username');
+
+                authenticationService.getUserInfo().then(function(response) {
+                    if (response.Message == undefined || response.Message == null) {
+                        $scope.getUserInfo($scope.username);
+                    }
+                }, function() {
+                    authenticationService.logout();
+                });
+            } else {
+                authenticationService.logout();
+            }
+        };
+
+        $scope.getUserInfo = function (username) {
+            userService.getUserInfo(username).then(function (user) {
+                if (user.Error === null) {
+                    $rootScope.user = user;
+                    $rootScope.authData = $scope.authData;
+                    $timeout(function () {
+                        $rootScope.$broadcast("loggedInUserInfo", user);
+                        messagingService.userChatOnline(user.Id);
+                        console.log("Connected to chat (userChat_" + user.Id + ")");
+                    }, 1500);
+                }
+            });
+        };
+
+        $scope.snapOptions = {
+            maxPosition: 321,
+            minPosition: -321
+        };
+
+        $rootScope.$on("userLoggedIn", function (ev, data) {
+            $scope.getUserInfo(data.username);
+        });
+
+        $scope.init();
+    }
+]);
 ///#source 1 1 /wwwroot/modules/templates.js
 angular.module('blog').run(['$templateCache', function($templateCache) {
   'use strict';
@@ -377,6 +1052,18 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "            at {{community.DateDisplay}}\r" +
     "\n" +
     "        </p>\r" +
+    "\n" +
+    "        <a data-title=\"Click here to join this community\" bs-tooltip ng-click=\"join()\" ng-show=\"!isUserJoined\">\r" +
+    "\n" +
+    "            <label class=\"label label-success\">Join</label>\r" +
+    "\n" +
+    "        </a>\r" +
+    "\n" +
+    "        <a data-title=\"Click here to leave this community\" bs-tooltip ng-click=\"leave()\" ng-show=\"isUserJoined\">\r" +
+    "\n" +
+    "            <label class=\"label label-danger\">Leave</label>\r" +
+    "\n" +
+    "        </a>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
@@ -3038,951 +3725,6 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
 
 }]);
 
-///#source 1 1 /wwwroot/modules/ellipsis/ellipsis.js
-var ngEllipsis = angular.module("ngEllipsis", []);
-///#source 1 1 /wwwroot/modules/ellipsis/directives/ellipsis.js
-ngEllipsis.directive('ellipsis', [function () {
-    var filterFn;
-    filterFn = function (scope, element, attrs) {
-        scope.$on("reapplyEllipsis", function () {
-            scope.applyEllipsis();
-        });
-
-        scope.applyEllipsis = function() {
-            var height = parseInt(attrs.wrapHeight == undefined ? 180 : attrs.wrapHeight);
-            $(element).dotdotdot({
-                ellipsis: "...",
-                height: height
-            });
-        };
-
-        scope.applyEllipsis();
-    };
-
-    return {
-        restrict: 'EA',
-        link: filterFn
-    };
-}]);
-///#source 1 1 /wwwroot/modules/date/dateHelper.js
-var ngDateHelper = angular.module("ngDateHelper", []);
-///#source 1 1 /wwwroot/modules/date/services/dateHelper.js
-ngDateHelper.factory('dateHelper', [function () {
-    return {
-        getJsFullDate: function (jsonDate) {
-            return moment(jsonDate);
-        },
-
-        getYearsDifference: function (jsonDate) {
-            return moment().diff(jsonDate, 'years');
-        },
-        
-        getJsDate: function (jsonDate) {
-            var date = moment(jsonDate).format("MMM D, YYYY");
-            return date;
-        },
-
-        getMonthYear: function(jsonDate) {
-            var date = moment(jsonDate).format("MMMM YYYY");
-            return date;
-        },
-
-        getJsTime: function (jsonDate) {
-            var time = moment(jsonDate).format("hh:mm A");
-            return time;
-        },
-
-        getDateDisplay: function (jsonDate) {
-            var itemDate = moment(jsonDate);
-            var currDate = moment();
-            
-            return itemDate.from(currDate) + " at " + this.getJsTime(jsonDate);
-        }
-    };
-}]);
-///#source 1 1 /wwwroot/modules/blockUi/blockUi.js
-var ngBlockUi = angular.module("ngBlockUi", []);
-///#source 1 1 /wwwroot/modules/blockUi/services/blockUi.js
-ngBlockUi.factory('blockUiService', [function () {
-    return {
-        blockIt: function (properties) {
-            if (properties == undefined) properties = {};
-
-            if (properties.html == undefined) {
-                properties.html = '<h4><img src="wwwroot/css/images/loader-girl.gif" height="128" /></h4>';
-            }
-
-            if (properties.css == undefined) {
-                properties.css = {
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: '#000',
-                    opacity: .5,
-                    color: '#fff'
-                };
-            }
-
-            if (properties.elem == undefined) {
-                $.blockUI({
-                    message: properties.html,
-                    css: properties.css
-                });
-            } else {
-                $(properties.elem).block({
-                    message: properties.html,
-                    css: properties.css
-                });
-            }
-        },
-
-        unblockIt: function (elem) {
-            if (elem == undefined) {
-                $.unblockUI();
-            } else {
-                $(elem).unblock();
-            }
-        }
-    };
-}]);
-///#source 1 1 /wwwroot/modules/isotope/isotope.js
-var blogIsotope = angular.module("blogIsotope", ["iso.directives"]);
-///#source 1 1 /wwwroot/modules/isotope/directives/isotopeItemResize.js
-blogIsotope.directive('isotopeItemResize', ["$window", "$timeout", "$interval",
-    function ($window, $timeout, $interval) {
-        var linkFn = function (scope, elem, attrs) {
-            scope.columnCount = 0;
-            scope.$emit('iso-option', { 'animationEngine' : 'best-available' });
-
-            scope.applyLayout = function () {
-                $interval(function () {
-                    resizeItems($window.innerWidth);
-                    scope.$broadcast('iso-method', { name: 'layout', params: null });
-
-                    // TODO: temporarily removed and to be verified if it works!
-                    //var isotopeElements = elem.children();
-                    //for (var i = 0; i < isotopeElements.length; i++) {
-                    //    if ((i + 1) % scope.columnCount == 0) {
-                    //        $(isotopeElements[i]).css({ "margin-right": "0"});
-                    //    }
-                    //}
-                }, 500, 5);
-            };
-
-            scope.$on("windowSizeChanged", function (e, d) {
-                if (attrs.resizeLayoutOnly == undefined || attrs.resizeLayoutOnly === "false") {
-                    resizeItems(d.width);
-                }
-                scope.applyLayout();
-            });
-
-            scope.$on("resizeIsotopeItems", function () {
-                scope.applyLayout();
-            });
-
-            var getColumnCount = function(containerWidth, columnSize, defaultSize) {
-                var columnPercentage = columnSize == undefined ? parseFloat(defaultSize) : parseFloat(columnSize);
-                var columnWidth = (containerWidth / 100) * columnPercentage;
-                var columnCount = parseInt(containerWidth / columnWidth);
-
-                return columnCount;
-            };
-
-            var resizeItems = function (w) {
-                if (attrs.resizeContainer == undefined) {
-                    if (w >= 992) {
-                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "32%");
-                        _.each($(elem).children(), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "32%" : attrs.resizeLarge;
-                            $(a).width(large);
-                        });
-                    } else if (w >= 767 && w < 992) {
-                        scope.columnCount = getColumnCount(w, attrs.resizeLarge, "48%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeMedium == undefined ? "48%" : attrs.resizeMedium;
-                            $(a).width(medium);
-                        });
-                    } else {
-                        scope.columnCount = getColumnCount(w, attrs.resizeSmall, "96%");
-                        _.each($(elem).children(), function (a) {
-                            var small = attrs.resizeSmall == undefined ? "96%" : attrs.resizeSmall;
-                            $(a).width(small);
-                        });
-                    }
-                } else {
-                    var container = $("#" + attrs.resizeContainer);
-                    var containerWidth = container.outerWidth();
-
-                    if (containerWidth > 1200) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXlarge, "19%");
-                        _.each($(elem).children(), function (a) {
-                            var xlarge = attrs.resizeXlarge == undefined ? "19%" : attrs.resizeXlarge;
-                            $(a).width(xlarge);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "xlarge");
-                    } else if (containerWidth > 992) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeLarge, "23.5%");
-                        _.each($(elem).children(), function (a) {
-                            var large = attrs.resizeLarge == undefined ? "23.5%" : attrs.resizeLarge;
-                            $(a).width(large);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "large");
-                    } else if (containerWidth > 768) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeMedium, "31.5%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeMedium == undefined ? "31.5%" : attrs.resizeMedium;
-                            $(a).width(medium);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "medium");
-                    } else if (containerWidth > 568) {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeSmall, "48%");
-                        _.each($(elem).children(), function (a) {
-                            var medium = attrs.resizeSmall == undefined ? "48%" : attrs.resizeSmall;
-                            $(a).width(medium);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "small");
-                    } else {
-                        scope.columnCount = getColumnCount(containerWidth, attrs.resizeXsmall, "98%");
-                        _.each($(elem).children(), function (a) {
-                            var xsmall = attrs.resizeXsmall == undefined ? "98%" : attrs.resizeXsmall;
-                            $(a).width(xsmall);
-                        });
-                        if (attrs.resizeBroadcast != undefined)
-                            scope.$emit(attrs.resizeBroadcast, "xsmall");
-                    }
-                }
-            };
-
-            scope.applyLayout();
-        };
-
-        return {
-            restrict: 'EA',
-            link: linkFn
-        };
-    }
-]);
-
-///#source 1 1 /wwwroot/modules/fileUpload/fileUpload.js
-var blogFileUpload = angular.module("blogFileUpload", [
-    'angularFileUpload', "akoenig.deckgrid"]);
-///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUpload.js
-blogFileUpload.directive("fileUpload", ["$templateCache",
-    function ($templateCache) {
-        return {
-            restrict: 'EA',
-            scope: { uploader: '='},
-            replace: true,
-            template: $templateCache.get("fileUpload/fileUpload.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadItem.js
-blogFileUpload.directive("fileUploadItem", ["$templateCache",
-    function ($templateCache) {
-        var linkFn = function(scope) {
-            scope.isNewContent = function (exists) {
-                var response = true;
-                if (exists) {
-                    response = false;
-                }
-                return response;
-            };
-        };
-
-        return {
-            link: linkFn,
-            restrict: 'EA',
-            scope: {
-                item: '=',
-                uploader: '='
-            },
-            replace: true,
-            template: $templateCache.get("fileUpload/fileUploadItem.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/fileUpload/directives/fileUploadThumbnail.js
-blogFileUpload.directive('fileUploadThumbnail', ['$window', "$rootScope", "blockUiService",
-    function ($window, $rootScope, blockUiService) {
-        var helper = {
-            support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-            isFile: function (item) {
-                return angular.isObject(item) && item instanceof $window.File;
-            },
-            isImage: function (file) {
-                var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        };
-
-        return {
-            restrict: 'A',
-            template: '<canvas/>',
-            link: function (scope, element, attributes) {
-                if (!helper.support) return;
-
-                var params = scope.$eval(attributes.fileUploadThumbnail);
-
-                if (!helper.isFile(params.file)) return;
-                if (!helper.isImage(params.file)) return;
-
-                var canvas = element.find('canvas');
-                var reader = new FileReader();
-
-                reader.onload = onLoadFile;
-                reader.readAsDataURL(params.file);
-
-                function onLoadFile(event) {
-                    var img = new Image();
-                    img.onload = onLoadImage;
-                    img.src = event.target.result;
-                }
-
-                function onLoadImage() {
-                    blockUiService.blockIt();
-                    var width = params.width || this.width / this.height * params.height;
-                    var height = params.height || this.height / this.width * params.width;
-                    canvas.attr({ width: width, height: height });
-                    canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
-                    $rootScope.$broadcast("resizeIsotopeItems", {});
-                    blockUiService.unblockIt();
-                }
-            }
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/videoPlayer/videoPlayer.js
-var blogVideoPlayer = angular.module("blogVideoPlayer",
-    [
-        "com.2fdevs.videogular",
-		"com.2fdevs.videogular.plugins.controls",
-		"com.2fdevs.videogular.plugins.overlayplay",
-		"com.2fdevs.videogular.plugins.buffering",
-		"com.2fdevs.videogular.plugins.poster",
-		"com.2fdevs.videogular.plugins.imaads"
-    ]);
-///#source 1 1 /wwwroot/modules/videoPlayer/directives/videoPlayer.js
-blogVideoPlayer.directive("videoPlayer", ["$templateCache",
-    function ($templateCache) {
-        var ctrlFn = function ($scope, $sce) {
-            $scope.currentTime = 0;
-            $scope.totalTime = 0;
-            $scope.state = null;
-            $scope.volume = 1;
-            $scope.isCompleted = false;
-            $scope.API = null;
-
-            $scope.onPlayerReady = function (API) {
-                $scope.API = API;
-            };
-
-            $scope.onCompleteVideo = function () {
-                $scope.currentTime = 0;
-                $scope.isCompleted = true;
-            };
-
-            $scope.onUpdateState = function (state) {
-                $scope.state = state;
-            };
-
-            $scope.onUpdateTime = function (currentTime, totalTime) {
-                $scope.currentTime = currentTime;
-                $scope.totalTime = totalTime;
-            };
-
-            $scope.onUpdateVolume = function (newVol) {
-                $scope.volume = newVol;
-            };
-
-            $scope.onUpdateSize = function (width, height) {
-                $scope.config.width = width;
-                $scope.config.height = height;
-            };
-
-            $scope.stretchModes = [
-                { label: "None", value: "none" },
-                { label: "Fit", value: "fit" },
-                { label: "Fill", value: "fill" }
-            ];
-
-            $scope.config = {
-                width: 740,
-                height: 380,
-                autoHide: false,
-                autoHideTime: 3000,
-                autoPlay: false,
-                responsive: false,
-                stretch: $scope.stretchModes[2],
-                sources: [
-                    {
-                        src: $sce.trustAsResourceUrl($scope.media.MediaUrl),
-                        type: $scope.media.MediaType
-                    }
-                ],
-                transclude: true,
-                theme: {
-                    url: window.blogConfiguration.blogRoot + "/bower_components/videogular-themes-default/videogular.css"
-                },
-                plugins: {
-                    poster: {
-                        url: $scope.media.ThumbnailUrl
-                    }
-                }
-            };
-        };
-        ctrlFn.$inject = ["$scope", "$sce"];
-
-        return {
-            restrict: 'EA',
-            scope: { media: '=' },
-            controller: ctrlFn,
-            replace: true,
-            template: $templateCache.get("videoPlayer/videoPlayer.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/ticker/ticker.js
-var blogTicker = angular.module("blogTicker", []);
-///#source 1 1 /wwwroot/modules/ticker/directives/ticker.js
-blogTicker.directive('ticker', function () {
-    var filterFn;
-    filterFn = function (scope, element, attrs) {
-        var ticker = $(element).newsTicker({
-            row_height: 40,
-            max_rows: 1,
-            duration: 5000
-        });
-
-        if (attrs.enablePause) {
-            $(element).on("click", $(element).find("[data-pause-trigger]"), function (ev) {
-                ticker.newsTicker('toggle');
-            });
-        }
-    };
-
-    return {
-        restrict: 'EA',
-        link: filterFn
-    };
-});
-///#source 1 1 /wwwroot/modules/keypress/keypress.js
-var blogKeyPress = angular.module("blogKeyPress", []);
-///#source 1 1 /wwwroot/modules/keypress/directives/keypress.js
-blogKeyPress.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if (event.which === 13) {
-                scope.$apply(function () {
-                    scope.$eval(attrs.ngEnter);
-                });
-
-                event.preventDefault();
-            }
-        });
-    };
-});
-///#source 1 1 /wwwroot/modules/empty/empty.js
-var blogEmpty = angular.module("blogEmpty", []);
-///#source 1 1 /wwwroot/modules/empty/directives/emptyRecordMessage.js
-blogEmpty.directive("emptyRecordMessage", ["$templateCache",
-    function ($templateCache) {
-        var ctrlFn = function ($scope) {
-        };
-        ctrlFn.$inject = ["$scope"];
-
-        return {
-            restrict: 'EA',
-            scope: { message: '=' },
-            replace: true,
-            template: $templateCache.get("empty/emptyRecordMessage.html"),
-            controller: ctrlFn
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/scrollTrigger/scrollTrigger.js
-var blogScrollTrigger = angular.module("blogScrollTrigger", []);
-///#source 1 1 /wwwroot/modules/scrollTrigger/directives/scrollTrigger.js
-blogScrollTrigger.directive('scrollTrigger', ["$rootScope", function ($rootScope) {
-    return {
-        link: function (scope, element, attrs) {
-            scope.scrollTriggerWatch = null;
-
-            $rootScope.$on("updateScrollTriggerWatch", function (event, data) {
-                scope.scrollTriggerWatch = "#" + data;
-            });
-
-            angular.element(element).bind("scroll", function () {
-                if (scope.scrollTriggerWatch != null) {
-                    var scroll = $(element).scrollTop();
-                    if (scroll + $(window).height() >= $(scope.scrollTriggerWatch).outerHeight()) {
-                        $rootScope.$broadcast("scrollBottom");
-                    }
-                }
-            });
-        }
-    };
-}]);
-///#source 1 1 /wwwroot/modules/windowResize/windowResize.js
-var windowResize = angular.module("windowResize", []);
-///#source 1 1 /wwwroot/modules/windowResize/directives/windowResize.js
-windowResize.directive("windowResize", ["$window", "$rootScope", "$timeout", function ($window, $rootScope, $timeout) {
-    return {
-        restrict: 'EA',
-        link: function postLink(scope) {
-            scope.onResizeFunction = function () {
-                scope.windowHeight = $window.innerHeight;
-                scope.windowWidth = $window.innerWidth;
-                $rootScope.$broadcast("windowSizeChanged", {
-                    height: scope.windowHeight,
-                    width: scope.windowWidth
-                });
-            };
-
-            scope.onResizeFunction();
-
-            angular.element($window).bind('resize', function () {
-                $timeout(function () {
-                    scope.onResizeFunction();
-                    scope.$apply();
-                }, 500);
-            });
-        }
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/comments/comments.js
-var ngComments = angular.module("ngComments",
-    [
-        "ngDateHelper",
-        "blogIsotope",
-        "ngConfig",
-        "LocalStorageModule"
-    ]);
-///#source 1 1 /wwwroot/modules/comments/directives/commentItem.js
-ngComments.directive('commentItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $interval, commentsService, errorService, configProvider) {
-        $scope.canExpandComment = function () {
-            if (!$scope.allowExpand) {
-                return false;
-            }
-            if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
-                return false;
-            }
-            return true;
-        };
-
-        $scope.toggleReplies = function () {
-            var state = !$scope.comment.ShowReplies;
-            $scope.comment.ShowReplies = state;
-
-            if (!state) {
-                $rootScope.$broadcast("hideAddReply");
-            }
-        };
-
-        $scope.isExpanded = function () {
-            if ($scope.comment.ShowReplies) {
-                return "fa-minus";
-            }
-            return "fa-plus";
-        };
-
-        $scope.canReplyToComment = function () {
-            if (!$scope.allowReply) {
-                return "hidden";
-            }
-            if ($scope.comment.PostId === null || $scope.comment.PostId == 0) {
-                return "hidden";
-            }
-
-            return "";
-        };
-
-        $scope.showAddReply = function () {
-            $scope.comment.ShowAddReply = true;
-
-            if (!$scope.comment.ShowReplies) {
-                $scope.toggleReplies();
-                $scope.isExpanded();
-            }
-        };
-
-        $scope.isUserLiked = function () {
-            var isLiked = false;
-            _.each($scope.comment.CommentLikes, function (c) {
-                if ($scope.user && c.UserId == $scope.user.Id) {
-                    isLiked = true;
-                }
-            });
-
-            return isLiked ? "fa-star" : "fa-star-o";
-        };
-
-        $scope.isFromPostOwner = function () {
-            if ($scope.comment.User && $scope.poster && $scope.comment.User.UserName == $scope.poster) {
-                return "";
-            }
-            return "hidden";
-        };
-
-        $scope.likeComment = function () {
-            if (!$scope.user) {
-                $rootScope.$broadcast("launchLoginForm", { canClose: true });
-            }
-
-            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
-                function (err) {
-                    errorService.displayError(err);
-                });
-        };
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
-                    if ($scope.comment.Id == d.commentId) {
-                        $scope.comment.CommentLikes = d.commentLikes;
-                        $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        $scope.isUserLiked();
-                    }
-                });
-
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-        
-        $rootScope.$on("hideAddReply", function () {
-            $scope.comment.ShowAddReply = false;
-        });
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "commentsService", "errorService", "configProvider"];
-
-    var linkFn = function(scope, elem, attrs) {
-        scope.allowReply = attrs.allowReply === 'true' ? true : false;
-        scope.allowExpand = attrs.allowExpand === 'true' ? true : false;
-    };
-
-    return {
-        restrict: 'EA',
-        scope: {
-            comment: '=',
-            user: '=',
-            poster: '='
-        },
-        replace: true,
-        template: $templateCache.get("comments/commentItem.html"),
-        controller: ctrlFn,
-        link: linkFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/comments/directives/commentsAddNew.js
-ngComments.directive('commentsAddNew', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, commentsService, errorService) {
-        $scope.comment = {
-            CommentMessage: "",
-            PostId: $scope.postid,
-            ParentCommentId: $scope.commentid,
-            User: $scope.user
-        };
-
-        $scope.hasError = false;
-
-        $scope.commentMessageStyle = function() {
-            if ($scope.hasError) {
-                return errorService.highlightField();
-            }
-            return "";
-        };
-
-        $scope.removeCommentMessageError = function() {
-            $scope.hasError = false;
-        };
-
-        $scope.hideAddComment = function () {
-            if ($scope.commentid == undefined || $scope.commentid == null) {
-                $rootScope.$broadcast("hideAddComment");
-            } else {
-                $rootScope.$broadcast("hideAddReply");
-            }
-        };
-
-        $scope.saveComment = function () {
-            if ($scope.comment.CommentMessage != "") {
-                commentsService.addComment($scope.createCommentForAdding()).then(function(resp) {
-                    if (resp.Error == undefined) {
-                        $scope.comment.CommentMessage = "";
-                        $scope.hideAddComment();
-                    } else {
-                        $scope.hasError = true;
-                        errorService.displayError(resp.Error);
-                    }
-                }, function(e) {
-                    errorService.displayError(e);
-                });
-            } else {
-                $scope.hasError = true;
-                errorService.displayError({ Message: "Your comment message is empty. Please don't be that stupid." });
-            }
-        };
-
-        $scope.createCommentForAdding = function () {
-            if ($scope.comment.ParentCommentId) {
-                $scope.comment.PostId = $scope.parentpostid;
-                return $scope.comment;
-            }
-            return $scope.comment;
-        };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.comment.User = $rootScope.user;
-            }
-        });
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            commentid: '=',
-            postid: '=',
-            user: '=',
-            parentpostid: '='
-        },
-        replace: true,
-        template: $templateCache.get("comments/commentsAddNew.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/comments/directives/commentsContainer.js
-ngComments.directive('commentsContainer', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope) {
-        $scope.showAddComment = false;
-
-        $scope.toggleShowAddComment = function() {
-            $scope.showAddComment = !$scope.showAddComment;
-        };
-
-        $scope.$on("hideAddComment", function () {
-            $scope.showAddComment = false;
-        });
-    };
-    ctrlFn.$inject = ["$scope"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            user: '=',
-            postid: '=',
-            poster: '='
-        },
-        replace: true,
-        template: $templateCache.get("comments/commentsContainer.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/comments/directives/commentsList.js
-ngComments.directive('commentsList', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $interval, postsService, commentsService, userService, errorService, configProvider) {
-        $scope.comments = [];
-
-        $scope.emptyCommentsMessage = "";
-
-        $scope.hasError = false;
-
-        $scope.getComments = function () {
-            if (!isNaN($scope.postid)) {
-                commentsService.getCommentsByPost($scope.postid).then(function (comments) {
-                    $scope.hasError = false;
-                    $scope.comments = comments;
-                    postsService.subscribeToPost($scope.postid);
-                }, function(err) {
-                    $scope.hasError = true;
-                    errorService.displayError(err);
-                });
-            } else {
-                $scope.hasError = true;
-            }
-        };
-
-        $scope.showEmptyCommentsMessage = function () {
-            if ($scope.comments.length != 0) {
-                return false;
-            }
-            return true;
-        };
-
-        $scope.emptyMessageStyle = function() {
-            return $scope.hasError ? "alert-danger" : "alert-warning";
-        };
-
-        $scope.getEmptyCommentsMessage = function() {
-            return $scope.hasError ?
-                "Something went wrong with loading the comments! :(" :
-                "There are no comments yet.";
-        };
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().commentAdded && configProvider.getSocketClientFunctions().wsConnect) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
-                    d.comment = commentsService.addViewProperties(d.comment);
-
-                    if (d.commentId !== null && d.commentId != undefined) {
-                        var comment = _.where($scope.comments, { Id: d.commentId })[0];
-                        if (comment.Comments === null) comment.Comments = [];
-
-                        comment.Comments.unshift(d.comment);
-
-                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                    } else {
-                        $scope.comments.unshift(d.comment);
-                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                    }
-                });
-
-                $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
-                    postsService.subscribeToPost($scope.postid);
-                });
-
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-
-        $scope.getComments();
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "commentsService", "userService", "errorService", "configProvider"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            user: '=',
-            postid: '=',
-            poster: '='
-        },
-        replace: true,
-        template: $templateCache.get("comments/commentsList.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/comments/services/commentsService.js
-ngComments.factory('commentsService', ["$http", "$q", "configProvider", "dateHelper",
-    function ($http, $q, configProvider, dateHelper) {
-        var commentsApi = configProvider.getSettings().BlogApi == "" ?
-            window.blogConfiguration.blogApi :
-            configProvider.getSettings().BlogApi;
-
-        return {
-            getCommentsByPost: function (id) {
-                var deferred = $q.defer();
-                var that = this;
-
-                $http({
-                    url: commentsApi + "Posts/" + id + "/Comments",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (c) {
-                        c = that.addViewProperties(c, false, false);
-
-                        _.each(c.Comments, function (r) {
-                            that.addViewProperties(r);
-                        });
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getCommentsByUser: function (userId) {
-                var userCommentsUrl = configProvider.getSettings().BlogApi == "" ?
-                    window.blogConfiguration.blogApi + "user/" :
-                    configProvider.getSettings().BlogApi + "user/";
-
-                var deferred = $q.defer();
-                var that = this;
-
-                $http({
-                    url: userCommentsUrl + userId + "/comments",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (c) {
-                        c = that.addViewProperties(c, false, false);
-
-                        _.each(c.Comments, function (r) {
-                            that.addViewProperties(r);
-                        });
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            likeComment: function (commentId, username) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: commentsApi + "comments/likes?username=" + username + "&commentId=" + commentId,
-                    method: "POST"
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            addComment: function (comment) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: commentsApi + "comments",
-                    method: "POST",
-                    data: comment
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            addViewProperties: function(comment, showReplies, showAddReply) {
-                comment.DateDisplay = dateHelper.getDateDisplay(comment.CreatedDate);
-                comment.NameDisplay = comment.User != null ? comment.User.FirstName + " " + comment.User.LastName : "";
-                comment.Url = "/#/user/" + (comment.User != null ? comment.User.UserName : "");
-
-                if (showReplies != undefined) {
-                    comment.ShowReplies = false;
-                }
-
-                if (showAddReply != undefined) {
-                    comment.ShowAddReply = false;
-                }
-
-                return comment;
-            }
-        };
-    }
-]);
 ///#source 1 1 /wwwroot/modules/config/config.js
 var ngConfig = angular.module("ngConfig", []);
 ///#source 1 1 /wwwroot/modules/config/provider/configProvider.js
@@ -4132,7 +3874,6 @@ ngCommunities.controller('communitiesListController', ["$scope", "$rootScope", "
             communitiesService.getList().then(function (resp) {
                 $scope.communities = resp;
                 $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayError(e);
             });
@@ -4149,7 +3890,6 @@ ngCommunities.controller('communitiesListController', ["$scope", "$rootScope", "
                     $scope.communities.push(p);
                 });
                 $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
             }, function (e) {
                 errorService.displayError(e);
             });
@@ -4201,7 +3941,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	        Description: "",
             Leader: $scope.user,
 	        LeaderUserId: $scope.user ? $scope.user.Id : null,
-            EmblemId: null
+            Emblem: null
 	    };
 
 	    $scope.selectedEmblemUrl = null;
@@ -4212,8 +3952,8 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 
 	    $scope.getCommunity = function () {
 	        communitiesService.getById($rootScope.$stateParams.communityId).then(function (resp) {
-	            if ($scope.username === resp.Leader.UserName) {
-	                if (resp.Error == undefined) {
+	            if (resp && $scope.user && resp.Leader && $scope.user.UserName === resp.Leader.UserName) {
+	                if (!resp.Error) {
 	                    $scope.isAdding = false;
 	                    $scope.community = resp;
 
@@ -4236,7 +3976,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            if ($scope.isAdding) {
 	                communitiesService.addCommunity($scope.community).then(function (resp) {
 	                    if (resp.Error == undefined) {
-	                        $location.path("/");
+	                        $location.path("/communities");
 	                    } else {
 	                        errorService.displayError(resp.Error);
 	                    }
@@ -4246,7 +3986,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            } else {
 	                communitiesService.updateCommunity($scope.community).then(function (resp) {
 	                    if (resp.Error == undefined) {
-	                        $location.path("/");
+	                        $location.path("/communities");
 	                    } else {
 	                        errorService.displayError(resp.Error);
 	                    }
@@ -4266,6 +4006,8 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 	            if (response.Message == undefined || response.Message == null) {
 	                if (!isNaN($rootScope.$stateParams.communityId)) {
 	                    $scope.getCommunity();
+	                } else {
+	                    $scope.isAdding = true;
 	                }
 	            } else {
 	                errorService.displayErrorRedirect(response.Message);
@@ -4332,7 +4074,7 @@ ngCommunities.controller('communityModifyController', ["$scope", "$rootScope", "
 
 	        media.IsSelected = isSelectedResult;
 	        if (isSelectedResult) {
-	            $scope.community.EmblemId = media.Id;
+	            $scope.community.Emblem = media;
 	            $scope.selectedEmblemUrl = media.MediaUrl;
 	        }
 	    };
@@ -4419,8 +4161,10 @@ ngCommunities.controller('communityViewController', ["$scope", "$rootScope", "$l
 ]);
 ///#source 1 1 /wwwroot/modules/communities/directives/communityHeader.js
 ngCommunities.directive('communityHeader', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService, communitiesService, errorService) {
         $scope.username = localStorageService.get("username");
+
+        $scope.isUserJoined = false;
 
         $scope.isEditable = function () {
             if ($scope.community && $scope.community.Leader && $scope.community.Leader.UserName === $scope.username) {
@@ -4444,8 +4188,68 @@ ngCommunities.directive('communityHeader', ["$templateCache", function ($templat
         $scope.edit = function () {
             $location.path("/community/edit/" + $scope.community.Id);
         };
+
+        $scope.join = function () {
+            if (!$rootScope.user || !$scope.community) {
+                errorService.displayError({ Message: "Cannot join at the moment." });
+            }
+
+            communitiesService.joinCommunity($rootScope.user, $scope.community.Id).then(function (resp) {
+                $scope.getCommunity();
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.leave = function () {
+            if (!$rootScope.user || !$scope.community) {
+                errorService.displayError({ Message: "Cannot leave at the moment." });
+            }
+
+            communitiesService.leaveCommunity($rootScope.user, $scope.community.Id).then(function (resp) {
+                $scope.getCommunity();
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.getCommunity = function () {
+            communitiesService.getById($scope.community.Id).then(function (resp) {
+                $scope.community = resp;
+                $scope.init();
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+        
+        $scope.init = function () {
+            if (!$rootScope.user) $scope.isUserJoined = false;
+
+            if ($scope.community && $scope.community.Members) {
+                for (var i = 0; i < $scope.community.Members.length; i++) {
+                    if ($rootScope.user && $scope.community.Members[i].UserName === $rootScope.user.UserName) {
+                        $scope.isUserJoined = true;
+                        return;
+                    }
+                }
+            }
+
+            $scope.isUserJoined = false;
+        };
+
+        $scope.init();
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.init();
+            }
+        });
+
+        $scope.$on("userLoggedIn", function () {
+            $scope.init();
+        });
     };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService", "communitiesService", "errorService"];
 
     return {
         restrict: 'EA',
@@ -4697,6 +4501,7 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "d
                     url: baseApi + "community/" + id,
                     method: "GET"
                 }).success(function (response) {
+                    addCommunityViewData(response);
                     deferred.resolve(response);
                 }).error(function (e) {
                     deferred.reject(e);
@@ -4858,6 +4663,38 @@ ngCommunities.factory('communitiesService', ["$http", "$q", "configProvider", "d
                 });
 
                 return deferred.promise;
+            },
+
+            joinCommunity: function (user, communityId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + communityId + "/join",
+                    method: "POST",
+                    data: user
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            leaveCommunity: function (user, communityId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + communityId + "/leave",
+                    method: "POST",
+                    data: user
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
             }
         };
     }
@@ -4911,7 +4748,7 @@ ngError.factory('errorService', ["$location", "$rootScope", "$window", "configPr
         var error = {};
 
         var isAuthorized = function (d) {
-            if (d.error == "invalid_grant" || d.Message == "Authorization has been denied for this request.") {
+            if (d.error === "invalid_grant" || d.Message === "Authorization has been denied for this request.") {
                 return false;
             } else {
                 return true;
@@ -4926,11 +4763,29 @@ ngError.factory('errorService', ["$location", "$rootScope", "$window", "configPr
             });
         };
 
+        var getModelStateErrors = function (d) {
+            if (d.ModelState) {
+                var errorDisplayMessage = "";
+
+                for (var property in d.ModelState) {
+                    if (d.ModelState.hasOwnProperty(property)) {
+                        _.each(d.ModelState[property], function (err) {
+                            errorDisplayMessage += err + " ";
+                        });
+                    }
+                }
+
+                return errorDisplayMessage;
+            } else {
+                return d;
+            }
+        };
+
         return {
             displayError: function (d) {
                 error = d;
                 if (isAuthorized(d)) {
-                    $rootScope.$broadcast("displayError", d);
+                    $rootScope.$broadcast("displayError", getModelStateErrors(d));
                 }
             },
 
@@ -4957,6 +4812,49 @@ ngError.factory('errorService', ["$location", "$rootScope", "$window", "configPr
         };
     }
 ]);
+///#source 1 1 /wwwroot/modules/logger/logger.js
+var ngLogger = angular.module("ngLogger", ["ngConfig"]);
+///#source 1 1 /wwwroot/modules/logger/services/errorLogService.js
+ngLogger.factory("errorLogService", ["$log", "$window", "configProvider", "stacktraceService", function ($log, $window, configProvider, stacktraceService) {
+    function log(exception, cause) {
+        var logApi = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi + "log" :
+            configProvider.getSettings().BlogApi + "log";
+
+        $log.error.apply($log, arguments);
+
+        try {
+            var errorMessage = exception.toString();
+            var stackTrace = stacktraceService.print({ e: exception });
+
+            $.ajax({
+                type: "POST",
+                url: logApi,
+                contentType: "application/json",
+                data: JSON.stringify({
+                    ErrorUrl: $window.location.href,
+                    ErrorMessage: errorMessage,
+                    StackTrace: stackTrace,
+                    Cause: (cause || "")
+                }),
+                success: function (d) {
+                    $log.error.apply(d);
+                }
+            });
+
+        } catch (loggingError) {
+            $log.warn("Error logging failed");
+            $log.log(loggingError);
+        }
+    }
+    return (log);
+}]);
+///#source 1 1 /wwwroot/modules/logger/services/stacktraceService.js
+ngLogger.factory('stacktraceService', [function() {
+    return ({
+        print: printStackTrace
+    });
+}]);
 ///#source 1 1 /wwwroot/modules/header/header.js
 var ngHeader = angular.module("ngHeader", ["ngConfig", "ngLogin"]);
 ///#source 1 1 /wwwroot/modules/header/directives/headerMenu.js
@@ -5054,48 +4952,48 @@ ngHeader.directive('headerMenu', ["$templateCache", function ($templateCache) {
         controller: ctrlFn
     };
 }]);
-///#source 1 1 /wwwroot/modules/logger/logger.js
-var ngLogger = angular.module("ngLogger", ["ngConfig"]);
-///#source 1 1 /wwwroot/modules/logger/services/errorLogService.js
-ngLogger.factory("errorLogService", ["$log", "$window", "configProvider", "stacktraceService", function ($log, $window, configProvider, stacktraceService) {
-    function log(exception, cause) {
-        var logApi = configProvider.getSettings().BlogApi == "" ?
-            window.blogConfiguration.blogApi + "log" :
-            configProvider.getSettings().BlogApi + "log";
+///#source 1 1 /wwwroot/modules/tags/tags.js
+var ngTags = angular.module("ngTags", []);
+///#source 1 1 /wwwroot/modules/tags/directives/tagItem.js
+ngTags.directive('tagItem', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope) {
+        
+    };
+    ctrlFn.$inject = ["$scope"];
 
-        $log.error.apply($log, arguments);
+    return {
+        restrict: 'EA',
+        scope: { tag: '=' },
+        replace: true,
+        template: $templateCache.get("tags/tagItem.html"),
+        controller: ctrlFn
+    };
+}]);
 
-        try {
-            var errorMessage = exception.toString();
-            var stackTrace = stacktraceService.print({ e: exception });
+///#source 1 1 /wwwroot/modules/tags/services/tagsService.js
+ngTags.factory('tagsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
+    var tagsApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "tags" : configProvider.getSettings().BlogApi + "tags";
 
-            $.ajax({
-                type: "POST",
-                url: logApi,
-                contentType: "application/json",
-                data: JSON.stringify({
-                    ErrorUrl: $window.location.href,
-                    ErrorMessage: errorMessage,
-                    StackTrace: stackTrace,
-                    Cause: (cause || "")
-                }),
-                success: function (d) {
-                    $log.error.apply(d);
-                }
+    return {
+        getTagsByName: function (tag) {
+            var deferred = $q.defer();
+
+            $http({
+                url: tagsApi + "/" + tag,
+                method: "GET"
+            }).success(function (response) {
+                var tagItems = [];
+                _.each(response, function (r) {
+                    tagItems.push({ text: r.TagName });
+                });
+                deferred.resolve(tagItems);
+            }).error(function () {
+                deferred.reject("An error occurred!");
             });
 
-        } catch (loggingError) {
-            $log.warn("Error logging failed");
-            $log.log(loggingError);
+            return deferred.promise;
         }
-    }
-    return (log);
-}]);
-///#source 1 1 /wwwroot/modules/logger/services/stacktraceService.js
-ngLogger.factory('stacktraceService', [function() {
-    return ({
-        print: printStackTrace
-    });
+    };
 }]);
 ///#source 1 1 /wwwroot/modules/login/login.js
 var ngLogin = angular.module("ngLogin",
@@ -5619,310 +5517,6 @@ ngLogin.factory('loginService', ["$http", "$q", "$window", "configProvider", fun
         }
     };
 }]);
-///#source 1 1 /wwwroot/modules/main/app.js
-var blog = angular.module("blog",
-    [
-        "ngRoute",
-        "ngAnimate",
-        "ngCookies",
-        "mgcrea.ngStrap",
-        "snap",
-        "ngBlockUi",
-        "ngConfig",
-        "ngLogger",
-        "ngHeader",
-        "ngLogin",
-        "ngPosts",
-        "ngCommunities",
-        "ngComments",
-        "ngError",
-        "ngNavigation",
-        "ngMessaging",
-        "ngUser",
-        "ngTags",
-        "ui.router"
-    ]);
-
-blog.run([
-    '$rootScope', '$state', '$stateParams',
-    function ($rootScope, $state, $stateParams) {
-        $rootScope.$state = $state;
-        $rootScope.$stateParams = $stateParams;
-    }
-]);
-///#source 1 1 /wwwroot/modules/main/config/blogConfig.js
-blog.config(["$routeProvider", "$httpProvider", "$provide", "$stateProvider",
-    "$urlRouterProvider",
-    function ($routeProvider, $httpProvider, $provide, $stateProvider, $urlRouterProvider) {
-        $provide.factory('httpInterceptor', ["$q", "$location", "blockUiService", function ($q, $location, blockUiService) {
-            return {
-                request: function (config) {
-                    blockUiService.blockIt();
-
-                    return config || $q.when(config);
-                },
-
-                requestError: function (rejection) {
-                    blockUiService.blockIt();
-                    return $q.reject(rejection);
-                },
-
-                response: function (response) {
-                    blockUiService.unblockIt();
-
-                    return response || $q.when(response);
-                },
-
-                responseError: function (rejection) {
-                    blockUiService.unblockIt();
-
-                    return $q.reject(rejection);
-                }
-            };
-        }]);
-
-        $httpProvider.interceptors.push('httpInterceptor');
-        $httpProvider.interceptors.push('authenticationInterceptorService');
-
-        $urlRouterProvider.otherwise("/");
-
-        $stateProvider
-            .state('posts', {
-                url: "/",
-                controller: 'postsController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('posts/mainPagePosts.html');
-                }
-            })
-            .state('viewpost', {
-                url: "/post/:postId",
-                controller: 'postsViewController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('posts/postView.html');
-                }
-            })
-                .state('viewpost.gallery', {
-                    url: "/gallery",
-                    controller: 'mediaGalleryController'
-                })
-            .state('friends', {
-                url: "/friends",
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('friends.html');
-                }
-            })
-            .state('communities', {
-                url: "/communities",
-                controller: 'communitiesListController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('communities/communities.html');
-                }
-            })
-            .state('viewcommunity', {
-                url: "/community/:communityId",
-                controller: 'communityViewController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('communities/communityView.html');
-                }
-            })
-            .state('newcommunity', {
-                url: "/community/create/new",
-                controller: 'communityModifyController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('communities/communityEdit.html');
-                }
-            })
-            .state('editcommunity', {
-                url: "/community/edit/:communityId",
-                controller: 'communityModifyController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('communities/communityEdit.html');
-                }
-            })
-            .state('events', {
-                url: "/events",
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('events.html');
-                }
-            })
-            .state('newpost', {
-                url: "/post/create/new",
-                controller: 'postsModifyController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('posts/postUpdate.html');
-                }
-            })
-            .state('editpost', {
-                url: "/post/edit/:postId",
-                controller: 'postsModifyController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('posts/postUpdate.html');
-                }
-            })
-            .state('ownprofile', {
-                url: "/user",
-                controller: 'userProfileController',
-                'abstract': true,
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('user/userView.html');
-                }
-            })
-                .state('ownprofile.details', {
-                    url: '',
-                    controller: 'userProfileController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileDetails.html');
-                    }
-                })
-                .state('ownprofile.posts', {
-                    url: '/posts',
-                    controller: 'userProfilePostsController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfilePosts.html');
-                    }
-                })
-                .state('ownprofile.comments', {
-                    url: '/comments',
-                    controller: 'userProfileCommentsController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileComments.html');
-                    }
-                })
-                .state('ownprofile.favorites', {
-                    url: '/favorites',
-                    controller: 'userProfileFavoritesController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileFavorites.html');
-                    }
-                })
-                .state('ownprofile.media', {
-                    url: '/media',
-                    controller: 'userProfileMediaController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileMedia.html');
-                    }
-                })
-                    .state('ownprofile.media.gallery', {
-                        url: '/gallery/:albumName',
-                        controller: 'mediaGalleryController'
-                    })
-            .state('othersprofile', {
-                url: "/user/:username",
-                controller: 'userProfileController',
-                'abstract': true,
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('user/userView.html');
-                }
-            })
-                .state('othersprofile.details', {
-                    url: '',
-                    controller: 'userProfileController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileDetails.html');
-                    }
-                })
-                .state('othersprofile.posts', {
-                    url: '/posts',
-                    controller: 'userProfilePostsController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfilePosts.html');
-                    }
-                })
-                .state('othersprofile.comments', {
-                    url: '/comments',
-                    controller: 'userProfileCommentsController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileComments.html');
-                    }
-                })
-                .state('othersprofile.favorites', {
-                    url: '/favorites',
-                    controller: 'userProfileFavoritesController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileFavorites.html');
-                    }
-                }).state('othersprofile.media', {
-                    url: '/media',
-                    controller: 'userProfileMediaController',
-                    templateProvider: function ($templateCache) {
-                        return $templateCache.get('user/userProfileMedia.html');
-                    }
-                })
-                    .state('othersprofile.media.gallery', {
-                        url: '/gallery/:albumName',
-                        controller: 'mediaGalleryController'
-                    })
-            .state('error', {
-                url: "/error",
-                controller: 'errorPageController',
-                templateProvider: function ($templateCache) {
-                    return $templateCache.get('errorpage.html');
-                }
-            });
-    }
-]);
-///#source 1 1 /wwwroot/modules/main/controllers/blogMainController.js
-blog.controller('blogMainController', ["$scope", "$location", "$rootScope", "$log", "$timeout", "configProvider",
-    "localStorageService", "postsService", "userService", "authenticationService", "messagingService",
-    function ($scope, $location, $rootScope, $log, $timeout, configProvider, localStorageService, postsService,
-        userService, authenticationService, messagingService) {
-
-        $scope.authData = localStorageService.get('authorizationData');
-
-        $scope.username = null;
-
-        $rootScope.$on("$locationChangeStart", function (event, next, current) {
-            if (current !== configProvider.getSettings().BlogRoot + "/#/") {
-                postsService.getRecentPosts();
-            }
-
-            if ($rootScope.user) {
-                $rootScope.$broadcast("loggedInUserInfo", $rootScope.user);
-            }
-        });
-
-        $scope.init = function() {
-            if ($scope.authData !== null) {
-                $scope.username = localStorageService.get('username');
-
-                authenticationService.getUserInfo().then(function(response) {
-                    if (response.Message == undefined || response.Message == null) {
-                        $scope.getUserInfo($scope.username);
-                    }
-                }, function() {
-                    authenticationService.logout();
-                });
-            } else {
-                authenticationService.logout();
-            }
-        };
-
-        $scope.getUserInfo = function (username) {
-            userService.getUserInfo(username).then(function (user) {
-                if (user.Error === null) {
-                    $rootScope.user = user;
-                    $rootScope.authData = $scope.authData;
-                    $timeout(function () {
-                        $rootScope.$broadcast("loggedInUserInfo", user);
-                        messagingService.userChatOnline(user.Id);
-                        console.log("Connected to chat (userChat_" + user.Id + ")");
-                    }, 1500);
-                }
-            });
-        };
-
-        $scope.snapOptions = {
-            maxPosition: 321,
-            minPosition: -321
-        };
-
-        $rootScope.$on("userLoggedIn", function (ev, data) {
-            $scope.getUserInfo(data.username);
-        });
-
-        $scope.init();
-    }
-]);
 ///#source 1 1 /wwwroot/modules/media/media.js
 var ngMedia = angular.module("ngMedia",
     [
@@ -6708,2065 +6302,6 @@ ngMedia.factory('mediaService', ["$http", "$q", "configProvider",
         };
     }
 ]);
-///#source 1 1 /wwwroot/modules/messaging/messaging.js
-var ngMessaging = angular.module("ngMessaging",
-    [
-        "ngDateHelper",
-        "ngError",
-        "ngBlogSockets",
-        "ngConfig",
-        "luegg.directives"
-    ]);
-///#source 1 1 /wwwroot/modules/messaging/directives/chatWindow.js
-ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($timeout, $templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $interval, dateHelper, messagingService, errorService, configProvider, localStorageService) {
-        $scope.user = null;
-
-        $scope.recipient = null;
-
-        $scope.authData = localStorageService.get("authorizationData");
-
-        $scope.isBusy = false;
-
-        $scope.chatMessages = [];
-
-        $scope.isActive = false;
-
-        $scope.newMessage = "";
-
-        $scope.hasMoreMessages = true;
-
-        $scope.showViewMoreMessagesButton = function () {
-            return $scope.hasMoreMessages;
-        };
-
-        $scope.recipientName = function () {
-            return $scope.recipient ? $scope.recipient.FirstName + ' ' + $scope.recipient.LastName : '';
-        };
-
-        $scope.hideChatWindow = function () {
-            $scope.isActive = false;
-        };
-
-        $scope.chatWindowVisibility = function () {
-            return $scope.isActive;
-        };
-
-        $scope.isLoggedIn = function () {
-            if ($scope.authData && $scope.user) {
-                return true;
-            }
-            return false;
-        };
-
-        $scope.isFromRecipient = function (chatMessage) {
-            if (chatMessage.FromUser.UserName == $scope.user.UserName) {
-                return "";
-            } else {
-                return "recipient-message";
-            }
-        };
-
-        $scope.$on("launchChatWindow", function (ev, userData) {
-            if (!$scope.user || !$rootScope.user || !$scope.authData) return;
-
-            $scope.chatMessages = [];
-
-            $scope.isActive = true;
-
-            $scope.recipient = userData;
-
-            setUserInSession();
-
-            messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
-                if (response) {
-                    _.each(response, function (r) {
-                        $scope.chatMessages.unshift(r);
-                    });
-
-                    if ($scope.chatMessages.length === 25) {
-                        $scope.hasMoreMessages = true;
-                    }
-                } else {
-                    errorService.displayError({ Message: "No messages found! " });
-                }
-            }, function () {
-                errorService.displayError({ Message: "Failed getting messages!" });
-            });
-        });
-
-        $scope.getMoreChatMessages = function () {
-            if ($scope.isBusy) {
-                return;
-            }
-            $scope.isBusy = true;
-
-            messagingService.getMoreChatMessages($scope.user.Id, $scope.recipient.Id, $scope.chatMessages.length).then(function (response) {
-                $scope.isBusy = false;
-
-                if (response) {
-                    $scope.hasMoreMessages = response.length === 10;
-
-                    _.each(response, function (r) {
-                        $scope.chatMessages.unshift(r);
-                    });
-                } else {
-                    errorService.displayError({ Message: "No messages found! " });
-                }
-            }, function () {
-                $scope.isBusy = false;
-                errorService.displayError({ Message: "Failed getting messages!" });
-            });
-        };
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().sendChatMessage) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-                    if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
-                        d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                        $scope.chatMessages.push(d);
-                    }
-                });
-
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-
-        $scope.sendChatMessage = function () {
-            var chatMessage = {
-                FromUser: $scope.user,
-                ToUser: $scope.recipient,
-                Text: $scope.newMessage
-            };
-
-            messagingService.addChatMessage(chatMessage).then(function (response) {
-                if (response) {
-                    response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
-                    $scope.chatMessages.push(response);
-                    $scope.newMessage = "";
-                } else {
-                    errorService.displayError({ Message: "Failed to send message!" });
-                }
-            }, function () {
-                errorService.displayError({ Message: "Failed to send message!" });
-            });
-        };
-
-        $rootScope.$watch('user', function () {
-            setUserInSession();
-        });
-
-        $rootScope.$on("userLoggedIn", function () {
-            $scope.authData = localStorageService.get("authorizationData");
-        });
-
-        $scope.init();
-
-        var setUserInSession = function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
-            }
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
-
-    var linkFn = function (scope, elem) {
-        $timeout(function () {
-            scope.elemHeight = ($(document).height()) + 'px';
-
-            scope.bodyHeight = function () {
-                var headerHeight = $(elem).find('.header').height();
-                return ($(document).height() - (50 * 2) - headerHeight) + 'px';
-            };
-        }, 1000);
-    };
-
-    return {
-        restrict: 'EA',
-        replace: true,
-        template: $templateCache.get("messaging/chatWindow.html"),
-        controller: ctrlFn,
-        link: linkFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/messaging/directives/messagesPanel.js
-ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $interval, messagingService, dateHelper, errorService, configProvider,
-        localStorageService) {
-
-        $scope.user = null;
-
-        $scope.authData = localStorageService.get("authorizationData");
-
-        $scope.messagesList = [];
-
-        $scope.isLoggedIn = function () {
-            if ($scope.authData && $scope.user) {
-                return true;
-            }
-            return false;
-        };
-
-        $scope.launchChatWindow = function (messageItem) {
-            $rootScope.$broadcast("launchChatWindow", messageItem.User);
-        };
-
-        $scope.init = function () {
-            getUserChatMessageList();
-        };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                getUserChatMessageList();
-            }
-        });
-
-        $rootScope.$on("userLoggedIn", function () {
-            $scope.authData = localStorageService.get("authorizationData");
-        });
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().sendChatMessage) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
-                    if (d && d.FromUser) {
-                        var messageItem = null;
-                        var messageItemIndex = -1;
-
-                        for (var i = 0; i < $scope.messagesList.length; i++) {
-                            if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
-                                messageItem = $scope.messagesList[i];
-                                messageItemIndex = i;
-                                break;
-                            }
-                        }
-
-                        if (messageItem && messageItemIndex > -1) {
-                            messageItem.LastChatMessage.Text = d.Text;
-                            messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
-                            $scope.messagesList.splice(messageItemIndex, 1);
-                            $scope.messagesList.unshift(messageItem);
-
-                            $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
-                        }
-                    }
-                });
-
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-
-        var getUserChatMessageList = function () {
-            if ($scope.authData && $rootScope.user) {
-                $scope.user = $rootScope.user;
-
-                messagingService.getUserChatMessageList($scope.user.Id).then(function (response) {
-                    if (response) {
-                        $scope.messagesList = response;
-                    } else {
-                        errorService.displayError({ Message: "No messages found! " });
-                    }
-                }, function () {
-                    errorService.displayError({ Message: "Failed getting messages!" });
-                });
-            }
-        };
-
-        $scope.init();
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
-
-    var linkFn = function (scope, elem) {
-        scope.elemHeight = ($(document).height()) + 'px';
-
-        scope.bodyHeight = function () {
-            var headerHeight = $(elem).find('.header').height();
-            return ($(document).height() - 50 - headerHeight) + 'px';
-        };
-    };
-
-    return {
-        restrict: 'EA',
-        replace: true,
-        template: $templateCache.get("messaging/messagesPanel.html"),
-        controller: ctrlFn,
-        link: linkFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/messaging/services/messagingService.js
-ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper", "blogSocketsService",
-    function ($http, $q, configProvider, dateHelper, blogSocketsService) {
-        var baseUrl = configProvider.getSettings().BlogApi == "" ?
-            window.blogConfiguration.blogApi :
-            configProvider.getSettings().BlogApi;
-
-        return {
-            getUserChatMessageList: function(userId) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseUrl + "user/" + userId + "/chats",
-                    method: "GET"
-                }).success(function (response) {
-                    var userChatMessages = response.ChatMessageListItems;
-
-                    _.each(userChatMessages, function (a) {
-                        a.User.NameDisplay = a.User.FirstName + ' ' + a.User.LastName;
-                        a.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(a.LastChatMessage.CreatedDate);
-                    });
-                    deferred.resolve(userChatMessages);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getChatMessages: function (fromUserId, toUserId) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (a) {
-                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getMoreChatMessages: function (fromUserId, toUserId, skip) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId + "/more/" + skip,
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (a) {
-                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            addChatMessage: function (chatMessage) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseUrl + "chat",
-                    method: "POST",
-                    data: chatMessage
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            userChatOnline: function (id) {
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOnline, { userId: id });
-            },
-
-            userChatOffline: function (id) {
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
-            }
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/navigation/navigation.js
-var ngNavigation = angular.module("ngNavigation", ["ngConfig"]);
-///#source 1 1 /wwwroot/modules/navigation/directives/navigationMenu.js
-ngNavigation.directive('navigationMenu', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
-        $scope.navigationItems = configProvider.getNavigationItems();
-
-        $scope.user = {};
-
-        $scope.authData = localStorageService.get("authorizationData");
-
-        $scope.isLoggedIn = function() {
-            if ($scope.authData) {
-                return true;
-            }
-            return false;
-        };
-
-        $scope.logout = function () {
-            authenticationService.logout();
-            $window.location.href = configProvider.getSettings().BlogRoot + "/account";
-        };
-        
-        $scope.launchLoginForm = function() {
-            $rootScope.$broadcast("launchLoginForm", { canClose: true });
-        };
-        
-        $scope.toggleNavigation = function() {
-            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
-        };
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
-            }
-        });
-
-        $rootScope.$on("userLoggedIn", function () {
-            $scope.authData = localStorageService.get("authorizationData");
-        });
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
-
-    return {
-        restrict: 'EA',
-        scope: { data: '=' },
-        replace: true,
-        template: $templateCache.get("navigation/navigationMenu.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/posts.js
-var ngPosts = angular.module("ngPosts",
-    [
-        "ngSanitize",
-        "ngComments",
-        "ngEllipsis",
-        "ngDateHelper",
-        "ngTags",
-        "ngUser",
-        "ngMedia",
-        "ngError",
-        "ngMedia",
-        "ngConfig",
-        "ngCommunities",
-        "ngBlogSockets",
-        "ngCkeditor",
-        "ngTagsInput",
-        "blogEmpty",
-        "blogFileUpload",
-        "blogVideoPlayer",
-        "blogTicker",
-        "blogScrollTrigger",
-        "LocalStorageModule",
-        "akoenig.deckgrid",
-        "slick"
-    ]);
-///#source 1 1 /wwwroot/modules/posts/controllers/postsController.js
-ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
-    function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, errorService) {
-        $scope.posts = [];
-
-        $scope.isBusy = false;
-
-        $scope.init = function() {
-            $scope.getRecentPosts();
-            $rootScope.$broadcast("updateScrollTriggerWatch", "posts-main");
-        };
-        
-        $scope.getRecentPosts = function () {
-            if ($scope.isBusy) {
-                return;
-            }
-            $scope.isBusy = true;
-
-            postsService.getRecentPosts().then(function (resp) {
-                $scope.posts = resp;
-                $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
-            }, function (e) {
-                errorService.displayError(e);
-            });
-        };
-
-        $scope.getMoreRecentPosts = function () {
-            if ($scope.isBusy) {
-                return;
-            }
-            $scope.isBusy = true;
-            
-            postsService.getMoreRecentPosts($scope.posts.length).then(function (resp) {
-                _.each(resp, function (p) {
-                    $scope.posts.push(p);
-                });
-                $scope.isBusy = false;
-                $scope.$broadcast("resizeIsotopeItems");
-            }, function (e) {
-                errorService.displayError(e);
-            });
-        };
-
-        $scope.$on("updatePostsSize", function (ev, size) {
-            $scope.size = size;
-        });
-
-        $scope.$on("scrollBottom", function () {
-            $scope.getMoreRecentPosts();
-        });
-
-        $scope.init();
-    }
-]);
-///#source 1 1 /wwwroot/modules/posts/controllers/postsModifyController.js
-// ReSharper disable InconsistentNaming
-
-ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
-	"$templateCache", "$modal", "FileUploader", "localStorageService", "postsService", "userService",
-	"albumService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService",
-	function ($scope, $rootScope, $location, $timeout, $window, $templateCache, $modal, FileUploader, localStorageService,
-		postsService, userService, albumService, tagsService, errorService, dateHelper, configProvider,
-		authenticationService) {
-
-		var mediaSelectionDialog = $modal({
-			title: 'Select media to add',
-			scope: $scope,
-			template: "media/mediaSelectionDialog.html",
-			show: false
-		});
-
-		$scope.user = $rootScope.user;
-
-		$scope.isAdding = true;
-
-		$scope.existingContents = [];
-
-		$scope.albums = [];
-
-		$scope.username = localStorageService.get("username");
-
-		$scope.authData = localStorageService.get("authorizationData");
-
-		$scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
-			window.getDimensionMode() : configProvider.windowDimensions.mode;
-
-		$scope.post = {
-			PostTitle: "",
-			PostMessage: "",
-			PostContents: [],
-			Communities: [],
-			Tags: []
-		};
-
-	    $scope.emptyCommunitiesMessage = "No communities selected for this post to show..";
-
-		$scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
-			window.blogConfiguration.blogApi + "media?username=" + $scope.username + "&album=default" :
-			configProvider.getSettings().BlogApi + "media?username=getTagsSource" + $scope.username + "&album=default";
-
-		$scope.onTagAdded = function (t) {
-			var tag = { TagName: t.text };
-			$scope.post.Tags.push(tag);
-		};
-
-		$scope.onTagRemoved = function (t) {
-			var tag = { TagName: t.text };
-			var index = $scope.post.Tags.indexOf(tag);
-			$scope.post.Tags.splice(index);
-		};
-
-		$scope.getTagsSource = function (t) {
-			return tagsService.getTagsByName(t);
-		};
-
-	    $scope.hasCommunities = function() {
-	        return $scope.post.Communities && $scope.post.Communities.length > 0;
-	    };
-
-	    $scope.communityCreatedByLoggedUser = function (community) {
-	        if (community && community.Leader) {
-	            return $scope.username === community.Leader.UserName;
-	        }
-	        return false;
-	    };
-
-	    $scope.removeCommunityFromPost = function(community) {
-	        var index = $scope.post.Communities.indexOf(community);
-	        $scope.post.Communities.splice(index);
-	    };
-
-		$scope.showCommunitySelection = function () {
-			$scope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
-		};
-
-		$scope.$on("doneSelectingCommunities", function (ev, data) {
-		    $scope.post.Communities = [];
-
-            if (data && data.items) {
-                _.each(data.items, function(community) {
-                    $scope.post.Communities.push(community);
-                });
-            } else {
-                errorService.displayError("Something went wrong when you selected communities. :P");
-            }
-		});
-
-		$scope.getPost = function () {
-			postsService.getPost($rootScope.$stateParams.postId).then(function (resp) {
-				if ($scope.username === resp.User.UserName) {
-					if (resp.Error == undefined) {
-						$scope.isAdding = false;
-						$scope.post = resp;
-
-						_.each(resp.Tags, function (t) {
-							$scope.Tags.push({ text: t.TagName });
-						});
-
-						_.each(resp.PostContents, function (t) {
-							addMediaToUploaderQueue(t.Media, t.PostContentTitle, t.PostContentText);
-						});
-					} else {
-						errorService.displayError(resp.Error);
-					}
-				} else {
-					errorService.displayError({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
-				}
-			}, function (e) {
-				errorService.displayError(e);
-			});
-		};
-
-		$scope.savePost = function () {
-			if ($scope.authData && $scope.user) {
-				if (uploader.getNotUploadedItems().length === 0) {
-					$scope.post.User = $scope.user;
-					setPostContentsFromUploader();
-
-					if ($scope.isAdding) {
-						postsService.addPost($scope.post).then(function(resp) {
-							if (resp.Error == undefined) {
-								$location.path("/");
-							} else {
-								errorService.displayError(resp.Error);
-							}
-						}, function(e) {
-							errorService.displayError(e);
-						});
-					} else {
-						postsService.updatePost($scope.post).then(function(resp) {
-							if (resp.Error == undefined) {
-								$location.path("/");
-							} else {
-								errorService.displayError(resp.Error);
-							}
-						}, function(e) {
-							errorService.displayError(e);
-						});
-					}
-				} else {
-					errorService.displayError("There are some contents not yet uploaded.");
-				}
-			} else {
-				$rootScope.$broadcast("launchLoginForm");
-			}
-		};
-
-		$scope.cancelPost = function () {
-			$location.path("/");
-		};
-
-		$scope.init = function () {
-			authenticationService.getUserInfo().then(function (response) {
-				if (response.Message == undefined || response.Message == null) {
-					if (!isNaN($rootScope.$stateParams.postId)) {
-						$scope.getPost();
-					}
-				} else {
-					errorService.displayErrorRedirect(response.Message);
-				}
-			});
-		};
-
-		$rootScope.$watch('user', function () {
-			if ($rootScope.user) {
-				$scope.user = $rootScope.user;
-				$scope.username = $scope.user.UserName;
-				$scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
-			}
-		});
-
-		$scope.$on("userLoggedIn", function () {
-			$scope.username = localStorageService.get("username");
-			$scope.authData = localStorageService.get("authorizationData");
-		});
-
-		$scope.$on("windowSizeChanged", function (e, d) {
-			configProvider.setDimensions(d.width, d.height);
-		});
-
-		// #region media selection dialog
-
-		$scope.launchMediaSelectionDialog = function () {
-			if ($scope.albums.length == 0) {
-				albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
-					_.each(resp, function (a) {
-						_.each(a.Media, function (m) {
-							m.IsSelected = false;
-						});
-					});
-
-					$scope.albums = resp;
-					mediaSelectionDialog.show();
-				}, function (e) {
-					errorService.displayError(e);
-				});
-			} else {
-				mediaSelectionDialog.show();
-			}
-		};
-
-		$scope.getThumbnailUrl = function (media) {
-			return {
-				"background-image": "url(" + media.ThumbnailUrl + ")"
-			};
-		};
-
-		$scope.toggleMediaSelectionToExistingContents = function (media) {
-			media.IsSelected = !media.IsSelected;
-
-			if (media.IsSelected) {
-				media.IsSelected = addMediaToUploaderQueue(media, '', '');
-			} else {
-				removeMediaFromUploaderQueue(media);
-			}
-		};
-
-		$scope.getMediaToggleButtonStyle = function (media) {
-			return media.IsSelected ? 'btn-danger' : 'btn-success';
-		};
-
-		$scope.getMediaToggleButtonIcon = function (media) {
-			return media.IsSelected ? 'fa-times' : 'fa-check';
-		};
-
-		// #endregion
-
-		// #region angular-file-upload
-
-		var addMediaToUploaderQueue = function (media, title, text) {
-			var item = getUploaderItem(media, title, text);
-
-			var isValid = validateVideoUpload(item);
-			if (!isValid) {
-				errorService.displayError("You cannot upload more than one video in a post.");
-				return false;
-			}
-
-			$timeout(function () {
-				uploader.queue.push(item);
-				$scope.$broadcast("resizeIsotopeItems");
-			}, 500);
-
-			return true;
-		};
-
-		var removeMediaFromUploaderQueue = function (media) {
-			var item = _.where(uploader.queue, { media: media, mediaId: media.Id })[0];
-
-			$timeout(function () {
-				var index = uploader.queue.indexOf(item);
-				uploader.queue.splice(index, 1);
-				$scope.$broadcast("resizeIsotopeItems");
-			}, 500);
-		};
-
-		var setPostContentsFromUploader = function () {
-			$scope.post.PostContents = [];
-
-			_.each(uploader.queue, function (item) {
-				var postContent = {
-					PostId: 0,
-					Media: item.media,
-					PostContentTitle: item.postContentTitle,
-					PostContentText: item.postContentText
-				};
-				$scope.post.PostContents.push(postContent);
-			});
-		};
-
-		var getUploaderItem = function (media, title, text) {
-			var item = {
-				file: {
-					name: media.FileName,
-					size: 1e6,
-					type: media.MediaType,
-				},
-				mediaId: media.Id,
-				media: media,
-				progress: 100,
-				isUploaded: true,
-				isSuccess: true,
-				isExisting: true,
-				url: media.ThumbnailUrl,
-				base: media,
-				allowCaptions: true,
-				postContentTitle: title,
-				postContentText: text,
-				remove: function () {
-					var index = uploader.queue.indexOf(item);
-					uploader.queue.splice(index, 1);
-
-					if ($scope.albums.length > 0) {
-						var album = _.where($scope.albums, { AlbumId: item.media.AlbumId })[0];
-						var albumMedia = _.where(album.Media, { Id: item.media.Id })[0];
-						albumMedia.IsSelected = false;
-					}
-				}
-			};
-
-			return item;
-		};
-
-		var uploader = $scope.uploader = new FileUploader({
-			scope: $rootScope,
-			url: $scope.uploadUrl,
-			autoUpload: false,
-			headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
-		});
-
-		uploader.filters.push({
-			name: 'imageFilter',
-			fn: function (item /*{File|HTMLInputElement}*/) {
-				var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-				type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-
-				if (!validateVideoUpload(item)) {
-					errorService.displayError("You cannot upload more than one video in a post.");
-					return false;
-				}
-				
-				return '|jpg|png|jpeg|bmp|gif|mp4|flv|'.indexOf(type) !== -1;
-			}
-		});
-
-		uploader.onSuccessItem = function (fileItem, response) {
-			response.IsSelected = true;
-
-			if ($scope.albums.length > 0) {
-				var album = _.where($scope.albums, { IsUserDefault: true })[0];
-				album.Media.push(response);
-			}
-
-			fileItem.media = response;
-			fileItem.mediaId = response.Id;
-			fileItem.mediaId = response;
-		};
-
-		uploader.onAfterAddingFile = function (fileItem) {
-			fileItem.allowCaptions = true;
-			fileItem.postContentTitle = "";
-			fileItem.postContentText = "";
-		};
-
-		var validateVideoUpload = function(fileItem) {
-			var supportedVideos = [
-				"video/avi",
-				"video/quicktime",
-				"video/mpeg",
-				"video/mp4",
-				"video/x-flv"
-			];
-
-			var isVideo = _.contains(supportedVideos, (fileItem.file ? fileItem.file.type : fileItem.type));
-			if (isVideo) {
-				var videoUploads = _.filter(uploader.queue, function (upload) {
-					return _.contains(supportedVideos, upload.file.type);
-				});
-
-				if (videoUploads.length > 0) {
-					return false;
-				}
-				return true;
-			};
-			return true;
-		};
-
-		// #endregion
-
-		$scope.init();
-	}
-]);
-
-// ReSharper restore InconsistentNaming
-///#source 1 1 /wwwroot/modules/posts/controllers/postsViewController.js
-ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
-    "userService", "mediaService", "configProvider", "errorService", "localStorageService",
-    function ($scope, $rootScope, $location, postsService, userService, mediaService, configProvider,
-        errorService, localStorageService) {
-
-        $scope.postId = parseInt($rootScope.$stateParams.postId);
-
-        $scope.post = null;
-
-        $scope.user = null;
-
-        $scope.hasError = false;
-
-        $scope.viewCount = [];
-
-        $scope.postsList = [];
-
-        $scope.postLikes = [];
-
-        $scope.isBusy = false;
-
-        $scope.isEditable = false;
-
-        $scope.authData = localStorageService.get("authorizationData");
-
-        $scope.username = localStorageService.get("username");
-
-        $scope.toggleIsEditable = function () {
-            if ($scope.user && $scope.post && $scope.post.User.UserName === $scope.username) {
-                $scope.isEditable = true;
-                return;
-            }
-            $scope.isEditable = false;
-        };
-
-        $scope.showEmptyMessage = function () {
-            if ($scope.post && !$scope.hasError) {
-                return false;
-            }
-            return true;
-        };
-
-        $scope.emptyMessageStyle = function () {
-            return $scope.hasError ? "alert-danger" : 
-                ($scope.isBusy ? "alert-info" : "alert-warning");
-        };
-
-        $scope.getEmptyMessage = function () {
-            return $scope.hasError ?
-                "Something went wrong with loading the post! :(" :
-                "Loading post..";
-        };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            if (data) {
-                $scope.username = data.UserName;
-                $scope.toggleIsEditable();
-            }
-        });
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.user = $rootScope.user;
-                $scope.username = $rootScope.user.UserName;
-                $scope.toggleIsEditable();
-            }
-        });
-
-        $scope.editPost = function () {
-            $location.path("/post/edit/" + $scope.post.Id);
-        };
-
-        $scope.getContentType = function (content) {
-            if (content == undefined) return "image";
-
-            var contentType = content.split('/');
-            if (contentType[0] == "video") {
-                return "video";
-            } else {
-                return "image";
-            }
-        };
-
-        $scope.getPostsList = function () {
-            postsService.getPopularPosts().then(function (list) {
-                $scope.postsList = list;
-            }, function (e) {
-                errorService.displayError({ Message: e });
-            });
-        };
-
-        $scope.getViewedPost = function () {
-            if (!isNaN($rootScope.$stateParams.postId)) {
-                postsService.getPost($scope.postId).then(function (post) {
-                    if (post.Error == undefined) {
-                        $scope.post = post;
-                        $scope.isBusy = false;
-                        $scope.toggleIsEditable();
-
-                        // update post likes and view counts directive
-                        $scope.postLikes = $scope.post.PostLikes;
-                        $scope.viewCount = $scope.post.ViewCounts;
-
-                        // subscribe to post socket.io events
-                        postsService.subscribeToPost($scope.post.Id);
-
-                        // update mediaservice viewed gallery
-                        var mediaList = _.pluck(post.PostContents, 'Media');
-                        mediaService.addViewedMediaListFromPost(mediaList, post.Id);
-                        $rootScope.$broadcast("updateMediaGalleryFromPost", {});
-                    } else {
-                        errorService.displayError({ Message: e });
-                        $scope.hasError = true;
-                    }
-                }, function (e) {
-                    errorService.displayError({ Message: e });
-                    $scope.hasError = true;
-                });
-            } else {
-                errorService.displayErrorRedirect({ Message: "You're missing the post to view bruh! Don't be stupid!" });
-            }
-        };
-
-        $scope.hasContents = function () {
-            if ($scope.post && $scope.post.PostContents && $scope.post.PostContents.length > 0) {
-                return true;
-            }
-            return false;
-        };
-
-        $scope.init = function () {
-            if ($scope.isBusy) {
-                return;
-            }
-            $scope.isBusy = true;
-
-            if ($scope.authData) {
-                if ($rootScope.user) {
-                    $scope.user = $rootScope.user;
-                }
-            }
-
-            $scope.getViewedPost();
-        };
-
-        $scope.init();
-    }
-]);
-///#source 1 1 /wwwroot/modules/posts/directives/postHeader.js
-ngPosts.directive('postHeader', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
-        $scope.username = localStorageService.get("username");
-
-        $scope.isEditable = function () {
-            if ($scope.user && $scope.user.UserName === $scope.username) {
-                return true;
-            }
-            return false;
-        };
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            if (data) {
-                $scope.username = data.UserName;
-            }
-        });
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.username = $rootScope.user.UserName;
-            }
-        });
-
-        $scope.editPost = function () {
-            $location.path("/post/edit/" + $scope.post.Id);
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            post: '=',
-            user: '='
-        },
-        replace: true,
-        template: $templateCache.get("posts/postHeader.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postContents.js
-ngPosts.directive('postContents', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope) {
-    };
-    ctrlFn.$inject = ["$scope"];
-
-    return {
-        restrict: 'EA',
-        scope: { contents: '=' },
-        replace: true,
-        template: $templateCache.get("posts/postContents.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postLikes.js
-ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
-    var linkFn = function (scope, elem) {
-        scope.highlight = function() {
-            $(elem).effect("highlight", { color: "#B3C833" }, 1500);
-        };
-    };
-
-    var ctrlFn = function ($scope, $rootScope, $interval, postsService, userService, errorService, localStorageService, configProvider) {
-        $scope.postLikes = $scope.list;
-
-        $scope.user = null;
-
-        $scope.username = localStorageService.get("username");
-
-        $scope.authData = localStorageService.get("authorizationData");
-
-        $scope.tooltip = { "title": "Click to favorite this post." };
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().postLikesUpdate) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
-                    if (d.postId == $scope.postId) {
-                        $scope.postLikes = d.postLikes;
-                        $scope.highlight();
-                        $scope.isUserLiked();
-                    }
-                });
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            $scope.user = data;
-            $scope.isUserLiked();
-        });
-
-        $rootScope.$watch('user', function () {
-            $scope.user = $rootScope.user;
-            $scope.isUserLiked();
-        });
-
-        $scope.$on("viewPostLoadedLikes", function (e, d) {
-            $scope.postId = d.postId;
-            $scope.postLikes = d.postLikes;
-            $scope.isUserLiked();
-        });
-
-        $scope.$watch('list', function() {
-            $scope.postLikes = $scope.list;
-        });
-
-        $scope.likePost = function () {
-            postsService.likePost($scope.postId, $scope.username).then(function () { },
-            function (err) {
-                errorService.displayError(err);
-            });
-        };
-
-        $scope.isUserLiked = function () {
-            var isLiked = false;
-            if ($scope.authData && $scope.user) {
-                _.each($scope.postLikes, function (p) {
-                    if (p.UserId == $scope.user.Id) {
-                        isLiked = true;
-                    }
-                });
-            }
-
-            return isLiked ? "fa-star" : "fa-star-o";
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            list: '=',
-            postId: '='
-        },
-        replace: true,
-        template: $templateCache.get("posts/postLikes.html"),
-        controller: ctrlFn,
-        link: linkFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postViewCount.js
-ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $interval, configProvider) {
-        $scope.viewCount = $scope.list;
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().viewCountUpdate) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
-                    if (d.postId == $scope.postId) {
-                        $scope.viewCount = d.viewCount;
-                    }
-                });
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-        
-        $scope.$watch('list', function () {
-            $scope.viewCount = $scope.list;
-        });
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "configProvider"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            list: '=',
-            postId: '='
-        },
-        replace: true,
-        template: $templateCache.get("posts/postViewCount.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postListItem.js
-ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
-
-        $scope.username = localStorageService.get("username");
-
-        $scope.user = $scope.post && $scope.post.User ? $scope.post.User : null;
-
-        $scope.comments = $scope.post && $scope.post.Comments ? $scope.post.Comments : [];
-
-        $scope.postLikes = $scope.post && $scope.post.PostLikes ? $scope.post.PostLikes : [];
-
-        $scope.hasComments = $scope.post && $scope.post.Comments && $scope.post.Comments.length > 0 ? true : false;
-
-        $scope.hasTags = $scope.post && $scope.post.Tags && $scope.post.Tags.length > 0 ? true : false;
-
-        $scope.isEditable = $scope.user && $scope.user.UserName === $scope.username ? true : false;
-        
-        $scope.getCommentPopover = function(commentId) {
-            var comment = _.where($scope.comments, { CommentId: commentId });
-            var user = comment.User.FirstName + " " + comment.User.LastName;
-            return { "title": user, "content": comment.CommentMessage };
-        };
-
-        $scope.getPostSize = function() {
-            return $scope.width ? $scope.width : '';
-        };
-
-        $scope.toggleIsEditable = function () {
-            if ($scope.user && $scope.user.UserName === $scope.username) {
-                $scope.isEditable = true;
-            }
-            $scope.isEditable = false;
-        };
-
-        var stop;
-        stop = $interval(function () {
-            if (configProvider.getSocketClientFunctions().getPostTopComments && configProvider.getSocketClientFunctions().getPostLikes) {
-                $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
-                    if (d.postId == $scope.post.Id) {
-                        $scope.comments = d.comments;
-                        $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
-                    }
-                });
-
-                $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
-                    if (d.postId == $scope.post.Id) {
-                        $scope.postLikes = d.postLikes;
-                    }
-                });
-
-                $interval.cancel(stop);
-                stop = undefined;
-            }
-        }, 250);
-
-        $scope.$on("loggedInUserInfo", function (ev, data) {
-            if (data) {
-                $scope.username = data.UserName;
-                $scope.toggleIsEditable();
-            }
-        });
-
-        $rootScope.$watch('user', function () {
-            if ($rootScope.user) {
-                $scope.username = $rootScope.user.UserName;
-                $scope.toggleIsEditable();
-            }
-        });
-
-        $scope.editPost = function() {
-            $location.path("/post/edit/" + $scope.post.Id);
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$interval", "localStorageService", "configProvider"];
-
-    return {
-        restrict: 'EA',
-        scope: {
-            post: '=',
-            width: '='
-        },
-        replace: true,
-        template: $templateCache.get("posts/postListItem.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postListItemComment.js
-ngPosts.directive('postListItemComment', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope) {
-        $scope.user = {
-            "name": $scope.comment.User.FirstName + " " + $scope.comment.User.LastName,
-            "url": "#"
-        };
-
-        $scope.popover = {
-            "title": $scope.user.name,
-            "content": $scope.comment.CommentMessage
-        };
-    };
-    ctrlFn.$inject = ["$scope"];
-
-    return {
-        restrict: 'EA',
-        scope: { comment: '=' },
-        replace: true,
-        template: $templateCache.get("posts/postListItemComment.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postRelatedItem.js
-ngPosts.directive('postRelatedItem', ["$templateCache", function ($templateCache) {
-    return {
-        restrict: 'EA',
-        scope: { post: '=' },
-        replace: true,
-        template: $templateCache.get("posts/postRelatedItem.html")
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postRelatedItems.js
-ngPosts.directive('postRelatedItems', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $rootScope, postsService, errorService) {
-        $scope.hasError = false;
-
-        $scope.postsByTag = [];
-
-        $scope.postsByUser = [];
-        
-        $scope.relatedCategories = [
-            { name: 'By user', id: "user" },
-            { name: 'By similar tags', id: "tags" }
-        ];
-
-        $scope.selectedCategory = $scope.relatedCategories[0];
-
-        $scope.emptyPostsMessage = "There are no related posts.";
-
-        $scope.getRelatedPosts = function () {
-            if (!isNaN($scope.parentpostid)) {
-                postsService.getRelatedPosts($scope.parentpostid).then(function (response) {
-                    $scope.hasError = false;
-                    $scope.postsByTag = response.PostsByTags;
-                    $scope.postsByUser = response.PostsByUser;
-                }, function(e) {
-                    errorService.displayError(e);
-                    $scope.hasError = true;
-                });
-            } else {
-                $scope.hasError = true;
-            }
-        };
-
-        $scope.displayEmptyPostsMessage = function() {
-            if ($scope.selectedCategory.id == "user") {
-                if ($scope.postsByUser.length > 0) {
-                    return false;
-                }
-                return true;
-            } else {
-                if ($scope.postsByTag.length > 0) {
-                    return false;
-                }
-                return true;
-            }
-        };
-
-        $scope.emptyPostsStyle = function() {
-            return $scope.hasError ? "alert-danger" : "alert-warning";
-        };
-
-        $scope.getEmptyPostsMessage = function () {
-            return $scope.hasError ?
-                "Something went wrong with loading the related posts! :(" :
-                "There are no related posts yet.";
-        };
-
-        $scope.displayUser = function() {
-            if ($scope.selectedCategory.id == "user") {
-                if ($scope.postsByUser.length > 0) {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        };
-
-        $scope.displayTag = function () {
-            if ($scope.selectedCategory.id == "tags") {
-                if ($scope.postsByTag.length > 0) {
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        };
-
-        $scope.getRelatedPosts();
-    };
-    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "errorService"];
-
-    return {
-        restrict: 'EA',
-        scope: { parentpostid: '=' },
-        replace: true,
-        template: $templateCache.get("posts/postRelatedItems.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/directives/postViewNavigator.js
-ngPosts.directive('postViewNavigator', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope, $location, $rootScope, postsService) {
-        $scope.nextPost = function () {
-            if (!$rootScope.$stateParams.postId) return;
-
-            var nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
-
-            if (nextPost) {
-                $location.path("/post/" + nextPost);
-            } else {
-                postsService.getMoreRecentPosts().then(function () {
-                    nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
-
-                    if (nextPost) {
-                        $location.path("/post/" + nextPost);
-                    } else {
-                        $location.path("/");
-                    }
-                }, function () {
-                    $location.path("/");
-                });
-            }
-        };
-
-        $scope.previousPost = function () {
-            if (!$rootScope.$stateParams.postId) return;
-
-            var previousPost = postsService.getPreviousPostIdFromCache(parseInt($rootScope.$stateParams.postId));
-
-            if (previousPost) {
-                $location.path("/post/" + previousPost);
-            } else {
-                $location.path("/");
-            }
-        };
-
-        $scope.isVisible = function() {
-            if ($rootScope.$stateParams.postId) {
-                return true;
-            };
-            return false;
-        };
-    };
-    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "postsService"];
-
-    return {
-        restrict: 'EA',
-        replace: true,
-        template: $templateCache.get("posts/postViewNavigator.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/posts/services/postsService.js
-ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configProvider", "dateHelper",
-    function ($http, $q, blogSocketsService, configProvider, dateHelper) {
-        var baseApi = configProvider.getSettings().BlogApi === "" ?
-            window.blogConfiguration.blogApi : configProvider.getSettings().BlogApi;
-        var postsApi = baseApi + "Posts/";
-
-        var addPostViewData = function (post) {
-            post.DateDisplay = dateHelper.getDateDisplay(post.CreatedDate);
-            post.Url = "/#/post/" + post.Id;
-
-            return post;
-        };
-
-        var cachedPostsList = [];
-
-        var getCachedPostId = function (currentPostId, isNext) {
-            if (cachedPostsList && cachedPostsList.length > 0) {
-                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
-                var isCurrentPostInCache = _.contains(cachedPostIds, currentPostId);
-
-                if (!isCurrentPostInCache) return null;
-                
-                var index = _.indexOf(cachedPostIds, currentPostId);
-                if (index < 0) return cachedPostIds[0];
-
-                if (index === 0 && !isNext) {
-                    return null;
-                } else {
-                    index = isNext ? index + 1 : index - 1;
-
-                    if (cachedPostIds.length < index + 1) {
-                        return null;
-                    }
-
-                    return cachedPostIds[index];
-                }
-            } else {
-                return null;
-            }
-        };
-
-        return {
-            getPost: function (id) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi + id,
-                    method: "GET"
-                }).success(function (response) {
-                    var post = addPostViewData(response);
-                    deferred.resolve(post);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getRelatedPosts: function (id) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi + id + "/related",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response.PostsByUser, function (p) {
-                        addPostViewData(p);
-                    });
-                    _.each(response.PostsByTags, function (p) {
-                        addPostViewData(p);
-                    });
-
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getPopularPosts: function () {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi + "popular",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getRecentPosts: function () {
-                var self = this;
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi + "recent",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                        self.addToCachedPostsList([p]);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getByCommunity: function (id) {
-                var self = this;
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseApi + "community/" + id + "/posts",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                        self.addToCachedPostsList([p]);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getMoreByCommunity: function (id, skip) {
-                var self = this;
-                var deferred = $q.defer();
-
-                $http({
-                    url: baseApi + "community/" + id + "/posts/more/" + skip,
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                        self.addToCachedPostsList([p]);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getMoreRecentPosts: function (currentPostsCount) {
-                var self = this;
-                var deferred = $q.defer();
-
-                if (!currentPostsCount || currentPostsCount === 0) currentPostsCount = cachedPostsList.length;
-
-                $http({
-                    url: postsApi + "recent/more/" + currentPostsCount,
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                        self.addToCachedPostsList([p]);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getPostsByUser: function (userId) {
-                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
-                    window.blogConfiguration.blogApi + "user/" :
-                    configProvider.getSettings().BlogApi + "user/";
-
-                var deferred = $q.defer();
-
-                $http({
-                    url: userPostsUrl + userId + "/posts",
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            getMorePostsByUser: function (userId, skip) {
-                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
-                    window.blogConfiguration.blogApi + "user/" :
-                    configProvider.getSettings().BlogApi + "user/";
-
-                var deferred = $q.defer();
-
-                $http({
-                    url: userPostsUrl + userId + "/posts/more/" + skip,
-                    method: "GET"
-                }).success(function (response) {
-                    _.each(response, function (p) {
-                        addPostViewData(p);
-                    });
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            subscribeToPost: function (id) {
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().unsubscribeViewPost, { postId: id });
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
-            },
-
-            addPost: function (post) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi,
-                    method: "POST",
-                    data: post
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            updatePost: function (post) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi,
-                    method: "PUT",
-                    data: post
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            likePost: function (postId, username) {
-                var deferred = $q.defer();
-
-                $http({
-                    url: postsApi + "likes?username=" + username + "&postId=" + postId,
-                    method: "POST"
-                }).success(function (response) {
-                    deferred.resolve(response);
-                }).error(function (e) {
-                    deferred.reject(e);
-                });
-
-                return deferred.promise;
-            },
-
-            addToCachedPostsList: function (postsList) {
-                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
-
-                _.each(postsList, function (post) {
-                    if (!_.contains(cachedPostIds, post.Id)) {
-                        cachedPostsList.push(post);
-                        return;
-                    }
-                });
-            },
-
-            getNextPostIdFromCache: function (currentPostId) {
-                return getCachedPostId(currentPostId, true);
-            },
-
-            getPreviousPostIdFromCache: function (currentPostId) {
-                return getCachedPostId(currentPostId, false);
-            },
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/sockets/socket.js
-var ngBlogSockets = angular.module("ngBlogSockets",
-    [
-        "ngConfig",
-        "ngAnimate"
-    ]);
-///#source 1 1 /wwwroot/modules/sockets/directives/socketDebugger.js
-ngBlogSockets.directive("socketDebugger", ["$templateCache", "$interval",
-    function ($templateCache, $interval) {
-        var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
-            $scope.messages = [];
-
-            $scope.show = false;
-
-            $scope.channelSubscription = null;
-
-            $scope.echoMessage = null;
-
-            $scope.showEmptyMessage = function() {
-                if ($scope.messages.length > 0) {
-                    return false;
-                }
-                return true;
-            };
-
-            $scope.doEcho = function () {
-                blogSocketsService.emit("echo", { message: $scope.echoMessage });
-            };
-
-            $scope.subscribeToChannel = function () {
-                var id = parseInt($scope.channelSubscription);
-                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
-            };
-
-            $rootScope.$on("toggleSocketDebugger", function () {
-                $scope.show = !$scope.show;
-            });
-
-            var stopPublishMessage;
-            stopPublishMessage = $interval(function () {
-                if (configProvider.getSocketClientFunctions().publishMessage) {
-                    $rootScope.$on(configProvider.getSocketClientFunctions().publishMessage, function (ev, data) {
-                        $scope.addToMessages(configProvider.getSocketClientFunctions().publishMessage, data);
-                    });
-
-                    $interval.cancel(stopPublishMessage);
-                    stopPublishMessage = undefined;
-                }
-            }, 250);
-
-            var stopCommentLikesUpdate;
-            stopCommentLikesUpdate = $interval(function () {
-                if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
-                    $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (ev, data) {
-                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
-                    });
-                    $interval.cancel(stopCommentLikesUpdate);
-                    stopCommentLikesUpdate = undefined;
-                }
-            }, 250);
-
-            var stopPostTopComments;
-            stopPostTopComments = $interval(function () {
-                if (configProvider.getSocketClientFunctions().postTopComments) {
-                    $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
-                        $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
-                    });
-                    $interval.cancel(stopPostTopComments);
-                    stopPostTopComments = undefined;
-                }
-            }, 250);
-
-            var stopCommentAdded;
-            stopCommentAdded = $interval(function () {
-                if (configProvider.getSocketClientFunctions().commentAdded) {
-                    $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
-                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
-                    });
-                    $interval.cancel(stopCommentAdded);
-                    stopCommentAdded = undefined;
-                }
-            }, 250);
-
-            var stopPostLikesUpdate;
-            stopPostLikesUpdate = $interval(function () {
-                if (configProvider.getSocketClientFunctions().postLikesUpdate) {
-                    $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (ev, data) {
-                        $scope.addToMessages(configProvider.getSocketClientFunctions().postLikesUpdate, data);
-                    });
-                    $interval.cancel(stopPostLikesUpdate);
-                    stopPostLikesUpdate = undefined;
-                }
-            }, 250);
-
-            $scope.addToMessages = function(fn, data) {
-                var message = {
-                    fn: fn,
-                    data: JSON.stringify(data)
-                };
-                $scope.messages.push(message);
-            };
-        };
-        ctrlFn.$inject = ["$scope", "$rootScope", "blogSocketsService", "configProvider"];
-
-        return {
-            controller: ctrlFn,
-            restrict: 'EA',
-            replace: true,
-            template: $templateCache.get("sockets/socketDebugger.html")
-        };
-    }
-]);
-///#source 1 1 /wwwroot/modules/sockets/services/socketsService.js
-// ReSharper disable UseOfImplicitGlobalInFunctionScope
-ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interval", "configProvider",
-    function ($rootScope, $timeout, $interval, configProvider) {
-        var address = configProvider.getSettings().BlogSockets === "" ?
-            window.blogConfiguration.blogSockets :
-            configProvider.getSettings().BlogSockets;
-
-        var details = {
-            resource: address + "socket.io"
-        };
-
-        var socket = {};
-        if (typeof io !== "undefined") {
-            socket = io.connect(address, details);
-        }
-
-        var broadcastMessage = function(topic, data) {
-            var stop;
-            stop = $interval(function () {
-                if ($rootScope.$$listeners[topic] && $rootScope.$$listeners[topic].length > 0) {
-                    $rootScope.$broadcast(topic, data);
-                    $interval.cancel(stop);
-                    stop = undefined;
-                }
-            }, 250);
-        };
-
-        var isBlogSocketsAvailable = window.blogConfiguration.blogSocketsAvailable;
-
-        if (isBlogSocketsAvailable || isBlogSocketsAvailable === 'true') {
-            var socketReady;
-
-            socketReady = $interval(function() {
-                if (socket && socket.on) {
-                    $interval.cancel(socketReady);
-                    socketReady = undefined;
-
-                    socket.on('connect', function () {
-                        $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
-                    });
-
-                    socket.on('echo', function (data) {
-                        console.log(data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
-                        $timeout(function () {
-                            $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
-                        }, 250);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().getPostLikes;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().viewCountUpdate, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().viewCountUpdate;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().getPostTopComments;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().postLikesUpdate;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().commentLikesUpdate;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().commentAdded;
-                        broadcastMessage(topic, data);
-                    });
-
-                    socket.on(configProvider.getSocketClientFunctions().sendChatMessage, function (data) {
-                        var topic = configProvider.getSocketClientFunctions().sendChatMessage;
-                        broadcastMessage(topic, data);
-                    });
-                }
-            }, 250);
-        }
-
-        return {
-            emit: function (eventName, data, callback) {
-                if (socket.connected) {
-                    if (typeof io !== "undefined") {
-                        socket.emit(eventName, data, function () {
-                            var args = arguments;
-                            $rootScope.$apply(function () {
-                                if (callback) {
-                                    callback.apply(socket, args);
-                                }
-                            });
-                            return true;
-                        });
-                    }
-                }
-                return false;
-            }
-        };
-    }]);
-
-// ReSharper restore UseOfImplicitGlobalInFunctionScope
-///#source 1 1 /wwwroot/modules/tags/tags.js
-var ngTags = angular.module("ngTags", []);
-///#source 1 1 /wwwroot/modules/tags/directives/tagItem.js
-ngTags.directive('tagItem', ["$templateCache", function ($templateCache) {
-    var ctrlFn = function ($scope) {
-        
-    };
-    ctrlFn.$inject = ["$scope"];
-
-    return {
-        restrict: 'EA',
-        scope: { tag: '=' },
-        replace: true,
-        template: $templateCache.get("tags/tagItem.html"),
-        controller: ctrlFn
-    };
-}]);
-
-///#source 1 1 /wwwroot/modules/tags/services/tagsService.js
-ngTags.factory('tagsService', ["$http", "$q", "configProvider", function ($http, $q, configProvider) {
-    var tagsApi = configProvider.getSettings().BlogApi == "" ? window.blogConfiguration.blogApi + "tags" : configProvider.getSettings().BlogApi + "tags";
-
-    return {
-        getTagsByName: function (tag) {
-            var deferred = $q.defer();
-
-            $http({
-                url: tagsApi + "/" + tag,
-                method: "GET"
-            }).success(function (response) {
-                var tagItems = [];
-                _.each(response, function (r) {
-                    tagItems.push({ text: r.TagName });
-                });
-                deferred.resolve(tagItems);
-            }).error(function () {
-                deferred.reject("An error occurred!");
-            });
-
-            return deferred.promise;
-        }
-    };
-}]);
 ///#source 1 1 /wwwroot/modules/user/user.js
 var ngUser = angular.module("ngUser",
     [
@@ -8779,7 +6314,6 @@ var ngUser = angular.module("ngUser",
         "ngLogin",
         "ngConfig",
         "ngMessaging",
-        "blogIsotope",
         "blogScrollTrigger"
     ]);
 ///#source 1 1 /wwwroot/modules/user/controllers/userProfileCommentsController.js
@@ -9994,3 +7528,2470 @@ ngUser.factory('userService', ["$http", "$q", "configProvider", "dateHelper",
         };
     }
 ]);
+///#source 1 1 /wwwroot/modules/sockets/socket.js
+var ngBlogSockets = angular.module("ngBlogSockets",
+    [
+        "ngConfig",
+        "ngAnimate"
+    ]);
+///#source 1 1 /wwwroot/modules/sockets/directives/socketDebugger.js
+ngBlogSockets.directive("socketDebugger", ["$templateCache", "$interval",
+    function ($templateCache, $interval) {
+        var ctrlFn = function ($scope, $rootScope, blogSocketsService, configProvider) {
+            $scope.messages = [];
+
+            $scope.show = false;
+
+            $scope.channelSubscription = null;
+
+            $scope.echoMessage = null;
+
+            $scope.showEmptyMessage = function() {
+                if ($scope.messages.length > 0) {
+                    return false;
+                }
+                return true;
+            };
+
+            $scope.doEcho = function () {
+                blogSocketsService.emit("echo", { message: $scope.echoMessage });
+            };
+
+            $scope.subscribeToChannel = function () {
+                var id = parseInt($scope.channelSubscription);
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
+            };
+
+            $rootScope.$on("toggleSocketDebugger", function () {
+                $scope.show = !$scope.show;
+            });
+
+            var stopPublishMessage;
+            stopPublishMessage = $interval(function () {
+                if (configProvider.getSocketClientFunctions().publishMessage) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().publishMessage, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().publishMessage, data);
+                    });
+
+                    $interval.cancel(stopPublishMessage);
+                    stopPublishMessage = undefined;
+                }
+            }, 250);
+
+            var stopCommentLikesUpdate;
+            stopCommentLikesUpdate = $interval(function () {
+                if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentLikesUpdate, data);
+                    });
+                    $interval.cancel(stopCommentLikesUpdate);
+                    stopCommentLikesUpdate = undefined;
+                }
+            }, 250);
+
+            var stopPostTopComments;
+            stopPostTopComments = $interval(function () {
+                if (configProvider.getSocketClientFunctions().postTopComments) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().postTopComments, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().postTopComments, data);
+                    });
+                    $interval.cancel(stopPostTopComments);
+                    stopPostTopComments = undefined;
+                }
+            }, 250);
+
+            var stopCommentAdded;
+            stopCommentAdded = $interval(function () {
+                if (configProvider.getSocketClientFunctions().commentAdded) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().commentAdded, data);
+                    });
+                    $interval.cancel(stopCommentAdded);
+                    stopCommentAdded = undefined;
+                }
+            }, 250);
+
+            var stopPostLikesUpdate;
+            stopPostLikesUpdate = $interval(function () {
+                if (configProvider.getSocketClientFunctions().postLikesUpdate) {
+                    $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (ev, data) {
+                        $scope.addToMessages(configProvider.getSocketClientFunctions().postLikesUpdate, data);
+                    });
+                    $interval.cancel(stopPostLikesUpdate);
+                    stopPostLikesUpdate = undefined;
+                }
+            }, 250);
+
+            $scope.addToMessages = function(fn, data) {
+                var message = {
+                    fn: fn,
+                    data: JSON.stringify(data)
+                };
+                $scope.messages.push(message);
+            };
+        };
+        ctrlFn.$inject = ["$scope", "$rootScope", "blogSocketsService", "configProvider"];
+
+        return {
+            controller: ctrlFn,
+            restrict: 'EA',
+            replace: true,
+            template: $templateCache.get("sockets/socketDebugger.html")
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/sockets/services/socketsService.js
+// ReSharper disable UseOfImplicitGlobalInFunctionScope
+ngBlogSockets.factory('blogSocketsService', ["$rootScope", "$timeout", "$interval", "configProvider",
+    function ($rootScope, $timeout, $interval, configProvider) {
+        var address = configProvider.getSettings().BlogSockets === "" ?
+            window.blogConfiguration.blogSockets :
+            configProvider.getSettings().BlogSockets;
+
+        var details = {
+            resource: address + "socket.io"
+        };
+
+        var socket = {};
+        if (typeof io !== "undefined") {
+            socket = io.connect(address, details);
+        }
+
+        var broadcastMessage = function(topic, data) {
+            var stop;
+            stop = $interval(function () {
+                if ($rootScope.$$listeners[topic] && $rootScope.$$listeners[topic].length > 0) {
+                    $rootScope.$broadcast(topic, data);
+                    $interval.cancel(stop);
+                    stop = undefined;
+                }
+            }, 250);
+        };
+
+        var isBlogSocketsAvailable = window.blogConfiguration.blogSocketsAvailable;
+
+        if (isBlogSocketsAvailable || isBlogSocketsAvailable === 'true') {
+            var socketReady;
+
+            socketReady = $interval(function() {
+                if (socket && socket.on) {
+                    $interval.cancel(socketReady);
+                    socketReady = undefined;
+
+                    socket.on('connect', function () {
+                        $rootScope.$broadcast(configProvider.getSocketClientFunctions().wsConnect);
+                    });
+
+                    socket.on('echo', function (data) {
+                        console.log(data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().publishMessage, function (data) {
+                        $timeout(function () {
+                            $rootScope.$broadcast(configProvider.getSocketClientFunctions().publishMessage, data);
+                        }, 250);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().getPostLikes, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().getPostLikes;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().viewCountUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().viewCountUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().getPostTopComments, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().getPostTopComments;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().postLikesUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().postLikesUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().commentLikesUpdate;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().commentAdded, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().commentAdded;
+                        broadcastMessage(topic, data);
+                    });
+
+                    socket.on(configProvider.getSocketClientFunctions().sendChatMessage, function (data) {
+                        var topic = configProvider.getSocketClientFunctions().sendChatMessage;
+                        broadcastMessage(topic, data);
+                    });
+                }
+            }, 250);
+        }
+
+        return {
+            emit: function (eventName, data, callback) {
+                if (socket.connected) {
+                    if (typeof io !== "undefined") {
+                        socket.emit(eventName, data, function () {
+                            var args = arguments;
+                            $rootScope.$apply(function () {
+                                if (callback) {
+                                    callback.apply(socket, args);
+                                }
+                            });
+                            return true;
+                        });
+                    }
+                }
+                return false;
+            }
+        };
+    }]);
+
+// ReSharper restore UseOfImplicitGlobalInFunctionScope
+///#source 1 1 /wwwroot/modules/navigation/navigation.js
+var ngNavigation = angular.module("ngNavigation", ["ngConfig"]);
+///#source 1 1 /wwwroot/modules/navigation/directives/navigationMenu.js
+ngNavigation.directive('navigationMenu', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $window, userService, configProvider, localStorageService, authenticationService) {
+        $scope.navigationItems = configProvider.getNavigationItems();
+
+        $scope.user = {};
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.isLoggedIn = function() {
+            if ($scope.authData) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.logout = function () {
+            authenticationService.logout();
+            $window.location.href = configProvider.getSettings().BlogRoot + "/account";
+        };
+        
+        $scope.launchLoginForm = function() {
+            $rootScope.$broadcast("launchLoginForm", { canClose: true });
+        };
+        
+        $scope.toggleNavigation = function() {
+            $rootScope.$broadcast("toggleNavigation", { direction: 'left' });
+        };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
+        });
+
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$window", "userService", "configProvider", "localStorageService", "authenticationService"];
+
+    return {
+        restrict: 'EA',
+        scope: { data: '=' },
+        replace: true,
+        template: $templateCache.get("navigation/navigationMenu.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/messaging/messaging.js
+var ngMessaging = angular.module("ngMessaging",
+    [
+        "ngDateHelper",
+        "ngError",
+        "ngBlogSockets",
+        "ngConfig",
+        "luegg.directives"
+    ]);
+///#source 1 1 /wwwroot/modules/messaging/directives/chatWindow.js
+ngMessaging.directive('chatWindow', ["$timeout", "$templateCache", function ($timeout, $templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $interval, dateHelper, messagingService, errorService, configProvider, localStorageService) {
+        $scope.user = null;
+
+        $scope.recipient = null;
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.isBusy = false;
+
+        $scope.chatMessages = [];
+
+        $scope.isActive = false;
+
+        $scope.newMessage = "";
+
+        $scope.hasMoreMessages = true;
+
+        $scope.showViewMoreMessagesButton = function () {
+            return $scope.hasMoreMessages;
+        };
+
+        $scope.recipientName = function () {
+            return $scope.recipient ? $scope.recipient.FirstName + ' ' + $scope.recipient.LastName : '';
+        };
+
+        $scope.hideChatWindow = function () {
+            $scope.isActive = false;
+        };
+
+        $scope.chatWindowVisibility = function () {
+            return $scope.isActive;
+        };
+
+        $scope.isLoggedIn = function () {
+            if ($scope.authData && $scope.user) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.isFromRecipient = function (chatMessage) {
+            if (chatMessage.FromUser.UserName == $scope.user.UserName) {
+                return "";
+            } else {
+                return "recipient-message";
+            }
+        };
+
+        $scope.$on("launchChatWindow", function (ev, userData) {
+            if (!$scope.user || !$rootScope.user || !$scope.authData) return;
+
+            $scope.chatMessages = [];
+
+            $scope.isActive = true;
+
+            $scope.recipient = userData;
+
+            setUserInSession();
+
+            messagingService.getChatMessages($scope.user.Id, userData.Id).then(function (response) {
+                if (response) {
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+
+                    if ($scope.chatMessages.length === 25) {
+                        $scope.hasMoreMessages = true;
+                    }
+                } else {
+                    errorService.displayError({ Message: "No messages found! " });
+                }
+            }, function () {
+                errorService.displayError({ Message: "Failed getting messages!" });
+            });
+        });
+
+        $scope.getMoreChatMessages = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            messagingService.getMoreChatMessages($scope.user.Id, $scope.recipient.Id, $scope.chatMessages.length).then(function (response) {
+                $scope.isBusy = false;
+
+                if (response) {
+                    $scope.hasMoreMessages = response.length === 10;
+
+                    _.each(response, function (r) {
+                        $scope.chatMessages.unshift(r);
+                    });
+                } else {
+                    errorService.displayError({ Message: "No messages found! " });
+                }
+            }, function () {
+                $scope.isBusy = false;
+                errorService.displayError({ Message: "Failed getting messages!" });
+            });
+        };
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser && $scope.recipient && d.FromUser.Id === $scope.recipient.Id) {
+                        d.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                        $scope.chatMessages.push(d);
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+
+        $scope.sendChatMessage = function () {
+            var chatMessage = {
+                FromUser: $scope.user,
+                ToUser: $scope.recipient,
+                Text: $scope.newMessage
+            };
+
+            messagingService.addChatMessage(chatMessage).then(function (response) {
+                if (response) {
+                    response.CreatedDateDisplay = dateHelper.getDateDisplay(response.CreatedDate);
+                    $scope.chatMessages.push(response);
+                    $scope.newMessage = "";
+                } else {
+                    errorService.displayError({ Message: "Failed to send message!" });
+                }
+            }, function () {
+                errorService.displayError({ Message: "Failed to send message!" });
+            });
+        };
+
+        $rootScope.$watch('user', function () {
+            setUserInSession();
+        });
+
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+
+        $scope.init();
+
+        var setUserInSession = function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.user.FullName = $scope.user.FirstName + " " + $scope.user.LastName;
+            }
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "dateHelper", "messagingService", "errorService", "configProvider", "localStorageService"];
+
+    var linkFn = function (scope, elem) {
+        $timeout(function () {
+            scope.elemHeight = ($(document).height()) + 'px';
+
+            scope.bodyHeight = function () {
+                var headerHeight = $(elem).find('.header').height();
+                return ($(document).height() - (50 * 2) - headerHeight) + 'px';
+            };
+        }, 1000);
+    };
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: $templateCache.get("messaging/chatWindow.html"),
+        controller: ctrlFn,
+        link: linkFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/messaging/directives/messagesPanel.js
+ngMessaging.directive('messagesPanel', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $interval, messagingService, dateHelper, errorService, configProvider,
+        localStorageService) {
+
+        $scope.user = null;
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.messagesList = [];
+
+        $scope.isLoggedIn = function () {
+            if ($scope.authData && $scope.user) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.launchChatWindow = function (messageItem) {
+            $rootScope.$broadcast("launchChatWindow", messageItem.User);
+        };
+
+        $scope.init = function () {
+            getUserChatMessageList();
+        };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                getUserChatMessageList();
+            }
+        });
+
+        $rootScope.$on("userLoggedIn", function () {
+            $scope.authData = localStorageService.get("authorizationData");
+        });
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().sendChatMessage) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().sendChatMessage, function (e, d) {
+                    if (d && d.FromUser) {
+                        var messageItem = null;
+                        var messageItemIndex = -1;
+
+                        for (var i = 0; i < $scope.messagesList.length; i++) {
+                            if (d.FromUser.Id === $scope.messagesList[i].User.Id) {
+                                messageItem = $scope.messagesList[i];
+                                messageItemIndex = i;
+                                break;
+                            }
+                        }
+
+                        if (messageItem && messageItemIndex > -1) {
+                            messageItem.LastChatMessage.Text = d.Text;
+                            messageItem.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(d.CreatedDate);
+                            $scope.messagesList.splice(messageItemIndex, 1);
+                            $scope.messagesList.unshift(messageItem);
+
+                            $(".message-item[data-user-id='" + d.FromUser.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        }
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+
+        var getUserChatMessageList = function () {
+            if ($scope.authData && $rootScope.user) {
+                $scope.user = $rootScope.user;
+
+                messagingService.getUserChatMessageList($scope.user.Id).then(function (response) {
+                    if (response) {
+                        $scope.messagesList = response;
+                    } else {
+                        errorService.displayError({ Message: "No messages found! " });
+                    }
+                }, function () {
+                    errorService.displayError({ Message: "Failed getting messages!" });
+                });
+            }
+        };
+
+        $scope.init();
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "messagingService", "dateHelper", "errorService", "configProvider", "localStorageService"];
+
+    var linkFn = function (scope, elem) {
+        scope.elemHeight = ($(document).height()) + 'px';
+
+        scope.bodyHeight = function () {
+            var headerHeight = $(elem).find('.header').height();
+            return ($(document).height() - 50 - headerHeight) + 'px';
+        };
+    };
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: $templateCache.get("messaging/messagesPanel.html"),
+        controller: ctrlFn,
+        link: linkFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/messaging/services/messagingService.js
+ngMessaging.factory('messagingService', ["$http", "$q", "configProvider", "dateHelper", "blogSocketsService",
+    function ($http, $q, configProvider, dateHelper, blogSocketsService) {
+        var baseUrl = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getUserChatMessageList: function(userId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "user/" + userId + "/chats",
+                    method: "GET"
+                }).success(function (response) {
+                    var userChatMessages = response.ChatMessageListItems;
+
+                    _.each(userChatMessages, function (a) {
+                        a.User.NameDisplay = a.User.FirstName + ' ' + a.User.LastName;
+                        a.LastChatMessage.CreatedDateDisplay = dateHelper.getDateDisplay(a.LastChatMessage.CreatedDate);
+                    });
+                    deferred.resolve(userChatMessages);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getChatMessages: function (fromUserId, toUserId) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreChatMessages: function (fromUserId, toUserId, skip) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat/" + fromUserId + "/" + toUserId + "/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (a) {
+                        a.CreatedDateDisplay = dateHelper.getDateDisplay(a.CreatedDate);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addChatMessage: function (chatMessage) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseUrl + "chat",
+                    method: "POST",
+                    data: chatMessage
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            userChatOnline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOnline, { userId: id });
+            },
+
+            userChatOffline: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().userChatOffline, { userId: id });
+            }
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/posts/posts.js
+var ngPosts = angular.module("ngPosts",
+    [
+        "ngSanitize",
+        "ngComments",
+        "ngEllipsis",
+        "ngDateHelper",
+        "ngTags",
+        "ngUser",
+        "ngMedia",
+        "ngError",
+        "ngMedia",
+        "ngConfig",
+        "ngCommunities",
+        "ngBlogSockets",
+        "ngCkeditor",
+        "ngTagsInput",
+        "blogEmpty",
+        "blogFileUpload",
+        "blogVideoPlayer",
+        "blogTicker",
+        "blogScrollTrigger",
+        "LocalStorageModule",
+        "akoenig.deckgrid",
+        "slick"
+    ]);
+///#source 1 1 /wwwroot/modules/posts/controllers/postsController.js
+ngPosts.controller('postsController', ["$scope", "$rootScope", "$location", "$timeout", "$interval", "localStorageService", "postsService", "errorService",
+    function ($scope, $rootScope, $location, $timeout, $interval, localStorageService, postsService, errorService) {
+        $scope.posts = [];
+
+        $scope.isBusy = false;
+
+        $scope.init = function() {
+            $scope.getRecentPosts();
+            $rootScope.$broadcast("updateScrollTriggerWatch", "posts-main");
+        };
+        
+        $scope.getRecentPosts = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            postsService.getRecentPosts().then(function (resp) {
+                $scope.posts = resp;
+                $scope.isBusy = false;
+                $scope.$broadcast("resizeIsotopeItems");
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.getMoreRecentPosts = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+            
+            postsService.getMoreRecentPosts($scope.posts.length).then(function (resp) {
+                _.each(resp, function (p) {
+                    $scope.posts.push(p);
+                });
+                $scope.isBusy = false;
+                $scope.$broadcast("resizeIsotopeItems");
+            }, function (e) {
+                errorService.displayError(e);
+            });
+        };
+
+        $scope.$on("updatePostsSize", function (ev, size) {
+            $scope.size = size;
+        });
+
+        $scope.$on("scrollBottom", function () {
+            $scope.getMoreRecentPosts();
+        });
+
+        $scope.init();
+    }
+]);
+///#source 1 1 /wwwroot/modules/posts/controllers/postsModifyController.js
+// ReSharper disable InconsistentNaming
+
+ngPosts.controller('postsModifyController', ["$scope", "$rootScope", "$location", "$timeout", "$window",
+	"$templateCache", "$modal", "FileUploader", "localStorageService", "postsService", "userService",
+	"albumService", "tagsService", "errorService", "dateHelper", "configProvider", "authenticationService",
+	function ($scope, $rootScope, $location, $timeout, $window, $templateCache, $modal, FileUploader, localStorageService,
+		postsService, userService, albumService, tagsService, errorService, dateHelper, configProvider,
+		authenticationService) {
+
+		var mediaSelectionDialog = $modal({
+			title: 'Select media to add',
+			scope: $scope,
+			template: "media/mediaSelectionDialog.html",
+			show: false
+		});
+
+		$scope.user = $rootScope.user;
+
+		$scope.isAdding = true;
+
+		$scope.existingContents = [];
+
+		$scope.albums = [];
+
+		$scope.username = localStorageService.get("username");
+
+		$scope.authData = localStorageService.get("authorizationData");
+
+		$scope.dimensionMode = configProvider.windowDimensions.mode == "" ?
+			window.getDimensionMode() : configProvider.windowDimensions.mode;
+
+		$scope.post = {
+			PostTitle: "",
+			PostMessage: "",
+			PostContents: [],
+			Communities: [],
+			Tags: []
+		};
+
+	    $scope.emptyCommunitiesMessage = "No communities selected for this post to show..";
+
+		$scope.uploadUrl = configProvider.getSettings().BlogApi == "" ?
+			window.blogConfiguration.blogApi + "media?username=" + $scope.username + "&album=default" :
+			configProvider.getSettings().BlogApi + "media?username=getTagsSource" + $scope.username + "&album=default";
+
+		$scope.onTagAdded = function (t) {
+			var tag = { TagName: t.text };
+			$scope.post.Tags.push(tag);
+		};
+
+		$scope.onTagRemoved = function (t) {
+			var tag = { TagName: t.text };
+			var index = $scope.post.Tags.indexOf(tag);
+			$scope.post.Tags.splice(index);
+		};
+
+		$scope.getTagsSource = function (t) {
+			return tagsService.getTagsByName(t);
+		};
+
+	    $scope.hasCommunities = function() {
+	        return $scope.post.Communities && $scope.post.Communities.length > 0;
+	    };
+
+	    $scope.communityCreatedByLoggedUser = function (community) {
+	        if (community && community.Leader) {
+	            return $scope.username === community.Leader.UserName;
+	        }
+	        return false;
+	    };
+
+	    $scope.removeCommunityFromPost = function(community) {
+	        var index = $scope.post.Communities.indexOf(community);
+	        $scope.post.Communities.splice(index);
+	    };
+
+		$scope.showCommunitySelection = function () {
+			$scope.$broadcast("launchCommunitySelectionDialog", { canClose: true });
+		};
+
+		$scope.$on("doneSelectingCommunities", function (ev, data) {
+		    $scope.post.Communities = [];
+
+            if (data && data.items) {
+                _.each(data.items, function(community) {
+                    $scope.post.Communities.push(community);
+                });
+            } else {
+                errorService.displayError("Something went wrong when you selected communities. :P");
+            }
+		});
+
+		$scope.getPost = function () {
+			postsService.getPost($rootScope.$stateParams.postId).then(function (resp) {
+				if ($scope.username === resp.User.UserName) {
+					if (resp.Error == undefined) {
+						$scope.isAdding = false;
+						$scope.post = resp;
+
+						_.each(resp.Tags, function (t) {
+							$scope.Tags.push({ text: t.TagName });
+						});
+
+						_.each(resp.PostContents, function (t) {
+							addMediaToUploaderQueue(t.Media, t.PostContentTitle, t.PostContentText);
+						});
+					} else {
+						errorService.displayError(resp.Error);
+					}
+				} else {
+					errorService.displayError({ Message: "Oh you sneaky bastard! This post is not yours to edit." });
+				}
+			}, function (e) {
+				errorService.displayError(e);
+			});
+		};
+
+		$scope.savePost = function () {
+			if ($scope.authData && $scope.user) {
+				if (uploader.getNotUploadedItems().length === 0) {
+					$scope.post.User = $scope.user;
+					setPostContentsFromUploader();
+
+					if ($scope.isAdding) {
+						postsService.addPost($scope.post).then(function(resp) {
+							if (resp.Error == undefined) {
+								$location.path("/");
+							} else {
+								errorService.displayError(resp.Error);
+							}
+						}, function(e) {
+							errorService.displayError(e);
+						});
+					} else {
+						postsService.updatePost($scope.post).then(function(resp) {
+							if (resp.Error == undefined) {
+								$location.path("/");
+							} else {
+								errorService.displayError(resp.Error);
+							}
+						}, function(e) {
+							errorService.displayError(e);
+						});
+					}
+				} else {
+					errorService.displayError("There are some contents not yet uploaded.");
+				}
+			} else {
+				$rootScope.$broadcast("launchLoginForm");
+			}
+		};
+
+		$scope.cancelPost = function () {
+			$location.path("/");
+		};
+
+		$scope.init = function () {
+			authenticationService.getUserInfo().then(function (response) {
+				if (response.Message == undefined || response.Message == null) {
+					if (!isNaN($rootScope.$stateParams.postId)) {
+						$scope.getPost();
+					}
+				} else {
+					errorService.displayErrorRedirect(response.Message);
+				}
+			});
+		};
+
+		$rootScope.$watch('user', function () {
+			if ($rootScope.user) {
+				$scope.user = $rootScope.user;
+				$scope.username = $scope.user.UserName;
+				$scope.uploadUrl = configProvider.getSettings().BlogApi + "media?username=" + $scope.username + "&album=default";
+			}
+		});
+
+		$scope.$on("userLoggedIn", function () {
+			$scope.username = localStorageService.get("username");
+			$scope.authData = localStorageService.get("authorizationData");
+		});
+
+		$scope.$on("windowSizeChanged", function (e, d) {
+			configProvider.setDimensions(d.width, d.height);
+		});
+
+		// #region media selection dialog
+
+		$scope.launchMediaSelectionDialog = function () {
+			if ($scope.albums.length == 0) {
+				albumService.getAlbumsByUser($scope.user.Id).then(function (resp) {
+					_.each(resp, function (a) {
+						_.each(a.Media, function (m) {
+							m.IsSelected = false;
+						});
+					});
+
+					$scope.albums = resp;
+					mediaSelectionDialog.show();
+				}, function (e) {
+					errorService.displayError(e);
+				});
+			} else {
+				mediaSelectionDialog.show();
+			}
+		};
+
+		$scope.getThumbnailUrl = function (media) {
+			return {
+				"background-image": "url(" + media.ThumbnailUrl + ")"
+			};
+		};
+
+		$scope.toggleMediaSelectionToExistingContents = function (media) {
+			media.IsSelected = !media.IsSelected;
+
+			if (media.IsSelected) {
+				media.IsSelected = addMediaToUploaderQueue(media, '', '');
+			} else {
+				removeMediaFromUploaderQueue(media);
+			}
+		};
+
+		$scope.getMediaToggleButtonStyle = function (media) {
+			return media.IsSelected ? 'btn-danger' : 'btn-success';
+		};
+
+		$scope.getMediaToggleButtonIcon = function (media) {
+			return media.IsSelected ? 'fa-times' : 'fa-check';
+		};
+
+		// #endregion
+
+		// #region angular-file-upload
+
+		var addMediaToUploaderQueue = function (media, title, text) {
+			var item = getUploaderItem(media, title, text);
+
+			var isValid = validateVideoUpload(item);
+			if (!isValid) {
+				errorService.displayError("You cannot upload more than one video in a post.");
+				return false;
+			}
+
+			$timeout(function () {
+				uploader.queue.push(item);
+				$scope.$broadcast("resizeIsotopeItems");
+			}, 500);
+
+			return true;
+		};
+
+		var removeMediaFromUploaderQueue = function (media) {
+			var item = _.where(uploader.queue, { media: media, mediaId: media.Id })[0];
+
+			$timeout(function () {
+				var index = uploader.queue.indexOf(item);
+				uploader.queue.splice(index, 1);
+				$scope.$broadcast("resizeIsotopeItems");
+			}, 500);
+		};
+
+		var setPostContentsFromUploader = function () {
+			$scope.post.PostContents = [];
+
+			_.each(uploader.queue, function (item) {
+				var postContent = {
+					PostId: 0,
+					Media: item.media,
+					PostContentTitle: item.postContentTitle,
+					PostContentText: item.postContentText
+				};
+				$scope.post.PostContents.push(postContent);
+			});
+		};
+
+		var getUploaderItem = function (media, title, text) {
+			var item = {
+				file: {
+					name: media.FileName,
+					size: 1e6,
+					type: media.MediaType,
+				},
+				mediaId: media.Id,
+				media: media,
+				progress: 100,
+				isUploaded: true,
+				isSuccess: true,
+				isExisting: true,
+				url: media.ThumbnailUrl,
+				base: media,
+				allowCaptions: true,
+				postContentTitle: title,
+				postContentText: text,
+				remove: function () {
+					var index = uploader.queue.indexOf(item);
+					uploader.queue.splice(index, 1);
+
+					if ($scope.albums.length > 0) {
+						var album = _.where($scope.albums, { AlbumId: item.media.AlbumId })[0];
+						var albumMedia = _.where(album.Media, { Id: item.media.Id })[0];
+						albumMedia.IsSelected = false;
+					}
+				}
+			};
+
+			return item;
+		};
+
+		var uploader = $scope.uploader = new FileUploader({
+			scope: $rootScope,
+			url: $scope.uploadUrl,
+			autoUpload: false,
+			headers: { Authorization: 'Bearer ' + ($scope.authData ? $scope.authData.token : "") }
+		});
+
+		uploader.filters.push({
+			name: 'imageFilter',
+			fn: function (item /*{File|HTMLInputElement}*/) {
+				var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
+				type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
+
+				if (!validateVideoUpload(item)) {
+					errorService.displayError("You cannot upload more than one video in a post.");
+					return false;
+				}
+				
+				return '|jpg|png|jpeg|bmp|gif|mp4|flv|'.indexOf(type) !== -1;
+			}
+		});
+
+		uploader.onSuccessItem = function (fileItem, response) {
+			response.IsSelected = true;
+
+			if ($scope.albums.length > 0) {
+				var album = _.where($scope.albums, { IsUserDefault: true })[0];
+				album.Media.push(response);
+			}
+
+			fileItem.media = response;
+			fileItem.mediaId = response.Id;
+			fileItem.mediaId = response;
+		};
+
+		uploader.onAfterAddingFile = function (fileItem) {
+			fileItem.allowCaptions = true;
+			fileItem.postContentTitle = "";
+			fileItem.postContentText = "";
+		};
+
+		var validateVideoUpload = function(fileItem) {
+			var supportedVideos = [
+				"video/avi",
+				"video/quicktime",
+				"video/mpeg",
+				"video/mp4",
+				"video/x-flv"
+			];
+
+			var isVideo = _.contains(supportedVideos, (fileItem.file ? fileItem.file.type : fileItem.type));
+			if (isVideo) {
+				var videoUploads = _.filter(uploader.queue, function (upload) {
+					return _.contains(supportedVideos, upload.file.type);
+				});
+
+				if (videoUploads.length > 0) {
+					return false;
+				}
+				return true;
+			};
+			return true;
+		};
+
+		// #endregion
+
+		$scope.init();
+	}
+]);
+
+// ReSharper restore InconsistentNaming
+///#source 1 1 /wwwroot/modules/posts/controllers/postsViewController.js
+ngPosts.controller('postsViewController', ["$scope", "$rootScope", "$location", "postsService",
+    "userService", "mediaService", "configProvider", "errorService", "localStorageService",
+    function ($scope, $rootScope, $location, postsService, userService, mediaService, configProvider,
+        errorService, localStorageService) {
+
+        $scope.postId = parseInt($rootScope.$stateParams.postId);
+
+        $scope.post = null;
+
+        $scope.user = null;
+
+        $scope.hasError = false;
+
+        $scope.viewCount = [];
+
+        $scope.postsList = [];
+
+        $scope.postLikes = [];
+
+        $scope.isBusy = false;
+
+        $scope.isEditable = false;
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.username = localStorageService.get("username");
+
+        $scope.toggleIsEditable = function () {
+            if ($scope.user && $scope.post && $scope.post.User && $scope.post.User.UserName === $scope.username) {
+                $scope.isEditable = true;
+                return;
+            }
+            $scope.isEditable = false;
+        };
+
+        $scope.showEmptyMessage = function () {
+            if ($scope.post && !$scope.hasError) {
+                return false;
+            }
+            return true;
+        };
+
+        $scope.emptyMessageStyle = function () {
+            return $scope.hasError ? "alert-danger" : 
+                ($scope.isBusy ? "alert-info" : "alert-warning");
+        };
+
+        $scope.getEmptyMessage = function () {
+            return $scope.hasError ?
+                "Something went wrong with loading the post! :(" :
+                "Loading post..";
+        };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.user = $rootScope.user;
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $scope.editPost = function () {
+            $location.path("/post/edit/" + $scope.post.Id);
+        };
+
+        $scope.getContentType = function (content) {
+            if (content == undefined) return "image";
+
+            var contentType = content.split('/');
+            if (contentType[0] == "video") {
+                return "video";
+            } else {
+                return "image";
+            }
+        };
+
+        $scope.getPostsList = function () {
+            postsService.getPopularPosts().then(function (list) {
+                $scope.postsList = list;
+            }, function (e) {
+                errorService.displayError({ Message: e });
+            });
+        };
+
+        $scope.getViewedPost = function () {
+            if (!isNaN($rootScope.$stateParams.postId)) {
+                postsService.getPost($scope.postId).then(function (post) {
+                    if (post.Error == undefined) {
+                        $scope.post = post;
+                        $scope.isBusy = false;
+                        $scope.toggleIsEditable();
+
+                        // update post likes and view counts directive
+                        $scope.postLikes = $scope.post.PostLikes;
+                        $scope.viewCount = $scope.post.ViewCounts;
+
+                        // subscribe to post socket.io events
+                        postsService.subscribeToPost($scope.post.Id);
+
+                        // update mediaservice viewed gallery
+                        var mediaList = _.pluck(post.PostContents, 'Media');
+                        mediaService.addViewedMediaListFromPost(mediaList, post.Id);
+                        $rootScope.$broadcast("updateMediaGalleryFromPost", {});
+                    } else {
+                        errorService.displayError({ Message: e });
+                        $scope.hasError = true;
+                    }
+                }, function (e) {
+                    errorService.displayError({ Message: e });
+                    $scope.hasError = true;
+                });
+            } else {
+                errorService.displayErrorRedirect({ Message: "You're missing the post to view bruh! Don't be stupid!" });
+            }
+        };
+
+        $scope.hasContents = function () {
+            if ($scope.post && $scope.post.PostContents && $scope.post.PostContents.length > 0) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.init = function () {
+            if ($scope.isBusy) {
+                return;
+            }
+            $scope.isBusy = true;
+
+            if ($scope.authData) {
+                if ($rootScope.user) {
+                    $scope.user = $rootScope.user;
+                }
+            }
+
+            $scope.getViewedPost();
+        };
+
+        $scope.init();
+    }
+]);
+///#source 1 1 /wwwroot/modules/posts/directives/postHeader.js
+ngPosts.directive('postHeader', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $location, localStorageService) {
+        $scope.username = localStorageService.get("username");
+
+        $scope.isEditable = function () {
+            if ($scope.user && $scope.user.UserName === $scope.username) {
+                return true;
+            }
+            return false;
+        };
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+            }
+        });
+
+        $scope.editPost = function () {
+            $location.path("/post/edit/" + $scope.post.Id);
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "localStorageService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            post: '=',
+            user: '='
+        },
+        replace: true,
+        template: $templateCache.get("posts/postHeader.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postContents.js
+ngPosts.directive('postContents', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope) {
+    };
+    ctrlFn.$inject = ["$scope"];
+
+    return {
+        restrict: 'EA',
+        scope: { contents: '=' },
+        replace: true,
+        template: $templateCache.get("posts/postContents.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postLikes.js
+ngPosts.directive('postLikes', ["$templateCache", function ($templateCache) {
+    var linkFn = function (scope, elem) {
+        scope.highlight = function() {
+            $(elem).effect("highlight", { color: "#B3C833" }, 1500);
+        };
+    };
+
+    var ctrlFn = function ($scope, $rootScope, $interval, postsService, userService, errorService, localStorageService, configProvider) {
+        $scope.postLikes = $scope.list;
+
+        $scope.user = null;
+
+        $scope.username = localStorageService.get("username");
+
+        $scope.authData = localStorageService.get("authorizationData");
+
+        $scope.tooltip = { "title": "Click to favorite this post." };
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().postLikesUpdate) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().postLikesUpdate, function (e, d) {
+                    if (d.postId == $scope.postId) {
+                        $scope.postLikes = d.postLikes;
+                        $scope.highlight();
+                        $scope.isUserLiked();
+                    }
+                });
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            $scope.user = data;
+            $scope.isUserLiked();
+        });
+
+        $rootScope.$watch('user', function () {
+            $scope.user = $rootScope.user;
+            $scope.isUserLiked();
+        });
+
+        $scope.$on("viewPostLoadedLikes", function (e, d) {
+            $scope.postId = d.postId;
+            $scope.postLikes = d.postLikes;
+            $scope.isUserLiked();
+        });
+
+        $scope.$watch('list', function() {
+            $scope.postLikes = $scope.list;
+        });
+
+        $scope.likePost = function () {
+            postsService.likePost($scope.postId, $scope.username).then(function () { },
+            function (err) {
+                errorService.displayError(err);
+            });
+        };
+
+        $scope.isUserLiked = function () {
+            var isLiked = false;
+            if ($scope.authData && $scope.user) {
+                _.each($scope.postLikes, function (p) {
+                    if (p.UserId == $scope.user.Id) {
+                        isLiked = true;
+                    }
+                });
+            }
+
+            return isLiked ? "fa-star" : "fa-star-o";
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "userService", "errorService", "localStorageService", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            list: '=',
+            postId: '='
+        },
+        replace: true,
+        template: $templateCache.get("posts/postLikes.html"),
+        controller: ctrlFn,
+        link: linkFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postViewCount.js
+ngPosts.directive('postViewCount', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $interval, configProvider) {
+        $scope.viewCount = $scope.list;
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().viewCountUpdate) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().viewCountUpdate, function (e, d) {
+                    if (d.postId == $scope.postId) {
+                        $scope.viewCount = d.viewCount;
+                    }
+                });
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+        
+        $scope.$watch('list', function () {
+            $scope.viewCount = $scope.list;
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            list: '=',
+            postId: '='
+        },
+        replace: true,
+        template: $templateCache.get("posts/postViewCount.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postListItem.js
+ngPosts.directive('postListItem', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $location, $interval, localStorageService, configProvider) {
+
+        $scope.username = localStorageService.get("username");
+
+        $scope.user = $scope.post && $scope.post.User ? $scope.post.User : null;
+
+        $scope.comments = $scope.post && $scope.post.Comments ? $scope.post.Comments : [];
+
+        $scope.postLikes = $scope.post && $scope.post.PostLikes ? $scope.post.PostLikes : [];
+
+        $scope.hasComments = $scope.post && $scope.post.Comments && $scope.post.Comments.length > 0 ? true : false;
+
+        $scope.hasTags = $scope.post && $scope.post.Tags && $scope.post.Tags.length > 0 ? true : false;
+
+        $scope.isEditable = $scope.user && $scope.user.UserName === $scope.username ? true : false;
+        
+        $scope.getCommentPopover = function(commentId) {
+            var comment = _.where($scope.comments, { CommentId: commentId });
+            var user = comment.User.FirstName + " " + comment.User.LastName;
+            return { "title": user, "content": comment.CommentMessage };
+        };
+
+        $scope.getPostSize = function() {
+            return $scope.width ? $scope.width : '';
+        };
+
+        $scope.toggleIsEditable = function () {
+            if ($scope.user && $scope.user.UserName === $scope.username) {
+                $scope.isEditable = true;
+            }
+            $scope.isEditable = false;
+        };
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().getPostTopComments && configProvider.getSocketClientFunctions().getPostLikes) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostTopComments, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.comments = d.comments;
+                        $scope.hasComments = d.comments && d.comments.length > 0 ? true : false;
+                    }
+                });
+
+                $rootScope.$on(configProvider.getSocketClientFunctions().getPostLikes, function (e, d) {
+                    if (d.postId == $scope.post.Id) {
+                        $scope.postLikes = d.postLikes;
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+
+        $scope.$on("loggedInUserInfo", function (ev, data) {
+            if (data) {
+                $scope.username = data.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.username = $rootScope.user.UserName;
+                $scope.toggleIsEditable();
+            }
+        });
+
+        $scope.editPost = function() {
+            $location.path("/post/edit/" + $scope.post.Id);
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$location", "$interval", "localStorageService", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            post: '=',
+            width: '='
+        },
+        replace: true,
+        template: $templateCache.get("posts/postListItem.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postListItemComment.js
+ngPosts.directive('postListItemComment', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope) {
+        $scope.user = {
+            "name": $scope.comment.User.FirstName + " " + $scope.comment.User.LastName,
+            "url": "#"
+        };
+
+        $scope.popover = {
+            "title": $scope.user.name,
+            "content": $scope.comment.CommentMessage
+        };
+    };
+    ctrlFn.$inject = ["$scope"];
+
+    return {
+        restrict: 'EA',
+        scope: { comment: '=' },
+        replace: true,
+        template: $templateCache.get("posts/postListItemComment.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postRelatedItem.js
+ngPosts.directive('postRelatedItem', ["$templateCache", function ($templateCache) {
+    return {
+        restrict: 'EA',
+        scope: { post: '=' },
+        replace: true,
+        template: $templateCache.get("posts/postRelatedItem.html")
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postRelatedItems.js
+ngPosts.directive('postRelatedItems', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, postsService, errorService) {
+        $scope.hasError = false;
+
+        $scope.postsByTag = [];
+
+        $scope.postsByUser = [];
+        
+        $scope.relatedCategories = [
+            { name: 'By user', id: "user" },
+            { name: 'By similar tags', id: "tags" }
+        ];
+
+        $scope.selectedCategory = $scope.relatedCategories[0];
+
+        $scope.emptyPostsMessage = "There are no related posts.";
+
+        $scope.getRelatedPosts = function () {
+            if (!isNaN($scope.parentpostid)) {
+                postsService.getRelatedPosts($scope.parentpostid).then(function (response) {
+                    $scope.hasError = false;
+                    $scope.postsByTag = response.PostsByTags;
+                    $scope.postsByUser = response.PostsByUser;
+                }, function(e) {
+                    errorService.displayError(e);
+                    $scope.hasError = true;
+                });
+            } else {
+                $scope.hasError = true;
+            }
+        };
+
+        $scope.displayEmptyPostsMessage = function() {
+            if ($scope.selectedCategory.id == "user") {
+                if ($scope.postsByUser.length > 0) {
+                    return false;
+                }
+                return true;
+            } else {
+                if ($scope.postsByTag.length > 0) {
+                    return false;
+                }
+                return true;
+            }
+        };
+
+        $scope.emptyPostsStyle = function() {
+            return $scope.hasError ? "alert-danger" : "alert-warning";
+        };
+
+        $scope.getEmptyPostsMessage = function () {
+            return $scope.hasError ?
+                "Something went wrong with loading the related posts! :(" :
+                "There are no related posts yet.";
+        };
+
+        $scope.displayUser = function() {
+            if ($scope.selectedCategory.id == "user") {
+                if ($scope.postsByUser.length > 0) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        };
+
+        $scope.displayTag = function () {
+            if ($scope.selectedCategory.id == "tags") {
+                if ($scope.postsByTag.length > 0) {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        };
+
+        $scope.getRelatedPosts();
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "postsService", "errorService"];
+
+    return {
+        restrict: 'EA',
+        scope: { parentpostid: '=' },
+        replace: true,
+        template: $templateCache.get("posts/postRelatedItems.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/directives/postViewNavigator.js
+ngPosts.directive('postViewNavigator', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $location, $rootScope, postsService) {
+        $scope.nextPost = function () {
+            if (!$rootScope.$stateParams.postId) return;
+
+            var nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+            if (nextPost) {
+                $location.path("/post/" + nextPost);
+            } else {
+                postsService.getMoreRecentPosts().then(function () {
+                    nextPost = postsService.getNextPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+                    if (nextPost) {
+                        $location.path("/post/" + nextPost);
+                    } else {
+                        $location.path("/");
+                    }
+                }, function () {
+                    $location.path("/");
+                });
+            }
+        };
+
+        $scope.previousPost = function () {
+            if (!$rootScope.$stateParams.postId) return;
+
+            var previousPost = postsService.getPreviousPostIdFromCache(parseInt($rootScope.$stateParams.postId));
+
+            if (previousPost) {
+                $location.path("/post/" + previousPost);
+            } else {
+                $location.path("/");
+            }
+        };
+
+        $scope.isVisible = function() {
+            if ($rootScope.$stateParams.postId) {
+                return true;
+            };
+            return false;
+        };
+    };
+    ctrlFn.$inject = ["$scope", "$location", "$rootScope", "postsService"];
+
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: $templateCache.get("posts/postViewNavigator.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/posts/services/postsService.js
+ngPosts.factory('postsService', ["$http", "$q", "blogSocketsService", "configProvider", "dateHelper",
+    function ($http, $q, blogSocketsService, configProvider, dateHelper) {
+        var baseApi = configProvider.getSettings().BlogApi === "" ?
+            window.blogConfiguration.blogApi : configProvider.getSettings().BlogApi;
+        var postsApi = baseApi + "Posts/";
+
+        var addPostViewData = function (post) {
+            post.DateDisplay = dateHelper.getDateDisplay(post.CreatedDate);
+            post.Url = "/#/post/" + post.Id;
+
+            return post;
+        };
+
+        var cachedPostsList = [];
+
+        var getCachedPostId = function (currentPostId, isNext) {
+            if (cachedPostsList && cachedPostsList.length > 0) {
+                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
+                var isCurrentPostInCache = _.contains(cachedPostIds, currentPostId);
+
+                if (!isCurrentPostInCache) return null;
+                
+                var index = _.indexOf(cachedPostIds, currentPostId);
+                if (index < 0) return cachedPostIds[0];
+
+                if (index === 0 && !isNext) {
+                    return null;
+                } else {
+                    index = isNext ? index + 1 : index - 1;
+
+                    if (cachedPostIds.length < index + 1) {
+                        return null;
+                    }
+
+                    return cachedPostIds[index];
+                }
+            } else {
+                return null;
+            }
+        };
+
+        return {
+            getPost: function (id) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + id,
+                    method: "GET"
+                }).success(function (response) {
+                    var post = addPostViewData(response);
+                    deferred.resolve(post);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getRelatedPosts: function (id) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + id + "/related",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response.PostsByUser, function (p) {
+                        addPostViewData(p);
+                    });
+                    _.each(response.PostsByTags, function (p) {
+                        addPostViewData(p);
+                    });
+
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getPopularPosts: function () {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + "popular",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getRecentPosts: function () {
+                var self = this;
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + "recent",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getByCommunity: function (id) {
+                var self = this;
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + id + "/posts",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreByCommunity: function (id, skip) {
+                var self = this;
+                var deferred = $q.defer();
+
+                $http({
+                    url: baseApi + "community/" + id + "/posts/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMoreRecentPosts: function (currentPostsCount) {
+                var self = this;
+                var deferred = $q.defer();
+
+                if (!currentPostsCount || currentPostsCount === 0) currentPostsCount = cachedPostsList.length;
+
+                $http({
+                    url: postsApi + "recent/more/" + currentPostsCount,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                        self.addToCachedPostsList([p]);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getPostsByUser: function (userId) {
+                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+
+                $http({
+                    url: userPostsUrl + userId + "/posts",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getMorePostsByUser: function (userId, skip) {
+                var userPostsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+
+                $http({
+                    url: userPostsUrl + userId + "/posts/more/" + skip,
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (p) {
+                        addPostViewData(p);
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            subscribeToPost: function (id) {
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().unsubscribeViewPost, { postId: id });
+                blogSocketsService.emit(configProvider.getSocketClientFunctions().subscribeViewPost, { postId: id });
+            },
+
+            addPost: function (post) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi,
+                    method: "POST",
+                    data: post
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            updatePost: function (post) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi,
+                    method: "PUT",
+                    data: post
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            likePost: function (postId, username) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: postsApi + "likes?username=" + username + "&postId=" + postId,
+                    method: "POST"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addToCachedPostsList: function (postsList) {
+                var cachedPostIds = _.pluck(cachedPostsList, 'Id');
+
+                _.each(postsList, function (post) {
+                    if (!_.contains(cachedPostIds, post.Id)) {
+                        cachedPostsList.push(post);
+                        return;
+                    }
+                });
+            },
+
+            getNextPostIdFromCache: function (currentPostId) {
+                return getCachedPostId(currentPostId, true);
+            },
+
+            getPreviousPostIdFromCache: function (currentPostId) {
+                return getCachedPostId(currentPostId, false);
+            },
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/comments/comments.js
+var ngComments = angular.module("ngComments",
+    [
+        "ngDateHelper",
+        "ngConfig",
+        "LocalStorageModule"
+    ]);
+///#source 1 1 /wwwroot/modules/comments/directives/commentItem.js
+ngComments.directive('commentItem', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $interval, commentsService, errorService, configProvider) {
+        $scope.canExpandComment = function () {
+            if (!$scope.allowExpand) {
+                return false;
+            }
+            if ($scope.comment.Comments == undefined || $scope.comment.Comments === null || $scope.comment.Comments.length < 1) {
+                return false;
+            }
+            return true;
+        };
+
+        $scope.toggleReplies = function () {
+            var state = !$scope.comment.ShowReplies;
+            $scope.comment.ShowReplies = state;
+
+            if (!state) {
+                $rootScope.$broadcast("hideAddReply");
+            }
+        };
+
+        $scope.isExpanded = function () {
+            if ($scope.comment.ShowReplies) {
+                return "fa-minus";
+            }
+            return "fa-plus";
+        };
+
+        $scope.canReplyToComment = function () {
+            if (!$scope.allowReply) {
+                return "hidden";
+            }
+            if ($scope.comment.PostId === null || $scope.comment.PostId == 0) {
+                return "hidden";
+            }
+
+            return "";
+        };
+
+        $scope.showAddReply = function () {
+            $scope.comment.ShowAddReply = true;
+
+            if (!$scope.comment.ShowReplies) {
+                $scope.toggleReplies();
+                $scope.isExpanded();
+            }
+        };
+
+        $scope.isUserLiked = function () {
+            var isLiked = false;
+            _.each($scope.comment.CommentLikes, function (c) {
+                if ($scope.user && c.UserId == $scope.user.Id) {
+                    isLiked = true;
+                }
+            });
+
+            return isLiked ? "fa-star" : "fa-star-o";
+        };
+
+        $scope.isFromPostOwner = function () {
+            if ($scope.comment.User && $scope.poster && $scope.comment.User.UserName == $scope.poster) {
+                return "";
+            }
+            return "hidden";
+        };
+
+        $scope.likeComment = function () {
+            if (!$scope.user) {
+                $rootScope.$broadcast("launchLoginForm", { canClose: true });
+            }
+
+            commentsService.likeComment($scope.comment.Id, $scope.user.UserName).then(function () { },
+                function (err) {
+                    errorService.displayError(err);
+                });
+        };
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().commentLikesUpdate) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentLikesUpdate, function (e, d) {
+                    if ($scope.comment.Id == d.commentId) {
+                        $scope.comment.CommentLikes = d.commentLikes;
+                        $(".comment-likes-count[data-comment-id='" + d.commentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $scope.isUserLiked();
+                    }
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+        
+        $rootScope.$on("hideAddReply", function () {
+            $scope.comment.ShowAddReply = false;
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "commentsService", "errorService", "configProvider"];
+
+    var linkFn = function(scope, elem, attrs) {
+        scope.allowReply = attrs.allowReply === 'true' ? true : false;
+        scope.allowExpand = attrs.allowExpand === 'true' ? true : false;
+    };
+
+    return {
+        restrict: 'EA',
+        scope: {
+            comment: '=',
+            user: '=',
+            poster: '='
+        },
+        replace: true,
+        template: $templateCache.get("comments/commentItem.html"),
+        controller: ctrlFn,
+        link: linkFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/comments/directives/commentsAddNew.js
+ngComments.directive('commentsAddNew', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, commentsService, errorService) {
+        $scope.comment = {
+            CommentMessage: "",
+            PostId: $scope.postid,
+            ParentCommentId: $scope.commentid,
+            User: $scope.user
+        };
+
+        $scope.hasError = false;
+
+        $scope.commentMessageStyle = function() {
+            if ($scope.hasError) {
+                return errorService.highlightField();
+            }
+            return "";
+        };
+
+        $scope.removeCommentMessageError = function() {
+            $scope.hasError = false;
+        };
+
+        $scope.hideAddComment = function () {
+            if ($scope.commentid == undefined || $scope.commentid == null) {
+                $rootScope.$broadcast("hideAddComment");
+            } else {
+                $rootScope.$broadcast("hideAddReply");
+            }
+        };
+
+        $scope.saveComment = function () {
+            if ($scope.comment.CommentMessage != "") {
+                commentsService.addComment($scope.createCommentForAdding()).then(function(resp) {
+                    if (resp.Error == undefined) {
+                        $scope.comment.CommentMessage = "";
+                        $scope.hideAddComment();
+                    } else {
+                        $scope.hasError = true;
+                        errorService.displayError(resp.Error);
+                    }
+                }, function(e) {
+                    errorService.displayError(e);
+                });
+            } else {
+                $scope.hasError = true;
+                errorService.displayError({ Message: "Your comment message is empty. Please don't be that stupid." });
+            }
+        };
+
+        $scope.createCommentForAdding = function () {
+            if ($scope.comment.ParentCommentId) {
+                $scope.comment.PostId = $scope.parentpostid;
+                return $scope.comment;
+            }
+            return $scope.comment;
+        };
+
+        $rootScope.$watch('user', function () {
+            if ($rootScope.user) {
+                $scope.comment.User = $rootScope.user;
+            }
+        });
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "commentsService", "errorService"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            commentid: '=',
+            postid: '=',
+            user: '=',
+            parentpostid: '='
+        },
+        replace: true,
+        template: $templateCache.get("comments/commentsAddNew.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/comments/directives/commentsContainer.js
+ngComments.directive('commentsContainer', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope) {
+        $scope.showAddComment = false;
+
+        $scope.toggleShowAddComment = function() {
+            $scope.showAddComment = !$scope.showAddComment;
+        };
+
+        $scope.$on("hideAddComment", function () {
+            $scope.showAddComment = false;
+        });
+    };
+    ctrlFn.$inject = ["$scope"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            user: '=',
+            postid: '=',
+            poster: '='
+        },
+        replace: true,
+        template: $templateCache.get("comments/commentsContainer.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/comments/directives/commentsList.js
+ngComments.directive('commentsList', ["$templateCache", function ($templateCache) {
+    var ctrlFn = function ($scope, $rootScope, $interval, postsService, commentsService, userService, errorService, configProvider) {
+        $scope.comments = [];
+
+        $scope.emptyCommentsMessage = "";
+
+        $scope.hasError = false;
+
+        $scope.getComments = function () {
+            if (!isNaN($scope.postid)) {
+                commentsService.getCommentsByPost($scope.postid).then(function (comments) {
+                    $scope.hasError = false;
+                    $scope.comments = comments;
+                    postsService.subscribeToPost($scope.postid);
+                }, function(err) {
+                    $scope.hasError = true;
+                    errorService.displayError(err);
+                });
+            } else {
+                $scope.hasError = true;
+            }
+        };
+
+        $scope.showEmptyCommentsMessage = function () {
+            if ($scope.comments.length != 0) {
+                return false;
+            }
+            return true;
+        };
+
+        $scope.emptyMessageStyle = function() {
+            return $scope.hasError ? "alert-danger" : "alert-warning";
+        };
+
+        $scope.getEmptyCommentsMessage = function() {
+            return $scope.hasError ?
+                "Something went wrong with loading the comments! :(" :
+                "There are no comments yet.";
+        };
+
+        var stop;
+        stop = $interval(function () {
+            if (configProvider.getSocketClientFunctions().commentAdded && configProvider.getSocketClientFunctions().wsConnect) {
+                $rootScope.$on(configProvider.getSocketClientFunctions().commentAdded, function (e, d) {
+                    d.comment = commentsService.addViewProperties(d.comment);
+
+                    if (d.commentId !== null && d.commentId != undefined) {
+                        var comment = _.where($scope.comments, { Id: d.commentId })[0];
+                        if (comment.Comments === null) comment.Comments = [];
+
+                        comment.Comments.unshift(d.comment);
+
+                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                        $(".comment-item[data-comment-id='" + d.comment.ParentCommentId + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                    } else {
+                        $scope.comments.unshift(d.comment);
+                        $(".comment-item[data-comment-id='" + d.comment.Id + "']").effect("highlight", { color: "#B3C833" }, 1500);
+                    }
+                });
+
+                $rootScope.$on(configProvider.getSocketClientFunctions().wsConnect, function () {
+                    postsService.subscribeToPost($scope.postid);
+                });
+
+                $interval.cancel(stop);
+                stop = undefined;
+            }
+        }, 250);
+
+        $scope.getComments();
+    };
+    ctrlFn.$inject = ["$scope", "$rootScope", "$interval", "postsService", "commentsService", "userService", "errorService", "configProvider"];
+
+    return {
+        restrict: 'EA',
+        scope: {
+            user: '=',
+            postid: '=',
+            poster: '='
+        },
+        replace: true,
+        template: $templateCache.get("comments/commentsList.html"),
+        controller: ctrlFn
+    };
+}]);
+
+///#source 1 1 /wwwroot/modules/comments/services/commentsService.js
+ngComments.factory('commentsService', ["$http", "$q", "configProvider", "dateHelper",
+    function ($http, $q, configProvider, dateHelper) {
+        var commentsApi = configProvider.getSettings().BlogApi == "" ?
+            window.blogConfiguration.blogApi :
+            configProvider.getSettings().BlogApi;
+
+        return {
+            getCommentsByPost: function (id) {
+                var deferred = $q.defer();
+                var that = this;
+
+                $http({
+                    url: commentsApi + "Posts/" + id + "/Comments",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (c) {
+                        c = that.addViewProperties(c, false, false);
+
+                        _.each(c.Comments, function (r) {
+                            that.addViewProperties(r);
+                        });
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            getCommentsByUser: function (userId) {
+                var userCommentsUrl = configProvider.getSettings().BlogApi == "" ?
+                    window.blogConfiguration.blogApi + "user/" :
+                    configProvider.getSettings().BlogApi + "user/";
+
+                var deferred = $q.defer();
+                var that = this;
+
+                $http({
+                    url: userCommentsUrl + userId + "/comments",
+                    method: "GET"
+                }).success(function (response) {
+                    _.each(response, function (c) {
+                        c = that.addViewProperties(c, false, false);
+
+                        _.each(c.Comments, function (r) {
+                            that.addViewProperties(r);
+                        });
+                    });
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            likeComment: function (commentId, username) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: commentsApi + "comments/likes?username=" + username + "&commentId=" + commentId,
+                    method: "POST"
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addComment: function (comment) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: commentsApi + "comments",
+                    method: "POST",
+                    data: comment
+                }).success(function (response) {
+                    deferred.resolve(response);
+                }).error(function (e) {
+                    deferred.reject(e);
+                });
+
+                return deferred.promise;
+            },
+
+            addViewProperties: function(comment, showReplies, showAddReply) {
+                comment.DateDisplay = dateHelper.getDateDisplay(comment.CreatedDate);
+                comment.NameDisplay = comment.User != null ? comment.User.FirstName + " " + comment.User.LastName : "";
+                comment.Url = "/#/user/" + (comment.User != null ? comment.User.UserName : "");
+
+                if (showReplies != undefined) {
+                    comment.ShowReplies = false;
+                }
+
+                if (showAddReply != undefined) {
+                    comment.ShowAddReply = false;
+                }
+
+                return comment;
+            }
+        };
+    }
+]);
+///#source 1 1 /wwwroot/modules/init.js
+window.blogInit = {};
+
+window.blogInit =
+{
+    start: function () {var settings = angular.element(document.querySelector('[ng-app]')).injector().get("configProvider");
+        settings.setBlogSockets(window.blogConfiguration.blogSockets);
+        settings.setBlogApiEndpoint(window.blogConfiguration.blogApi);
+        settings.setBlogRoot(window.blogConfiguration.blogRoot);
+        settings.setBlogSocketsAvailability(window.blogConfiguration.blogSocketsAvailable);
+        settings.setDimensions(window.innerWidth, window.innerHeight);
+        settings.setDefaultProfilePicture(window.blogConfiguration.blogApi + "media/defaultprofilepicture");
+        settings.setDefaultBackgroundPicture(window.blogConfiguration.blogApi + "media/defaultbackgroundpicture");
+        settings.setSocketClientFunctions(window.socketClientFunctions);
+
+        // TODO: This is a temporary hack. It should be in its respective module
+        ngLogger.provider("$exceptionHandler", {
+            $get: function (errorLogService) {
+                return (errorLogService);
+            }
+        });
+    }
+}

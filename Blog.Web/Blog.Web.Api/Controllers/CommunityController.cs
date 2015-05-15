@@ -6,6 +6,7 @@ using Blog.Common.Web.Attributes;
 using Blog.Services.Helpers.Interfaces;
 using Microsoft.AspNet.Identity;
 using WebApi.OutputCache.V2;
+using System.Collections.Generic;
 
 namespace Blog.Web.Api.Controllers
 {
@@ -291,6 +292,82 @@ namespace Blog.Web.Api.Controllers
             catch (Exception ex)
             {
                 _errorSignaler.SignalFromCurrentContext(ex);
+            }
+        }
+
+        [HttpPost, PreventCrossUserManipulation, Authorize]
+        [Route("api/community/{communityId}/join")]
+        public IHttpActionResult Join([FromBody]User user, int communityId)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var community = _communityResource.Get(communityId);
+                if (community == null) throw new Exception("Cannot update community at the moment.");
+
+                community.Members.Add(user);
+
+                return Ok(_communityResource.Update(community));
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                var errorResult = new Community
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Common.Utils.Constants.Error.InternalError,
+                        Message = ex.Message
+                    }
+                };
+                return Ok(errorResult);
+            }
+        }
+
+        [HttpPost, PreventCrossUserManipulation, Authorize]
+        [Route("api/community/{communityId}/leave")]
+        public IHttpActionResult Leave([FromBody]User user, int communityId)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var community = _communityResource.Get(communityId);
+                if (community == null) throw new Exception("Cannot update community at the moment.");
+
+                var tempMembers = new List<User>();
+
+                foreach (var member in community.Members)
+                {
+                    if (user.Id != member.Id)
+                    {
+                        tempMembers.Add(member);
+                    }
+                }
+
+                community.Members = tempMembers;
+
+                return Ok(_communityResource.Update(community));
+            }
+            catch (Exception ex)
+            {
+                _errorSignaler.SignalFromCurrentContext(ex);
+                var errorResult = new Community
+                {
+                    Error = new Error
+                    {
+                        Id = (int)Common.Utils.Constants.Error.InternalError,
+                        Message = ex.Message
+                    }
+                };
+                return Ok(errorResult);
             }
         }
     }

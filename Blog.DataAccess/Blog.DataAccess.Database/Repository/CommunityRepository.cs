@@ -12,7 +12,7 @@ namespace Blog.DataAccess.Database.Repository
     {
         public Community Get(int id)
         {
-            var db = Find(a => a.LeaderUserId == id, null, "Members,Leader,Posts").FirstOrDefault();
+            var db = Find(a => a.Id == id, null, "Members,Leader,Posts").FirstOrDefault();
             if (db == null) return null;
 
             var members = db.Members
@@ -39,8 +39,12 @@ namespace Blog.DataAccess.Database.Repository
             foreach (var post in db.Posts)
             {
                 post.Communities = null;
-                post.User.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.PictureId);
-                post.User.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.BackgroundId);
+
+                if (post.User != null)
+                {
+                    post.User.Picture = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.PictureId);
+                    post.User.Background = Context.Media.AsNoTracking().FirstOrDefault(a => a.MediaId == post.User.BackgroundId);
+                }
             }
 
             foreach (var member in db.Members)
@@ -240,26 +244,38 @@ namespace Blog.DataAccess.Database.Repository
             db.Name = community.Name;
             db.Description = community.Description;
 
-            var tempMembers = db.Members.ToList();
-            foreach (var t in tempMembers)
-            {
-                Context.Entry(t).State = GetMemberState(t, community.Members);
-            }
+            #region members
+
+            var userIds = community.Members.Select(a => a.UserId).ToList();
+            var tmpMembers = Context.Users.Where(a => userIds.Contains(a.UserId)).ToList();
+            db.Members = tmpMembers;
 
             var newMembers = GetNewMembers(db.Members, community.Members);
             newMembers.ForEach(a =>
                             {
                                 Context.Users.Attach(a);
-                                Context.Entry(a).State = EntityState.Added;
+                                Context.Entry(a).State = EntityState.Unchanged;
                                 db.Members.Add(a);
                             });
 
-            var tempPosts = db.Posts.ToList();
-            foreach (var p in tempPosts)
+            #endregion
+
+            #region posts
+
+            community.Posts = community.Posts ?? new List<Post>();
+            var postIds = community.Posts.Select(a => a.PostId).ToList();
+            var tmpPosts = Context.Posts.Where(a => postIds.Contains(a.PostId)).ToList();
+            db.Posts = tmpPosts;
+
+            var newPosts = GetNewPosts(db.Posts, community.Posts);
+            newPosts.ForEach(a =>
             {
-                var tPost = community.Posts.FirstOrDefault(a => a.PostId == p.PostId);
-                Context.Entry(p).State = tPost != null ? EntityState.Modified : EntityState.Deleted;
-            }
+                Context.Posts.Attach(a);
+                Context.Entry(a).State = EntityState.Unchanged;
+                db.Posts.Add(a);
+            });
+
+            #endregion
 
             db.ModifiedDate = DateTime.Now;
             db.ModifiedBy = community.LeaderUserId;
@@ -287,7 +303,7 @@ namespace Blog.DataAccess.Database.Repository
             var userNames = users.Select(a => a.UserName.ToLower()).ToList();
 
             return userNames.Contains(user.UserName.ToLower()) ?
-                EntityState.Unchanged : EntityState.Deleted;
+                EntityState.Unchanged : EntityState.Modified;
         }
 
         private static List<User> GetNewMembers(IEnumerable<User> dbMembers, IEnumerable<User> clientMembers)
@@ -298,6 +314,16 @@ namespace Blog.DataAccess.Database.Repository
                               select t).ToList();
 
             return newMembers;
+        }
+
+        private static List<Post> GetNewPosts(IEnumerable<Post> dbPosts, IEnumerable<Post> clientPosts)
+        {
+            var dbPostIds = dbPosts.Select(a => a.PostId).ToList();
+            var newPosts = (from t in clientPosts
+                            where dbPostIds.All(a => a != t.PostId)
+                              select t).ToList();
+
+            return newPosts;
         }
 
         #endregion

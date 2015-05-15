@@ -12,57 +12,56 @@
   </settings>
   <!--The order of the <file> elements determines the order of the files in the bundle.-->
   <files>
-    <file>/wwwroot/css/font.css</file>
-    <file>/wwwroot/css/modules/extensions/animations.css</file>
-    <file>/wwwroot/css/modules/extensions/ckeditor.css</file>
-    <file>/wwwroot/css/modules/extensions/blockui.css</file>
-    <file>/wwwroot/css/modules/extensions/ngtagsinput.css</file>
-    <file>/wwwroot/css/modules/extensions/angular-snap.css</file>
-    <file>/wwwroot/css/modules/extensions/slick.css</file>
-    <file>/wwwroot/css/modules/extensions/isotope.css</file>
-    <file>/wwwroot/css/modules/extensions/bootstrap.css</file>
-    
     <file>/wwwroot/css/modules/main.css</file>
+    <file>/wwwroot/css/font.css</file>
+    
+    <file>/wwwroot/css/modules/extensions/angular-snap.css</file>
+    <file>/wwwroot/css/modules/extensions/animations.css</file>
+    <file>/wwwroot/css/modules/extensions/blockui.css</file>
+    <file>/wwwroot/css/modules/extensions/bootstrap.css</file>
+    <file>/wwwroot/css/modules/extensions/ckeditor.css</file>
+    <file>/wwwroot/css/modules/extensions/ngtagsinput.css</file>
+    <file>/wwwroot/css/modules/extensions/slick.css</file>
+	  <file>/wwwroot/css/modules/extensions/videogular.css</file>
+    
     <file>/wwwroot/css/modules/accountpage.css</file>
     <file>/wwwroot/css/modules/errorpage.css</file>
-    <file>/wwwroot/css/modules/modifypost.css</file>
     <file>/wwwroot/css/modules/posts.css</file>
     <file>/wwwroot/css/modules/users.css</file>
     <file>/wwwroot/css/modules/viewpost.css</file>
-    
-    <file>/wwwroot/css/modules/comments/commentitem.css</file>
-    <file>/wwwroot/css/modules/comments/commentsaddnew.css</file>
-    <file>/wwwroot/css/modules/comments/commentscontainer.css</file>
-    <file>/wwwroot/css/modules/comments/commentslist.css</file>
-    
+    <file>/wwwroot/css/modules/modifypost.css</file>
+
     <file>/wwwroot/css/modules/communities.css</file>
-	  <file>/wwwroot/css/modules/communities/communityedit.css</file>
+    <file>/wwwroot/css/modules/communities/communityedit.css</file>
     <file>/wwwroot/css/modules/communities/communitybuttonlist.css</file>
     <file>/wwwroot/css/modules/communities/communityselectiondialog.css</file>
     <file>/wwwroot/css/modules/communities/communityheader.css</file>
     <file>/wwwroot/css/modules/communities/communitylistitem.css</file>
     <file>/wwwroot/css/modules/communities/communityview.css</file>
-    
-    <file>/wwwroot/css/modules/error/errorDisplay.css</file>
-    
-    <file>/wwwroot/css/modules/header/headermenu.css</file>
-    
-    <file>/wwwroot/css/modules/loginform/loggeduser.css</file>
-    <file>/wwwroot/css/modules/loginform/loginform.css</file>
-    <file>/wwwroot/css/modules/loginform/loginformmodal.css</file>
-    <file>/wwwroot/css/modules/loginform/registerform.css</file>
-    
-    <file>/wwwroot/css/modules/navigation/navigationmenu.css</file>
-    
-    <file>/wwwroot/css/modules/messaging/messagespanel.css</file>
-    <file>/wwwroot/css/modules/messaging/chatwindow.css</file>
-    
+
     <file>/wwwroot/css/modules/media/mediagallery.css</file>
     <file>/wwwroot/css/modules/media/mediagroupedlist.css</file>
     <file>/wwwroot/css/modules/media/albumgroup.css</file>
     <file>/wwwroot/css/modules/media/mediaitem.css</file>
     <file>/wwwroot/css/modules/media/mediaselectiondialog.css</file>
     
+    <file>/wwwroot/css/modules/sockets/socketdebugger.css</file>
+
+    <file>/wwwroot/css/modules/shared/fileupload.css</file>
+    <file>/wwwroot/css/modules/shared/fileuploaditem.css</file>
+
+    <file>/wwwroot/css/modules/header/headermenu.css</file>
+
+    <file>/wwwroot/css/modules/loginform/loggeduser.css</file>
+    <file>/wwwroot/css/modules/loginform/loginform.css</file>
+    <file>/wwwroot/css/modules/loginform/loginformmodal.css</file>
+    <file>/wwwroot/css/modules/loginform/registerform.css</file>
+
+    <file>/wwwroot/css/modules/navigation/navigationmenu.css</file>
+
+    <file>/wwwroot/css/modules/messaging/messagespanel.css</file>
+    <file>/wwwroot/css/modules/messaging/chatwindow.css</file>
+
     <file>/wwwroot/css/modules/posts/postcontents.css</file>
     <file>/wwwroot/css/modules/posts/postlikes.css</file>
     <file>/wwwroot/css/modules/posts/postviewnavigator.css</file>
@@ -70,12 +69,14 @@
     <file>/wwwroot/css/modules/posts/postlistitemcomment.css</file>
     <file>/wwwroot/css/modules/posts/postrelateditem.css</file>
     <file>/wwwroot/css/modules/posts/postrelateditems.css</file>
+
+    <file>/wwwroot/css/modules/error/errorDisplay.css</file>
     
-    <file>/wwwroot/css/modules/shared/fileupload.css</file>
-    <file>/wwwroot/css/modules/shared/fileuploaditem.css</file>
-    
-    <file>/wwwroot/css/modules/sockets/socketdebugger.css</file>
-    
+    <file>/wwwroot/css/modules/comments/commentitem.css</file>
+    <file>/wwwroot/css/modules/comments/commentsaddnew.css</file>
+    <file>/wwwroot/css/modules/comments/commentscontainer.css</file>
+    <file>/wwwroot/css/modules/comments/commentslist.css</file>
+
     <file>/wwwroot/css/modules/tags/tagitem.css</file>
     
     <file>/wwwroot/css/modules/user/usercommentitem.css</file>

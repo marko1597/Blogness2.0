@@ -1,6 +1,15 @@
 ﻿@import '../variables';
 
 .community-header {
+    h4 {
+        .fa-edit {
+            &:hover {
+                @include opacity(0.7);
+                cursor: pointer;
+            }
+        }
+    }
+
     p {
         @include margin(0);
         font-size: 0.8em;
