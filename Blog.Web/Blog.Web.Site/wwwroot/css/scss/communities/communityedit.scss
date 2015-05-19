@@ -2,28 +2,33 @@
 
 #community-edit {
     .card {
-        .content {
-            input, textarea {
-                @include size(100%, auto);
+        input, textarea {
+            @include size(100%, auto);
+        }
+
+        .header {
+            img {
+                cursor: pointer;
             }
 
+            .fa-pencil {
+                @include position(absolute, 20%, null, null, null);
+                color: $main-font-color;
+            }
+
+            input {
+                border: 0;
+                @include borders(1px, solid, $main-font-color, false, false, true);
+                @include padding(null, null, null, $default-padding);
+                color: $main-font-color;
+                background: $main-color;
+                font-size: 1.5em;
+            }
+        }
+
+        .content {
             textarea {
                 min-height: unquote($min-textarea-size + 'px');
-            }
-
-            .community-emblem-select {
-                .btn {
-                    @include margin(0, 0, $default-margin);
-                }
-
-                .center-block {
-                    @include borders(2px, dashed, $light-border-color, true);
-                    min-height: unquote($img-header-size + 'px');
-
-                    img {
-                        @include size(100%, 100%);
-                    }
-                }
             }
         }
     }

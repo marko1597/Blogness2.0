@@ -1,0 +1,7 @@
+Application has thrown an uncaught exception and is terminated:
+Error: Redis connection to 192.168.14.11:6379 failed - read ECONNRESET
+    at RedisClient.on_error (C:\Users\admin\Documents\GitHub\Blogness2.0\Blog.Web\Blog.Web.Sockets\node_modules\redis\index.js:196:24)
+    at Socket.<anonymous> (C:\Users\admin\Documents\GitHub\Blogness2.0\Blog.Web\Blog.Web.Sockets\node_modules\redis\index.js:106:14)
+    at Socket.emit (events.js:107:17)
+    at net.js:459:14
+    at process._tickCallback (node.js:355:11)

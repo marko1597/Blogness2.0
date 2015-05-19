@@ -76,11 +76,16 @@
         };
 
         $scope.init();
-
+        
         $rootScope.$watch('user', function () {
             if ($rootScope.user) {
                 $scope.init();
             }
+        });
+
+        $scope.$on("viewedCommunityLoaded", function (ev, data) {
+            $scope.community = data;
+            $scope.init();
         });
 
         $scope.$on("userLoggedIn", function () {

@@ -162,7 +162,7 @@ a {
         > div:last-child {
             @include size(100%, auto);
 
-            > h4 {
+            > h4, > h5 {
                 @include padding(null, null, null, $header-details-padding);
                 @include margin(0, 0, unquote($img-margin + 'px'));
                 font-weight: bold;

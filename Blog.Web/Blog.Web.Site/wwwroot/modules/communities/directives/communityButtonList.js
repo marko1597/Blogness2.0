@@ -17,7 +17,7 @@
             $scope.removeFromList = function (community) {
                 if (community && $scope.allowDelete) {
                     var index = $scope.communities.indexOf(community);
-                    $scope.communities.splice(index);
+                    $scope.communities.splice(index, 1  );
                 }
             };
         };

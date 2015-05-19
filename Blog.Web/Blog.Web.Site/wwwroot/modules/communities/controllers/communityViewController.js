@@ -19,6 +19,8 @@
                     if (!community.Error) {
                         $scope.community = community;
                         $scope.isBusy = false;
+
+                        $scope.$broadcast("viewedCommunityLoaded", community);
                     } else {
                         errorService.displayError({ Message: e });
                     }

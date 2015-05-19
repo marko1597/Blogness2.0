@@ -961,39 +961,33 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "    <div class=\"card default\">\r" +
     "\n" +
-    "        <div class=\"content\">\r" +
+    "        <div class=\"header big row community-header\">\r" +
     "\n" +
-    "            <h5>Title</h5>\r" +
+    "            <div ng-click=\"launchMediaSelectionDialog()\" data-trigger=\"hover\" data-placement=\"right\" data-title=\"Click to edit this community's emblem..\" bs-tooltip>\r" +
     "\n" +
-    "            <input ng-model=\"community.Name\" />\r" +
+    "                <img ng-show=\"selectedEmblemUrl\" src=\"{{selectedEmblemUrl}}\" />\r" +
+    "\n" +
+    "            </div>\r" +
+    "\n" +
+    "            <div>\r" +
+    "\n" +
+    "                <p>\r" +
+    "\n" +
+    "                    <i class=\"fa fa-pencil\"></i>\r" +
+    "\n" +
+    "                    <input ng-model=\"community.Name\" placeholder=\"Enter an awesome community name..\"/>\r" +
+    "\n" +
+    "                </p>\r" +
+    "\n" +
+    "            </div>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
     "        <div class=\"content\">\r" +
     "\n" +
-    "            <div class=\"row\">\r" +
+    "            <h5>Description</h5>\r" +
     "\n" +
-    "                <div class=\"col-sm-8\">\r" +
-    "\n" +
-    "                    <h5>Description</h5>\r" +
-    "\n" +
-    "                    <textarea ng-model=\"community.Description\"></textarea>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "                <div class=\"col-sm-4 community-emblem-select\">\r" +
-    "\n" +
-    "                    <div class=\"btn btn-primary\" ng-click=\"launchMediaSelectionDialog()\">Select emblem for this community..</div>\r" +
-    "\n" +
-    "                    <div class=\"center-block\">\r" +
-    "\n" +
-    "                        <img ng-show=\"selectedEmblemUrl\" src=\"{{selectedEmblemUrl}}\" />\r" +
-    "\n" +
-    "                    </div>\r" +
-    "\n" +
-    "                </div>\r" +
-    "\n" +
-    "            </div>\r" +
+    "            <textarea ng-model=\"community.Description\" placeholder=\"Tell something about this community..\"></textarea>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -1053,13 +1047,13 @@ angular.module('blog').run(['$templateCache', function($templateCache) {
     "\n" +
     "        </p>\r" +
     "\n" +
-    "        <a data-title=\"Click here to join this community\" bs-tooltip ng-click=\"join()\" ng-show=\"!isUserJoined\">\r" +
+    "        <a data-title=\"Click here to join this community\" bs-tooltip ng-click=\"join()\" ng-show=\"!isEditable() && !isUserJoined\">\r" +
     "\n" +
     "            <label class=\"label label-success\">Join</label>\r" +
     "\n" +
     "        </a>\r" +
     "\n" +
-    "        <a data-title=\"Click here to leave this community\" bs-tooltip ng-click=\"leave()\" ng-show=\"isUserJoined\">\r" +
+    "        <a data-title=\"Click here to leave this community\" bs-tooltip ng-click=\"leave()\" ng-show=\"!isEditable() && isUserJoined\">\r" +
     "\n" +
     "            <label class=\"label label-danger\">Leave</label>\r" +
     "\n" +
@@ -4126,6 +4120,8 @@ ngCommunities.controller('communityViewController', ["$scope", "$rootScope", "$l
                     if (!community.Error) {
                         $scope.community = community;
                         $scope.isBusy = false;
+
+                        $scope.$broadcast("viewedCommunityLoaded", community);
                     } else {
                         errorService.displayError({ Message: e });
                     }
@@ -4238,11 +4234,16 @@ ngCommunities.directive('communityHeader', ["$templateCache", function ($templat
         };
 
         $scope.init();
-
+        
         $rootScope.$watch('user', function () {
             if ($rootScope.user) {
                 $scope.init();
             }
+        });
+
+        $scope.$on("viewedCommunityLoaded", function (ev, data) {
+            $scope.community = data;
+            $scope.init();
         });
 
         $scope.$on("userLoggedIn", function () {
@@ -4282,7 +4283,7 @@ ngCommunities.directive("communityButtonList", ["$templateCache",
             $scope.removeFromList = function (community) {
                 if (community && $scope.allowDelete) {
                     var index = $scope.communities.indexOf(community);
-                    $scope.communities.splice(index);
+                    $scope.communities.splice(index, 1  );
                 }
             };
         };

@@ -1,21 +1,20 @@
-﻿#community-edit .card .content input, #community-edit .card .content textarea {
+﻿#community-edit .card input, #community-edit .card textarea {
   width: 100%;
   height: auto; }
+#community-edit .card .header img {
+  cursor: pointer; }
+#community-edit .card .header .fa-pencil {
+  position: absolute;
+  top: 20%;
+  color: #fff; }
+#community-edit .card .header input {
+  border: 0;
+  border-bottom: 1px solid #fff;
+  padding-left: 15px;
+  color: #fff;
+  background: #4c4c4c;
+  font-size: 1.5em; }
 #community-edit .card .content textarea {
   min-height: 100px; }
-#community-edit .card .content .community-emblem-select .btn {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 15px;
-  margin-left: 0; }
-#community-edit .card .content .community-emblem-select .center-block {
-  border-top: 2px dashed #cccccc;
-  border-right: 2px dashed #cccccc;
-  border-bottom: 2px dashed #cccccc;
-  border-left: 2px dashed #cccccc;
-  min-height: 80px; }
-  #community-edit .card .content .community-emblem-select .center-block img {
-    width: 100%;
-    height: 100%; }
 
 /*# sourceMappingURL=communityedit.css.map */

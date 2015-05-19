@@ -206,7 +206,7 @@ a:hover {
   height: auto;
 }
 /* line 165, ../scss/main.scss */
-.header.big > div:last-child > h4 {
+.header.big > div:last-child > h4, .header.big > div:last-child > h5 {
   padding-left: 90px;
   margin-top: 0;
   margin-right: 0;
@@ -1872,34 +1872,33 @@ html, body {
   margin-left: 0;
 }
 
-/* line 6, ../../scss/communities/communityedit.scss */
-#community-edit .card .content input, #community-edit .card .content textarea {
+/* line 5, ../../scss/communities/communityedit.scss */
+#community-edit .card input, #community-edit .card textarea {
   width: 100%;
   height: auto;
 }
 /* line 10, ../../scss/communities/communityedit.scss */
-#community-edit .card .content textarea {
-  min-height: 100px;
+#community-edit .card .header img {
+  cursor: pointer;
 }
-/* line 15, ../../scss/communities/communityedit.scss */
-#community-edit .card .content .community-emblem-select .btn {
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 15px;
-  margin-left: 0;
+/* line 14, ../../scss/communities/communityedit.scss */
+#community-edit .card .header .fa-pencil {
+  position: absolute;
+  top: 20%;
+  color: #fff;
 }
 /* line 19, ../../scss/communities/communityedit.scss */
-#community-edit .card .content .community-emblem-select .center-block {
-  border-top: 2px dashed #cccccc;
-  border-right: 2px dashed #cccccc;
-  border-bottom: 2px dashed #cccccc;
-  border-left: 2px dashed #cccccc;
-  min-height: 80px;
+#community-edit .card .header input {
+  border: 0;
+  border-bottom: 1px solid #fff;
+  padding-left: 15px;
+  color: #fff;
+  background: #4c4c4c;
+  font-size: 1.5em;
 }
-/* line 23, ../../scss/communities/communityedit.scss */
-#community-edit .card .content .community-emblem-select .center-block img {
-  width: 100%;
-  height: 100%;
+/* line 30, ../../scss/communities/communityedit.scss */
+#community-edit .card .content textarea {
+  min-height: 100px;
 }
 
 /* line 3, ../../scss/communities/communitybuttonlist.scss */

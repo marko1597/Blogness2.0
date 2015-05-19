@@ -147,7 +147,7 @@ a {
     .header.big > div:last-child {
       width: 100%;
       height: auto; }
-      .header.big > div:last-child > h4 {
+      .header.big > div:last-child > h4, .header.big > div:last-child > h5 {
         padding-left: 90px;
         margin-top: 0;
         margin-right: 0;

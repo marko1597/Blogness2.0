@@ -1,22 +1,19 @@
 ﻿<div id="community-edit">
     <div class="card default">
-        <div class="content">
-            <h5>Title</h5>
-            <input ng-model="community.Name" />
+        <div class="header big row community-header">
+            <div ng-click="launchMediaSelectionDialog()" data-trigger="hover" data-placement="right" data-title="Click to edit this community's emblem.." bs-tooltip>
+                <img ng-show="selectedEmblemUrl" src="{{selectedEmblemUrl}}" />
+            </div>
+            <div>
+                <p>
+                    <i class="fa fa-pencil"></i>
+                    <input ng-model="community.Name" placeholder="Enter an awesome community name.."/>
+                </p>
+            </div>
         </div>
         <div class="content">
-            <div class="row">
-                <div class="col-sm-8">
-                    <h5>Description</h5>
-                    <textarea ng-model="community.Description"></textarea>
-                </div>
-                <div class="col-sm-4 community-emblem-select">
-                    <div class="btn btn-primary" ng-click="launchMediaSelectionDialog()">Select emblem for this community..</div>
-                    <div class="center-block">
-                        <img ng-show="selectedEmblemUrl" src="{{selectedEmblemUrl}}" />
-                    </div>
-                </div>
-            </div>
+            <h5>Description</h5>
+            <textarea ng-model="community.Description" placeholder="Tell something about this community.."></textarea>
         </div>
         <div class="content">
             <div class="btn btn-primary" ng-click="saveCommunity()">
